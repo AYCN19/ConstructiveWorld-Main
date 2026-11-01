@@ -273,6 +273,8 @@ jobs:
           export CHK_SKIP_FILE="$PWD/ConstructiveWorld_vo/_attest_skip.txt"
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
           export CHK_JOBS=4
+          # W3 v1.1 backstop (20261101): every 20th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
+          if [ $((GITHUB_RUN_NUMBER % 20)) -eq 0 ]; then : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"; echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (skip list withheld)"; fi
           # 20261030 装箱回退（C-path 撤除）：own-mode K=12 cost-weighted packing
           # （cost_table.json + parallel_chk v3 own branch）实测 28h+ cancelled，对照
           # K=4 基线 14h15m——每道全闭包重验物理墙，非调参可救；CHK_JOBS 回退 4，
