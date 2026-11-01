@@ -22,7 +22,7 @@ Require Import S13_NLiveAudit.
 Require Import S14_B5BatchBlock.
 Require Import S15_TailFEPUp.
 Require Import UpReqPadeExp UpReqAltSumPos UpReqPadeDenPos.
-Require Import  DenPosGeneralClose DenPosGeneral.
+Require Import DenPosGeneral.
 
 (* ================= §1 pdpa_c0_nz 族 ================= *)
 From Stdlib Require Import QArith.QArith Arith.Arith Lia.

@@ -962,3 +962,11 @@ piu_zz_tau_segtree_1024_leaf_g.v#R212-170e69
 piu_zz_tau_segtree_1024_leaf_h.v#R212-330c0c
 piu_zz_tau_segtree_1024_merge.v#R212-f6f04d
 zzphi_e_slim_equiv.v#R212-f66bad
+piu_zz_cage_constants.v#R213-5b5a48
+piu_zz_sigma_decay.v#R214-7b1921
+piu_zz_nail_mu.v#R215-191cea
+piu_zz_n1_linform.v#R216-f96119
+piu_zz_s2_headledger.v#R217-a3df0f
+piu_zz_ec_escwin_nescD.v#R218-124f79
+piu_zz_ec_escwin_bracket.v#R219-4951eb
+piu_zz_n2c_sigma_assembly.v#R220-8c1e82

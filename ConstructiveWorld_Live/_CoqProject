@@ -941,3 +941,11 @@ piu_zz_tau_segtree_1024_leaf_g.v
 piu_zz_tau_segtree_1024_leaf_h.v
 piu_zz_tau_segtree_1024_merge.v
 zzphi_e_slim_equiv.v
+piu_zz_cage_constants.v
+piu_zz_sigma_decay.v
+piu_zz_nail_mu.v
+piu_zz_n1_linform.v
+piu_zz_s2_headledger.v
+piu_zz_ec_escwin_nescD.v
+piu_zz_ec_escwin_bracket.v
+piu_zz_n2c_sigma_assembly.v
