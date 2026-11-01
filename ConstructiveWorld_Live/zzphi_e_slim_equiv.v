@@ -19,20 +19,6 @@
 Require Import piu_zz_tau_enclosure_bank4.
 From Stdlib Require Import QArith ZArith Arith PArith Lia List.
 Require Import piu_zz_poincare_engine piu_zz_padic_clearing.
-Require Export piu_zz_tau_hb_wave1.
-Require Export piu_zz_tau_hb_wave2.
-Require Export piu_zz_tau_hb_wave3a.
-Require Export piu_zz_tau_hb_wave3b.
-Require Export piu_zz_tau_hb_wave3c.
-Require Export piu_zz_tau_hb_wave3d.
-Require Export piu_zz_tau_hb_wave4a.
-Require Export piu_zz_tau_hb_wave4b.
-Require Export piu_zz_tau_hb_wave4c.
-Require Export piu_zz_tau_hb_wave4d.
-Require Export piu_zz_tau_hb_wave5.
-Require Export piu_zz_tau_hb_wave6.
-Require Export piu_zz_tau_hb_wave7.
-Require Export piu_zz_tau_hb_wave8.
 Require Import piu_zz_tau_segtree_1024_merge.
 Definition piu_zz_lit_Phibase_1024 : Z := 2676424583214047812886498025277%Z.
 Lemma piu_zz_Phibase_1024 : zz_prodf 1024 512 = piu_zz_lit_Phibase_1024.
