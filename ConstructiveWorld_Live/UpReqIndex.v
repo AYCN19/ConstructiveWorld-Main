@@ -5228,6 +5228,11 @@ Definition ng_PiuZzEcEscwinBracket : NewGreenFace :=
 Definition ng_PiuZzN2cSigmaAssembly : NewGreenFace :=
   MkNewGreenFace "piu_zz_n2c_sigma_assembly.v" 314 22 20261101
   "N2c assembly-surface constants unit: acceptance object the A coefficient-value face Qabs(piu_zz_Aj n j) with the sharp obligation and finite flags, the sigma_ZZ assembly pin and mu_ZZ name mapping, and the KB41k numeric-bank v2 anchors; machine-outside fit values banned from the statement surface" "L314:m8c1e82".
+(* ---------- W5 · piu1932_uncond_zz.v（一致型顶件 9.3 同名重落·六前提无条件闭合·W6 二批·R194 旧代 61baed 条目 ng_Piu1932UncondZz 原位保留＝A 案裁定·本块为候选版 46f5f5 二代登记·R 号 ? 占位·登记日全角占位候落位 commit 日终配） ---------- *)
+(* ng_Piu1932UncondZzReland -- piu1932_uncond_zz.v: Route B 装配正件 W5 四槽直供形（在册件同名替换候选）：率槽 nsep 上界 NatLe (tlw1448_nsep_rebase ck q) (S (bpow_c C0 8 (height q))) 由 tlw1703_unif_rebase_le_Sbpowc 四槽直供导出——槽 1/2/4 取自池（C0 正·阈正·ck_alpha 自反）·槽 3 经 v2 率槽桥取自六前提条件链 piu_zz_ec_mu_cond·率形证书不再作抽象前提；前提组 Hp/Htri/Hcoef/Hesc/Hcage/Hexit 为显式诚实接口·旧率载签名保留为孪生定理（签名稳定迁移账）；C0=1/10^9·alpha=8（ZZ μ=7.1032…<8）; PA=7 Closed（kb77 out/born_b_uncond.log 实测）; ng_qed=8（行尾计数实测） *)
+Definition ng_Piu1932UncondZzReland : NewGreenFace :=
+  MkNewGreenFace "piu1932_uncond_zz.v" 179 8 20261103
+  "Route B assembly main piece, W5 four-slot direct-supply form: the rate-slot nsep bound is derived with all four slots of tlw1703_unif_rebase_le_Sbpowc supplied directly, slot 3 from the six-premise conditional chain piu_zz_ec_mu_cond via the v2 rate-slot bridge, so no rate-form certificate is an abstract premise; the six premises Hp/Htri/Hcoef/Hesc/Hcage/Hexit are the explicit honest interface; previous rate-loaded signature kept as a twin theorem; C0 = 1/10^9, alpha = 8" "L179:m46f5f5".
 (* ---------- V47 批统计（整批追加纪律：清单/常量/引理同块原子写入·ng_qed 口径） ---------- *)
 Definition NewGreenListV47 : list NewGreenFace :=
  cons ng_PiuMuCriterion
@@ -5292,7 +5297,8 @@ Definition NewGreenListV47 : list NewGreenFace :=
  (cons ng_PiuZzEcEscwinNescD
  (cons ng_PiuZzEcEscwinBracket
  (cons ng_PiuZzN2cSigmaAssembly
- nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
+ (cons ng_Piu1932UncondZzReland
+ nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
 (* ---------- V48 批八件 cons（插于 V47 清单 nil 前·依赖拓扑序·R213-R220 于 order.txt 行锚） ---------- *)
 (* ---------- 十七片终形辅助名注记（KB13R 按 KB12/KB15 核勘代拟·KB20 无壳形制修订：wave4 拆四季·伞退役·slim 直挂八季） ---------- *)
 (* 本批 wave 行承载 128 条升格辅助引理名：piu_zz_hb_512_0..31（wave1/2 各 16）＋
@@ -5301,10 +5307,10 @@ Definition NewGreenListV47 : list NewGreenFace :=
    复核 128/128·KB15 独立交叉审计两法一致·64 名落袋 vo 可见性实测检验全过）。名字面判据演进：
    原 2,912 定义性名零丢失＋辅助名增量 128＝终形 3,040 名；语句多集 3,044 位恒等、原 42 位
    零丢失（KB12 审计·KB15 复核）。落地后逐行 PA 占位以 new_About 实测检验填注（仅注释面）。 *)
-(* 续写统计：62 件 / 行数和 43204 / 闭合数和 3843（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·R213-R220 于 order.txt 行锚·登记日 20261101·W5 件候 born 第二批重锚禁预填）。 *)
-Definition NewGreenV47Pieces  : nat := 62.
-Definition NewGreenV47LineSum : nat := 43204.
-Definition NewGreenV47QedSum  : nat := 3843.
+(* 续写统计：63 件 / 行数和 43383 / 闭合数和 3851（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·R213-R220 于 order.txt 行锚·登记日 20261101·W5 件候 born 第二批重锚禁预填）＋W6 二批一件追加 179/8（piu1932_uncond_zz 9.3 一致型同名重落·候选版 46f5f5·六前提无条件闭合顶件·R194 旧条目 ng_Piu1932UncondZz 原位保留＝A 案·R 号 ? 占位·登记日全角占位候落位 commit 日终配·order.txt :973 行锚）。 *)
+Definition NewGreenV47Pieces  : nat := 63.
+Definition NewGreenV47LineSum : nat := 43383.
+Definition NewGreenV47QedSum  : nat := 3851.
 
 (* 清单件数 = 字面值（增删清单而忘改字面值即爆 G2） *)
 Lemma NewGreenV47Pieces_matches : NewGreenV47Pieces = cnt_ng NewGreenListV47.
