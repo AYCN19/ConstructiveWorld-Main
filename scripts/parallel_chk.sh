@@ -327,6 +327,17 @@ if [ "${CHK_TREE_COPY:-0}" = "1" ] && [ -n "${LANE_ARR[*]:-}" ]; then
 fi
 echo "::endgroup::"
 echo "::group::PCHK 4/4 K-lane certification"
+# ③c-2 认证继承 admit 接线（20261103·三捷径③收口）：CHK_SKIP_FILE=attest_reconcile
+# digest 命中件（该件字节=上次 coqchk 全绿所验内容·cw_attest/v1 建档律）→ -admit 载入不查。
+# 跳过清单空（20 炉 backstop 收缴·run%20==0）=零 admit=全量闭包重验（v2 行为逐字节不变）。
+# 声明：admit 件正当性=digest 断言非本炉内核重验；档案仅在绿炉后随 commit 前进（先绿后录）。
+PCHK_ADMIT_ARGS=""
+if [ -n "${CHK_SKIP_FILE:-}" ] && [ -s "$CHK_SKIP_FILE" ]; then
+  while IFS= read -r _am; do [ -n "$_am" ] && PCHK_ADMIT_ARGS="$PCHK_ADMIT_ARGS -admit $_am"; done < "$CHK_SKIP_FILE"
+  echo "PCHK-ADMIT: $(grep -c . "$CHK_SKIP_FILE") modules admitted (digest=attested, loaded-not-checked)"
+else
+  echo "PCHK-ADMIT: none (skip list absent/empty — full-closure mode)"
+fi
 i=0
 LANE_PIDS=()
 while IFS= read -r grp; do
@@ -343,9 +354,9 @@ while IFS= read -r grp; do
   # （USER/USERNAME 进 lane 环境——通道名可能含用户域）＋独立副本（CHK_TREE_COPY）。
   # 实测组合：四 lane 共存全程推进（旧配置秒死窗不复现）。
   if [ -n "$ldir" ] && [ -d "$ldir" ]; then
-    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o -Q . "" $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
+    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   else
-    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o -Q . "" $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
+    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   fi
   # 20261019 死锁修：定向收 lane PID——裸 wait 会把监视器子壳（永循环）一并等死＝
   # coqchk 步永久假死（桩件实测 t=338s 心跳不歇·wait 不归）。下同 ③d 重试段。
