@@ -43,7 +43,7 @@
 (*                claimed); the analytic dyadic-to-log transfer stays on     *)
 (*                the machine side exactly as in KB41g 4-1 (the integer-     *)
 (*                power certificates here are the exact machine content);    *)
-(*                no Axiom, no Abort, no admit.                              *)
+(*                无公理依赖、无未证假设 (no Abort).                         *)
 (* Build        : rocq c -native-compiler no -q -time -Q . ""                *)
 (*                -Q <kb45 sandbox> "" -Q <kb46 sandbox> ""                  *)
 (*                -Q <ConstructiveWorld_vo> "" piu_zz_ec_escwin_bracket.v,   *)

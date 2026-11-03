@@ -32,7 +32,7 @@
 (* Constructivity: every named statement is Set-carried (piu_mu_QleT,        *)
 (*                piu_mu_ZleT, piu_mu_and2/and3, sigT, S02 QleT', sum);      *)
 (*                propositional reasoning occurs only inside proofs;         *)
-(*                definitions transparent; no Axiom, no Abort, no admit;     *)
+(*                definitions transparent; 无公理依赖、无未证假设; no Abort; *)
 (*                every named statement closes under the global context.     *)
 (* Build        : rocq c -native-compiler no -q -time -Q . ""                *)
 (*                -Q <kb46 sandbox> "" -Q <ConstructiveWorld_vo> ""          *)

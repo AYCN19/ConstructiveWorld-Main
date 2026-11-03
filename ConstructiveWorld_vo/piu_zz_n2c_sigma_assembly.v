@@ -41,7 +41,7 @@
 (*   the N2c consumption note); receipt-KB72 (first-wave born state);  *)
 (*   workorder GEDAN-gammaP1 sec.2 N2c row.                            *)
 (* Constructivity.: statement faces Set-carried (QleT'/QltT/QeqT over  *)
-(*   Id/bool); zero new Prop surface (red-line v2.4 path A); no open   *)
+(*   Id/bool); zero new Prop surface (red-line rev 2.4 path A); no open   *)
 (*   leaves, no abandoned proofs, no axiom declarations;               *)
 (*   machine-outside values (16.7553, 0.2447,                          *)
 (*   16.9358, 0.0642, sup_j fits) stay in comments - none is a         *)

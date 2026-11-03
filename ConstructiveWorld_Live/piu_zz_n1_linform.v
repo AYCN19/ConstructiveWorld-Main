@@ -350,7 +350,7 @@ Proof. vm_compute. reflexivity. Qed.
    pointwise true-flags for 9 <= n < 17 are attested by the KB41n
    calibration table (mirror cross-checked), and n <= 8 falls back to
    the tree-wide crude bound 2^(37n). In-Coq certificates for n = 9,10
-   were retired per the 20261031 measured-cost ruling: their guarded
+   were retired per the late-October 2026 measured-cost ruling: their guarded
    -time spectrum measured a single-sample wall over the 20-minute
    line (finite_n9: vm_compute 1302.3s + Qed 1398.9s). *)
 Definition zz_forallb_le (n : nat) : bool :=

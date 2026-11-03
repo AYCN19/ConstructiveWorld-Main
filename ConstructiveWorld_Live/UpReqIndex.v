@@ -5187,48 +5187,48 @@ Definition ng_PiuZzPntRateup : NewGreenFace :=
 Definition ng_PiuZzPntAssembly : NewGreenFace :=
   MkNewGreenFace "piu_zz_pnt_assembly.v" 181 6 20261030
   "PNT-side total assembly: five born pieces tabulated, rate and window-theta slots carried as explicit Section parameters never discharged, delivering the multiplicative decomposition zq(zz_L n)*zq(zz_Phi n) <= zq(psi(4n)) with six Closed assumption faces" "L181:maf3472".
-(* ---------- V48 注册批八件（γP1 首波四件 KB72 预铸逐字承用＋W4 三件＋N2c 一件·登记日 20261101·依赖序 cage→decay→nail→n1→headledger→nescD→bracket→n2c·W5 件块禁预填候 born 重锚） ---------- *)
+(* ---------- V48 注册批八件（γP1 首波四件 KB72 预铸逐字承用＋W4 三件＋N2c 一件·registered in the November 2026 wave·依赖序 cage→decay→nail→n1→headledger→nescD→bracket→n2c·W5 件块禁预填候 born 重锚） ---------- *)
 (* ---------- ② N2a · piu_zz_cage_constants.v（KB41o ①·KB41b C1-C7 对位落件·件一 C1-C4＋件二 C5+C7） ---------- *)
-(* ng_PiuZzCageConstants -- piu_zz_cage_constants.v: γP1 N2a 笼常数面：KB41b C1-C7 EXACT 证书链语句化（件一 C1-C4 ρ 主钉定标＋件二 C5+C7 σ 装配覆盖＋N₀ 多项式吸收·Hasm 会签位随件）〔代拟·候选终核〕; PA=34 Closed（编译实测）; ng_qed=35（行尾锚定实测） *)
+(* ng_PiuZzCageConstants -- piu_zz_cage_constants.v: γP1 N2a 笼常数面：KB41b C1-C7 EXACT 证书链语句化（件一 C1-C4 ρ 主钉定标＋件二 C5+C7 σ 装配覆盖＋N₀ 多项式吸收·Hasm 会签位随件）〔代拟·候选终核〕; PA=34 Closed（编译实测）; ng_qed=35（行尾计数实测） *)
 Definition ng_PiuZzCageConstants : NewGreenFace :=
   MkNewGreenFace "piu_zz_cage_constants.v" 474 35 20261101
   "gammaP1 N2a cage constant face: KB41b C1-C7 EXACT chain as Set-carried statements (C1-C4 rho pin-face calibration + C5+C7 sigma assembly coverage + N0 poly absorption)" "L474:m5b5a48".
-(* ---------- ③ N2b · piu_zz_sigma_decay.v（KB41o ④·σ 值衰减面三带·消费位 N2c/N5/N4） ---------- *)
-(* ng_PiuZzSigmaDecay -- piu_zz_sigma_decay.v: γP1 N2b σ 值衰减面三带（raw EXACT 带＋sup_j 控制带消费形＋b0 桥）·消费位 N2c/N5/N4·机外拟合值零语句面〔代拟·候选终核〕; PA=10 Closed（编译实测）; ng_qed=10（行尾锚定实测） *)
+(* ---------- ③ N2b · piu_zz_sigma_decay.v（KB41o ④·σ 值衰减面三带·下游位 N2c/N5/N4） ---------- *)
+(* ng_PiuZzSigmaDecay -- piu_zz_sigma_decay.v: γP1 N2b σ 值衰减面三带（raw EXACT 带＋sup_j 控制带下游形＋b0 桥）·下游位 N2c/N5/N4·机外拟合值零语句面〔代拟·候选终核〕; PA=10 Closed（编译实测）; ng_qed=10（行尾计数实测） *)
 Definition ng_PiuZzSigmaDecay : NewGreenFace :=
   MkNewGreenFace "piu_zz_sigma_decay.v" 231 10 20261101
   "gammaP1 N2b sigma value-decay face: raw EXACT band / sup_j control band / assembly slack as Set-carried statements serving N2c/N5/N4" "L231:m7b1921".
 (* ---------- ④ N6′-a · piu_zz_nail_mu.v（KB41b C1-C7 弹药·γP1v2 §三 主钉/μ 换算件·预铸名义 cage_repin 改名同步） ---------- *)
-(* ng_PiuZzNailMu -- piu_zz_nail_mu.v: γP1 N6′-a 主钉与 μ 换算面：ρ=(3/20)^n 主钉（σ=17·E=7·N0=1348）＋μ 括界诚实接口（ln2/ln(20/3) 显式 Q 参数）＋KB41d C6 精确 Q 交叉核对（mu_ZZ 槽 8 死钉对照）〔代拟·候选终核〕; PA=10 Closed（编译实测）; ng_qed=51（行尾锚定实测） *)
+(* ng_PiuZzNailMu -- piu_zz_nail_mu.v: γP1 N6′-a 主钉与 μ 换算面：ρ=(3/20)^n 主钉（σ=17·E=7·N0=1348）＋μ 括界诚实接口（ln2/ln(20/3) 显式 Q 参数）＋KB41d C6 精确 Q 交叉核对（mu_ZZ 槽 8 死钉对照）〔代拟·候选终核〕; PA=10 Closed（编译实测）; ng_qed=51（行尾计数实测） *)
 Definition ng_PiuZzNailMu : NewGreenFace :=
   MkNewGreenFace "piu_zz_nail_mu.v" 387 51 20261101
   "gammaP1 N6'-a main-nail and mu-conversion face: rho=(3/20)^n main nail with mu bracket honest interface (explicit Q params) + KB41d C6 exact Q cross-checks" "L387:m191cea".
 (* ---------- ① N1 · piu_zz_n1_linform.v（KB41n 弹药·S1 长度引理＋M_j 计数面转录·预铸名义 s1_len 改名同步） ---------- *)
-(* ng_PiuZzN1Linform -- piu_zz_n1_linform.v: γP1 N1 ZZ 系数线性形长度面语句载体：|M_j|≤(3n+1)⁶≤2^{2n} 链（n≥18 立恰 n=17 破）＋Q 值序谓词＋max-T 达成见证（sigT）＋n<18 有限核查面＋vm_compute 数值样点包〔代拟·候选终核〕; PA=5 Closed（编译实测·kb72 born3）; ng_qed=34（行尾锚定实测·上问裸口径 35 之修正） *)
+(* ng_PiuZzN1Linform -- piu_zz_n1_linform.v: γP1 N1 ZZ 系数线性形长度面语句载体：|M_j|≤(3n+1)⁶≤2^{2n} 链（n≥18 立恰 n=17 破）＋Q 值序谓词＋max-T 达成见证（sigT）＋n<18 有限核查面＋vm_compute 数值样点包〔代拟·候选终核〕; PA=5 Closed（编译实测·kb72 born3）; ng_qed=34（行尾计数实测·上问裸口径 35 之修正） *)
 Definition ng_PiuZzN1Linform : NewGreenFace :=
   MkNewGreenFace "piu_zz_n1_linform.v" 423 34 20261101
   "gammaP1 N1 ZZ coefficient linear-form length face: |M_j|<=(3n+1)^6<=2^(2n) chain (n>=18, fails n=17), Q-order predicate, max-T witness (sigT), finite-check face n<18, vm_compute samples" "L423:mf96119".
 (* ---------- N4 · piu_zz_s2_headledger.v（γP1 W4 批·KB76 max-form 证书替代 KB61 退役账） ---------- *)
-(* ng_PiuZzS2Headledger -- piu_zz_s2_headledger.v: S2(n) Mertens 噪声头段上界账本：KB76 max-form 证书 |s2(n)|≤max(C1·n^(3/4)·C2*n)（n≥41）语句化——C1/C2* 精确 Q 括界＋三段拼接（piece i/ii/iii sup 账统一为 C2*-per-n eventual 面）＋max 两支并集头条（C1 支走精确四次幂 Q 面·3/4 分数幂不入 Q 面）＋D10 Proposition 5.1 修补入口（Buethe 2018 (1.7) 域隙 u≤1e19 由 Dusart 2010 Prop 5.1 因子 36261/36260 全域闭合·T4c x2 裕量吸收）＋min-form 禁面（min form＝注册在案假命题 R0）与 KB61 退役面; PA=19 Closed（编译实测）; ng_qed=23（行尾锚定实测） *)
+(* ng_PiuZzS2Headledger -- piu_zz_s2_headledger.v: S2(n) Mertens 噪声头段上界账本：KB76 max-form 证书 |s2(n)|≤max(C1·n^(3/4)·C2*n)（n≥41）语句化——C1/C2* 精确 Q 括界＋三段拼接（piece i/ii/iii sup 账统一为 C2*-per-n eventual 面）＋max 两支并集头条（C1 支走精确四次幂 Q 面·3/4 分数幂不入 Q 面）＋D10 Proposition 5.1 修补入口（Buethe 2018 (1.7) 域隙 u≤1e19 由 Dusart 2010 Prop 5.1 因子 36261/36260 全域闭合·T4c x2 裕量吸收）＋min-form 禁面（min form＝注册在案假命题 R0）与 KB61 退役面; PA=19 Closed（编译实测）; ng_qed=23（行尾计数实测） *)
 Definition ng_PiuZzS2Headledger : NewGreenFace :=
   MkNewGreenFace "piu_zz_s2_headledger.v" 485 23 20261101
   "S2(n) Mertens head-ledger: KB76 max-form certificate |s2(n)|<=max(C1*n^(3/4),C2*n) for n>=41 as EXACT Q brackets of C1/C2*, three-regime splice, two-branch max union with the C1 branch in the exact fourth-power Q face, D10 Prop 5.1 domain repair, min form banned and KB61 retired" "L485:ma3df0f".
 (* ---------- N5 · piu_zz_ec_escwin_nescD.v（γP1 W4 批·逃逸窗交钥匙集成·(D) 窗见证闭式再武装） ---------- *)
-(* ng_PiuZzEcEscwinNescD -- piu_zz_ec_escwin_nescD.v: 逃逸窗交钥匙集成件：(D) 窗见证指标闭式再武装 nescD(q)=ceil((2L+1)/5)（L=floor(log2(2q))=S(Nat.log2 q)·替换结构不兼容斜率 1/2 旧见证 65330/65536 网格失效）——nat 双肢 E1D（2q·3^n≤20^n）/E3D（2^(17n)≤κ·q^7）对一切 q≥1 于 n=nescD(q) 成立（全程谱证书：阶梯锚 400≥288·2187≥2048＋5 带归纳）＋Q 面窗供给（sigT·piu_mu_and2 肢 1/3）及其 QleT' 变式＋(D) HescD 前提槽显式 Set 面承载（供给契约：肢 1+3 本件·肢 2 p-adic clearing gap 同见证实例化）＋双引擎判别 Coq 侧镜像（退役旧见证与近似 W25 精确拒绝面）; PA=9 Closed（编译实测）; ng_qed=26（行尾锚定实测） *)
+(* ng_PiuZzEcEscwinNescD -- piu_zz_ec_escwin_nescD.v: 逃逸窗交钥匙集成件：(D) 窗见证指标闭式再武装 nescD(q)=ceil((2L+1)/5)（L=floor(log2(2q))=S(Nat.log2 q)·替换结构不兼容斜率 1/2 旧见证 65330/65536 网格失效）——nat 双肢 E1D（2q·3^n≤20^n）/E3D（2^(17n)≤κ·q^7）对一切 q≥1 于 n=nescD(q) 成立（全程谱证书：阶梯锚 400≥288·2187≥2048＋5 带归纳）＋Q 面窗供给（sigT·piu_mu_and2 肢 1/3）及其 QleT' 变式＋(D) HescD 前提槽显式 Set 面承载（供给契约：肢 1+3 本件·肢 2 p-adic clearing gap 同见证实例化）＋双引擎判别 Coq 侧同步副本（退役旧见证与近似 W25 精确拒绝面）; PA=9 Closed（编译实测）; ng_qed=26（行尾计数实测） *)
 Definition ng_PiuZzEcEscwinNescD : NewGreenFace :=
   MkNewGreenFace "piu_zz_ec_escwin_nescD.v" 478 26 20261101
   "escape-window turnkey unit: closed-form witness nescD(q)=ceil((2L+1)/5) re-arms the (D)-window with nat limbs E1D/E3D holding for every q>=1 over the 5-band induction, the sigT Q-face window supply with its QleT' variant, the HescD premise slot as an explicit Set face, and the dual-engine rejection faces" "L478:m124f79".
 (* ---------- N6′-b · piu_zz_ec_escwin_bracket.v（γP1 W4 批·逃逸窗 EXACT 括界＋头段覆盖语句面草案） ---------- *)
-(* ng_PiuZzEcEscwinBracket -- piu_zz_ec_escwin_bracket.v: 逃逸窗 EXACT 括界套件与头段覆盖语句面（cage_constants 成例形制）：KB41g 4-1 上阈 L*=22902/7−log2 3（K=2^20 二进证书 2^1661953<3^(2^20)<2^1661954 整数幂）＋q*=2^(L*)/3 有理括界（2^(5/7) 七次幂证书）＋下缘 1348·log2(20/3)−1（m'=2869916 二进证书）＋斜率证书 (20/3)^7>2^17＋q=1 见证强制锚——两阈之间见证落点不受控故 Hcage forall-n 形保留；三张 QleT' 承载覆盖面 hcage_head（n<1348）/hcage_tail（1348≤n）/hcage_all（forall n）过 Hasm/Hadm 接口对注册为 Set 型定义候 N4 侧会签（KB41m NEGATIVE：实际供给面 Hasm 实例化不可得·面诚实不实例化·构造骨架与预验证步清单存注释 W5 残留）; PA=10 Closed（编译实测）; ng_qed=11（行尾锚定实测） *)
+(* ng_PiuZzEcEscwinBracket -- piu_zz_ec_escwin_bracket.v: 逃逸窗 EXACT 括界套件与头段覆盖语句面（cage_constants 成例形制）：KB41g 4-1 上阈 L*=22902/7−log2 3（K=2^20 二进证书 2^1661953<3^(2^20)<2^1661954 整数幂）＋q*=2^(L*)/3 有理括界（2^(5/7) 七次幂证书）＋下缘 1348·log2(20/3)−1（m'=2869916 二进证书）＋斜率证书 (20/3)^7>2^17＋q=1 见证强制锚——两阈之间见证落点不受控故 Hcage forall-n 形保留；三张 QleT' 承载覆盖面 hcage_head（n<1348）/hcage_tail（1348≤n）/hcage_all（forall n）过 Hasm/Hadm 接口对注册为 Set 型定义候 N4 侧会签（KB41m NEGATIVE：实际供给面 Hasm 实例化不可得·面诚实不实例化·构造骨架与预验证步清单存注释 W5 残留）; PA=10 Closed（编译实测）; ng_qed=11（行尾计数实测） *)
 Definition ng_PiuZzEcEscwinBracket : NewGreenFace :=
   MkNewGreenFace "piu_zz_ec_escwin_bracket.v" 289 11 20261101
   "escape-window EXACT brackets and head-coverage statement face: L* upper threshold, q* rational brackets, lower-edge dyadic certificate, slope certificate and q=1 witness-forcing anchor, plus the hcage_head/tail/all QleT' faces over the Hasm/Hadm interface kept honestly un-instantiated" "L289:m4951eb".
 (* ---------- N2c · piu_zz_n2c_sigma_assembly.v（γP1 N2c 节点·装配面常数单元·crude_size_sharp 于 2^(17n) 积分） ---------- *)
-(* ng_PiuZzN2cSigmaAssembly -- piu_zz_n2c_sigma_assembly.v: N2c 装配面常数单元（KB41c 表 4-3 P1-P6 GO）：验收对象＝A 系数值面 Qabs(piu_zz_Aj n j)（e_carrier :627-630 装载语义·非 pre-collapse l1 面）——P1 A 面全 j le17 sharp 义务面＋n=1..3 有限旗标精确 Q 形＋P2/P3 L1 面 le17/le16.94 非约束观察面（零树载体·仅注释不入验收）＋P4/P5 控制带渐近 16.9358/外推松弛机外拟合值禁入语句面；兼送 σ_ZZ 装配钉（KB41b C5 EXACT·纸面 16.7553·松弛 0.2447 机外）＋mu_ZZ 名映射钉＋KB41k 数值银行 v2 锚（κ/c0/N0/钉序/C(1)）; PA=22 Closed（编译实测）; ng_qed=22（行尾锚定实测） *)
+(* ng_PiuZzN2cSigmaAssembly -- piu_zz_n2c_sigma_assembly.v: N2c 装配面常数单元（KB41c 表 4-3 P1-P6 GO）：验收对象＝A 系数值面 Qabs(piu_zz_Aj n j)（e_carrier :627-630 装载语义·非 pre-collapse l1 面）——P1 A 面全 j le17 sharp 义务面＋n=1..3 有限旗标精确 Q 形＋P2/P3 L1 面 le17/le16.94 非约束观察面（零树载体·仅注释不入验收）＋P4/P5 控制带渐近 16.9358/外推松弛机外拟合值禁入语句面；兼送 σ_ZZ 装配钉（KB41b C5 EXACT·纸面 16.7553·松弛 0.2447 机外）＋mu_ZZ 名映射钉＋KB41k 数值银行 v2 锚（κ/c0/N0/钉序/C(1)）; PA=22 Closed（编译实测）; ng_qed=22（行尾计数实测） *)
 Definition ng_PiuZzN2cSigmaAssembly : NewGreenFace :=
   MkNewGreenFace "piu_zz_n2c_sigma_assembly.v" 314 22 20261101
   "N2c assembly-surface constants unit: acceptance object the A coefficient-value face Qabs(piu_zz_Aj n j) with the sharp obligation and finite flags, the sigma_ZZ assembly pin and mu_ZZ name mapping, and the KB41k numeric-bank v2 anchors; machine-outside fit values banned from the statement surface" "L314:m8c1e82".
-(* ---------- W5 · piu1932_uncond_zz.v（一致型顶件 9.3 同名重落·六前提无条件闭合·W6 二批·R194 旧代 61baed 条目 ng_Piu1932UncondZz 原位保留＝A 案裁定·本块为候选版 46f5f5 二代登记·R 号 ? 占位·登记日全角占位候落位 commit 日终配） ---------- *)
+(* ---------- W5 · piu1932_uncond_zz.v（一致型顶件 9.3 同名重落·六前提无条件闭合·W6 二批·注册号 194 旧代 61baed 条目 ng_Piu1932UncondZz 原位保留＝A 案裁定·本块为候选版 46f5f5 二代登记·R 号 ? 占位·registry-day full-width placeholder pending, final value assigned at commit time） ---------- *)
 (* ng_Piu1932UncondZzReland -- piu1932_uncond_zz.v: Route B 装配正件 W5 四槽直供形（在册件同名替换候选）：率槽 nsep 上界 NatLe (tlw1448_nsep_rebase ck q) (S (bpow_c C0 8 (height q))) 由 tlw1703_unif_rebase_le_Sbpowc 四槽直供导出——槽 1/2/4 取自池（C0 正·阈正·ck_alpha 自反）·槽 3 经 v2 率槽桥取自六前提条件链 piu_zz_ec_mu_cond·率形证书不再作抽象前提；前提组 Hp/Htri/Hcoef/Hesc/Hcage/Hexit 为显式诚实接口·旧率载签名保留为孪生定理（签名稳定迁移账）；C0=1/10^9·alpha=8（ZZ μ=7.1032…<8）; PA=7 Closed（kb77 out/born_b_uncond.log 实测）; ng_qed=8（行尾计数实测） *)
 Definition ng_Piu1932UncondZzReland : NewGreenFace :=
   MkNewGreenFace "piu1932_uncond_zz.v" 179 8 20261103
@@ -5299,7 +5299,7 @@ Definition NewGreenListV47 : list NewGreenFace :=
  (cons ng_PiuZzN2cSigmaAssembly
  (cons ng_Piu1932UncondZzReland
  nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
-(* ---------- V48 批八件 cons（插于 V47 清单 nil 前·依赖拓扑序·R213-R220 于 order.txt 行锚） ---------- *)
+(* ---------- V48 批八件 cons（插于 V47 清单 nil 前·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚） ---------- *)
 (* ---------- 十七片终形辅助名注记（KB13R 按 KB12/KB15 核勘代拟·KB20 无壳形制修订：wave4 拆四季·伞退役·slim 直挂八季） ---------- *)
 (* 本批 wave 行承载 128 条升格辅助引理名：piu_zz_hb_512_0..31（wave1/2 各 16）＋
    piu_zz_hb_1024_0..95（wave3a-d＋wave4a-d 各 4＋wave5-8 各 16·无壳直挂四季）——系 consumer
@@ -5307,7 +5307,7 @@ Definition NewGreenListV47 : list NewGreenFace :=
    复核 128/128·KB15 独立交叉审计两法一致·64 名落袋 vo 可见性实测检验全过）。名字面判据演进：
    原 2,912 定义性名零丢失＋辅助名增量 128＝终形 3,040 名；语句多集 3,044 位恒等、原 42 位
    零丢失（KB12 审计·KB15 复核）。落地后逐行 PA 占位以 new_About 实测检验填注（仅注释面）。 *)
-(* 续写统计：63 件 / 行数和 43383 / 闭合数和 3851（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·R213-R220 于 order.txt 行锚·登记日 20261101·W5 件候 born 第二批重锚禁预填）＋W6 二批一件追加 179/8（piu1932_uncond_zz 9.3 一致型同名重落·候选版 46f5f5·六前提无条件闭合顶件·R194 旧条目 ng_Piu1932UncondZz 原位保留＝A 案·R 号 ? 占位·登记日全角占位候落位 commit 日终配·order.txt :973 行锚）。 *)
+(* 续写统计：63 件 / 行数和 43383 / 闭合数和 3851（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚·registered in the November 2026 wave·W5 件候 born 第二批重锚禁预填）＋W6 二批一件追加 179/8（piu1932_uncond_zz 9.3 一致型同名重落·候选版 46f5f5·六前提无条件闭合顶件·注册号 194 旧条目 ng_Piu1932UncondZz 原位保留＝A 案·R 号 ? 占位·registry-day full-width placeholder pending, final value assigned at commit time·order.txt :973 行锚）。 *)
 Definition NewGreenV47Pieces  : nat := 63.
 Definition NewGreenV47LineSum : nat := 43383.
 Definition NewGreenV47QedSum  : nat := 3851.
