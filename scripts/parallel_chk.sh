@@ -338,6 +338,10 @@ if [ -n "${CHK_SKIP_FILE:-}" ] && [ -s "$CHK_SKIP_FILE" ]; then
 else
   echo "PCHK-ADMIT: none (skip list absent/empty — full-closure mode)"
 fi
+# ③c-3 vm_compute 证书字节码机对称化（20261103·E-COQCHK-BYTECODE-FLAG）：默认 no=纯结构
+# 归约重算 bignum 证书＝小时级难磨（K12_lo ≥5h）；yes=与 coqc 产证同通路（实测 ≥30×）。
+# 字节码机系受信内核组成部分·对称化非降验证强度·-o Axioms 输出不受影响。
+PCHK_BC_ARGS="-bytecode-compiler yes"
 i=0
 LANE_PIDS=()
 while IFS= read -r grp; do
@@ -354,9 +358,9 @@ while IFS= read -r grp; do
   # （USER/USERNAME 进 lane 环境——通道名可能含用户域）＋独立副本（CHK_TREE_COPY）。
   # 实测组合：四 lane 共存全程推进（旧配置秒死窗不复现）。
   if [ -n "$ldir" ] && [ -d "$ldir" ]; then
-    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
+    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o $PCHK_BC_ARGS -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   else
-    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
+    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o $PCHK_BC_ARGS -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   fi
   # 20261019 死锁修：定向收 lane PID——裸 wait 会把监视器子壳（永循环）一并等死＝
   # coqchk 步永久假死（桩件实测 t=338s 心跳不歇·wait 不归）。下同 ③d 重试段。
@@ -413,9 +417,9 @@ for j in $(seq 0 $((NGRP-1))); do
     ldir="${LANE_ARR[$j]:-}"
     mods=$(sed -n "$((j+1))p" "$WORK/groups.txt" | tr '\037\r' '  ')
     if [ -n "$ldir" ] && [ -d "$ldir" ]; then
-      ( export USER="lane$$-r$j" USERNAME="lane$$-r$j"; cd "$ldir" && "$K" -o -Q . "" $mods > "$WORK/g$j.log" 2>&1; echo $? > "$WORK/g$j.rc" ) &
+      ( export USER="lane$$-r$j" USERNAME="lane$$-r$j"; cd "$ldir" && "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$j.log" 2>&1; echo $? > "$WORK/g$j.rc" ) &
     else
-      ( export USER="lane$$-r$j" USERNAME="lane$$-r$j"; "$K" -o -Q . "" $mods > "$WORK/g$j.log" 2>&1; echo $? > "$WORK/g$j.rc" ) &
+      ( export USER="lane$$-r$j" USERNAME="lane$$-r$j"; "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$j.log" 2>&1; echo $? > "$WORK/g$j.rc" ) &
     fi
   fi
 done
