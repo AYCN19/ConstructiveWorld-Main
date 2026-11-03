@@ -327,6 +327,12 @@ jobs:
           # 随附页入 _chk_all.log 留痕（gate2 认证态断言对账用）。绝对路径=parallel_chk
           # 会 cd 进 VO_DIR，相对路径即失配（att 链实证同坑）。
           export CHK_SKIP_FILE="$PWD/ConstructiveWorld_vo/_attest_skip.txt"
+          # 20261103 admit 边界结构性过渡（#329-#331 三连 rc=129 实证）：档案（#319 重铸）落后
+          # 树态三个波次（W6 波＋107 叶落岸＋144 重编）——admit 集含 recorded-digest 失配件
+          # ＝intern 早期 anomaly。本炉起无条件收缴跳过清单＝全树模式（等价 backstop·全量
+          # 重认证）＋bytecode 旗标加速；待绿炉后档案重铸（ab5eed8 式 recast commit）再恢复
+          # admit（删本行即回滚）。
+          export CHK_SKIP_FILE=""
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
           export CHK_JOBS=4
           # W3 v1.1 backstop (20261101): every 20th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
