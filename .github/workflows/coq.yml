@@ -164,6 +164,62 @@ jobs:
           # HEAD 源重编，与本地按 M 态工作树源编译的种子 .vo 撞 digest
           # （Inconsistent assumptions over PhysPredAblation）。播种即真镜像，无需自愈；
           # 真撕裂由 coqchk 步 fail-loud 暴露、按「本地先全绿」教义本地治愈后重推。
+          # ④-dep 级联失效（20261103·#329 admit 边界「missing dep」anomaly 实证）：own-file
+          # fingerprint 看不见依赖过时——archive-hit 但依赖已变的 .vo／archive-miss 残留种子
+          # .vo 在 admit 边界炸 anomaly。构建前三层清理：T0=无源孤儿 .vo（源不在 vo 树＝
+          # 不可重编不可认证）必删；T1=archive 非命中 .vo 必删（未认证=每炉重认证）；T2=
+          # 被删者静态反向依赖闭包级联删→指纹机全量重编=字节一致重铸→admit 边界依赖
+          # 一致性恢复。fail-open：dep 图空则仅 T0/T1。
+          PYTHON="C:\Program Files\Python313\python.exe"
+          "$PYTHON" - <<'PYEOF'
+          import hashlib, json, os, subprocess
+          vo = 'ConstructiveWorld_vo'
+          arc = json.load(open('scripts/gates/cw_attest.json', encoding='utf-8'))['modules']
+          vs = sorted(f for f in os.listdir(vo) if f.endswith('.v') and not f.startswith('_'))
+          stems = set(f[:-2] for f in vs)
+          rocq = r'C:/Rocq-Platform~9.1~2026.01/bin/rocq.exe'
+          try:
+              out = subprocess.run([rocq, 'dep', '-Q', '.', ''] + vs, capture_output=True, text=True, cwd='.', timeout=600)
+          except Exception as e:
+              print('DEP-CASCADE: rocq dep failed (%s) — fail-open to T0/T1 only' % e)
+              out = None
+          deps = {}
+          for line in (out.stdout.splitlines() if out else []):
+              if ':' not in line: continue
+              left, right = line.split(':', 1)
+              vt = [t for t in left.split() if t.endswith('.vo')]
+              if not vt: continue
+              src = vt[0].replace('\\', '/').split('/')[-1][:-3]
+              ds = set()
+              for t in right.split():
+                  if t.endswith('.vo') and not t.startswith('/'):
+                      d = t.replace('\\', '/').split('/')[-1][:-3]
+                      if d != src: ds.add(d)
+              deps[src] = ds
+          def sha(p):
+              h = hashlib.sha256()
+              with open(p, 'rb') as f:
+                  for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
+              return h.hexdigest()
+          removed = set()
+          for f in os.listdir(vo):
+              if not f.endswith('.vo'): continue
+              stem = f[:-3]
+              if stem not in stems: removed.add(stem); continue
+              ent = arc.get(stem + '.v')
+              if not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256'): removed.add(stem)
+          changed = True
+          while changed:
+              changed = False
+              for s, ds in deps.items():
+                  if s not in removed and any(d in removed for d in ds):
+                      removed.add(s); changed = True
+          n = 0
+          for s in sorted(removed):
+              p = os.path.join(vo, s + '.vo')
+              if os.path.exists(p): os.remove(p); n += 1
+          print('DEP-CASCADE: vo_sources=%d invalidated=%d' % (len(vs), n))
+          PYEOF
           pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "cmd /c D:\actions-runner\cw_build.cmd" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
 
       # S7/PA4+PB6：全树模块计数自动化——六维计数（全树 .v／Live_X 顶层／UpAbl 顶层／
