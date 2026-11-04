@@ -1,0 +1,541 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# coq93.yml — Main CI 9.3（Rocq 9.3.0 换基炉·双炉并存位·20261105 铸造）
+# ═══════════════════════════════════════════════════════════════════════════
+# 底本：.github/workflows/coq.yml @ HEAD 3dea632（"perf(ci): certification furnace 4 -> 14
+#       lanes (user order 20261105)"·458 行全文复制改形）——9.1 炉 coq.yml 零触碰，双炉并存。
+# 铸造：换基铸造师·20261105·staging ci_switch_stage_20261105（ci_switch 包 r3＋ci_adapt_draft 五改点表）。
+# 七组改点（ask 20261105）：
+#   ① 底本全文复制改形（本文件）；9.1 炉任何行为零触碰。
+#   ② name=Main CI 9.3（守望按 workflow 名甄别）；并发组 cw-main-ci-93（与 9.1 组 cw-main-ci
+#     隔离·cancel-in-progress 仅及本组）；触发同底本（push[main]＋pull_request＋workflow_dispatch
+#     ·macos_only 输入随底本保留——Main 底本无 mac job 块，该输入为模板残留·无害）。
+#   ③ 工具链形 A 环境注入（job env）：COQC/COQCHK/COQLIB/ROCQLIB → opam-root 9.3（-v 实测双
+#     9.3.0）。【cmdLedger 裁定】runner cmd 不吃 env（D:/actions-runner/cw_build.cmd:3 硬编
+#     `set "COQC=…9.1…"` 无条件覆写）→ build 步改直调 build.sh（build.sh L4 吃 COQC；偏离包
+#     diff hunk3 的 cw_build93.cmd 路线·gaps 登记）；chk 步 parallel_chk.sh 直调照旧＋export
+#     COQCHK（parallel_chk.sh L57 `${COQCHK:-…}` 形 A·包偏离1 同判：直挂 cw_chk93.cmd 串行壳
+#     会废并行·否决）。
+#   ④ gate2 代际钉 Welcome to Chicken 9.3.0；gate5 黑名单 v3_93（scripts/gates/
+#     poison_digest_blacklist_v3_93.txt）：§A=v2 原 25 枚 9.1 字节指纹逐字保留（Set r3 落树先例
+#     同形）＋§B=9.3 重产（毒形 Lia→Lia Lra 恢复·main93 世界闭包·gen1/gen2 双建互证·gate5 对
+#     gen2 产物 DIGEST-HIT 全中）；对照组显式 --control 指 9.3 平台 ClassicalDedekindReals.vo
+#     （SELF-HIT 校准件同代重铸·本席预验 PASS；digest 算法依 gate5 脚本契约=32 位 md5——ask 字面
+#     「sha256」与 gate5_vodep_quarantine.py:220 [0-9a-f]{32} 硬闸冲突·按脚本契约裁定·gaps 登记）。
+#   ⑤ attest 沿 a062074 gate2 mode FULL 过渡形照抄（ATT-MODE-OVERRIDE 块）；CHK_SKIP_FILE
+#     全树模式过渡行照抄（#329-336 六连实证块）。
+#   ⑥ seed=main93 沙箱 BUILD_DONE 闸（seedLedger 判定 20261105=不可用：_93m_BUILD_DONE 缺席＋
+#     1013/1018 .vo 缺 5 件·炉在飞）→ 首炉冷编零 seed·禁播 9.1 .vo（魔数 90100 vs 90300 拒载律）；
+#     沙箱收官（R4 闸线）后播种自动启用。
+#   ⑦ CHK_JOBS=14（用户令 20261105）＋CHK_TREE_COPY=1＋PCHK_BC_ARGS 照抄（脚本内置
+#     parallel_chk.sh:344="-bytecode-compiler yes"·yml 无需带）＋RAM guard/TL98 backstop 保留；
+#     guard 无 -CoreN 钉（底本 20261019 set1557 已去钉·本席 grep 实证）·mac 观察席 omit（Main
+#     底本无 mac job 块·如实登记）。
+# 摘雷（偏离底本·gaps 响亮登记）：底本 L384 悬空行 `pwsh … cpu_guard_v3.ps1 -Command`（无值）
+#     本席实测 rc=1「参数 'Command' 缺少自变量」——bash -e 下必杀 coqchk 步（parallel_chk 永不
+#     启动）；系底本 20261105 编辑残留。本炉摘除该行；底本零触碰（9.1 炉该行归底本所有者处置）。
+# ═══════════════════════════════════════════════════════════════════════════
+name: Main CI 9.3
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      macos_only:
+        description: 'Run macOS observation job only (skip Windows cert job)'
+        type: boolean
+        default: false
+
+concurrency:
+  # 20261105 换基（改点②）：与 9.1 炉组 cw-main-ci 隔离——双炉互不取消；组内 cancel-in-progress 仅及本组。
+  group: cw-main-ci-93
+  cancel-in-progress: true
+
+jobs:
+  # ── Windows 认证 job（9.3 炉·与 9.1 炉 coq.yml 并存；认证语义同构·改点详见文件头注）────────
+  coq-build:
+    # 显示残留（ci_switch 包 §6 残留1 同款·不判红）：job name 仍书 9.1——甄别一律按 workflow 名
+    # Main CI 9.3（守望甄别键=workflow 名·非 job 名）。
+    name: Rocq 9.1 build + coqchk (self-hosted local trust cache, Windows)
+    # 20261026 mac-side pilot lane: workflow_dispatch with macos_only=true
+    # skips the Windows cert job so mac-side revisions can be validated
+    # without occupying the Windows self-hosted runner. Push/PR unchanged.
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.macos_only != true }}
+    runs-on: [self-hosted, Windows]
+    # 20261025 tau 十七片落装：无壳 hb 实件 128 条内核复算实证 ~10min/枚（KB22 沙箱双跑
+    # 10h15m/2 道·主仓 R5 同款 4 组实测预测 10-12h）——480min 墙对首验 tau 闭包确定性不足，
+    # 提至 960（与落装同波捎带·KB6 地雷二合规·本注记即实测依据）。
+    timeout-minutes: 960
+    env:
+      # ── 形 A 工具链注入（20261105 换基·七组改点③）──────────────────────────────
+      # opam-root 9.3（本席实勘 coqc.exe/coqchk.exe/rocq.exe -v 三件双 9.3.0·20261105）。
+      # 消费位：build.sh L4 `C="${COQC:-…9.1…}"`·parallel_chk.sh L57 `K="${COQCHK:-…9.1…}"`
+      # （SW2 同根推导 COQLIB/ROCQLIB/ROCQDEP 全自 K 出）·gate5 CONTROL_BASES 读 COQLIB/
+      # ROCQLIB（gate5 步另显式 --control 指 9.3 对照件）。unset 路径不存在（job env 恒注入）；
+      # 回滚=删本 env 块＋改回底本形（底本原件未动·git 历史可 revert）。
+      # 【cmdLedger 裁定 20261105】D:/actions-runner/cw_build.cmd L3 `set "COQC=…9.1…"` 硬编
+      # 不吃 env（env 透传被覆写实测）→ build 步直调 build.sh（见 build 步内注·gaps 登记）。
+      COQC: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqc.exe
+      COQCHK: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe
+      COQLIB: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/lib/coq
+      ROCQLIB: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/lib/coq
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      # ── AX-FORTRESS 防线挂点（20260925 施工单，R131 落树）────────────────────
+      # 闸① 毒 token 守卫：pre-build fail-fast，秒级。exit 0 洁净／1 命中／2 树无效——
+      # bash -e 下非零即 step 红且后续步不启（禁红后继续）。gate1 系扁平扫描（非递归）。
+      # 【R131 落树席偏离登记，候翻案】施工单原案三树（含 CW219_split），现测
+      # CW219_split 在册 5×Psatz（S11-S15 壳线，09-08 分裂波遗存，HEAD 在册、零脏态），
+      # 系 CW_219 消融波候 GO 施工面且不在 CI build/coqchk 认证面（cw_build/cw_chk
+      # 均 cd ConstructiveWorld_vo）——硬闸常咬已知有主面=哨兵信号归零，故本波
+      # gate1 只扫 Live+vo（恰=云端认证面+世系对称面）；升级方向：消融波断根后
+      # CW219_split 回补第三 --tree。本地预验：Live 679/vo 700 均 0 命中。
+      - name: gate1 poison-token guard (pre-build fail-fast)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          python scripts/gates/gate1_poison_guard.py \
+            --tree ConstructiveWorld_Live --tree ConstructiveWorld_vo \
+            --json gate1_ci.json --text
+
+      # 闸④ 注释哨兵（comment hygiene hard-gate，R135 落树）：gate1 后顺位——
+      # 注释面先于公理面红闸（GATE4-EXT 草案口径）。gate4_comment_guard.py v2.0：
+      # 头注五字段＋基座 65 禁词＋扩展五族共 130 扫描单元＋三域全量（文件头注/
+      # 证明体内/子结构头注）＋判定原则启发式（--no-principle 可作降噪开关，CI 默认开）。
+      # exit 0=PASS 绿；1=硬违规红屏（五字段缺/词面硬命中/承认式/席次战役/日期戳——
+      # bash -e 下同 gate1 教义，非零红且后续步不启，禁红后继续）；2=黄级（仅原则
+      # 启发式复核项/语境双义词如「载体」）——artifact 收编不红屏，人工复核清单
+      # 随 gate4_report.json 出。双树口径与 gate1 同款；升级方向：CW219_split
+      # 消融波断根后回补第三 --tree。
+      # 【CI-ARTIFACT-FIX 20260926 事实登记】report 先写后判：脚本在 exit 码裁决前
+      # 无条件落 gate4_report.json（v2.0/v2.1 同序，红/黄/绿三态均留证）。实证：
+      # run 36156662359(红) 与 36152669096 a1(红)/a2(取消) 三包内均含
+      # gate4_report.json+gate1_ci.json——红态 artifact 面可用，gate4 权威数以
+      # coqchk-logs 包内 report 为准，run log 扫描行降为旁证。
+      # 【--tree-recursive 裁决 20260926】默认关（守 1227 口径连续性，R135 1281→
+      # R134 1245→LATEST 1227 对照链不破）；v2.1 脚本随下一波认证合流入库后，
+      # 候探针件族归册/清偿 commit 落树再原子开启（vo 树 +22 盲区面如实入红账，
+      # 红只增不减，禁降档）。
+      - name: gate4 comment guard (pre-build, exit1=red exit2=yellow artifact-only)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          set +e
+          python scripts/gates/gate4_comment_guard.py \
+            --tree ConstructiveWorld_Live --tree ConstructiveWorld_vo \
+            --json gate4_report.json
+          rc=$?
+          set -e
+          if [ "$rc" -eq 1 ]; then
+            echo "GATE4-RED: comment-guard hard violations — see gate4_report.json artifact"
+            exit 1
+          elif [ "$rc" -eq 2 ]; then
+            echo "GATE4-YELLOW: review-only findings — artifact-collected, not red"
+            exit 0
+          elif [ "$rc" -eq 0 ]; then
+            echo "GATE4-GREEN: all comment checks passed"
+          else
+            echo "GATE4-UNEXPECTED-EXIT rc=$rc — fail-loud, treat as red"
+            exit 1
+          fi
+
+      # 闸③ 跨树 Require 毒面对称检查（E957 暗雷族／世系倒灌）。秒级，常开。
+      # SINGLE-TREE-POISON exit 1=红；REQUIRE-DRIFT 仅登记 exit 0（卫生信息）。
+      - name: gate3 cross-tree require-face diff
+        if: always()  # CI-ARTIFACT-FIX：gate4 红屏不阻断 gate3 出证（gate3_ci.json 随 coqchk-logs 上传，补红态证据链缺口）
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          python scripts/gates/gate3_cross_tree_diff.py \
+            --tree-a ConstructiveWorld_Live --tree-b ConstructiveWorld_vo \
+            --json gate3_ci.json
+
+      # 【20261105 9.3 炉 omit·gaps 登记】底本 L106-114「Sync cross-machine vo trust cache
+      # (one-shot, fail-open)」步摘除：该步将对侧 mac 9.1 artifact 合流进 9.1 本地缓存树
+      # （vo_sync_once.sh·SYNC_CACHE_DIR=9.1 开发树）——服务 9.1 播种链；本炉零 seed（下步）
+      # 无入站需求，9.3 炉不触碰 9.1 缓存经济（防 9.3 炉写路径与 9.1 生态交叉）。
+
+      # 本地信任缓存播种（9.3 炉·20261105 换基·改点⑥）：工具链=opam 9.3 根（job env 形 A 注入）；
+      # 播种源=rocq93_work_20261101/main93 9.3 缓存树（其 .vo 同为 9.3 编译·魔数 90300）。
+      # .vo 魔数 90100→90300 换代——禁播 9.1 .vo（跨代拒载全红·E835 判例同机制）。
+      # 【seedLedger 判定 20261105】main93 沙箱现势：_93m_BUILD_DONE 缺席＋顶层 .vo 1013/1018
+      # （缺 Arch_UpAbl_30/UpAblP2FeedSumLe/UpAblP6_Package/UpReqPadeConstUnify/_twc_probe 五件·
+      # 炉在飞）→判「不可用」→首炉冷编零 seed；唯一当沙箱 BUILD_DONE 就位（R4 闸线 ≈1018＋
+      # rc0·chk_main93 绿）播种自动启用——本 if 闸即 seedLedger 判定的 yml 落地形。
+      - name: Seed trust cache from local vo tree
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          # 治本（E-STAGING-P9）：runner 侧 _work 检出目录持久非易失，
+          # 旧版纯 cp 只增不改，陈旧 .vo 跨轮幸存 → coqchk digest 撕裂单件红。
+          # 改为镜像删除语义：先清空再播种，保证 _work vo 树 = 播种源的真镜像。
+          # （零 seed 轮本步=纯清场——9.1 并存炉在该检出树遗留的 9.1 .vo 一律先清，防跨代混装。）
+          rm -f ConstructiveWorld_vo/*.vo ConstructiveWorld_vo/*.vos ConstructiveWorld_vo/*.vok 2>/dev/null || true  # 20261019 扩清 .vos/.vok 残留（叶子件 "searching for .vos" 撕裂根除）
+          mkdir -p ConstructiveWorld_vo/Local
+          rm -f ConstructiveWorld_vo/Local/*.vo ConstructiveWorld_vo/Local/*.vos ConstructiveWorld_vo/Local/*.vok 2>/dev/null || true
+          if [ -f /d/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo/_93m_BUILD_DONE ]; then
+            cp /d/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo/*.vo ConstructiveWorld_vo/ 2>/dev/null || true
+            cp /d/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo/Local/*.vo ConstructiveWorld_vo/Local/ 2>/dev/null || true
+            echo "seeded from main93 (_93m_BUILD_DONE present)"
+          else
+            echo "ZERO-SEED: main93 sandbox not ready (_93m_BUILD_DONE absent · seedLedger verdict 20261105) — cold build; 9.1 .vo 禁播（跨代拒载）"
+          fi
+          echo "seeded (mirror-deleted stale) $(ls ConstructiveWorld_vo/*.vo 2>/dev/null | wc -l) .vo"
+
+
+      # 20261028 内存窗卫兵（软性·report-only·零阻断）：本机与多门巨炮共用一个内存池
+      # （commit 限额 ~128GB）。#301 实证：commit 水位 >89% 时 coqchk 被页出抖动拖至
+      # 15.7h（清洁基线 3-5h）。本步在重相位前轮询 commit free（>30GB 即过·至多 10 分
+      # 钟·不到也照常推进）——把内存水位显式化进 CI 日志·为 CHK_JOBS 调优留数据。
+      # CHK_JOBS 20261105 起=14（用户提速令）：并行度加速只在内存余量充裕时有效·内存紧时越多道越抖
+      # （#301 反例）·升档候内存窗常态化后另评。
+      - name: RAM guard (report commit headroom before heavy phase)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          set +e
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            FREE=$(powershell -NoProfile -Command "[math]::Round((Get-CimInstance Win32_OperatingSystem).FreeVirtualMemory/1MB,1)")
+            echo "RAM guard round ${i}: commit free ${FREE} GB"
+            OK=$(powershell -NoProfile -Command "if ((Get-CimInstance Win32_OperatingSystem).FreeVirtualMemory/1MB -gt 30) { 'yes' } else { 'no' }")
+            if [ "$OK" = "yes" ]; then echo "RAM guard: headroom OK"; break; fi
+            sleep 60
+          done
+          exit 0
+
+      - name: Build full tree (order topology, fingerprint skip, thermal-guarded)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          # 温控协议已入库（仓库根 cpu_guard.ps1）：CPU 负载>LoadLimit(60%) 自动错峰冷却，绑核 CoreN 2 避免热集中。
+          # 20261019 用户令：并行 build 三连红（#267 假绿/#269 卡 S10/#270 卡 36min）——build 面回退本
+          # proven 串行版（#263 双机全绿·指纹跳过实测 1.6h）·并行 build 退实验田另勘（scripts/parallel_build.sh
+          # v2 留树：代差失效/三断言/lane 文件形俱在）；并行 coqchk（K=4）保留＝时长墙正解·与 build 解耦。
+          # repair_tear 已摘除（2026-09-19 run#85 红 run 根因，fail-loud 存档）：镜像播种语义下
+          # （上一步 rm+cp 即本地信任缓存真镜像），repair_tear 的 mtime 启发式对字母序 cp 落盘
+          # 时差（G→U 跨分钟，远超 v2.2 的 5s 容差）误撕 → dep-missing 级联删除 → build 按检出
+          # HEAD 源重编，与本地按 M 态工作树源编译的种子 .vo 撞 digest
+          # （Inconsistent assumptions over PhysPredAblation）。播种即真镜像，无需自愈；
+          # 真撕裂由 coqchk 步 fail-loud 暴露、按「本地先全绿」教义本地治愈后重推。
+          # ④-dep 级联失效（20261103·#329 admit 边界「missing dep」anomaly 实证）：own-file
+          # fingerprint 看不见依赖过时——archive-hit 但依赖已变的 .vo／archive-miss 残留种子
+          # .vo 在 admit 边界炸 anomaly。构建前三层清理：T0=无源孤儿 .vo（源不在 vo 树＝
+          # 不可重编不可认证）必删；T1=archive 非命中 .vo 必删（未认证=每炉重认证）；T2=
+          # 被删者静态反向依赖闭包级联删→指纹机全量重编=字节一致重铸→admit 边界依赖
+          # 一致性恢复。fail-open：dep 图空则仅 T0/T1。
+          PYTHON="C:\Program Files\Python313\python.exe"
+          "$PYTHON" - <<'PYEOF'
+          import hashlib, json, os, subprocess
+          vo = 'ConstructiveWorld_vo'
+          arc = json.load(open('scripts/gates/cw_attest.json', encoding='utf-8'))['modules']
+          vs = sorted(f for f in os.listdir(vo) if f.endswith('.v') and not f.startswith('_'))
+          stems = set(f[:-2] for f in vs)
+          rocq = r'D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/rocq.exe'  # 20261105 换基：dep 面同代 9.3（底本钉 9.1 封存平台·偏离登记 gaps）
+          try:
+              out = subprocess.run([rocq, 'dep', '-Q', '.', ''] + vs, capture_output=True, text=True, cwd='.', timeout=600)
+          except Exception as e:
+              print('DEP-CASCADE: rocq dep failed (%s) — fail-open to T0/T1 only' % e)
+              out = None
+          deps = {}
+          for line in (out.stdout.splitlines() if out else []):
+              if ':' not in line: continue
+              left, right = line.split(':', 1)
+              vt = [t for t in left.split() if t.endswith('.vo')]
+              if not vt: continue
+              src = vt[0].replace('\\', '/').split('/')[-1][:-3]
+              ds = set()
+              for t in right.split():
+                  if t.endswith('.vo') and not t.startswith('/'):
+                      d = t.replace('\\', '/').split('/')[-1][:-3]
+                      if d != src: ds.add(d)
+              deps[src] = ds
+          def sha(p):
+              h = hashlib.sha256()
+              with open(p, 'rb') as f:
+                  for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
+              return h.hexdigest()
+          removed = set()
+          # v4 终版删除律（20261104·#332-334 三连实证收束）：删除仅限
+          # 「有 order 行 ∧ archive-miss」的 .vo（可重编陈旧件——删→指纹重编→字节一致）。
+          # 其余一切 .vo 永不删：
+          #   archive-hit＝认证字节 ✓；无 order 行＝承载件（KB70/LW0 叶·合并退役件的缓存
+          #   .vo——consolidation 波退役删源留 .vo·消费件 Require 在·删除即 Cannot find
+          #   崩炉 #332-334 实证）。
+          order_stems = set()
+          for l in open('ConstructiveWorld_vo/order.txt', encoding='utf-8', errors='replace'):
+              l = l.strip()
+              if l.endswith('.v'):
+                  order_stems.add(l.split('#')[0].strip()[:-2])
+          for f in os.listdir(vo):
+              if not f.endswith('.vo'): continue
+              stem = f[:-3]
+              ent = arc.get(stem + '.v')
+              if stem in order_stems and (not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256')):
+                  removed.add(stem)
+          changed = True
+          while changed:
+              changed = False
+              for s, ds in deps.items():
+                  if s not in removed and any(d in removed for d in ds):
+                      removed.add(s); changed = True
+          n = 0
+          for s in sorted(removed):
+              p = os.path.join(vo, s + '.vo')
+              if os.path.exists(p): os.remove(p); n += 1
+          print('DEP-CASCADE: vo_sources=%d invalidated=%d' % (len(vs), n))
+          PYEOF
+          # 20261105 换基（改点③·cmdLedger 裁定）：runner cmd（cw_build.cmd:3-5）硬编 COQC 不吃 env，
+          # 其形态=cd ConstructiveWorld_vo→bash build.sh → 本炉直调等价式（build.sh L4
+          # `C="${COQC:-…9.1…}"` 吃 job env·SW2 同根推导 COQLIB/ROCQLIB）；包 diff hunk3 的
+          # cw_build93.cmd 路线弃用（偏离·gaps 登记·runner 侧 93 同胞件仍部署在位可回挂）。
+          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash -c 'cd ConstructiveWorld_vo && bash build.sh'" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
+
+      # S7/PA4+PB6：全树模块计数自动化——六维计数（全树 .v／Live_X 顶层／UpAbl 顶层／
+      # attn 沙箱／order 行数／提交面数）三口径分列（注册面/侧树顶层/沙箱）；
+      # 论文引用口径固定=侧树顶层，防锈声明随 JSON 落盘（PB6）。
+      # 前置：scripts/gen_tree_stats.ps1 须与本 patch 同波（R11x 注册波）先行入库；
+      # 侧树/vo 树未挂载时该口径记 absent 不红屏（-CI record-only）；>5% fail-loud 门仅本地判。
+      - name: Generate tree-stats (six-dimension counts, three-caliber breakdown)
+        if: always()
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          pwsh -File scripts/gen_tree_stats.ps1 -CI -OutFile tree-stats.json
+          echo "tree-stats head: $(head -c 300 tree-stats.json)"
+
+      - name: Upload tree-stats
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: tree-stats
+          path: tree-stats.json
+
+      # 闸⑤ .vo/.vos/.vok 二进制依赖层检疫（GATE-VOQ 20260926，E-STAGING-AXFORENSIC-1 判例：
+      # 休眠毒代 .vo 播种激活——gate1 源面绿与 coqchk Axioms 现形两口径不相交，载体在源闸半径外的
+      # .vo 依赖串表层）。coqchk 消费闭包前对 vo 树递归全量：①解压感知 token 串扫描（raw+gzip+zlib，
+      # 裸 grep 有 glob 零命中假象）硬四族 Lra/Reals/ClassicalDedekindReals/FunctionalExtensionality
+      # （净主树 2474 件实测 0/0/0/0 校准；\b 词边界大小写敏感，ConstructiveReals/Qreals 不误配）；
+      # ②毒 digest 黑名单 v2 对照（25 枚 vendored scripts/gates/poison_digest_blacklist_v2.txt，
+      # 同名 vo 即净假设不成立，一切按 digest 对账）；③platform 对照组内建 SELF-HIT 校准
+      # （ClassicalDedekindReals.vo 必自命中，否则方法不可证）。Psatz 二进制层=信息档非硬
+      # （净主树 173 件串表携带=Lia 闭包 Q 域供给非毒，AXFORENSIC §1.1 判例；源面 Require Psatz
+      # 由 gate1 硬闸把守）。
+      # exit 0=洁净（扫全+对照过+零命中）；1=命中（红）；2=无可扫面/树无效/对照失效（红，
+      # 诊断文案分流，禁降档——gate2 GATE-BANNER-ABSENT 先例）。上游红时 if:always() 照 gate3
+      # 先例不阻断本闸出证；evidence=本步 stdout 全量 HIT 清单（gate5_vodep_report.json 落盘于
+      # 工作区根，artifact 收编候合流窗——Upload 步 path 清单本波禁改，登记于 _tgatevoq_ 报告 §四）。
+      # 【20261105 9.3 炉改点④·黑名单 v3_93（Set 仓 r3 落树先例同形）】
+      # §A=v2 原 25 枚 9.1 字节 digest 逐字保留（md5 系绝对字节指纹·不随编译器代际失效·仍咬 9.1
+      # 毒代回流）；§B=9.3 重产（毒形 Lia→Lia Lra 恢复·main93 世界闭包·gen1/gen2 异目录双建互证
+      # ·gate5 对 gen2 产物 DIGEST-HIT 全中·净沙箱扫零命中）。黑名单文件须先于/同 commit 入树：
+      # 缺件=脚本 rc=2「黑名单不可用」→ 本步 GATE5-NOSCANNABLE 红（入树时序硬闸）。
+      # 对照组：显式 --control 指 9.3 平台 ClassicalDedekindReals.vo（SELF-HIT 校准件同代重铸·
+      # 本席 20261105 预验 SELF-HIT PASS；底本 auto 定位钉 9.1 装机路径优先——平台封存在位亦恒过
+      # ·此处取同代更严形）。digest 算法依脚本契约=32 位 md5（gate5_vodep_quarantine.py:220）。
+      - name: gate5 vo-binary quarantine (pre-coqchk, token+digest, control-calibrated)
+        if: always()  # gate3 先例：上游红不阻断 gate5 出证
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          set +e
+          python scripts/gates/gate5_vodep_quarantine.py \
+            --tree ConstructiveWorld_vo \
+            --blacklist scripts/gates/poison_digest_blacklist_v3_93.txt \
+            --control D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/lib/coq/user-contrib/Stdlib/Reals/ClassicalDedekindReals.vo \
+            --json gate5_vodep_report.json
+          rc=$?
+          set -e
+          if [ "$rc" -eq 1 ]; then
+            echo "GATE5-RED: poison token/digest hit in .vo/.vos/.vok binary layer — HIT list above; disposition per VO-RES-CLEAN (purge poison gen + rebuild consumer closure from clean source + Axioms=<none> recheck)"
+            exit 1
+          elif [ "$rc" -eq 2 ]; then
+            echo "GATE5-NOSCANNABLE: no scannable surface / tree missing / control SELF-HIT failed — treat as red (fail-loud, gate2 GATE-BANNER-ABSENT precedent; upstream red cause first)"
+            exit 1
+          elif [ "$rc" -eq 0 ]; then
+            echo "GATE5-GREEN: vo binary layer clean (hard token 0-hit + digest 0-hit + control SELF-HIT pass; Psatz soft counts in gate5_vodep_report.json)"
+          else
+            echo "GATE5-UNEXPECTED-EXIT rc=$rc — fail-loud, treat as red"
+            exit 1
+          fi
+
+      # ── 认证对账步（ATT-RECON 20261029·cw.attest/v1）────────────────────────
+      # coqchk 前对账：现树逐件 sha256+size 对照认证档案 scripts/gates/cw_attest.json
+      # （对账口径与沙箱对账器 coqchk_delta_check.py 同源：四类判定
+      # unchanged/changed/added/removed·mtime 等任何 stat 元数据一律不入判——
+      # 偏离必检的判据只有内容本身）。
+      #   命中（unchanged）→ 入跳过清单 _attest_skip.txt：该件字节=上次 coqchk 全绿
+      #   运行所验内容（档案 generated_by=coqchk green run·建档律第1条），认证凭哈希
+      #   继承，本轮免列；未命中（changed/added/removed）→ 不入清单，正常送 coqchk
+      #   （偏离必检律）。
+      # 跳过面 v1 如实收窄（宁强勿弱）：仅顶层模块；Local/ 件维持依赖闭包核验现状。
+      # 红只增不减（降速不降强律）：档案缺席/坏档/自洽破 → 清单置空=本轮全量 coqchk
+      # （认证态分支不启用）；现树 vo 不可读 → exit 2 fail-loud 红。
+      # 留痕：清单经 CHK_SKIP_FILE 交 coqchk 步并入 _chk_all.log 附页（gate2 认证态
+      # 分支档案覆盖断言的日志侧正本）；attest_reconcile.json 随 coqchk-logs 出证。
+      # 【20261102 Rocq 9.3 换基口径（ci_switch 包 diff hunk4 采撷）】换代首炉对账预期
+      # changed≈全量（.vo 魔数 90100→90300 全换代）·removed=0——口径=「换代」非「漂移」
+      # （工单风险#3）；cw_attest.json 由步3 以 9.3 绿树重铸（新 tree_sha·指纹全换代）后
+      # 恢复增量继承语义。机制零改：档案缺席/坏档仍走全量 coqchk 分支（降速不降强）；
+      # W3 v1.1 backstop（每 20 轮全量）代际无关零改。
+      - name: attest reconcile (archive-hit -> skip list, miss -> coqchk, cw.attest/v1)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          set +e
+          python scripts/gates/attest_reconcile.py \
+            --tree ConstructiveWorld_vo \
+            --attest scripts/gates/cw_attest.json \
+            --skip-out ConstructiveWorld_vo/_attest_skip.txt \
+            --json attest_reconcile.json
+          rc=$?
+          set -e
+          case "$rc" in
+            0) echo "ATT-RECON-OK: skip list ready ($(grep -c . ConstructiveWorld_vo/_attest_skip.txt) modules inherited)" ;;
+            3) echo "ATT-RECON-NOARCHIVE: 档案缺席/坏档/自洽破——本轮全量 coqchk（降速不降强）" ;;
+            *) echo "ATT-RECON-FAIL rc=$rc — fail-loud, treat as red"; exit 1 ;;
+          esac
+          # 20261104 skip 收缴过渡（#329-#336 六连实证）：skip 收缴=全树认证 → gate2
+          # 必须走 FULL 分支——对账 JSON 的 mode 改写 FULL（否则 ATTEST 分支断言附页
+          # 必红：附页 0 vs skipped 960 结构性错配 #336 实证）。恢复 admit 时删除本段。
+          python - <<'PYEOF'
+          import json
+          p = 'attest_reconcile.json'
+          d = json.load(open(p, encoding='utf-8'))
+          d['mode'] = 'FULL'
+          d['skipped'] = []
+          json.dump(d, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+          print('ATT-MODE-OVERRIDE: mode=FULL (skip withheld transition)')
+          PYEOF
+
+      # 20261018 并行认证切换：单遍全模块共享闭包（cw_chk.cmd→coqchk_all.sh）CPU 串行
+      # 3h04m 基线/4h23m 未竟实证；改 scripts/parallel_chk.sh 根分组均衡 K 路并行
+      # （历史判例守线：逐件 O(n²) 已否决——本版按依赖顶根闭包装箱，组内共享闭包、
+      # 组间重复仅基座；日志合并 _chk_all.log 对 gate2 零改动）。回退=单 commit revert。
+      - name: coqchk full-tree certification (parallel root-grouped, thermal-guarded)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          # 20261018 强制并行：均衡分组装箱·组数=并行度·禁退化为单遍
+          # 20261105 用户提速令：CHK_JOBS 4→14（16 逻辑核占 14=87.5%）；K=12 own-mode 28h+ 判例
+          # 系逐件全闭包装箱（重复闭包爆炸），不适用本共享闭包模式；lane 内存抖动则回退 8。
+          # 20261019 set1557：去 -CoreN 钉核（同 Build 步——多组并行禁单核钉死）
+          # 20261019 用户温控修法令：编译可占 4-8 核·温控包裹不减（LoadLimit 占空+TL98 照全）——
+          # lane 数按授权带下沿 4 设计（mac 观察档同款）
+          # 20261024 #290 PCHK-PACK-FAIL 根治：PY=${PYTHON:-python3} 在 runner bash 解析到
+          # WindowsApps 商店桩（python3.exe stub：静默无输出）——显式钉真实 python。
+          export PYTHON="C:\Program Files\Python313\python.exe"
+          # 20261029 ATT-RECON 接线：对账步产物交 parallel_chk 免列继承件；档案指纹
+          # 随附页入 _chk_all.log 留痕（gate2 认证态断言对账用）。绝对路径=parallel_chk
+          # 会 cd 进 VO_DIR，相对路径即失配（att 链实证同坑）。
+          export CHK_SKIP_FILE="$PWD/ConstructiveWorld_vo/_attest_skip.txt"
+          # 20261103 admit 边界结构性过渡（#329-#331 三连 rc=129 实证）：档案（#319 重铸）落后
+          # 树态三个波次（W6 波＋107 叶落岸＋144 重编）——admit 集含 recorded-digest 失配件
+          # ＝intern 早期 anomaly。本炉起无条件收缴跳过清单＝全树模式（等价 backstop·全量
+          # 重认证）＋bytecode 旗标加速；待绿炉后档案重铸（ab5eed8 式 recast commit）再恢复
+          # admit（删本行即回滚）。
+          export CHK_SKIP_FILE=""
+          # gate2-attest 一致性（同波）：skip 收缴后对账清单必须同步清空——gate2 据此
+          # 进 FULL 分支（跳过清单空＝旧版逐字节语义·无附页断言）。
+          : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"
+          export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
+          export CHK_JOBS=14   # 20261105 用户令：14 路（根分组共享闭包模式不变）
+          # 20261105 Rocq 9.3 换基（形A·改点③）：parallel_chk.sh L57 K="${COQCHK:-…9.1…}" 吃本环境
+          # （SW2 同根推导 COQLIB/ROCQLIB/ROCQDEP）；job env 已注入同值，此行显式重申=步级自含。
+          # cw_chk93.cmd 系 coqchk_all.sh 串行壳，直挂会废并行 K=14（ci_switch README 偏离1 同判
+          # ·否决）；原 cw_chk.cmd 未删，回滚=弃 job env＋本 export 即复 9.1 默认。
+          export COQCHK="D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe"
+          # W3 v1.1 backstop (20261101): every 20th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
+          if [ $((GITHUB_RUN_NUMBER % 20)) -eq 0 ]; then : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"; echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (skip list withheld)"; fi
+          # 20261030 装箱回退（C-path 撤除）：own-mode K=12 cost-weighted packing
+          # （cost_table.json + parallel_chk v3 own branch）实测 28h+ cancelled，对照
+          # K=4 基线 14h15m——每道全闭包重验物理墙，非调参可救；CHK_JOBS 回退 4，
+          # own 装箱模式导出随 C-path 一并撤除。
+          # 20261019 set1557：CHK_TREE_COPY=1——每 lane 独立 vo 副本（Windows 并发 coqchk mmap
+          # 共载竞态对策：att1-3 三连实证同树 4 并发全灭/单发复现 CLEAN·副本断共享保并行度）
+          export CHK_TREE_COPY=1
+          # 20261019 活性仪表盘（假死定谳反制·用户令「环节显式表达」）：脚本内置 30s 心跳直打
+          # 控制台实时日志流（各 lane checking 行数＋末模块＋rc 收割·lane 完结即时播报·宕机
+          # 时刻精确到 30s）＋::group:: 四阶段折叠＋lane 失败 ::error:: 注记＋Step Summary 终表。
+          # 心跳频率可调 PCHK_MON_SEC；合并日志 _chk_all.log 口径零污染（心跳只走控制台）。
+          # 20261020 双实例互踩定谳（39267194332 被并发取消后 bash 进程树漏杀→僵尸实例
+          # 与新轮并行互踩：僵尸 g3 22:58 被撞死·新轮 build 饿到未及自证被取消）——发射前
+          # 清场：杀残存 coqchk 与 parallel_chk 壳（concurrency 组保证同刻至多一轮合法在飞）。
+          taskkill //IM coqchk.exe //F 2>/dev/null || true
+          powershell -NoProfile -Command "Get-CimInstance Win32_Process | Where-Object { \$_.Name -eq 'bash.exe' -and \$_.CommandLine -like '*parallel_chk*' } | ForEach-Object { Stop-Process -Id \$_.ProcessId -Force -ErrorAction SilentlyContinue }" || true
+          # 【20261105 摘雷·gaps 响亮登记】底本 L384 悬空行 `pwsh … cpu_guard_v3.ps1 -Command`（无值）
+          # 本席实测 rc=1「参数 'Command' 缺少自变量」（guard $Command=Mandatory=$true·cpu_guard_v3.ps1
+          # param 块实勘）——bash -e 下必杀本步，parallel_chk 永不启动。系底本 20261105 用户令 commit
+          # （3dea632 载门 60→90）编辑残留；底本零触碰不代改（9.1 炉该行归底本所有者处置），本炉摘除。
+          # 载门 60→90 配套 14 路（20261105 用户令）；运行中温控防线 93C 占空/98C 硬帽不变
+          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash scripts/parallel_chk.sh" -LoadLimit 90 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
+
+      # 20261018 跨机 vo 信任缓存通道：绿后上传全树 .vo artifact，对侧
+      # vo_sync_watch（scripts/vo_sync_watch.ps1 常驻计划任务）自动下载合并本地缓存，
+      # 实现「一侧新增模块推送 CI、对侧自动本地化+认证」闭环。
+      # 【20261105 9.3 炉改点·gaps 登记】artifact 名加 -93 后缀＝vo-trust-cache-windows-93：
+      # vo_sync_once.sh:50 过滤=精确名匹配（a['name']==ARTIFACT 实测）→ 9.3 件与 9.1 通道
+      # 结构性隔离（防 9.3 .vo 经 vo_sync 混入 9.1 缓存树=魔数混装）；mac 9.3 消费端候工具包
+      # v1.1 波（当前无消费者·休眠无碰撞）。
+      - name: Upload vo trust cache (cross-machine sync)
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: vo-trust-cache-windows-93
+          path: |
+            ConstructiveWorld_vo/*.vo
+            ConstructiveWorld_vo/Local/*.vo
+
+      # 闸② Axioms 段哨兵：块状态机解析（禁裸 grep——裸 -i error 假配 84 行／-i axiom
+      # 假配 2213 行，E422/AX-MATRIX 实证；状态机段外假匹配结构性不可能）。
+      # 前置硬要求：coqchk_all.sh 已带 -o（无 Axioms 段=exit 2 不可判，一律红）。
+      # exit 0 CLEAN／1 DIRTY／2 NO_AXIOMS_SECTION／3 LOG_INCOMPLETE——1/2/3 一律红（fail-loud）。
+      # 代际钉：banner 必须 Chicken 9.3.0（20261105 换基·改点④；COQLIB 钉代防假红，SW2；
+      # 8.3 落 9.0 陷阱免疫实证形）。
+      # log 缺失≠代际失守：gate4/build 夭折时 coqchk 被 skipped、无日志可查——
+      # 分支报 GATE-BANNER-ABSENT 指向上游红因（E-STAGING-R135GATE-1 连带红不指控下游域），
+      # 仍 exit 1 保持红（禁降档），仅诊断文案分流。
+      # 20261029 ATT-RECON 认证态分支：部分日志 + 档案覆盖断言全备 = 可判绿
+      # （gate2_attest_gate.py 裁 ATTESTED_CLEAN）；断言缺一即红（禁降档）。
+      # FULL 模式（跳过清单空）语义与旧版逐字节等价；parser 1/2/3（DIRTY/
+      # NO_AXIOMS_SECTION/LOG_INCOMPLETE）两态一律红。banner 代际钉前置不变。
+      - name: gate2 axioms sentinel (block-state-machine, fail-loud; attest branch)
+        if: always()
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          if [ ! -f ConstructiveWorld_vo/_chk_all.log ]; then
+            echo "GATE-BANNER-ABSENT: _chk_all.log 不在盘——coqchk 未产出日志（上游 gate4/build 夭折连带，红因看上游步），非 COQLIB 代际失守"
+            exit 1
+          fi
+          grep -q "Welcome to Chicken 9.3.0" ConstructiveWorld_vo/_chk_all.log \
+            || { echo "GATE-BANNER-FAIL: coqchk 代际非 9.3（COQLIB 钉代失守，log 不可作公理判据）"; exit 1; }
+          set +e
+          python scripts/gates/gate2_axioms_parser.py \
+            ConstructiveWorld_vo/_chk_all.log --json gate2_verdict.json
+          parser_rc=$?
+          python scripts/gates/gate2_attest_gate.py \
+            --log ConstructiveWorld_vo/_chk_all.log \
+            --parser-json gate2_verdict.json \
+            --reconcile-json attest_reconcile.json \
+            --json gate2_attest.json
+          gate_rc=$?
+          set -e
+          if [ "$gate_rc" -ne 0 ]; then
+            echo "GATE2-ATTEST-RED: 认证态覆盖断言不备（gate2_attest.json reasons 列明）——red，禁降档"
+            exit 1
+          fi
+          if [ "$parser_rc" -ne 0 ]; then
+            echo "GATE2-AXIOMS-RED: parser exit $parser_rc（DIRTY/NO_AXIOMS_SECTION/LOG_INCOMPLETE 一律红）"
+            exit 1
+          fi
+          echo "GATE2-GREEN: verdict=$(python -c "import json,io;print(json.load(io.open('gate2_attest.json',encoding='utf-8'))['verdict'])" 2>/dev/null || echo UNKNOWN)"
+
+      - name: Upload coqchk logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coqchk-logs
+          # gate4_report.json 随本件搭车出证，无独立 gate4 artifact 名——
+          # 按 artifact 名清点会误判「gate4 件缺席」（CI-ARTIFACT-FIX 20260926 三包实勘在案）。
+          path: |
+            ConstructiveWorld_vo/_chk_*.log
+            gate1_ci.json
+            gate3_ci.json
+            gate2_verdict.json
+            gate4_report.json
+            attest_reconcile.json
+            gate2_attest.json
+
