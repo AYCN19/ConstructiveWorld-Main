@@ -136,7 +136,7 @@ jobs:
       # （commit 限额 ~128GB）。#301 实证：commit 水位 >89% 时 coqchk 被页出抖动拖至
       # 15.7h（清洁基线 3-5h）。本步在重相位前轮询 commit free（>30GB 即过·至多 10 分
       # 钟·不到也照常推进）——把内存水位显式化进 CI 日志·为 CHK_JOBS 调优留数据。
-      # CHK_JOBS 维持 4：并行度加速只在内存余量充裕时有效·内存紧时越多道越抖
+      # CHK_JOBS 20261105 起=14（用户提速令）：并行度加速只在内存余量充裕时有效·内存紧时越多道越抖
       # （#301 反例）·升档候内存窗常态化后另评。
       - name: RAM guard (report commit headroom before heavy phase)
         shell: C:/Progra~1/Git/bin/bash.exe -e {0}
@@ -339,7 +339,9 @@ jobs:
       - name: coqchk full-tree certification (parallel root-grouped, thermal-guarded)
         shell: C:/Progra~1/Git/bin/bash.exe -e {0}
         run: |
-          # 20261018 强制并行：CHK_JOBS 显式钉 4（均衡分组装箱·组数=并行度·禁退化为单遍）
+          # 20261018 强制并行：均衡分组装箱·组数=并行度·禁退化为单遍
+          # 20261105 用户提速令：CHK_JOBS 4→14（16 逻辑核占 14=87.5%）；K=12 own-mode 28h+ 判例
+          # 系逐件全闭包装箱（重复闭包爆炸），不适用本共享闭包模式；lane 内存抖动则回退 8。
           # 20261019 set1557：去 -CoreN 钉核（同 Build 步——多组并行禁单核钉死）
           # 20261019 用户温控修法令：编译可占 4-8 核·温控包裹不减（LoadLimit 占空+TL98 照全）——
           # lane 数按授权带下沿 4 设计（mac 观察档同款）
@@ -360,7 +362,7 @@ jobs:
           # 进 FULL 分支（跳过清单空＝旧版逐字节语义·无附页断言）。
           : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
-          export CHK_JOBS=4
+          export CHK_JOBS=14   # 20261105 用户令：14 路（根分组共享闭包模式不变）
           # W3 v1.1 backstop (20261101): every 20th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
           if [ $((GITHUB_RUN_NUMBER % 20)) -eq 0 ]; then : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"; echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (skip list withheld)"; fi
           # 20261030 装箱回退（C-path 撤除）：own-mode K=12 cost-weighted packing
@@ -379,7 +381,8 @@ jobs:
           # 清场：杀残存 coqchk 与 parallel_chk 壳（concurrency 组保证同刻至多一轮合法在飞）。
           taskkill //IM coqchk.exe //F 2>/dev/null || true
           powershell -NoProfile -Command "Get-CimInstance Win32_Process | Where-Object { \$_.Name -eq 'bash.exe' -and \$_.CommandLine -like '*parallel_chk*' } | ForEach-Object { Stop-Process -Id \$_.ProcessId -Force -ErrorAction SilentlyContinue }" || true
-          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash scripts/parallel_chk.sh" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
+          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command # 载门 60→90 配套 14 路（20261105 用户令）；运行中温控防线 93C 占空/98C 硬帽不变
+          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash scripts/parallel_chk.sh" -LoadLimit 90 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
 
       # 20261018 跨机 vo 信任缓存通道：绿后上传全树 .vo artifact，对侧
       # vo_sync_watch（scripts/vo_sync_watch.ps1 常驻计划任务）自动下载合并本地缓存，
