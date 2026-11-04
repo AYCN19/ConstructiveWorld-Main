@@ -202,8 +202,12 @@ jobs:
                   for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
               return h.hexdigest()
           removed = set()
-          # T1 豁免（20261104·#332 实证）：无 order 行的 stem＝无重编路径的认证承载件
-          # （KB70/LW0 叶类——源在工作区·认证态在缓存）——archive-miss 也保留不删。
+          # v4 终版删除律（20261104·#332-334 三连实证收束）：删除仅限
+          # 「有 order 行 ∧ archive-miss」的 .vo（可重编陈旧件——删→指纹重编→字节一致）。
+          # 其余一切 .vo 永不删：
+          #   archive-hit＝认证字节 ✓；无 order 行＝承载件（KB70/LW0 叶·合并退役件的缓存
+          #   .vo——consolidation 波退役删源留 .vo·消费件 Require 在·删除即 Cannot find
+          #   崩炉 #332-334 实证）。
           order_stems = set()
           for l in open('ConstructiveWorld_vo/order.txt', encoding='utf-8', errors='replace'):
               l = l.strip()
@@ -212,13 +216,9 @@ jobs:
           for f in os.listdir(vo):
               if not f.endswith('.vo'): continue
               stem = f[:-3]
-              if stem not in stems:
-                  if stem in order_stems: continue    # 认证承载件：保留（无源可重编）
-                  removed.add(stem); continue         # 真孤儿：删
               ent = arc.get(stem + '.v')
-              if not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256'):
-                  if stem in order_stems: removed.add(stem)   # T1：有行＝可重编
-                  # 无行＝认证承载件：保留（cache-carried）
+              if stem in order_stems and (not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256')):
+                  removed.add(stem)
           changed = True
           while changed:
               changed = False
