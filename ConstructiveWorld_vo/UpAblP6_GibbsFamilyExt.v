@@ -31,6 +31,7 @@
 
 From Stdlib Require Import List.
 Require Import S02_CauchyComplete.
+Require Import S07_RealSetoidExpLog.
 Require Import S08_RealMainlineDPO.
 Import ListNotations.
 Require Import UpRealLeB.
