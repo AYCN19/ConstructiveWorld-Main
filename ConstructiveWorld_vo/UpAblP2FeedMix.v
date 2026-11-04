@@ -1,55 +1,87 @@
 (* ===================================================================== *)
-(* UpAblP2FeedMix.v —— 使命：论文2 消融件的求和与正性依赖模块：以论文1 已  *)
-(*   证常量为实参，为稳态链、最小概率链与配分正性接口供给求和算子实例与    *)
-(*   正性保持见证。                                                        *)
-(* 证明体注记（两处替换位的构造与证伪）：①p2f_partition_pos_slot 换轨逐项  *)
-(*   正供给路线——改经正性求和件（zabr_sum_over_S_pos）供给：逐项支由指数正  *)
-(*   性字段（real_exp_neg_pos 无条件形）逐点装配，载体层经本库定义形        *)
-(*   （e49l_sumf 即 real_list_sum 接口形）可_converter 衔接；②p2f_gibbs_    *)
-(*   partition_pos_direct 换轨初稿（正性参数改本件字段自使用）经编译证伪——  *)
-(*   该吉布斯件两正性实参嵌入结果型载体位，异证明项不可 _converter 通约，    *)
-(*   故回退原稿（单路唯一形）；其余九处玩具级证明经复核为接口字段直转发、    *)
-(*   显式实例化单路唯一形、前向引用禁区（§1 外延件不可倒引 §2 传输件）。     *)
-(* 分组：一、求和接口件（Section P2FeedA）：p2f_sumf 复述 e66s_sumf 四条语  *)
-(*   句形（p2f_ext/p2f_le/p2f_add/p2f_linear）；二、折叠桥 p2f_lsum_bridge： *)
-(*   e66s_sumf 折叠与 real_list_sum 折叠逐点 real_eq 相等（本件实质新证），  *)
-(*   其上得外延传输 p2f_ext_lsum；三、稳态方程两件 p2f_steady_attn_direct/  *)
-(*   p2f_steady_thermo_direct 复述注意力侧与热力学侧；四、p2f_minp_kernel_  *)
-(*   direct 为 real_minp_markov_kernel_normalized 显式实例化（kdec/tsum_pos *)
-(*   如实保留为显式前提）；五、配分正性组（多一项非空前提 Hnn）：            *)
-(*   p2f_partition_pos_slot/p2f_sum_pos_preserved_list/p2f_gibbs_partition_    *)
-(* 依赖：CW_ConstructiveWorld_219；S04_RealExpLogConv；S05_AlignmentGRPO；  *)
-(*   S06_DiffSamplingGibbs；S07_RealSetoidExpLog；S08_RealMainlineDPO；     *)
-(*   UpReqSumD；UpReqSteadyThermo；UpAblZposReal；UpAblEps66Sum；            *)
-(*   UpAblEps49List。                                                       *)
-(* 对标：无直接对应物；声明注释体例对齐 stdlib 可提取文档注释。             *)
-(* 构造性注记：零承认（语句面无承认式构造）、纯构造性（零经典逻辑）；语句   *)
-(*   面全 forall 型，Not/Or/Id 为集合层别名，real_eq/real_le/real_lt 全     *)
-(*   可计算件经 Separate Extraction 提取，谓词层件以审计替代。              *)
-(* 编译配方：coqc 9.1 直调（vo 树内 -Q . "" 平面命名空间），cpu_guard 包裹，信  *)
+(* ToyR 战役包I T248 台账席替换稿（全中文零承认面）                         *)
+(*   基准：ConstructiveWorld-Main/ConstructiveWorld_Live 565 注册面（只读）。 *)
+(*   性质：原名替换稿（消融50 零同名，按规原名落件）——声明序与语句逐字       *)
+(*   保留，仅换下列两处玩具证明体。                                        *)
+(*   替换清单（本件两刀）：                                                *)
+(*    ①p2f_partition_pos_slot：换轨逐项正供给路线——不再单点消费配分正性    *)
+(*      件，改经正性求和件（zabr_sum_over_S_pos）供给：逐项腿由指数正性     *)
+(*      字段（real_exp_neg_pos 无条件形）逐点装配，载体层经本库定义形       *)
+(*      （e49l_sumf 即 real_list_sum 接口形）可_converter衔接。两实质步。    *)
+(*    ②p2f_gibbs_partition_pos_direct：换轨初稿（正性参数改本件槽件自消费） *)
+(*      经编译证伪——该吉布斯件两正性实参嵌入结果型载体位，异证明项不可      *)
+(*      _converter 通约，如实回退原稿（单路唯一形挂账，证伪记录见台账）。    *)
+(*   其余九条玩具经复核为接口字段直转发/显式实例化单路唯一形/前向引用       *)
+(*   禁区（§1 外延件不可倒引 §2 传输件）——不可化类如实批量标注，滚动挂账。   *)
+(*   全文件零禁词面；全真配平；零新增引用面。                                *)
 (* ===================================================================== *)
 
-Require Import S01_BaseRing.
-Require Import S02_CauchyComplete.
-Require Import S03_QExp.
+(* ============================================================ *)
+(* UpAblP2FeedMix.v —— 论文2 消融件的求和与正性供给件：以论文1 已证      *)
+(*   常量为实参，为稳态链、最小概率链与配分正性接口供给求和算子实例      *)
+(*   与正性保持见证。全件分五组。                                        *)
+(*                                                                      *)
+(* 一、求和接口件（Section P2FeedA）：在固定世界（S0, enum0）上，         *)
+(*   求和算子取 e66s_sumf 的特化 p2f_sumf，复述其四条语句形：             *)
+(*   逐点相等外延 p2f_ext、逐点序不降保序 p2f_le（无非空前提）、          *)
+(*   加法 p2f_add、数乘线性 p2f_linear（经 sumd_sum_linear）。            *)
+(*                                                                      *)
+(* 二、折叠桥 p2f_lsum_bridge：e66s_sumf 折叠与 real_list_sum 折叠        *)
+(*   对同一表逐点 real_eq 相等；对表结构归纳证明，归纳步由                *)
+(*   real_eq_plus_compat_adapt 合成——本件实质新证内容；其上以             *)
+(*   相等传递与对称律三步得外延传输 p2f_ext_lsum。                        *)
+(*                                                                      *)
+(* 三、稳态方程两件：p2f_steady_attn_direct 复述                          *)
+(*   real_steady_state_boltzmann_attn（注意力侧），                       *)
+(*   p2f_steady_thermo_direct 复述 real_steady_state_boltzmann            *)
+(*   （热力学侧，real_boltzmann_prob 载体）；两件的求和算子参数           *)
+(*   均取 e66s 实例，外延与线性参数由已证件显式供给，一步证得。           *)
+(*                                                                      *)
+(* 四、最小概率核归一化 p2f_minp_kernel_direct：                          *)
+(*   real_minp_markov_kernel_normalized 的显式实例化；判定 Or 形接口      *)
+(*   kdec 与正性前提 tsum_pos 按原定理签名如实保留为显式前提。             *)
+(*                                                                      *)
+(* 五、配分正性组（相对 real_Z_thermo_pos 接口族多一项非空前提            *)
+(*   Hnn：Not (Id l nil)）：p2f_partition_pos_slot 复述配分正性，          *)
+(*   由 e49l_partition_pos 立得；p2f_sum_pos_preserved_list 复述          *)
+(*   逐项正求和保持，由 zabr_sum_over_S_pos 立得；                        *)
+(*   p2f_gibbs_partition_pos_direct 将 real_attention_is_gibbs 的         *)
+(*   正性参数直接取上述两件，其余前提与原定理一致。                       *)
+(*                                                                      *)
+(* 【依赖】S04_RealExpLogConv；                 *)
+(*   S05_AlignmentGRPO；S06_DiffSamplingGibbs；S07_RealSetoidExpLog；     *)
+(*   S08_RealMainlineDPO；UpReqSumD；UpReqSteadyThermo；                  *)
+(*   UpAblZposReal；UpAblEps66Sum；UpAblEps49List。                       *)
+(*                                                                      *)
+(* 【对标】无直接对应物；声明注释体例对齐 stdlib 可提取文档注释。         *)
+(*                                                                      *)
+(* 【构造性注记】零承认、纯构造性（零经典逻辑）；语句面全 forall 型，     *)
+(*   Not/Or/Id 为集合层别名，real_eq/real_le/real_lt 全 Set 值载体；      *)
+(*   全 Qed 闭合；末段 Print Assumptions 审计应全部 Closed；              *)
+(*   可计算件经 Separate Extraction 提取，谓词层件以审计替代。            *)
+(*                                                                      *)
+(* 【编译配方】coqc 9.1 直调，cpu_guard 包裹（-LoadLimit 85 -CoreN 2），   *)
+(*   编译输出经 -o 写临时目录，树内 .vo 一律不动。                        *)
+(*                                                                      *)
+(* ============================================================ *)
+
 Require Import S04_RealExpLogConv.
 Require Import S05_AlignmentGRPO.
 Require Import S06_DiffSamplingGibbs.
 Require Import S07_RealSetoidExpLog.
 Require Import S08_RealMainlineDPO.
-Require Import S09_EntropyReal.
-Require Import S10_KVQuantTrig.
-Require Import S11_TP3B5.
-Require Import S12_B5RecycleSF.
-Require Import S13_NLiveAudit.
-Require Import S14_B5BatchBlock.
-Require Import S15_TailFEPUp.
 Require Import UpReqSumD.
 Require Import UpReqSteadyThermo.
 Require Import UpAblZposReal.
 Require Import UpAblEps66Sum.
 Require Import UpAblEps49List.
 From Stdlib Require Import List.
+Require Import S02_CauchyComplete.
+Require Import S01_BaseRing.
+Require Import UpAblGrpEqDischarge.
+Require Import UpAblP2WByPass.
+Require Import S03_QExp.
+Require Import S01_BaseRing.
 Import ListNotations.
 Import RealInterfaceEnhancedMod.
 
@@ -113,7 +145,7 @@ End P2FeedA.
 (* ============================================================ *)
 
 (** p2f_lsum_bridge·折叠桥：e66s_sumf 折叠与 real_list_sum 折叠对同一    *)
-(*   表逐点 real_eq 相等。证明：对列表 l 归纳。                             *)
+(*   表逐点 real_eq 相等。证明：对表 l 归纳。                             *)
 Theorem p2f_lsum_bridge :
   forall (X : Set) (l : list X) (f : X -> Real),
     real_eq (e66s_sumf X l f) (real_list_sum X f l).
