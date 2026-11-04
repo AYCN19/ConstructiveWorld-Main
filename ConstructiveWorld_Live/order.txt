@@ -382,6 +382,9 @@ UpAblEps49List.v#R0-d66910
 UpAblEps49Body.v#R212-reland-20261104
 UpAblEps66Sum.v#R0-d66910
 UpAblP2FeedSumLe.v#R212-reland-20261104
+UpAblP6_GibbsFamilyExt.v#R212-reland-20261104
+UpAblP2FeedMix.v#R212-reland-20261104
+UpReqPadeBetaPos.v#R212-reland-20261104
 UpAblEps66Body.v#R212-reland-20261104
 P7BoundedSoftmaxDeep.v#R112-7aeac3
 UpAblP7_UMixSelect.v#R0-d66910
