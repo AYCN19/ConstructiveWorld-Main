@@ -319,6 +319,18 @@ jobs:
             3) echo "ATT-RECON-NOARCHIVE: 档案缺席/坏档/自洽破——本轮全量 coqchk（降速不降强）" ;;
             *) echo "ATT-RECON-FAIL rc=$rc — fail-loud, treat as red"; exit 1 ;;
           esac
+          # 20261104 skip 收缴过渡（#329-#336 六连实证）：skip 收缴=全树认证 → gate2
+          # 必须走 FULL 分支——对账 JSON 的 mode 改写 FULL（否则 ATTEST 分支断言附页
+          # 必红：附页 0 vs skipped 960 结构性错配 #336 实证）。恢复 admit 时删除本段。
+          python - <<'PYEOF'
+          import json
+          p = 'attest_reconcile.json'
+          d = json.load(open(p, encoding='utf-8'))
+          d['mode'] = 'FULL'
+          d['skipped'] = []
+          json.dump(d, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+          print('ATT-MODE-OVERRIDE: mode=FULL (skip withheld transition)')
+          PYEOF
 
       # 20261018 并行认证切换：单遍全模块共享闭包（cw_chk.cmd→coqchk_all.sh）CPU 串行
       # 3h04m 基线/4h23m 未竟实证；改 scripts/parallel_chk.sh 根分组均衡 K 路并行
