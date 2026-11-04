@@ -202,12 +202,23 @@ jobs:
                   for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
               return h.hexdigest()
           removed = set()
+          # T1 豁免（20261104·#332 实证）：无 order 行的 stem＝无重编路径的认证承载件
+          # （KB70/LW0 叶类——源在工作区·认证态在缓存）——archive-miss 也保留不删。
+          order_stems = set()
+          for l in open('ConstructiveWorld_vo/order.txt', encoding='utf-8', errors='replace'):
+              l = l.strip()
+              if l.endswith('.v'):
+                  order_stems.add(l.split('#')[0].strip()[:-2])
           for f in os.listdir(vo):
               if not f.endswith('.vo'): continue
               stem = f[:-3]
-              if stem not in stems: removed.add(stem); continue
+              if stem not in stems:
+                  if stem in order_stems: continue    # 认证承载件：保留（无源可重编）
+                  removed.add(stem); continue         # 真孤儿：删
               ent = arc.get(stem + '.v')
-              if not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256'): removed.add(stem)
+              if not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256'):
+                  if stem in order_stems: removed.add(stem)   # T1：有行＝可重编
+                  # 无行＝认证承载件：保留（cache-carried）
           changed = True
           while changed:
               changed = False
@@ -333,6 +344,9 @@ jobs:
           # 重认证）＋bytecode 旗标加速；待绿炉后档案重铸（ab5eed8 式 recast commit）再恢复
           # admit（删本行即回滚）。
           export CHK_SKIP_FILE=""
+          # gate2-attest 一致性（同波）：skip 收缴后对账清单必须同步清空——gate2 据此
+          # 进 FULL 分支（跳过清单空＝旧版逐字节语义·无附页断言）。
+          : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
           export CHK_JOBS=4
           # W3 v1.1 backstop (20261101): every 20th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
