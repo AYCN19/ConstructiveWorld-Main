@@ -282,11 +282,20 @@ jobs:
               if os.path.exists(p): os.remove(p); n += 1
           print('DEP-CASCADE: vo_sources=%d invalidated=%d' % (len(vs), n))
           PYEOF
-          # 20261105 换基（改点③·cmdLedger 裁定）：runner cmd（cw_build.cmd:3-5）硬编 COQC 不吃 env，
-          # 其形态=cd ConstructiveWorld_vo→bash build.sh → 本炉直调等价式（build.sh L4
-          # `C="${COQC:-…9.1…}"` 吃 job env·SW2 同根推导 COQLIB/ROCQLIB）；包 diff hunk3 的
-          # cw_build93.cmd 路线弃用（偏离·gaps 登记·runner 侧 93 同胞件仍部署在位可回挂）。
-          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash -c 'cd ConstructiveWorld_vo && bash build.sh'" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
+          # 20261105 换基二次裁定（run 41898362546 红根因·H2 沙箱实证）：上版内联
+          # `bash -c 'cd X && bash build.sh'` 被 guard 执行段（cpu_guard_v3.ps1:184
+          # Start-Process cmd.exe /c $Command）按 cmd 词法段拆——单引号对 cmd 无盾，
+          # `&&` 被吃成 cmd 命令分隔符→误跑根目录 9.1 钉版 build.sh（_CoqProject 面：
+          # 83 重定向崩＋6 裸名 Can't find＝89 连零编译·vo 树 build.sh 零执行）。
+          # 修形＝runner cmd 正形单 token（9.1 炉 coq.yml:234 认证成例同形）：
+          # cw_build93.cmd 双 runner 目录部署在位·实勘内钉 9.3 opam COQC＋
+          # cd ConstructiveWorld_vo→bash build.sh（vo 树 order 面·build.sh 自带
+          # mkdir 幂等建日志目录）；-Command 值零内联 &&／零嵌套引号→段拆面消除。
+          # cmd 硬编 cd 路径耦合 runner workFolder=_work2310（双 runner .runner 实勘
+          # 同 registration·checkout 落点 41898362546 日志 L42 同径）。
+          # chk 步「bash scripts/parallel_chk.sh」单 token 无 && 同检无段拆险
+          # （parallel_chk.sh:55-56 自解析 VO_DIR cd·任一 runner 落点皆正）。
+          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "cmd /c D:\\actions-runner-clean\\cw_build93.cmd" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
 
       # S7/PA4+PB6：全树模块计数自动化——六维计数（全树 .v／Live_X 顶层／UpAbl 顶层／
       # attn 沙箱／order 行数／提交面数）三口径分列（注册面/侧树顶层/沙箱）；

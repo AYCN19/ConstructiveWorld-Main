@@ -370,6 +370,9 @@ UpAblP6_ConcMixSelFeed.v
 UpAblP6_SecondLaw_two_state.v
 UpAblP6_StateSpace_inst.v
 UpAblP6_EntropyMonoSplit_C.v
+UpAblP6_S5SlotWire.v
+FepIdConsume.v
+fka_weak_triangle_ref.v
 UpAblLogWall.v
 UpAblLogWallEq.v
 UpAblMetaEngine.v

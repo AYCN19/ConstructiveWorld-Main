@@ -151,7 +151,6 @@ UpReqBanachInstB.v#R0-d66910
 UpReqBanachInstPre.v#R0-b56555
 UpReqPadeTailPos.v#R0-9452c9
 UpReqPadeLower.v#R0-d66910
-UpReqPadeConstUnify.v#R212-reland-20261104
 QTailBridge.v#R0-d66910
 PadeDenPosB12.v#R0-d66910
 Arch_Banach_01.v#R0-d66910
@@ -179,7 +178,6 @@ DTPT_Bridge_Dep.v#R0-a7823b
 ExpNegPos.v#R0-d66910
 DTPT_Bridge_Rot.v#R0-d66910
 UpReqSpec2x2.v#R153-f1d505
-UpReqSymplecticBridge.v#R212-reland-20261104
 EnergyTempMonoB.v#R0-d66910
 RealKLDecomp.v#R0-d66910
 BoltzmannBridgeDischarge.v#R0-d66910
@@ -402,6 +400,9 @@ UpAblAbsQFeed.v#R0-d66910
 UpAblP6_TempDefs.v#R101-0fe093
 GibbsFamilyExt.v#R112-7aeac3
 UpAblP6_GibbsFamilyExt.v#R212-reland-20261104
+FepIdConsume.v#R340-homecoming-20261105
+fka_weak_triangle_ref.v#R340-homecoming-20261105
+UpAblP6_S5SlotWire.v#R340-homecoming-20261105
 UpAblP6_ZPosLowRef.v#R101-0fe093
 UpAblP6_ConcMixSelFeed.v#R101-0fe093
 UpAblP6_SecondLaw_two_state.v#R101-0fe093
@@ -1053,5 +1054,4 @@ LW2NivenInt.v#R212-reland-20261104
 LW2IntegMachine.v#R212-reland-20261104
 LW1ZPoly.v#R212-reland-20261104
 UpAblBYUpperTight.v#R212-reland-20261104
-LW0LeibSeparation.v#R212-reland-20261104
 _twc_probe.v#R212-probe-reland-20261104

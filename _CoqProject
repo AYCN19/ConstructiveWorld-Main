@@ -35,12 +35,6 @@ ConstructiveWorld_vo/UpDebtGibbsT.v
 ConstructiveWorld_vo/UpDPOLip.v
 ConstructiveWorld_vo/UpDissip.v
 ConstructiveWorld_vo/UpStopTime.v
-UpKVDrift.v
-UpLoeb.v
-UpLoebD2.v
-UpQKBound.v
-UpRefuted.v
-UpIDL.v
 ConstructiveWorld_vo/UpReqAlgebra.v
 ConstructiveWorld_vo/UpReqDist.v
 ConstructiveWorld_vo/UpReqTempEntropy.v
