@@ -78,7 +78,6 @@ Require Import UpAblEps49List.
 From Stdlib Require Import List.
 Require Import S02_CauchyComplete.
 Require Import S01_BaseRing.
-Require Import UpAblGrpEqDischarge.
 Require Import UpAblP2WByPass.
 Require Import S03_QExp.
 Require Import S01_BaseRing.
