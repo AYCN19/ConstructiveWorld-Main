@@ -65,17 +65,17 @@ Require Import UpAblMetaWorld3.
 Require Import UpAblMetaEngine.
 From Stdlib Require Import Setoid Morphisms.
 From Stdlib Require Import Lia.
-Require Import S13_NLiveAudit.  (* keeper4 20261105 P8：w_T 解析面重接——裸 w_T 影蔽序钉 S13_NLiveAudit.w_T＝pa6ul_strict_first_cut 陈述面同源（解除 AttnHardLimit218 影蔽）；语句面零触碰 *)
+Require Import S13_NLiveAudit.  (* keeper4：w_T 解析面重接——裸 w_T 影蔽序钉 S13_NLiveAudit.w_T＝pa6ul_strict_first_cut 陈述面同源（解除 AttnHardLimit218 影蔽）；语句面零触碰 *)
 
 (* ================= §1 uapkg6_temp_param_full_suppl 族 ================= *)
 Import RealInterfaceEnhancedMod.
 
-(* keeper4 20261105：S01.Id 世界钉定（解析面重接·语句面零触碰）——UpAblMetaEngine（L65 导入）
+(* keeper4：S01.Id 世界钉定（解析面重接·语句面零触碰）——UpAblMetaEngine（L65 导入）
    同名克隆 kit（Id/id_refl/id_sym/id_trans/id_cong/id_cong2·其 L857-925）遮蔽 S01_BaseRing
    原版，致全部裸 Id/id_* 面（uassw/pa6ul/loi 供给位·cross-module 陈述面＝S01 世界）型错配
-   （7672468 生置件·S11 缺位期零编译见证·本席逐层实勘 L375/L432/L885 同因三层）。
+   （7672468 生置件·S11 缺位期零编译见证·逐层核对 L375/L432/L885 同因三层）。
    RealInterfaceEnhancedMod（L71 导入）plus_zero/le/lt 投影面不在此列（晚于 L65·影蔽序自正）。
-   本文件零 MetaEngine.Id 世界真消费位（本席 grep 实勘·其面皆为 S01 世界供给）。 *)
+   本文件无 MetaEngine.Id 世界真引用位（grep 逐面核对·其面皆为 S01 世界供给）。 *)
 Local Notation Id := S01_BaseRing.Id.
 Local Notation id_refl := S01_BaseRing.id_refl.
 Local Notation id_sym := S01_BaseRing.id_sym.
@@ -828,6 +828,39 @@ Section LoInflation.
 Context {RI : RealInterfaceEnhanced}.
 Local Existing Instance RI_base.
 
+(* keeper4：S01 接口面钉定——RealInterfaceEnhancedMod（L71 导入）req 版同名投影
+   全字段族遮蔽 S01_BaseRing 原名，donor 形 @zero RI 的 @显式位把 RI 递入 Set 参数
+   位而型错配（donor 节 UpAblA2_LoInflation 无该导入故原状可编）；节内 Notation
+   钉定同名面，出节即散，语句面零触碰。 *)
+Local Notation zero := S01_BaseRing.zero.
+Local Notation one := S01_BaseRing.one.
+Local Notation le := S01_BaseRing.le.
+Local Notation lt := S01_BaseRing.lt.
+Local Notation plus := S01_BaseRing.plus.
+Local Notation mult := S01_BaseRing.mult.
+Local Notation inv_pos := S01_BaseRing.inv_pos.
+Local Notation inv_pos_correct := S01_BaseRing.inv_pos_correct.
+Local Notation plus_zero := S01_BaseRing.plus_zero.
+Local Notation mult_assoc := S01_BaseRing.mult_assoc.
+Local Notation mult_comm := S01_BaseRing.mult_comm.
+Local Notation mult_one := S01_BaseRing.mult_one.
+Local Notation mult_zero := S01_BaseRing.mult_zero.
+Local Notation le_refl := S01_BaseRing.le_refl.
+Local Notation le_trans := S01_BaseRing.le_trans.
+Local Notation le_lt_trans := S01_BaseRing.le_lt_trans.
+Local Notation lt_le_iff := S01_BaseRing.lt_le_iff.
+Local Notation le_id_l := S01_BaseRing.le_id_l.
+Local Notation le_id_r := S01_BaseRing.le_id_r.
+Local Notation lt_id_l := S01_BaseRing.lt_id_l.
+Local Notation one_pos := S01_BaseRing.one_pos.
+Local Notation le_plus_compat := S01_BaseRing.le_plus_compat.
+Local Notation plus_positive := S01_BaseRing.plus_positive.
+Local Notation mult_positive := S01_BaseRing.mult_positive.
+Local Notation le_mult_compat := S01_BaseRing.le_mult_compat.
+Local Notation le_mult_compat_weak := S01_BaseRing.le_mult_compat_weak.
+Local Notation inv_pos_pos := S01_BaseRing.inv_pos_pos.
+Local Notation inv_pos_le_compat := S01_BaseRing.inv_pos_le_compat.
+
 Let one := @one RI.
 Let zero := @zero RI.
 Let le := @le RI.
@@ -1120,6 +1153,28 @@ Local Existing Instance RI_base.
 Context {SS : StateSpace RI}.
 Context {SO : SumOver RI SS}.
 
+(* keeper4：S01 接口面钉定——同 LoInflation 节头注（req 版同名投影遮蔽 S01
+   原名；节内 Notation 钉定，出节即散，语句面零触碰）。 *)
+Local Notation zero := S01_BaseRing.zero.
+Local Notation one := S01_BaseRing.one.
+Local Notation le := S01_BaseRing.le.
+Local Notation lt := S01_BaseRing.lt.
+Local Notation plus := S01_BaseRing.plus.
+Local Notation mult := S01_BaseRing.mult.
+Local Notation opp := S01_BaseRing.opp.
+Local Notation abs := S01_BaseRing.abs.
+Local Notation inv_pos := S01_BaseRing.inv_pos.
+Local Notation mult_comm := S01_BaseRing.mult_comm.
+Local Notation mult_zero := S01_BaseRing.mult_zero.
+Local Notation le_lt_trans := S01_BaseRing.le_lt_trans.
+Local Notation lt_le_iff := S01_BaseRing.lt_le_iff.
+Local Notation le_id_l := S01_BaseRing.le_id_l.
+Local Notation one_pos := S01_BaseRing.one_pos.
+Local Notation plus_positive := S01_BaseRing.plus_positive.
+Local Notation mult_positive := S01_BaseRing.mult_positive.
+Local Notation le_mult_compat_weak := S01_BaseRing.le_mult_compat_weak.
+Local Notation inv_pos_pos := S01_BaseRing.inv_pos_pos.
+
 Let zero := @zero RI.
 Let one := @one RI.
 Let le := @le RI.
@@ -1360,6 +1415,11 @@ Section LoiResSumEqListIdt.
 Context {RI : RealInterfaceEnhanced}.
 Local Existing Instance RI_base.
 Context {SS : StateSpace RI}.
+
+(* keeper4：S01 接口面钉定——同 LoInflation 节头注（req 版同名投影遮蔽 S01
+   原名；节内 Notation 钉定，出节即散，语句面零触碰）。 *)
+Local Notation zero := S01_BaseRing.zero.
+Local Notation plus := S01_BaseRing.plus.
 
 Fixpoint loir_idt_list_sum (f : S -> R) (l : list S) : R :=
   match l with
