@@ -42,7 +42,7 @@ Require Import UpAblP6_ZPosLowRef.
 Require Import UpAblP6_ConcMixSelFeed.
 Require Import FepIdConsume.
 Require Import UpAblP6_EntropyMonoSplit_C.
-Require Import UpAblP6_UniformLimit.
+Require Import Arch_ToyR_02.
 Require Import UpAblP6_SecondLaw_two_state.
 Require Import fka_weak_triangle_ref.
 Require Import AttnHardLimit218.
@@ -65,9 +65,23 @@ Require Import UpAblMetaWorld3.
 Require Import UpAblMetaEngine.
 From Stdlib Require Import Setoid Morphisms.
 From Stdlib Require Import Lia.
+Require Import S13_NLiveAudit.  (* keeper4 20261105 P8：w_T 解析面重接——裸 w_T 影蔽序钉 S13_NLiveAudit.w_T＝pa6ul_strict_first_cut 陈述面同源（解除 AttnHardLimit218 影蔽）；语句面零触碰 *)
 
 (* ================= §1 uapkg6_temp_param_full_suppl 族 ================= *)
 Import RealInterfaceEnhancedMod.
+
+(* keeper4 20261105：S01.Id 世界钉定（解析面重接·语句面零触碰）——UpAblMetaEngine（L65 导入）
+   同名克隆 kit（Id/id_refl/id_sym/id_trans/id_cong/id_cong2·其 L857-925）遮蔽 S01_BaseRing
+   原版，致全部裸 Id/id_* 面（uassw/pa6ul/loi 供给位·cross-module 陈述面＝S01 世界）型错配
+   （7672468 生置件·S11 缺位期零编译见证·本席逐层实勘 L375/L432/L885 同因三层）。
+   RealInterfaceEnhancedMod（L71 导入）plus_zero/le/lt 投影面不在此列（晚于 L65·影蔽序自正）。
+   本文件零 MetaEngine.Id 世界真消费位（本席 grep 实勘·其面皆为 S01 世界供给）。 *)
+Local Notation Id := S01_BaseRing.Id.
+Local Notation id_refl := S01_BaseRing.id_refl.
+Local Notation id_sym := S01_BaseRing.id_sym.
+Local Notation id_trans := S01_BaseRing.id_trans.
+Local Notation id_cong := S01_BaseRing.id_cong.
+Local Notation id_cong2 := S01_BaseRing.id_cong2.
 
 (* ---------- 七件消融件（显式 Require） ---------- *)
 
@@ -378,9 +392,22 @@ Theorem uapkg6_feeder_ri_abstract :
            lt a b -> le c d ->
            lt (plus (inv_pos b Hb) c) (plus (inv_pos a Ha) d))}}.
 Proof.
-  exact (existT _
+  exact (existT
+           (fun _ : lt zero (fa56_covariance one one) =>
+              {_ : Id (fa56c_entropy_production_rate unit unit
+                        (fun _ : unit => one) (fun _ : unit => one) tt tt)
+                   (mult one one) &
+               forall (a b c d : R) (Ha : lt zero a) (Hb : lt zero b),
+                 lt a b -> le c d ->
+                 lt (plus (inv_pos b Hb) c) (plus (inv_pos a Ha) d)})
            uassw_covariance_unit_pos
-           (existT _
+           (existT
+              (fun _ : Id (fa56c_entropy_production_rate unit unit
+                             (fun _ : unit => one) (fun _ : unit => one) tt tt)
+                          (mult one one) =>
+                 forall (a b c d : R) (Ha : lt zero a) (Hb : lt zero b),
+                   lt a b -> le c d ->
+                   lt (plus (inv_pos b Hb) c) (plus (inv_pos a Ha) d))
               uassw_entropy_production_unit
               (fun (a b c d : R) (Ha : lt zero a) (Hb : lt zero b)
                      (Hab : lt a b) (Hcd : le c d) =>

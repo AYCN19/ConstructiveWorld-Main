@@ -507,12 +507,13 @@ Print Assumptions uapkg6_campaign_supply_closed.
 
 (* ---------- v2 依赖面追加（显式点名；⑨：Import 载荷不透传） ---------- *)
 Require Import UpAblP6_EntropyMonoSplit_C.
-Require Import UpAblP6_UniformLimit.
+Require Import Arch_ToyR_02.
 Require Import UpAblP6_SecondLaw_two_state.
 Require Import fka_weak_triangle_ref.
 Require Import AttnHardLimit218.
 Require Import UpReqAttnUniformLimit.
 Require Import SecondLawQuantified.
+Require Import S13_NLiveAudit.  (* keeper4 20261105 P8：w_T 解析面重接——裸 w_T 影蔽序钉 S13_NLiveAudit.w_T＝pa6ul_strict_first_cut 陈述面同源（解除 AttnHardLimit218 影蔽）；语句面零触碰 *)
 
 (* ===================================================================== *)
 (* ① EMS_C 覆盖 completeness 引用面：uac_e11_full_muster 总成引证          *)

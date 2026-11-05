@@ -66,7 +66,11 @@ jobs:
     # 20261025 tau 十七片落装：无壳 hb 实件 128 条内核复算实证 ~10min/枚（KB22 沙箱双跑
     # 10h15m/2 道·主仓 R5 同款 4 组实测预测 10-12h）——480min 墙对首验 tau 闭包确定性不足，
     # 提至 960（与落装同波捎带·KB6 地雷二合规·本注记即实测依据）。
-    timeout-minutes: 960
+    # 20261105 keeper4 令（用户 20261105·三补丁②）：960→2880（48h 重尾冷编墙）——
+    # run 41914865932 实证 9.3 冷编 960min 墙杀死循环结构解（build 步 stdout 21:42:58Z
+    # 静默后 job 13:08:45Z 判 failure·全窗无 verdict）；48h=960 的 3 倍余量·
+    # 卡死判据不靠墙（CPU 采样 10s 零增量另判）·墙只兜尾。
+    timeout-minutes: 2880
     env:
       # ── 形 A 工具链注入（20261105 换基·七组改点③）──────────────────────────────
       # opam-root 9.3（本席实勘 coqc.exe/coqchk.exe/rocq.exe -v 三件双 9.3.0·20261105）。
@@ -173,6 +177,41 @@ jobs:
           rm -f ConstructiveWorld_vo/*.vo ConstructiveWorld_vo/*.vos ConstructiveWorld_vo/*.vok 2>/dev/null || true  # 20261019 扩清 .vos/.vok 残留（叶子件 "searching for .vos" 撕裂根除）
           mkdir -p ConstructiveWorld_vo/Local
           rm -f ConstructiveWorld_vo/Local/*.vo ConstructiveWorld_vo/Local/*.vos ConstructiveWorld_vo/Local/*.vok 2>/dev/null || true
+          # ── furnace93 seed（keeper4 20261105·三补丁①·先于 main93 闸）────────────────
+          # 播种源=furnace93_seed 277 .vo＝run 41914865932（#3 炉@bb2a32ff）真编译幸存产物
+          # （9.3 代·魔数 90300）。契约＝源指纹清单 _seed93_manifest.json（同目录）：
+          # 每件录 bb2a32ff 生成时 .v sha256＋.vo sha256。只播「源未变」件——源已变件
+          # 不播不豁免→指纹机全量重编（防陈旧 .vo 假绿）；有效件名册落
+          # ConstructiveWorld_vo/_seed93_valid.json 供 Build 步 T2 删除律豁免
+          # （cw_attest.json 系 9.1 代 digest·9.3 产物永失配——无豁免则播种被 T2 全灭）。
+          # 假绿防线不受削弱：有效件字节=清单在册 digest（步内复核）＋终局全树 coqchk
+          # （chk 步 CHK_SKIP_FILE="" 全树模式）＋T2 对其余件照常每炉失效。
+          PYTHON="C:\Program Files\Python313\python.exe"   # keeper4 20261105：显式钉真实 python（#290 商店桩坑·T2/chk 步同款）
+          "$PYTHON" - <<'PYEOF93SEED'
+          import json, os, hashlib, shutil
+          seed_dir = r'D:/ComplexAnalysis/attn/rocq93_work_20261101/furnace93_seed'
+          man_path = os.path.join(seed_dir, '_seed93_manifest.json')
+          def sha(p):
+              h = hashlib.sha256()
+              with open(p, 'rb') as f:
+                  for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
+              return h.hexdigest()
+          valid = {}
+          if os.path.isfile(man_path):
+              man = json.load(open(man_path, encoding='utf-8'))
+              for stem, ent in man.items():
+                  vf, of = stem + '.v', os.path.join(seed_dir, stem + '.vo')
+                  if not os.path.isfile(vf) or not os.path.isfile(of):
+                      continue
+                  if sha(vf) != ent.get('v_sha256'):
+                      continue  # 源已变（此头改面）→不播不豁免→指纹机重编
+                  shutil.copyfile(of, os.path.join('ConstructiveWorld_vo', stem + '.vo'))
+                  valid[stem] = ent.get('vo_sha256')
+              print('FURNACE93-SEED: manifest=%d seeded_valid=%d' % (len(man), len(valid)))
+          else:
+              print('FURNACE93-SEED: manifest absent — zero 93-seed (cold path)')
+          json.dump(valid, open('ConstructiveWorld_vo/_seed93_valid.json', 'w'))
+          PYEOF93SEED
           if [ -f /d/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo/_93m_BUILD_DONE ]; then
             cp /d/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo/*.vo ConstructiveWorld_vo/ 2>/dev/null || true
             cp /d/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo/Local/*.vo ConstructiveWorld_vo/Local/ 2>/dev/null || true
@@ -264,9 +303,19 @@ jobs:
               l = l.strip()
               if l.endswith('.v'):
                   order_stems.add(l.split('#')[0].strip()[:-2])
+          # keeper4 20261105 三补丁①配套：furnace93 seed 有效件豁免（_seed93_valid.json
+          # =「源指纹未变∧字节=在册 digest」名册·seed 步铸）。cw_attest.json 系 9.1 代
+          # digest 面·9.3 产物永失配——无豁免则 277 真产物被本删除律全灭→播种空转。
+          # 豁免件字节在本步再核一次（=valid[stem] 才豁免）；其余件照旧每炉失效。
+          try:
+              seed93 = json.load(open('ConstructiveWorld_vo/_seed93_valid.json', encoding='utf-8'))
+          except Exception:
+              seed93 = {}
           for f in os.listdir(vo):
               if not f.endswith('.vo'): continue
               stem = f[:-3]
+              if stem in seed93 and sha(os.path.join(vo, f)) == seed93[stem]:
+                  continue  # furnace93 seed 有效件豁免（假绿防线=终局全树 coqchk 不变）
               ent = arc.get(stem + '.v')
               if stem in order_stems and (not ent or sha(os.path.join(vo, f)) != ent.get('vo_sha256')):
                   removed.add(stem)
@@ -295,7 +344,25 @@ jobs:
           # 同 registration·checkout 落点 41898362546 日志 L42 同径）。
           # chk 步「bash scripts/parallel_chk.sh」单 token 无 && 同检无段拆险
           # （parallel_chk.sh:55-56 自解析 VO_DIR cd·任一 runner 落点皆正）。
-          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "cmd /c D:\\actions-runner-clean\\cw_build93.cmd" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
+          # ── keeper4 20261105 三补丁③：build 14 并行（用户令·翻转 20261019 串行回退·仅限本 9.3 炉）──
+          # 串行 build.sh（20261019 三连红后回退版）继续留树可回滚（cw_build93.cmd 未动）。
+          # 本炉改调 scripts/parallel_build.sh（v2 留树·三 fail-loud 断言俱在）：
+          # rocq dep→Kahn 分层（层内互不依赖 xargs -P14 并行·层间串行=依赖在先层落盘）；
+          # fingerprint skip 保留（无 base→mtime 模式·同机镜像播种语义）；lane 独立日志
+          # （_pbld_tmp_$$/lane_*.log）；③a order 注册面覆盖断言（缺源/缺 .vo 即红）。
+          # 本地适配三改（20261105 keeper4）：maxdepth 2 收 Local/（注册行断言面）＋
+          # 摘 `! -name '_*'`（_twc_probe 系注册件被 UpReqPadeTransport Require）＋
+          # fail 清单落盘位修正（/tmp→"$WORK/fail.txt"·红出证面）。
+          # 假绿防线不变：③a 覆盖断言（编译面）＋终局全树 coqchk（chk 步全树模式）＋
+          # T2 每炉失效（本步上方·seed 有效件契约豁免除外）——任何 miss 都 fail-loud 红。
+          # 9.1 炉 coq.yml 串行面零触碰（他席域）。
+          # export 面（guard→cmd→bash 继承链与 chk 步同款）：COQC job env 已注入；
+          # BLDJ_JOBS=14（用户令·16 逻辑核占 87.5%·lane 内存抖动则回退 8）；PYTHON 显式
+          # 钉真实 python（#290 商店桩坑·chk 步同款）；PBLD_AUTO_BASE 不设=无 base 纯
+          # mtime 模式（镜像播种=真镜像·无跨机代差面）。
+          export BLDJ_JOBS=14
+          export PYTHON="C:\\Program Files\\Python313\\python.exe"
+          pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash scripts/parallel_build.sh" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
 
       # S7/PA4+PB6：全树模块计数自动化——六维计数（全树 .v／Live_X 顶层／UpAbl 顶层／
       # attn 沙箱／order 行数／提交面数）三口径分列（注册面/侧树顶层/沙箱）；

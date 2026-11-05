@@ -45,8 +45,13 @@ ROCQDEP="${CHK_ROCQDEP:-$ROCQDEP}"
 WORK="_pbld_tmp_$$"   # 实例唯一（同 parallel_chk 多写者互踩定谳）
 rm -rf "$WORK"; mkdir -p "$WORK"
 
-# ① 全源清单+依赖图（`_` 前缀暂态件排除）
-find . -maxdepth 1 -name '*.v' ! -name '_*' | sed 's|^\./||' | sort > "$WORK/allv.txt"
+# ① 全源清单+依赖图（20261105 keeper4：maxdepth 2 收 Local/ 子目录——order.txt 有
+#    Local/LW0LeibSeparation.v 注册行，③a 覆盖断言对其要求源+产物双在，maxdepth 1
+#    漏编则断言必红（PBLD-COV-NO-VO）；lane 日志名经 tr '/' '_' 子目录安全。
+#    原 `! -name '_*'` 排除一并摘除：vo 树 _twc_probe.v 系注册件（order 行）且被
+#    UpReqPadeTransport.v:34 Require——排除即该件零产物→消费件红+③a 断言红。
+#    全树实勘 _ 前缀源=唯 _twc_probe.v 一件（双树同勘），摘除无旁效。）
+find . -maxdepth 2 -name '*.v' | sed 's|^\./||' | sort > "$WORK/allv.txt"
 NALL=$(wc -l < "$WORK/allv.txt")
 [ "$NALL" -gt 0 ] || { echo "PBLD-NO-SOURCES"; exit 2; }
 "$ROCQDEP" dep -Q . "" $(cat "$WORK/allv.txt") > "$WORK/deps.txt" 2>/dev/null || true
@@ -243,5 +248,7 @@ if [ "${nfail:-0}" -eq 0 ]; then
   exit 0
 fi
 echo "PARALLEL_BUILD_FAIL — red files:"
-cat /tmp/_pbld_fail.txt
+# 20261105 keeper4 修 bug：原 cat /tmp/_pbld_fail.txt 与 fail.txt 落盘位（$WORK/fail.txt）
+# 错位——红清单永远打不出（Windows python /tmp ≠ MSYS /tmp·v1 教训同族）。fail-loud 出证面。
+cat "$WORK/fail.txt"
 exit 1
