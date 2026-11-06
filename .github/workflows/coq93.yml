@@ -57,7 +57,7 @@ jobs:
   coq-build:
     # 显示残留（ci_switch 包 §6 残留1 同款·不判红）：job name 仍书 9.1——甄别一律按 workflow 名
     # Main CI 9.3（守望甄别键=workflow 名·非 job 名）。
-    name: Rocq 9.1 build + coqchk (self-hosted local trust cache, Windows)
+    name: Rocq 9.3 build + coqchk (self-hosted seed cache, Windows)  # display rename per user order 20261106
     # 20261026 mac-side pilot lane: workflow_dispatch with macos_only=true
     # skips the Windows cert job so mac-side revisions can be validated
     # without occupying the Windows self-hosted runner. Push/PR unchanged.
@@ -200,7 +200,7 @@ jobs:
           if os.path.isfile(man_path):
               man = json.load(open(man_path, encoding='utf-8'))
               for stem, ent in man.items():
-                  vf, of = stem + '.v', os.path.join(seed_dir, stem + '.vo')
+                  vf, of = os.path.join('ConstructiveWorld_vo', stem + '.v'), os.path.join(seed_dir, stem + '.vo')  # keeper6 fix: .v lives under ConstructiveWorld_vo (cwd=repo root)
                   if not os.path.isfile(vf) or not os.path.isfile(of):
                       continue
                   if sha(vf) != ent.get('v_sha256'):
