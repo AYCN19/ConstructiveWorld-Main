@@ -406,7 +406,7 @@ Qed.
 (* QleT' 影子件（Set 面 ≤ 形） *)
 Theorem cec_tangent_le : forall m : nat, QleT' (cec_tg m) (1 + 1)%Q.
 Proof.
-Proof. intro m. exact (qltT_leT' (cec_tg m) (1 + 1)%Q (cec_tangent_ceiling m)). Qed.
+  intro m. exact (qltT_leT' (cec_tg m) (1 + 1)%Q (cec_tangent_ceiling m)). Qed.
 
 (* 缺口恒等式：2 − 2m/(m+1) == 2/(m+1)（缺口恰 2/k 的 Q 层精确形） *)
 Theorem cec_tangent_gap : forall m : nat,

@@ -69,7 +69,8 @@ fi
 : > "$WORK/invalidate.txt"
 if [ -n "$BASE" ] && { git cat-file -e "$BASE" 2>/dev/null || git fetch --depth=1 -q origin "$BASE" 2>/dev/null; }; then
   if git diff --name-only "$BASE" HEAD --relative > "$WORK/rawdiff.txt" 2>/dev/null; then
-    grep '\.v$' "$WORK/rawdiff.txt" 2>/dev/null | sed 's|.*/||' | sort -u > "$WORK/changed.txt" || : > "$WORK/changed.txt"
+    # changed 面保留 cwd 相对路径（allv 名册键形；basename 剥除曾使 Local/ 子目录变面永不命中名册——Main CI 9.3 run#5 同类归一病）
+    grep '\.v$' "$WORK/rawdiff.txt" 2>/dev/null | sort -u > "$WORK/changed.txt" || : > "$WORK/changed.txt"
     "$PY" - "$WORK/allv.txt" "$WORK/deps.txt" "$WORK/changed.txt" > "$WORK/invalidate.txt" <<'PYEOF'
 import sys
 from collections import defaultdict
@@ -84,12 +85,20 @@ for line in open(deps_f, encoding='utf-8', errors='replace'):
     vt = [t for t in left.split() if t.endswith('.vo')]
     if not vt:
         continue
-    src = vt[0].replace('\\', '/').split('/')[-1][:-3]
+    def norm(t):
+        # 全相对路径形优先（Local/ 子目录件名册键含目录），basename 形兜底——
+        # 单一 basename 剥除曾把 Local/LW0LeibSeparation 归一成 LW0LeibSeparation
+        # ≠ 名册键，整行依赖边被静默丢弃（Main CI 9.3 run#5 fail=34 根因之一）。
+        p = t.replace('\\', '/')
+        if p.endswith('.vo'):
+            p = p[:-3]
+        return p if p in allset else p.split('/')[-1]
+    src = norm(vt[0])
     if src not in allset:
         continue
     for t in right.split():
         if t.endswith('.vo') and not t.startswith('/'):
-            d = t.replace('\\', '/').split('/')[-1][:-3]
+            d = norm(t)
             if d != src and d in allset:
                 rdeps[d].add(src)
 changed = [l.strip() for l in open(changed_f, encoding='utf-8', errors='replace') if l.strip()]
@@ -149,12 +158,21 @@ for line in open(deps_f, encoding='utf-8', errors='replace'):
     vt = [t for t in left.split() if t.endswith('.vo')]
     if not vt:
         continue
-    src = vt[0].replace('\\', '/').split('/')[-1][:-3] + '.v'
+    def norm(t):
+        # 全相对路径形优先（Local/ 子目录件名册键含目录），basename 形兜底——
+        # 单一 basename 剥除曾把 Local/LW0LeibSeparation 归一成 LW0LeibSeparation
+        # ≠ 名册键，目标行被静默跳过、入度记 0，该件被误排第 1 层抢在依赖
+        # S01_BaseRing.vo 落盘前编译（Main CI 9.3 run#5 fail=34 根因）。
+        p = t.replace('\\', '/')
+        if p.endswith('.vo'):
+            p = p[:-3] + '.v'
+        return p if p in allset else p.split('/')[-1]
+    src = norm(vt[0])
     if src not in allset:
         continue
     for t in right.split():
         if t.endswith('.vo') and not t.startswith('/'):
-            d = t.replace('\\', '/').split('/')[-1][:-3] + '.v'
+            d = norm(t)
             if d != src and d in allset:
                 deps[src].add(d)
 indeg = {f: len(deps[f]) for f in allv}
