@@ -13,8 +13,8 @@
    见证解包为显式 N/eps 的逐点 QltT 形。
    ── 依赖：UpReqPadeExp（pade_num/pade_den）、UpReqQExpTail
    （qtail_*）、UpReqPadeLower（cpl_lower_even 系）、DTPT_Bridge、
-   S01_BaseRing、S02_CauchyComplete、S03_QExp、S07_RealSetoidExpLog、
-   _twc_probe；只 Require 不改源。
+   S01_BaseRing、S02_CauchyComplete、S03_QExp、S07_RealSetoidExpLog；
+   只 Require 不改源。
    ── 构造性注记：全员 Print Assumptions 预期 Closed（无公理依赖）；
    纯构造性、零 LPO、零经典极限／积分性质；Set 层假设位全走
    QltT/QleT（S01 Set 序），无 Prop 假设位。
@@ -31,7 +31,6 @@ From Stdlib Require Import QArith.QArith QArith.Qabs Arith.Arith Lia Setoid.
 Require Import DTPT_Bridge.
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.
-Require Import _twc_probe.
 Require Import S01_BaseRing.
 Require Import S07_RealSetoidExpLog.
 
