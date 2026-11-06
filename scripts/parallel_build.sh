@@ -144,8 +144,13 @@ else
 fi
 
 # ③ Kahn 分层：层=入度零批次的逐波剥离（层内并行安全）
+# Windows 原生 python 文本 stdout 重定向恒 CRLF：层行尾 CR 传入 bash read 后不被剥，
+# 层尾文件名带 CR 使 ${f%.v} 后缀剥除失配、"name.v\r.vo" 存在性判定恒假——每炉层尾件
+# 被"缺失"假象全量重编（种子 .vo 指纹 skip 失效，Main CI 9.3 run#8 30 lane=29 层尾+Local
+# 实证）。正形=生产侧钉 LF；消费侧 bash [ -f ]/[ -nt ] 不吃 CR，唯一可靠修位在此。
 "$PY" - "$WORK/allv.txt" "$WORK/deps.txt" > "$WORK/layers.txt" <<'PYEOF'
 import sys
+sys.stdout.reconfigure(newline='\n')
 from collections import defaultdict, deque
 allv_f, deps_f = sys.argv[1], sys.argv[2]
 allv = [l.strip() for l in open(allv_f, encoding='utf-8', errors='replace') if l.strip()]
