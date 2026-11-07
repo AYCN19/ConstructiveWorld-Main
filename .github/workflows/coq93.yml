@@ -21,8 +21,9 @@
 #     gen2 产物 DIGEST-HIT 全中）；对照组显式 --control 指 9.3 平台 ClassicalDedekindReals.vo
 #     （SELF-HIT 校准件同代重铸·本席预验 PASS；digest 算法依 gate5 脚本契约=32 位 md5——ask 字面
 #     「sha256」与 gate5_vodep_quarantine.py:220 [0-9a-f]{32} 硬闸冲突·按脚本契约裁定·gaps 登记）。
-#   ⑤ attest 沿 a062074 gate2 mode FULL 过渡形照抄（ATT-MODE-OVERRIDE 块）；CHK_SKIP_FILE
-#     全树模式过渡行照抄（#329-336 六连实证块）。
+#   ⑤ attest 增量继承现役（20261108 admit 恢复）：过渡件（ATT-MODE-OVERRIDE 块＋CHK_SKIP_FILE
+#     全树行＋skip 清空行）已退役删除——档案已按 #9 绿树重铸（e0dacd49·1021 件）；W3 backstop
+#     （每 20 轮全量）保留。
 #   ⑥ seed=main93 沙箱 BUILD_DONE 闸（seedLedger 判定 20261105=不可用：_93m_BUILD_DONE 缺席＋
 #     1013/1018 .vo 缺 5 件·炉在飞）→ 首炉冷编零 seed·禁播 9.1 .vo（魔数 90100 vs 90300 拒载律）；
 #     沙箱收官（R4 闸线）后播种自动启用。
@@ -183,9 +184,11 @@ jobs:
           # 每件录 bb2a32ff 生成时 .v sha256＋.vo sha256。只播「源未变」件——源已变件
           # 不播不豁免→指纹机全量重编（防陈旧 .vo 假绿）；有效件名册落
           # ConstructiveWorld_vo/_seed93_valid.json 供 Build 步 T2 删除律豁免
-          # （cw_attest.json 系 9.1 代 digest·9.3 产物永失配——无豁免则播种被 T2 全灭）。
-          # 假绿防线不受削弱：有效件字节=清单在册 digest（步内复核）＋终局全树 coqchk
-          # （chk 步 CHK_SKIP_FILE="" 全树模式）＋T2 对其余件照常每炉失效。
+          # （无豁免则播种件无 Build 产物、被 T2 删除律全灭。20261108 注：cw_attest.json 已按
+          # #9 绿树重铸（e0dacd49·9.3 代）——播种有效件若字节≠档案 digest，reconcile 判 changed
+          # 送 coqchk 复验，陈种永不入跳过清单）。
+          # 假绿防线不受削弱：有效件字节=清单在册 digest（步内复核）＋W3 backstop 每 20 轮
+          # 全树 coqchk＋T2 对其余件照常每炉失效。
           PYTHON="C:\Program Files\Python313\python.exe"   # keeper4 20261105：显式钉真实 python（#290 商店桩坑·T2/chk 步同款）
           "$PYTHON" - <<'PYEOF93SEED'
           import json, os, hashlib, shutil
@@ -465,18 +468,9 @@ jobs:
             3) echo "ATT-RECON-NOARCHIVE: 档案缺席/坏档/自洽破——本轮全量 coqchk（降速不降强）" ;;
             *) echo "ATT-RECON-FAIL rc=$rc — fail-loud, treat as red"; exit 1 ;;
           esac
-          # 20261104 skip 收缴过渡（#329-#336 六连实证）：skip 收缴=全树认证 → gate2
-          # 必须走 FULL 分支——对账 JSON 的 mode 改写 FULL（否则 ATTEST 分支断言附页
-          # 必红：附页 0 vs skipped 960 结构性错配 #336 实证）。恢复 admit 时删除本段。
-          python - <<'PYEOF'
-          import json
-          p = 'attest_reconcile.json'
-          d = json.load(open(p, encoding='utf-8'))
-          d['mode'] = 'FULL'
-          d['skipped'] = []
-          json.dump(d, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-          print('ATT-MODE-OVERRIDE: mode=FULL (skip withheld transition)')
-          PYEOF
+          # 20261108 admit restored: the 20261104 ATT-MODE-OVERRIDE transition is retired
+          # (archive re-cast from the #9 green tree at e0dacd49) - reconcile JSON now goes
+          # to gate2 verbatim; the ATTEST branch asserts R1-R4 + the _chk_all.log appendix.
 
       # 20261018 并行认证切换：单遍全模块共享闭包（cw_chk.cmd→coqchk_all.sh）CPU 串行
       # 3h04m 基线/4h23m 未竟实证；改 scripts/parallel_chk.sh 根分组均衡 K 路并行
@@ -498,15 +492,10 @@ jobs:
           # 随附页入 _chk_all.log 留痕（gate2 认证态断言对账用）。绝对路径=parallel_chk
           # 会 cd 进 VO_DIR，相对路径即失配（att 链实证同坑）。
           export CHK_SKIP_FILE="$PWD/ConstructiveWorld_vo/_attest_skip.txt"
-          # 20261103 admit 边界结构性过渡（#329-#331 三连 rc=129 实证）：档案（#319 重铸）落后
-          # 树态三个波次（W6 波＋107 叶落岸＋144 重编）——admit 集含 recorded-digest 失配件
-          # ＝intern 早期 anomaly。本炉起无条件收缴跳过清单＝全树模式（等价 backstop·全量
-          # 重认证）＋bytecode 旗标加速；待绿炉后档案重铸（ab5eed8 式 recast commit）再恢复
-          # admit（删本行即回滚）。
-          export CHK_SKIP_FILE=""
-          # gate2-attest 一致性（同波）：skip 收缴后对账清单必须同步清空——gate2 据此
-          # 进 FULL 分支（跳过清单空＝旧版逐字节语义·无附页断言）。
-          : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"
+          # 20261108 admit restored: the 20261103 skip-withholding transition is retired
+          # (archive re-cast from the #9 green tree at e0dacd49, 1021 modules) - the skip
+          # list feeds parallel_chk again; the W3-BACKSTOP below still forces a full-tree
+          # coqchk every 20 runs.
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
           export CHK_JOBS=14   # 20261105 用户令：14 路（根分组共享闭包模式不变）
           # 20261105 Rocq 9.3 换基（形A·改点③）：parallel_chk.sh L57 K="${COQCHK:-…9.1…}" 吃本环境
