@@ -111,10 +111,20 @@ rm -rf "$WORK"; mkdir -p "$WORK"
 
 echo "::group::PCHK 1/4 module list + coverage assertion"
 # ① 认证面清单（`_` 前缀探针/暂态 .vo 不入闭包——CI#46 教训）
+# 20261108 admit 恢复配套（#11 PCHK-NO-LANES 判例）：认证面收编 Local/ 茎——与
+# attest_reconcile 的 cert_surface（树根＋Local/）统一。全树时代 Local 件经依赖闭包
+# 搭车核验无碍；admit 时代顶层全命中→搭车件成孤儿→待验集=0→零道护栏拒炉（诚实红）。
+# 收编后 admit 炉恒有 Local 闭包单道实查（1020 admit＋1 查），全树炉 headline
+# 1020→1021（语义更强非降级：Local 由闭包搭车升为显式列出）。
 : > "$WORK/mods.txt"
 for f in *.vo; do
   [ -e "$f" ] || continue
   case "$f" in _*) continue ;; esac
+  printf '%s\n' "${f%.vo}" >> "$WORK/mods.txt"
+done
+for f in Local/*.vo; do
+  [ -e "$f" ] || continue
+  case "$f" in Local/_*) continue ;; esac
   printf '%s\n' "${f%.vo}" >> "$WORK/mods.txt"
 done
 NMOD=$(wc -l < "$WORK/mods.txt")
@@ -142,8 +152,9 @@ fi
 
 # ①a 注册面覆盖断言（禁漏件门：order.txt 全注册 .v 须有 .vo 且入认证面）
 # 子目录注册行（Local/*，order L478 R160 判例）：build 面自编自管（build.sh 逐件走）·
-# 认证面 membership 断言仅约束顶层（历史 coqchk_all 顶层 glob 语义）——Local 件经
-# 依赖闭包随组核验，不单列。
+# 20261108 起 Local 茎已收编入认证面清单（上方 ① 段·与 reconcile cert_surface 统一）
+# ——membership 断言对 Local 行仍按顶层历史语义跳过（下方 */* continue），覆盖由
+# mods.txt 收编＋未知项守卫保证。
 covfail=0
 while IFS= read -r line; do
   f=$(printf '%s' "$line" | sed 's/#.*//' | tr -d '\r' | tr -d ' ')
@@ -159,8 +170,10 @@ done < order.txt
 echo "::endgroup::"
 echo "::group::PCHK 2/4 dependency graph + balanced packing"
 # ② 依赖图 → 均衡分组
-"$ROCQDEP" dep -Q . "" $(ls *.v 2>/dev/null | grep -v '^_') > "$WORK/deps.txt" 2>/dev/null || true
+"$ROCQDEP" dep -Q . "" $(ls *.v 2>/dev/null | grep -v '^_'; ls Local/*.v 2>/dev/null | grep -v '/_') > "$WORK/deps.txt" 2>/dev/null || true
 [ -s "$WORK/deps.txt" ] || echo "PCHK-WARN-EMPTYDEP: rocq dep 零输出（闭包退化=每组仅列模块——fail-loud 留痕）"
+# 20261108 admit scoping 料备（已撤）：scoped-admit 机械经预演台裁定退役——闭包真查形态
+# 152s/道（字节码机 5 万 checking 行）·语义最强·admit 继承无增益（见 ③c-2 注）。
 CHK_JOBS="$JOBS" "$PY" - "$WORK/mods.txt" "$WORK/deps.txt" > "$WORK/groups.txt" <<'PYEOF'
 import sys, os, math, json, statistics
 from collections import defaultdict
@@ -175,7 +188,9 @@ for line in open(deps_f, encoding='utf-8', errors='replace'):
     vt = [t for t in left.split() if t.endswith('.vo')]
     if not vt:
         continue
-    src = vt[0].replace('\\', '/').split('/')[-1][:-3]
+    src = vt[0].replace('\\', '/')
+    if src.endswith('.vo'):
+        src = src[:-3]
     if src not in allset:
         continue
     for t in right.split():
@@ -327,17 +342,15 @@ if [ "${CHK_TREE_COPY:-0}" = "1" ] && [ -n "${LANE_ARR[*]:-}" ]; then
 fi
 echo "::endgroup::"
 echo "::group::PCHK 4/4 K-lane certification"
-# ③c-2 认证继承 admit 接线（20261103·三捷径③收口）：CHK_SKIP_FILE=attest_reconcile
-# digest 命中件（该件字节=上次 coqchk 全绿所验内容·cw_attest/v1 建档律）→ -admit 载入不查。
-# 跳过清单空（20 炉 backstop 收缴·run%20==0）=零 admit=全量闭包重验（v2 行为逐字节不变）。
-# 声明：admit 件正当性=digest 断言非本炉内核重验；档案仅在绿炉后随 commit 前进（先绿后录）。
-PCHK_ADMIT_ARGS=""
-if [ -n "${CHK_SKIP_FILE:-}" ] && [ -s "$CHK_SKIP_FILE" ]; then
-  while IFS= read -r _am; do [ -n "$_am" ] && PCHK_ADMIT_ARGS="$PCHK_ADMIT_ARGS -admit $_am"; done < "$CHK_SKIP_FILE"
-  echo "PCHK-ADMIT: $(grep -c . "$CHK_SKIP_FILE") modules admitted (digest=attested, loaded-not-checked)"
-else
-  echo "PCHK-ADMIT: none (skip list absent/empty — full-closure mode)"
-fi
+# ③c-2 delta 炉语义（20261108 定谳·预演台三连判例）：跳过清单不再转译为 -admit——
+# 待验集（对账 sent_to_chk＝变更件＋Local 守护件）由道**真查全闭包**（字节码机对称化下
+# LW0 全闭包 152s/5 万 checking 行实测）。史账：-admit 全局 1020 单道=rc=129 静默死
+# （intern 全 done 后 Stdlib 内核重算中段·资源性死亡·#329-331 同签名——「陈账失配」旧诊
+# 被预演台翻案）；closure-scoped admit 修正后仍不取（152s 真查使 admit 无增益·拆）。
+# 跳过清单空（20 炉 backstop 收缴·run%20==0）=全量重验（v2 行为逐字节不变）。
+# 附页照录（④b 段）：ATTEST-SKIP=对账命中面＝「本炉未列」的日志侧正本——闭包内真查件
+# 属超集强化，与附页最小保证语义相容（宁强勿弱）。
+echo "PCHK-ADMIT: retired (delta lanes run real closure checks; skip list defines the check set only)"
 # ③c-3 vm_compute 证书字节码机对称化（20261103·E-COQCHK-BYTECODE-FLAG）：默认 no=纯结构
 # 归约重算 bignum 证书＝小时级难磨（K12_lo ≥5h）；yes=与 coqc 产证同通路（实测 ≥30×）。
 # 字节码机系受信内核组成部分·对称化非降验证强度·-o Axioms 输出不受影响。
@@ -349,18 +362,18 @@ while IFS= read -r grp; do
   # 20261019 CRLF 定谳：groups.txt 行尾 \r 黏在末位件名上→coqchk Cannot find library(名\r)
   # （Windows Python 文本模式写 \n→\r\n·mac POSIX 无此翻译故同版无恙·CI att1-3 三连红恒为各
   #  lane 末位参即铁证）——此处连同 \037 一并翻译为空格，消费侧兜底。
-  mods=$(printf '%s' "$grp" | tr '\037\r' '  ')
+  mods=$(printf '%s' "$grp" | tr '\037\r' '  ' | tr '/' '.')
   nm=$(printf '%s' "$mods" | wc -w | tr -d ' ')
-  echo "PCHK group $((i+1)): $nm modules"
+  echo "PCHK group $((i+1)): $nm modules (real closure check)"
   if [ "${PCHK_PACK_ONLY:-0}" = "1" ]; then i=$((i+1)); continue; fi
   ldir="${LANE_ARR[$i]:-}"
   # 20261019 并发失效对策三件：错峰启动（45s/lane——通道建立窗错开）＋实例域用户隔离
   # （USER/USERNAME 进 lane 环境——通道名可能含用户域）＋独立副本（CHK_TREE_COPY）。
   # 实测组合：四 lane 共存全程推进（旧配置秒死窗不复现）。
   if [ -n "$ldir" ] && [ -d "$ldir" ]; then
-    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o $PCHK_BC_ARGS -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
+    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   else
-    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o $PCHK_BC_ARGS -Q . "" $PCHK_ADMIT_ARGS $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
+    ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   fi
   # 20261019 死锁修：定向收 lane PID——裸 wait 会把监视器子壳（永循环）一并等死＝
   # coqchk 步永久假死（桩件实测 t=338s 心跳不歇·wait 不归）。下同 ③d 重试段。
@@ -415,7 +428,7 @@ for j in $(seq 0 $((NGRP-1))); do
     echo "PCHK retry: group $((j+1)) rc=$rc — single retry after 60s settle"
     sleep 60
     ldir="${LANE_ARR[$j]:-}"
-    mods=$(sed -n "$((j+1))p" "$WORK/groups.txt" | tr '\037\r' '  ')
+    mods=$(sed -n "$((j+1))p" "$WORK/groups.txt" | tr '\037\r' '  ' | tr '/' '.')
     if [ -n "$ldir" ] && [ -d "$ldir" ]; then
       ( export USER="lane$$-r$j" USERNAME="lane$$-r$j"; cd "$ldir" && "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$j.log" 2>&1; echo $? > "$WORK/g$j.rc" ) &
     else
