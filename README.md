@@ -1,6 +1,6 @@
 # ConstructiveWorld — 构造性数学库（Rocq/Coq）
 
-[![Coq CI](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq.yml/badge.svg?branch=main)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23717747.svg)](https://doi.org/10.5281/zenodo.23717747)
+[![Main CI 9.3](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq93.yml/badge.svg?branch=main)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq93.yml) [![Coq CI（9.1 炉·并存保留）](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq.yml/badge.svg?branch=main)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23717747.svg)](https://doi.org/10.5281/zenodo.23717747)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ## 作者与贡献者（Authors）
@@ -16,38 +16,56 @@
 
 > 📐 **构造世界结构志 / Architecture monograph**: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) —— 八域全域地图 · 依赖分层拓扑（实测 9,571 边·最大深度 28） · 注册十波演进时间线 · 四支柱谱系 · 构造塔叙事（「构造一切可构造」：万物皆算法的类型论实现）。
 
-本仓库是论文《π 的构造性强无理：零公理判据与显式搜索上界》（*Constructive Strong Irrationality of π*；预印本 [figshare DOI 10.6084/m9.figshare.34134429](https://doi.org/10.6084/m9.figshare.34134429)）的**主张面工件仓**（π_geom 顶点强无理分离定理 `leibsep_pi_rational_unconditional` 及其全部认证引用件；冻结面 tag `v1.0-pi-separation`，Zenodo DOI [10.5281/zenodo.23717747](https://doi.org/10.5281/zenodo.23717747)），同时是 ConstructiveWorld 构造性数学库的主干：全库在 Set 层以 `sigT` 显式见证给出存在型结论，不引入任何公理，且整链可提取。
+本仓库是论文《π 的构造性强无理：零公理判据与显式搜索上界》（*Constructive Strong Irrationality of π*；预印本 [figshare DOI 10.6084/m9.figshare.34134429](https://doi.org/10.6084/m9.figshare.34134429)）的**主张面工件仓**（π_geom 顶点强无理分离定理 `leibsep_pi_rational_unconditional` 及其全部认证引用件；冻结面 tag `v1.0-pi-separation`，Zenodo DOI [10.5281/zenodo.23717747](https://doi.org/10.5281/zenodo.23717747)），同时是 ConstructiveWorld 构造性数学库的主干：全库在 Set 层以 `sigT` 显式见证给出存在型结论，不引入任何公理，且整链可提取。2026-11-07/08 全库于 Rocq 9.3.0 完成内核全闭包收官认证（GPG 签名 tag `GREEN-CERTIFIED-v1`，见 §2「认证发布面」）。
 
 ## 1. 库概述
 
-- **规模**：857 个在册模块（注册序 `order.txt`，857 行·2026-10-31 实测；随注册演进而增长，以现势为准）。注册序是库的权威引用面：每个在册件一行，形如 `S01_BaseRing.v#R0-d66910`，`#` 之后为注册批次指纹。
-- **纯构造性**：全库不使用 `Axiom`/`Admitted`/经典逻辑；内核级 `coqchk -o` 复核口径为 `Axioms: <none>`。
+- **规模**：认证面 **1021 件**（内容寻址认证档案 `scripts/gates/cw_attest.json`·schema `cw.attest/v1`，2026-11-07 自 #9 绿炉重铸；含 `Local/` 茎守护件 `Local/LW0LeibSeparation.v`，全闭包 `coqchk` 复核口径）。注册序 `order.txt` 是库的权威引用面（`ConstructiveWorld_Live/order.txt` 现势 1058 行，2026-11-08 实测；随注册演进而增长，以现势为准），每个在册件一行，形如 `S01_BaseRing.v#R0-d66910`，`#` 之后为注册批次指纹。树内源件（1023 件 `.v`）与去重注册序（1023 件）零差集（2026-11-08 实测）；产物树注册序去重 1021 件与认证档案同集，源树注册序多出的 2 行为 pending-wave 登记行（见 §2 认证链注）。主件 `LW0PiIrrational.v` 位于 ：525（批次指纹 `#R150-40656c`）。
+- **纯构造性**：全库不使用 `Axiom`/`Admitted`/经典逻辑；内核级 `coqchk -o` 复核口径为 `Axioms: <none>`（最近一次全树云端落定：run #9，见 §2）。
 - **Set 层 `sigT` 显式见证**：存在型结论一律给出可计算见证（有理数端点、近似根等），不停留于命题层。
 - **可提取**：以 `Separate Extraction` 生成目标语言代码并机械检查 `Obj.magic` 计数为零（计数非零即示 Prop 层内容泄入提取面）。
 - **「率即算法」范式**：可执行件（`Defined` 计算器）与其正确性证书（`Qed` 证明）同体共存——定理与程序是同一件东西的两面。
 - **双支柱现状**：第一支柱为 π 的构造性强无理闭合（主件 `LW0PiIrrational.v`）；第二支柱为五常数族——√2、√3、e、ln 2 的构造性无理性分离件已批量在册（#R164 起，`u5c_*`／`abl_ln2_*` 件族），ζ(2) 无理性方向的 Beukers 法机械件族（整除/衰减/计数）已在册·闭式定理装配进行中（`abl_z2_*` 件族·#R167）。其通用逃逸窗判据引擎的标准化路线已定谳（2026-10-14 stdlib 维护者判定转介、2026-10-26 CoRN 侧同构判定）：引擎与 π 分离件现以**独立库 [rocq-pi-leibniz](https://github.com/hy7pc8gfmf-dotcom/rocq-pi-leibniz)** 发行（v1.0.4，已入官方 opam 索引，`opam install rocq-pi-leibniz`；Zenodo DOI 10.5281/zenodo.23656982）。
-- **tau 封闭链支柱（#R194 战役）**：τ 的上下界封闭链（`piu_zz_tau_enclosure` 件族）已按无壳 18 片终形落装（`8df6c9f`）：zzPhi_256／512／1024 上下界封闭，原巨件 128 个匿名断言块升格为独立引理 `piu_zz_hb_512_0..31`／`piu_zz_hb_1024_0..95`，内核级 `coqchk` 4 组并行全树复核 ALL_PASS 且 `Axioms: <none>`（本地双线实证；工程志见 §5）。
+- **第三支柱·tau 封闭链（#R194 战役）**：τ 的上下界封闭链（`piu_zz_tau_enclosure` 件族）已按无壳 18 片终形落装（`8df6c9f`）：zzPhi_256／512／1024 上下界封闭，原巨件 128 个匿名断言块升格为独立引理 `piu_zz_hb_512_0..31`／`piu_zz_hb_1024_0..95`，内核级 `coqchk` 4 组并行全树复核 ALL_PASS 且 `Axioms: <none>`（本地双线实证；工程志见 §5。注：该役为 2026-10 的 9.1 代·4 组并行旧口径历史认证；现役认证引擎为 Rocq 9.3.0·14 路并行，见 §2）。
+- **第四支柱·ZZ 测度路线（#R194–#R197 波）**：无理测度判据与速率形证书装配线（`piu_mu_criterion`／`piu_zz_mu_assembly` 等）；支柱谱系与现状见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) 图 ④。
 
 ## 2. 版本与认证记录
 
 | 项 | 值 |
 |---|---|
-| 库版本 | `49e3f13`（`main` 分支，2026-10-28 实测；随注册演进而前进） |
-| CI 认证 | **run #301**（id 40467659226，head `49e3f13`）：**success**（2026-10-28 收口，15.7 小时全树磨程；全树编译＋`coqchk` 全树内核复核通过，承载 `#R195`–`#R197` 三注册面的云端认证升格）。上一轮全绿 run #291（head `8e93893`，2026-10-24） |
-| 公理审计 | `coqchk -o` 全库复核，`Axioms: <none>`（CI 侧由 gate2 块状态机哨兵解析判定） |
-| 注册序 | `order.txt` 857 行（2026-10-31 实测）；主件 `LW0PiIrrational.v` 位于 ：476（批次指纹 `#R150-40656c`） |
+| 库版本 | `0da56c9f`（`main` 分支，2026-11-08 实测；随注册演进而前进） |
+| CI 认证 | **收官 run #9**（Main CI 9.3·head `0ef0c40f`）：**success**——`coqchk` 全树 14 组·1020 件并行内核复核 ALL_PASS·`Axioms: <none>`·gate2 mode=FULL（head 提交 2026-11-06·`git log` 实测；认证链 2026-11-07/08 落定，见下「认证链」）。增量炉现势：run #12（attempt 2）success——gate2 ATTEST 分支判词 **ATTESTED_CLEAN**（9.3 首航），delta 炉整炉约 14.5 分钟（旧全树炉 11 小时级） |
+| 公理审计 | `coqchk -o` 全库复核，`Axioms: <none>`（CI 侧由 gate2 块状态机哨兵解析判定：全树炉走 FULL 分支，增量炉走 ATTEST 分支——#12 判词 `ATTESTED_CLEAN`） |
+| 注册序 | `ConstructiveWorld_Live/order.txt` 现势 1058 行（2026-11-08 实测）；主件 `LW0PiIrrational.v` 位于 ：525（批次指纹 `#R150-40656c`） |
 | 许可 | Apache-2.0（见 `LICENSE`） |
 
-持续集成（`.github/workflows/coq.yml`）在每次推送时执行（Windows 认证 job；macOS job 已于 2026-10-29 裁定移除（Main CI Windows-only；并发压缩后恢复即双机复证））：gate1 毒 token 守卫 → gate4 注释哨兵 → gate3 跨树 diff → 跨机 vo 信任缓存起步同步（fail-open）→ 全树编译（温控包裹·指纹跳过）→ gate5 vo 二进制检疫 → `coqchk` 全树内核复核（4 组根分组并行·树副本隔离装箱·时长墙 960 分钟）→ gate2 公理哨兵（块状态机解析 `coqchk` 日志判定 `Axioms: <none>`，代际钉 Chicken 9.1.0）。哨兵脚本位于 `scripts/gates/`，并行认证脚本为 `scripts/parallel_chk.sh`。
+### 认证链（Rocq 9.3.0 收官，2026-11-07/08）
+
+#9 绿炉（`0ef0c40f`：全树 1020 件·`coqchk` 14 组并行 ALL_PASS·`Axioms: <none>`·gate2 mode=FULL）→ ① **认证档案重铸** `e0dacd49`（`scripts/gates/cw_attest.json` 重铸为 1021 件·Rocq 9.3.0 指纹——commit message 自证 964→1021）→ ② **过渡件退役** `559d0147`（skip 收缴行与 gate2 ATT-MODE-OVERRIDE 块删除，炉恢复继承认证面）→ ③ **delta 炉正典** `0da56c9f`（认证面收编 `Local/` 茎→1021 件；`coqchk` 逻辑名点分转换；`-admit` 继承机械退役——delta 炉对变更件跑真查全闭包；全树 headline 1020→1021；W3-BACKSTOP 每 20 炉强制全树）→ run #12（attempt 2）`GATE2-GREEN verdict=ATTESTED_CLEAN`。三连均为零源码改动（各 commit message 自证 zero source changes；`git show --stat` 实测三连各仅触碰一个文件：档案／workflow／`parallel_chk.sh`）。
+
+> 注：产物树注册序（1021 件·去重口径）与认证档案同集；源树注册序中的 `UpReqPadeConstUnify.v`／`UpReqSymplecticBridge.v`（#R212-reland-20261104）为已登记而尚未进入认证面的 pending-wave 行——其入面随下一绿炉落定。
+
+### 认证发布面（tag／Release／Zenodo）
+
+- **GPG 签名 tag `GREEN-CERTIFIED-v1`**：钉收官提交 `0ef0c40f`（tag 对象体 `git cat-file` 实测：一致型云端收官六前提 6/6 闭合，`piu1932_uncond_zz` 于 1020 模块全树重认证面内 `Axioms: <none>`）。别名 tag `r-consistency-certified-v1` 指向同一提交（tag 体自述别名关系·Zenodo 铸版绑定件；`git rev-parse` 实测两 tag 同指 `0ef0c40f`）。
+- **GitHub Release「Consistency Certified v1 (Rocq 9.3.0)」**：双资产 `coqchk-logs.zip`（3.9MB）＋`vo-trust-cache-windows-93.zip`（31.8MB）。
+- **Zenodo**：记录绑定 tag `r-consistency-certified-v1`，webhook 自动铸版六作者（Wang／Zu／Xia／Zeng／Zhou／Gao·ORCID 全；concept DOI [10.5281/zenodo.23717747](https://doi.org/10.5281/zenodo.23717747)）。
+
+### 「认证一次永久有效」的语义
+
+指**增量继承语义**：已认证面内未变更的模块免列（ATTEST-SKIP 附表），不再逐炉重验——**不是跳过验证**：delta 炉对每个变更模块的完整闭包执行真 `coqchk` 内核复核，闭包外模块不参与加载；W3-BACKSTOP 每 20 炉强制全树复核兜底。
+
+持续集成现役为 **Main CI 9.3**（`.github/workflows/coq93.yml`·self-hosted Windows 认证 job；macOS job 已于 2026-10-29 裁定移除（Main CI Windows-only；并发压缩后恢复即双机复证），9.3 炉铸造时按底本无 mac job 块如实登记）：gate1 毒 token 守卫 → gate4 注释哨兵 → gate3 跨树 diff → vo 信任缓存起步播种（fail-open）→ 全树编译（温控包裹·指纹跳过·14 路 Kahn 分层）→ gate7 提取执行（红即增长）→ gate5 vo 二进制检疫（token＋digest 黑名单 v3_93·对照校准）→ attest 对账（`cw_attest.json` 档案命中→skip 清单·未命中→送检）→ `coqchk` 内核复核（14 路 root-grouped 并行·树副本隔离装箱·字节码机旗标 `-bytecode-compiler yes`——`vm_compute` 证书复核 ≥30× 提速；增量炉只验变更闭包，W3-BACKSTOP 每 20 炉强制全树）→ gate2 公理哨兵（块状态机解析 `coqchk` 日志判定 `Axioms: <none>`；代际钉 `Welcome to Chicken 9.3.0`·FULL／ATTEST 双分支）。delta 炉整炉约 14.5 分钟（旧全树炉 11 小时级）。哨兵脚本位于 `scripts/gates/`，并行认证脚本为 `scripts/parallel_chk.sh`；上一代 9.1 炉 `.github/workflows/coq.yml` 并存保留。
 
 ## 3. 环境前置
 
-- **Rocq / Coq 9.1.0**（`rocq` 与 `coqchk` 已在此版本实测）。旧版未验证；更换验证环境后须重跑下方四步。
+- **Rocq / Coq 9.3.0**（`rocq` 与 `coqchk` 已在此版本实测——2026-11-07/08 收官认证引擎；CI 炉 `.github/workflows/coq93.yml` 代际钉 `Welcome to Chicken 9.3.0`）。旧版未验证；更换验证环境后须重跑下方四步。
+- **环境与工件声明**：库全部形式化内容在 Rocq 9.3.0（CI 炉 opam 构建工具链·OCaml 5.5.2——CI 钉二进制 `coqc -v` 实测）下开发并通过内核全闭包认证（`coqchk` 14 路并行，2026-11-07 run #9 绿炉）。上一代认证引擎为 Rocq 9.1.0（并存 9.1 炉 `.github/workflows/coq.yml` 保留）；Rocq 9.1 的已知内核 guard 族三漏洞（CVE-2026-72703／72704／72705，2026-10-26 oss-security 第三方披露）不在 9.3.0 中存在，故本文全部结论不受该漏洞族影响。
 - 无外部 OCaml 依赖；提取产物为普通 OCaml 源码，仅作审计对象，不要求可编译执行环境。
 
 ## 4. 复现：四步验证
 
-与论文 §6「四步命令形态」逐字一致。以下命令在 `ConstructiveWorld_vo/`（或 `ConstructiveWorld_Live/`）内执行；两树均采用 `-Q . ""` 扁平命名空间。全树驱动见 `.github/workflows/coq.yml`。
+与论文 §6「四步命令形态」逐字一致。以下命令在 `ConstructiveWorld_vo/`（或 `ConstructiveWorld_Live/`）内执行；两树均采用 `-Q . ""` 扁平命名空间。全树驱动见 `.github/workflows/coq93.yml`（现役 9.3 炉；9.1 炉 `coq.yml` 并存保留）。
 
 ```sh
 # ① 全量编译：按 order.txt 注册序逐件（本机直调；全树 driver 见库 README）
@@ -65,9 +83,12 @@ coqchk -silent -Q . "" <逻辑库名>.<件名>
 
 - 逻辑库名**不等于**文件名。例如 `S01_BaseRing.v` 的逻辑库名是 `FS01_BaseRing`（取自 `S01_BaseRing.glob` 第 2 行）。第 ④ 步若误用文件名，`coqchk` 将报库不存在。
 - 第 ① 步按 `order.txt` 行序逐件执行即满足依赖序；单件失败先行解决再续。
+- 第 ④ 步 CI 炉在 `coqchk` 上启用字节码机旗标 `-bytecode-compiler yes`（`scripts/parallel_chk.sh` 内置；`vm_compute` 证书复核 ≥30× 提速）；本机单件复核可不带该旗标。
 - 四步覆盖注册面全部在册件，主件 `LW0PiIrrational.v` 已在注册序内，无须独立配方。
 
-## 5. tau 封闭链工程志（#R194 战役）
+## 5. 第三支柱工程志：tau 封闭链（#R194 战役）
+
+> 本章为 2026-10 的 #R194 战役工程志，成文于 Rocq 9.1 代·`coqchk` 4 组并行旧口径（历史保留）；现役认证引擎为 Rocq 9.3.0·14 路并行（见 §2），两代数字不可互代。
 
 第三支柱的封闭链主件原为单体巨件 `piu_zz_tau_enclosure.v`（24,636 行，β 区单引理证明体 2,317 行）。consumer 片含 96 段 assertion 巨带与提取物化区，单体编译在 64GB 主机上两轮实证于物化区 95% 处 OOM——单体编译是死路，拆分是唯一出路。战役要点：
 
@@ -77,33 +98,35 @@ coqchk -silent -Q . "" <逻辑库名>.<件名>
 - **零漂移名面**：定义性语句名面 2,912 名零丢失零改名＋128 辅助名入册＝终形 3,040 名；语句多集 3,044 位恒等；Tier-2 导入面全量单入口 Check 零错；提取差分双基线字节等同。
 - **双线内核认证**：本地 `coqchk` 双线（沙箱双跑 10h15m＋主仓 4 组并行 10h23m）ALL_PASS、`Axioms: <none>` ×4、gate2 CLEAN。
 
-落装世系：六片拆分 `10e14f9` → 五片先行认证波 `8205e21`（consumer 片因 OOM 风险缓装）→ consumer 无壳 18 片终形落装 `8df6c9f`（`order.txt` tau 区 5→23 行）。技术细节见各 commit message 与 `.github/workflows/coq.yml` 步注。
+落装世系：六片拆分 `10e14f9` → 五片先行认证波 `8205e21`（consumer 片因 OOM 风险缓装）→ consumer 无壳 18 片终形落装 `8df6c9f`（`order.txt` tau 区 5→23 行）。技术细节见各 commit message 与 `.github/workflows/coq93.yml` 步注。
 
 ## 6. 仓库布局
 
 | 路径 | 内容 |
 |---|---|
-| `ConstructiveWorld_Live/` | 源码树：全树 `.v` 源件＋`order.txt`＋`_CoqProject`（823 行，`-Q . ""`） |
-| `ConstructiveWorld_vo/` | 产物树：与源树同构，另含 `.vo`/`.glob`/`.vos`/`.vok` 编译产物 |
-| `order.txt` | 注册序（双树各一份，857 行，内容一致；`scripts/` 留有维护用历史副本 803 行，止于 R193 波未随 R194 同步），权威引用面 |
-| `_CoqProject` | 根级清单：220 版时代历史版（存史备查，见文件头注记）；现役清单为双树 `_CoqProject`（823 行，`-Q . ""`） |
-| `scripts/` | 注册序维护脚本与 `scripts/gates/` 哨兵（毒 token 守卫、公理解析、跨树 diff、注释哨兵、vo 依赖检疫） |
-| `.github/workflows/coq.yml` | CI 全树驱动（编译＋`coqchk`＋哨兵） |
+| `ConstructiveWorld_Live/` | 源码树：全树 `.v` 源件（1023 件，2026-11-08 实测）＋`order.txt`（现势 1058 行）＋`_CoqProject`（955 行，`-Q . ""`）＋`Local/`（守护件 `Local/LW0LeibSeparation.v`，注册序 ：529） |
+| `ConstructiveWorld_vo/` | 产物树：与源树同构，另含 `.vo`/`.glob`/`.vos`/`.vok` 编译产物（产物树注册序现势 1056 行·去重 1021 件，与认证档案同集） |
+| `order.txt` | 注册序（双树各一份；源树现势 1058 行·产物树 1056 行，行数随注册演进而增长、以现势为准；`scripts/` 留有维护用历史副本 803 行，止于 R193 波未随 R194 同步），权威引用面 |
+| `_CoqProject` | 根级清单：220 版时代历史版（92 行，存史备查，见文件头注记）；现役清单为双树 `_CoqProject`（源树 955 行，`-Q . ""`） |
+| `scripts/` | 注册序维护脚本、`scripts/gates/` 哨兵（毒 token 守卫、公理解析、跨树 diff、注释哨兵、vo 依赖检疫、提取执行）与内容寻址认证档案 `scripts/gates/cw_attest.json`（1021 件·schema `cw.attest/v1`）；并行认证脚本 `scripts/parallel_chk.sh` |
+| `.github/workflows/coq93.yml` | CI 全树驱动·现役 9.3 炉（编译＋14 路 `coqchk`＋哨兵＋gate2 FULL／ATTEST） |
+| `.github/workflows/coq.yml` | CI 全树驱动·9.1 炉（并存保留） |
 | `docs/` | 设计与规划文档 |
 | `releases/` | 历史单文件合并版（220 版，见附录） |
 
 ## 7. 许可与引用
 
 - **许可**：Apache-2.0。提取产物（`.ml`/`.mli`）与源件同许可。
-- **制品引用（Zenodo）**：冻结面制品已永久归档——concept DOI [10.5281/zenodo.23717747](https://doi.org/10.5281/zenodo.23717747)（当前版本 v1.0-pi-separation，DOI 10.5281/zenodo.23717748）。
-- **引用锚**：引用库内语句时，建议以「件名＋`order.txt` 行号＋批次指纹」定位，例如主件为 `LW0PiIrrational.v`，`order.txt` :476，`#R150-40656c`。批次指纹随注册批固化，可用于核对所引版本。
+- **制品引用（Zenodo）**：concept DOI [10.5281/zenodo.23717747](https://doi.org/10.5281/zenodo.23717747)——记录现绑定认证 tag `r-consistency-certified-v1`（2026-11-07/08 认证发布面，webhook 自动铸版六作者）；π 分离冻结面版本 `v1.0-pi-separation`（版本 DOI 10.5281/zenodo.23717748）仍可引用。
+- **认证发布面引用**：GPG 签名 tag `GREEN-CERTIFIED-v1`（钉 `0ef0c40f`）＋GitHub Release「Consistency Certified v1 (Rocq 9.3.0)」双资产（`coqchk-logs.zip`＋`vo-trust-cache-windows-93.zip`）。
+- **引用锚**：引用库内语句时，建议以「件名＋`order.txt` 行号＋批次指纹」定位，例如主件为 `LW0PiIrrational.v`，`order.txt` :525，`#R150-40656c`。批次指纹随注册批固化，可用于核对所引版本。
 
 ## 8. 公开范围与例外
 
-引用面所在件全量公开。显式例外仅两类：
+引用面所在件全量公开。显式例外现势为零——两类历史例外均已清空：
 
-1. **1 件下划线探针件 `_twc_probe.v`**：不在注册序内，维持禁止引用口径，不参与配套论文引用面。
-2. **在册外差集件**：树内存在而未列入 `order.txt` 的源件（现 45 件，不含前述探针件）；其去留随仓库公开前置批次的裁定结果在此登记。当前注册序为唯一权威引用面（行数随注册演进而增长·以现势为准），未在册件不构成库的引用承诺。
+1. **下划线探针件 `_twc_probe.v`（已退役）**：曾维持禁止引用口径、不在注册序内；已于 2026-11-06 退役出树（commit `0571411`——探针不属注册面·注册序探针行清除），双树现均无此件。
+2. **在册外差集件（已清空）**：树内存在而未列入 `order.txt` 的源件，2026-10 口径曾有 45 件；现势（2026-11-08 实测）树内 1023 件 `.v` 与注册序（去重 1023 行）零差集，无在册外源件。若后续出现未在册件，其去留随仓库公开前置批次的裁定结果在此登记。当前注册序为唯一权威引用面（行数随注册演进而增长·以现势为准），未在册件不构成库的引用承诺。
 
 ## 附录：220 版历史说明（2026-09-07/08）
 
