@@ -1,0 +1,17 @@
+Require Import GaC3_P08_PerronCutoff.
+Print Assumptions GaC3_P08_mult_zero_l.
+Print Assumptions GaC3_P08_sub_ge0.
+Print Assumptions GaC3_P08_lnR.
+Print Assumptions GaC3_P08_lnR_ge0.
+Print Assumptions GaC3_P08_ln_dist.
+Print Assumptions GaC3_P08_ln_dist_ge0.
+Print Assumptions GaC3_P08_powR.
+Print Assumptions GaC3_P08_powR_pos.
+Print Assumptions GaC3_P08_c_pos.
+Print Assumptions GaC3_P08_powR_ge1.
+Print Assumptions GaC3_P08_inv_one.
+Print Assumptions GaC3_P08_inv_ge1_le_one.
+Print Assumptions GaC3_P08_den.
+Print Assumptions GaC3_P08_den_ge1.
+Print Assumptions GaC3_P08_den_pos.
+Print Assumptions GaC3_P08_inv_scale_le_one.

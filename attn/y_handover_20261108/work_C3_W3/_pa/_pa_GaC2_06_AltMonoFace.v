@@ -1,0 +1,13 @@
+Require Import GaC2_06_AltMonoFace.
+Print Assumptions mn_exp_le.
+Print Assumptions mn_sig_pos.
+Print Assumptions mn_natreal_le.
+Print Assumptions mn_log_nonneg.
+Print Assumptions mn_slice_exp_gen.
+Print Assumptions mn_slice_exp.
+Print Assumptions mn_slice_exp0.
+Print Assumptions mn_rnpow_irrel.
+Print Assumptions r_npow_anti.
+Print Assumptions r_npow_tozero.
+Print Assumptions r_npow0_tendsto.
+Print Assumptions r_npow_diff_nonneg.

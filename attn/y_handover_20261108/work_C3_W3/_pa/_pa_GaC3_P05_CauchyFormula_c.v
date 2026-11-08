@@ -1,0 +1,12 @@
+Require Import GaC3_P05_CauchyFormula_c.
+Print Assumptions GaC3_P05_val_bounded_abs.
+Print Assumptions GaC3_P05_qmul_abs_bounded.
+Print Assumptions GaC3_P05_pair_eqb_refl_true.
+Print Assumptions GaC3_P05_pair_eqb_true.
+Print Assumptions GaC3_P05_fk_lookup_spec.
+Print Assumptions GaC3_P05_fk_lookup_fst.
+Print Assumptions GaC3_P05_fk_lookup_none.
+Print Assumptions GaC3_P05_fk_lookup_bounded.
+Print Assumptions GaC3_P05_fk_bounded.
+Print Assumptions GaC3_P05_len1_rect.
+Print Assumptions GaC3_P05_cauchy_kernel_ml.

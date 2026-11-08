@@ -1,0 +1,13 @@
+DIGEST 2952f0f38f2732fd3d0f81cc0ac1af69
+F_pa._pa_GaC3_V02_BProcess
+R15:31 GaC3_V02_BProcess <> <> lib
+R52:70 GaC3_V02_BProcess <> GaC3_V02_pcell_cw_R thm
+R91:109 GaC3_V02_BProcess <> GaC3_V02_pcell_cw_I thm
+R130:155 GaC3_V02_BProcess <> GaC3_V02_base_dual_pstep_R thm
+R176:201 GaC3_V02_BProcess <> GaC3_V02_base_dual_pstep_I thm
+R222:246 GaC3_V02_BProcess <> GaC3_V02_mismatch_abs_sel thm
+R267:289 GaC3_V02_BProcess <> GaC3_V02_mismatch_bound thm
+R310:334 GaC3_V02_BProcess <> GaC3_V02_val_bounded_mono thm
+R355:380 GaC3_V02_BProcess <> GaC3_V02_dual_sum_base_sel thm
+R401:429 GaC3_V02_BProcess <> GaC3_V02_b_process_completion thm
+R450:483 GaC3_V02_BProcess <> GaC3_V02_b_process_completion_expl thm

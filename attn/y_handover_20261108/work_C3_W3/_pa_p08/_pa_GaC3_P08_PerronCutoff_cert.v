@@ -1,0 +1,7 @@
+Require Import GaC3_P08_PerronCutoff_cert.
+Print Assumptions GaC3_P08_cert_ln_dist_then.
+Print Assumptions GaC3_P08_cert_ln_dist_else.
+Print Assumptions GaC3_P08_cert_perron_sum_unfold.
+Print Assumptions GaC3_P08_cert_psi_half_unfold.
+Print Assumptions GaC3_P08_cert_ml_vline_sample.
+Print Assumptions GaC3_P08_cert_ml_vline_sampleI.

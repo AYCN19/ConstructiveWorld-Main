@@ -1,0 +1,21 @@
+DIGEST fa05a6202c63497e035ec5f57514778a
+F_pa._pa_GaC3_V02_BProcess_a
+R15:33 GaC3_V02_BProcess_a <> <> lib
+R54:72 GaC3_V02_BProcess_a <> GaC3_V02_gscale_fst thm
+R93:111 GaC3_V02_BProcess_a <> GaC3_V02_gscale_snd thm
+R132:149 GaC3_V02_BProcess_a <> GaC3_V02_pplus_fst thm
+R170:187 GaC3_V02_BProcess_a <> GaC3_V02_pplus_snd thm
+R208:225 GaC3_V02_BProcess_a <> GaC3_V02_pzero_fst thm
+R246:263 GaC3_V02_BProcess_a <> GaC3_V02_pzero_snd thm
+R284:301 GaC3_V02_BProcess_a <> GaC3_V02_wphas_sel thm
+R322:338 GaC3_V02_BProcess_a <> GaC3_V02_wsum_sel thm
+R359:380 GaC3_V02_BProcess_a <> GaC3_V02_base_dual_sel thm
+R401:421 GaC3_V02_BProcess_a <> GaC3_V02_mismatch_sel thm
+R442:464 GaC3_V02_BProcess_a <> GaC3_V02_wsum_split_sel thm
+R485:510 GaC3_V02_BProcess_a <> GaC3_V02_trunc_kernel_zero thm
+R531:556 GaC3_V02_BProcess_a <> GaC3_V02_trunc_kernel_succ thm
+R577:593 GaC3_V02_BProcess_a <> GaC3_V02_wdev_abs thm
+R614:632 GaC3_V02_BProcess_a <> GaC3_V02_wdev_intro thm
+R653:672 GaC3_V02_BProcess_a <> GaC3_V02_term_abs_le thm
+R693:712 GaC3_V02_BProcess_a <> GaC3_V02_abs_qsum_le thm
+R733:752 GaC3_V02_BProcess_a <> GaC3_V02_qsum_map_le thm

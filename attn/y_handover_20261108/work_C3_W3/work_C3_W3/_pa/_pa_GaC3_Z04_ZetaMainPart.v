@@ -1,0 +1,15 @@
+Require Import GaC3_Z04_ZetaMainPart.
+Print Assumptions z04_qsq_mono.
+Print Assumptions z04_const_le.
+Print Assumptions z04_inv_le.
+Print Assumptions z04_fold_eps.
+Print Assumptions z04_ofQ_congr.
+Print Assumptions z04_mp_kernel.
+Print Assumptions z04_mult_square_swap.
+Print Assumptions z04_mp2_sq.
+Print Assumptions z04_pole_shift.
+Print Assumptions z04_mp_norm_sq.
+Print Assumptions z04_split_gen.
+Print Assumptions z04_norm_sq_comm.
+Print Assumptions z04_dsum_split.
+Print Assumptions z04_mp_norm_cap.

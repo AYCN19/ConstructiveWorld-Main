@@ -1,0 +1,10 @@
+DIGEST eaf05067d57dd818db299dfca146c04a
+Fwork_C3_W3._pa._pa_GaC3_Z04_ZetaMainPart_b
+R15:37 GaC3_Z04_ZetaMainPart_b <> <> lib
+R58:69 GaC3_Z04_ZetaMainPart_b <> z04_tailB_le thm
+R90:102 GaC3_Z04_ZetaMainPart_b <> z04_dtailB_le thm
+R123:135 GaC3_Z04_ZetaMainPart_b <> z04_ltailB_le thm
+R156:168 GaC3_Z04_ZetaMainPart_b <> z04_main_part thm
+R189:207 GaC3_Z04_ZetaMainPart_b <> z04_deriv_main_part thm
+R228:249 GaC3_Z04_ZetaMainPart_b <> z04_logderiv_main_part thm
+R270:283 GaC3_Z04_ZetaMainPart_b <> z04_strip_read thm

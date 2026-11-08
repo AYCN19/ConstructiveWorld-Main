@@ -1,0 +1,12 @@
+Require Import GaC3_V03_VinoZeta.
+Print Assumptions v03_qsq_nonneg.
+Print Assumptions v03_qsqsum_nonneg.
+Print Assumptions v03_norm_sq_dilute.
+Print Assumptions v03_plus_opp_split.
+Print Assumptions v03_H2le.
+Print Assumptions v03_Wfold.
+Print Assumptions v03_H16pos.
+Print Assumptions v03_Hltau1pos.
+Print Assumptions v03_Hllpos.
+Print Assumptions v03_zeta_1line_vino.
+Print Assumptions v03_zeta_deriv_1line_vino.

@@ -1,0 +1,2098 @@
+{
+ "scan_time": "2026-11-08T14:35:54",
+ "tool": "gate4_comment_guard.py v2.1 EXT",
+ "length_cap": 30,
+ "principle": true,
+ "trees_ledger": [
+  {
+   "tree": "work_PR/C1",
+   "mode": "flat",
+   "files": 18,
+   "subdir_files": 0,
+   "subdirs": 1
+  },
+  {
+   "tree": "work_PR/C2",
+   "mode": "flat",
+   "files": 21,
+   "subdir_files": 0,
+   "subdirs": 1
+  },
+  {
+   "tree": "work_PR/C3",
+   "mode": "flat",
+   "files": 13,
+   "subdir_files": 0,
+   "subdirs": 1
+  }
+ ],
+ "deep_files": 0,
+ "results": [
+  {
+   "file": "work_C3_W3/GaC3_P05_CauchyFormula.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 47,
+    "证明体内": 1,
+    "子结构头注": 0,
+    "体内散块": 58
+   },
+   "families": {},
+   "proof_regions": 14,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_P05_CauchyFormula_b.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 46 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 46,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 45,
+    "证明体内": 4,
+    "子结构头注": 0,
+    "体内散块": 40
+   },
+   "families": {},
+   "proof_regions": 17,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_P05_CauchyFormula_c.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 45 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 45,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 44,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 39
+   },
+   "families": {},
+   "proof_regions": 11,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_V01_VdCSecond_b.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     270,
+     "体内散块",
+     "承认式词面",
+     "hypothesis"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 36 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 36,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 35,
+    "证明体内": 1,
+    "子结构头注": 0,
+    "体内散块": 22
+   },
+   "families": {
+    "承认式": 1
+   },
+   "proof_regions": 17,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_V02_BProcess.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 47,
+    "证明体内": 0,
+    "子结构头注": 2,
+    "体内散块": 30
+   },
+   "families": {},
+   "proof_regions": 10,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_V02_BProcess_a.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 38 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 38,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 13,
+    "子结构头注": 0,
+    "体内散块": 18
+   },
+   "families": {},
+   "proof_regions": 10,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_Z01_LogDerivSeries.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 47 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 47,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 46,
+    "证明体内": 5,
+    "子结构头注": 1,
+    "体内散块": 56
+   },
+   "families": {},
+   "proof_regions": 26,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_Z01_LogDerivSeries_cert.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 47,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 8
+   },
+   "families": {},
+   "proof_regions": 1,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_V03_VinoZeta.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 48,
+    "证明体内": 0,
+    "子结构头注": 2,
+    "体内散块": 60
+   },
+   "families": {},
+   "proof_regions": 11,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_C3_W3/GaC3_V03_VinoZeta_cert.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 41 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 41,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 1,
+    "子结构头注": 0,
+    "体内散块": 5
+   },
+   "families": {},
+   "proof_regions": 1,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/CxRealPairCore.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 39 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 39,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 5
+   },
+   "families": {},
+   "proof_regions": 28,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/CxRealPairExpLog.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 42 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 42,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 12
+   },
+   "families": {},
+   "proof_regions": 15,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/G1_PYTH.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 33 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 33,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 32,
+    "证明体内": 5,
+    "子结构头注": 4,
+    "体内散块": 9
+   },
+   "families": {},
+   "proof_regions": 4,
+   "struct_decls": 2,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_01_LogMono.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 39 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 39,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 0,
+    "子结构头注": 4,
+    "体内散块": 8
+   },
+   "families": {},
+   "proof_regions": 3,
+   "struct_decls": 2,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_02_LogPowBridge.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 36 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 36,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 35,
+    "证明体内": 0,
+    "子结构头注": 6,
+    "体内散块": 14
+   },
+   "families": {},
+   "proof_regions": 3,
+   "struct_decls": 3,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_03_LogTelescope.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 43 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 43,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 42,
+    "证明体内": 0,
+    "子结构头注": 10,
+    "体内散块": 17
+   },
+   "families": {},
+   "proof_regions": 9,
+   "struct_decls": 5,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_04_QRealBridge.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 38 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 38,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 1,
+    "子结构头注": 4,
+    "体内散块": 13
+   },
+   "families": {},
+   "proof_regions": 3,
+   "struct_decls": 2,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_05_RealPowRoot.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 42 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 42,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 4,
+    "子结构头注": 4,
+    "体内散块": 16
+   },
+   "families": {},
+   "proof_regions": 9,
+   "struct_decls": 3,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_06_RealPowOrder.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 38 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 38,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 6,
+    "子结构头注": 4,
+    "体内散块": 11
+   },
+   "families": {},
+   "proof_regions": 11,
+   "struct_decls": 3,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_14_SeriesCauchy.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 38 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 38,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 3,
+    "子结构头注": 7,
+    "体内散块": 25
+   },
+   "families": {},
+   "proof_regions": 11,
+   "struct_decls": 5,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_15_PowSeriesConv.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 46 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 46,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 45,
+    "证明体内": 1,
+    "子结构头注": 3,
+    "体内散块": 16
+   },
+   "families": {},
+   "proof_regions": 6,
+   "struct_decls": 3,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_16_CExpNorm.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     11,
+     "头注",
+     "承认式词面",
+     "hypothesis"
+    ],
+    [
+     14,
+     "头注",
+     "承认式词面",
+     "hypothesis"
+    ],
+    [
+     103,
+     "子结构头注",
+     "承认式词面",
+     "hypothesis"
+    ],
+    [
+     105,
+     "体内散块",
+     "承认式词面",
+     "hypothesis"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 41 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 41,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 40,
+    "证明体内": 2,
+    "子结构头注": 4,
+    "体内散块": 7
+   },
+   "families": {
+    "承认式": 4
+   },
+   "proof_regions": 2,
+   "struct_decls": 2,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_17_TwoPiPeriod.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 39 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 39,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 0,
+    "子结构头注": 2,
+    "体内散块": 15
+   },
+   "families": {},
+   "proof_regions": 14,
+   "struct_decls": 2,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_Iface_Cx.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 46 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 46,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 45,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 0
+   },
+   "families": {},
+   "proof_regions": 0,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_Iface_Real.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 41 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 41,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 0
+   },
+   "families": {},
+   "proof_regions": 0,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_RB01_RealLeB.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 32 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 32,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 31,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 2
+   },
+   "families": {},
+   "proof_regions": 0,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_RB02_RealLeToLeB.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 35 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 35,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 34,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 4
+   },
+   "families": {},
+   "proof_regions": 2,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C1/GaC1_RB03_LogLeLinearB.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 43 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 43,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 42,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 4
+   },
+   "families": {},
+   "proof_regions": 2,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/CxRealPairCore.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 39 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 39,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 5
+   },
+   "families": {},
+   "proof_regions": 28,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/CxRealPairExpLog.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 42 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 42,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 12
+   },
+   "families": {},
+   "proof_regions": 15,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_01_DirichletPartialSum.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 43 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 43,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 43,
+    "证明体内": 0,
+    "子结构头注": 4,
+    "体内散块": 23
+   },
+   "families": {},
+   "proof_regions": 17,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_01_DirichletPartialSum_cert.v",
+   "verdict": "PASS",
+   "hard": [],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 19,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 19,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 0
+   },
+   "families": {},
+   "proof_regions": 0,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_02_AbsConvTailBound.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 47 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 47,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 47,
+    "证明体内": 6,
+    "子结构头注": 0,
+    "体内散块": 7
+   },
+   "families": {},
+   "proof_regions": 3,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_02_AbsConvTailBound_a.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 37 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 37,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 5,
+    "子结构头注": 0,
+    "体内散块": 28
+   },
+   "families": {},
+   "proof_regions": 23,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_02_AbsConvTailBound_b.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 41 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 41,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 0,
+    "子结构头注": 1,
+    "体内散块": 16
+   },
+   "families": {},
+   "proof_regions": 15,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_02_AbsConvTailBound_c.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 35 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 35,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 35,
+    "证明体内": 2,
+    "子结构头注": 0,
+    "体内散块": 11
+   },
+   "families": {},
+   "proof_regions": 13,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_02_AbsConvTailBound_cert.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 46 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 46,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 46,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 0
+   },
+   "families": {},
+   "proof_regions": 1,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_FiniteEulerProduct.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 45 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 45,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 45,
+    "证明体内": 8,
+    "子结构头注": 1,
+    "体内散块": 36
+   },
+   "families": {},
+   "proof_regions": 13,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_FiniteEulerProduct_cert.v",
+   "verdict": "PASS",
+   "hard": [],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 28,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 28,
+    "证明体内": 10,
+    "子结构头注": 0,
+    "体内散块": 1
+   },
+   "families": {},
+   "proof_regions": 1,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_a.v",
+   "verdict": "PASS",
+   "hard": [],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 27,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 27,
+    "证明体内": 1,
+    "子结构头注": 0,
+    "体内散块": 23
+   },
+   "families": {},
+   "proof_regions": 13,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_b.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     309,
+     "体内散块",
+     "承认式词面",
+     "parameter"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 38 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 38,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 13,
+    "子结构头注": 0,
+    "体内散块": 50
+   },
+   "families": {
+    "承认式": 1
+   },
+   "proof_regions": 22,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_c_eq_shim.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 34 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 34,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 34,
+    "证明体内": 1,
+    "子结构头注": 0,
+    "体内散块": 11
+   },
+   "families": {},
+   "proof_regions": 8,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_d.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 34 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 34,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 34,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 22
+   },
+   "families": {},
+   "proof_regions": 8,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_d_probe.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 35 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 35,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 35,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 22
+   },
+   "families": {},
+   "proof_regions": 8,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_e.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 37 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 37,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 22
+   },
+   "families": {},
+   "proof_regions": 7,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_03_f.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 46 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 46,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 46,
+    "证明体内": 7,
+    "子结构头注": 1,
+    "体内散块": 48
+   },
+   "families": {},
+   "proof_regions": 15,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_04_EulerTailError.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 48,
+    "证明体内": 0,
+    "子结构头注": 1,
+    "体内散块": 29
+   },
+   "families": {},
+   "proof_regions": 7,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_05_EulerLimitAsm.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     216,
+     "体内散块",
+     "承认式词面",
+     "hypothesis"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 48,
+    "证明体内": 3,
+    "子结构头注": 0,
+    "体内散块": 22
+   },
+   "families": {
+    "承认式": 1
+   },
+   "proof_regions": 5,
+   "struct_decls": 1,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C2/GaC2_Iface_DS.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 51 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 51,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 50,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 43
+   },
+   "families": {},
+   "proof_regions": 0,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/CxRealPairCore.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 39 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 39,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 5
+   },
+   "families": {},
+   "proof_regions": 28,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/CxRealPairExpLog.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 42 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 42,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 12
+   },
+   "families": {},
+   "proof_regions": 15,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P01_LineIntegralDef.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     265,
+     "体内散块",
+     "承认式词面",
+     "hypothesis"
+    ],
+    [
+     31,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ],
+    [
+     37,
+     "头注",
+     "日期戳",
+     "2024-05-05"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 48 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 48,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 48,
+    "证明体内": 7,
+    "子结构头注": 0,
+    "体内散块": 51
+   },
+   "families": {
+    "承认式": 1,
+    "过程叙述族": 2
+   },
+   "proof_regions": 18,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P02_LineIntegralAlg.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     21,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 37 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 37,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 37,
+    "证明体内": 3,
+    "子结构头注": 0,
+    "体内散块": 38
+   },
+   "families": {
+    "过程叙述族": 1
+   },
+   "proof_regions": 16,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P02_LineIntegralAlg_b.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     18,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ]
+   ],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 30,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 30,
+    "证明体内": 2,
+    "子结构头注": 0,
+    "体内散块": 9
+   },
+   "families": {
+    "过程叙述族": 1
+   },
+   "proof_regions": 5,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P03_MLEstimate.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     25,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 41 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 41,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 4,
+    "子结构头注": 0,
+    "体内散块": 26
+   },
+   "families": {
+    "过程叙述族": 1
+   },
+   "proof_regions": 13,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P03_MLEstimate_cert.v",
+   "verdict": "PASS",
+   "hard": [],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 21,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 21,
+    "证明体内": 2,
+    "子结构头注": 0,
+    "体内散块": 1
+   },
+   "families": {},
+   "proof_regions": 1,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P04_CauchyRect.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     28,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 47 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 47,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 47,
+    "证明体内": 5,
+    "子结构头注": 0,
+    "体内散块": 39
+   },
+   "families": {
+    "过程叙述族": 1
+   },
+   "proof_regions": 4,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P04_CauchyRect_cert.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     19,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ]
+   ],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 30,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 30,
+    "证明体内": 12,
+    "子结构头注": 0,
+    "体内散块": 6
+   },
+   "families": {
+    "过程叙述族": 1
+   },
+   "proof_regions": 1,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P04_CauchyRect_probe.v",
+   "verdict": "FAIL",
+   "hard": [
+    [
+     26,
+     "头注",
+     "日期戳",
+     "2026-06-17"
+    ]
+   ],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 41 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 41,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 41,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 27
+   },
+   "families": {
+    "过程叙述族": 1
+   },
+   "proof_regions": 3,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_P07_PowerGrowth.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 32 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 32,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 32,
+    "证明体内": 3,
+    "子结构头注": 0,
+    "体内散块": 15
+   },
+   "families": {},
+   "proof_regions": 4,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_V01_VdCSecond_a.v",
+   "verdict": "PASS",
+   "hard": [],
+   "review": [],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 25,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 25,
+    "证明体内": 0,
+    "子结构头注": 0,
+    "体内散块": 18
+   },
+   "families": {},
+   "proof_regions": 25,
+   "struct_decls": 0,
+   "principle": true
+  },
+  {
+   "file": "work_PR/C3/GaC3_Z02_ThreeCosine.v",
+   "verdict": "REVIEW",
+   "hard": [],
+   "review": [
+    [
+     1,
+     "头注",
+     "头注超标",
+     "头注 38 行 > 上限 30"
+    ]
+   ],
+   "header_fields": [
+    "使命",
+    "依赖",
+    "对标",
+    "构造性",
+    "编译"
+   ],
+   "header_lines": 38,
+   "header_first_at_1": true,
+   "domains": {
+    "头注": 38,
+    "证明体内": 4,
+    "子结构头注": 0,
+    "体内散块": 20
+   },
+   "families": {},
+   "proof_regions": 7,
+   "struct_decls": 0,
+   "principle": true
+  }
+ ],
+ "baseline": null
+}

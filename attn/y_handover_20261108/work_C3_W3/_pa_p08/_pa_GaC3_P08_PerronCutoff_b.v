@@ -1,0 +1,10 @@
+Require Import GaC3_P08_PerronCutoff_b.
+Print Assumptions GaC3_P08_pw.
+Print Assumptions GaC3_P08_perron_sum.
+Print Assumptions GaC3_P08_pw_le.
+Print Assumptions GaC3_P08_perron_sum_le.
+Print Assumptions GaC3_P08_le_plus_r.
+Print Assumptions GaC3_P08_mansum_mono.
+Print Assumptions GaC3_P08_psi_half.
+Print Assumptions GaC3_P08_psi_half_sandwich.
+Print Assumptions GaC3_P08_vline_ml.

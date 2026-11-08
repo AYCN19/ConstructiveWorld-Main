@@ -1,0 +1,10 @@
+W3cast/GaC3_P05_CauchyFormula.v CJK=0 md5=dcc97fcbc70dbff91640bad8bccc3e51
+W3cast/GaC3_P05_CauchyFormula_b.v CJK=0 md5=05c5bd75c820d77df799b8878a4a1e19
+W3cast/GaC3_P05_CauchyFormula_c.v CJK=0 md5=f53a8d2eb3defdb8cfbdd2a2d5f2f343
+W3cast/GaC3_V01_VdCSecond_b.v CJK=0 md5=d84127d70c3bf1901f9ae67a3aef0900
+W3cast/GaC3_V02_BProcess.v CJK=0 md5=b68307dc07ba55e95281cb0b310c40a4
+W3cast/GaC3_V02_BProcess_a.v CJK=0 md5=d0034f38e35b52d3f8d59fc33f0262a4
+W3cast/GaC3_Z01_LogDerivSeries.v CJK=0 md5=8cae39d3b88a27e7d40b79a2cc9a99a9
+W3cast/GaC3_Z01_LogDerivSeries_cert.v CJK=0 md5=aaf3da3e99a238b614d30d52288489ad
+W3cast/GaC3_V03_VinoZeta.v CJK=0 md5=cd563d96df46015c8222aa79097f8415
+W3cast/GaC3_V03_VinoZeta_cert.v CJK=0 md5=8805fafc7772089286640292f0a8add8

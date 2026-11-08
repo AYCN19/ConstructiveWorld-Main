@@ -1,0 +1,5 @@
+DIGEST 20039d889c5392965bff0dd63612f54d
+F_pa._pa_GaC3_V03_VinoZeta_cert
+R15:36 GaC3_V03_VinoZeta_cert <> <> lib
+R57:73 GaC3_V03_VinoZeta_cert <> v03_cert_all_true thm
+R94:109 GaC3_V03_VinoZeta_cert <> v03_cert_true_eq thm

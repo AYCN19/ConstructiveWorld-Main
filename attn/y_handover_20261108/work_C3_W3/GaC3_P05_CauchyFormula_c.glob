@@ -1,0 +1,970 @@
+DIGEST f53a8d2eb3defdb8cfbdd2a2d5f2f343
+FGaC3_P05_CauchyFormula_c
+R2667:2679 Stdlib.QArith.QArith <> <> lib
+R2681:2691 Stdlib.QArith.Qabs <> <> lib
+R2693:2704 Stdlib.QArith.Qring <> <> lib
+R2734:2737 Stdlib.Lists.List <> <> lib
+R2755:2766 S01_BaseRing <> <> lib
+R2784:2801 S02_CauchyComplete <> <> lib
+R2819:2832 CxRealPairCore <> <> lib
+R2850:2873 GaC3_P01_LineIntegralDef <> <> lib
+R2891:2914 GaC3_P02_LineIntegralAlg <> <> lib
+R2932:2950 GaC3_P03_MLEstimate <> <> lib
+R2968:2986 GaC3_P04_CauchyRect <> <> lib
+R3004:3025 GaC3_P05_CauchyFormula <> <> lib
+R3043:3066 GaC3_P05_CauchyFormula_b <> <> lib
+R3103:3115 Stdlib.Lists.List ListNotations <> mod
+prf 3506:3529 <> GaC3_P05_val_bounded_abs
+R3546:3548 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3545:3545 Stdlib.QArith.QArith_base <> Q rec
+R3549:3549 Stdlib.QArith.QArith_base <> Q rec
+binder 3541:3541 <> v:1
+R3557:3557 Stdlib.QArith.QArith_base <> Q rec
+binder 3553:3553 <> B:2
+R3580:3583 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R3575:3578 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R3563:3566 Stdlib.QArith.Qabs <> Qabs def
+R3569:3571 Corelib.Init.Datatypes <> fst def
+R3573:3573 GaC3_P05_CauchyFormula_c <> v:1 var
+R3579:3579 GaC3_P05_CauchyFormula_c <> B:2 var
+R3601:3604 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R3596:3599 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R3584:3587 Stdlib.QArith.Qabs <> Qabs def
+R3590:3592 Corelib.Init.Datatypes <> snd def
+R3594:3594 GaC3_P05_CauchyFormula_c <> v:1 var
+R3600:3600 GaC3_P05_CauchyFormula_c <> B:2 var
+R3605:3624 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R3626:3626 GaC3_P05_CauchyFormula_c <> v:1 var
+R3628:3628 GaC3_P05_CauchyFormula_c <> B:2 var
+R3707:3718 S02_CauchyComplete <> Qle_to_QleT' thm
+R3728:3732 Corelib.Init.Logic <> proj1 thm
+R3735:3739 Corelib.Init.Logic <> proj1 thm
+R3742:3759 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R3783:3794 S02_CauchyComplete <> Qle_to_QleT' thm
+R3804:3808 Corelib.Init.Logic <> proj2 thm
+R3811:3815 Corelib.Init.Logic <> proj1 thm
+R3818:3835 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R3859:3870 S02_CauchyComplete <> Qle_to_QleT' thm
+R3880:3884 Corelib.Init.Logic <> proj1 thm
+R3887:3891 Corelib.Init.Logic <> proj1 thm
+R3894:3911 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R3935:3946 S02_CauchyComplete <> Qle_to_QleT' thm
+R3956:3960 Corelib.Init.Logic <> proj2 thm
+R3963:3967 Corelib.Init.Logic <> proj1 thm
+R3970:3987 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+prf 4201:4225 <> GaC3_P05_qmul_abs_bounded
+R4244:4246 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4243:4243 Stdlib.QArith.QArith_base <> Q rec
+R4247:4247 Stdlib.QArith.QArith_base <> Q rec
+binder 4237:4237 <> f:3
+binder 4239:4239 <> k:4
+R4257:4257 Stdlib.QArith.QArith_base <> Q rec
+binder 4251:4251 <> M:5
+binder 4253:4253 <> K:6
+R4272:4275 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4263:4267 S02_CauchyComplete <> QleT' def
+R4271:4271 GaC3_P05_CauchyFormula_c <> M:5 var
+R4285:4290 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4276:4280 S02_CauchyComplete <> QleT' def
+R4284:4284 GaC3_P05_CauchyFormula_c <> K:6 var
+R4315:4318 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4291:4310 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R4312:4312 GaC3_P05_CauchyFormula_c <> f:3 var
+R4314:4314 GaC3_P05_CauchyFormula_c <> M:5 var
+R4343:4348 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4319:4338 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R4340:4340 GaC3_P05_CauchyFormula_c <> k:4 var
+R4342:4342 GaC3_P05_CauchyFormula_c <> K:6 var
+R4392:4397 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R4379:4382 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R4349:4352 Stdlib.QArith.Qabs <> Qabs def
+R4355:4357 Corelib.Init.Datatypes <> fst def
+R4360:4372 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R4374:4374 GaC3_P05_CauchyFormula_c <> f:3 var
+R4376:4376 GaC3_P05_CauchyFormula_c <> k:4 var
+R4388:4390 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R4384:4386 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R4387:4387 GaC3_P05_CauchyFormula_c <> M:5 var
+R4391:4391 GaC3_P05_CauchyFormula_c <> K:6 var
+R4428:4431 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R4398:4401 Stdlib.QArith.Qabs <> Qabs def
+R4404:4406 Corelib.Init.Datatypes <> snd def
+R4409:4421 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R4423:4423 GaC3_P05_CauchyFormula_c <> f:3 var
+R4425:4425 GaC3_P05_CauchyFormula_c <> k:4 var
+R4437:4439 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R4433:4435 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R4436:4436 GaC3_P05_CauchyFormula_c <> M:5 var
+R4440:4440 GaC3_P05_CauchyFormula_c <> K:6 var
+R4494:4517 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded_Qle thm
+R4549:4572 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded_Qle thm
+R4700:4703 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R4688:4691 Stdlib.QArith.Qabs <> Qabs def
+R4694:4696 Corelib.Init.Datatypes <> fst def
+R4719:4723 Corelib.Init.Logic <> proj2 thm
+R4726:4743 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R4746:4748 Corelib.Init.Datatypes <> fst def
+R4826:4829 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R4814:4817 Stdlib.QArith.Qabs <> Qabs def
+R4820:4822 Corelib.Init.Datatypes <> snd def
+R4845:4849 Corelib.Init.Logic <> proj2 thm
+R4852:4869 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R4872:4874 Corelib.Init.Datatypes <> snd def
+R4952:4955 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R4940:4943 Stdlib.QArith.Qabs <> Qabs def
+R4946:4948 Corelib.Init.Datatypes <> fst def
+R4971:4975 Corelib.Init.Logic <> proj2 thm
+R4978:4995 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R4998:5000 Corelib.Init.Datatypes <> fst def
+R5078:5081 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R5066:5069 Stdlib.QArith.Qabs <> Qabs def
+R5072:5074 Corelib.Init.Datatypes <> snd def
+R5097:5101 Corelib.Init.Logic <> proj2 thm
+R5104:5121 Stdlib.QArith.Qabs <> Qabs_Qle_condition thm
+R5124:5126 Corelib.Init.Datatypes <> snd def
+R5193:5196 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R5210:5221 S02_CauchyComplete <> QleT'_to_Qle thm
+R5252:5255 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R5269:5280 S02_CauchyComplete <> QleT'_to_Qle thm
+R5312:5324 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R5326:5328 Corelib.Init.Datatypes <> fst def
+R5330:5332 Corelib.Init.Datatypes <> snd def
+R5343:5348 Stdlib.QArith.QArith_base <> Qminus def
+R5362:5370 Stdlib.QArith.QArith_base <> Qle_trans thm
+R5395:5397 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R5375:5378 Stdlib.QArith.Qabs <> Qabs def
+R5386:5388 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5381:5383 Corelib.Init.Datatypes <> fst def
+R5389:5391 Corelib.Init.Datatypes <> fst def
+R5398:5401 Stdlib.QArith.Qabs <> Qabs def
+R5404:5406 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R5420:5420 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R5412:5414 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5407:5409 Corelib.Init.Datatypes <> snd def
+R5415:5417 Corelib.Init.Datatypes <> snd def
+R5438:5450 Stdlib.QArith.Qabs <> Qabs_triangle thm
+R5468:5477 Stdlib.QArith.Qabs <> Qabs_Qmult thm
+R5480:5482 Corelib.Init.Datatypes <> fst def
+R5488:5490 Corelib.Init.Datatypes <> fst def
+R5497:5504 Stdlib.QArith.Qabs <> Qabs_opp thm
+R5522:5531 Stdlib.QArith.Qabs <> Qabs_Qmult thm
+R5534:5536 Corelib.Init.Datatypes <> snd def
+R5542:5544 Corelib.Init.Datatypes <> snd def
+R5564:5572 Stdlib.QArith.QArith_base <> Qle_trans thm
+R5582:5584 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R5578:5580 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5586:5588 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5608:5622 Stdlib.QArith.QArith_base <> Qplus_le_compat thm
+R5643:5651 Stdlib.QArith.QArith_base <> Qle_trans thm
+R5668:5670 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5656:5659 Stdlib.QArith.Qabs <> Qabs def
+R5662:5664 Corelib.Init.Datatypes <> fst def
+R5699:5708 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R5711:5714 Stdlib.QArith.Qabs <> Qabs def
+R5717:5719 Corelib.Init.Datatypes <> fst def
+R5726:5729 Stdlib.QArith.Qabs <> Qabs def
+R5732:5734 Corelib.Init.Datatypes <> fst def
+R5765:5774 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R5777:5780 Stdlib.QArith.Qabs <> Qabs def
+R5783:5785 Corelib.Init.Datatypes <> fst def
+R5816:5832 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R5835:5838 Stdlib.QArith.Qabs <> Qabs def
+R5841:5843 Corelib.Init.Datatypes <> fst def
+R5852:5855 Stdlib.QArith.Qabs <> Qabs def
+R5858:5860 Corelib.Init.Datatypes <> fst def
+R5894:5904 Stdlib.QArith.Qabs <> Qabs_nonneg thm
+R5907:5909 Corelib.Init.Datatypes <> fst def
+R5938:5954 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R5957:5960 Stdlib.QArith.Qabs <> Qabs def
+R5963:5965 Corelib.Init.Datatypes <> fst def
+R6003:6011 Stdlib.QArith.QArith_base <> Qle_trans thm
+R6028:6030 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R6016:6019 Stdlib.QArith.Qabs <> Qabs def
+R6022:6024 Corelib.Init.Datatypes <> snd def
+R6059:6068 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R6071:6074 Stdlib.QArith.Qabs <> Qabs def
+R6077:6079 Corelib.Init.Datatypes <> snd def
+R6086:6089 Stdlib.QArith.Qabs <> Qabs def
+R6092:6094 Corelib.Init.Datatypes <> snd def
+R6125:6134 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R6137:6140 Stdlib.QArith.Qabs <> Qabs def
+R6143:6145 Corelib.Init.Datatypes <> snd def
+R6176:6192 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R6195:6198 Stdlib.QArith.Qabs <> Qabs def
+R6201:6203 Corelib.Init.Datatypes <> snd def
+R6212:6215 Stdlib.QArith.Qabs <> Qabs def
+R6218:6220 Corelib.Init.Datatypes <> snd def
+R6254:6264 Stdlib.QArith.Qabs <> Qabs_nonneg thm
+R6267:6269 Corelib.Init.Datatypes <> snd def
+R6298:6314 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R6317:6320 Stdlib.QArith.Qabs <> Qabs def
+R6323:6325 Corelib.Init.Datatypes <> snd def
+R6359:6364 S02_CauchyComplete <> qeq_le thm
+R6382:6394 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R6396:6398 Corelib.Init.Datatypes <> fst def
+R6400:6402 Corelib.Init.Datatypes <> snd def
+R6413:6418 Stdlib.QArith.QArith_base <> Qminus def
+R6432:6440 Stdlib.QArith.QArith_base <> Qle_trans thm
+R6465:6467 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R6445:6448 Stdlib.QArith.Qabs <> Qabs def
+R6456:6458 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R6451:6453 Corelib.Init.Datatypes <> fst def
+R6459:6461 Corelib.Init.Datatypes <> snd def
+R6468:6471 Stdlib.QArith.Qabs <> Qabs def
+R6479:6481 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R6474:6476 Corelib.Init.Datatypes <> snd def
+R6482:6484 Corelib.Init.Datatypes <> fst def
+R6504:6516 Stdlib.QArith.Qabs <> Qabs_triangle thm
+R6534:6543 Stdlib.QArith.Qabs <> Qabs_Qmult thm
+R6546:6548 Corelib.Init.Datatypes <> snd def
+R6554:6556 Corelib.Init.Datatypes <> fst def
+R6564:6573 Stdlib.QArith.Qabs <> Qabs_Qmult thm
+R6576:6578 Corelib.Init.Datatypes <> fst def
+R6584:6586 Corelib.Init.Datatypes <> snd def
+R6606:6614 Stdlib.QArith.QArith_base <> Qle_trans thm
+R6624:6626 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R6620:6622 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R6628:6630 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R6650:6664 Stdlib.QArith.QArith_base <> Qplus_le_compat thm
+R6685:6693 Stdlib.QArith.QArith_base <> Qle_trans thm
+R6710:6712 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R6698:6701 Stdlib.QArith.Qabs <> Qabs def
+R6704:6706 Corelib.Init.Datatypes <> fst def
+R6741:6750 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R6753:6756 Stdlib.QArith.Qabs <> Qabs def
+R6759:6761 Corelib.Init.Datatypes <> fst def
+R6768:6771 Stdlib.QArith.Qabs <> Qabs def
+R6774:6776 Corelib.Init.Datatypes <> snd def
+R6807:6816 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R6819:6822 Stdlib.QArith.Qabs <> Qabs def
+R6825:6827 Corelib.Init.Datatypes <> fst def
+R6858:6874 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R6877:6880 Stdlib.QArith.Qabs <> Qabs def
+R6883:6885 Corelib.Init.Datatypes <> snd def
+R6894:6897 Stdlib.QArith.Qabs <> Qabs def
+R6900:6902 Corelib.Init.Datatypes <> fst def
+R6936:6946 Stdlib.QArith.Qabs <> Qabs_nonneg thm
+R6949:6951 Corelib.Init.Datatypes <> fst def
+R6980:6996 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R6999:7002 Stdlib.QArith.Qabs <> Qabs def
+R7005:7007 Corelib.Init.Datatypes <> fst def
+R7045:7053 Stdlib.QArith.QArith_base <> Qle_trans thm
+R7070:7072 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R7058:7061 Stdlib.QArith.Qabs <> Qabs def
+R7064:7066 Corelib.Init.Datatypes <> snd def
+R7101:7110 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R7113:7116 Stdlib.QArith.Qabs <> Qabs def
+R7119:7121 Corelib.Init.Datatypes <> snd def
+R7128:7131 Stdlib.QArith.Qabs <> Qabs def
+R7134:7136 Corelib.Init.Datatypes <> fst def
+R7167:7176 Stdlib.QArith.QArith_base <> Qmult_comm thm
+R7179:7182 Stdlib.QArith.Qabs <> Qabs def
+R7185:7187 Corelib.Init.Datatypes <> snd def
+R7218:7234 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R7237:7240 Stdlib.QArith.Qabs <> Qabs def
+R7243:7245 Corelib.Init.Datatypes <> fst def
+R7254:7257 Stdlib.QArith.Qabs <> Qabs def
+R7260:7262 Corelib.Init.Datatypes <> snd def
+R7296:7306 Stdlib.QArith.Qabs <> Qabs_nonneg thm
+R7309:7311 Corelib.Init.Datatypes <> snd def
+R7340:7356 Stdlib.QArith.QArith_base <> Qmult_le_compat_r thm
+R7359:7362 Stdlib.QArith.Qabs <> Qabs def
+R7365:7367 Corelib.Init.Datatypes <> snd def
+R7401:7406 S02_CauchyComplete <> qeq_le thm
+def 7790:7802 <> GaC3_P05_vzip
+R7813:7816 Corelib.Init.Datatypes <> list ind
+R7820:7822 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R7819:7819 Stdlib.QArith.QArith_base <> Q rec
+R7823:7823 Stdlib.QArith.QArith_base <> Q rec
+binder 7805:7806 <> fs:7
+binder 7808:7809 <> ks:8
+R7829:7832 Corelib.Init.Datatypes <> list ind
+R7836:7838 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R7835:7835 Stdlib.QArith.QArith_base <> Q rec
+R7839:7839 Stdlib.QArith.QArith_base <> Q rec
+R7857:7858 GaC3_P05_CauchyFormula_c <> ks:8 var
+R7853:7854 GaC3_P05_CauchyFormula_c <> fs:7 var
+R7870:7873 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7880:7883 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7908:7911 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7891:7903 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R7912:7924 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip:9 def
+R7946:7948 Corelib.Init.Datatypes <> nil constr
+def 8022:8038 <> GaC3_P05_pair_eqb
+R8048:8050 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R8047:8047 Stdlib.QArith.QArith_base <> Q rec
+R8051:8051 Stdlib.QArith.QArith_base <> Q rec
+binder 8041:8041 <> u:12
+binder 8043:8043 <> v:13
+R8056:8059 Corelib.Init.Datatypes <> bool ind
+R8066:8069 Corelib.Init.Datatypes <> andb def
+R8099:8106 Stdlib.QArith.QArith_base <> Qeq_bool def
+R8109:8111 Corelib.Init.Datatypes <> snd def
+R8113:8113 GaC3_P05_CauchyFormula_c <> u:12 var
+R8117:8119 Corelib.Init.Datatypes <> snd def
+R8121:8121 GaC3_P05_CauchyFormula_c <> v:13 var
+R8072:8079 Stdlib.QArith.QArith_base <> Qeq_bool def
+R8082:8084 Corelib.Init.Datatypes <> fst def
+R8086:8086 GaC3_P05_CauchyFormula_c <> u:12 var
+R8090:8092 Corelib.Init.Datatypes <> fst def
+R8094:8094 GaC3_P05_CauchyFormula_c <> v:13 var
+prf 8133:8159 <> GaC3_P05_pair_eqb_refl_true
+R8175:8177 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R8174:8174 Stdlib.QArith.QArith_base <> Q rec
+R8178:8178 Stdlib.QArith.QArith_base <> Q rec
+binder 8170:8170 <> u:14
+R8204:8206 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8183:8199 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R8201:8201 GaC3_P05_CauchyFormula_c <> u:14 var
+R8203:8203 GaC3_P05_CauchyFormula_c <> u:14 var
+R8207:8210 Corelib.Init.Datatypes <> true constr
+R8238:8254 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R8283:8283 Stdlib.QArith.QArith_base <> Q rec
+binder 8279:8279 <> x:15
+R8298:8300 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8286:8293 Stdlib.QArith.QArith_base <> Qeq_bool def
+R8295:8295 GaC3_P05_CauchyFormula_c <> x:15 var
+R8297:8297 GaC3_P05_CauchyFormula_c <> x:15 var
+R8301:8304 Corelib.Init.Datatypes <> true constr
+binder 8279:8279 <> x:16
+R8295:8295 GaC3_P05_CauchyFormula_c <> x:16 var
+R8297:8297 GaC3_P05_CauchyFormula_c <> x:16 var
+R8328:8335 Stdlib.QArith.QArith_base <> Qeq_bool def
+R8344:8353 Stdlib.ZArith.BinInt Z eqb_refl thm
+R8373:8375 Corelib.Init.Datatypes <> fst def
+R8387:8389 Corelib.Init.Datatypes <> snd def
+prf 8490:8511 <> GaC3_P05_pair_eqb_true
+R8529:8531 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R8528:8528 Stdlib.QArith.QArith_base <> Q rec
+R8532:8532 Stdlib.QArith.QArith_base <> Q rec
+binder 8522:8522 <> u:17
+binder 8524:8524 <> v:18
+R8565:8568 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R8558:8560 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8537:8553 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R8555:8555 GaC3_P05_CauchyFormula_c <> u:17 var
+R8557:8557 GaC3_P05_CauchyFormula_c <> v:18 var
+R8561:8564 Corelib.Init.Datatypes <> true constr
+R8569:8580 GaC3_P05_CauchyFormula <> GaC3_P05_veq def
+R8582:8582 GaC3_P05_CauchyFormula_c <> u:17 var
+R8584:8584 GaC3_P05_CauchyFormula_c <> v:18 var
+R8625:8641 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R8656:8658 Corelib.Init.Datatypes <> fst def
+R8660:8662 Corelib.Init.Datatypes <> snd def
+R8683:8690 Stdlib.QArith.QArith_base <> Qeq_bool def
+R8715:8722 Stdlib.QArith.QArith_base <> Qeq_bool def
+R8769:8786 GaC3_P05_CauchyFormula <> GaC3_P05_veq_intro thm
+R8795:8805 Stdlib.QArith.QArith_base <> Qeq_bool_eq thm
+def 9096:9113 <> GaC3_P05_fk_lookup
+R9122:9125 Corelib.Init.Datatypes <> list ind
+R9129:9131 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9128:9128 Stdlib.QArith.QArith_base <> Q rec
+R9132:9132 Stdlib.QArith.QArith_base <> Q rec
+binder 9116:9118 <> fvs:19
+R9156:9159 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R9143:9155 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+R9161:9163 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9160:9160 Stdlib.QArith.QArith_base <> Q rec
+R9164:9164 Stdlib.QArith.QArith_base <> Q rec
+binder 9139:9139 <> g:20
+R9173:9186 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 9168:9169 <> ps:21
+R9195:9197 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9194:9194 Stdlib.QArith.QArith_base <> Q rec
+R9198:9198 Stdlib.QArith.QArith_base <> Q rec
+binder 9190:9190 <> v:22
+R9205:9210 Corelib.Init.Datatypes <> option ind
+R9213:9213 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9219:9223 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9229:9229 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9215:9217 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9214:9214 Stdlib.QArith.QArith_base <> Q rec
+R9218:9218 Stdlib.QArith.QArith_base <> Q rec
+R9225:9227 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9224:9224 Stdlib.QArith.QArith_base <> Q rec
+R9228:9228 Stdlib.QArith.QArith_base <> Q rec
+R9243:9245 GaC3_P05_CauchyFormula_c <> fvs:19 var
+R9256:9258 Corelib.Init.Datatypes <> nil constr
+R9263:9266 Corelib.Init.Datatypes <> None constr
+R9273:9276 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9296:9297 GaC3_P05_CauchyFormula_c <> ps:21 var
+R9312:9314 Corelib.Init.Datatypes <> nil constr
+R9319:9322 Corelib.Init.Datatypes <> None constr
+R9333:9336 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9357:9373 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R9375:9375 GaC3_P05_CauchyFormula_c <> v:22 var
+R9378:9390 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R9395:9395 GaC3_P05_CauchyFormula_c <> g:20 var
+R9435:9452 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup:23 def
+R9464:9464 GaC3_P05_CauchyFormula_c <> v:22 var
+R9458:9458 GaC3_P05_CauchyFormula_c <> g:20 var
+R9416:9419 Corelib.Init.Datatypes <> Some constr
+R9421:9421 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9423:9424 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9428:9428 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9425:9425 GaC3_P05_CauchyFormula_c <> g:20 var
+prf 9602:9624 <> GaC3_P05_fk_lookup_spec
+R9642:9645 Corelib.Init.Datatypes <> list ind
+R9649:9651 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9648:9648 Stdlib.QArith.QArith_base <> Q rec
+R9652:9652 Stdlib.QArith.QArith_base <> Q rec
+binder 9636:9638 <> fvs:26
+R9676:9679 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R9663:9675 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+R9681:9683 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9680:9680 Stdlib.QArith.QArith_base <> Q rec
+R9684:9684 Stdlib.QArith.QArith_base <> Q rec
+binder 9659:9659 <> g:27
+R9693:9706 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 9688:9689 <> ps:28
+R9721:9723 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9720:9720 Stdlib.QArith.QArith_base <> Q rec
+R9724:9724 Stdlib.QArith.QArith_base <> Q rec
+binder 9710:9710 <> v:29
+binder 9712:9713 <> f':30
+binder 9715:9716 <> w':31
+R9775:9780 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R9759:9761 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R9730:9747 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R9749:9751 GaC3_P05_CauchyFormula_c <> fvs:26 var
+R9753:9753 GaC3_P05_CauchyFormula_c <> g:27 var
+R9755:9756 GaC3_P05_CauchyFormula_c <> ps:28 var
+R9758:9758 GaC3_P05_CauchyFormula_c <> v:29 var
+R9762:9765 Corelib.Init.Datatypes <> Some constr
+R9767:9767 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9770:9771 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9774:9774 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R9768:9769 GaC3_P05_CauchyFormula_c <> f':30 var
+R9772:9773 GaC3_P05_CauchyFormula_c <> w':31 var
+R9781:9792 GaC3_P05_CauchyFormula <> GaC3_P05_veq def
+R9794:9794 GaC3_P05_CauchyFormula_c <> v:29 var
+R9797:9809 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R9811:9812 GaC3_P05_CauchyFormula_c <> f':30 var
+R9814:9815 GaC3_P05_CauchyFormula_c <> w':31 var
+R9977:9994 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R10019:10035 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R10040:10052 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R10107:10128 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb_true thm
+prf 10258:10279 <> GaC3_P05_fk_lookup_fst
+R10297:10300 Corelib.Init.Datatypes <> list ind
+R10304:10306 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10303:10303 Stdlib.QArith.QArith_base <> Q rec
+R10307:10307 Stdlib.QArith.QArith_base <> Q rec
+binder 10291:10293 <> fvs:32
+R10331:10334 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10318:10330 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+R10336:10338 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10335:10335 Stdlib.QArith.QArith_base <> Q rec
+R10339:10339 Stdlib.QArith.QArith_base <> Q rec
+binder 10314:10314 <> g:33
+R10348:10361 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 10343:10344 <> ps:34
+R10376:10378 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10375:10375 Stdlib.QArith.QArith_base <> Q rec
+R10379:10379 Stdlib.QArith.QArith_base <> Q rec
+binder 10365:10365 <> v:35
+binder 10367:10368 <> f':36
+binder 10370:10371 <> w':37
+R10430:10433 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10414:10416 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R10385:10402 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R10404:10406 GaC3_P05_CauchyFormula_c <> fvs:32 var
+R10408:10408 GaC3_P05_CauchyFormula_c <> g:33 var
+R10410:10411 GaC3_P05_CauchyFormula_c <> ps:34 var
+R10413:10413 GaC3_P05_CauchyFormula_c <> v:35 var
+R10417:10420 Corelib.Init.Datatypes <> Some constr
+R10422:10422 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10425:10426 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10429:10429 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R10423:10424 GaC3_P05_CauchyFormula_c <> f':36 var
+R10427:10428 GaC3_P05_CauchyFormula_c <> w':37 var
+R10434:10435 Stdlib.Lists.List <> In def
+R10440:10442 GaC3_P05_CauchyFormula_c <> fvs:32 var
+R10437:10438 GaC3_P05_CauchyFormula_c <> f':36 var
+R10603:10620 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R10645:10661 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R10666:10678 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R10732:10736 Stdlib.Lists.List <> in_eq thm
+R10753:10759 Stdlib.Lists.List <> in_cons thm
+prf 10872:10894 <> GaC3_P05_fk_lookup_none
+R10912:10915 Corelib.Init.Datatypes <> list ind
+R10919:10921 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10918:10918 Stdlib.QArith.QArith_base <> Q rec
+R10922:10922 Stdlib.QArith.QArith_base <> Q rec
+binder 10906:10908 <> fvs:38
+R10946:10949 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10933:10945 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+R10951:10953 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10950:10950 Stdlib.QArith.QArith_base <> Q rec
+R10954:10954 Stdlib.QArith.QArith_base <> Q rec
+binder 10929:10929 <> g:39
+R10963:10976 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 10958:10959 <> ps:40
+R10985:10987 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10984:10984 Stdlib.QArith.QArith_base <> Q rec
+R10988:10988 Stdlib.QArith.QArith_base <> Q rec
+binder 10980:10980 <> v:41
+R11030:11035 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R11023:11025 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R10994:11011 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R11013:11015 GaC3_P05_CauchyFormula_c <> fvs:38 var
+R11017:11017 GaC3_P05_CauchyFormula_c <> g:39 var
+R11019:11020 GaC3_P05_CauchyFormula_c <> ps:40 var
+R11022:11022 GaC3_P05_CauchyFormula_c <> v:41 var
+R11026:11029 Corelib.Init.Datatypes <> None constr
+R11036:11037 Corelib.Init.Logic <> ::type_scope:'~'_x not
+R11038:11039 Stdlib.Lists.List <> In def
+R11044:11056 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R11058:11060 GaC3_P05_CauchyFormula_c <> fvs:38 var
+R11063:11065 Corelib.Lists.ListDef <> map def
+R11069:11070 GaC3_P05_CauchyFormula_c <> ps:40 var
+R11067:11067 GaC3_P05_CauchyFormula_c <> g:39 var
+R11041:11041 GaC3_P05_CauchyFormula_c <> v:41 var
+R11157:11169 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R11171:11173 Corelib.Lists.ListDef <> map def
+R11175:11176 Stdlib.Lists.List <> In def
+R11242:11254 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R11256:11258 Corelib.Lists.ListDef <> map def
+R11260:11261 Stdlib.Lists.List <> In def
+R11297:11314 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R11334:11346 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R11348:11350 Corelib.Lists.ListDef <> map def
+R11352:11353 Stdlib.Lists.List <> In def
+R11437:11463 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb_refl_true thm
+R11466:11478 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R11550:11566 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R11571:11583 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+prf 11847:11872 <> GaC3_P05_fk_lookup_bounded
+R11889:11902 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 11884:11885 <> ps:42
+R11925:11928 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R11912:11924 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+R11930:11932 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11929:11929 Stdlib.QArith.QArith_base <> Q rec
+R11933:11933 Stdlib.QArith.QArith_base <> Q rec
+binder 11908:11908 <> g:43
+R11943:11946 Corelib.Init.Datatypes <> list ind
+R11950:11952 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11949:11949 Stdlib.QArith.QArith_base <> Q rec
+R11953:11953 Stdlib.QArith.QArith_base <> Q rec
+binder 11937:11939 <> fvs:44
+R11962:11962 Stdlib.QArith.QArith_base <> Q rec
+binder 11958:11958 <> K:45
+R11977:11979 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R11976:11976 Stdlib.QArith.QArith_base <> Q rec
+R11980:11980 Stdlib.QArith.QArith_base <> Q rec
+binder 11966:11966 <> v:46
+binder 11968:11969 <> f':47
+binder 11971:11972 <> w':48
+R11986:11986 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12036:12042 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 11994:11994 <> s:49
+R12004:12007 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R11997:11998 Stdlib.Lists.List <> In def
+R12002:12003 GaC3_P05_CauchyFormula_c <> ps:42 var
+R12000:12000 GaC3_P05_CauchyFormula_c <> s:49 var
+R12008:12027 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R12030:12030 GaC3_P05_CauchyFormula_c <> g:43 var
+R12032:12032 GaC3_P05_CauchyFormula_c <> s:49 var
+R12035:12035 GaC3_P05_CauchyFormula_c <> K:45 var
+R12088:12093 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12072:12074 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R12043:12060 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R12062:12064 GaC3_P05_CauchyFormula_c <> fvs:44 var
+R12066:12066 GaC3_P05_CauchyFormula_c <> g:43 var
+R12068:12069 GaC3_P05_CauchyFormula_c <> ps:42 var
+R12071:12071 GaC3_P05_CauchyFormula_c <> v:46 var
+R12075:12078 Corelib.Init.Datatypes <> Some constr
+R12080:12080 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12083:12084 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12087:12087 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R12081:12082 GaC3_P05_CauchyFormula_c <> f':47 var
+R12085:12086 GaC3_P05_CauchyFormula_c <> w':48 var
+R12094:12113 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R12115:12116 GaC3_P05_CauchyFormula_c <> w':48 var
+R12118:12118 GaC3_P05_CauchyFormula_c <> K:45 var
+R12304:12321 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+R12346:12362 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb def
+R12367:12379 GaC3_P05_CauchyFormula <> GaC3_P05_qmul def
+R12442:12446 Stdlib.Lists.List <> in_eq thm
+binder 12511:12512 <> s':50
+binder 12514:12516 <> Hs':51
+R12526:12527 GaC3_P05_CauchyFormula_c <> s':50 var
+R12530:12536 Stdlib.Lists.List <> in_cons thm
+R12547:12549 GaC3_P05_CauchyFormula_c <> Hs':51 var
+R12540:12541 GaC3_P05_CauchyFormula_c <> s':50 var
+binder 12511:12512 <> s':52
+binder 12514:12516 <> Hs':53
+R12526:12527 GaC3_P05_CauchyFormula_c <> s':52 var
+R12547:12549 GaC3_P05_CauchyFormula_c <> Hs':53 var
+R12540:12541 GaC3_P05_CauchyFormula_c <> s':52 var
+prf 13107:13125 <> GaC3_P05_fk_bounded
+R13143:13146 Corelib.Init.Datatypes <> list ind
+R13150:13152 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13149:13149 Stdlib.QArith.QArith_base <> Q rec
+R13153:13153 Stdlib.QArith.QArith_base <> Q rec
+binder 13137:13139 <> fvs:54
+R13168:13168 Stdlib.QArith.QArith_base <> Q rec
+binder 13158:13158 <> c:55
+binder 13160:13160 <> b:56
+binder 13162:13162 <> T:57
+binder 13164:13164 <> d:58
+R13180:13182 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13179:13179 Stdlib.QArith.QArith_base <> Q rec
+R13183:13183 Stdlib.QArith.QArith_base <> Q rec
+binder 13174:13175 <> z0:59
+R13191:13191 Stdlib.QArith.QArith_base <> Q rec
+binder 13187:13187 <> M:60
+R13205:13208 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13197:13200 S02_CauchyComplete <> QltT def
+R13204:13204 GaC3_P05_CauchyFormula_c <> d:58 var
+R13235:13238 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13209:13223 GaC3_P05_CauchyFormula_b <> GaC3_P05_margin def
+R13225:13225 GaC3_P05_CauchyFormula_c <> c:55 var
+R13227:13227 GaC3_P05_CauchyFormula_c <> b:56 var
+R13229:13229 GaC3_P05_CauchyFormula_c <> T:57 var
+R13231:13231 GaC3_P05_CauchyFormula_c <> d:58 var
+R13233:13234 GaC3_P05_CauchyFormula_c <> z0:59 var
+R13248:13253 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13239:13243 S02_CauchyComplete <> QleT' def
+R13247:13247 GaC3_P05_CauchyFormula_c <> M:60 var
+R13254:13254 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13301:13307 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 13262:13262 <> v:61
+R13273:13276 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13265:13266 Stdlib.Lists.List <> In def
+R13270:13272 GaC3_P05_CauchyFormula_c <> fvs:54 var
+R13268:13268 GaC3_P05_CauchyFormula_c <> v:61 var
+R13277:13296 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R13298:13298 GaC3_P05_CauchyFormula_c <> v:61 var
+R13300:13300 GaC3_P05_CauchyFormula_c <> M:60 var
+binder 13315:13315 <> v:62
+R13418:13425 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13318:13319 Stdlib.Lists.List <> In def
+R13324:13336 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R13338:13340 GaC3_P05_CauchyFormula_c <> fvs:54 var
+R13362:13381 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_data def
+R13383:13384 GaC3_P05_CauchyFormula_c <> z0:59 var
+R13387:13408 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R13410:13410 GaC3_P05_CauchyFormula_c <> c:55 var
+R13412:13412 GaC3_P05_CauchyFormula_c <> b:56 var
+R13414:13414 GaC3_P05_CauchyFormula_c <> T:57 var
+R13321:13321 GaC3_P05_CauchyFormula_c <> v:62 var
+R13426:13445 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R13447:13447 GaC3_P05_CauchyFormula_c <> v:62 var
+R13455:13457 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13451:13453 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13454:13454 GaC3_P05_CauchyFormula_c <> M:60 var
+R13458:13459 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R13460:13460 GaC3_P05_CauchyFormula_c <> d:58 var
+R13524:13543 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_data def
+R13564:13581 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup def
+binder 13606:13606 <> s:63
+R13611:13629 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R13635:13637 Corelib.Init.Datatypes <> fst def
+R13639:13639 GaC3_P05_CauchyFormula_c <> s:63 var
+R13658:13679 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+binder 13606:13606 <> s:64
+R13639:13639 GaC3_P05_CauchyFormula_c <> s:64 var
+binder 13739:13739 <> s:65
+R13777:13794 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13742:13743 Stdlib.Lists.List <> In def
+R13748:13769 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R13745:13745 GaC3_P05_CauchyFormula_c <> s:65 var
+R13795:13814 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R13817:13835 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R13841:13843 Corelib.Init.Datatypes <> fst def
+R13845:13845 GaC3_P05_CauchyFormula_c <> s:65 var
+R13850:13851 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+binder 13739:13739 <> s:66
+R13745:13745 GaC3_P05_CauchyFormula_c <> s:66 var
+R13845:13845 GaC3_P05_CauchyFormula_c <> s:66 var
+R13892:13918 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_rect_bounds thm
+R13967:13990 GaC3_P05_CauchyFormula_c <> GaC3_P05_val_bounded_abs thm
+R14034:14050 GaC3_P05_CauchyFormula <> GaC3_P05_veq_elim thm
+R14073:14095 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_spec thm
+binder 14125:14125 <> s:67
+R14130:14148 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R14154:14156 Corelib.Init.Datatypes <> fst def
+R14158:14158 GaC3_P05_CauchyFormula_c <> s:67 var
+R14182:14203 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+binder 14125:14125 <> s:68
+R14158:14158 GaC3_P05_CauchyFormula_c <> s:68 var
+R14248:14271 GaC3_P05_CauchyFormula_c <> GaC3_P05_val_bounded_abs thm
+R14306:14310 Corelib.Init.Logic <> proj1 thm
+R14313:14337 GaC3_P05_CauchyFormula_c <> GaC3_P05_qmul_abs_bounded thm
+R14348:14349 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R14379:14390 S02_CauchyComplete <> Qle_to_QleT' thm
+R14395:14396 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R14401:14420 GaC3_P05_CauchyFormula_b <> GaC3_P05_qinv_nonneg thm
+R14459:14480 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_fst thm
+binder 14523:14523 <> s:69
+R14528:14546 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R14552:14554 Corelib.Init.Datatypes <> fst def
+R14556:14556 GaC3_P05_CauchyFormula_c <> s:69 var
+R14593:14614 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R14658:14683 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_bounded thm
+R14711:14732 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+binder 14771:14771 <> s:70
+R14776:14794 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R14800:14802 Corelib.Init.Datatypes <> fst def
+R14804:14804 GaC3_P05_CauchyFormula_c <> s:70 var
+R14813:14814 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+binder 14523:14523 <> s:71
+R14556:14556 GaC3_P05_CauchyFormula_c <> s:71 var
+binder 14771:14771 <> s:72
+R14804:14804 GaC3_P05_CauchyFormula_c <> s:72 var
+R14894:14898 Corelib.Init.Logic <> proj2 thm
+R14901:14925 GaC3_P05_CauchyFormula_c <> GaC3_P05_qmul_abs_bounded thm
+R14936:14937 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R14967:14978 S02_CauchyComplete <> Qle_to_QleT' thm
+R14983:14984 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R14989:15008 GaC3_P05_CauchyFormula_b <> GaC3_P05_qinv_nonneg thm
+R15047:15068 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_fst thm
+binder 15111:15111 <> s:73
+R15116:15134 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R15140:15142 Corelib.Init.Datatypes <> fst def
+R15144:15144 GaC3_P05_CauchyFormula_c <> s:73 var
+R15181:15202 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R15246:15271 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_bounded thm
+R15299:15320 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+binder 15359:15359 <> s:74
+R15364:15382 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R15388:15390 Corelib.Init.Datatypes <> fst def
+R15392:15392 GaC3_P05_CauchyFormula_c <> s:74 var
+R15401:15402 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+binder 15111:15111 <> s:75
+R15144:15144 GaC3_P05_CauchyFormula_c <> s:75 var
+binder 15359:15359 <> s:76
+R15392:15392 GaC3_P05_CauchyFormula_c <> s:76 var
+R15461:15470 Corelib.Init.Logic <> False_rect scheme
+R15488:15510 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_none thm
+binder 15537:15537 <> s:77
+R15542:15560 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_val def
+R15566:15568 Corelib.Init.Datatypes <> fst def
+R15570:15570 GaC3_P05_CauchyFormula_c <> s:77 var
+R15591:15612 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+binder 15537:15537 <> s:78
+R15570:15570 GaC3_P05_CauchyFormula_c <> s:78 var
+prf 15774:15791 <> GaC3_P05_len1_rect
+R15810:15810 Stdlib.QArith.QArith_base <> Q rec
+binder 15802:15802 <> c:79
+binder 15804:15804 <> b:80
+binder 15806:15806 <> T:81
+R15829:15832 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R15817:15820 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R15822:15824 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R15821:15821 GaC3_P05_CauchyFormula_c <> b:80 var
+R15825:15825 GaC3_P05_CauchyFormula_c <> c:79 var
+R15843:15848 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R15835:15838 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R15839:15839 GaC3_P05_CauchyFormula_c <> T:81 var
+R15898:15901 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R15849:15866 GaC3_P03_MLEstimate <> GaC3_P03_path_len1 def
+R15869:15890 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R15892:15892 GaC3_P05_CauchyFormula_c <> c:79 var
+R15894:15894 GaC3_P05_CauchyFormula_c <> b:80 var
+R15896:15896 GaC3_P05_CauchyFormula_c <> T:81 var
+R15913:15915 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R15903:15906 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R15912:15912 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R15908:15910 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R15907:15907 GaC3_P05_CauchyFormula_c <> b:80 var
+R15911:15911 GaC3_P05_CauchyFormula_c <> c:79 var
+R15917:15919 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R15920:15920 GaC3_P05_CauchyFormula_c <> T:81 var
+R15976:15979 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R15972:15974 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R15998:16012 GaC3_P05_CauchyFormula_b <> GaC3_P05_qle_wd thm
+R16015:16017 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16023:16023 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16019:16021 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16028:16030 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16061:16077 GaC3_P05_CauchyFormula_b <> GaC3_P05_qle_wd_r thm
+R16080:16082 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16088:16088 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16084:16086 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16092:16093 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16122:16135 Stdlib.QArith.QArith_base <> Qopp_le_compat thm
+R16171:16174 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R16176:16178 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16196:16212 Stdlib.QArith.QArith_base <> Qmult_le_0_compat thm
+R16228:16238 Stdlib.QArith.QArith_base <> Qlt_le_weak thm
+R16252:16262 S02_CauchyComplete <> QltT_to_Qlt thm
+R16271:16278 S02_CauchyComplete <> qltT_0_2 thm
+R16325:16325 Stdlib.QArith.QArith_base <> Q rec
+binder 16321:16321 <> x:82
+R16340:16343 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R16328:16331 Stdlib.QArith.Qabs <> Qabs def
+R16335:16337 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16334:16334 GaC3_P05_CauchyFormula_c <> x:82 var
+R16338:16338 GaC3_P05_CauchyFormula_c <> x:82 var
+binder 16321:16321 <> x:83
+R16334:16334 GaC3_P05_CauchyFormula_c <> x:83 var
+R16338:16338 GaC3_P05_CauchyFormula_c <> x:83 var
+R16368:16386 GaC3_P05_CauchyFormula <> GaC3_P05_qeq_trans2 thm
+R16391:16394 Stdlib.QArith.Qabs <> Qabs def
+R16413:16419 Stdlib.QArith.Qabs <> Qabs_wd def
+R16441:16448 Stdlib.QArith.Qabs <> Qabs_pos thm
+R16453:16460 Stdlib.QArith.QArith_base <> Qle_refl thm
+R16496:16499 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R16484:16487 Stdlib.QArith.Qabs <> Qabs def
+R16491:16493 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16501:16503 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16517:16524 Stdlib.QArith.Qabs <> Qabs_pos thm
+R16566:16569 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R16554:16557 Stdlib.QArith.Qabs <> Qabs def
+R16561:16563 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16571:16573 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16594:16613 GaC3_P05_CauchyFormula_b <> GaC3_P05_abs_val_neg thm
+R16617:16619 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16666:16669 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R16652:16655 Stdlib.QArith.Qabs <> Qabs def
+R16659:16661 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16662:16663 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16671:16673 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16689:16707 GaC3_P05_CauchyFormula <> GaC3_P05_qeq_trans2 thm
+R16712:16715 Stdlib.QArith.Qabs <> Qabs def
+R16719:16721 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16740:16746 Stdlib.QArith.Qabs <> Qabs_wd def
+R16768:16775 Stdlib.QArith.Qabs <> Qabs_pos thm
+R16779:16781 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16822:16825 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R16808:16811 Stdlib.QArith.Qabs <> Qabs def
+R16817:16819 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16814:16815 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16827:16829 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16845:16863 GaC3_P05_CauchyFormula <> GaC3_P05_qeq_trans2 thm
+R16868:16871 Stdlib.QArith.Qabs <> Qabs def
+R16874:16876 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16882:16882 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R16878:16880 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16900:16906 Stdlib.QArith.Qabs <> Qabs_wd def
+R16929:16936 Stdlib.QArith.Qabs <> Qabs_opp thm
+R16946:16953 Stdlib.QArith.Qabs <> Qabs_pos thm
+R16957:16959 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16978:16995 GaC3_P03_MLEstimate <> GaC3_P03_path_len1 def
+R16997:17018 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R17020:17034 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+R17036:17038 Corelib.Init.Datatypes <> fst def
+R17040:17042 Corelib.Init.Datatypes <> snd def
+R17065:17066 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+prf 17397:17421 <> GaC3_P05_cauchy_kernel_ml
+R17443:17443 Stdlib.QArith.QArith_base <> Q rec
+binder 17433:17433 <> c:84
+binder 17435:17435 <> b:85
+binder 17437:17437 <> T:86
+binder 17439:17439 <> d:87
+R17453:17455 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R17452:17452 Stdlib.QArith.QArith_base <> Q rec
+R17456:17456 Stdlib.QArith.QArith_base <> Q rec
+binder 17447:17448 <> z0:88
+R17468:17471 Corelib.Init.Datatypes <> list ind
+R17475:17477 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R17474:17474 Stdlib.QArith.QArith_base <> Q rec
+R17478:17478 Stdlib.QArith.QArith_base <> Q rec
+binder 17462:17464 <> fvs:89
+R17487:17487 Stdlib.QArith.QArith_base <> Q rec
+binder 17483:17483 <> M:90
+R17501:17504 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R17493:17496 S02_CauchyComplete <> QltT def
+R17500:17500 GaC3_P05_CauchyFormula_c <> d:87 var
+R17531:17534 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R17505:17519 GaC3_P05_CauchyFormula_b <> GaC3_P05_margin def
+R17521:17521 GaC3_P05_CauchyFormula_c <> c:84 var
+R17523:17523 GaC3_P05_CauchyFormula_c <> b:85 var
+R17525:17525 GaC3_P05_CauchyFormula_c <> T:86 var
+R17527:17527 GaC3_P05_CauchyFormula_c <> d:87 var
+R17529:17530 GaC3_P05_CauchyFormula_c <> z0:88 var
+R17544:17549 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R17535:17539 S02_CauchyComplete <> QleT' def
+R17543:17543 GaC3_P05_CauchyFormula_c <> M:90 var
+R17550:17550 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R17597:17603 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 17558:17558 <> v:91
+R17569:17572 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R17561:17562 Stdlib.Lists.List <> In def
+R17566:17568 GaC3_P05_CauchyFormula_c <> fvs:89 var
+R17564:17564 GaC3_P05_CauchyFormula_c <> v:91 var
+R17573:17592 GaC3_P03_MLEstimate <> GaC3_P03_val_bounded def
+R17594:17594 GaC3_P05_CauchyFormula_c <> v:91 var
+R17596:17596 GaC3_P05_CauchyFormula_c <> M:90 var
+R17837:17842 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R17760:17771 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R17604:17607 Stdlib.QArith.Qabs <> Qabs def
+R17610:17627 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R17630:17651 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R17653:17653 GaC3_P05_CauchyFormula_c <> c:84 var
+R17655:17655 GaC3_P05_CauchyFormula_c <> b:85 var
+R17657:17657 GaC3_P05_CauchyFormula_c <> T:86 var
+R17671:17683 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R17685:17687 GaC3_P05_CauchyFormula_c <> fvs:89 var
+R17703:17722 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_data def
+R17724:17725 GaC3_P05_CauchyFormula_c <> z0:88 var
+R17728:17749 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R17751:17751 GaC3_P05_CauchyFormula_c <> c:84 var
+R17753:17753 GaC3_P05_CauchyFormula_c <> b:85 var
+R17755:17755 GaC3_P05_CauchyFormula_c <> T:86 var
+R17772:17772 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R17784:17787 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R17778:17780 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R17774:17776 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R17777:17777 GaC3_P05_CauchyFormula_c <> M:90 var
+R17781:17782 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R17783:17783 GaC3_P05_CauchyFormula_c <> d:87 var
+R17788:17805 GaC3_P03_MLEstimate <> GaC3_P03_path_len1 def
+R17808:17829 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R17831:17831 GaC3_P05_CauchyFormula_c <> c:84 var
+R17833:17833 GaC3_P05_CauchyFormula_c <> b:85 var
+R17835:17835 GaC3_P05_CauchyFormula_c <> T:86 var
+R17999:18010 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R17843:17846 Stdlib.QArith.Qabs <> Qabs def
+R17849:17866 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R17869:17890 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R17892:17892 GaC3_P05_CauchyFormula_c <> c:84 var
+R17894:17894 GaC3_P05_CauchyFormula_c <> b:85 var
+R17896:17896 GaC3_P05_CauchyFormula_c <> T:86 var
+R17910:17922 GaC3_P05_CauchyFormula_c <> GaC3_P05_vzip def
+R17924:17926 GaC3_P05_CauchyFormula_c <> fvs:89 var
+R17942:17961 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_data def
+R17963:17964 GaC3_P05_CauchyFormula_c <> z0:88 var
+R17967:17988 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R17990:17990 GaC3_P05_CauchyFormula_c <> c:84 var
+R17992:17992 GaC3_P05_CauchyFormula_c <> b:85 var
+R17994:17994 GaC3_P05_CauchyFormula_c <> T:86 var
+R18011:18011 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18023:18026 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18017:18019 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18013:18015 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18016:18016 GaC3_P05_CauchyFormula_c <> M:90 var
+R18020:18021 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R18022:18022 GaC3_P05_CauchyFormula_c <> d:87 var
+R18027:18044 GaC3_P03_MLEstimate <> GaC3_P03_path_len1 def
+R18047:18068 GaC3_P04_CauchyRect <> GaC3_P04_rect_boundary def
+R18070:18070 GaC3_P05_CauchyFormula_c <> c:84 var
+R18072:18072 GaC3_P05_CauchyFormula_c <> b:85 var
+R18074:18074 GaC3_P05_CauchyFormula_c <> T:86 var
+R18142:18162 GaC3_P03_MLEstimate <> GaC3_P03_path_sumR_ml thm
+R18174:18176 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18170:18172 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18177:18178 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R18196:18212 Stdlib.QArith.QArith_base <> Qmult_le_0_compat thm
+R18229:18245 Stdlib.QArith.QArith_base <> Qmult_le_0_compat thm
+R18266:18276 Stdlib.QArith.QArith_base <> Qlt_le_weak thm
+R18290:18300 S02_CauchyComplete <> QltT_to_Qlt thm
+R18309:18316 S02_CauchyComplete <> qltT_0_2 thm
+R18336:18347 S02_CauchyComplete <> QleT'_to_Qle thm
+R18374:18393 GaC3_P05_CauchyFormula_b <> GaC3_P05_qinv_nonneg thm
+R18419:18437 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_bounded thm
+R18481:18501 GaC3_P03_MLEstimate <> GaC3_P03_path_sumI_ml thm
+R18513:18515 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18509:18511 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R18516:18517 Stdlib.QArith.QArith_base <> ::Q_scope:'/'_x not
+R18535:18551 Stdlib.QArith.QArith_base <> Qmult_le_0_compat thm
+R18568:18584 Stdlib.QArith.QArith_base <> Qmult_le_0_compat thm
+R18605:18615 Stdlib.QArith.QArith_base <> Qlt_le_weak thm
+R18629:18639 S02_CauchyComplete <> QltT_to_Qlt thm
+R18648:18655 S02_CauchyComplete <> qltT_0_2 thm
+R18675:18686 S02_CauchyComplete <> QleT'_to_Qle thm
+R18713:18732 GaC3_P05_CauchyFormula_b <> GaC3_P05_qinv_nonneg thm
+R18758:18776 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_bounded thm

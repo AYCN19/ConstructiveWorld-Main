@@ -1,0 +1,12 @@
+DIGEST 1911ca05f6c63dfde6f88b642a685b47
+F_pa_p08._pa_GaC3_P08_PerronCutoff_b
+R15:37 GaC3_P08_PerronCutoff_b <> <> lib
+R58:68 GaC3_P08_PerronCutoff_b <> GaC3_P08_pw def
+R89:107 GaC3_P08_PerronCutoff_b <> GaC3_P08_perron_sum def
+R128:141 GaC3_P08_PerronCutoff_b <> GaC3_P08_pw_le thm
+R162:183 GaC3_P08_PerronCutoff_b <> GaC3_P08_perron_sum_le thm
+R204:221 GaC3_P08_PerronCutoff_b <> GaC3_P08_le_plus_r thm
+R242:261 GaC3_P08_PerronCutoff_b <> GaC3_P08_mansum_mono thm
+R282:298 GaC3_P08_PerronCutoff_b <> GaC3_P08_psi_half def
+R319:344 GaC3_P08_PerronCutoff_b <> GaC3_P08_psi_half_sandwich thm
+R365:381 GaC3_P08_PerronCutoff_b <> GaC3_P08_vline_ml thm

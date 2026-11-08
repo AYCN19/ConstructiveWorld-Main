@@ -1,0 +1,25 @@
+DIGEST cb58b8d6bf4c2bef8dafbd0c0e662e69
+F_pa._pa_GaC3_V01_VdCSecond_b
+R15:34 GaC3_V01_VdCSecond_b <> <> lib
+R55:75 GaC3_V01_VdCSecond_b <> GaC3_V01_allzero_elim thm
+R96:117 GaC3_V01_VdCSecond_b <> GaC3_V01_allzero_intro thm
+R138:157 GaC3_V01_VdCSecond_b <> GaC3_V01_pdot_zero_r thm
+R178:197 GaC3_V01_VdCSecond_b <> GaC3_V01_pdot_zero_l thm
+R218:237 GaC3_V01_VdCSecond_b <> GaC3_V01_pnorm2_zero thm
+R258:277 GaC3_V01_VdCSecond_b <> GaC3_V01_pnorm2_plus thm
+R298:314 GaC3_V01_VdCSecond_b <> GaC3_V01_pdot_sym thm
+R335:354 GaC3_V01_VdCSecond_b <> GaC3_V01_pdot_plus_r thm
+R375:394 GaC3_V01_VdCSecond_b <> GaC3_V01_pdot_plus_l thm
+R415:436 GaC3_V01_VdCSecond_b <> GaC3_V01_allzero_pplus thm
+R457:480 GaC3_V01_VdCSecond_b <> GaC3_V01_wphas_zero_comp thm
+R501:523 GaC3_V01_VdCSecond_b <> GaC3_V01_wphas_sing_dot thm
+R544:568 GaC3_V01_VdCSecond_b <> GaC3_V01_wphas_sing_norm2 thm
+R589:607 GaC3_V01_VdCSecond_b <> GaC3_V01_scomp_cons thm
+R628:645 GaC3_V01_VdCSecond_b <> GaC3_V01_scomp_add thm
+R666:685 GaC3_V01_VdCSecond_b <> GaC3_V01_scomp_mul_l thm
+R706:728 GaC3_V01_VdCSecond_b <> GaC3_V01_scomp_allzero0 thm
+R749:768 GaC3_V01_VdCSecond_b <> GaC3_V01_f_wphas_nth thm
+R789:817 GaC3_V01_VdCSecond_b <> GaC3_V01_scomp_firstn_allzero thm
+R838:861 GaC3_V01_VdCSecond_b <> GaC3_V01_corr0_plist_dot thm
+R882:902 GaC3_V01_VdCSecond_b <> GaC3_V01_nth_pair_sum thm
+R923:945 GaC3_V01_VdCSecond_b <> GaC3_V01_qsum_transpose thm

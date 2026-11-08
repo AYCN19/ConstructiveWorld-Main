@@ -1,0 +1,19 @@
+DIGEST fd935371633ef8dae899448b2e8dbb81
+F_pa_p08._pa_GaC3_P08_PerronCutoff
+R15:35 GaC3_P08_PerronCutoff <> <> lib
+R56:75 GaC3_P08_PerronCutoff <> GaC3_P08_mult_zero_l thm
+R96:111 GaC3_P08_PerronCutoff <> GaC3_P08_sub_ge0 thm
+R132:143 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R164:179 GaC3_P08_PerronCutoff <> GaC3_P08_lnR_ge0 thm
+R200:215 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R236:255 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist_ge0 thm
+R276:288 GaC3_P08_PerronCutoff <> GaC3_P08_powR def
+R309:325 GaC3_P08_PerronCutoff <> GaC3_P08_powR_pos thm
+R346:359 GaC3_P08_PerronCutoff <> GaC3_P08_c_pos thm
+R380:396 GaC3_P08_PerronCutoff <> GaC3_P08_powR_ge1 thm
+R417:432 GaC3_P08_PerronCutoff <> GaC3_P08_inv_one thm
+R453:475 GaC3_P08_PerronCutoff <> GaC3_P08_inv_ge1_le_one thm
+R496:507 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R528:543 GaC3_P08_PerronCutoff <> GaC3_P08_den_ge1 thm
+R564:579 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R600:624 GaC3_P08_PerronCutoff <> GaC3_P08_inv_scale_le_one thm

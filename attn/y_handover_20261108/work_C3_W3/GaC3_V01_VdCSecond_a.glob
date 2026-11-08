@@ -1,0 +1,963 @@
+DIGEST 6e5db9781b06cfebd867ab9848c9cad2
+FGaC3_V01_VdCSecond_a
+R1720:1732 Stdlib.QArith.QArith <> <> lib
+R1734:1744 Stdlib.QArith.Qabs <> <> lib
+R1746:1757 Stdlib.QArith.Qring <> <> lib
+R1787:1797 Stdlib.Arith.Arith <> <> lib
+R1827:1830 Stdlib.Lists.List <> <> lib
+R1867:1879 Stdlib.Lists.List ListNotations <> mod
+def 2122:2132 <> GaC3_V01_qn
+R2139:2141 Corelib.Init.Datatypes <> nat ind
+binder 2135:2135 <> n:1
+R2146:2146 Stdlib.QArith.QArith_base <> Q rec
+R2159:2159 GaC3_V01_VdCSecond_a <> n:1 var
+R2185:2185 Corelib.Init.Datatypes <> S constr
+R2194:2196 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R2197:2207 GaC3_V01_VdCSecond_a <> GaC3_V01_qn:2 def
+prf 2226:2240 <> GaC3_V01_qn_pos
+R2255:2257 Corelib.Init.Datatypes <> nat ind
+binder 2251:2251 <> n:4
+R2262:2265 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R2266:2276 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R2278:2278 GaC3_V01_VdCSecond_a <> n:4 var
+R2337:2347 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R2357:2364 Stdlib.QArith.QArith_base <> Qle_refl thm
+R2378:2386 Stdlib.QArith.QArith_base <> Qle_trans thm
+R2392:2394 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R2395:2405 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R2413:2415 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R2416:2426 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R2448:2456 Stdlib.QArith.QArith_base <> Qplus_0_l thm
+R2481:2495 Stdlib.QArith.QArith_base <> Qplus_le_compat thm
+R2522:2524 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<'_x not
+R2561:2571 Stdlib.QArith.QArith_base <> Qlt_le_weak thm
+R2599:2606 Stdlib.QArith.QArith_base <> Qle_refl thm
+prf 2851:2866 <> GaC3_V01_nth_nil
+binder 2878:2878 <> A:5
+R2894:2894 GaC3_V01_VdCSecond_a <> A:5 var
+binder 2889:2890 <> d0:6
+R2902:2904 Corelib.Init.Datatypes <> nat ind
+binder 2898:2898 <> m:7
+R2931:2933 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R2910:2912 Corelib.Lists.ListDef <> nth def
+R2929:2930 GaC3_V01_VdCSecond_a <> d0:6 var
+R2921:2924 Corelib.Init.Datatypes <> list ind
+R2926:2926 GaC3_V01_VdCSecond_a <> A:5 var
+R2917:2919 Corelib.Init.Datatypes <> nil constr
+R2914:2914 GaC3_V01_VdCSecond_a <> m:7 var
+R2934:2935 GaC3_V01_VdCSecond_a <> d0:6 var
+prf 2997:3015 <> GaC3_V01_firstn_nil
+binder 3027:3027 <> A:8
+R3042:3044 Corelib.Init.Datatypes <> nat ind
+binder 3038:3038 <> n:9
+R3071:3073 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3050:3055 Corelib.Lists.ListDef <> firstn def
+R3064:3067 Corelib.Init.Datatypes <> list ind
+R3069:3069 GaC3_V01_VdCSecond_a <> A:8 var
+R3060:3062 Corelib.Init.Datatypes <> nil constr
+R3057:3057 GaC3_V01_VdCSecond_a <> n:9 var
+R3074:3076 Corelib.Init.Datatypes <> nil constr
+prf 3135:3152 <> GaC3_V01_skipn_nil
+binder 3164:3164 <> A:10
+R3179:3181 Corelib.Init.Datatypes <> nat ind
+binder 3175:3175 <> n:11
+R3189:3192 Corelib.Init.Datatypes <> list ind
+R3194:3194 GaC3_V01_VdCSecond_a <> A:10 var
+binder 3185:3185 <> l:12
+R3219:3222 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R3209:3212 Corelib.Init.Peano <> ::nat_scope:x_'<='_x not
+R3201:3206 Corelib.Init.Datatypes <> length def
+R3208:3208 GaC3_V01_VdCSecond_a <> l:12 var
+R3213:3213 GaC3_V01_VdCSecond_a <> n:11 var
+R3232:3234 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3223:3227 Corelib.Lists.ListDef <> skipn def
+R3231:3231 GaC3_V01_VdCSecond_a <> l:12 var
+R3229:3229 GaC3_V01_VdCSecond_a <> n:11 var
+R3235:3237 Corelib.Init.Datatypes <> nil constr
+R3364:3369 Corelib.Init.Datatypes <> length def
+R3459:3463 Corelib.Lists.ListDef <> skipn def
+R3465:3470 Corelib.Init.Datatypes <> length def
+R3495:3500 Corelib.Init.Peano <> le_S_n thm
+prf 3524:3545 <> GaC3_V01_skipn_nil_inv
+binder 3557:3557 <> A:13
+R3572:3574 Corelib.Init.Datatypes <> nat ind
+binder 3568:3568 <> n:14
+R3582:3585 Corelib.Init.Datatypes <> list ind
+R3587:3587 GaC3_V01_VdCSecond_a <> A:13 var
+binder 3578:3578 <> l:15
+R3608:3611 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R3602:3604 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R3593:3597 Corelib.Lists.ListDef <> skipn def
+R3601:3601 GaC3_V01_VdCSecond_a <> l:15 var
+R3599:3599 GaC3_V01_VdCSecond_a <> n:14 var
+R3605:3607 Corelib.Init.Datatypes <> nil constr
+R3621:3624 Corelib.Init.Peano <> ::nat_scope:x_'<='_x not
+R3613:3618 Corelib.Init.Datatypes <> length def
+R3620:3620 GaC3_V01_VdCSecond_a <> l:15 var
+R3625:3625 GaC3_V01_VdCSecond_a <> n:14 var
+R3732:3742 Stdlib.Arith.PeanoNat Nat le_refl thm
+R3804:3809 Corelib.Init.Datatypes <> length def
+R3819:3828 Stdlib.Arith.PeanoNat Nat le_0_l thm
+R3842:3846 Corelib.Lists.ListDef <> skipn def
+R3861:3866 Corelib.Init.Peano <> le_n_S thm
+prf 4128:4145 <> GaC3_V01_seq_S_map
+binder 4157:4157 <> A:16
+R4174:4176 Corelib.Init.Datatypes <> nat ind
+binder 4168:4168 <> a:17
+binder 4170:4170 <> n:18
+R4191:4193 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4180:4182 Corelib.Lists.ListDef <> seq def
+R4190:4190 GaC3_V01_VdCSecond_a <> n:18 var
+R4185:4185 Corelib.Init.Datatypes <> S constr
+R4187:4187 GaC3_V01_VdCSecond_a <> a:17 var
+R4194:4196 Corelib.Lists.ListDef <> map def
+R4201:4203 Corelib.Lists.ListDef <> seq def
+R4207:4207 GaC3_V01_VdCSecond_a <> n:18 var
+R4205:4205 GaC3_V01_VdCSecond_a <> a:17 var
+R4198:4198 Corelib.Init.Datatypes <> S constr
+R4305:4307 Corelib.Lists.ListDef <> seq def
+R4309:4311 Corelib.Lists.ListDef <> map def
+prf 4346:4362 <> GaC3_V01_seq_tail
+R4380:4382 Corelib.Init.Datatypes <> nat ind
+binder 4374:4374 <> a:19
+binder 4376:4376 <> n:20
+R4397:4399 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4386:4388 Corelib.Lists.ListDef <> seq def
+R4393:4393 Corelib.Init.Datatypes <> S constr
+R4395:4395 GaC3_V01_VdCSecond_a <> n:20 var
+R4390:4390 GaC3_V01_VdCSecond_a <> a:19 var
+R4407:4411 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4430:4430 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R4400:4402 Corelib.Lists.ListDef <> seq def
+R4406:4406 GaC3_V01_VdCSecond_a <> n:20 var
+R4404:4404 GaC3_V01_VdCSecond_a <> a:19 var
+R4423:4426 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4414:4416 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R4413:4413 GaC3_V01_VdCSecond_a <> a:19 var
+R4417:4417 GaC3_V01_VdCSecond_a <> n:20 var
+R4427:4429 Corelib.Init.Datatypes <> nil constr
+R4508:4510 Corelib.Lists.ListDef <> seq def
+R4512:4514 Corelib.Init.Datatypes <> app def
+R4535:4545 Stdlib.Arith.PeanoNat Nat add_0_r thm
+R4574:4576 Corelib.Lists.ListDef <> seq def
+R4581:4581 Corelib.Init.Datatypes <> S constr
+R4584:4584 Corelib.Init.Datatypes <> S constr
+R4599:4602 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R4603:4605 Corelib.Lists.ListDef <> seq def
+R4614:4614 Corelib.Init.Datatypes <> S constr
+R4608:4608 Corelib.Init.Datatypes <> S constr
+R4654:4654 Corelib.Init.Datatypes <> S constr
+R4666:4668 Corelib.Lists.ListDef <> seq def
+R4670:4672 Corelib.Init.Datatypes <> app def
+R4706:4719 Stdlib.Arith.PeanoNat Nat add_succ_r thm
+prf 4747:4764 <> GaC3_V01_map_seq_S
+binder 4776:4776 <> A:21
+R4794:4797 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4791:4793 Corelib.Init.Datatypes <> nat ind
+R4798:4798 GaC3_V01_VdCSecond_a <> A:21 var
+binder 4787:4787 <> h:22
+R4806:4808 Corelib.Init.Datatypes <> nat ind
+binder 4802:4802 <> n:23
+R4829:4831 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4814:4816 Corelib.Lists.ListDef <> map def
+R4821:4823 Corelib.Lists.ListDef <> seq def
+R4827:4827 GaC3_V01_VdCSecond_a <> n:23 var
+R4818:4818 GaC3_V01_VdCSecond_a <> h:22 var
+R4832:4834 Corelib.Lists.ListDef <> map def
+R4856:4858 Corelib.Lists.ListDef <> seq def
+R4862:4862 GaC3_V01_VdCSecond_a <> n:23 var
+binder 4841:4841 <> i:24
+R4846:4846 GaC3_V01_VdCSecond_a <> h:22 var
+R4849:4849 Corelib.Init.Datatypes <> S constr
+R4851:4851 GaC3_V01_VdCSecond_a <> i:24 var
+R4900:4917 GaC3_V01_VdCSecond_a <> GaC3_V01_seq_S_map thm
+R4937:4943 Stdlib.Lists.List <> map_map thm
+prf 4971:4992 <> GaC3_V01_map_seq_shift
+binder 5004:5004 <> A:25
+R5022:5025 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R5019:5021 Corelib.Init.Datatypes <> nat ind
+R5026:5026 GaC3_V01_VdCSecond_a <> A:25 var
+binder 5015:5015 <> h:26
+R5036:5038 Corelib.Init.Datatypes <> nat ind
+binder 5030:5030 <> a:27
+binder 5032:5032 <> n:28
+R5059:5061 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5044:5046 Corelib.Lists.ListDef <> map def
+R5051:5053 Corelib.Lists.ListDef <> seq def
+R5057:5057 GaC3_V01_VdCSecond_a <> n:28 var
+R5055:5055 GaC3_V01_VdCSecond_a <> a:27 var
+R5048:5048 GaC3_V01_VdCSecond_a <> h:26 var
+R5062:5064 Corelib.Lists.ListDef <> map def
+R5094:5096 Corelib.Lists.ListDef <> seq def
+R5100:5100 GaC3_V01_VdCSecond_a <> n:28 var
+binder 5071:5071 <> i:29
+R5076:5076 GaC3_V01_VdCSecond_a <> h:26 var
+R5081:5083 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R5080:5080 GaC3_V01_VdCSecond_a <> a:27 var
+R5084:5084 GaC3_V01_VdCSecond_a <> i:29 var
+R5205:5207 Corelib.Lists.ListDef <> seq def
+R5209:5211 Corelib.Lists.ListDef <> map def
+R5223:5233 Stdlib.Arith.PeanoNat Nat add_0_r thm
+R5264:5264 Corelib.Init.Datatypes <> S constr
+R5284:5301 GaC3_V01_VdCSecond_a <> GaC3_V01_map_seq_S thm
+binder 5310:5310 <> i:30
+R5320:5322 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R5323:5323 GaC3_V01_VdCSecond_a <> i:30 var
+binder 5310:5310 <> i:31
+R5323:5323 GaC3_V01_VdCSecond_a <> i:31 var
+binder 5310:5310 <> i:32
+R5323:5323 GaC3_V01_VdCSecond_a <> i:32 var
+R5347:5353 Stdlib.Lists.List <> map_ext thm
+R5386:5399 Stdlib.Arith.PeanoNat Nat add_succ_r thm
+prf 5644:5661 <> GaC3_V01_nth_skipn
+binder 5673:5673 <> A:33
+R5689:5689 GaC3_V01_VdCSecond_a <> A:33 var
+binder 5684:5685 <> d0:34
+R5699:5701 Corelib.Init.Datatypes <> nat ind
+binder 5693:5693 <> n:35
+binder 5695:5695 <> m:36
+R5709:5712 Corelib.Init.Datatypes <> list ind
+R5714:5714 GaC3_V01_VdCSecond_a <> A:33 var
+binder 5705:5705 <> l:37
+R5740:5742 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R5720:5722 Corelib.Lists.ListDef <> nth def
+R5738:5739 GaC3_V01_VdCSecond_a <> d0:34 var
+R5727:5731 Corelib.Lists.ListDef <> skipn def
+R5735:5735 GaC3_V01_VdCSecond_a <> l:37 var
+R5733:5733 GaC3_V01_VdCSecond_a <> n:35 var
+R5724:5724 GaC3_V01_VdCSecond_a <> m:36 var
+R5743:5745 Corelib.Lists.ListDef <> nth def
+R5763:5764 GaC3_V01_VdCSecond_a <> d0:34 var
+R5761:5761 GaC3_V01_VdCSecond_a <> l:37 var
+R5750:5752 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R5749:5749 GaC3_V01_VdCSecond_a <> n:35 var
+R5753:5753 GaC3_V01_VdCSecond_a <> m:36 var
+R5838:5842 Corelib.Lists.ListDef <> skipn def
+R5844:5850 Stdlib.Arith.PeanoNat Nat add def
+R5910:5927 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_nil thm
+R5932:5932 Corelib.Init.Datatypes <> S constr
+R5938:5940 Corelib.Init.Datatypes <> nil constr
+R5943:5952 Stdlib.Arith.PeanoNat Nat le_0_l thm
+R5974:5989 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_nil thm
+R6016:6020 Corelib.Lists.ListDef <> skipn def
+R6029:6035 Stdlib.Arith.PeanoNat Nat add def
+R6037:6039 Corelib.Lists.ListDef <> nth def
+prf 6065:6083 <> GaC3_V01_nth_firstn
+binder 6095:6095 <> A:38
+R6111:6111 GaC3_V01_VdCSecond_a <> A:38 var
+binder 6106:6107 <> d0:39
+R6121:6123 Corelib.Init.Datatypes <> nat ind
+binder 6115:6115 <> n:40
+binder 6117:6117 <> p:41
+R6131:6134 Corelib.Init.Datatypes <> list ind
+R6136:6136 GaC3_V01_VdCSecond_a <> A:38 var
+binder 6127:6127 <> l:42
+R6153:6156 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R6144:6146 Corelib.Init.Peano <> ::nat_scope:x_'<'_x not
+R6143:6143 GaC3_V01_VdCSecond_a <> p:41 var
+R6147:6147 GaC3_V01_VdCSecond_a <> n:40 var
+R6178:6180 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6157:6159 Corelib.Lists.ListDef <> nth def
+R6176:6177 GaC3_V01_VdCSecond_a <> d0:39 var
+R6164:6169 Corelib.Lists.ListDef <> firstn def
+R6173:6173 GaC3_V01_VdCSecond_a <> l:42 var
+R6171:6171 GaC3_V01_VdCSecond_a <> n:40 var
+R6161:6161 GaC3_V01_VdCSecond_a <> p:41 var
+R6181:6183 Corelib.Lists.ListDef <> nth def
+R6189:6190 GaC3_V01_VdCSecond_a <> d0:39 var
+R6187:6187 GaC3_V01_VdCSecond_a <> l:42 var
+R6185:6185 GaC3_V01_VdCSecond_a <> p:41 var
+R6319:6337 GaC3_V01_VdCSecond_a <> GaC3_V01_firstn_nil thm
+R6342:6342 Corelib.Init.Datatypes <> S constr
+R6359:6374 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_nil thm
+R6431:6436 Corelib.Lists.ListDef <> firstn def
+R6438:6440 Corelib.Lists.ListDef <> nth def
+R6470:6475 Corelib.Lists.ListDef <> firstn def
+R6477:6479 Corelib.Lists.ListDef <> nth def
+R6499:6504 Corelib.Init.Peano <> le_S_n thm
+prf 6529:6553 <> GaC3_V01_nth_firstn_skipn
+binder 6565:6565 <> A:43
+R6581:6581 GaC3_V01_VdCSecond_a <> A:43 var
+binder 6576:6577 <> d0:44
+R6589:6592 Corelib.Init.Datatypes <> list ind
+R6594:6594 GaC3_V01_VdCSecond_a <> A:43 var
+binder 6585:6585 <> l:45
+R6606:6608 Corelib.Init.Datatypes <> nat ind
+binder 6598:6598 <> a:46
+binder 6600:6600 <> n:47
+binder 6602:6602 <> j:48
+R6625:6628 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R6616:6618 Corelib.Init.Peano <> ::nat_scope:x_'<'_x not
+R6615:6615 GaC3_V01_VdCSecond_a <> j:48 var
+R6619:6619 GaC3_V01_VdCSecond_a <> n:47 var
+R6660:6662 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R6629:6631 Corelib.Lists.ListDef <> nth def
+R6658:6659 GaC3_V01_VdCSecond_a <> d0:44 var
+R6636:6641 Corelib.Lists.ListDef <> firstn def
+R6646:6650 Corelib.Lists.ListDef <> skipn def
+R6654:6654 GaC3_V01_VdCSecond_a <> l:45 var
+R6652:6652 GaC3_V01_VdCSecond_a <> a:46 var
+R6643:6643 GaC3_V01_VdCSecond_a <> n:47 var
+R6633:6633 GaC3_V01_VdCSecond_a <> j:48 var
+R6663:6665 Corelib.Lists.ListDef <> nth def
+R6683:6684 GaC3_V01_VdCSecond_a <> d0:44 var
+R6681:6681 GaC3_V01_VdCSecond_a <> l:45 var
+R6670:6672 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R6669:6669 GaC3_V01_VdCSecond_a <> a:46 var
+R6673:6673 GaC3_V01_VdCSecond_a <> j:48 var
+R6775:6779 Corelib.Lists.ListDef <> skipn def
+R6792:6810 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_firstn thm
+R6833:6839 Stdlib.Arith.PeanoNat Nat add def
+R6895:6899 Corelib.Lists.ListDef <> skipn def
+R6918:6936 GaC3_V01_VdCSecond_a <> GaC3_V01_firstn_nil thm
+R6959:6974 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_nil thm
+R7001:7005 Corelib.Lists.ListDef <> skipn def
+R7014:7020 Stdlib.Arith.PeanoNat Nat add def
+R7022:7024 Corelib.Lists.ListDef <> nth def
+prf 7060:7081 <> GaC3_V01_firstn_S_tail
+binder 7093:7093 <> A:49
+R7108:7110 Corelib.Init.Datatypes <> nat ind
+binder 7104:7104 <> n:50
+R7118:7121 Corelib.Init.Datatypes <> list ind
+R7123:7123 GaC3_V01_VdCSecond_a <> A:49 var
+binder 7114:7114 <> l:51
+R7143:7145 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R7129:7134 Corelib.Lists.ListDef <> firstn def
+R7142:7142 GaC3_V01_VdCSecond_a <> l:51 var
+R7137:7137 Corelib.Init.Datatypes <> S constr
+R7139:7139 GaC3_V01_VdCSecond_a <> n:50 var
+R7156:7159 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R7146:7151 Corelib.Lists.ListDef <> firstn def
+R7155:7155 GaC3_V01_VdCSecond_a <> l:51 var
+R7153:7153 GaC3_V01_VdCSecond_a <> n:50 var
+R7166:7170 Corelib.Lists.ListDef <> skipn def
+R7174:7174 GaC3_V01_VdCSecond_a <> l:51 var
+R7172:7172 GaC3_V01_VdCSecond_a <> n:50 var
+R7181:7183 Corelib.Init.Datatypes <> nil constr
+R7188:7190 Corelib.Init.Datatypes <> nil constr
+R7195:7198 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7205:7208 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R7209:7211 Corelib.Init.Datatypes <> nil constr
+R7332:7337 Corelib.Lists.ListDef <> firstn def
+R7339:7343 Corelib.Lists.ListDef <> skipn def
+R7345:7347 Corelib.Init.Datatypes <> app def
+R7422:7427 Corelib.Lists.ListDef <> firstn def
+R7429:7433 Corelib.Lists.ListDef <> skipn def
+R7435:7437 Corelib.Init.Datatypes <> app def
+prf 7472:7494 <> GaC3_V01_skipn_head_nth
+binder 7506:7506 <> A:52
+R7522:7522 GaC3_V01_VdCSecond_a <> A:52 var
+binder 7517:7518 <> d0:53
+R7530:7532 Corelib.Init.Datatypes <> nat ind
+binder 7526:7526 <> d:54
+R7540:7543 Corelib.Init.Datatypes <> list ind
+R7545:7545 GaC3_V01_VdCSecond_a <> A:52 var
+binder 7536:7536 <> l:55
+R7567:7570 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R7560:7563 Corelib.Init.Logic <> ::type_scope:x_'<>'_x not
+R7551:7555 Corelib.Lists.ListDef <> skipn def
+R7559:7559 GaC3_V01_VdCSecond_a <> l:55 var
+R7557:7557 GaC3_V01_VdCSecond_a <> d:54 var
+R7564:7566 Corelib.Init.Datatypes <> nil constr
+R7591:7593 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R7571:7573 Corelib.Lists.ListDef <> nth def
+R7589:7590 GaC3_V01_VdCSecond_a <> d0:53 var
+R7578:7582 Corelib.Lists.ListDef <> skipn def
+R7586:7586 GaC3_V01_VdCSecond_a <> l:55 var
+R7584:7584 GaC3_V01_VdCSecond_a <> d:54 var
+R7594:7596 Corelib.Lists.ListDef <> nth def
+R7602:7603 GaC3_V01_VdCSecond_a <> d0:53 var
+R7600:7600 GaC3_V01_VdCSecond_a <> l:55 var
+R7598:7598 GaC3_V01_VdCSecond_a <> d:54 var
+R7684:7688 Corelib.Lists.ListDef <> skipn def
+R7690:7692 Corelib.Lists.ListDef <> nth def
+R7784:7801 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_nil thm
+R7806:7806 Corelib.Init.Datatypes <> S constr
+R7812:7814 Corelib.Init.Datatypes <> nil constr
+R7830:7839 Stdlib.Arith.PeanoNat Nat le_0_l thm
+R7863:7867 Corelib.Lists.ListDef <> skipn def
+R7869:7871 Corelib.Lists.ListDef <> nth def
+prf 7911:7927 <> GaC3_V01_tl_skipn
+binder 7939:7939 <> A:56
+R7954:7956 Corelib.Init.Datatypes <> nat ind
+binder 7950:7950 <> n:57
+R7964:7967 Corelib.Init.Datatypes <> list ind
+R7969:7969 GaC3_V01_VdCSecond_a <> A:56 var
+binder 7960:7960 <> l:58
+R7989:7991 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R7975:7976 Stdlib.Lists.List <> tl def
+R7979:7983 Corelib.Lists.ListDef <> skipn def
+R7987:7987 GaC3_V01_VdCSecond_a <> l:58 var
+R7985:7985 GaC3_V01_VdCSecond_a <> n:57 var
+R7992:7996 Corelib.Lists.ListDef <> skipn def
+R8004:8004 GaC3_V01_VdCSecond_a <> l:58 var
+R7999:7999 Corelib.Init.Datatypes <> S constr
+R8001:8001 GaC3_V01_VdCSecond_a <> n:57 var
+R8123:8140 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_nil thm
+R8145:8145 Corelib.Init.Datatypes <> S constr
+R8151:8153 Corelib.Init.Datatypes <> nil constr
+R8156:8165 Stdlib.Arith.PeanoNat Nat le_0_l thm
+R8187:8204 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_nil thm
+R8209:8209 Corelib.Init.Datatypes <> S constr
+R8212:8212 Corelib.Init.Datatypes <> S constr
+R8219:8221 Corelib.Init.Datatypes <> nil constr
+R8224:8233 Stdlib.Arith.PeanoNat Nat le_0_l thm
+R8270:8274 Corelib.Lists.ListDef <> skipn def
+R8276:8277 Stdlib.Lists.List <> tl def
+prf 8533:8554 <> GaC3_V01_In_firstn_nth
+binder 8566:8566 <> A:59
+R8582:8582 GaC3_V01_VdCSecond_a <> A:59 var
+binder 8577:8578 <> d0:60
+R8590:8593 Corelib.Init.Datatypes <> list ind
+R8595:8595 GaC3_V01_VdCSecond_a <> A:59 var
+binder 8586:8586 <> l:61
+R8603:8605 Corelib.Init.Datatypes <> nat ind
+binder 8599:8599 <> H:62
+R8613:8613 GaC3_V01_VdCSecond_a <> A:59 var
+binder 8609:8609 <> y:63
+R8636:8639 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R8619:8620 Stdlib.Lists.List <> In def
+R8625:8630 Corelib.Lists.ListDef <> firstn def
+R8634:8634 GaC3_V01_VdCSecond_a <> l:61 var
+R8632:8632 GaC3_V01_VdCSecond_a <> H:62 var
+R8622:8622 GaC3_V01_VdCSecond_a <> y:63 var
+R8640:8646 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R8648:8649 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 8647:8647 <> j:64
+R8661:8664 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R8652:8654 Corelib.Init.Peano <> ::nat_scope:x_'<'_x not
+R8651:8651 GaC3_V01_VdCSecond_a <> j:64 var
+R8655:8655 GaC3_V01_VdCSecond_a <> H:62 var
+R8675:8677 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R8665:8667 Corelib.Lists.ListDef <> nth def
+R8673:8674 GaC3_V01_VdCSecond_a <> d0:60 var
+R8671:8671 GaC3_V01_VdCSecond_a <> l:61 var
+R8669:8669 GaC3_V01_VdCSecond_a <> j:64 var
+R8678:8678 GaC3_V01_VdCSecond_a <> y:63 var
+R8768:8773 Corelib.Lists.ListDef <> firstn def
+R8842:8860 GaC3_V01_VdCSecond_a <> GaC3_V01_firstn_nil thm
+R8865:8865 Corelib.Init.Datatypes <> S constr
+R8905:8910 Corelib.Lists.ListDef <> firstn def
+R8995:9000 Corelib.Init.Peano <> le_n_S thm
+R9009:9018 Stdlib.Arith.PeanoNat Nat le_0_l thm
+R9037:9039 Corelib.Lists.ListDef <> nth def
+R9116:9116 Corelib.Init.Datatypes <> S constr
+R9146:9151 Corelib.Init.Peano <> le_n_S thm
+R9180:9182 Corelib.Lists.ListDef <> nth def
+prf 9208:9235 <> GaC3_V01_In_firstn_skipn_nth
+binder 9247:9247 <> A:65
+R9263:9263 GaC3_V01_VdCSecond_a <> A:65 var
+binder 9258:9259 <> d0:66
+R9271:9274 Corelib.Init.Datatypes <> list ind
+R9276:9276 GaC3_V01_VdCSecond_a <> A:65 var
+binder 9267:9267 <> l:67
+R9286:9288 Corelib.Init.Datatypes <> nat ind
+binder 9280:9280 <> p:68
+binder 9282:9282 <> H:69
+R9296:9296 GaC3_V01_VdCSecond_a <> A:65 var
+binder 9292:9292 <> y:70
+R9329:9332 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R9302:9303 Stdlib.Lists.List <> In def
+R9308:9313 Corelib.Lists.ListDef <> firstn def
+R9318:9322 Corelib.Lists.ListDef <> skipn def
+R9326:9326 GaC3_V01_VdCSecond_a <> l:67 var
+R9324:9324 GaC3_V01_VdCSecond_a <> p:68 var
+R9315:9315 GaC3_V01_VdCSecond_a <> H:69 var
+R9305:9305 GaC3_V01_VdCSecond_a <> y:70 var
+R9333:9339 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+R9341:9342 Corelib.Init.Logic <> ::type_scope:'exists'_x_'..'_x_','_x not
+binder 9340:9340 <> j:71
+R9354:9357 Corelib.Init.Logic <> ::type_scope:x_'/\'_x not
+R9345:9347 Corelib.Init.Peano <> ::nat_scope:x_'<'_x not
+R9344:9344 GaC3_V01_VdCSecond_a <> j:71 var
+R9348:9348 GaC3_V01_VdCSecond_a <> H:69 var
+R9380:9382 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R9358:9360 Corelib.Lists.ListDef <> nth def
+R9378:9379 GaC3_V01_VdCSecond_a <> d0:66 var
+R9376:9376 GaC3_V01_VdCSecond_a <> l:67 var
+R9365:9367 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R9364:9364 GaC3_V01_VdCSecond_a <> p:68 var
+R9368:9368 GaC3_V01_VdCSecond_a <> j:71 var
+R9383:9383 GaC3_V01_VdCSecond_a <> y:70 var
+R9432:9453 GaC3_V01_VdCSecond_a <> GaC3_V01_In_firstn_nth thm
+R9461:9465 Corelib.Lists.ListDef <> skipn def
+R9544:9561 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_skipn thm
+def 9831:9843 <> GaC3_V01_qsum
+R9850:9853 Corelib.Init.Datatypes <> list ind
+R9855:9855 Stdlib.QArith.QArith_base <> Q rec
+binder 9846:9846 <> l:72
+R9860:9860 Stdlib.QArith.QArith_base <> Q rec
+R9873:9873 GaC3_V01_VdCSecond_a <> l:72 var
+R9884:9886 Corelib.Init.Datatypes <> nil constr
+R9898:9901 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R9909:9911 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R9912:9924 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum:73 def
+prf 9943:9968 <> GaC3_V01_qplus_eq_compat_l
+R9987:9987 Stdlib.QArith.QArith_base <> Q rec
+binder 9979:9979 <> x:75
+binder 9981:9981 <> y:76
+binder 9983:9983 <> z:77
+R9996:9999 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R9991:9994 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R9990:9990 GaC3_V01_VdCSecond_a <> x:75 var
+R9995:9995 GaC3_V01_VdCSecond_a <> y:76 var
+R10005:10008 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10001:10003 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10000:10000 GaC3_V01_VdCSecond_a <> z:77 var
+R10004:10004 GaC3_V01_VdCSecond_a <> x:75 var
+R10010:10012 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10009:10009 GaC3_V01_VdCSecond_a <> z:77 var
+R10013:10013 GaC3_V01_VdCSecond_a <> y:76 var
+prf 10075:10097 <> GaC3_V01_qplus_exchange
+R10118:10118 Stdlib.QArith.QArith_base <> Q rec
+binder 10108:10108 <> a:78
+binder 10110:10110 <> b:79
+binder 10112:10112 <> c:80
+binder 10114:10114 <> d:81
+R10138:10141 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10121:10121 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10127:10131 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10137:10137 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10123:10125 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10122:10122 GaC3_V01_VdCSecond_a <> a:78 var
+R10126:10126 GaC3_V01_VdCSecond_a <> b:79 var
+R10133:10135 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10132:10132 GaC3_V01_VdCSecond_a <> c:80 var
+R10136:10136 GaC3_V01_VdCSecond_a <> d:81 var
+R10142:10142 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10148:10152 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10158:10158 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10144:10146 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10143:10143 GaC3_V01_VdCSecond_a <> a:78 var
+R10147:10147 GaC3_V01_VdCSecond_a <> c:80 var
+R10154:10156 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10153:10153 GaC3_V01_VdCSecond_a <> b:79 var
+R10157:10157 GaC3_V01_VdCSecond_a <> d:81 var
+prf 10202:10217 <> GaC3_V01_qsum_eq
+R10236:10239 Corelib.Init.Datatypes <> list ind
+R10241:10241 Stdlib.QArith.QArith_base <> Q rec
+binder 10228:10229 <> l1:82
+binder 10231:10232 <> l2:83
+R10253:10256 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10248:10250 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R10246:10247 GaC3_V01_VdCSecond_a <> l1:82 var
+R10251:10252 GaC3_V01_VdCSecond_a <> l2:83 var
+R10273:10276 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10257:10269 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10271:10272 GaC3_V01_VdCSecond_a <> l1:82 var
+R10277:10289 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10291:10292 GaC3_V01_VdCSecond_a <> l2:83 var
+prf 10354:10370 <> GaC3_V01_qsum_app
+R10389:10392 Corelib.Init.Datatypes <> list ind
+R10394:10394 Stdlib.QArith.QArith_base <> Q rec
+binder 10381:10382 <> l1:84
+binder 10384:10385 <> l2:85
+R10423:10426 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10399:10411 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10416:10419 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10414:10415 GaC3_V01_VdCSecond_a <> l1:84 var
+R10420:10421 GaC3_V01_VdCSecond_a <> l2:85 var
+R10443:10445 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10427:10439 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10441:10442 GaC3_V01_VdCSecond_a <> l1:84 var
+R10446:10458 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10460:10461 GaC3_V01_VdCSecond_a <> l2:85 var
+R10521:10523 Corelib.Init.Datatypes <> app def
+R10525:10537 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10556:10558 Corelib.Init.Datatypes <> app def
+R10560:10572 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+prf 10606:10622 <> GaC3_V01_qsum_ext
+R10643:10646 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10640:10642 Corelib.Init.Datatypes <> nat ind
+R10647:10647 Stdlib.QArith.QArith_base <> Q rec
+binder 10634:10634 <> g:86
+binder 10636:10636 <> h:87
+R10657:10659 Corelib.Init.Datatypes <> nat ind
+binder 10651:10651 <> n:88
+binder 10653:10653 <> a:89
+R10665:10665 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10710:10716 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 10673:10673 <> i:90
+R10696:10699 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10678:10681 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R10683:10685 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R10677:10677 GaC3_V01_VdCSecond_a <> a:89 var
+R10682:10682 GaC3_V01_VdCSecond_a <> i:90 var
+R10687:10689 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R10686:10686 GaC3_V01_VdCSecond_a <> a:89 var
+R10690:10690 GaC3_V01_VdCSecond_a <> n:88 var
+R10703:10706 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10700:10700 GaC3_V01_VdCSecond_a <> g:86 var
+R10702:10702 GaC3_V01_VdCSecond_a <> i:90 var
+R10707:10707 GaC3_V01_VdCSecond_a <> h:87 var
+R10709:10709 GaC3_V01_VdCSecond_a <> i:90 var
+R10748:10751 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10717:10729 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10732:10734 Corelib.Lists.ListDef <> map def
+R10739:10741 Corelib.Lists.ListDef <> seq def
+R10745:10745 GaC3_V01_VdCSecond_a <> n:88 var
+R10743:10743 GaC3_V01_VdCSecond_a <> a:89 var
+R10736:10736 GaC3_V01_VdCSecond_a <> g:86 var
+R10752:10764 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10767:10769 Corelib.Lists.ListDef <> map def
+R10774:10776 Corelib.Lists.ListDef <> seq def
+R10780:10780 GaC3_V01_VdCSecond_a <> n:88 var
+R10778:10778 GaC3_V01_VdCSecond_a <> a:89 var
+R10771:10771 GaC3_V01_VdCSecond_a <> h:87 var
+R10890:10892 Corelib.Lists.ListDef <> seq def
+R10894:10896 Corelib.Lists.ListDef <> map def
+R10898:10910 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R10934:10937 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10982:10992 Stdlib.Arith.PeanoNat Nat le_refl thm
+R11011:11024 Stdlib.Arith.PeanoNat Nat add_succ_r thm
+R11033:11038 Corelib.Init.Peano <> le_n_S thm
+R11047:11058 Stdlib.Arith.PeanoNat Nat le_add_r thm
+R11085:11110 GaC3_V01_VdCSecond_a <> GaC3_V01_qplus_eq_compat_l thm
+R11171:11182 Stdlib.Arith.PeanoNat Nat le_trans thm
+R11187:11187 Corelib.Init.Datatypes <> S constr
+R11210:11227 Stdlib.Arith.PeanoNat Nat le_succ_diag_r thm
+R11245:11249 Corelib.Init.Logic <> proj1 thm
+R11270:11283 Stdlib.Arith.PeanoNat Nat add_succ_r thm
+R11293:11297 Corelib.Init.Logic <> proj2 thm
+prf 11316:11336 <> GaC3_V01_qsum_map_add
+R11357:11360 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R11354:11356 Corelib.Init.Datatypes <> nat ind
+R11361:11361 Stdlib.QArith.QArith_base <> Q rec
+binder 11348:11348 <> g:91
+binder 11350:11350 <> h:92
+R11371:11373 Corelib.Init.Datatypes <> nat ind
+binder 11365:11365 <> n:93
+binder 11367:11367 <> a:94
+R11431:11436 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R11379:11391 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R11394:11396 Corelib.Lists.ListDef <> map def
+R11422:11424 Corelib.Lists.ListDef <> seq def
+R11428:11428 GaC3_V01_VdCSecond_a <> n:93 var
+R11426:11426 GaC3_V01_VdCSecond_a <> a:94 var
+binder 11403:11403 <> i:95
+R11411:11413 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R11408:11408 GaC3_V01_VdCSecond_a <> g:91 var
+R11410:11410 GaC3_V01_VdCSecond_a <> i:95 var
+R11414:11414 GaC3_V01_VdCSecond_a <> h:92 var
+R11416:11416 GaC3_V01_VdCSecond_a <> i:95 var
+R11468:11470 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R11437:11449 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R11452:11454 Corelib.Lists.ListDef <> map def
+R11459:11461 Corelib.Lists.ListDef <> seq def
+R11465:11465 GaC3_V01_VdCSecond_a <> n:93 var
+R11463:11463 GaC3_V01_VdCSecond_a <> a:94 var
+R11456:11456 GaC3_V01_VdCSecond_a <> g:91 var
+R11471:11483 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R11486:11488 Corelib.Lists.ListDef <> map def
+R11493:11495 Corelib.Lists.ListDef <> seq def
+R11499:11499 GaC3_V01_VdCSecond_a <> n:93 var
+R11497:11497 GaC3_V01_VdCSecond_a <> a:94 var
+R11490:11490 GaC3_V01_VdCSecond_a <> h:92 var
+R11588:11590 Corelib.Lists.ListDef <> seq def
+R11592:11594 Corelib.Lists.ListDef <> map def
+R11596:11608 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R11627:11629 Corelib.Lists.ListDef <> seq def
+R11631:11633 Corelib.Lists.ListDef <> map def
+R11635:11647 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R11668:11668 Corelib.Init.Datatypes <> S constr
+R11685:11707 GaC3_V01_VdCSecond_a <> GaC3_V01_qplus_exchange thm
+prf 11722:11740 <> GaC3_V01_qsum_map_0
+R11758:11760 Corelib.Init.Datatypes <> nat ind
+binder 11752:11752 <> a:96
+binder 11754:11754 <> n:97
+R11816:11819 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R11766:11778 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R11781:11783 Corelib.Lists.ListDef <> map def
+R11807:11809 Corelib.Lists.ListDef <> seq def
+R11813:11813 GaC3_V01_VdCSecond_a <> n:97 var
+R11811:11811 GaC3_V01_VdCSecond_a <> a:96 var
+R11794:11796 Corelib.Init.Datatypes <> nat ind
+R11915:11917 Corelib.Lists.ListDef <> seq def
+R11919:11921 Corelib.Lists.ListDef <> map def
+R11923:11935 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+prf 11969:11991 <> GaC3_V01_qsum_const_mul
+binder 12003:12003 <> A:98
+R12018:12018 Stdlib.QArith.QArith_base <> Q rec
+binder 12014:12014 <> c:99
+R12026:12029 Corelib.Init.Datatypes <> list ind
+R12031:12031 GaC3_V01_VdCSecond_a <> A:98 var
+binder 12022:12022 <> l:100
+R12071:12074 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R12037:12049 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R12052:12054 Corelib.Lists.ListDef <> map def
+R12069:12069 GaC3_V01_VdCSecond_a <> l:100 var
+R12066:12066 GaC3_V01_VdCSecond_a <> c:99 var
+R12097:12099 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R12075:12085 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R12088:12093 Corelib.Init.Datatypes <> length def
+R12095:12095 GaC3_V01_VdCSecond_a <> l:100 var
+R12100:12100 GaC3_V01_VdCSecond_a <> c:99 var
+R12163:12165 Corelib.Lists.ListDef <> map def
+R12167:12172 Corelib.Init.Datatypes <> length def
+R12174:12184 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R12186:12198 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R12217:12219 Corelib.Lists.ListDef <> map def
+R12221:12226 Corelib.Init.Datatypes <> length def
+R12228:12238 GaC3_V01_VdCSecond_a <> GaC3_V01_qn def
+R12240:12252 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+prf 12286:12301 <> GaC3_V01_qsum_le
+R12322:12325 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12319:12321 Corelib.Init.Datatypes <> nat ind
+R12326:12326 Stdlib.QArith.QArith_base <> Q rec
+binder 12313:12313 <> g:101
+binder 12315:12315 <> h:102
+R12336:12338 Corelib.Init.Datatypes <> nat ind
+binder 12330:12330 <> n:103
+binder 12332:12332 <> a:104
+R12344:12344 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12389:12395 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 12352:12352 <> i:105
+R12375:12378 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12357:12360 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R12362:12364 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R12356:12356 GaC3_V01_VdCSecond_a <> a:104 var
+R12361:12361 GaC3_V01_VdCSecond_a <> i:105 var
+R12366:12368 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R12365:12365 GaC3_V01_VdCSecond_a <> a:104 var
+R12369:12369 GaC3_V01_VdCSecond_a <> n:103 var
+R12382:12385 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R12379:12379 GaC3_V01_VdCSecond_a <> g:101 var
+R12381:12381 GaC3_V01_VdCSecond_a <> i:105 var
+R12386:12386 GaC3_V01_VdCSecond_a <> h:102 var
+R12388:12388 GaC3_V01_VdCSecond_a <> i:105 var
+R12427:12430 Stdlib.QArith.QArith_base <> ::Q_scope:x_'<='_x not
+R12396:12408 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R12411:12413 Corelib.Lists.ListDef <> map def
+R12418:12420 Corelib.Lists.ListDef <> seq def
+R12424:12424 GaC3_V01_VdCSecond_a <> n:103 var
+R12422:12422 GaC3_V01_VdCSecond_a <> a:104 var
+R12415:12415 GaC3_V01_VdCSecond_a <> g:101 var
+R12431:12443 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R12446:12448 Corelib.Lists.ListDef <> map def
+R12453:12455 Corelib.Lists.ListDef <> seq def
+R12459:12459 GaC3_V01_VdCSecond_a <> n:103 var
+R12457:12457 GaC3_V01_VdCSecond_a <> a:104 var
+R12450:12450 GaC3_V01_VdCSecond_a <> h:102 var
+R12553:12560 Stdlib.QArith.QArith_base <> Qle_refl thm
+R12572:12574 Corelib.Lists.ListDef <> seq def
+R12576:12578 Corelib.Lists.ListDef <> map def
+R12580:12592 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R12602:12616 Stdlib.QArith.QArith_base <> Qplus_le_compat thm
+R12657:12667 Stdlib.Arith.PeanoNat Nat le_refl thm
+R12686:12699 Stdlib.Arith.PeanoNat Nat add_succ_r thm
+R12708:12713 Corelib.Init.Peano <> le_n_S thm
+R12722:12733 Stdlib.Arith.PeanoNat Nat le_add_r thm
+R12798:12809 Stdlib.Arith.PeanoNat Nat le_trans thm
+R12814:12814 Corelib.Init.Datatypes <> S constr
+R12840:12857 Stdlib.Arith.PeanoNat Nat le_succ_diag_r thm
+R12878:12882 Corelib.Init.Logic <> proj1 thm
+R12905:12918 Stdlib.Arith.PeanoNat Nat add_succ_r thm
+R12928:12932 Corelib.Init.Logic <> proj2 thm
+prf 12951:12973 <> GaC3_V01_qsum_head_zero
+R12992:12995 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12989:12991 Corelib.Init.Datatypes <> nat ind
+R12996:12996 Stdlib.QArith.QArith_base <> Q rec
+binder 12985:12985 <> g:106
+R13008:13010 Corelib.Init.Datatypes <> nat ind
+binder 13000:13000 <> c:107
+binder 13002:13002 <> M:108
+binder 13004:13004 <> a:109
+R13016:13016 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13059:13065 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 13024:13024 <> i:110
+R13047:13050 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13029:13032 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R13034:13036 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R13028:13028 GaC3_V01_VdCSecond_a <> a:109 var
+R13033:13033 GaC3_V01_VdCSecond_a <> i:110 var
+R13038:13040 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13037:13037 GaC3_V01_VdCSecond_a <> a:109 var
+R13041:13041 GaC3_V01_VdCSecond_a <> c:107 var
+R13054:13057 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13051:13051 GaC3_V01_VdCSecond_a <> g:106 var
+R13053:13053 GaC3_V01_VdCSecond_a <> i:110 var
+R13109:13112 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13066:13078 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R13081:13083 Corelib.Lists.ListDef <> map def
+R13088:13090 Corelib.Lists.ListDef <> seq def
+R13097:13099 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13096:13096 GaC3_V01_VdCSecond_a <> c:107 var
+R13100:13100 GaC3_V01_VdCSecond_a <> M:108 var
+R13092:13092 GaC3_V01_VdCSecond_a <> a:109 var
+R13085:13085 GaC3_V01_VdCSecond_a <> g:106 var
+R13113:13125 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R13128:13130 Corelib.Lists.ListDef <> map def
+R13135:13137 Corelib.Lists.ListDef <> seq def
+R13153:13153 GaC3_V01_VdCSecond_a <> M:108 var
+R13142:13144 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13141:13141 GaC3_V01_VdCSecond_a <> a:109 var
+R13145:13145 GaC3_V01_VdCSecond_a <> c:107 var
+R13132:13132 GaC3_V01_VdCSecond_a <> g:106 var
+R13197:13203 Stdlib.Lists.List <> seq_app thm
+R13221:13227 Stdlib.Lists.List <> map_app thm
+R13238:13254 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_app thm
+R13306:13309 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13275:13287 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R13290:13292 Corelib.Lists.ListDef <> map def
+R13297:13299 Corelib.Lists.ListDef <> seq def
+R13327:13343 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_ext thm
+R13378:13396 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_map_0 thm
+R13460:13468 Stdlib.QArith.QArith_base <> Qplus_0_l thm
+prf 13483:13505 <> GaC3_V01_qsum_tail_zero
+R13524:13527 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13521:13523 Corelib.Init.Datatypes <> nat ind
+R13528:13528 Stdlib.QArith.QArith_base <> Q rec
+binder 13517:13517 <> g:111
+R13540:13542 Corelib.Init.Datatypes <> nat ind
+binder 13532:13532 <> M:112
+binder 13534:13534 <> c:113
+binder 13536:13536 <> a:114
+R13548:13548 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13599:13605 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+binder 13556:13556 <> i:115
+R13587:13590 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R13565:13568 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R13570:13572 Corelib.Init.Peano <> ::nat_scope:x_'<='_x_'<'_x not
+R13561:13563 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13560:13560 GaC3_V01_VdCSecond_a <> a:114 var
+R13564:13564 GaC3_V01_VdCSecond_a <> M:112 var
+R13569:13569 GaC3_V01_VdCSecond_a <> i:115 var
+R13578:13580 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13574:13576 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13573:13573 GaC3_V01_VdCSecond_a <> a:114 var
+R13577:13577 GaC3_V01_VdCSecond_a <> M:112 var
+R13581:13581 GaC3_V01_VdCSecond_a <> c:113 var
+R13594:13597 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13591:13591 GaC3_V01_VdCSecond_a <> g:111 var
+R13593:13593 GaC3_V01_VdCSecond_a <> i:115 var
+R13649:13652 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13606:13618 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R13621:13623 Corelib.Lists.ListDef <> map def
+R13628:13630 Corelib.Lists.ListDef <> seq def
+R13637:13639 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13636:13636 GaC3_V01_VdCSecond_a <> M:112 var
+R13640:13640 GaC3_V01_VdCSecond_a <> c:113 var
+R13632:13632 GaC3_V01_VdCSecond_a <> a:114 var
+R13625:13625 GaC3_V01_VdCSecond_a <> g:111 var
+R13653:13665 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R13668:13670 Corelib.Lists.ListDef <> map def
+R13675:13677 Corelib.Lists.ListDef <> seq def
+R13681:13681 GaC3_V01_VdCSecond_a <> M:112 var
+R13679:13679 GaC3_V01_VdCSecond_a <> a:114 var
+R13672:13672 GaC3_V01_VdCSecond_a <> g:111 var
+R13725:13731 Stdlib.Lists.List <> seq_app thm
+R13749:13755 Stdlib.Lists.List <> map_app thm
+R13766:13782 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_app thm
+R13846:13849 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13803:13815 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R13818:13820 Corelib.Lists.ListDef <> map def
+R13825:13827 Corelib.Lists.ListDef <> seq def
+R13832:13834 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13867:13883 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_ext thm
+R13905:13907 Corelib.Init.Peano <> ::nat_scope:x_'+'_x not
+R13930:13948 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_map_0 thm
+R14012:14020 Stdlib.QArith.QArith_base <> Qplus_0_r thm
+prf 14035:14055 <> GaC3_V01_qsum_seq_rev
+R14074:14077 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R14071:14073 Corelib.Init.Datatypes <> nat ind
+R14078:14078 Stdlib.QArith.QArith_base <> Q rec
+binder 14067:14067 <> g:116
+R14086:14088 Corelib.Init.Datatypes <> nat ind
+binder 14082:14082 <> n:117
+R14150:14153 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R14094:14106 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R14109:14111 Corelib.Lists.ListDef <> map def
+R14141:14143 Corelib.Lists.ListDef <> seq def
+R14147:14147 GaC3_V01_VdCSecond_a <> n:117 var
+binder 14118:14118 <> j:118
+R14123:14123 GaC3_V01_VdCSecond_a <> g:116 var
+R14128:14130 Corelib.Init.Peano <> ::nat_scope:x_'-'_x not
+R14127:14127 GaC3_V01_VdCSecond_a <> n:117 var
+R14131:14131 GaC3_V01_VdCSecond_a <> j:118 var
+R14154:14166 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R14169:14171 Corelib.Lists.ListDef <> map def
+R14176:14178 Corelib.Lists.ListDef <> seq def
+R14182:14182 GaC3_V01_VdCSecond_a <> n:117 var
+R14173:14173 GaC3_V01_VdCSecond_a <> g:116 var
+R14261:14277 GaC3_V01_VdCSecond_a <> GaC3_V01_seq_tail thm
+R14295:14297 Corelib.Lists.ListDef <> seq def
+R14299:14301 Corelib.Lists.ListDef <> map def
+R14303:14315 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R14332:14349 GaC3_V01_VdCSecond_a <> GaC3_V01_map_seq_S thm
+R14351:14351 Stdlib.QArith.QArith_base <> Q rec
+binder 14358:14358 <> j:119
+R14371:14373 Corelib.Init.Peano <> ::nat_scope:x_'-'_x not
+R14367:14367 Corelib.Init.Datatypes <> S constr
+R14374:14374 GaC3_V01_VdCSecond_a <> j:119 var
+binder 14358:14358 <> j:120
+R14374:14374 GaC3_V01_VdCSecond_a <> j:120 var
+binder 14358:14358 <> j:121
+R14374:14374 GaC3_V01_VdCSecond_a <> j:121 var
+R14464:14480 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R14418:14420 Corelib.Lists.ListDef <> map def
+R14455:14457 Corelib.Lists.ListDef <> seq def
+binder 14427:14427 <> i:122
+R14440:14442 Corelib.Init.Peano <> ::nat_scope:x_'-'_x not
+R14436:14436 Corelib.Init.Datatypes <> S constr
+R14443:14443 Corelib.Init.Datatypes <> S constr
+R14445:14445 GaC3_V01_VdCSecond_a <> i:122 var
+R14481:14483 Corelib.Lists.ListDef <> map def
+R14514:14516 Corelib.Lists.ListDef <> seq def
+binder 14490:14490 <> i:123
+R14501:14503 Corelib.Init.Peano <> ::nat_scope:x_'-'_x not
+R14504:14504 GaC3_V01_VdCSecond_a <> i:123 var
+binder 14427:14427 <> i:124
+R14445:14445 GaC3_V01_VdCSecond_a <> i:124 var
+binder 14490:14490 <> i:125
+R14504:14504 GaC3_V01_VdCSecond_a <> i:125 var
+R14538:14544 Stdlib.Lists.List <> map_ext thm
+R14561:14567 Stdlib.Arith.PeanoNat Nat sub def
+R14625:14631 Stdlib.Lists.List <> map_app thm
+R14642:14658 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_app thm
+R14670:14672 Corelib.Lists.ListDef <> map def
+R14674:14686 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R14688:14694 Stdlib.Arith.PeanoNat Nat sub def
+R14696:14702 Stdlib.Arith.PeanoNat Nat add def
+prf 14724:14743 <> GaC3_V01_nth_seq_sum
+binder 14755:14755 <> A:126
+R14771:14774 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R14770:14770 GaC3_V01_VdCSecond_a <> A:126 var
+R14775:14775 Stdlib.QArith.QArith_base <> Q rec
+binder 14766:14766 <> f:127
+R14783:14786 Corelib.Init.Datatypes <> list ind
+R14788:14788 GaC3_V01_VdCSecond_a <> A:126 var
+binder 14779:14779 <> l:128
+R14797:14797 GaC3_V01_VdCSecond_a <> A:126 var
+binder 14792:14793 <> d0:129
+R14867:14870 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R14803:14815 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R14818:14820 Corelib.Lists.ListDef <> map def
+R14849:14851 Corelib.Lists.ListDef <> seq def
+R14856:14861 Corelib.Init.Datatypes <> length def
+R14863:14863 GaC3_V01_VdCSecond_a <> l:128 var
+binder 14827:14827 <> i:130
+R14832:14832 GaC3_V01_VdCSecond_a <> f:127 var
+R14835:14837 Corelib.Lists.ListDef <> nth def
+R14843:14844 GaC3_V01_VdCSecond_a <> d0:129 var
+R14841:14841 GaC3_V01_VdCSecond_a <> l:128 var
+R14839:14839 GaC3_V01_VdCSecond_a <> i:130 var
+R14871:14883 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R14886:14888 Corelib.Lists.ListDef <> map def
+R14892:14892 GaC3_V01_VdCSecond_a <> l:128 var
+R14890:14890 GaC3_V01_VdCSecond_a <> f:127 var
+R14983:14988 Corelib.Init.Datatypes <> length def
+R14990:14992 Corelib.Lists.ListDef <> seq def
+R14994:14996 Corelib.Lists.ListDef <> map def
+R14998:15010 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum def
+R15027:15044 GaC3_V01_VdCSecond_a <> GaC3_V01_map_seq_S thm
+R15046:15046 Stdlib.QArith.QArith_base <> Q rec
+binder 15053:15053 <> i:131
+R15061:15063 Corelib.Lists.ListDef <> nth def
+R15069:15072 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R15065:15065 GaC3_V01_VdCSecond_a <> i:131 var
+R15083:15088 Corelib.Init.Datatypes <> length def
+binder 15053:15053 <> i:132
+R15065:15065 GaC3_V01_VdCSecond_a <> i:132 var
+binder 15053:15053 <> i:133
+R15065:15065 GaC3_V01_VdCSecond_a <> i:133 var
+R15115:15117 Corelib.Lists.ListDef <> nth def

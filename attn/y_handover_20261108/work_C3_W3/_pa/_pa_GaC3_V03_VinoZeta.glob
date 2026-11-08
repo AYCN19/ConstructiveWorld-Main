@@ -1,0 +1,14 @@
+DIGEST 8004fa1ad1df0b44d2e4237b43db052f
+F_pa._pa_GaC3_V03_VinoZeta
+R15:31 GaC3_V03_VinoZeta <> <> lib
+R52:65 GaC3_V03_VinoZeta <> v03_qsq_nonneg thm
+R86:102 GaC3_V03_VinoZeta <> v03_qsqsum_nonneg thm
+R123:140 GaC3_V03_VinoZeta <> v03_norm_sq_dilute thm
+R161:178 GaC3_V03_VinoZeta <> v03_plus_opp_split thm
+R199:206 GaC3_V03_VinoZeta <> v03_H2le thm
+R227:235 GaC3_V03_VinoZeta <> v03_Wfold thm
+R256:265 GaC3_V03_VinoZeta <> v03_H16pos thm
+R286:298 GaC3_V03_VinoZeta <> v03_Hltau1pos thm
+R319:328 GaC3_V03_VinoZeta <> v03_Hllpos thm
+R349:367 GaC3_V03_VinoZeta <> v03_zeta_1line_vino thm
+R388:412 GaC3_V03_VinoZeta <> v03_zeta_deriv_1line_vino thm

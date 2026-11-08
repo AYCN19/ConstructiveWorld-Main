@@ -1,0 +1,33 @@
+DIGEST 8c1de578c524499a84ee0b797691dd2b
+F_pa._pa_GaC3_V01_VdCSecond_a
+R15:34 GaC3_V01_VdCSecond_a <> <> lib
+R55:69 GaC3_V01_VdCSecond_a <> GaC3_V01_qn_pos thm
+R90:105 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_nil thm
+R126:144 GaC3_V01_VdCSecond_a <> GaC3_V01_firstn_nil thm
+R165:182 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_nil thm
+R203:224 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_nil_inv thm
+R245:262 GaC3_V01_VdCSecond_a <> GaC3_V01_seq_S_map thm
+R283:299 GaC3_V01_VdCSecond_a <> GaC3_V01_seq_tail thm
+R320:337 GaC3_V01_VdCSecond_a <> GaC3_V01_map_seq_S thm
+R358:379 GaC3_V01_VdCSecond_a <> GaC3_V01_map_seq_shift thm
+R400:417 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_skipn thm
+R438:456 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_firstn thm
+R477:501 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_firstn_skipn thm
+R522:543 GaC3_V01_VdCSecond_a <> GaC3_V01_firstn_S_tail thm
+R564:586 GaC3_V01_VdCSecond_a <> GaC3_V01_skipn_head_nth thm
+R607:623 GaC3_V01_VdCSecond_a <> GaC3_V01_tl_skipn thm
+R644:665 GaC3_V01_VdCSecond_a <> GaC3_V01_In_firstn_nth thm
+R686:713 GaC3_V01_VdCSecond_a <> GaC3_V01_In_firstn_skipn_nth thm
+R734:759 GaC3_V01_VdCSecond_a <> GaC3_V01_qplus_eq_compat_l thm
+R780:802 GaC3_V01_VdCSecond_a <> GaC3_V01_qplus_exchange thm
+R823:838 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_eq thm
+R859:875 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_app thm
+R896:912 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_ext thm
+R933:953 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_map_add thm
+R974:992 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_map_0 thm
+R1013:1035 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_const_mul thm
+R1056:1071 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_le thm
+R1092:1114 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_head_zero thm
+R1135:1157 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_tail_zero thm
+R1178:1198 GaC3_V01_VdCSecond_a <> GaC3_V01_qsum_seq_rev thm
+R1219:1238 GaC3_V01_VdCSecond_a <> GaC3_V01_nth_seq_sum thm

@@ -1,0 +1,5 @@
+DIGEST 3375fae7d875a38b753b58e6bde09866
+Fwork_C3_W3._pa._pa_GaC3_Z04_ZetaMainPart_cert
+R15:40 GaC3_Z04_ZetaMainPart_cert <> <> lib
+R61:77 GaC3_Z04_ZetaMainPart_cert <> z04_cert_all_true thm
+R98:113 GaC3_Z04_ZetaMainPart_cert <> z04_cert_true_eq thm

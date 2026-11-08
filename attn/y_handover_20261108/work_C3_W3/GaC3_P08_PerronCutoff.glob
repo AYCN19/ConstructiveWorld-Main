@@ -1,0 +1,560 @@
+DIGEST 200b6fc77a0f042be1e88896a5b11dea
+FGaC3_P08_PerronCutoff
+R3040:3051 S01_BaseRing <> <> lib
+R3232:3243 S01_BaseRing <> <> mod
+R3293:3310 S02_CauchyComplete <> <> lib
+R3328:3335 S03_QExp <> <> lib
+R3353:3372 S07_RealSetoidExpLog <> <> lib
+R3390:3402 GaC2_Iface_DS <> <> lib
+R3412:3437 GaC2_02_AbsConvTailBound_a <> <> mod
+R3455:3477 GaC3_Z01_LogDerivSeries <> <> lib
+R3495:3514 GaC3_P07_PowerGrowth <> <> lib
+R3544:3556 Stdlib.QArith.QArith <> <> lib
+R3558:3568 Stdlib.QArith.Qabs <> <> lib
+R3598:3608 Stdlib.Arith.Arith <> <> lib
+R3638:3640 Stdlib.micromega.Lia <> <> lib
+prf 3745:3764 <> GaC3_P08_mult_zero_l
+R3779:3782 S02_CauchyComplete <> Real def
+binder 3775:3775 <> x:1
+R3787:3793 S02_CauchyComplete <> real_eq def
+R3796:3804 S02_CauchyComplete <> real_mult def
+R3806:3814 S02_CauchyComplete <> real_zero def
+R3816:3816 GaC3_P08_PerronCutoff <> x:1 var
+R3819:3827 S02_CauchyComplete <> real_zero def
+R3857:3869 S02_CauchyComplete <> real_eq_trans thm
+R3872:3880 S02_CauchyComplete <> real_mult def
+R3882:3890 S02_CauchyComplete <> real_zero def
+R3896:3904 S02_CauchyComplete <> real_mult def
+R3908:3916 S02_CauchyComplete <> real_zero def
+R3919:3927 S02_CauchyComplete <> real_zero def
+R3941:3954 S02_CauchyComplete <> real_mult_comm thm
+R3967:3980 S02_CauchyComplete <> real_mult_zero thm
+prf 4053:4068 <> GaC3_P08_sub_ge0
+R4085:4088 S02_CauchyComplete <> Real def
+binder 4079:4079 <> a:2
+binder 4081:4081 <> b:3
+R4104:4107 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4093:4099 S02_CauchyComplete <> real_le def
+R4101:4101 GaC3_P08_PerronCutoff <> b:3 var
+R4103:4103 GaC3_P08_PerronCutoff <> a:2 var
+R4108:4114 S02_CauchyComplete <> real_le def
+R4116:4124 S02_CauchyComplete <> real_zero def
+R4127:4135 S02_CauchyComplete <> real_plus def
+R4137:4137 GaC3_P08_PerronCutoff <> a:2 var
+R4140:4147 S02_CauchyComplete <> real_opp def
+R4149:4149 GaC3_P08_PerronCutoff <> b:3 var
+R4188:4200 S02_CauchyComplete <> real_le_trans thm
+R4202:4210 S02_CauchyComplete <> real_zero def
+R4224:4232 S02_CauchyComplete <> real_plus def
+R4237:4244 S02_CauchyComplete <> real_opp def
+R4262:4270 S02_CauchyComplete <> real_plus def
+R4275:4282 S02_CauchyComplete <> real_opp def
+R4300:4309 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R4318:4328 S02_CauchyComplete <> real_eq_sym thm
+R4337:4349 S02_CauchyComplete <> real_plus_opp thm
+R4362:4380 S07_RealSetoidExpLog <> real_le_plus_compat thm
+R4403:4414 S02_CauchyComplete <> real_le_refl thm
+sec 4663:4671 <> P08Cutoff
+var 4684:4688 P08Cutoff Hnpos
+R4703:4705 Corelib.Init.Datatypes <> nat ind
+binder 4699:4699 <> n:4
+R4717:4720 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4708:4712 S01_BaseRing <> NatLe def
+R4716:4716 GaC3_P08_PerronCutoff <> n:4 var
+R4721:4727 S02_CauchyComplete <> real_lt def
+R4729:4737 S02_CauchyComplete <> real_zero def
+R4740:4747 GaC2_01_DirichletPartialSum <> nat_real def
+R4749:4749 GaC3_P08_PerronCutoff <> n:4 var
+var 4762:4763 P08Cutoff xk
+R4767:4769 Corelib.Init.Datatypes <> nat ind
+var 4783:4786 P08Cutoff Hxk1
+R4790:4794 S01_BaseRing <> NatLe def
+R4798:4799 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+var 4811:4811 P08Cutoff c
+var 4813:4813 P08Cutoff T
+R4817:4820 S02_CauchyComplete <> Real def
+var 4834:4836 P08Cutoff Hc1
+R4840:4846 S02_CauchyComplete <> real_lt def
+R4848:4855 S02_CauchyComplete <> real_one def
+R4857:4857 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+var 4871:4873 P08Cutoff HT0
+R4877:4883 S02_CauchyComplete <> real_lt def
+R4885:4893 S02_CauchyComplete <> real_zero def
+R4895:4895 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+def 4982:4993 <> GaC3_P08_lnR
+R5000:5002 Corelib.Init.Datatypes <> nat ind
+binder 4996:4996 <> n:19
+R5011:5015 S01_BaseRing <> NatLe def
+R5019:5019 GaC3_P08_PerronCutoff <> n:19 var
+binder 5006:5007 <> Hn:20
+R5024:5027 S02_CauchyComplete <> Real def
+R5034:5041 S07_RealSetoidExpLog <> real_log def
+R5044:5051 GaC2_01_DirichletPartialSum <> nat_real def
+R5053:5053 GaC3_P08_PerronCutoff <> n:19 var
+R5057:5061 GaC3_P08_PerronCutoff <> P08Cutoff.Hnpos var
+R5063:5063 GaC3_P08_PerronCutoff <> n:19 var
+R5065:5066 GaC3_P08_PerronCutoff <> Hn:20 var
+prf 5173:5188 <> GaC3_P08_lnR_ge0
+R5204:5206 Corelib.Init.Datatypes <> nat ind
+binder 5200:5200 <> n:21
+R5215:5219 S01_BaseRing <> NatLe def
+R5223:5223 GaC3_P08_PerronCutoff <> n:21 var
+binder 5210:5211 <> Hn:22
+R5229:5235 S02_CauchyComplete <> real_le def
+R5237:5245 S02_CauchyComplete <> real_zero def
+R5248:5259 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R5261:5261 GaC3_P08_PerronCutoff <> n:21 var
+R5263:5264 GaC3_P08_PerronCutoff <> Hn:22 var
+R5324:5341 GaC2_01_DirichletPartialSum <> NatLe_1_zero_empty thm
+R5359:5371 S02_CauchyComplete <> real_le_trans thm
+R5373:5381 S02_CauchyComplete <> real_zero def
+R5397:5408 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R5413:5423 GaC2_01_DirichletPartialSum <> NatLe_one_S thm
+R5443:5454 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R5457:5457 Corelib.Init.Datatypes <> S constr
+R5480:5489 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R5505:5517 S02_CauchyComplete <> real_eq_trans thm
+R5519:5527 S02_CauchyComplete <> real_zero def
+R5530:5537 S07_RealSetoidExpLog <> real_log def
+R5539:5546 S02_CauchyComplete <> real_one def
+R5548:5563 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R5582:5593 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R5598:5608 GaC2_01_DirichletPartialSum <> NatLe_one_S thm
+R5630:5640 S02_CauchyComplete <> real_eq_sym thm
+R5649:5660 S07_RealSetoidExpLog <> real_log_one thm
+R5677:5687 S02_CauchyComplete <> real_eq_sym thm
+R5705:5715 GaC2_02_AbsConvTailBound_a <> real_log_wd thm
+R5718:5725 GaC2_01_DirichletPartialSum <> nat_real def
+R5730:5737 S02_CauchyComplete <> real_one def
+R5757:5761 GaC3_P08_PerronCutoff <> P08Cutoff.Hnpos var
+R5766:5776 GaC2_01_DirichletPartialSum <> NatLe_one_S thm
+R5782:5797 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R5799:5810 GaC2_02_AbsConvTailBound_a <> nat_real_one thm
+R5826:5840 GaC3_Z01_LogDerivSeries <> z01_log_le_mono thm
+R5855:5868 GaC3_Z01_LogDerivSeries <> z01_natreal_le thm
+def 6047:6062 <> GaC3_P08_ln_dist
+R6069:6071 Corelib.Init.Datatypes <> nat ind
+binder 6065:6065 <> n:23
+R6080:6084 S01_BaseRing <> NatLe def
+R6088:6088 GaC3_P08_PerronCutoff <> n:23 var
+binder 6075:6076 <> Hn:24
+R6093:6096 S02_CauchyComplete <> Real def
+R6106:6112 Stdlib.Arith.PeanoNat Nat leb def
+R6114:6114 GaC3_P08_PerronCutoff <> n:23 var
+R6116:6117 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6197:6205 S02_CauchyComplete <> real_plus def
+R6208:6219 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R6221:6221 GaC3_P08_PerronCutoff <> n:23 var
+R6223:6224 GaC3_P08_PerronCutoff <> Hn:24 var
+R6228:6235 S02_CauchyComplete <> real_opp def
+R6238:6249 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R6251:6252 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6254:6257 GaC3_P08_PerronCutoff <> P08Cutoff.Hxk1 var
+R6126:6134 S02_CauchyComplete <> real_plus def
+R6137:6148 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R6150:6151 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6153:6156 GaC3_P08_PerronCutoff <> P08Cutoff.Hxk1 var
+R6160:6167 S02_CauchyComplete <> real_opp def
+R6170:6181 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R6183:6183 GaC3_P08_PerronCutoff <> n:23 var
+R6185:6186 GaC3_P08_PerronCutoff <> Hn:24 var
+prf 6392:6411 <> GaC3_P08_ln_dist_ge0
+R6427:6429 Corelib.Init.Datatypes <> nat ind
+binder 6423:6423 <> n:25
+R6438:6442 S01_BaseRing <> NatLe def
+R6446:6446 GaC3_P08_PerronCutoff <> n:25 var
+binder 6433:6434 <> Hn:26
+R6452:6458 S02_CauchyComplete <> real_le def
+R6460:6468 S02_CauchyComplete <> real_zero def
+R6471:6486 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R6488:6488 GaC3_P08_PerronCutoff <> n:25 var
+R6490:6491 GaC3_P08_PerronCutoff <> Hn:26 var
+R6524:6539 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R6554:6560 Stdlib.Arith.PeanoNat Nat leb def
+R6564:6565 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6598:6601 Corelib.Init.Peano <> ::nat_scope:x_'<='_x not
+R6602:6603 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6621:6625 Corelib.Init.Logic <> proj1 thm
+R6628:6637 Stdlib.Arith.PeanoNat Nat leb_le thm
+R6641:6642 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6662:6677 GaC3_P08_PerronCutoff <> GaC3_P08_sub_ge0 thm
+R6690:6704 GaC3_Z01_LogDerivSeries <> z01_log_le_mono thm
+R6717:6730 GaC3_Z01_LogDerivSeries <> z01_natreal_le thm
+R6765:6767 Corelib.Init.Peano <> ::nat_scope:x_'<'_x not
+R6763:6764 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6786:6790 Corelib.Init.Logic <> proj1 thm
+R6793:6802 Stdlib.Arith.PeanoNat Nat leb_gt thm
+R6806:6807 GaC3_P08_PerronCutoff <> P08Cutoff.xk var
+R6827:6842 GaC3_P08_PerronCutoff <> GaC3_P08_sub_ge0 thm
+R6855:6869 GaC3_Z01_LogDerivSeries <> z01_log_le_mono thm
+R6882:6895 GaC3_Z01_LogDerivSeries <> z01_natreal_le thm
+def 7367:7379 <> GaC3_P08_powR
+R7386:7388 Corelib.Init.Datatypes <> nat ind
+binder 7382:7382 <> n:27
+R7397:7401 S01_BaseRing <> NatLe def
+R7405:7405 GaC3_P08_PerronCutoff <> n:27 var
+binder 7392:7393 <> Hn:28
+R7410:7413 S02_CauchyComplete <> Real def
+R7420:7433 GaC3_P07_PowerGrowth <> GaC3_P07_cpowR def
+R7436:7443 GaC2_01_DirichletPartialSum <> nat_real def
+R7445:7445 GaC3_P08_PerronCutoff <> n:27 var
+R7449:7453 GaC3_P08_PerronCutoff <> P08Cutoff.Hnpos var
+R7455:7455 GaC3_P08_PerronCutoff <> n:27 var
+R7457:7458 GaC3_P08_PerronCutoff <> Hn:28 var
+R7461:7461 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+prf 7471:7487 <> GaC3_P08_powR_pos
+R7503:7505 Corelib.Init.Datatypes <> nat ind
+binder 7499:7499 <> n:29
+R7514:7518 S01_BaseRing <> NatLe def
+R7522:7522 GaC3_P08_PerronCutoff <> n:29 var
+binder 7509:7510 <> Hn:30
+R7528:7534 S02_CauchyComplete <> real_lt def
+R7536:7544 S02_CauchyComplete <> real_zero def
+R7547:7559 GaC3_P08_PerronCutoff <> GaC3_P08_powR def
+R7561:7561 GaC3_P08_PerronCutoff <> n:29 var
+R7563:7564 GaC3_P08_PerronCutoff <> Hn:30 var
+R7597:7609 GaC3_P08_PerronCutoff <> GaC3_P08_powR def
+R7612:7625 GaC3_P07_PowerGrowth <> GaC3_P07_cpowR def
+R7636:7654 S03_QExp <> cauchy_real_exp_pos thm
+prf 7695:7708 <> GaC3_P08_c_pos
+R7712:7718 S02_CauchyComplete <> real_lt def
+R7720:7728 S02_CauchyComplete <> real_zero def
+R7730:7730 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R7749:7764 S02_CauchyComplete <> real_lt_le_trans thm
+R7766:7774 S02_CauchyComplete <> real_zero def
+R7776:7783 S02_CauchyComplete <> real_one def
+R7785:7785 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R7799:7814 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R7828:7841 S02_CauchyComplete <> real_lt_le_iff thm
+R7843:7850 S02_CauchyComplete <> real_one def
+R7852:7852 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R7868:7870 GaC3_P08_PerronCutoff <> P08Cutoff.Hc1 var
+prf 7962:7978 <> GaC3_P08_powR_ge1
+R7994:7996 Corelib.Init.Datatypes <> nat ind
+binder 7990:7990 <> n:31
+R8005:8009 S01_BaseRing <> NatLe def
+R8013:8013 GaC3_P08_PerronCutoff <> n:31 var
+binder 8000:8001 <> Hn:32
+R8019:8025 S02_CauchyComplete <> real_le def
+R8027:8034 S02_CauchyComplete <> real_one def
+R8037:8049 GaC3_P08_PerronCutoff <> GaC3_P08_powR def
+R8051:8051 GaC3_P08_PerronCutoff <> n:31 var
+R8053:8054 GaC3_P08_PerronCutoff <> Hn:32 var
+R8097:8103 S02_CauchyComplete <> real_le def
+R8105:8113 S02_CauchyComplete <> real_zero def
+R8116:8124 S02_CauchyComplete <> real_mult def
+R8126:8126 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R8129:8140 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R8162:8186 S07_RealSetoidExpLog RealSetoid real_le_compat thm
+R8189:8197 S02_CauchyComplete <> real_mult def
+R8199:8207 S02_CauchyComplete <> real_zero def
+R8210:8221 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R8243:8251 S02_CauchyComplete <> real_zero def
+R8267:8275 S02_CauchyComplete <> real_mult def
+R8277:8277 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R8280:8291 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R8314:8322 S02_CauchyComplete <> real_mult def
+R8324:8324 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R8327:8338 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R8361:8380 GaC3_P08_PerronCutoff <> GaC3_P08_mult_zero_l thm
+R8395:8406 S02_CauchyComplete <> real_eq_refl thm
+R8421:8444 S07_RealSetoidExpLog <> real_le_mult_compat_weak thm
+R8462:8477 GaC3_P08_PerronCutoff <> GaC3_P08_lnR_ge0 thm
+R8501:8514 S02_CauchyComplete <> real_lt_le_iff thm
+R8516:8524 S02_CauchyComplete <> real_zero def
+R8526:8526 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R8542:8555 GaC3_P08_PerronCutoff <> GaC3_P08_c_pos thm
+R8569:8581 GaC3_P08_PerronCutoff <> GaC3_P08_powR def
+R8584:8597 GaC3_P07_PowerGrowth <> GaC3_P07_cpowR def
+R8609:8615 S02_CauchyComplete <> real_le def
+R8669:8682 S02_CauchyComplete <> real_lt_le_iff thm
+R8684:8691 S02_CauchyComplete <> real_one def
+R8712:8724 S02_CauchyComplete <> real_eq_lt_lt thm
+R8726:8733 S02_CauchyComplete <> real_one def
+R8736:8750 S03_QExp <> cauchy_real_exp def
+R8752:8760 S02_CauchyComplete <> real_zero def
+R8777:8791 S03_QExp <> cauchy_real_exp def
+R8794:8802 S02_CauchyComplete <> real_mult def
+R8804:8804 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R8807:8818 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R8842:8852 S02_CauchyComplete <> real_eq_sym thm
+R8861:8880 S03_QExp <> cauchy_real_exp_zero thm
+R8895:8914 S07_RealSetoidExpLog <> cauchy_real_exp_mono thm
+R8938:8947 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R8960:8970 S02_CauchyComplete <> real_eq_sym thm
+R8984:8996 S02_CauchyComplete <> real_eq_trans thm
+R8999:9013 S03_QExp <> cauchy_real_exp def
+R9016:9024 S02_CauchyComplete <> real_mult def
+R9026:9026 GaC3_P08_PerronCutoff <> P08Cutoff.c var
+R9029:9040 GaC3_P08_PerronCutoff <> GaC3_P08_lnR def
+R9064:9078 S03_QExp <> cauchy_real_exp def
+R9080:9088 S02_CauchyComplete <> real_zero def
+R9091:9098 S02_CauchyComplete <> real_one def
+R9114:9131 S07_RealSetoidExpLog <> cauchy_real_exp_wd thm
+R9141:9151 S02_CauchyComplete <> real_eq_sym thm
+R9175:9194 S03_QExp <> cauchy_real_exp_zero thm
+prf 9439:9454 <> GaC3_P08_inv_one
+R9458:9464 S02_CauchyComplete <> real_eq def
+R9467:9478 S03_QExp <> real_inv_pos def
+R9480:9487 S02_CauchyComplete <> real_one def
+R9489:9504 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R9507:9514 S02_CauchyComplete <> real_one def
+R9533:9547 S07_RealSetoidExpLog <> real_inv_unique thm
+R9549:9556 S02_CauchyComplete <> real_one def
+R9559:9570 S03_QExp <> real_inv_pos def
+R9572:9579 S02_CauchyComplete <> real_one def
+R9581:9596 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R9599:9606 S02_CauchyComplete <> real_one def
+R9621:9640 S03_QExp <> real_inv_pos_correct thm
+R9642:9649 S02_CauchyComplete <> real_one def
+R9651:9666 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R9680:9692 S02_CauchyComplete <> real_mult_one thm
+prf 9820:9842 <> GaC3_P08_inv_ge1_le_one
+R9858:9861 S02_CauchyComplete <> Real def
+binder 9854:9854 <> u:33
+R9870:9876 S02_CauchyComplete <> real_lt def
+R9878:9886 S02_CauchyComplete <> real_zero def
+R9888:9888 GaC3_P08_PerronCutoff <> u:33 var
+binder 9865:9866 <> Hu:34
+R9901:9907 S02_CauchyComplete <> real_le def
+R9909:9916 S02_CauchyComplete <> real_one def
+R9918:9918 GaC3_P08_PerronCutoff <> u:33 var
+binder 9896:9897 <> H1:35
+R9924:9930 S02_CauchyComplete <> real_le def
+R9933:9944 S03_QExp <> real_inv_pos def
+R9946:9946 GaC3_P08_PerronCutoff <> u:33 var
+R9948:9949 GaC3_P08_PerronCutoff <> Hu:34 var
+R9952:9959 S02_CauchyComplete <> real_one def
+R9994:10000 S02_CauchyComplete <> real_le def
+R10048:10061 S02_CauchyComplete <> real_lt_le_iff thm
+R10064:10075 S03_QExp <> real_inv_pos def
+R10102:10117 S02_CauchyComplete <> real_lt_le_trans thm
+R10120:10131 S03_QExp <> real_inv_pos def
+R10153:10164 S03_QExp <> real_inv_pos def
+R10166:10173 S02_CauchyComplete <> real_one def
+R10175:10190 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R10193:10200 S02_CauchyComplete <> real_one def
+R10217:10238 S07_RealSetoidExpLog <> real_inv_pos_lt_contra thm
+R10240:10247 S02_CauchyComplete <> real_one def
+R10251:10266 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R10296:10305 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R10314:10329 GaC3_P08_PerronCutoff <> GaC3_P08_inv_one thm
+R10342:10351 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R10365:10377 S02_CauchyComplete <> real_eq_trans thm
+R10380:10391 S03_QExp <> real_inv_pos def
+R10413:10424 S03_QExp <> real_inv_pos def
+R10426:10433 S02_CauchyComplete <> real_one def
+R10435:10450 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R10453:10460 S02_CauchyComplete <> real_one def
+R10477:10491 S07_RealSetoidExpLog <> real_inv_unique thm
+R10496:10507 S03_QExp <> real_inv_pos def
+R10531:10542 S03_QExp <> real_inv_pos def
+R10544:10551 S02_CauchyComplete <> real_one def
+R10553:10568 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R10588:10607 S03_QExp <> real_inv_pos_correct thm
+R10631:10643 S02_CauchyComplete <> real_eq_trans thm
+R10646:10654 S02_CauchyComplete <> real_mult def
+R10659:10670 S03_QExp <> real_inv_pos def
+R10672:10679 S02_CauchyComplete <> real_one def
+R10681:10696 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R10718:10726 S02_CauchyComplete <> real_mult def
+R10728:10735 S02_CauchyComplete <> real_one def
+R10738:10749 S03_QExp <> real_inv_pos def
+R10751:10758 S02_CauchyComplete <> real_one def
+R10760:10775 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R10796:10803 S02_CauchyComplete <> real_one def
+R10823:10852 S07_RealSetoidExpLog RealSetoid real_eq_mult_compat thm
+R10874:10884 S02_CauchyComplete <> real_eq_sym thm
+R10886:10893 S02_CauchyComplete <> real_one def
+R10923:10934 S02_CauchyComplete <> real_eq_refl thm
+R10958:10970 S02_CauchyComplete <> real_eq_trans thm
+R10992:11000 S02_CauchyComplete <> real_mult def
+R11002:11009 S02_CauchyComplete <> real_one def
+R11012:11023 S03_QExp <> real_inv_pos def
+R11025:11032 S02_CauchyComplete <> real_one def
+R11034:11049 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R11073:11081 S02_CauchyComplete <> real_mult def
+R11083:11090 S02_CauchyComplete <> real_one def
+R11092:11099 S02_CauchyComplete <> real_one def
+R11102:11109 S02_CauchyComplete <> real_one def
+R11131:11160 S07_RealSetoidExpLog RealSetoid real_eq_mult_compat thm
+R11183:11194 S02_CauchyComplete <> real_eq_refl thm
+R11219:11234 GaC3_P08_PerronCutoff <> GaC3_P08_inv_one thm
+R11259:11271 S02_CauchyComplete <> real_mult_one thm
+R11290:11305 GaC3_P08_PerronCutoff <> GaC3_P08_inv_one thm
+def 11375:11386 <> GaC3_P08_den
+R11393:11395 Corelib.Init.Datatypes <> nat ind
+binder 11389:11389 <> n:36
+R11404:11408 S01_BaseRing <> NatLe def
+R11412:11412 GaC3_P08_PerronCutoff <> n:36 var
+binder 11399:11400 <> Hn:37
+R11417:11420 S02_CauchyComplete <> Real def
+R11427:11435 S02_CauchyComplete <> real_plus def
+R11437:11444 S02_CauchyComplete <> real_one def
+R11447:11455 S02_CauchyComplete <> real_mult def
+R11457:11457 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R11460:11475 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R11477:11477 GaC3_P08_PerronCutoff <> n:36 var
+R11479:11480 GaC3_P08_PerronCutoff <> Hn:37 var
+prf 11492:11507 <> GaC3_P08_den_ge1
+R11523:11525 Corelib.Init.Datatypes <> nat ind
+binder 11519:11519 <> n:38
+R11534:11538 S01_BaseRing <> NatLe def
+R11542:11542 GaC3_P08_PerronCutoff <> n:38 var
+binder 11529:11530 <> Hn:39
+R11548:11554 S02_CauchyComplete <> real_le def
+R11556:11563 S02_CauchyComplete <> real_one def
+R11566:11577 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R11579:11579 GaC3_P08_PerronCutoff <> n:38 var
+R11581:11582 GaC3_P08_PerronCutoff <> Hn:39 var
+R11615:11626 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R11638:11662 S07_RealSetoidExpLog RealSetoid real_le_compat thm
+R11665:11673 S02_CauchyComplete <> real_plus def
+R11675:11682 S02_CauchyComplete <> real_one def
+R11684:11692 S02_CauchyComplete <> real_zero def
+R11695:11702 S02_CauchyComplete <> real_one def
+R11716:11724 S02_CauchyComplete <> real_plus def
+R11726:11733 S02_CauchyComplete <> real_one def
+R11736:11744 S02_CauchyComplete <> real_mult def
+R11746:11746 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R11749:11764 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R11786:11794 S02_CauchyComplete <> real_plus def
+R11796:11803 S02_CauchyComplete <> real_one def
+R11806:11814 S02_CauchyComplete <> real_mult def
+R11816:11816 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R11819:11834 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R11856:11872 GaC2_02_AbsConvTailBound_a <> r_plus_zero_r_gen thm
+R11885:11896 S02_CauchyComplete <> real_eq_refl thm
+R11909:11927 S07_RealSetoidExpLog <> real_le_plus_compat thm
+R11942:11953 S02_CauchyComplete <> real_le_refl thm
+R11969:11993 S07_RealSetoidExpLog RealSetoid real_le_compat thm
+R12011:12019 S02_CauchyComplete <> real_mult def
+R12021:12029 S02_CauchyComplete <> real_zero def
+R12032:12047 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R12056:12064 S02_CauchyComplete <> real_zero def
+R12082:12090 S02_CauchyComplete <> real_mult def
+R12092:12092 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R12095:12110 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R12135:12143 S02_CauchyComplete <> real_mult def
+R12145:12145 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R12148:12163 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R12188:12207 GaC3_P08_PerronCutoff <> GaC3_P08_mult_zero_l thm
+R12224:12235 S02_CauchyComplete <> real_eq_refl thm
+R12252:12275 S07_RealSetoidExpLog <> real_le_mult_compat_weak thm
+R12295:12314 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist_ge0 thm
+R12342:12355 S02_CauchyComplete <> real_lt_le_iff thm
+R12357:12365 S02_CauchyComplete <> real_zero def
+R12367:12367 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R12383:12385 GaC3_P08_PerronCutoff <> P08Cutoff.HT0 var
+prf 12402:12417 <> GaC3_P08_den_pos
+R12433:12435 Corelib.Init.Datatypes <> nat ind
+binder 12429:12429 <> n:40
+R12444:12448 S01_BaseRing <> NatLe def
+R12452:12452 GaC3_P08_PerronCutoff <> n:40 var
+binder 12439:12440 <> Hn:41
+R12458:12464 S02_CauchyComplete <> real_lt def
+R12466:12474 S02_CauchyComplete <> real_zero def
+R12477:12488 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R12490:12490 GaC3_P08_PerronCutoff <> n:40 var
+R12492:12493 GaC3_P08_PerronCutoff <> Hn:41 var
+R12528:12543 S02_CauchyComplete <> real_lt_le_trans thm
+R12545:12553 S02_CauchyComplete <> real_zero def
+R12555:12562 S02_CauchyComplete <> real_one def
+R12565:12576 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R12596:12611 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R12625:12640 GaC3_P08_PerronCutoff <> GaC3_P08_den_ge1 thm
+prf 12883:12907 <> GaC3_P08_inv_scale_le_one
+R12923:12925 Corelib.Init.Datatypes <> nat ind
+binder 12919:12919 <> n:42
+R12934:12938 S01_BaseRing <> NatLe def
+R12942:12942 GaC3_P08_PerronCutoff <> n:42 var
+binder 12929:12930 <> Hn:43
+R12948:12954 S02_CauchyComplete <> real_le def
+R12957:12965 S02_CauchyComplete <> real_mult def
+R12968:12979 S03_QExp <> real_inv_pos def
+R12982:12993 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R12995:12995 GaC3_P08_PerronCutoff <> n:42 var
+R12997:12998 GaC3_P08_PerronCutoff <> Hn:43 var
+R13002:13017 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R13019:13019 GaC3_P08_PerronCutoff <> n:42 var
+R13021:13022 GaC3_P08_PerronCutoff <> Hn:43 var
+R13048:13056 S02_CauchyComplete <> real_mult def
+R13058:13058 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13061:13076 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13078:13078 GaC3_P08_PerronCutoff <> n:42 var
+R13080:13081 GaC3_P08_PerronCutoff <> Hn:43 var
+R13096:13103 S02_CauchyComplete <> real_one def
+R13147:13153 S02_CauchyComplete <> real_le def
+R13156:13164 S02_CauchyComplete <> real_mult def
+R13166:13166 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13169:13184 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13221:13232 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R13253:13264 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R13278:13302 S07_RealSetoidExpLog RealSetoid real_le_compat thm
+R13318:13326 S02_CauchyComplete <> real_plus def
+R13328:13336 S02_CauchyComplete <> real_zero def
+R13339:13347 S02_CauchyComplete <> real_mult def
+R13349:13349 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13352:13367 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13391:13399 S02_CauchyComplete <> real_mult def
+R13401:13401 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13404:13419 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13442:13450 S02_CauchyComplete <> real_plus def
+R13452:13459 S02_CauchyComplete <> real_one def
+R13462:13470 S02_CauchyComplete <> real_mult def
+R13472:13472 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13475:13490 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13514:13522 S02_CauchyComplete <> real_plus def
+R13524:13531 S02_CauchyComplete <> real_one def
+R13534:13542 S02_CauchyComplete <> real_mult def
+R13544:13544 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13547:13562 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13586:13602 GaC2_02_AbsConvTailBound_a <> r_plus_zero_l_gen thm
+R13617:13628 S02_CauchyComplete <> real_eq_refl thm
+R13643:13661 S07_RealSetoidExpLog <> real_le_plus_compat thm
+R13679:13692 S02_CauchyComplete <> real_lt_le_iff thm
+R13694:13702 S02_CauchyComplete <> real_zero def
+R13704:13711 S02_CauchyComplete <> real_one def
+R13727:13742 S07_RealSetoidExpLog <> real_lt_zero_one thm
+R13759:13770 S02_CauchyComplete <> real_le_refl thm
+R13784:13796 S02_CauchyComplete <> real_le_trans thm
+R13810:13818 S02_CauchyComplete <> real_mult def
+R13821:13832 S03_QExp <> real_inv_pos def
+R13835:13846 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R13855:13870 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R13902:13910 S02_CauchyComplete <> real_mult def
+R13912:13912 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13915:13930 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R13952:13960 S02_CauchyComplete <> real_mult def
+R13963:13971 S02_CauchyComplete <> real_mult def
+R13973:13973 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R13976:13991 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R14023:14034 S03_QExp <> real_inv_pos def
+R14037:14048 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R14057:14072 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R14093:14100 S02_CauchyComplete <> real_one def
+R14114:14123 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R14132:14145 S02_CauchyComplete <> real_mult_comm thm
+R14159:14171 S02_CauchyComplete <> real_le_trans thm
+R14187:14195 S02_CauchyComplete <> real_mult def
+R14198:14206 S02_CauchyComplete <> real_mult def
+R14208:14208 GaC3_P08_PerronCutoff <> P08Cutoff.T var
+R14211:14226 GaC3_P08_PerronCutoff <> GaC3_P08_ln_dist def
+R14260:14271 S03_QExp <> real_inv_pos def
+R14274:14285 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R14294:14309 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R14333:14341 S02_CauchyComplete <> real_mult def
+R14344:14355 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R14388:14399 S03_QExp <> real_inv_pos def
+R14402:14413 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R14422:14437 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R14460:14467 S02_CauchyComplete <> real_one def
+R14483:14506 S07_RealSetoidExpLog <> real_le_mult_compat_weak thm
+R14524:14537 S02_CauchyComplete <> real_lt_le_iff thm
+R14539:14547 S02_CauchyComplete <> real_zero def
+R14573:14588 S03_QExp <> real_inv_pos_pos thm
+R14625:14634 GaC2_02_AbsConvTailBound_a <> r_le_of_eq thm
+R14650:14669 S03_QExp <> real_inv_pos_correct thm
+R14672:14683 GaC3_P08_PerronCutoff <> GaC3_P08_den def
+R14692:14707 GaC3_P08_PerronCutoff <> GaC3_P08_den_pos thm
+R14727:14735 GaC3_P08_PerronCutoff P08Cutoff <> sec

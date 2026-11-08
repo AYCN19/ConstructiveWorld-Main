@@ -1,0 +1,131 @@
+DIGEST 8805fafc7772089286640292f0a8add8
+FGaC3_V03_VinoZeta_cert
+R3139:3151 Stdlib.QArith.QArith <> <> lib
+R3169:3180 S01_BaseRing <> <> lib
+R3198:3217 S07_RealSetoidExpLog <> <> lib
+def 3288:3300 <> v03_exp_sq_ok
+R3304:3307 Corelib.Init.Datatypes <> bool ind
+R3314:3317 Corelib.Init.Datatypes <> andb def
+R3366:3369 Corelib.Init.Datatypes <> andb def
+R3424:3431 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3434:3434 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3440:3444 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3450:3450 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3436:3438 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3446:3448 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3455:3457 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3372:3379 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3382:3382 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3388:3392 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3398:3398 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3384:3386 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3394:3396 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3403:3405 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3320:3327 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3330:3330 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3336:3340 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3346:3346 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3332:3334 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3342:3344 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3351:3353 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+def 3537:3551 <> v03_exp_cube_ok
+R3555:3558 Corelib.Init.Datatypes <> bool ind
+R3565:3568 Corelib.Init.Datatypes <> andb def
+R3605:3608 Corelib.Init.Datatypes <> andb def
+R3638:3645 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3649:3652 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3658:3658 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3654:3656 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3611:3618 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3622:3625 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3631:3631 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3627:3629 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3571:3578 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3582:3585 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3591:3591 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3587:3589 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+def 3753:3763 <> v03_fold_ok
+R3771:3771 Stdlib.QArith.QArith_base <> Q rec
+binder 3766:3767 <> cv:1
+R3776:3779 Corelib.Init.Datatypes <> bool ind
+R3786:3793 Stdlib.QArith.QArith_base <> Qeq_bool def
+R3819:3821 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R3797:3800 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3818:3818 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3808:3811 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3817:3817 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3803:3805 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3801:3802 GaC3_V03_VinoZeta_cert <> cv:1 var
+R3806:3807 GaC3_V03_VinoZeta_cert <> cv:1 var
+R3813:3815 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3823:3826 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3844:3844 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3834:3837 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3843:3843 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3829:3831 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3827:3828 GaC3_V03_VinoZeta_cert <> cv:1 var
+R3832:3833 GaC3_V03_VinoZeta_cert <> cv:1 var
+R3839:3841 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R3850:3852 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R3848:3849 GaC3_V03_VinoZeta_cert <> cv:1 var
+R3853:3854 GaC3_V03_VinoZeta_cert <> cv:1 var
+def 3870:3883 <> v03_balance_ok
+R3887:3890 Corelib.Init.Datatypes <> bool ind
+R3897:3900 Corelib.Init.Datatypes <> andb def
+R3919:3922 Corelib.Init.Datatypes <> andb def
+R3941:3944 Corelib.Init.Datatypes <> andb def
+R3963:3973 GaC3_V03_VinoZeta_cert <> v03_fold_ok def
+R3947:3957 GaC3_V03_VinoZeta_cert <> v03_fold_ok def
+R3925:3935 GaC3_V03_VinoZeta_cert <> v03_fold_ok def
+R3903:3913 GaC3_V03_VinoZeta_cert <> v03_fold_ok def
+def 4069:4075 <> v03_qlt
+R4084:4084 Stdlib.QArith.QArith_base <> Q rec
+binder 4078:4078 <> x:2
+binder 4080:4080 <> y:3
+R4089:4092 Corelib.Init.Datatypes <> bool ind
+R4107:4110 Stdlib.QArith.QArith_base <> ::Q_scope:x_'?='_x not
+R4106:4106 GaC3_V03_VinoZeta_cert <> x:2 var
+R4111:4111 GaC3_V03_VinoZeta_cert <> y:3 var
+R4121:4122 Corelib.Init.Datatypes <> Lt constr
+R4127:4130 Corelib.Init.Datatypes <> true constr
+R4139:4143 Corelib.Init.Datatypes <> false constr
+def 4162:4174 <> v03_regime_ok
+R4178:4181 Corelib.Init.Datatypes <> bool ind
+R4188:4191 Corelib.Init.Datatypes <> andb def
+R4228:4231 Corelib.Init.Datatypes <> andb def
+R4267:4270 Corelib.Init.Datatypes <> andb def
+R4312:4315 Corelib.Init.Datatypes <> andb def
+R4338:4344 GaC3_V03_VinoZeta_cert <> v03_qlt def
+R4350:4352 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R4318:4324 GaC3_V03_VinoZeta_cert <> v03_qlt def
+R4330:4332 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R4273:4279 GaC3_V03_VinoZeta_cert <> v03_qlt def
+R4285:4287 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R4234:4240 GaC3_V03_VinoZeta_cert <> v03_qlt def
+R4246:4248 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R4194:4200 GaC3_V03_VinoZeta_cert <> v03_qlt def
+R4204:4206 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+R4213:4215 Stdlib.QArith.QArith_base <> ::Q_scope:x_'#'_x not
+def 4458:4469 <> v03_cert_all
+R4473:4476 Corelib.Init.Datatypes <> bool ind
+R4483:4486 Corelib.Init.Datatypes <> andb def
+R4526:4529 Corelib.Init.Datatypes <> andb def
+R4546:4558 GaC3_V03_VinoZeta_cert <> v03_regime_ok def
+R4531:4544 GaC3_V03_VinoZeta_cert <> v03_balance_ok def
+R4489:4492 Corelib.Init.Datatypes <> andb def
+R4508:4522 GaC3_V03_VinoZeta_cert <> v03_exp_cube_ok def
+R4494:4506 GaC3_V03_VinoZeta_cert <> v03_exp_sq_ok def
+prf 4571:4587 <> v03_cert_all_true
+R4591:4592 S01_BaseRing <> Id ind
+R4607:4610 Corelib.Init.Datatypes <> true constr
+R4594:4605 GaC3_V03_VinoZeta_cert <> v03_cert_all def
+R4638:4644 S01_BaseRing <> id_refl constr
+prf 4725:4740 <> v03_cert_true_eq
+R4764:4767 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4744:4745 S01_BaseRing <> Id ind
+R4760:4763 Corelib.Init.Datatypes <> true constr
+R4747:4758 GaC3_V03_VinoZeta_cert <> v03_cert_all def
+R4780:4782 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4768:4779 GaC3_V03_VinoZeta_cert <> v03_cert_all def
+R4783:4786 Corelib.Init.Datatypes <> true constr
+R4812:4827 S07_RealSetoidExpLog RealSetoid Id_eq thm

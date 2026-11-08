@@ -1,0 +1,35 @@
+DIGEST ce2e3babfe2afee6b6679be7f191660e
+F_pa._pa_GaC3_Z01_LogDerivSeries
+R15:37 GaC3_Z01_LogDerivSeries <> <> lib
+R58:72 GaC3_Z01_LogDerivSeries <> z01_z2nat_ofnat thm
+R93:108 GaC3_Z01_LogDerivSeries <> z01_zofnat_S_pos thm
+R129:139 GaC3_Z01_LogDerivSeries <> z01_zdiv_le thm
+R160:173 GaC3_Z01_LogDerivSeries <> z01_lcm_nonneg thm
+R194:204 GaC3_Z01_LogDerivSeries <> z01_lcm_ge1 thm
+R225:237 GaC3_Z01_LogDerivSeries <> z01_lcm_pos_l thm
+R258:272 GaC3_Z01_LogDerivSeries <> z01_lcm_step_le thm
+R293:308 GaC3_Z01_LogDerivSeries <> z01_lcm_div_step thm
+R329:344 GaC3_Z01_LogDerivSeries <> z01_lcm_div_mono thm
+R365:377 GaC3_Z01_LogDerivSeries <> z01_lcmn_mono thm
+R398:410 GaC3_Z01_LogDerivSeries <> z01_lcmn_step thm
+R431:444 GaC3_Z01_LogDerivSeries <> z01_natreal_le thm
+R465:479 GaC3_Z01_LogDerivSeries <> z01_log_le_mono thm
+R500:516 GaC3_Z01_LogDerivSeries <> z01_le_plus_opp_r thm
+R537:552 GaC3_Z01_LogDerivSeries <> z01_add_cancel_r thm
+R573:584 GaC3_Z01_LogDerivSeries <> z01_lam_le_S thm
+R605:615 GaC3_Z01_LogDerivSeries <> z01_lam_ge0 thm
+R636:648 GaC3_Z01_LogDerivSeries <> z01_telescope thm
+R669:681 GaC3_Z01_LogDerivSeries <> z01_ln_lam_le thm
+R702:714 GaC3_Z01_LogDerivSeries <> z01_ln_sn_pos thm
+R735:745 GaC3_Z01_LogDerivSeries <> z01_rtsum_S thm
+R766:779 GaC3_Z01_LogDerivSeries <> z01_rtsum_zero thm
+R800:816 GaC3_Z01_LogDerivSeries <> z01_rmantail_zero thm
+R837:852 GaC3_Z01_LogDerivSeries <> z01_rmantail_ge0 thm
+R873:886 GaC3_Z01_LogDerivSeries <> z01_term_le_ln thm
+R907:927 GaC3_Z01_LogDerivSeries <> z01_rmantail_le_scale thm
+R948:970 GaC3_Z01_LogDerivSeries <> z01_rmantail_le_lnrtail thm
+R991:1007 GaC3_Z01_LogDerivSeries <> z01_absconv_bound thm
+R1028:1046 GaC3_Z01_LogDerivSeries <> z01_absconv_uniform thm
+R1067:1082 GaC3_Z01_LogDerivSeries <> z01_mantail_zero thm
+R1103:1118 GaC3_Z01_LogDerivSeries <> z01_mantail_diff thm
+R1139:1154 GaC3_Z01_LogDerivSeries <> z01_cauchy_bound thm

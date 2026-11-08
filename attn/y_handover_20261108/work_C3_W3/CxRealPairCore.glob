@@ -1,0 +1,746 @@
+DIGEST dfcead7dd41b418439c1fc2d65da5284
+FCxRealPairCore
+R1376:1387 S01_BaseRing <> <> lib
+R1405:1422 S02_CauchyComplete <> <> lib
+R1452:1464 Stdlib.QArith.QArith <> <> lib
+R1466:1476 Stdlib.QArith.Qabs <> <> lib
+R1506:1511 Stdlib.Setoids.Setoid <> <> lib
+R1513:1521 Stdlib.Classes.Morphisms <> <> lib
+R1551:1553 Stdlib.micromega.Lia <> <> lib
+R1555:1568 Stdlib.QArith.Qminmax <> <> lib
+def 1665:1666 <> Cx
+R1681:1683 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R1677:1680 S02_CauchyComplete <> Real def
+R1684:1687 S02_CauchyComplete <> Real def
+def 1702:1704 <> cRe
+R1711:1712 CxRealPairCore <> Cx def
+binder 1707:1707 <> z:1
+R1717:1720 S02_CauchyComplete <> Real def
+R1725:1727 Corelib.Init.Datatypes <> fst def
+R1729:1729 CxRealPairCore <> z:1 var
+def 1744:1746 <> cIm
+R1753:1754 CxRealPairCore <> Cx def
+binder 1749:1749 <> z:2
+R1759:1762 S02_CauchyComplete <> Real def
+R1767:1769 Corelib.Init.Datatypes <> snd def
+R1771:1771 CxRealPairCore <> z:2 var
+def 1786:1789 <> c_eq
+R1798:1799 CxRealPairCore <> Cx def
+binder 1792:1792 <> z:3
+binder 1794:1794 <> w:4
+R1813:1815 S01_BaseRing <> And def
+R1818:1824 S02_CauchyComplete <> real_eq def
+R1827:1829 CxRealPairCore <> cRe def
+R1831:1831 CxRealPairCore <> z:3 var
+R1835:1837 CxRealPairCore <> cRe def
+R1839:1839 CxRealPairCore <> w:4 var
+R1844:1850 S02_CauchyComplete <> real_eq def
+R1853:1855 CxRealPairCore <> cIm def
+R1857:1857 CxRealPairCore <> z:3 var
+R1861:1863 CxRealPairCore <> cIm def
+R1865:1865 CxRealPairCore <> w:4 var
+def 1882:1887 <> c_zero
+R1891:1892 CxRealPairCore <> Cx def
+R1897:1897 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1907:1908 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1918:1918 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1898:1906 S02_CauchyComplete <> real_zero def
+R1909:1917 S02_CauchyComplete <> real_zero def
+def 1933:1937 <> c_one
+R1941:1942 CxRealPairCore <> Cx def
+R1947:1947 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1956:1957 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1967:1967 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R1948:1955 S02_CauchyComplete <> real_one def
+R1958:1966 S02_CauchyComplete <> real_zero def
+def 1982:1987 <> c_of_Q
+R1996:1996 Stdlib.QArith.QArith_base <> Q rec
+binder 1990:1990 <> a:5
+binder 1992:1992 <> b:6
+R2001:2002 CxRealPairCore <> Cx def
+R2007:2007 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2020:2021 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2034:2034 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2008:2017 S02_CauchyComplete <> real_const def
+R2019:2019 CxRealPairCore <> a:5 var
+R2022:2031 S02_CauchyComplete <> real_const def
+R2033:2033 CxRealPairCore <> b:6 var
+def 2049:2054 <> c_plus
+R2063:2064 CxRealPairCore <> Cx def
+binder 2057:2057 <> z:7
+binder 2059:2059 <> w:8
+R2069:2070 CxRealPairCore <> Cx def
+R2077:2077 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2103:2104 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2130:2130 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2078:2086 S02_CauchyComplete <> real_plus def
+R2089:2091 CxRealPairCore <> cRe def
+R2093:2093 CxRealPairCore <> z:7 var
+R2097:2099 CxRealPairCore <> cRe def
+R2101:2101 CxRealPairCore <> w:8 var
+R2105:2113 S02_CauchyComplete <> real_plus def
+R2116:2118 CxRealPairCore <> cIm def
+R2120:2120 CxRealPairCore <> z:7 var
+R2124:2126 CxRealPairCore <> cIm def
+R2128:2128 CxRealPairCore <> w:8 var
+def 2145:2149 <> c_opp
+R2156:2157 CxRealPairCore <> Cx def
+binder 2152:2152 <> z:9
+R2162:2163 CxRealPairCore <> Cx def
+R2168:2168 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2185:2186 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2203:2203 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2169:2176 S02_CauchyComplete <> real_opp def
+R2179:2181 CxRealPairCore <> cRe def
+R2183:2183 CxRealPairCore <> z:9 var
+R2187:2194 S02_CauchyComplete <> real_opp def
+R2197:2199 CxRealPairCore <> cIm def
+R2201:2201 CxRealPairCore <> z:9 var
+def 2218:2223 <> c_mult
+R2232:2233 CxRealPairCore <> Cx def
+binder 2226:2226 <> z:10
+binder 2228:2228 <> w:11
+R2238:2239 CxRealPairCore <> Cx def
+R2246:2246 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2323:2327 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2393:2393 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2247:2255 S02_CauchyComplete <> real_plus def
+R2258:2266 S02_CauchyComplete <> real_mult def
+R2269:2271 CxRealPairCore <> cRe def
+R2273:2273 CxRealPairCore <> z:10 var
+R2277:2279 CxRealPairCore <> cRe def
+R2281:2281 CxRealPairCore <> w:11 var
+R2286:2293 S02_CauchyComplete <> real_opp def
+R2296:2304 S02_CauchyComplete <> real_mult def
+R2307:2309 CxRealPairCore <> cIm def
+R2311:2311 CxRealPairCore <> z:10 var
+R2315:2317 CxRealPairCore <> cIm def
+R2319:2319 CxRealPairCore <> w:11 var
+R2328:2336 S02_CauchyComplete <> real_plus def
+R2339:2347 S02_CauchyComplete <> real_mult def
+R2350:2352 CxRealPairCore <> cRe def
+R2354:2354 CxRealPairCore <> z:10 var
+R2358:2360 CxRealPairCore <> cIm def
+R2362:2362 CxRealPairCore <> w:11 var
+R2367:2375 S02_CauchyComplete <> real_mult def
+R2378:2380 CxRealPairCore <> cIm def
+R2382:2382 CxRealPairCore <> z:10 var
+R2386:2388 CxRealPairCore <> cRe def
+R2390:2390 CxRealPairCore <> w:11 var
+def 2408:2413 <> c_conj
+R2420:2421 CxRealPairCore <> Cx def
+binder 2416:2416 <> z:12
+R2426:2427 CxRealPairCore <> Cx def
+R2432:2432 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2438:2439 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2456:2456 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R2433:2435 CxRealPairCore <> cRe def
+R2437:2437 CxRealPairCore <> z:12 var
+R2440:2447 S02_CauchyComplete <> real_opp def
+R2450:2452 CxRealPairCore <> cIm def
+R2454:2454 CxRealPairCore <> z:12 var
+def 2471:2479 <> c_norm_sq
+R2486:2487 CxRealPairCore <> Cx def
+binder 2482:2482 <> z:13
+R2492:2495 S02_CauchyComplete <> Real def
+R2502:2510 S02_CauchyComplete <> real_plus def
+R2513:2521 S02_CauchyComplete <> real_mult def
+R2524:2526 CxRealPairCore <> cRe def
+R2528:2528 CxRealPairCore <> z:13 var
+R2532:2534 CxRealPairCore <> cRe def
+R2536:2536 CxRealPairCore <> z:13 var
+R2541:2549 S02_CauchyComplete <> real_mult def
+R2552:2554 CxRealPairCore <> cIm def
+R2556:2556 CxRealPairCore <> z:13 var
+R2560:2562 CxRealPairCore <> cIm def
+R2564:2564 CxRealPairCore <> z:13 var
+prf 2576:2584 <> c_eq_refl
+R2599:2600 CxRealPairCore <> Cx def
+binder 2595:2595 <> z:14
+R2603:2606 CxRealPairCore <> c_eq def
+R2608:2608 CxRealPairCore <> z:14 var
+R2610:2610 CxRealPairCore <> z:14 var
+R2638:2641 CxRealPairCore <> c_eq def
+R2661:2672 S02_CauchyComplete <> real_eq_refl thm
+R2685:2696 S02_CauchyComplete <> real_eq_refl thm
+prf 2711:2718 <> c_eq_sym
+R2735:2736 CxRealPairCore <> Cx def
+binder 2729:2729 <> z:15
+binder 2731:2731 <> w:16
+R2747:2750 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R2739:2742 CxRealPairCore <> c_eq def
+R2744:2744 CxRealPairCore <> z:15 var
+R2746:2746 CxRealPairCore <> w:16 var
+R2751:2754 CxRealPairCore <> c_eq def
+R2756:2756 CxRealPairCore <> w:16 var
+R2758:2758 CxRealPairCore <> z:15 var
+R2791:2794 CxRealPairCore <> c_eq def
+R2819:2829 S02_CauchyComplete <> real_eq_sym thm
+R2851:2861 S02_CauchyComplete <> real_eq_sym thm
+prf 2885:2894 <> c_eq_trans
+R2913:2914 CxRealPairCore <> Cx def
+binder 2905:2905 <> z:17
+binder 2907:2907 <> w:18
+binder 2909:2909 <> u:19
+R2925:2928 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R2917:2920 CxRealPairCore <> c_eq def
+R2922:2922 CxRealPairCore <> z:17 var
+R2924:2924 CxRealPairCore <> w:18 var
+R2937:2940 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R2929:2932 CxRealPairCore <> c_eq def
+R2934:2934 CxRealPairCore <> w:18 var
+R2936:2936 CxRealPairCore <> u:19 var
+R2941:2944 CxRealPairCore <> c_eq def
+R2946:2946 CxRealPairCore <> z:17 var
+R2948:2948 CxRealPairCore <> u:19 var
+R2989:2992 CxRealPairCore <> c_eq def
+R3025:3037 S02_CauchyComplete <> real_eq_trans thm
+R3040:3042 CxRealPairCore <> cRe def
+R3048:3050 CxRealPairCore <> cRe def
+R3056:3058 CxRealPairCore <> cRe def
+R3110:3122 S02_CauchyComplete <> real_eq_trans thm
+R3125:3127 CxRealPairCore <> cIm def
+R3133:3135 CxRealPairCore <> cIm def
+R3141:3143 CxRealPairCore <> cIm def
+prf 3258:3269 <> real_zero_pt
+R3284:3286 Corelib.Init.Datatypes <> nat ind
+binder 3280:3280 <> n:20
+R3307:3310 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3289:3294 Corelib.Init.Specif <> projT1 def
+R3306:3306 CxRealPairCore <> n:20 var
+R3296:3304 S02_CauchyComplete <> real_zero def
+prf 3355:3365 <> real_one_pt
+R3380:3382 Corelib.Init.Datatypes <> nat ind
+binder 3376:3376 <> n:21
+R3402:3405 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3385:3390 Corelib.Init.Specif <> projT1 def
+R3401:3401 CxRealPairCore <> n:21 var
+R3392:3399 S02_CauchyComplete <> real_one def
+prf 3450:3460 <> cRe_zero_pt
+R3475:3477 Corelib.Init.Datatypes <> nat ind
+binder 3471:3471 <> n:22
+R3501:3504 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3480:3485 Corelib.Init.Specif <> projT1 def
+R3500:3500 CxRealPairCore <> n:22 var
+R3488:3490 CxRealPairCore <> cRe def
+R3492:3497 CxRealPairCore <> c_zero def
+prf 3549:3559 <> cIm_zero_pt
+R3574:3576 Corelib.Init.Datatypes <> nat ind
+binder 3570:3570 <> n:23
+R3600:3603 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3579:3584 Corelib.Init.Specif <> projT1 def
+R3599:3599 CxRealPairCore <> n:23 var
+R3587:3589 CxRealPairCore <> cIm def
+R3591:3596 CxRealPairCore <> c_zero def
+prf 3648:3657 <> cRe_one_pt
+R3672:3674 Corelib.Init.Datatypes <> nat ind
+binder 3668:3668 <> n:24
+R3697:3700 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3677:3682 Corelib.Init.Specif <> projT1 def
+R3696:3696 CxRealPairCore <> n:24 var
+R3685:3687 CxRealPairCore <> cRe def
+R3689:3693 CxRealPairCore <> c_one def
+prf 3745:3754 <> cIm_one_pt
+R3769:3771 Corelib.Init.Datatypes <> nat ind
+binder 3765:3765 <> n:25
+R3794:3797 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3774:3779 Corelib.Init.Specif <> projT1 def
+R3793:3793 CxRealPairCore <> n:25 var
+R3782:3784 CxRealPairCore <> cIm def
+R3786:3790 CxRealPairCore <> c_one def
+prf 3842:3852 <> cRe_of_Q_pt
+R3870:3870 Stdlib.QArith.QArith_base <> Q rec
+binder 3864:3864 <> a:26
+binder 3866:3866 <> b:27
+R3878:3880 Corelib.Init.Datatypes <> nat ind
+binder 3874:3874 <> n:28
+R3911:3914 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R3884:3889 Corelib.Init.Specif <> projT1 def
+R3910:3910 CxRealPairCore <> n:28 var
+R3892:3894 CxRealPairCore <> cRe def
+R3897:3902 CxRealPairCore <> c_of_Q def
+R3904:3904 CxRealPairCore <> a:26 var
+R3906:3906 CxRealPairCore <> b:27 var
+R3915:3915 CxRealPairCore <> a:26 var
+prf 3964:3974 <> cIm_of_Q_pt
+R3992:3992 Stdlib.QArith.QArith_base <> Q rec
+binder 3986:3986 <> a:29
+binder 3988:3988 <> b:30
+R4000:4002 Corelib.Init.Datatypes <> nat ind
+binder 3996:3996 <> n:31
+R4033:4036 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R4006:4011 Corelib.Init.Specif <> projT1 def
+R4032:4032 CxRealPairCore <> n:31 var
+R4014:4016 CxRealPairCore <> cIm def
+R4019:4024 CxRealPairCore <> c_of_Q def
+R4026:4026 CxRealPairCore <> a:29 var
+R4028:4028 CxRealPairCore <> b:30 var
+R4037:4037 CxRealPairCore <> b:30 var
+prf 4086:4096 <> cRe_plus_pt
+R4114:4115 CxRealPairCore <> Cx def
+binder 4108:4108 <> z:32
+binder 4110:4110 <> w:33
+R4123:4125 Corelib.Init.Datatypes <> nat ind
+binder 4119:4119 <> n:34
+R4158:4161 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R4131:4136 Corelib.Init.Specif <> projT1 def
+R4157:4157 CxRealPairCore <> n:34 var
+R4139:4141 CxRealPairCore <> cRe def
+R4144:4149 CxRealPairCore <> c_plus def
+R4151:4151 CxRealPairCore <> z:32 var
+R4153:4153 CxRealPairCore <> w:33 var
+R4178:4180 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R4162:4167 Corelib.Init.Specif <> projT1 def
+R4177:4177 CxRealPairCore <> n:34 var
+R4170:4172 CxRealPairCore <> cRe def
+R4174:4174 CxRealPairCore <> z:32 var
+R4181:4186 Corelib.Init.Specif <> projT1 def
+R4196:4196 CxRealPairCore <> n:34 var
+R4189:4191 CxRealPairCore <> cRe def
+R4193:4193 CxRealPairCore <> w:33 var
+prf 4299:4309 <> cIm_plus_pt
+R4327:4328 CxRealPairCore <> Cx def
+binder 4321:4321 <> z:35
+binder 4323:4323 <> w:36
+R4336:4338 Corelib.Init.Datatypes <> nat ind
+binder 4332:4332 <> n:37
+R4371:4374 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R4344:4349 Corelib.Init.Specif <> projT1 def
+R4370:4370 CxRealPairCore <> n:37 var
+R4352:4354 CxRealPairCore <> cIm def
+R4357:4362 CxRealPairCore <> c_plus def
+R4364:4364 CxRealPairCore <> z:35 var
+R4366:4366 CxRealPairCore <> w:36 var
+R4391:4393 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R4375:4380 Corelib.Init.Specif <> projT1 def
+R4390:4390 CxRealPairCore <> n:37 var
+R4383:4385 CxRealPairCore <> cIm def
+R4387:4387 CxRealPairCore <> z:35 var
+R4394:4399 Corelib.Init.Specif <> projT1 def
+R4409:4409 CxRealPairCore <> n:37 var
+R4402:4404 CxRealPairCore <> cIm def
+R4406:4406 CxRealPairCore <> w:36 var
+prf 4512:4521 <> cRe_opp_pt
+R4537:4538 CxRealPairCore <> Cx def
+binder 4533:4533 <> z:38
+R4546:4548 Corelib.Init.Datatypes <> nat ind
+binder 4542:4542 <> n:39
+R4578:4581 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R4554:4559 Corelib.Init.Specif <> projT1 def
+R4577:4577 CxRealPairCore <> n:39 var
+R4562:4564 CxRealPairCore <> cRe def
+R4567:4571 CxRealPairCore <> c_opp def
+R4573:4573 CxRealPairCore <> z:38 var
+R4582:4583 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R4584:4589 Corelib.Init.Specif <> projT1 def
+R4599:4599 CxRealPairCore <> n:39 var
+R4592:4594 CxRealPairCore <> cRe def
+R4596:4596 CxRealPairCore <> z:38 var
+prf 4674:4683 <> cIm_opp_pt
+R4699:4700 CxRealPairCore <> Cx def
+binder 4695:4695 <> z:40
+R4708:4710 Corelib.Init.Datatypes <> nat ind
+binder 4704:4704 <> n:41
+R4740:4743 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R4716:4721 Corelib.Init.Specif <> projT1 def
+R4739:4739 CxRealPairCore <> n:41 var
+R4724:4726 CxRealPairCore <> cIm def
+R4729:4733 CxRealPairCore <> c_opp def
+R4735:4735 CxRealPairCore <> z:40 var
+R4744:4745 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R4746:4751 Corelib.Init.Specif <> projT1 def
+R4761:4761 CxRealPairCore <> n:41 var
+R4754:4756 CxRealPairCore <> cIm def
+R4758:4758 CxRealPairCore <> z:40 var
+prf 4836:4846 <> cRe_mult_pt
+R4864:4865 CxRealPairCore <> Cx def
+binder 4858:4858 <> z:42
+binder 4860:4860 <> w:43
+R4873:4875 Corelib.Init.Datatypes <> nat ind
+binder 4869:4869 <> n:44
+R4908:4913 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R4881:4886 Corelib.Init.Specif <> projT1 def
+R4907:4907 CxRealPairCore <> n:44 var
+R4889:4891 CxRealPairCore <> cRe def
+R4894:4899 CxRealPairCore <> c_mult def
+R4901:4901 CxRealPairCore <> z:42 var
+R4903:4903 CxRealPairCore <> w:43 var
+R4949:4951 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R4930:4932 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R4914:4919 Corelib.Init.Specif <> projT1 def
+R4929:4929 CxRealPairCore <> n:44 var
+R4922:4924 CxRealPairCore <> cRe def
+R4926:4926 CxRealPairCore <> z:42 var
+R4933:4938 Corelib.Init.Specif <> projT1 def
+R4948:4948 CxRealPairCore <> n:44 var
+R4941:4943 CxRealPairCore <> cRe def
+R4945:4945 CxRealPairCore <> w:43 var
+R4968:4970 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R4952:4957 Corelib.Init.Specif <> projT1 def
+R4967:4967 CxRealPairCore <> n:44 var
+R4960:4962 CxRealPairCore <> cIm def
+R4964:4964 CxRealPairCore <> z:42 var
+R4971:4976 Corelib.Init.Specif <> projT1 def
+R4986:4986 CxRealPairCore <> n:44 var
+R4979:4981 CxRealPairCore <> cIm def
+R4983:4983 CxRealPairCore <> w:43 var
+prf 5141:5151 <> cIm_mult_pt
+R5169:5170 CxRealPairCore <> Cx def
+binder 5163:5163 <> z:45
+binder 5165:5165 <> w:46
+R5178:5180 Corelib.Init.Datatypes <> nat ind
+binder 5174:5174 <> n:47
+R5213:5218 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R5186:5191 Corelib.Init.Specif <> projT1 def
+R5212:5212 CxRealPairCore <> n:47 var
+R5194:5196 CxRealPairCore <> cIm def
+R5199:5204 CxRealPairCore <> c_mult def
+R5206:5206 CxRealPairCore <> z:45 var
+R5208:5208 CxRealPairCore <> w:46 var
+R5254:5256 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R5235:5237 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5219:5224 Corelib.Init.Specif <> projT1 def
+R5234:5234 CxRealPairCore <> n:47 var
+R5227:5229 CxRealPairCore <> cRe def
+R5231:5231 CxRealPairCore <> z:45 var
+R5238:5243 Corelib.Init.Specif <> projT1 def
+R5253:5253 CxRealPairCore <> n:47 var
+R5246:5248 CxRealPairCore <> cIm def
+R5250:5250 CxRealPairCore <> w:46 var
+R5273:5275 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5257:5262 Corelib.Init.Specif <> projT1 def
+R5272:5272 CxRealPairCore <> n:47 var
+R5265:5267 CxRealPairCore <> cIm def
+R5269:5269 CxRealPairCore <> z:45 var
+R5276:5281 Corelib.Init.Specif <> projT1 def
+R5291:5291 CxRealPairCore <> n:47 var
+R5284:5286 CxRealPairCore <> cRe def
+R5288:5288 CxRealPairCore <> w:46 var
+prf 5446:5456 <> cRe_conj_pt
+R5472:5473 CxRealPairCore <> Cx def
+binder 5468:5468 <> z:48
+R5481:5483 Corelib.Init.Datatypes <> nat ind
+binder 5477:5477 <> n:49
+R5514:5517 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R5489:5494 Corelib.Init.Specif <> projT1 def
+R5513:5513 CxRealPairCore <> n:49 var
+R5497:5499 CxRealPairCore <> cRe def
+R5502:5507 CxRealPairCore <> c_conj def
+R5509:5509 CxRealPairCore <> z:48 var
+R5518:5523 Corelib.Init.Specif <> projT1 def
+R5533:5533 CxRealPairCore <> n:49 var
+R5526:5528 CxRealPairCore <> cRe def
+R5530:5530 CxRealPairCore <> z:48 var
+prf 5584:5594 <> cIm_conj_pt
+R5610:5611 CxRealPairCore <> Cx def
+binder 5606:5606 <> z:50
+R5619:5621 Corelib.Init.Datatypes <> nat ind
+binder 5615:5615 <> n:51
+R5652:5655 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R5627:5632 Corelib.Init.Specif <> projT1 def
+R5651:5651 CxRealPairCore <> n:51 var
+R5635:5637 CxRealPairCore <> cIm def
+R5640:5645 CxRealPairCore <> c_conj def
+R5647:5647 CxRealPairCore <> z:50 var
+R5656:5657 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R5658:5663 Corelib.Init.Specif <> projT1 def
+R5673:5673 CxRealPairCore <> n:51 var
+R5666:5668 CxRealPairCore <> cIm def
+R5670:5670 CxRealPairCore <> z:50 var
+prf 5748:5759 <> c_norm_sq_pt
+R5775:5776 CxRealPairCore <> Cx def
+binder 5771:5771 <> z:52
+R5784:5786 Corelib.Init.Datatypes <> nat ind
+binder 5780:5780 <> n:53
+R5814:5819 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R5792:5797 Corelib.Init.Specif <> projT1 def
+R5813:5813 CxRealPairCore <> n:53 var
+R5800:5808 CxRealPairCore <> c_norm_sq def
+R5810:5810 CxRealPairCore <> z:52 var
+R5855:5857 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R5836:5838 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5820:5825 Corelib.Init.Specif <> projT1 def
+R5835:5835 CxRealPairCore <> n:53 var
+R5828:5830 CxRealPairCore <> cRe def
+R5832:5832 CxRealPairCore <> z:52 var
+R5839:5844 Corelib.Init.Specif <> projT1 def
+R5854:5854 CxRealPairCore <> n:53 var
+R5847:5849 CxRealPairCore <> cRe def
+R5851:5851 CxRealPairCore <> z:52 var
+R5874:5876 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5858:5863 Corelib.Init.Specif <> projT1 def
+R5873:5873 CxRealPairCore <> n:53 var
+R5866:5868 CxRealPairCore <> cIm def
+R5870:5870 CxRealPairCore <> z:52 var
+R5877:5882 Corelib.Init.Specif <> projT1 def
+R5892:5892 CxRealPairCore <> n:53 var
+R5885:5887 CxRealPairCore <> cIm def
+R5889:5889 CxRealPairCore <> z:52 var
+prf 6048:6058 <> c_plus_comm
+R6075:6076 CxRealPairCore <> Cx def
+binder 6069:6069 <> z:54
+binder 6071:6071 <> w:55
+R6079:6082 CxRealPairCore <> c_eq def
+R6085:6090 CxRealPairCore <> c_plus def
+R6092:6092 CxRealPairCore <> z:54 var
+R6094:6094 CxRealPairCore <> w:55 var
+R6098:6103 CxRealPairCore <> c_plus def
+R6105:6105 CxRealPairCore <> w:55 var
+R6107:6107 CxRealPairCore <> z:54 var
+R6247:6250 CxRealPairCore <> c_eq def
+R6266:6285 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 6322:6333 <> c_plus_assoc
+R6352:6353 CxRealPairCore <> Cx def
+binder 6344:6344 <> z:56
+binder 6346:6346 <> w:57
+binder 6348:6348 <> u:58
+R6358:6361 CxRealPairCore <> c_eq def
+R6364:6369 CxRealPairCore <> c_plus def
+R6371:6371 CxRealPairCore <> z:56 var
+R6374:6379 CxRealPairCore <> c_plus def
+R6381:6381 CxRealPairCore <> w:57 var
+R6383:6383 CxRealPairCore <> u:58 var
+R6388:6393 CxRealPairCore <> c_plus def
+R6396:6401 CxRealPairCore <> c_plus def
+R6403:6403 CxRealPairCore <> z:56 var
+R6405:6405 CxRealPairCore <> w:57 var
+R6408:6408 CxRealPairCore <> u:58 var
+R6604:6607 CxRealPairCore <> c_eq def
+R6623:6642 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 6679:6689 <> c_plus_zero
+R6704:6705 CxRealPairCore <> Cx def
+binder 6700:6700 <> z:59
+R6708:6711 CxRealPairCore <> c_eq def
+R6714:6719 CxRealPairCore <> c_plus def
+R6721:6726 CxRealPairCore <> c_zero def
+R6728:6728 CxRealPairCore <> z:59 var
+R6731:6731 CxRealPairCore <> z:59 var
+R6814:6817 CxRealPairCore <> c_eq def
+R6833:6852 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 6889:6898 <> c_plus_opp
+R6913:6914 CxRealPairCore <> Cx def
+binder 6909:6909 <> z:60
+R6917:6920 CxRealPairCore <> c_eq def
+R6923:6928 CxRealPairCore <> c_plus def
+R6930:6930 CxRealPairCore <> z:60 var
+R6933:6937 CxRealPairCore <> c_opp def
+R6939:6939 CxRealPairCore <> z:60 var
+R6943:6948 CxRealPairCore <> c_zero def
+R7031:7034 CxRealPairCore <> c_eq def
+R7050:7069 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 7106:7116 <> c_mult_comm
+R7133:7134 CxRealPairCore <> Cx def
+binder 7127:7127 <> z:61
+binder 7129:7129 <> w:62
+R7137:7140 CxRealPairCore <> c_eq def
+R7143:7148 CxRealPairCore <> c_mult def
+R7150:7150 CxRealPairCore <> z:61 var
+R7152:7152 CxRealPairCore <> w:62 var
+R7156:7161 CxRealPairCore <> c_mult def
+R7163:7163 CxRealPairCore <> w:62 var
+R7165:7165 CxRealPairCore <> z:61 var
+R7305:7308 CxRealPairCore <> c_eq def
+R7324:7343 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 7380:7391 <> c_mult_assoc
+R7410:7411 CxRealPairCore <> Cx def
+binder 7402:7402 <> z:63
+binder 7404:7404 <> w:64
+binder 7406:7406 <> u:65
+R7416:7419 CxRealPairCore <> c_eq def
+R7422:7427 CxRealPairCore <> c_mult def
+R7429:7429 CxRealPairCore <> z:63 var
+R7432:7437 CxRealPairCore <> c_mult def
+R7439:7439 CxRealPairCore <> w:64 var
+R7441:7441 CxRealPairCore <> u:65 var
+R7446:7451 CxRealPairCore <> c_mult def
+R7454:7459 CxRealPairCore <> c_mult def
+R7461:7461 CxRealPairCore <> z:63 var
+R7463:7463 CxRealPairCore <> w:64 var
+R7466:7466 CxRealPairCore <> u:65 var
+R7662:7665 CxRealPairCore <> c_eq def
+R7681:7700 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 7737:7746 <> c_mult_one
+R7761:7762 CxRealPairCore <> Cx def
+binder 7757:7757 <> z:66
+R7765:7768 CxRealPairCore <> c_eq def
+R7771:7776 CxRealPairCore <> c_mult def
+R7778:7782 CxRealPairCore <> c_one def
+R7784:7784 CxRealPairCore <> z:66 var
+R7787:7787 CxRealPairCore <> z:66 var
+R7870:7873 CxRealPairCore <> c_eq def
+R7889:7908 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 7945:7955 <> c_mult_zero
+R7970:7971 CxRealPairCore <> Cx def
+binder 7966:7966 <> z:67
+R7974:7977 CxRealPairCore <> c_eq def
+R7980:7985 CxRealPairCore <> c_mult def
+R7987:7992 CxRealPairCore <> c_zero def
+R7994:7994 CxRealPairCore <> z:67 var
+R7997:8002 CxRealPairCore <> c_zero def
+R8085:8088 CxRealPairCore <> c_eq def
+R8104:8123 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 8160:8168 <> c_distrib
+R8187:8188 CxRealPairCore <> Cx def
+binder 8179:8179 <> z:68
+binder 8181:8181 <> w:69
+binder 8183:8183 <> u:70
+R8193:8196 CxRealPairCore <> c_eq def
+R8199:8204 CxRealPairCore <> c_mult def
+R8206:8206 CxRealPairCore <> z:68 var
+R8209:8214 CxRealPairCore <> c_plus def
+R8216:8216 CxRealPairCore <> w:69 var
+R8218:8218 CxRealPairCore <> u:70 var
+R8223:8228 CxRealPairCore <> c_plus def
+R8231:8236 CxRealPairCore <> c_mult def
+R8238:8238 CxRealPairCore <> z:68 var
+R8240:8240 CxRealPairCore <> w:69 var
+R8244:8249 CxRealPairCore <> c_mult def
+R8251:8251 CxRealPairCore <> z:68 var
+R8253:8253 CxRealPairCore <> u:70 var
+R8450:8453 CxRealPairCore <> c_eq def
+R8469:8488 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 8565:8581 <> c_conj_involutive
+R8596:8597 CxRealPairCore <> Cx def
+binder 8592:8592 <> z:71
+R8600:8603 CxRealPairCore <> c_eq def
+R8606:8611 CxRealPairCore <> c_conj def
+R8614:8619 CxRealPairCore <> c_conj def
+R8621:8621 CxRealPairCore <> z:71 var
+R8625:8625 CxRealPairCore <> z:71 var
+R8708:8711 CxRealPairCore <> c_eq def
+R8727:8746 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 8783:8793 <> c_conj_plus
+R8810:8811 CxRealPairCore <> Cx def
+binder 8804:8804 <> z:72
+binder 8806:8806 <> w:73
+R8816:8819 CxRealPairCore <> c_eq def
+R8822:8827 CxRealPairCore <> c_conj def
+R8830:8835 CxRealPairCore <> c_plus def
+R8837:8837 CxRealPairCore <> z:72 var
+R8839:8839 CxRealPairCore <> w:73 var
+R8844:8849 CxRealPairCore <> c_plus def
+R8852:8857 CxRealPairCore <> c_conj def
+R8859:8859 CxRealPairCore <> z:72 var
+R8863:8868 CxRealPairCore <> c_conj def
+R8870:8870 CxRealPairCore <> w:73 var
+R9011:9014 CxRealPairCore <> c_eq def
+R9030:9049 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 9086:9096 <> c_conj_mult
+R9113:9114 CxRealPairCore <> Cx def
+binder 9107:9107 <> z:74
+binder 9109:9109 <> w:75
+R9119:9122 CxRealPairCore <> c_eq def
+R9125:9130 CxRealPairCore <> c_conj def
+R9133:9138 CxRealPairCore <> c_mult def
+R9140:9140 CxRealPairCore <> z:74 var
+R9142:9142 CxRealPairCore <> w:75 var
+R9147:9152 CxRealPairCore <> c_mult def
+R9155:9160 CxRealPairCore <> c_conj def
+R9162:9162 CxRealPairCore <> z:74 var
+R9166:9171 CxRealPairCore <> c_conj def
+R9173:9173 CxRealPairCore <> w:75 var
+R9314:9317 CxRealPairCore <> c_eq def
+R9333:9352 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 9389:9398 <> c_conj_opp
+R9413:9414 CxRealPairCore <> Cx def
+binder 9409:9409 <> z:76
+R9417:9420 CxRealPairCore <> c_eq def
+R9423:9428 CxRealPairCore <> c_conj def
+R9431:9435 CxRealPairCore <> c_opp def
+R9437:9437 CxRealPairCore <> z:76 var
+R9442:9446 CxRealPairCore <> c_opp def
+R9449:9454 CxRealPairCore <> c_conj def
+R9456:9456 CxRealPairCore <> z:76 var
+R9541:9544 CxRealPairCore <> c_eq def
+R9560:9579 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 9684:9697 <> c_norm_sq_conj
+R9712:9713 CxRealPairCore <> Cx def
+binder 9708:9708 <> z:77
+R9716:9722 S02_CauchyComplete <> real_eq def
+R9725:9733 CxRealPairCore <> c_norm_sq def
+R9736:9741 CxRealPairCore <> c_conj def
+R9743:9743 CxRealPairCore <> z:77 var
+R9748:9756 CxRealPairCore <> c_norm_sq def
+R9758:9758 CxRealPairCore <> z:77 var
+R9841:9860 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 9897:9909 <> c_norm_sq_mul
+R9926:9927 CxRealPairCore <> Cx def
+binder 9920:9920 <> z:78
+binder 9922:9922 <> w:79
+R9932:9938 S02_CauchyComplete <> real_eq def
+R9941:9949 CxRealPairCore <> c_norm_sq def
+R9952:9957 CxRealPairCore <> c_mult def
+R9959:9959 CxRealPairCore <> z:78 var
+R9961:9961 CxRealPairCore <> w:79 var
+R9966:9974 S02_CauchyComplete <> real_mult def
+R9977:9985 CxRealPairCore <> c_norm_sq def
+R9987:9987 CxRealPairCore <> z:78 var
+R9991:9999 CxRealPairCore <> c_norm_sq def
+R10001:10001 CxRealPairCore <> w:79 var
+R10141:10160 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 10197:10210 <> c_norm_sq_of_Q
+R10227:10227 Stdlib.QArith.QArith_base <> Q rec
+binder 10221:10221 <> a:80
+binder 10223:10223 <> b:81
+R10232:10238 S02_CauchyComplete <> real_eq def
+R10241:10249 CxRealPairCore <> c_norm_sq def
+R10252:10257 CxRealPairCore <> c_of_Q def
+R10259:10259 CxRealPairCore <> a:80 var
+R10261:10261 CxRealPairCore <> b:81 var
+R10266:10275 S02_CauchyComplete <> real_const def
+R10283:10285 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10279:10281 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10278:10278 CxRealPairCore <> a:80 var
+R10282:10282 CxRealPairCore <> a:80 var
+R10287:10289 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10286:10286 CxRealPairCore <> b:81 var
+R10290:10290 CxRealPairCore <> b:81 var
+R10322:10341 S02_CauchyComplete <> real_eq_of_zero_diff thm
+prf 10378:10399 <> c_norm_sq_Q_pos_bridge
+R10418:10418 Stdlib.QArith.QArith_base <> Q rec
+binder 10410:10410 <> a:82
+binder 10412:10412 <> b:83
+binder 10414:10414 <> e:84
+R10431:10434 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10423:10426 S02_CauchyComplete <> QltT def
+R10430:10430 CxRealPairCore <> e:84 var
+R10457:10462 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10435:10438 S02_CauchyComplete <> QltT def
+R10440:10440 CxRealPairCore <> e:84 var
+R10448:10450 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10444:10446 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10443:10443 CxRealPairCore <> a:82 var
+R10447:10447 CxRealPairCore <> a:82 var
+R10452:10454 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10451:10451 CxRealPairCore <> b:83 var
+R10455:10455 CxRealPairCore <> b:83 var
+R10463:10469 S02_CauchyComplete <> real_lt def
+R10471:10479 S02_CauchyComplete <> real_zero def
+R10482:10490 CxRealPairCore <> c_norm_sq def
+R10493:10498 CxRealPairCore <> c_of_Q def
+R10500:10500 CxRealPairCore <> a:82 var
+R10502:10502 CxRealPairCore <> b:83 var
+R10641:10644 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10637:10639 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R10629:10631 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10625:10627 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10633:10635 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10650:10652 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10646:10648 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10654:10656 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10688:10688 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R10711:10715 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R10734:10734 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R10690:10693 Stdlib.QArith.QArith_base <> ::Q_scope:x_'?='_x not
+R10707:10709 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R10699:10701 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10695:10697 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10703:10705 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10717:10720 Stdlib.QArith.QArith_base <> ::Q_scope:x_'?='_x not
+R10726:10728 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10722:10724 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10730:10732 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R10753:10765 Stdlib.QArith.QArith_base <> Qcompare_comp inst
+R10776:10783 Stdlib.QArith.QArith_base <> Qeq_refl thm
+R10811:10814 S02_CauchyComplete <> QltT def
+R10817:10824 S02_CauchyComplete <> Qlt_bool def

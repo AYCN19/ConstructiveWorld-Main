@@ -1,0 +1,15 @@
+DIGEST a18fb5361227f82ca0580627c55dbd51
+F_pa._pa_GaC2_06_AltMonoFace
+R15:33 GaC2_06_AltMonoFace <> <> lib
+R54:62 GaC2_06_AltMonoFace <> mn_exp_le thm
+R83:92 GaC2_06_AltMonoFace <> mn_sig_pos thm
+R113:125 GaC2_06_AltMonoFace <> mn_natreal_le thm
+R146:158 GaC2_06_AltMonoFace <> mn_log_nonneg thm
+R179:194 GaC2_06_AltMonoFace <> mn_slice_exp_gen thm
+R215:226 GaC2_06_AltMonoFace <> mn_slice_exp thm
+R247:259 GaC2_06_AltMonoFace <> mn_slice_exp0 thm
+R280:293 GaC2_06_AltMonoFace <> mn_rnpow_irrel thm
+R314:324 GaC2_06_AltMonoFace <> r_npow_anti thm
+R345:357 GaC2_06_AltMonoFace <> r_npow_tozero thm
+R378:392 GaC2_06_AltMonoFace <> r_npow0_tendsto thm
+R413:430 GaC2_06_AltMonoFace <> r_npow_diff_nonneg thm

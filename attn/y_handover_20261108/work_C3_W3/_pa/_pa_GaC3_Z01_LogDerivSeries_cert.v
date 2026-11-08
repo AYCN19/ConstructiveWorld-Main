@@ -1,0 +1,2 @@
+Require Import GaC3_Z01_LogDerivSeries_cert.
+Print Assumptions zz_g3_z01_all_true.

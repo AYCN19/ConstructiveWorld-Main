@@ -1,0 +1,4 @@
+[cpu_guard] FRONT launch pos=0 waited=0s tlevel=64
+File "/Users/apple/Desktop/y-gamma-sprint-20261108/work_C3_W3/_pa/_pa_GaC3_Z03_NonzeroLine.v", line 1, characters 0-36:
+Error: Cannot find library S01_BaseRing in loadpath
+

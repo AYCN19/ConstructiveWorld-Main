@@ -1,0 +1,36 @@
+DIGEST bf009d8d8609907f70da5e001ac68c3e
+F_pa._pa_GaC3_Z03_NonzeroLine
+R15:34 GaC3_Z03_NonzeroLine <> <> lib
+R55:62 GaC3_Z03_NonzeroLine <> qeq_lt_l thm
+R83:90 GaC3_Z03_NonzeroLine <> qeq_lt_r thm
+R111:118 GaC3_Z03_NonzeroLine <> qeq_le_l thm
+R139:146 GaC3_Z03_NonzeroLine <> qeq_le_r thm
+R167:178 GaC3_Z03_NonzeroLine <> qeq_minus_r0 thm
+R199:209 GaC3_Z03_NonzeroLine <> qopp_le_abs thm
+R230:241 GaC3_Z03_NonzeroLine <> qself_le_abs thm
+R262:268 GaC3_Z03_NonzeroLine <> qabs_lb thm
+R289:301 GaC3_Z03_NonzeroLine <> z03_le_mult_l thm
+R322:342 GaC3_Z03_NonzeroLine <> z03_sc_cos_term_congr thm
+R363:386 GaC3_Z03_NonzeroLine <> z03_sc_cos_partial_congr thm
+R407:417 GaC3_Z03_NonzeroLine <> z03_cos_peq thm
+R438:448 GaC3_Z03_NonzeroLine <> z03_exp_peq thm
+R469:483 GaC3_Z03_NonzeroLine <> z03_eq_ge0relax thm
+R504:518 GaC3_Z03_NonzeroLine <> z03_relax0_plus thm
+R539:550 GaC3_Z03_NonzeroLine <> z03_wy_relax thm
+R571:582 GaC3_Z03_NonzeroLine <> z03_lt_add_r thm
+R603:613 GaC3_Z03_NonzeroLine <> z03_lt_eq_r thm
+R634:649 GaC3_Z03_NonzeroLine <> z03_eq_relax_sym thm
+R670:687 GaC3_Z03_NonzeroLine <> z03_relax_lt_false thm
+R708:719 GaC3_Z03_NonzeroLine <> z03_cre_powq thm
+R740:751 GaC3_Z03_NonzeroLine <> z03_cre_plus thm
+R772:784 GaC3_Z03_NonzeroLine <> z03_cre_scale thm
+R805:819 GaC3_Z03_NonzeroLine <> z03_cre_manpart thm
+R840:850 GaC3_Z03_NonzeroLine <> z03_cre_tri thm
+R871:887 GaC3_Z03_NonzeroLine <> z03_comb_sqsum_eq thm
+R908:917 GaC3_Z03_NonzeroLine <> z03_ew_pos thm
+R938:950 GaC3_Z03_NonzeroLine <> z03_sqsum_ge0 thm
+R971:985 GaC3_Z03_NonzeroLine <> z03_comb_nonneg thm
+R1006:1015 GaC3_Z03_NonzeroLine <> z03_m0_pos thm
+R1036:1052 GaC3_Z03_NonzeroLine <> z03_racing_contra thm
+R1073:1086 GaC3_Z03_NonzeroLine <> z03_radius_pos thm
+R1107:1123 GaC3_Z03_NonzeroLine <> z03_radius_margin thm

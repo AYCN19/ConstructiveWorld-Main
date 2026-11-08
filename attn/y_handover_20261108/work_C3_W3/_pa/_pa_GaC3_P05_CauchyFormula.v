@@ -1,0 +1,16 @@
+Require Import GaC3_P05_CauchyFormula.
+Print Assumptions GaC3_P05_id_eq.
+Print Assumptions GaC3_P05_eq_id.
+Print Assumptions GaC3_P05_qeq_to_qeqb.
+Print Assumptions GaC3_P05_veq_intro.
+Print Assumptions GaC3_P05_veq_elim.
+Print Assumptions GaC3_P05_veq_refl.
+Print Assumptions GaC3_P05_qeq_trans2.
+Print Assumptions GaC3_P05_sumR_prim.
+Print Assumptions GaC3_P05_sumI_prim.
+Print Assumptions GaC3_P05_loop_cancel.
+Print Assumptions GaC3_P05_loop_cancel_cx.
+Print Assumptions GaC3_P05_endsum_cert.
+Print Assumptions GaC3_P05_rect_endsum_loop_zero.
+Print Assumptions GaC3_P05_cinv_mult.
+Print Assumptions GaC3_P05_cinv_cx.

@@ -1,0 +1,20 @@
+DIGEST a82b721a785261e8e2d018c12cbacf0f
+F_pa._pa_GaC3_P05_CauchyFormula_b
+R15:38 GaC3_P05_CauchyFormula_b <> <> lib
+R59:73 GaC3_P05_CauchyFormula_b <> GaC3_P05_qle_wd thm
+R94:110 GaC3_P05_CauchyFormula_b <> GaC3_P05_qle_wd_r thm
+R131:148 GaC3_P05_CauchyFormula_b <> GaC3_P05_qle_shift thm
+R169:185 GaC3_P05_CauchyFormula_b <> GaC3_P05_shift_ge thm
+R206:226 GaC3_P05_CauchyFormula_b <> GaC3_P05_shift_le_neg thm
+R247:266 GaC3_P05_CauchyFormula_b <> GaC3_P05_abs_val_neg thm
+R287:301 GaC3_P05_CauchyFormula_b <> GaC3_P05_abs_sq thm
+R322:339 GaC3_P05_CauchyFormula_b <> GaC3_P05_sq_nonneg thm
+R360:379 GaC3_P05_CauchyFormula_b <> GaC3_P05_qinv_nonneg thm
+R400:415 GaC3_P05_CauchyFormula_b <> GaC3_P05_qdiv_le thm
+R436:457 GaC3_P05_CauchyFormula_b <> GaC3_P05_cinv_abs_core thm
+R478:501 GaC3_P05_CauchyFormula_b <> GaC3_P05_cinv_abs_core_x thm
+R522:541 GaC3_P05_CauchyFormula_b <> GaC3_P05_margin_elim thm
+R562:580 GaC3_P05_CauchyFormula_b <> GaC3_P05_abs_ge_pos thm
+R601:619 GaC3_P05_CauchyFormula_b <> GaC3_P05_abs_ge_neg thm
+R640:668 GaC3_P05_CauchyFormula_b <> GaC3_P05_in_kernel_data_cases thm
+R689:715 GaC3_P05_CauchyFormula_b <> GaC3_P05_kernel_rect_bounds thm

@@ -1,0 +1,881 @@
+DIGEST fe5f9124bfa2d6492d5d2b8d50708114
+FGaC3_P02_LineIntegralAlg
+R2617:2629 Stdlib.QArith.QArith <> <> lib
+R2631:2641 Stdlib.QArith.Qabs <> <> lib
+R2643:2654 Stdlib.QArith.Qring <> <> lib
+R2684:2687 Stdlib.Lists.List <> <> lib
+R2705:2716 S01_BaseRing <> <> lib
+R2734:2751 S02_CauchyComplete <> <> lib
+R2769:2782 CxRealPairCore <> <> lib
+R2800:2823 GaC3_P01_LineIntegralDef <> <> lib
+R2860:2872 Stdlib.Lists.List ListNotations <> mod
+def 3117:3131 <> GaC3_P02_vertex
+R3144:3146 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3143:3143 Stdlib.QArith.QArith_base <> Q rec
+R3147:3147 Stdlib.QArith.QArith_base <> Q rec
+def 3167:3179 <> GaC3_P02_pseg
+R3206:3208 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3191:3205 GaC3_P02_LineIntegralAlg <> GaC3_P02_vertex def
+R3209:3223 GaC3_P02_LineIntegralAlg <> GaC3_P02_vertex def
+def 3243:3256 <> GaC3_P02_cpath
+R3267:3270 Corelib.Init.Datatypes <> list ind
+R3272:3284 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+def 3372:3389 <> GaC3_P02_vline_seg
+R3398:3398 Stdlib.QArith.QArith_base <> Q rec
+binder 3392:3392 <> c:1
+binder 3394:3394 <> T:2
+R3403:3416 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+R3421:3421 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3439:3439 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3422:3422 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3430:3431 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3438:3438 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3423:3423 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3425:3426 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3429:3429 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3424:3424 GaC3_P02_LineIntegralAlg <> c:1 var
+R3427:3427 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R3428:3428 GaC3_P02_LineIntegralAlg <> T:2 var
+R3432:3432 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3434:3435 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3437:3437 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3433:3433 GaC3_P02_LineIntegralAlg <> c:1 var
+R3436:3436 GaC3_P02_LineIntegralAlg <> T:2 var
+def 3498:3515 <> GaC3_P02_hline_seg
+R3528:3528 Stdlib.QArith.QArith_base <> Q rec
+binder 3518:3519 <> x0:3
+binder 3521:3522 <> x1:4
+binder 3524:3524 <> T:5
+R3533:3546 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+R3553:3553 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3572:3572 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R3554:3554 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3562:3563 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3571:3571 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3555:3555 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3558:3559 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3561:3561 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3556:3557 GaC3_P02_LineIntegralAlg <> x0:3 var
+R3560:3560 GaC3_P02_LineIntegralAlg <> T:5 var
+R3564:3564 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3567:3568 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3570:3570 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R3565:3566 GaC3_P02_LineIntegralAlg <> x1:4 var
+R3569:3569 GaC3_P02_LineIntegralAlg <> T:5 var
+def 3911:3926 <> GaC3_P02_plen_ok
+R3934:3947 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 3929:3930 <> ps:6
+R3956:3959 Corelib.Init.Datatypes <> list ind
+R3963:3965 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R3962:3962 Stdlib.QArith.QArith_base <> Q rec
+R3966:3966 Stdlib.QArith.QArith_base <> Q rec
+binder 3951:3952 <> vs:7
+R3981:3982 S01_BaseRing <> Id ind
+R4018:4021 Corelib.Init.Datatypes <> true constr
+R3985:3991 Corelib.Init.Nat <> eqb def
+R3994:3999 Corelib.Init.Datatypes <> length def
+R4001:4002 GaC3_P02_LineIntegralAlg <> ps:6 var
+R4006:4011 Corelib.Init.Datatypes <> length def
+R4013:4014 GaC3_P02_LineIntegralAlg <> vs:7 var
+prf 4110:4128 <> GaC3_P02_nat_eqb_eq
+R4145:4147 Corelib.Init.Datatypes <> nat ind
+binder 4139:4139 <> n:8
+binder 4141:4141 <> m:9
+R4168:4171 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4161:4163 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4150:4156 Corelib.Init.Nat <> eqb def
+R4158:4158 GaC3_P02_LineIntegralAlg <> n:8 var
+R4160:4160 GaC3_P02_LineIntegralAlg <> m:9 var
+R4164:4167 Corelib.Init.Datatypes <> true constr
+R4173:4175 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4172:4172 GaC3_P02_LineIntegralAlg <> n:8 var
+R4176:4176 GaC3_P02_LineIntegralAlg <> m:9 var
+prf 4348:4368 <> GaC3_P02_plen_ok_true
+R4385:4398 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 4380:4381 <> ps:10
+R4407:4410 Corelib.Init.Datatypes <> list ind
+R4414:4416 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4413:4413 Stdlib.QArith.QArith_base <> Q rec
+R4417:4417 Stdlib.QArith.QArith_base <> Q rec
+binder 4402:4403 <> vs:11
+R4446:4449 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4424:4439 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R4441:4442 GaC3_P02_LineIntegralAlg <> ps:10 var
+R4444:4445 GaC3_P02_LineIntegralAlg <> vs:11 var
+R4459:4461 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4450:4455 Corelib.Init.Datatypes <> length def
+R4457:4458 GaC3_P02_LineIntegralAlg <> ps:10 var
+R4462:4467 Corelib.Init.Datatypes <> length def
+R4469:4470 GaC3_P02_LineIntegralAlg <> vs:11 var
+R4505:4520 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R4540:4546 Corelib.Init.Nat <> eqb def
+R4549:4554 Corelib.Init.Datatypes <> length def
+R4561:4566 Corelib.Init.Datatypes <> length def
+R4591:4609 GaC3_P02_LineIntegralAlg <> GaC3_P02_nat_eqb_eq thm
+prf 4728:4749 <> GaC3_P02_plen_ok_of_eq
+R4766:4779 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 4761:4762 <> ps:12
+R4788:4791 Corelib.Init.Datatypes <> list ind
+R4795:4797 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R4794:4794 Stdlib.QArith.QArith_base <> Q rec
+R4798:4798 Stdlib.QArith.QArith_base <> Q rec
+binder 4783:4784 <> vs:13
+R4826:4829 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R4814:4816 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4805:4810 Corelib.Init.Datatypes <> length def
+R4812:4813 GaC3_P02_LineIntegralAlg <> ps:12 var
+R4817:4822 Corelib.Init.Datatypes <> length def
+R4824:4825 GaC3_P02_LineIntegralAlg <> vs:13 var
+R4830:4845 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R4847:4848 GaC3_P02_LineIntegralAlg <> ps:12 var
+R4850:4851 GaC3_P02_LineIntegralAlg <> vs:13 var
+R4886:4901 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R4930:4932 Corelib.Init.Datatypes <> nat ind
+binder 4926:4926 <> n:14
+R4946:4948 Corelib.Init.Logic <> ::type_scope:x_'='_x not
+R4935:4941 Corelib.Init.Nat <> eqb def
+R4943:4943 GaC3_P02_LineIntegralAlg <> n:14 var
+R4945:4945 GaC3_P02_LineIntegralAlg <> n:14 var
+R4949:4952 Corelib.Init.Datatypes <> true constr
+binder 4926:4926 <> n:15
+R4943:4943 GaC3_P02_LineIntegralAlg <> n:15 var
+R4945:4945 GaC3_P02_LineIntegralAlg <> n:15 var
+R5040:5045 Corelib.Init.Datatypes <> length def
+R5059:5065 S01_BaseRing <> id_refl constr
+def 5315:5329 <> GaC3_P02_seg_dz
+R5336:5348 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+binder 5332:5332 <> s:16
+R5354:5356 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5353:5353 Stdlib.QArith.QArith_base <> Q rec
+R5357:5357 Stdlib.QArith.QArith_base <> Q rec
+R5364:5364 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5394:5395 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5425:5425 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5377:5379 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R5366:5368 Corelib.Init.Datatypes <> fst def
+R5371:5373 Corelib.Init.Datatypes <> snd def
+R5375:5375 GaC3_P02_LineIntegralAlg <> s:16 var
+R5380:5382 Corelib.Init.Datatypes <> fst def
+R5385:5387 Corelib.Init.Datatypes <> fst def
+R5389:5389 GaC3_P02_LineIntegralAlg <> s:16 var
+R5408:5410 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R5397:5399 Corelib.Init.Datatypes <> snd def
+R5402:5404 Corelib.Init.Datatypes <> snd def
+R5406:5406 GaC3_P02_LineIntegralAlg <> s:16 var
+R5411:5413 Corelib.Init.Datatypes <> snd def
+R5416:5418 Corelib.Init.Datatypes <> fst def
+R5420:5420 GaC3_P02_LineIntegralAlg <> s:16 var
+def 5666:5685 <> GaC3_P02_seg_contrib
+R5692:5704 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+binder 5688:5688 <> s:17
+R5713:5715 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5712:5712 Stdlib.QArith.QArith_base <> Q rec
+R5716:5716 Stdlib.QArith.QArith_base <> Q rec
+binder 5708:5708 <> v:18
+R5722:5724 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5721:5721 Stdlib.QArith.QArith_base <> Q rec
+R5725:5725 Stdlib.QArith.QArith_base <> Q rec
+R5748:5762 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+R5764:5764 GaC3_P02_LineIntegralAlg <> s:17 var
+binder 5737:5738 <> dx:19
+binder 5741:5742 <> dy:20
+R5771:5771 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5795:5796 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5820:5820 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R5782:5784 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R5774:5776 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5772:5773 GaC3_P02_LineIntegralAlg <> dx:19 var
+R5777:5779 Corelib.Init.Datatypes <> fst def
+R5781:5781 GaC3_P02_LineIntegralAlg <> v:18 var
+R5787:5789 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5785:5786 GaC3_P02_LineIntegralAlg <> dy:20 var
+R5790:5792 Corelib.Init.Datatypes <> snd def
+R5794:5794 GaC3_P02_LineIntegralAlg <> v:18 var
+R5807:5809 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R5799:5801 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5797:5798 GaC3_P02_LineIntegralAlg <> dx:19 var
+R5802:5804 Corelib.Init.Datatypes <> snd def
+R5806:5806 GaC3_P02_LineIntegralAlg <> v:18 var
+R5812:5814 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R5810:5811 GaC3_P02_LineIntegralAlg <> dy:20 var
+R5815:5817 Corelib.Init.Datatypes <> fst def
+R5819:5819 GaC3_P02_LineIntegralAlg <> v:18 var
+def 5833:5850 <> GaC3_P02_path_sumR
+R5858:5871 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 5853:5854 <> ps:21
+R5880:5883 Corelib.Init.Datatypes <> list ind
+R5887:5889 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R5886:5886 Stdlib.QArith.QArith_base <> Q rec
+R5890:5890 Stdlib.QArith.QArith_base <> Q rec
+binder 5875:5876 <> vs:22
+R5896:5896 Stdlib.QArith.QArith_base <> Q rec
+R5913:5914 GaC3_P02_LineIntegralAlg <> vs:22 var
+R5909:5910 GaC3_P02_LineIntegralAlg <> ps:21 var
+R5925:5927 Corelib.Init.Datatypes <> nil constr
+R5944:5946 Corelib.Init.Datatypes <> nil constr
+R5958:5961 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R5968:5971 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6009:6011 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R5979:5981 Corelib.Init.Datatypes <> fst def
+R5984:6003 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R6012:6029 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR:23 def
+def 6056:6073 <> GaC3_P02_path_sumI
+R6081:6094 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 6076:6077 <> ps:26
+R6103:6106 Corelib.Init.Datatypes <> list ind
+R6110:6112 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6109:6109 Stdlib.QArith.QArith_base <> Q rec
+R6113:6113 Stdlib.QArith.QArith_base <> Q rec
+binder 6098:6099 <> vs:27
+R6119:6119 Stdlib.QArith.QArith_base <> Q rec
+R6136:6137 GaC3_P02_LineIntegralAlg <> vs:27 var
+R6132:6133 GaC3_P02_LineIntegralAlg <> ps:26 var
+R6148:6150 Corelib.Init.Datatypes <> nil constr
+R6167:6169 Corelib.Init.Datatypes <> nil constr
+R6181:6184 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6191:6194 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6232:6234 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R6202:6204 Corelib.Init.Datatypes <> snd def
+R6207:6226 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R6235:6252 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI:28 def
+def 6330:6351 <> GaC3_P02_line_integral
+R6359:6372 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 6354:6355 <> ps:31
+R6381:6384 Corelib.Init.Datatypes <> list ind
+R6388:6390 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6387:6387 Stdlib.QArith.QArith_base <> Q rec
+R6391:6391 Stdlib.QArith.QArith_base <> Q rec
+binder 6376:6377 <> vs:32
+R6397:6398 CxRealPairCore <> Cx def
+R6405:6410 CxRealPairCore <> c_of_Q def
+R6413:6430 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R6432:6433 GaC3_P02_LineIntegralAlg <> ps:31 var
+R6435:6436 GaC3_P02_LineIntegralAlg <> vs:32 var
+R6440:6457 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R6459:6460 GaC3_P02_LineIntegralAlg <> ps:31 var
+R6462:6463 GaC3_P02_LineIntegralAlg <> vs:32 var
+prf 6534:6556 <> GaC3_P02_path_sumR_cons
+R6572:6584 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+binder 6568:6568 <> p:33
+R6593:6606 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 6588:6589 <> ps:34
+R6617:6619 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6616:6616 Stdlib.QArith.QArith_base <> Q rec
+R6620:6620 Stdlib.QArith.QArith_base <> Q rec
+binder 6612:6612 <> v:35
+R6629:6632 Corelib.Init.Datatypes <> list ind
+R6636:6638 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6635:6635 Stdlib.QArith.QArith_base <> Q rec
+R6639:6639 Stdlib.QArith.QArith_base <> Q rec
+binder 6624:6625 <> vs:36
+R6684:6689 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R6646:6663 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R6667:6670 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6666:6666 GaC3_P02_LineIntegralAlg <> p:33 var
+R6671:6672 GaC3_P02_LineIntegralAlg <> ps:34 var
+R6677:6680 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6676:6676 GaC3_P02_LineIntegralAlg <> v:35 var
+R6681:6682 GaC3_P02_LineIntegralAlg <> vs:36 var
+R6720:6722 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R6690:6692 Corelib.Init.Datatypes <> fst def
+R6695:6714 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R6716:6716 GaC3_P02_LineIntegralAlg <> p:33 var
+R6718:6718 GaC3_P02_LineIntegralAlg <> v:35 var
+R6723:6740 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R6742:6743 GaC3_P02_LineIntegralAlg <> ps:34 var
+R6745:6746 GaC3_P02_LineIntegralAlg <> vs:36 var
+prf 6781:6803 <> GaC3_P02_path_sumI_cons
+R6819:6831 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+binder 6815:6815 <> p:37
+R6840:6853 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 6835:6836 <> ps:38
+R6864:6866 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6863:6863 Stdlib.QArith.QArith_base <> Q rec
+R6867:6867 Stdlib.QArith.QArith_base <> Q rec
+binder 6859:6859 <> v:39
+R6876:6879 Corelib.Init.Datatypes <> list ind
+R6883:6885 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R6882:6882 Stdlib.QArith.QArith_base <> Q rec
+R6886:6886 Stdlib.QArith.QArith_base <> Q rec
+binder 6871:6872 <> vs:40
+R6931:6936 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R6893:6910 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R6914:6917 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6913:6913 GaC3_P02_LineIntegralAlg <> p:37 var
+R6918:6919 GaC3_P02_LineIntegralAlg <> ps:38 var
+R6924:6927 Corelib.Init.Datatypes <> ::list_scope:x_'::'_x not
+R6923:6923 GaC3_P02_LineIntegralAlg <> v:39 var
+R6928:6929 GaC3_P02_LineIntegralAlg <> vs:40 var
+R6967:6969 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R6937:6939 Corelib.Init.Datatypes <> snd def
+R6942:6961 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R6963:6963 GaC3_P02_LineIntegralAlg <> p:37 var
+R6965:6965 GaC3_P02_LineIntegralAlg <> v:39 var
+R6970:6987 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R6989:6990 GaC3_P02_LineIntegralAlg <> ps:38 var
+R6992:6993 GaC3_P02_LineIntegralAlg <> vs:40 var
+prf 7258:7271 <> GaC3_P02_cploQ
+R7292:7292 Stdlib.QArith.QArith_base <> Q rec
+binder 7282:7282 <> a:41
+binder 7284:7284 <> b:42
+binder 7286:7286 <> c:43
+binder 7288:7288 <> d:44
+R7297:7300 CxRealPairCore <> c_eq def
+R7303:7308 CxRealPairCore <> c_plus def
+R7311:7316 CxRealPairCore <> c_of_Q def
+R7318:7318 GaC3_P02_LineIntegralAlg <> a:41 var
+R7320:7320 GaC3_P02_LineIntegralAlg <> b:42 var
+R7324:7329 CxRealPairCore <> c_of_Q def
+R7331:7331 GaC3_P02_LineIntegralAlg <> c:43 var
+R7333:7333 GaC3_P02_LineIntegralAlg <> d:44 var
+R7338:7343 CxRealPairCore <> c_of_Q def
+R7347:7349 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R7346:7346 GaC3_P02_LineIntegralAlg <> a:41 var
+R7350:7350 GaC3_P02_LineIntegralAlg <> c:43 var
+R7355:7357 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R7354:7354 GaC3_P02_LineIntegralAlg <> b:42 var
+R7358:7358 GaC3_P02_LineIntegralAlg <> d:44 var
+R7395:7398 CxRealPairCore <> c_eq def
+R7414:7433 S02_CauchyComplete <> real_eq_of_zero_diff thm
+R7458:7468 CxRealPairCore <> cRe_plus_pt thm
+R7471:7476 CxRealPairCore <> c_of_Q def
+R7484:7489 CxRealPairCore <> c_of_Q def
+R7513:7523 CxRealPairCore <> cRe_of_Q_pt thm
+R7542:7552 CxRealPairCore <> cRe_of_Q_pt thm
+R7575:7585 CxRealPairCore <> cRe_of_Q_pt thm
+R7589:7591 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R7597:7599 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R7626:7636 CxRealPairCore <> cIm_plus_pt thm
+R7639:7644 CxRealPairCore <> c_of_Q def
+R7652:7657 CxRealPairCore <> c_of_Q def
+R7681:7691 CxRealPairCore <> cIm_of_Q_pt thm
+R7710:7720 CxRealPairCore <> cIm_of_Q_pt thm
+R7743:7753 CxRealPairCore <> cIm_of_Q_pt thm
+R7757:7759 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R7765:7767 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+prf 7793:7807 <> GaC3_P02_coppoQ
+R7824:7824 Stdlib.QArith.QArith_base <> Q rec
+binder 7818:7818 <> a:45
+binder 7820:7820 <> b:46
+R7829:7832 CxRealPairCore <> c_eq def
+R7835:7839 CxRealPairCore <> c_opp def
+R7842:7847 CxRealPairCore <> c_of_Q def
+R7849:7849 GaC3_P02_LineIntegralAlg <> a:45 var
+R7851:7851 GaC3_P02_LineIntegralAlg <> b:46 var
+R7856:7861 CxRealPairCore <> c_of_Q def
+R7864:7865 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R7866:7866 GaC3_P02_LineIntegralAlg <> a:45 var
+R7870:7871 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R7872:7872 GaC3_P02_LineIntegralAlg <> b:46 var
+R7905:7908 CxRealPairCore <> c_eq def
+R7924:7943 S02_CauchyComplete <> real_eq_of_zero_diff thm
+R7968:7977 CxRealPairCore <> cRe_opp_pt thm
+R7980:7985 CxRealPairCore <> c_of_Q def
+R8009:8019 CxRealPairCore <> cRe_of_Q_pt thm
+R8038:8048 CxRealPairCore <> cRe_of_Q_pt thm
+R8051:8052 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R8057:8058 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R8085:8094 CxRealPairCore <> cIm_opp_pt thm
+R8097:8102 CxRealPairCore <> c_of_Q def
+R8126:8136 CxRealPairCore <> cIm_of_Q_pt thm
+R8155:8165 CxRealPairCore <> cIm_of_Q_pt thm
+R8168:8169 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R8174:8175 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+prf 8433:8458 <> GaC3_P02_line_integral_nil
+R8474:8477 Corelib.Init.Datatypes <> list ind
+R8481:8483 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R8480:8480 Stdlib.QArith.QArith_base <> Q rec
+R8484:8484 Stdlib.QArith.QArith_base <> Q rec
+binder 8469:8470 <> vs:47
+R8490:8493 CxRealPairCore <> c_eq def
+R8496:8517 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R8519:8521 Corelib.Init.Datatypes <> nil constr
+R8523:8524 GaC3_P02_LineIntegralAlg <> vs:47 var
+R8528:8533 CxRealPairCore <> c_of_Q def
+R8568:8589 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R8599:8616 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R8618:8635 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R8647:8662 GaC3_P01_LineIntegralDef <> GaC3_P01_cofQ_eq thm
+prf 8837:8856 <> GaC3_P02_vline_const
+R8874:8874 Stdlib.QArith.QArith_base <> Q rec
+binder 8868:8868 <> c:48
+binder 8870:8870 <> T:49
+R8883:8885 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R8882:8882 Stdlib.QArith.QArith_base <> Q rec
+R8886:8886 Stdlib.QArith.QArith_base <> Q rec
+binder 8878:8878 <> v:50
+R8892:8895 CxRealPairCore <> c_eq def
+R8898:8919 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R8922:8939 GaC3_P02_LineIntegralAlg <> GaC3_P02_vline_seg def
+R8941:8941 GaC3_P02_LineIntegralAlg <> c:48 var
+R8943:8943 GaC3_P02_LineIntegralAlg <> T:49 var
+R8946:8946 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R8948:8948 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R8947:8947 GaC3_P02_LineIntegralAlg <> v:50 var
+R8959:8964 CxRealPairCore <> c_of_Q def
+R8976:8978 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R8967:8969 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R8975:8975 Stdlib.QArith.QArith_base <> ::Q_scope:'-'_x not
+R8971:8973 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R8974:8974 GaC3_P02_LineIntegralAlg <> T:49 var
+R8979:8981 Corelib.Init.Datatypes <> snd def
+R8983:8983 GaC3_P02_LineIntegralAlg <> v:50 var
+R8992:8994 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R8988:8990 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R8991:8991 GaC3_P02_LineIntegralAlg <> T:49 var
+R8995:8997 Corelib.Init.Datatypes <> fst def
+R8999:8999 GaC3_P02_LineIntegralAlg <> v:50 var
+R9034:9055 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R9058:9075 GaC3_P02_LineIntegralAlg <> GaC3_P02_vline_seg def
+R9085:9102 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R9104:9121 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R9123:9137 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+R9146:9165 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R9167:9169 Corelib.Init.Datatypes <> fst def
+R9171:9173 Corelib.Init.Datatypes <> snd def
+R9185:9200 GaC3_P01_LineIntegralDef <> GaC3_P01_cofQ_eq thm
+prf 9298:9317 <> GaC3_P02_hline_const
+R9339:9339 Stdlib.QArith.QArith_base <> Q rec
+binder 9329:9330 <> x0:51
+binder 9332:9333 <> x1:52
+binder 9335:9335 <> T:53
+R9348:9350 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R9347:9347 Stdlib.QArith.QArith_base <> Q rec
+R9351:9351 Stdlib.QArith.QArith_base <> Q rec
+binder 9343:9343 <> v:54
+R9357:9360 CxRealPairCore <> c_eq def
+R9363:9384 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R9387:9404 GaC3_P02_LineIntegralAlg <> GaC3_P02_hline_seg def
+R9406:9407 GaC3_P02_LineIntegralAlg <> x0:51 var
+R9409:9410 GaC3_P02_LineIntegralAlg <> x1:52 var
+R9412:9412 GaC3_P02_LineIntegralAlg <> T:53 var
+R9415:9415 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R9417:9417 Stdlib.Lists.List ListNotations ::list_scope:'['_x_']' not
+R9416:9416 GaC3_P02_LineIntegralAlg <> v:54 var
+R9428:9433 CxRealPairCore <> c_of_Q def
+R9436:9436 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R9444:9447 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R9439:9441 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R9437:9438 GaC3_P02_LineIntegralAlg <> x1:52 var
+R9442:9443 GaC3_P02_LineIntegralAlg <> x0:51 var
+R9448:9450 Corelib.Init.Datatypes <> fst def
+R9452:9452 GaC3_P02_LineIntegralAlg <> v:54 var
+R9456:9456 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R9464:9467 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R9459:9461 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R9457:9458 GaC3_P02_LineIntegralAlg <> x1:52 var
+R9462:9463 GaC3_P02_LineIntegralAlg <> x0:51 var
+R9468:9470 Corelib.Init.Datatypes <> snd def
+R9472:9472 GaC3_P02_LineIntegralAlg <> v:54 var
+R9511:9532 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R9535:9552 GaC3_P02_LineIntegralAlg <> GaC3_P02_hline_seg def
+R9562:9579 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R9581:9598 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R9600:9614 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+R9623:9642 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R9644:9646 Corelib.Init.Datatypes <> fst def
+R9648:9650 Corelib.Init.Datatypes <> snd def
+R9662:9677 GaC3_P01_LineIntegralDef <> GaC3_P01_cofQ_eq thm
+prf 9930:9951 <> GaC3_P02_path_concat_R
+R9973:9986 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 9963:9965 <> ps1:55
+binder 9967:9969 <> ps2:56
+R10002:10005 Corelib.Init.Datatypes <> list ind
+R10009:10011 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10008:10008 Stdlib.QArith.QArith_base <> Q rec
+R10012:10012 Stdlib.QArith.QArith_base <> Q rec
+binder 9992:9994 <> vs1:57
+binder 9996:9998 <> vs2:58
+R10043:10048 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R10019:10034 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R10036:10038 GaC3_P02_LineIntegralAlg <> ps1:55 var
+R10040:10042 GaC3_P02_LineIntegralAlg <> vs1:57 var
+R10093:10098 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R10049:10066 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R10072:10075 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10069:10071 GaC3_P02_LineIntegralAlg <> ps1:55 var
+R10076:10078 GaC3_P02_LineIntegralAlg <> ps2:56 var
+R10085:10088 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R10082:10084 GaC3_P02_LineIntegralAlg <> vs1:57 var
+R10089:10091 GaC3_P02_LineIntegralAlg <> vs2:58 var
+R10125:10127 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R10099:10116 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R10118:10120 GaC3_P02_LineIntegralAlg <> ps1:55 var
+R10122:10124 GaC3_P02_LineIntegralAlg <> vs1:57 var
+R10128:10145 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R10147:10149 GaC3_P02_LineIntegralAlg <> ps2:56 var
+R10151:10153 GaC3_P02_LineIntegralAlg <> vs2:58 var
+R10277:10279 Corelib.Init.Datatypes <> app def
+R10281:10298 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R10321:10336 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R10352:10357 Corelib.Init.Datatypes <> length def
+R10359:10365 Corelib.Init.Nat <> eqb def
+R10438:10453 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R10469:10474 Corelib.Init.Datatypes <> length def
+R10476:10482 Corelib.Init.Nat <> eqb def
+R10583:10585 Corelib.Init.Datatypes <> app def
+R10597:10619 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR_cons thm
+R10622:10644 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR_cons thm
+R10682:10703 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok_of_eq thm
+R10730:10750 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok_true thm
+R10789:10794 Corelib.Init.Datatypes <> length def
+R10854:10873 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R10875:10877 Corelib.Init.Datatypes <> fst def
+R10879:10881 Corelib.Init.Datatypes <> snd def
+R10883:10897 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+prf 10921:10942 <> GaC3_P02_path_concat_I
+R10964:10977 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 10954:10956 <> ps1:59
+binder 10958:10960 <> ps2:60
+R10993:10996 Corelib.Init.Datatypes <> list ind
+R11000:11002 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R10999:10999 Stdlib.QArith.QArith_base <> Q rec
+R11003:11003 Stdlib.QArith.QArith_base <> Q rec
+binder 10983:10985 <> vs1:61
+binder 10987:10989 <> vs2:62
+R11034:11039 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R11010:11025 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R11027:11029 GaC3_P02_LineIntegralAlg <> ps1:59 var
+R11031:11033 GaC3_P02_LineIntegralAlg <> vs1:61 var
+R11084:11089 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R11040:11057 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R11063:11066 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R11060:11062 GaC3_P02_LineIntegralAlg <> ps1:59 var
+R11067:11069 GaC3_P02_LineIntegralAlg <> ps2:60 var
+R11076:11079 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R11073:11075 GaC3_P02_LineIntegralAlg <> vs1:61 var
+R11080:11082 GaC3_P02_LineIntegralAlg <> vs2:62 var
+R11116:11118 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R11090:11107 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R11109:11111 GaC3_P02_LineIntegralAlg <> ps1:59 var
+R11113:11115 GaC3_P02_LineIntegralAlg <> vs1:61 var
+R11119:11136 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R11138:11140 GaC3_P02_LineIntegralAlg <> ps2:60 var
+R11142:11144 GaC3_P02_LineIntegralAlg <> vs2:62 var
+R11268:11270 Corelib.Init.Datatypes <> app def
+R11272:11289 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R11312:11327 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R11343:11348 Corelib.Init.Datatypes <> length def
+R11350:11356 Corelib.Init.Nat <> eqb def
+R11429:11444 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R11460:11465 Corelib.Init.Datatypes <> length def
+R11467:11473 Corelib.Init.Nat <> eqb def
+R11574:11576 Corelib.Init.Datatypes <> app def
+R11588:11610 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI_cons thm
+R11613:11635 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI_cons thm
+R11673:11694 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok_of_eq thm
+R11721:11741 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok_true thm
+R11780:11785 Corelib.Init.Datatypes <> length def
+R11845:11864 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R11866:11868 Corelib.Init.Datatypes <> fst def
+R11870:11872 Corelib.Init.Datatypes <> snd def
+R11874:11888 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+prf 11975:12003 <> GaC3_P02_line_integral_concat
+R12025:12038 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 12015:12017 <> ps1:63
+binder 12019:12021 <> ps2:64
+R12054:12057 Corelib.Init.Datatypes <> list ind
+R12061:12063 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R12060:12060 Stdlib.QArith.QArith_base <> Q rec
+R12064:12064 Stdlib.QArith.QArith_base <> Q rec
+binder 12044:12046 <> vs1:65
+binder 12048:12050 <> vs2:66
+R12095:12100 Corelib.Init.Notations <> ::type_scope:x_'->'_x not
+R12071:12086 GaC3_P02_LineIntegralAlg <> GaC3_P02_plen_ok def
+R12088:12090 GaC3_P02_LineIntegralAlg <> ps1:63 var
+R12092:12094 GaC3_P02_LineIntegralAlg <> vs1:65 var
+R12101:12104 CxRealPairCore <> c_eq def
+R12107:12128 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R12134:12137 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R12131:12133 GaC3_P02_LineIntegralAlg <> ps1:63 var
+R12138:12140 GaC3_P02_LineIntegralAlg <> ps2:64 var
+R12147:12150 Corelib.Init.Datatypes <> ::list_scope:x_'++'_x not
+R12144:12146 GaC3_P02_LineIntegralAlg <> vs1:65 var
+R12151:12153 GaC3_P02_LineIntegralAlg <> vs2:66 var
+R12165:12170 CxRealPairCore <> c_plus def
+R12173:12194 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R12196:12198 GaC3_P02_LineIntegralAlg <> ps1:63 var
+R12200:12202 GaC3_P02_LineIntegralAlg <> vs1:65 var
+R12221:12242 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R12244:12246 GaC3_P02_LineIntegralAlg <> ps2:64 var
+R12248:12250 GaC3_P02_LineIntegralAlg <> vs2:66 var
+R12302:12323 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R12335:12344 CxRealPairCore <> c_eq_trans thm
+R12349:12354 CxRealPairCore <> c_of_Q def
+R12387:12389 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R12361:12378 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R12390:12407 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R12449:12451 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R12423:12440 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R12452:12469 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R12493:12508 GaC3_P01_LineIntegralDef <> GaC3_P01_cofQ_eq thm
+R12519:12540 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_concat_R thm
+R12550:12571 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_concat_I thm
+R12605:12618 GaC3_P02_LineIntegralAlg <> GaC3_P02_cploQ thm
+R12621:12638 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R12650:12667 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R12692:12709 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R12721:12738 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+def 13054:13066 <> GaC3_P02_vmul
+R13077:13079 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13076:13076 Stdlib.QArith.QArith_base <> Q rec
+R13080:13080 Stdlib.QArith.QArith_base <> Q rec
+binder 13069:13070 <> al:67
+binder 13072:13072 <> v:68
+R13086:13088 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13085:13085 Stdlib.QArith.QArith_base <> Q rec
+R13089:13089 Stdlib.QArith.QArith_base <> Q rec
+R13096:13096 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13128:13129 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13161:13161 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R13111:13113 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R13103:13105 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13097:13099 Corelib.Init.Datatypes <> fst def
+R13101:13102 GaC3_P02_LineIntegralAlg <> al:67 var
+R13106:13108 Corelib.Init.Datatypes <> fst def
+R13110:13110 GaC3_P02_LineIntegralAlg <> v:68 var
+R13120:13122 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13114:13116 Corelib.Init.Datatypes <> snd def
+R13118:13119 GaC3_P02_LineIntegralAlg <> al:67 var
+R13123:13125 Corelib.Init.Datatypes <> snd def
+R13127:13127 GaC3_P02_LineIntegralAlg <> v:68 var
+R13144:13146 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R13136:13138 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13130:13132 Corelib.Init.Datatypes <> fst def
+R13134:13135 GaC3_P02_LineIntegralAlg <> al:67 var
+R13139:13141 Corelib.Init.Datatypes <> snd def
+R13143:13143 GaC3_P02_LineIntegralAlg <> v:68 var
+R13153:13155 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13147:13149 Corelib.Init.Datatypes <> snd def
+R13151:13152 GaC3_P02_LineIntegralAlg <> al:67 var
+R13156:13158 Corelib.Init.Datatypes <> fst def
+R13160:13160 GaC3_P02_LineIntegralAlg <> v:68 var
+prf 13309:13331 <> GaC3_P02_contrib_vmul_R
+R13347:13359 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+binder 13343:13343 <> s:69
+R13371:13373 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13370:13370 Stdlib.QArith.QArith_base <> Q rec
+R13374:13374 Stdlib.QArith.QArith_base <> Q rec
+binder 13363:13363 <> v:70
+binder 13365:13366 <> al:71
+R13429:13434 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13380:13382 Corelib.Init.Datatypes <> fst def
+R13385:13404 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13406:13406 GaC3_P02_LineIntegralAlg <> s:69 var
+R13409:13421 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R13423:13424 GaC3_P02_LineIntegralAlg <> al:71 var
+R13426:13426 GaC3_P02_LineIntegralAlg <> v:70 var
+R13474:13476 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R13441:13443 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13435:13437 Corelib.Init.Datatypes <> fst def
+R13439:13440 GaC3_P02_LineIntegralAlg <> al:71 var
+R13444:13446 Corelib.Init.Datatypes <> fst def
+R13449:13468 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13470:13470 GaC3_P02_LineIntegralAlg <> s:69 var
+R13472:13472 GaC3_P02_LineIntegralAlg <> v:70 var
+R13483:13485 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13477:13479 Corelib.Init.Datatypes <> snd def
+R13481:13482 GaC3_P02_LineIntegralAlg <> al:71 var
+R13486:13488 Corelib.Init.Datatypes <> snd def
+R13491:13510 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13512:13512 GaC3_P02_LineIntegralAlg <> s:69 var
+R13514:13514 GaC3_P02_LineIntegralAlg <> v:70 var
+R13576:13588 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R13590:13609 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13611:13625 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+R13627:13629 Corelib.Init.Datatypes <> fst def
+R13631:13633 Corelib.Init.Datatypes <> snd def
+prf 13657:13679 <> GaC3_P02_contrib_vmul_I
+R13695:13707 GaC3_P02_LineIntegralAlg <> GaC3_P02_pseg def
+binder 13691:13691 <> s:72
+R13719:13721 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R13718:13718 Stdlib.QArith.QArith_base <> Q rec
+R13722:13722 Stdlib.QArith.QArith_base <> Q rec
+binder 13711:13711 <> v:73
+binder 13713:13714 <> al:74
+R13777:13782 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R13728:13730 Corelib.Init.Datatypes <> snd def
+R13733:13752 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13754:13754 GaC3_P02_LineIntegralAlg <> s:72 var
+R13757:13769 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R13771:13772 GaC3_P02_LineIntegralAlg <> al:74 var
+R13774:13774 GaC3_P02_LineIntegralAlg <> v:73 var
+R13822:13824 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R13789:13791 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13783:13785 Corelib.Init.Datatypes <> fst def
+R13787:13788 GaC3_P02_LineIntegralAlg <> al:74 var
+R13792:13794 Corelib.Init.Datatypes <> snd def
+R13797:13816 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13818:13818 GaC3_P02_LineIntegralAlg <> s:72 var
+R13820:13820 GaC3_P02_LineIntegralAlg <> v:73 var
+R13831:13833 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R13825:13827 Corelib.Init.Datatypes <> snd def
+R13829:13830 GaC3_P02_LineIntegralAlg <> al:74 var
+R13834:13836 Corelib.Init.Datatypes <> fst def
+R13839:13858 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13860:13860 GaC3_P02_LineIntegralAlg <> s:72 var
+R13862:13862 GaC3_P02_LineIntegralAlg <> v:73 var
+R13924:13936 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R13938:13957 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R13959:13973 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+R13975:13977 Corelib.Init.Datatypes <> fst def
+R13979:13981 Corelib.Init.Datatypes <> snd def
+prf 14007:14029 <> GaC3_P02_path_sumR_vmul
+R14046:14059 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 14041:14042 <> ps:75
+R14068:14071 Corelib.Init.Datatypes <> list ind
+R14075:14077 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R14074:14074 Stdlib.QArith.QArith_base <> Q rec
+R14078:14078 Stdlib.QArith.QArith_base <> Q rec
+binder 14063:14064 <> vs:76
+R14091:14093 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R14090:14090 Stdlib.QArith.QArith_base <> Q rec
+R14094:14094 Stdlib.QArith.QArith_base <> Q rec
+binder 14085:14086 <> al:77
+R14149:14154 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R14100:14117 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R14119:14120 GaC3_P02_LineIntegralAlg <> ps:75 var
+R14123:14125 Corelib.Lists.ListDef <> map def
+R14146:14147 GaC3_P02_LineIntegralAlg <> vs:76 var
+R14128:14140 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R14142:14143 GaC3_P02_LineIntegralAlg <> al:77 var
+R14188:14190 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R14161:14163 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R14155:14157 Corelib.Init.Datatypes <> fst def
+R14159:14160 GaC3_P02_LineIntegralAlg <> al:77 var
+R14164:14181 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R14183:14184 GaC3_P02_LineIntegralAlg <> ps:75 var
+R14186:14187 GaC3_P02_LineIntegralAlg <> vs:76 var
+R14197:14199 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R14191:14193 Corelib.Init.Datatypes <> snd def
+R14195:14196 GaC3_P02_LineIntegralAlg <> al:77 var
+R14200:14217 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R14219:14220 GaC3_P02_LineIntegralAlg <> ps:75 var
+R14222:14223 GaC3_P02_LineIntegralAlg <> vs:76 var
+R14325:14327 Corelib.Lists.ListDef <> map def
+R14329:14346 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R14348:14365 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R14384:14386 Corelib.Lists.ListDef <> map def
+R14388:14405 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R14407:14424 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R14443:14445 Corelib.Lists.ListDef <> map def
+R14447:14464 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R14466:14483 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R14502:14504 Corelib.Lists.ListDef <> map def
+R14604:14626 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR_cons thm
+R14629:14651 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR_cons thm
+R14666:14688 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI_cons thm
+R14699:14699 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14702:14703 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14706:14706 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R14719:14731 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R14733:14752 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R14754:14756 Corelib.Init.Datatypes <> fst def
+R14758:14760 Corelib.Init.Datatypes <> snd def
+R14762:14776 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+prf 14804:14826 <> GaC3_P02_path_sumI_vmul
+R14843:14856 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 14838:14839 <> ps:78
+R14865:14868 Corelib.Init.Datatypes <> list ind
+R14872:14874 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R14871:14871 Stdlib.QArith.QArith_base <> Q rec
+R14875:14875 Stdlib.QArith.QArith_base <> Q rec
+binder 14860:14861 <> vs:79
+R14888:14890 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R14887:14887 Stdlib.QArith.QArith_base <> Q rec
+R14891:14891 Stdlib.QArith.QArith_base <> Q rec
+binder 14882:14883 <> al:80
+R14946:14951 Stdlib.QArith.QArith_base <> ::Q_scope:x_'=='_x not
+R14897:14914 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R14916:14917 GaC3_P02_LineIntegralAlg <> ps:78 var
+R14920:14922 Corelib.Lists.ListDef <> map def
+R14943:14944 GaC3_P02_LineIntegralAlg <> vs:79 var
+R14925:14937 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R14939:14940 GaC3_P02_LineIntegralAlg <> al:80 var
+R14985:14987 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R14958:14960 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R14952:14954 Corelib.Init.Datatypes <> fst def
+R14956:14957 GaC3_P02_LineIntegralAlg <> al:80 var
+R14961:14978 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R14980:14981 GaC3_P02_LineIntegralAlg <> ps:78 var
+R14983:14984 GaC3_P02_LineIntegralAlg <> vs:79 var
+R14994:14996 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R14988:14990 Corelib.Init.Datatypes <> snd def
+R14992:14993 GaC3_P02_LineIntegralAlg <> al:80 var
+R14997:15014 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R15016:15017 GaC3_P02_LineIntegralAlg <> ps:78 var
+R15019:15020 GaC3_P02_LineIntegralAlg <> vs:79 var
+R15122:15124 Corelib.Lists.ListDef <> map def
+R15126:15143 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R15145:15162 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R15181:15183 Corelib.Lists.ListDef <> map def
+R15185:15202 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R15204:15221 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R15240:15242 Corelib.Lists.ListDef <> map def
+R15244:15261 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R15263:15280 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R15299:15301 Corelib.Lists.ListDef <> map def
+R15401:15423 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI_cons thm
+R15426:15448 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI_cons thm
+R15463:15485 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR_cons thm
+R15496:15496 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15499:15500 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15503:15503 Corelib.Init.Datatypes <> ::core_scope:'('_x_','_x_','_'..'_','_x_')' not
+R15516:15528 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R15530:15549 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_contrib def
+R15551:15553 Corelib.Init.Datatypes <> fst def
+R15555:15557 Corelib.Init.Datatypes <> snd def
+R15559:15573 GaC3_P02_LineIntegralAlg <> GaC3_P02_seg_dz def
+prf 15797:15825 <> GaC3_P02_line_integral_linear
+R15842:15855 GaC3_P02_LineIntegralAlg <> GaC3_P02_cpath def
+binder 15837:15838 <> ps:81
+R15866:15869 Corelib.Init.Datatypes <> list ind
+R15873:15875 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15872:15872 Stdlib.QArith.QArith_base <> Q rec
+R15876:15876 Stdlib.QArith.QArith_base <> Q rec
+binder 15861:15862 <> vs:82
+R15887:15889 Corelib.Init.Datatypes <> ::type_scope:x_'*'_x not
+R15886:15886 Stdlib.QArith.QArith_base <> Q rec
+R15890:15890 Stdlib.QArith.QArith_base <> Q rec
+binder 15881:15882 <> al:83
+R15896:15899 CxRealPairCore <> c_eq def
+R15902:15923 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R15925:15926 GaC3_P02_LineIntegralAlg <> ps:81 var
+R15929:15931 Corelib.Lists.ListDef <> map def
+R15952:15953 GaC3_P02_LineIntegralAlg <> vs:82 var
+R15934:15946 GaC3_P02_LineIntegralAlg <> GaC3_P02_vmul def
+R15948:15949 GaC3_P02_LineIntegralAlg <> al:83 var
+R15965:15970 CxRealPairCore <> c_mult def
+R15973:15978 CxRealPairCore <> c_of_Q def
+R15981:15983 Corelib.Init.Datatypes <> fst def
+R15985:15986 GaC3_P02_LineIntegralAlg <> al:83 var
+R15990:15992 Corelib.Init.Datatypes <> snd def
+R15994:15995 GaC3_P02_LineIntegralAlg <> al:83 var
+R16000:16021 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R16023:16024 GaC3_P02_LineIntegralAlg <> ps:81 var
+R16026:16027 GaC3_P02_LineIntegralAlg <> vs:82 var
+R16065:16086 GaC3_P02_LineIntegralAlg <> GaC3_P02_line_integral def
+R16098:16107 CxRealPairCore <> c_eq_trans thm
+R16112:16117 CxRealPairCore <> c_of_Q def
+R16157:16159 Stdlib.QArith.QArith_base <> ::Q_scope:x_'-'_x not
+R16130:16132 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16124:16126 Corelib.Init.Datatypes <> fst def
+R16133:16150 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R16166:16168 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16160:16162 Corelib.Init.Datatypes <> snd def
+R16169:16186 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R16233:16235 Stdlib.QArith.QArith_base <> ::Q_scope:x_'+'_x not
+R16206:16208 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16200:16202 Corelib.Init.Datatypes <> fst def
+R16209:16226 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def
+R16242:16244 Stdlib.QArith.QArith_base <> ::Q_scope:x_'*'_x not
+R16236:16238 Corelib.Init.Datatypes <> snd def
+R16245:16262 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R16284:16299 GaC3_P01_LineIntegralDef <> GaC3_P01_cofQ_eq thm
+R16317:16339 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR_vmul thm
+R16366:16388 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI_vmul thm
+R16414:16428 GaC3_P01_LineIntegralDef <> GaC3_P01_cmuloQ thm
+R16431:16433 Corelib.Init.Datatypes <> fst def
+R16440:16442 Corelib.Init.Datatypes <> snd def
+R16462:16479 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumR def
+R16489:16506 GaC3_P02_LineIntegralAlg <> GaC3_P02_path_sumI def

@@ -1,0 +1,18 @@
+DIGEST b6a9780e1bfdb14d156b372b0f3f3d91
+F_pa._pa_GaC3_P05_CauchyFormula
+R15:36 GaC3_P05_CauchyFormula <> <> lib
+R57:70 GaC3_P05_CauchyFormula <> GaC3_P05_id_eq thm
+R91:104 GaC3_P05_CauchyFormula <> GaC3_P05_eq_id thm
+R125:144 GaC3_P05_CauchyFormula <> GaC3_P05_qeq_to_qeqb thm
+R165:182 GaC3_P05_CauchyFormula <> GaC3_P05_veq_intro thm
+R203:219 GaC3_P05_CauchyFormula <> GaC3_P05_veq_elim thm
+R240:256 GaC3_P05_CauchyFormula <> GaC3_P05_veq_refl thm
+R277:295 GaC3_P05_CauchyFormula <> GaC3_P05_qeq_trans2 thm
+R316:333 GaC3_P05_CauchyFormula <> GaC3_P05_sumR_prim thm
+R354:371 GaC3_P05_CauchyFormula <> GaC3_P05_sumI_prim thm
+R392:411 GaC3_P05_CauchyFormula <> GaC3_P05_loop_cancel thm
+R432:454 GaC3_P05_CauchyFormula <> GaC3_P05_loop_cancel_cx thm
+R475:494 GaC3_P05_CauchyFormula <> GaC3_P05_endsum_cert thm
+R515:544 GaC3_P05_CauchyFormula <> GaC3_P05_rect_endsum_loop_zero thm
+R565:582 GaC3_P05_CauchyFormula <> GaC3_P05_cinv_mult thm
+R603:618 GaC3_P05_CauchyFormula <> GaC3_P05_cinv_cx thm

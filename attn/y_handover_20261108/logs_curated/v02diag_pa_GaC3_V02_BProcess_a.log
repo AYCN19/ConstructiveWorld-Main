@@ -1,0 +1,5 @@
+[cpu_guard] FRONT launch pos=0 waited=0s tlevel=85
+Warning: Cannot open boot_src [cannot-open-path,filesystem,default]
+File "./work_C3_W3/_pa/_pa_GaC3_V02_BProcess_a.v", line 1, characters 0-35:
+Error: Cannot find library S01_BaseRing in loadpath
+

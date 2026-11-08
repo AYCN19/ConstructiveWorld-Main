@@ -1,0 +1,11 @@
+Require Import GaC3_V02_BProcess.
+Print Assumptions GaC3_V02_pcell_cw_R.
+Print Assumptions GaC3_V02_pcell_cw_I.
+Print Assumptions GaC3_V02_base_dual_pstep_R.
+Print Assumptions GaC3_V02_base_dual_pstep_I.
+Print Assumptions GaC3_V02_mismatch_abs_sel.
+Print Assumptions GaC3_V02_mismatch_bound.
+Print Assumptions GaC3_V02_val_bounded_mono.
+Print Assumptions GaC3_V02_dual_sum_base_sel.
+Print Assumptions GaC3_V02_b_process_completion.
+Print Assumptions GaC3_V02_b_process_completion_expl.

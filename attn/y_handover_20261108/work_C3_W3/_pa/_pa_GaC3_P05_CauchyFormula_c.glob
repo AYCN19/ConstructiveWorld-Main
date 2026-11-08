@@ -1,0 +1,14 @@
+DIGEST 346268ad2e136e4d006d63263609d86a
+F_pa._pa_GaC3_P05_CauchyFormula_c
+R15:38 GaC3_P05_CauchyFormula_c <> <> lib
+R59:82 GaC3_P05_CauchyFormula_c <> GaC3_P05_val_bounded_abs thm
+R103:127 GaC3_P05_CauchyFormula_c <> GaC3_P05_qmul_abs_bounded thm
+R148:174 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb_refl_true thm
+R195:216 GaC3_P05_CauchyFormula_c <> GaC3_P05_pair_eqb_true thm
+R237:259 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_spec thm
+R280:301 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_fst thm
+R322:344 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_none thm
+R365:390 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_lookup_bounded thm
+R411:429 GaC3_P05_CauchyFormula_c <> GaC3_P05_fk_bounded thm
+R450:467 GaC3_P05_CauchyFormula_c <> GaC3_P05_len1_rect thm
+R488:512 GaC3_P05_CauchyFormula_c <> GaC3_P05_cauchy_kernel_ml thm

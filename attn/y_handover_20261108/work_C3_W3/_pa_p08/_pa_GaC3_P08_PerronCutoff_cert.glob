@@ -1,0 +1,9 @@
+DIGEST 3422b27706745cd87bd426e0299fb45a
+F_pa_p08._pa_GaC3_P08_PerronCutoff_cert
+R15:40 GaC3_P08_PerronCutoff_cert <> <> lib
+R61:86 GaC3_P08_PerronCutoff_cert <> GaC3_P08_cert_ln_dist_then thm
+R107:132 GaC3_P08_PerronCutoff_cert <> GaC3_P08_cert_ln_dist_else thm
+R153:183 GaC3_P08_PerronCutoff_cert <> GaC3_P08_cert_perron_sum_unfold thm
+R204:232 GaC3_P08_PerronCutoff_cert <> GaC3_P08_cert_psi_half_unfold thm
+R253:281 GaC3_P08_PerronCutoff_cert <> GaC3_P08_cert_ml_vline_sample thm
+R302:331 GaC3_P08_PerronCutoff_cert <> GaC3_P08_cert_ml_vline_sampleI thm
