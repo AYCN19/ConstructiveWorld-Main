@@ -1,0 +1,39 @@
+{
+  "_说明": "复制为 config.json 后按本机填写。{PKG}=包根。全部路径正斜杠。",
+  "coqc": "D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqc.exe",
+  "coqchk": "D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe",
+  "expect_version": "9.3.0",
+  "coqc_flags": [
+    "-q",
+    "-native-compiler",
+    "no"
+  ],
+  "main_vo_dir": "D:/ComplexAnalysis/ConstructiveWorld-Main/ConstructiveWorld_vo",
+  "deposit_dir": "{PKG}/20_sources",
+  "deposit_segments": [
+    "planB_wave1",
+    "route_unif"
+  ],
+  "exclude": [],
+  "work_dir": "D:/path/to/unif_work",
+  "l0_md5_list": "{PKG}/10_data/L0_vo_md5_current.txt",
+  "gate4": "{PKG}/50_toolkit/gate4_comment_guard.py",
+  "born_whitelist": [
+    "CxRealPairCore",
+    "CxRealPairExpLog"
+  ],
+  "guard": {
+    "enabled": true,
+    "ps1": "{PKG}/50_toolkit/cpu_guard_v3.ps1",
+    "extra": [
+      "-AllowG3",
+      "-TempLimit",
+      "93",
+      "-LoadLimit",
+      "60",
+      "-CoreN",
+      "2"
+    ]
+  },
+  "inter_compile_sleep_sec": 0
+}

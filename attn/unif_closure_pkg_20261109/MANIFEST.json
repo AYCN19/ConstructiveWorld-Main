@@ -1,0 +1,176 @@
+{
+ "package": "unif_closure_pkg_20261109",
+ "created": "2026-11-09T01:32:59",
+ "main_head": "6be57c09",
+ "route": "plan-B (alpha=10, Hcage zero-touch)",
+ "files": {
+  "00_README-先读.md": {
+   "md5": "abdcd2f5d04fc3415b4c507dd9fb3e0d",
+   "size": 1203
+  },
+  "01_工单-一致型实例化闭合-20261109.md": {
+   "md5": "25ec515f7ba5c1d7ca6a9039c60b6a23",
+   "size": 8774
+  },
+  "10_data/apex_sources/piu1932_uncond_zz.v": {
+   "md5": "51b312dda82938d2c752d5bfca15f0fe",
+   "size": 8802
+  },
+  "10_data/apex_sources/piu_zz_bridge_rateslot.v": {
+   "md5": "5bf2f43a0e7c43294e3a6b939e8ba8fb",
+   "size": 12767
+  },
+  "10_data/apex_sources/piu_zz_bridge_real.v": {
+   "md5": "3eafd374c49aac053582b09d211555d1",
+   "size": 17501
+  },
+  "10_data/apex_sources/piu_zz_e_carrier.v": {
+   "md5": "f22b5bcf120bc553350fe4d56eaaa7c1",
+   "size": 33950
+  },
+  "10_data/born_ledger_planB_wave1.md": {
+   "md5": "f70e823fbeb01b1be37486943fc0c16e",
+   "size": 7912
+  },
+  "10_data/L0_vo_md5_current.txt": {
+   "md5": "08ebb8b4376210614f1dbd8cc17d7e7c",
+   "size": 55971
+  },
+  "10_data/值守账-夜班三线并发-20261108.md": {
+   "md5": "7e421c98841627e03733fa8f7986342c",
+   "size": 11915
+  },
+  "10_data/回执-KB41h-处方预勘-20261028.md": {
+   "md5": "a45006c103e215e1574134b1d56b3d65",
+   "size": 23689
+  },
+  "10_data/回执-KB41m-β0预勘-20261028.md": {
+   "md5": "58a8fe7d1e279ac340ee94a090bc9996",
+   "size": 20265
+  },
+  "10_data/回执-路径A实例化层勘验-20261107.md": {
+   "md5": "dac94b0a2d6c069ecd75a91637a67746",
+   "size": 31301
+  },
+  "10_data/工单-piu_zz_Hmu_criterion供给槽闭合-20261108.md": {
+   "md5": "8300157cb6ea1be5162dc767d64c20b0",
+   "size": 7199
+  },
+  "20_sources/planB_wave1/planb1_hcage_zerotouch_prescription.v": {
+   "md5": "0be703c84f5ad39d352e196c92fe31a2",
+   "size": 33378
+  },
+  "20_sources/planB_wave1/planb1_hcage_zerotouch_prescription.vo": {
+   "md5": "a4da411cb65c11e1fd0e02ffe845fe02",
+   "size": 58556
+  },
+  "20_sources/planB_wave1/planb2_hesc_limb_impl.v": {
+   "md5": "728adc8fbb0165460023c530a1a7aced",
+   "size": 12704
+  },
+  "20_sources/planB_wave1/planb2_hesc_limb_impl.vo": {
+   "md5": "d09adbd20a8e3e9089e9f1e3a9e8b370",
+   "size": 13490
+  },
+  "20_sources/planB_wave1/planb3_g1_calib.v": {
+   "md5": "d671d0a9d17576798109bdd03eebb52d",
+   "size": 18176
+  },
+  "20_sources/planB_wave1/planb3_g1_calib.vo": {
+   "md5": "863f378c577b86d3348d03e986a4aa6b",
+   "size": 204584
+  },
+  "20_sources/planB_wave1/planb3_g1_g2_design.v": {
+   "md5": "72da5df22e98070607495265a94f2537",
+   "size": 12055
+  },
+  "20_sources/planB_wave1/planb3_g1_g2_design.vo": {
+   "md5": "cd9821e29daba90e857a9e585987ebf1",
+   "size": 14060
+  },
+  "20_sources/route_unif/piu1932_uncond_zz_final.v": {
+   "md5": "91504d897e51a7bf81951bc384375d09",
+   "size": 5030
+  },
+  "20_sources/route_unif/piu1932_uncond_zz_final.vo": {
+   "md5": "3b0abb206c4d5973aa192a24914afff6",
+   "size": 6010
+  },
+  "20_sources/route_unif/piu_zz_hcage_glue.v": {
+   "md5": "bbb86be757e0d34a85c9ea21a2cb531e",
+   "size": 18050
+  },
+  "20_sources/route_unif/piu_zz_hcage_glue.vo": {
+   "md5": "15bc35ec359a39ecd6b6874990f44631",
+   "size": 77953
+  },
+  "20_sources/route_unif/piu_zz_hcage_glue_ext.ml": {
+   "md5": "59882a9070f0579aea3c35e205162623",
+   "size": 20470
+  },
+  "20_sources/route_unif/piu_zz_hcage_glue_ext.mli": {
+   "md5": "8c408561d8924614cc2aefb9829b8964",
+   "size": 2900
+  },
+  "20_sources/route_unif/piu_zz_hmu_certificate_assembly.v": {
+   "md5": "0d99b9e08ee9eda8a7ec7cbae2781514",
+   "size": 10493
+  },
+  "20_sources/route_unif/piu_zz_hmu_certificate_assembly.vo": {
+   "md5": "79d371abecc466d335522f1ad31df5ed",
+   "size": 14133
+  },
+  "20_sources/route_unif/piu_zz_hmu_distpt_supply.v": {
+   "md5": "a8c540c97c58467f56e6ed088bb67481",
+   "size": 18265
+  },
+  "20_sources/route_unif/piu_zz_hmu_distpt_supply.vo": {
+   "md5": "d2ff8359bea1efab57631be03c0edc6f",
+   "size": 22586
+  },
+  "20_sources/route_unif/piu_zz_hmu_distpt_supply_ext.ml": {
+   "md5": "1670fbc682f046130f72a737925cfa0a",
+   "size": 435723
+  },
+  "20_sources/route_unif/piu_zz_hmu_distpt_supply_ext.mli": {
+   "md5": "7a6ae0ca0b88528aa236f8107ab48887",
+   "size": 37816
+  },
+  "40_skills/SKILL-cw-ci-sop.md": {
+   "md5": "b517c992f71e65ef5b44af3cd03bdb0a",
+   "size": 118017
+  },
+  "40_skills/SKILL-cw-tail-supply.md": {
+   "md5": "a343b42337ce7b11fcf7933cccbdd9df",
+   "size": 20201
+  },
+  "50_toolkit/accept_node.py": {
+   "md5": "aa0f780504c8e04514b6cc95ea55ac1c",
+   "size": 13087
+  },
+  "50_toolkit/build_deposit.py": {
+   "md5": "589ac3d5ffa4822cbd5975dca5fd5c71",
+   "size": 14950
+  },
+  "50_toolkit/config.example.json": {
+   "md5": "0c272da973c4f22674726f94a08f3971",
+   "size": 1047
+  },
+  "50_toolkit/cpu_guard_v3.ps1": {
+   "md5": "2d3c50605503fa5ab8aea4586d1ec336",
+   "size": 14669
+  },
+  "50_toolkit/env_check.py": {
+   "md5": "0654216c68c3748a5cefba09157ad070",
+   "size": 4111
+  },
+  "50_toolkit/gate4_comment_guard.py": {
+   "md5": "dbcdb591ab7755b98eb566039043a0e6",
+   "size": 41061
+  },
+  "50_toolkit/verify_pkg.py": {
+   "md5": "96c10fcc5877cf9e218f265c271d5953",
+   "size": 1194
+  }
+ }
+}
