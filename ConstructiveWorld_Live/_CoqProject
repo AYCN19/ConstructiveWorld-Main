@@ -953,3 +953,10 @@ piu_zz_ec_escwin_nescD.v
 piu_zz_ec_escwin_bracket.v
 piu_zz_n2c_sigma_assembly.v
 piu1932_uncond_zz.v
+planb1_hcage_zerotouch_prescription.v
+planb1_hcage_zerotouch_prescription_cert.v
+planb2_hesc_limb_impl.v
+planb2_hesc_limb_impl_cert.v
+planb3_g1_calib.v
+planb3_g1_calib_cert.v
+planb3_g1_g2_design.v
