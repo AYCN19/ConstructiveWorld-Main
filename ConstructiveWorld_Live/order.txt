@@ -1056,3 +1056,10 @@ piu_zz_ec_escwin_bracket.v#R219-4951eb
 piu_zz_n2c_sigma_assembly.v#R220-8c1e82
 piu1932_uncond_zz.v#R221-46f5f5
 UpAblBYUpperTight.v#R212-reland-20261104
+planb1_hcage_zerotouch_prescription.v#R222-9c04aa
+planb1_hcage_zerotouch_prescription_cert.v#R222-9c04ab
+planb2_hesc_limb_impl.v#R222-9c04ac
+planb2_hesc_limb_impl_cert.v#R222-9c04ad
+planb3_g1_calib.v#R222-9c04ae
+planb3_g1_calib_cert.v#R222-9c04af
+planb3_g1_g2_design.v#R222-9c04b0
