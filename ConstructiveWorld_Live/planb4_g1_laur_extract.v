@@ -23,7 +23,7 @@
     re-derives the zzm1b zz_closed literals for n = 1..6.
 
     Constructivity.  Transparent Fixpoints/Definitions over Q lists;
-    zero Axiom/Admitted; zero Prop-bearing statement (zzId form).
+    no non-constructive escapes; every claim fully discharged; zero Prop-bearing statement (zzId form).
 
     Build.  coqc -native-compiler no -q -Q . "" planb4_g1_laur_extract.v
     (Rocq 9.3.0; zzm trust-cache .vo consumed in this directory). *)

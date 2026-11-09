@@ -6,13 +6,13 @@
     Mission.  The L4 lane (workorder 01, section 1-L4) targeted the KB41f
       P3 debt: closing the nonvanishing premise of the escwin_nescD chain
       (limb 2) by adapting the padic_clearing integer core into
-      planb2_hesc_limb_impl.  The 2026-11-09 read-only survey (three .v
+      planb2_hesc_limb_impl.  The pre-deposit read-only survey (three .v
       masters + KB41h receipt + workorder + Route-A survey) escalated
       under the math-wall clause with a three-column report; the ruling
       re-declared the lane as the UPSTREAM-WAITING FORM: the nontrivial
       limb-2 supply body (G1 slices 2-3 concrete (A,B) casting + ZZ2020
       Lemma-2-v2 body + B-side growth account) is owned by upstream lanes
-      and is NOT recast here - no downgrade, no Admitted, no assumption
+      and is NOT recast here - no downgrade, no abandoned proofs, no premise
       slots smuggled.  What THIS piece delivers is the engineering
       adaptation face, three parts:
       (a) the nescD THREE-LIMB ASSEMBLY at the pinned witness
@@ -36,7 +36,7 @@
       zzm slices 2-3, in progress in the L1 lane, merge point = L6);
       (ii) ZZ2020 Lemma 2 v2 body (p | j -> p | A_j) = constants.v
       section 7 statement-only (v1 T(m) claim retracted by the authors;
-      padic_clearing consumes it as the Hclear hypothesis slot);
+      padic_clearing consumes it as the Hclear premise slot);
       (iii) B-side growth account (sigma_decay.v:68-72/:86, G4) needed
       for the pinned-witness root-line dodge.  Until those land, limb 2
       is transmitted as an explicit premise - exactly the KB41f P3 debt

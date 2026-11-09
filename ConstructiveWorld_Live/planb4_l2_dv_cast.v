@@ -22,6 +22,11 @@
     Hval/Hcage slots are the registered G2 debts (planb3_g1_g2_design
     .v:127-130; top theorem piu1932_uncond_zz.v:81-82) - outside the
     L2 acceptance face, not touched.
+    Dependencies.  S02_CauchyComplete (real/Q carriers); the planb3 born
+      faces (planb3_g1_g2_design: planb3_dv, planb3_dv_hp,
+      planb3_dv_htri) re-exported through the cast name.
+    References.  ZZ2020 dual-pairing face (the L3 assembly debt
+      pointer); the HCDRAFT cage-constants debt-registration precedent.
     Constructivity.  Every new statement is Set-carried (piu_mu_QleT,
     sigT, QleT'); the closed limbs inherit the born proofs, audited
     Closed under the global context in planb3_g1_g2_design.v:198-202
