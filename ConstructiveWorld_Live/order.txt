@@ -1063,3 +1063,8 @@ planb2_hesc_limb_impl_cert.v#R222-9c04ad
 planb3_g1_calib.v#R222-9c04ae
 planb3_g1_calib_cert.v#R222-9c04af
 planb3_g1_g2_design.v#R222-9c04b0
+planb4_g1_witness.v#R223-g1w001
+planb4_g1_laur_extract.v#R223-g1w002
+planb4_g1_phiwin.v#R223-g1w003
+planb4_l2_dv_cast.v#R223-l2v001
+planb4_l4_hesc_nonzero.v#R223-l4v001

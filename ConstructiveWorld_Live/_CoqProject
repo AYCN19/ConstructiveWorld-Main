@@ -960,3 +960,8 @@ planb2_hesc_limb_impl_cert.v
 planb3_g1_calib.v
 planb3_g1_calib_cert.v
 planb3_g1_g2_design.v
+planb4_g1_witness.v.v
+planb4_g1_laur_extract.v.v
+planb4_g1_phiwin.v.v
+planb4_l2_dv_cast.v.v
+planb4_l4_hesc_nonzero.v.v
