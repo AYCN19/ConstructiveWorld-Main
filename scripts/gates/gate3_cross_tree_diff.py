@@ -1,42 +1,42 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-闸③ 跨树毒 token diff ＋ 壳模块集隶属检查扩条（AX-GUARD 20260925 ＋ R130 乙案扩条草案 20260926）
+Gate 3: cross-tree poison-token diff + shell-module-set membership check extension (AX-GUARD 20260925 + R130 plan-B draft 20260926)
 ================================================================================
-【本件=沙箱草案，未落树（禁改仓库 gate 脚本）。差异全文见同目录
- gate3_module_membership_ablation.patch；语义依据=R18 §二裁决（E4）：gate3 扩条必须是
- 【模块集隶属检查】而非 diff 型——现闸 diff 逻辑对「两树对称复活」失明（对称=无 diff），
- 扩条的独立价值面正在于此。R2 §十.2 同款；gate1 token（乙案态零白名单形）覆盖 Require
- 行面，本扩条覆盖文件/模块面，两面合围 ⊇ S3 gate6 的 Require 前缀 grep。】
+[Sandbox draft, not landed (do not modify repository gate scripts). Full diff: the sibling file gate3_module_membership_ablation.patch;
+ semantic basis = R18 section 2 ruling (E4): the gate3 extension must be a [module-set membership check], not diff-shaped --
+ the current diff logic is blind to "symmetric resurrection in both trees" (symmetry = no diff), exactly this extension's
+ independent value. R2 section 10.2 same; gate1 tokens (plan-B zero-whitelist form) cover the Require-line face, this
+ extension the file/module face; the union is a superset of the S3 gate6 Require-prefix grep.]
 
-现闸语义（AX-GUARD 20260925，E957 教训内嵌，零变保留）：
-  逐模块比对两树剥注释后的 Require 行集合（正规化空白），分两级报：
-  [SINGLE-TREE-POISON] 一树 Require 行带毒 token、另一树同模块无 → exit 1（主咬合面）
-  [REQUIRE-DRIFT]      两树 Require 行不等但均无毒 → exit 0 仅登记（卫生信息）
+Current-gate semantics (AX-GUARD 20260925, E957 lesson embedded, kept unchanged):
+  per-module comparison of both trees' comment-stripped Require line sets (whitespace normalized), two levels:
+  [SINGLE-TREE-POISON] one tree's Require lines carry poison tokens, the other's same module does not -> exit 1 (main biting face)
+  [REQUIRE-DRIFT]      Require lines differ but neither is poisonous -> exit 0, recorded only (hygiene information)
 
-R130 乙案扩条（[M1]，先于现闸毒面比对执行）：
-  对 --tree-a/--tree-b 每树独立做【隶属检查】（非两树间比对，故对称复活两树各自咬合）：
-  [RESURRECT-MODULE]   树模块集（顶层 .v 基名集）含 CW_ConstructiveWorld_219 → exit 1
-                       （壳文件/模块面复活：含改名字节复活、git 检出复活、生成器再运行复活）
-  [RESURRECT-REQUIRE]  树内任一 .v 的活 Require 行（剥注释后）含 CW_ConstructiveWorld_219
-                       → exit 1（壳依赖行面复活；与 gate1 乙案态 token 同语义双树独立）
+R130 plan-B extension ([M1], runs before the current poison-face comparison):
+  each of --tree-a/--tree-b gets an independent [membership check] (not a cross-tree comparison, so symmetric resurrection bites per tree):
+  [RESURRECT-MODULE]   the tree module set (top-level .v base names) contains CW_ConstructiveWorld_219 -> exit 1
+                       (shell file/module-face resurrection: renamed bytes, git checkout, generator re-run)
+  [RESURRECT-REQUIRE]  any live Require line (comment-stripped) of any .v contains CW_ConstructiveWorld_219 -> exit 1
+                       (shell dependency-line face; same semantics as gate1's plan-B token, each tree independent)
 
-R130 落树版增条（单条文件级显式豁免）：唯一豁免面=EXEMPT_FILES={"_t24_probe3.v"}——
-  用户禁碰件豁免（内容与存在性受用户明令保护），其壳 Require 行为全树唯余存留处，
-  候用户终裁退役与否；仅豁免 [RESURRECT-REQUIRE] 行面且逐笔留账（exempted_hits），
-  模块面隶属检查不豁免；除该单件外语义零变。
-  响停处置纪律（R13 卡 1 措辞对齐，并入 E4）：命中先跑 digest 三件套（md5＋size＋mtime
-  对删除/快照台账）定性「残留 vs 复活」再处置，禁未证先判（R13 B-GO 63/63 残留判例）。
+R130 landed-version addition (single-file explicit exemption): the only exemption face = EXEMPT_FILES={"_t24_probe3.v"} --
+  user-protected file (content and existence protected by explicit user order); its shell Require line is the tree's sole
+  remaining place, pending the user's final retirement ruling; exempts only the [RESURRECT-REQUIRE] line face, each hit
+  logged (exempted_hits); the module-face membership check is not exempt; outside this file the semantics are unchanged.
+  Loud-stop discipline (R13 card 1 wording, merged per E4): on a hit, first run the digest trio (md5 + size + mtime against
+  the deletion/snapshot ledger) to classify "residue vs resurrection"; no verdict before proof (R13 B-GO 63/63 residue case).
 
-扫描域注记：--tree-a/b 各自顶层平扫（与 gate1 --tree 同域）；CW219_split 不在默认域，
-若 split 未随壳消融同票退役（runbook 刀 5），须显式 --tree-a/--tree-b 加扫或接线第三树；
-split 退役后自然出域（R7 §二：零消费成立，唯一注意项=coq.yml 第三 --tree 待办作废删除）。
+Scan-domain note: --tree-a/b each get a top-level flat scan (same domain as gate1 --tree); CW219_split is not in the default
+domain -- if split is not retired in the same vote as the shell ablation (runbook cut 5), add it via --tree-a/--tree-b or wire a
+third tree; once retired it leaves the domain naturally (R7 section 2: zero consumption holds; the coq.yml third --tree todo is void).
 
-用法：
+Usage:
   python gate3_cross_tree_diff.py [--tree-a DIR] [--tree-b DIR] [--json OUT]
-  默认 A=Main Live 树，B=vo 镜像树（两树 .v 均在盘）。
-退出码：0=无单树毒分歧且无壳复活隶属命中；1=存在单树毒分歧或壳复活隶属命中（硬红）；
-        2=树路径无效。
+  Default A = Main Live tree, B = vo mirror tree (both trees' .v files on disk).
+Exit codes: 0 = no single-tree poison divergence and no shell-resurrection membership hit; 1 = a single-tree poison
+        divergence or a shell-resurrection membership hit (hard red); 2 = invalid tree path.
 """
 import os, re, sys, json, argparse, datetime
 
@@ -45,13 +45,13 @@ POISON_TOKEN_RE = re.compile(
     r"Micromega|ClassicalDescription|Logic\.Classical)\b")
 REQUIRE_LINE_RE = re.compile(r"\bRequire\b")
 
-# [M1] R130 乙案扩条：壳模块隶属禁名单（模块集隶属检查，非 diff 型——对称复活亦咬合）
+# [M1] R130 plan-B extension: shell-module forbidden set (module-set membership check, not diff-shaped -- symmetric resurrection also bites)
 SHELL_MODULE = "CW_ConstructiveWorld_219"
 SHELL_NAME_RE = re.compile(r"\bCW_ConstructiveWorld_219\b")
 
-# 单条文件级显式豁免（用户禁碰件豁免）：_t24_probe3.v 内容与存在性受用户明令保护，
-# 其壳 Require 行为全树唯余存留处，候用户终裁退役与否。仅豁免 [RESURRECT-REQUIRE]
-# 行面命中且逐笔留账（exempted_hits）；模块面隶属检查（RESURRECT-MODULE）不豁免。
+# Single-file explicit exemption (user-protected file): _t24_probe3.v content and existence are user-protected;
+# its shell Require line is the tree's sole remaining place, pending the user's retirement ruling. Exempts only
+# [RESURRECT-REQUIRE] line-face hits (each logged in exempted_hits); the module-face membership check is not exempt.
 EXEMPT_FILES = {"_t24_probe3.v"}
 
 def strip_comments(text):
@@ -72,7 +72,7 @@ def strip_comments(text):
     return "".join(out)
 
 def require_face(path):
-    """返回该 .v 的 Require 行列表（剥注释、去空白正规化）。"""
+    """Return this .v file's Require lines (comments stripped, whitespace normalized)."""
     with open(path, encoding="utf-8", errors="replace") as f:
         raw = f.read()
     st = strip_comments(raw)
@@ -90,16 +90,16 @@ def load_tree(tree):
     return mods
 
 def membership_check(tree_tag, tree, mods):
-    """[M1] 模块集隶属检查：模块面＋Require 行面，两树各自独立（对称复活亦咬合）。"""
+    """[M1] module-set membership check: module face + Require-line face, each tree independent (symmetric resurrection also bites)."""
     hits = []
     exempted = []
-    # 面 1：模块集隶属——树模块集 ∩ 禁名单（不豁免：壳文件本体存在即红）
+    # face 1: module-set membership -- tree module set intersect the forbidden set (no exemption: the shell file existing is red)
     if SHELL_MODULE in mods:
         hits.append({"tree": tree_tag, "kind": "RESURRECT-MODULE",
                      "module": SHELL_MODULE, "file": mods[SHELL_MODULE],
                      "line": None, "text": "<壳文件/模块存在于树模块集>"})
-    # 面 2：Require 行隶属——任一 .v 活 Require 行含壳名（豁免件逐笔留账不咬合；
-    # 此处 m 为剥 .v 后缀的模块基名，豁免表存文件名故补后缀比对）
+    # face 2: Require-line membership -- any live .v Require line containing the shell name (exempt-file hits logged
+    # per line, no bite; m is the .v-stripped module base name -- the suffix is re-added to match the exemption table)
     for m in sorted(mods):
         if (m + ".v") in EXEMPT_FILES:
             try:
@@ -135,7 +135,7 @@ def main():
             return 2
     A, B = load_tree(args.tree_a), load_tree(args.tree_b)
     now = datetime.datetime.now().isoformat(timespec="seconds")
-    # [M1] 先隶属后 diff：隶属命中=壳复活实锤候选，exit 1 硬红
+    # [M1] membership before diff: a membership hit = a concrete shell-resurrection candidate, exit 1 hard red
     rA, eA = membership_check("A", args.tree_a, A)
     rB, eB = membership_check("B", args.tree_b, B)
     resurrect = rA + rB
@@ -147,7 +147,7 @@ def main():
         ra, rb = require_face(A[m]), require_face(B[m])
         pa = [r for r in ra if POISON_TOKEN_RE.search(r)]
         pb = [r for r in rb if POISON_TOKEN_RE.search(r)]
-        if pa != pb:  # 毒面单树不对称
+        if pa != pb:  # poison face asymmetric across the two trees
             poison_div.append({"module": m, "a_lines": pa, "b_lines": pb})
         elif ra != rb:
             drift.append({"module": m, "a_lines": ra, "b_lines": rb})

@@ -1,6 +1,8 @@
 # pa_drift_disposition — PA 审计 6 漂移逐条处置（2026-09-10 深夜，主会话亲执）
 
-> 数据源：pa_audit_report.md 漂移清单 + rename-ledger-20260910.md + 两树 grep/sed 实证（本席命令与输出见文末复现段）。
+> Historical planning record (dated in filename). Preserved verbatim except two body lines anglicized in place; file names, numbers and quoted fragments kept verbatim; current certification facts live in README.md section 2.
+
+> Sources: pa_audit_report.md drift list + rename-ledger-20260910.md + two-tree grep/sed evidence (commands and outputs: see the reproduction section at the end of this file).
 
 ## 逐条处置
 
@@ -13,7 +15,7 @@
 | 5 | `tv_doeblin_contraction`/`tv_doeblin_iter` | **UpTVReal/UpTVDoeblin 未并树**：attn 在盘（UpTVReal.v + UpTVDoeblin.v 在飞件），repo 无 | ls 两树 | 5.10 席注册后自解 | 合并轨收口→220 注册链 |
 | 6 | **`real_kl_sum_decomp` 注释幻影（库级意外）** | **基座 L43735-43736 注释头整行重复**：Coq 注释可嵌套，内层 `(*` 吞闭合 → Theorem 本体+证明全部处于未闭合注释内 → .vo 零导出；而论文2 §9.2 Real 复刻清单引它作定理 4.1 侧承载 | sed L43730-43760 实摘：注释头两行逐字重复，后接完整 Theorem/Proof 文本 | **双提案**（见下） | 见下 |
 
-## 漂移 6 双提案（择机执行，本席不动手）
+## Drift 6 dual proposals (to be executed when opportune; no action taken here)
 
 ### (a) 基座修复提案（正式通道）
 最小 diff = **删除 L43736 重复注释行（1 行）**。闭合链推演：删后外层 `(*`(L43735) 于 L43739 `*)` 正常闭合，Theorem 本体复活。代价评估：基座为正本冻结件——须走影子编译验证（单文件重编 ~40min）+ 下游全树重编（信任缓存下仅 .vo 时间戳失效面=基座直接消费者，估 87 模块重编）+ coqchk 全树。**建议排期**：与下一次基线升级（220 注册窗）捆绑执行，不单独开窗。

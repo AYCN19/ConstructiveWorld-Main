@@ -1,47 +1,68 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""coqchk_delta_check.py — ConstructiveWorld vo 树 vs 认证档案 四类增量对账。
+"""coqchk_delta_check.py - ConstructiveWorld vo tree vs certification archive,
+a four-way delta reconciliation.
 
-对账对象（契约 cw.attest/v1，与 coqchk_attest.py 同源）:
-    * 模块名 = 档案 modules 键（保 '.v' 后缀与 'Local/' 类相对路径）。
-    * 对应 vo 件 = 模块名去尾 '.v' 换 '.vo'，在 vo 树根下解析。
-    * 逐件哈希对 = 档案 {vo_sha256, size} vs 现树文件字节流 sha256 / 字节数
-      （mtime 等任何 stat 元数据不入对账）。
+Reconciliation object (contract cw.attest/v1, same source as coqchk_attest.py):
+    * module name = an archive modules key (the '.v' suffix and relative paths
+      such as 'Local/' are preserved).
+    * the corresponding vo file = the module name with the trailing '.v'
+      replaced by '.vo', resolved under the vo tree root.
+    * per-file hash pair = the archive's {vo_sha256, size} vs the sha256 / byte
+      count of the live file's byte stream (mtime and any other stat metadata
+      never enter the reconciliation).
 
-四类判定（互斥穷尽，对档案键 ∪ 现树寻址 vo 件的全并集逐件判定）:
-    unchanged —— 档案有、树有、sha256 与 size 均符;
-    changed   —— 档案有、树有、sha256 或 size 任一不符（含篡改检出）;
-    removed   —— 档案有、树无（vo 件缺失）;
-    added     —— 档案无、树有（未认证 vo 件混入）。
+Four verdicts (mutually exclusive and exhaustive, judged per file over the full
+union of archive keys and vo files addressed in the live tree):
+    unchanged - present in the archive and in the tree, sha256 and size both
+      match;
+    changed   - present in the archive and in the tree, sha256 or size
+      mismatch (tamper detection included);
+    removed   - present in the archive, absent from the tree (the vo file is
+      missing);
+    added     - absent from the archive, present in the tree (an uncertified
+      vo file mixed in).
 
-扫描域（added 的发现范围）:
-    vo 树根（非递归）+ 档案键涉及的每个子目录（如 Local/，非递归）。
-    档案键不寻址的目录（如 _pchk_tmp_* 构建残料）不在对账域内——它们不是
-    本档案的认证对象；此范围界定如实载明于报告 scan_domains。
+Scan scope (where added files can be discovered):
+    the vo tree root (non-recursive) + every subdirectory addressed by archive
+    keys (e.g. Local/, non-recursive).
+    Directories not addressed by archive keys (e.g. _pchk_tmp_* build
+    leftovers) are outside the reconciliation scope - they are not
+    certification objects of this archive; this scope definition is stated
+    explicitly in the report's scan_domains.
 
-退出码: 0 = 全 unchanged（零增量）; 1 = 有 changed/added/removed; 2 = 结构性失败
-    （档案缺失/坏 JSON/契约不符/档案 tree_sha256 自洽性破/vo 树不存在）。
+Exit codes: 0 = all unchanged (zero delta); 1 = some changed/added/removed;
+2 = structural failure (archive missing/bad JSON/contract mismatch/archive
+tree_sha256 self-consistency broken/vo tree missing).
 
-纪律（只读律）:
-    * 真实 vo 树与认证档案只读（仅 'rb' / 'r' 打开）。
-    * 一切写入（fixture 树、篡改、自验残料）只落沙箱 = 本脚本所在目录;
-      --json 越出沙箱即拒绝。
+Discipline (read-only law):
+    * the real vo tree and the certification archive are read-only (opened
+      'rb' / 'r' only).
+    * every write (fixture trees, tampering, self-test leftovers) lands only in
+      the sandbox = the directory holding this script;
+      --json escaping the sandbox is refused.
 
-三态闭环 selftest（fixture 在沙箱内，真实 vo 树零改动）:
-    ①  从真实树复制若干已认证 .vo 入 fixture 树，以真实档案的对应切片
-       （原始哈希原封保留）为对账档案 → 判定须全 unchanged;
-    ②  fixture 内 1 件翻转 1 字节 → 对账必须把它标入 changed（篡改检出），
-       其余仍 unchanged，removed/added 为零；
-    ③  fixture 内删 1 件 → 对账必须把它标入 removed，changed 归零。
-    另有附加态④（三态之外自加的验收）：fixture 内放入 1 件档案外 vo →
-    判 added。每态验毕即还原，态间互不污染。三态①②③全过才算交付。
-    fixture 用毕即删。
+Three-state closed-loop selftest (fixtures live in the sandbox; the real vo
+tree is untouched):
+    (1)  copy several certified .vo files from the real tree into a fixture
+       tree and reconcile against the matching slice of the real archive
+       (original hashes kept intact) -> all must be judged unchanged;
+    (2)  flip 1 byte of 1 file inside the fixture -> the reconciliation must
+       flag it changed (tamper detection), the rest stay unchanged, and
+       removed/added are zero;
+    (3)  delete 1 file inside the fixture -> the reconciliation must flag it
+       removed, with changed back to zero.
+    One extra state (4), added beyond the three as acceptance: place 1 vo file
+    outside the archive inside the fixture -> judged added. Each state is
+    reverted as soon as it is verified; states never pollute one another. All
+    of states (1)(2)(3) must pass for delivery. Fixtures are deleted after
+    use.
 
-用法:
-    python coqchk_delta_check.py                       # 真实树 vs 沙箱档案，四类对账
-    python coqchk_delta_check.py --tree T --attest A   # 指定 vo 树根与档案
-    python coqchk_delta_check.py --json OUT            # 另落逐件 JSON 报告（须在沙箱）
-    python coqchk_delta_check.py --selftest            # 沙箱 fixture 三态闭环（含附加态④）
+Usage:
+    python coqchk_delta_check.py                       # real tree vs sandbox archive, four-way reconciliation
+    python coqchk_delta_check.py --tree T --attest A   # explicit vo tree root and archive
+    python coqchk_delta_check.py --json OUT            # also write a per-file JSON report (must stay in the sandbox)
+    python coqchk_delta_check.py --selftest            # sandbox fixture three-state closed loop (extra state (4) included)
 """
 
 from __future__ import annotations
@@ -62,7 +83,7 @@ DEFAULT_TREE = Path(r"D:\ComplexAnalysis\ConstructiveWorld-Main\ConstructiveWorl
 SANDBOX = Path(__file__).resolve().parent
 DEFAULT_ATTEST = SANDBOX / "cw_attest.json"
 
-# selftest 选取的已认证模块（跨类取样，含 1 件 Local/ 子目录件以演练子目录解析）
+# Certified modules picked for the selftest (cross-category sample; includes 1 Local/ subdirectory file to exercise subdirectory resolution)
 SELFTEST_PICKS = [
     "AttnSqrt.v",
     "G02_Debt.v",
@@ -70,9 +91,9 @@ SELFTEST_PICKS = [
     "S15_TailFEPUp.v",
     "Local/LW0LeibSeparation.v",
 ]
-TAMPER_TARGET = "AttnSqrt.v"   # 态②翻转 1 字节的件
-REMOVE_TARGET = "G02_Debt.v"   # 态③删除的件
-ADDED_TARGET = "ZZ_UnattestedExtra.v"  # 附加态④的档案外混入件
+TAMPER_TARGET = "AttnSqrt.v"   # state (2): the file with 1 byte flipped
+REMOVE_TARGET = "G02_Debt.v"   # state (3): the file deleted
+ADDED_TARGET = "ZZ_UnattestedExtra.v"  # extra state (4): the file mixed in from outside the archive
 
 EXIT_CLEAN = 0
 EXIT_DELTA = 1
@@ -82,12 +103,12 @@ VERDICTS = ("unchanged", "changed", "added", "removed")
 
 
 class DeltaError(Exception):
-    """结构性失败（退出码 2）。"""
+    """Structural failure (exit code 2)."""
 
 
-# ------------------------------------------------------------------ 基础件 --
+# ------------------------------------------------------------------ helpers --
 def sha256_file(path: Path) -> tuple[str, int]:
-    """文件字节流 sha256 与字节数。不读任何 stat 元数据。"""
+    """sha256 and byte count of a file's byte stream. Reads no stat metadata."""
     h = hashlib.sha256()
     size = 0
     try:
@@ -104,7 +125,7 @@ def sha256_file(path: Path) -> tuple[str, int]:
 
 
 def vo_rel(key: str) -> str:
-    """模块名 → 相对 vo 路径（'X.v' → 'X.vo'）。非 .v 结尾按 error。"""
+    """Module name -> relative vo path ('X.v' -> 'X.vo'). A non-.v ending is an error."""
     if not key.endswith(".v"):
         raise DeltaError(f"模块键不以 .v 结尾，无法解析 vo: {key!r}")
     return key[:-2] + ".vo"
@@ -120,9 +141,9 @@ def tree_sha256_of(modules: dict) -> str:
     return hashlib.sha256(canonical_modules_bytes(modules)).hexdigest()
 
 
-# ------------------------------------------------------------------ 档案载入 --
+# ------------------------------------------------------------ archive loading --
 def load_attest(archive_path: Path) -> dict:
-    """读认证档案并做契约结构校验 + tree_sha256 自洽性校验；坏档 → DeltaError。"""
+    """Load the certification archive; validate the contract structure + tree_sha256 self-consistency; a bad archive -> DeltaError."""
     try:
         raw = archive_path.read_bytes()
     except OSError as exc:
@@ -166,9 +187,9 @@ def load_attest(archive_path: Path) -> dict:
     return archive
 
 
-# -------------------------------------------------------------------- 对账 --
+# ------------------------------------------------------------- reconciliation --
 def scan_domains_of(modules: dict) -> list[str]:
-    """档案键寻址的子目录集（含根 '.'）。added 的发现范围即根 + 这些目录。"""
+    """Subdirectories addressed by archive keys (root '.' included). The discovery scope for added is exactly the root plus these directories."""
     dirs = {"."}
     for key in modules:
         parent = PurePosixPath(vo_rel(key)).parent
@@ -178,7 +199,7 @@ def scan_domains_of(modules: dict) -> list[str]:
 
 
 def discover_tree_vos(tree: Path, modules: dict) -> dict[str, Path]:
-    """在扫描域（根 + 档案键子目录，各非递归）发现 vo 件 → {模块名: 路径}。"""
+    """Discover vo files in the scan scope (root + archive-key subdirectories, each non-recursive) -> {module name: path}."""
     found: dict[str, Path] = {}
     for domain in scan_domains_of(modules):
         base = tree if domain == "." else tree.joinpath(*PurePosixPath(domain).parts)
@@ -191,7 +212,7 @@ def discover_tree_vos(tree: Path, modules: dict) -> dict[str, Path]:
 
 
 def reconcile(tree: Path, archive: dict) -> dict:
-    """四类增量对账。逐件哈希对入 entries。只读树与档案。"""
+    """Four-way delta reconciliation. Per-file hash pairs go into entries. The tree and the archive are read-only."""
     modules = archive["modules"]
     tree_vos = discover_tree_vos(tree, modules)
     entries: list[dict] = []
@@ -245,7 +266,7 @@ def reconcile(tree: Path, archive: dict) -> dict:
         )
     return {
         "tree": str(tree),
-        "attest": None,  # 由调用方补填
+        "attest": None,  # filled in by the caller
         "scan_domains": scan_domains_of(modules),
         "counts": counts,
         "entries": entries,
@@ -286,7 +307,7 @@ def _ensure_in_sandbox(path: Path) -> Path:
 
 # ----------------------------------------------------------------- selftest --
 def _copy_real_vo(tree: Path, key: str, dest: Path) -> None:
-    """从真实树只读复制 1 件 vo 入 fixture。源仅 'rb'。"""
+    """Copy 1 vo file from the real tree into the fixture, read-only. The source is opened 'rb' only."""
     src = tree.joinpath(*PurePosixPath(vo_rel(key)).parts)
     try:
         blob = src.read_bytes()
@@ -297,8 +318,10 @@ def _copy_real_vo(tree: Path, key: str, dest: Path) -> None:
 
 
 def _subset_archive(archive: dict, keys: list[str]) -> dict:
-    """真实档案的键切片：原始 vo_sha256/size 原封保留（篡改检出锚定认证哈希），
-    tree_sha256 按同款 canonical 重算，使切片本身是合法 cw.attest/v1 档案。"""
+    """A key slice of the real archive: original vo_sha256/size kept intact
+    (tamper detection anchors on the certified hashes); tree_sha256 recomputed
+    with the same canonical form, so the slice itself is a valid cw.attest/v1
+    archive."""
     sub_modules = {k: dict(archive["modules"][k]) for k in keys}
     return {
         "modules": sub_modules,
@@ -313,7 +336,7 @@ def _counts_of(rep: dict) -> dict:
 
 
 def run_selftest() -> int:
-    """沙箱 fixture 三态闭环（①全unchanged ②1 changed ③1 removed + 附加态④added）。"""
+    """Sandbox fixture three-state closed loop ((1) all unchanged, (2) 1 changed, (3) 1 removed, plus the extra state (4) added)."""
     results: list[tuple[str, bool, str]] = []
     work = Path(tempfile.mkdtemp(prefix="delta_fixture_", dir=SANDBOX))
     try:
@@ -322,10 +345,10 @@ def run_selftest() -> int:
         ftree = work / "fix_tree"
         ftree.mkdir()
 
-        # 复制真实 .vo 数件（含 Local/ 子目录件）→ fixture 树
+        # Copy several real .vo files (the Local/ subdirectory file included) into the fixture tree
         for key in SELFTEST_PICKS:
             _copy_real_vo(real_tree, key, ftree.joinpath(*PurePosixPath(vo_rel(key)).parts))
-        # fixture 对账档案 = 真实档案对应切片（原始哈希锚）
+        # Fixture reconciliation archive = the matching slice of the real archive (original hashes as the anchor)
         sub = _subset_archive(archive, SELFTEST_PICKS)
 
         def once() -> dict:
@@ -334,7 +357,7 @@ def run_selftest() -> int:
         def ok_counts(rep: dict, want: dict) -> bool:
             return rep["counts"] == want
 
-        # 态① 全 unchanged
+        # state (1): all unchanged
         rep1 = once()
         want1 = {"unchanged": len(SELFTEST_PICKS), "changed": 0, "added": 0, "removed": 0}
         results.append(
@@ -345,7 +368,7 @@ def run_selftest() -> int:
             )
         )
 
-        # 态② fixture 内 1 件翻 1 字节 → 必标 changed（篡改检出）
+        # state (2): flip 1 byte of 1 fixture file -> must be flagged changed (tamper detection)
         tamper_path = ftree.joinpath(*PurePosixPath(vo_rel(TAMPER_TARGET)).parts)
         blob = tamper_path.read_bytes()
         tamper_path.write_bytes(blob[:0] + bytes([blob[0] ^ 0xFF]) + blob[1:])
@@ -364,10 +387,10 @@ def run_selftest() -> int:
             f" vs 树{short(tam_e['tree_sha256'])} counts={_counts_of(rep2)}"
         )
         results.append(("② 改 1 件 1 字节 → 标入 changed", cond2, detail2))
-        # 还原（重抄真实件，态间互不污染）
+        # Restore (re-copy the real file; states never pollute one another)
         _copy_real_vo(real_tree, TAMPER_TARGET, tamper_path)
 
-        # 态③ fixture 内删 1 件 → 标 removed
+        # state (3): delete 1 file in the fixture -> flagged removed
         remove_path = ftree.joinpath(*PurePosixPath(vo_rel(REMOVE_TARGET)).parts)
         remove_path.unlink()
         rep3 = once()
@@ -386,10 +409,10 @@ def run_selftest() -> int:
                 f"removed={sorted(removed3)} counts={_counts_of(rep3)}",
             )
         )
-        # 还原
+        # Restore
         _copy_real_vo(real_tree, REMOVE_TARGET, remove_path)
 
-        # 附加态④（三态之外自加）: 混入 1 件档案外 vo → 标 added
+        # Extra state (4) (added beyond the three states): mix in 1 vo file outside the archive -> flagged added
         (ftree / vo_rel(ADDED_TARGET)).write_bytes(b"fixture unattested extra bytes")
         rep4 = once()
         added4 = {e["module"] for e in rep4["entries"] if e["verdict"] == "added"}

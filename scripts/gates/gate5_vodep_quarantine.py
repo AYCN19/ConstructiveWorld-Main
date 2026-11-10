@@ -1,69 +1,69 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-闸⑤ .vo/.vos/.vok 二进制依赖层检疫（GATE-VOQ 20260926）
+Gate 5: .vo/.vos/.vok binary dependency-layer quarantine (GATE-VOQ 20260926)
 ========================================================
-源面闸①（gate1）扫不到的半径：休眠毒代二进制。判例 E-STAGING-AXFORENSIC-1
-（cw-ci-sop §6·B 第四型）：R109/R111 期落件编译的带毒 .vo 休眠于沙箱世界，
-跨批播种按文件名不按 digest 复活三经典公理——gate1 源面绿与 coqchk Axioms
-现形两口径不相交，载体躲在 .vo 依赖串表层。本闸在聚合 coqchk 消费闭包前
-对全 .vo/.vos/.vok 二进制做黑名单 token 串表扫描＋毒 digest 黑名单对照。
+Radius the source-level Gate 1 (gate1) cannot see: dormant poisoned binaries. Case E-STAGING-AXFORENSIC-1
+(cw-ci-sop 6.B fourth kind): poisoned .vo files from the R109/R111 era lay dormant in sandbox worlds and
+re-seeded the three classic axioms across batches by filename, not digest -- gate1 source-level green and
+coqchk Axioms listings never intersect; the carrier hides in the .vo dependency-string table. This gate scans
+all .vo/.vos/.vok binaries (token-string + poison-digest blacklists) before coqchk aggregates its closure.
 
-设计要点（全部来自实勘判例，出处见 _tgatevoq_ 检疫半径扩展报告）：
-1. 解压感知扫描（VO-SCAN/AXFORENSIC 双判例）：.vo 的依赖串表在 gzip 流内，
-   裸二进制 grep 得零命中假象——须对 raw 字节＋全部 gzip 流（\\x1f\\x8b）＋
-   zlib 流（\\x78\\x9c）解压后逐 blob 扫描。
-2. platform 对照组内建（防 glob 假象，fail-loud）：扫描器对平台自带
-   ClassicalDedekindReals.vo 必须自命中（SELF-HIT）；对照文件缺失或自命中
-   失败＝方法不可证，一律 exit 2 非绿（零命中在无对照自检时不可信）。
-3. token 五族全扫全报，硬/软分层（主树 2477 件实勘校准 20260926）：
-   - 硬四族（命中即 exit 1）：Lra / Reals / ClassicalDedekindReals /
-     FunctionalExtensionality——已认证净主树（Axioms=<none>）实测 0/0/0/0，
-     而五毒代（43f866e8 等）全携 Lra；\\b 词边界＋大小写敏感（gate1 同款），
-     ConstructiveReals/Qreals 等项目净件名不误配。
-   - 软一族（记录不红，--strict-psatz 升硬）：Psatz——净主树 172 件串表携带
-     （Lia 依赖闭包的 micromega Q 域供给，AXFORENSIC §1.1 判例「非毒」）；
-     源面 Require Psatz 拉公理链由 gate1 硬闸把守，二进制层串不构成载体证据。
-4. 毒 digest 黑名单（md5）：同名 vo 即净假设不成立（主树 a4b1c953 净 vs
-   P2 世界 43f866e8 毒判例），一切按 digest 对账；命中列出黑名单册名，
-   盘上文件名与册名不符时 name_mismatch=true 亮出（改名投毒检测）。
-5. fail-loud：命中 exit 1；无可扫面／树无效／对照失效／黑名单空／扫描出错
-   （面不完整）一律 exit 2；exit 0 必须是「扫全＋对照过＋零命中」三件齐。
-6. 构造性实数岛上下文豁免（20261006 校准，run #201 判例）：stdlib 构造性零公理
-   实数库——Stdlib.Reals.Cauchy.ConstructiveCauchyReals、
-   Stdlib.Reals.Abstract.ConstructiveReals 及同子树 QExtra/ConstructiveExtra 等
-   ——其路径串必嵌路径段 Reals，撞硬 token Reals（该 token 本意拦 Stdlib.Reals.*
-   经典实数毒面）。机械判据（双机制，真 born vo 字节实勘校准）：①Reals 命中所在
-   连续路径串（仅 [A-Za-z0-9_./\\] 字符）内含岛名全词；②叶先序长度前缀段列表
-   编码下命中左向紧邻段（word1，gap≤4 结构字节）∈ 岛名 ∪ 构造子树段
-   {Cauchy,Abstract}。任一成立 → 降为信息档（exempted_island 计数单列，判定
-   透明）；右向禁跨 gap（相邻条目 digest 屏障防串豁）；其余一切 Reals 命中
-   （ClassicalDedekindReals/Rbase/Raxioms/Lra 等路径段、裸路径段）照硬。
-   digest 层不适用本豁免——毒 digest 仍一票咬合。
+Design points (all sourced from field-surveyed cases; see the _tgatevoq_ quarantine-radius report):
+1. Decompression-aware scanning (VO-SCAN/AXFORENSIC cases): the .vo dependency-string table sits inside
+   the gzip stream; a bare binary grep fakes zero hits -- scan the raw bytes plus every decompressed
+   gzip (\\x1f\\x8b) and zlib (\\x78\\x9c) stream, blob by blob.
+2. Platform control group built in (anti glob illusion, fail-loud): the scanner must SELF-HIT the
+   platform's own ClassicalDedekindReals.vo; a missing control file or a failed self-hit = method
+   unproven -- always exit 2, never green (zero hits are not credible without a control self-check).
+3. All five token families scanned and reported, hard/soft split (main-tree 2477-file survey, 20260926):
+   - Hard four families (hit = exit 1): Lra / Reals / ClassicalDedekindReals / FunctionalExtensionality --
+     the certified clean main tree (Axioms=<none>) measured 0/0/0/0, while all five poison generations
+     (43f866e8 etc.) carry Lra; \\b word boundaries + case sensitive (gate1 style): clean project
+     names such as ConstructiveReals/Qreals do not mismatch.
+   - Soft one family (recorded, not red; --strict-psatz promotes to hard): Psatz -- carried in the string
+     tables of 172 clean main-tree files (micromega Q-domain supply of the Lia closure; AXFORENSIC 1.1
+     verdict "not poison"); source-level Require Psatz is gate1's hard gate, binary strings are not evidence.
+4. Poison-digest blacklist (md5): a same-name vo defeats the clean-by-name assumption (main tree a4b1c953
+   clean vs P2 world 43f866e8 poisoned), so everything reconciles by digest; hits list the blacklist
+   ledger name; a differing on-disk filename raises name_mismatch=true (rename-poison detection).
+5. fail-loud: hits exit 1; no scannable surface / invalid tree / failed control / empty blacklist / scan
+   errors (incomplete surface) all exit 2; exit 0 requires all three: full scan + control pass + zero hits.
+6. Constructive-reals island context exemption (20261006 calibration, run #201 case): the stdlib
+   constructive zero-axiom reals -- Stdlib.Reals.Cauchy.ConstructiveCauchyReals,
+   Stdlib.Reals.Abstract.ConstructiveReals, same-subtree QExtra/ConstructiveExtra, etc. -- always embed the
+   path segment Reals and clash with the hard token Reals (which targets the classical Stdlib.Reals.*
+   poison face). Mechanical criteria (two mechanisms, calibrated on real born-vo bytes): (a) the maximal
+   contiguous path run around the Reals hit ([A-Za-z0-9_./\\] chars only) contains an island name as a
+   whole word; (b) under the leaf-first length-prefixed segment-list encoding, the segment left-adjacent
+   to the hit (word1, gap<=4 structural bytes) is an island name or in {Cauchy,Abstract}. Either ->
+   informational (exempted_island counted separately, verdict transparent); rightward gap crossing forbidden
+   (neighbor digest barrier blocks serial exemption); all other Reals hits (ClassicalDedekindReals/Rbase/
+   Raxioms/Lra segments, bare segments) stay hard; the digest layer takes no exemption (poison digests bite).
 
-用法：
+Usage:
   python gate5_vodep_quarantine.py [--tree DIR]... [--blacklist FILE]
       [--control PATH|off] [--strict-psatz] [--json OUT] [--text]
-  默认树：主 vo 树 ConstructiveWorld_vo（可多次 --tree 扫多树/世界，递归）。
+  Default tree: the main vo tree ConstructiveWorld_vo (repeat --tree to scan more trees/worlds; recursive).
 
-退出码：0=洁净（扫全＋对照过＋零命中）；1=命中（硬 token 或黑名单 digest，
-检疫咬合）；2=无可扫面/树无效/对照组失效/黑名单空/扫描出错（不可判绿，红）。
+Exit codes: 0 = clean (full scan + control pass + zero hits); 1 = hit (hard token or blacklist digest --
+quarantine bites); 2 = no scannable surface / invalid tree / failed control / empty blacklist / scan error (red).
 """
 import os, re, sys, io, zlib, gzip, json, hashlib, argparse, datetime
 
 HARD_TOKENS = ["Lra", "Reals", "ClassicalDedekindReals", "FunctionalExtensionality"]
-SOFT_TOKENS = ["Psatz"]  # 信息档；--strict-psatz 升硬（§3 校准注）
+SOFT_TOKENS = ["Psatz"]  # informational tier; --strict-psatz promotes it to hard (section 3 calibration note)
 ALL_TOKENS = HARD_TOKENS + SOFT_TOKENS
 TOKEN_RES = {
     t: re.compile(rb"(?<![A-Za-z0-9_])" + t.encode() + rb"(?![A-Za-z0-9_])")
     for t in ALL_TOKENS
 }
-# 设计要点 6：构造性实数岛具名与连续路径串字符类（岛豁免仅作用于 token Reals）。
-# 真字节校准（run #201 同源 born vo 实勘 20261006）：.vo 依赖面存两种形——
-# ①点形/斜杠形连续串（Stdlib.Reals.Cauchy.ConstructiveCauchyReals）；②叶先序
-# 长度前缀段列表（ConstructiveCauchyReals·Cauchy·Reals·Stdlib，段间 1-2 结构
-# 字节）。构造族子树＝Stdlib.Reals.{Cauchy,Abstract}.*（QExtra/ConstructiveExtra
-# 亦居 Cauchy 目录，装机实勘），子树段名单列 SEG 判据；其余一切 Reals 命中照硬。
+# Design point 6: constructive-reals island names + contiguous-path char class (island
+# exemption applies only to the token Reals). Byte calibration (run #201 same-source born-vo
+# survey, 20261006): the .vo dependency face stores two shapes -- (1) dot/slash contiguous strings
+# (Stdlib.Reals.Cauchy.ConstructiveCauchyReals); (2) leaf-first length-prefixed segment lists
+# (segments 1-2 structural bytes apart). Constructive subtree = Stdlib.Reals.{Cauchy,Abstract}.*
+# (QExtra/ConstructiveExtra live in the Cauchy dir too); subtree segments judged by name; other hits hard.
 CONSTRUCTIVE_ISLANDS = ["ConstructiveCauchyReals", "ConstructiveReals"]
 CONSTRUCTIVE_SUBTREE_SEGS = ["Cauchy", "Abstract"]
 ISLAND_RES = [
@@ -72,21 +72,21 @@ ISLAND_RES = [
 ]
 RUN_CHAR_RE = re.compile(rb"[A-Za-z0-9_./\\]")
 WORD_RE = re.compile(rb"[A-Za-z0-9_]+")
-MAX_SEG_GAP = 4  # 段间结构字节上限（实测 1-2；digest 屏障 16 字节必超限断走）
+MAX_SEG_GAP = 4  # cap on structural bytes between segments (measured 1-2; the 16-byte digest barrier always exceeds it)
 SCAN_SUFFIXES = (".vo", ".vos", ".vok")
-MAX_FILE_BYTES = 512 * 1024 * 1024  # 单件 IO 安全帽，超出计 ERR（fail-loud）
+MAX_FILE_BYTES = 512 * 1024 * 1024  # per-file IO safety cap; over-cap counts as ERR (fail-loud)
 
 CONTROL_NAME = "ClassicalDedekindReals.vo"
 CONTROL_TOKEN = "ClassicalDedekindReals"
 CONTROL_BASES = [
-    "C:/Rocq-Platform~9.1~2026.01/lib/coq",  # 钉代优先（SW2：继承 env 可能是 9.0 旧值）
+    "C:/Rocq-Platform~9.1~2026.01/lib/coq",  # pinned generation first (SW2: an inherited env value may be an old 9.0)
     os.environ.get("COQLIB"),
     os.environ.get("ROCQLIB"),
 ]
 
 
 def blobs_of(path):
-    """raw ＋全部 gzip 流＋zlib 流解压 blob（VO-SCAN 原型同源，判例已验）。"""
+    """raw bytes + all gzip streams + zlib streams decompressed into blobs (VO-SCAN prototype lineage; case-verified)."""
     with open(path, "rb") as f:
         data = f.read()
     blobs = [data]
@@ -114,13 +114,13 @@ def blobs_of(path):
 
 
 def reals_island_name(blob, start, end):
-    """Reals 命中处的构造性实数岛上下文判定：命中返回豁免理由（岛名/子树段），
-    否则 None（照硬）。双机制（真字节校准见设计要点 6）：
-    ①连续路径串——命中两侧 [A-Za-z0-9_./\\] 极大串内含岛名全词（点形/斜杠形）；
-    ②左向分段邻域——叶先序段列表编码下，自命中左向以 ≤MAX_SEG_GAP 个非字母
-      字节为 gap 逐段读词（仅读 word1），word1∈岛名∪构造子树段（Cauchy/
-      Abstract）→ 豁免。右向禁跨 gap 读词：相邻依赖条目以 16 字节 digest 为
-      屏障，跨屏障读词构成串豁风险（防御纵深底线）。"""
+    """Island context verdict at a Reals hit: return the exemption reason (island name / subtree segment),
+    else None (stays hard). Two mechanisms (byte calibration: design point 6): (a) contiguous path run --
+    the maximal [A-Za-z0-9_./\\] run around the hit contains an island name whole-word (dot/slash shapes);
+    (b) leftward segment neighborhood -- under the leaf-first segment-list encoding, walk left from the hit
+    across <= MAX_SEG_GAP non-word bytes reading word1 only; word1 in island names or the constructive
+    subtree segments (Cauchy/Abstract) -> exempt. No rightward gap reading: the neighbor entry's 16-byte
+    digest is a barrier; reading across it risks serial exemption (defense-in-depth floor)."""
     lo = start
     while lo > 0 and RUN_CHAR_RE.match(blob[lo - 1 : lo]):
         lo -= 1
@@ -132,7 +132,7 @@ def reals_island_name(blob, start, end):
     for name, res in ISLAND_RES:
         if res.search(run):
             return name
-    # ②左向分段邻域：word1=紧邻段（该条目的叶段，叶先序编码实测）
+    # (b) leftward segment neighborhood: word1 = the adjacent segment (this entry's leaf segment, leaf-first encoding as measured)
     pos = start
     gap = 0
     while pos > 0 and gap <= MAX_SEG_GAP and not WORD_RE.match(blob[pos - 1 : pos]):
@@ -151,10 +151,10 @@ def reals_island_name(blob, start, end):
 
 
 def scan_tokens(path):
-    """返回 (硬/软命中 token 集合, 岛豁免记录列表, err 或 None)。
+    """Return (hard/soft hit token set, island exemption records, err or None).
 
-    token Reals 逐出现处分类：含岛上下文的出现处降为信息档（记入 exempted），
-    任一无岛上下文的出现处即令该 token 照硬入 hits。其余 token 判据不变。"""
+    Token Reals is classified per occurrence: island-context occurrences become informational (recorded in
+    exempted); any occurrence without island context makes the token hard in hits. Other tokens: unchanged."""
     try:
         hits = set()
         exempted = []
@@ -174,7 +174,7 @@ def scan_tokens(path):
                 elif TOKEN_RES[t].search(b):
                     hits.add(t)
         return hits, exempted, None
-    except Exception as e:  # OSError/EOFError/MemoryError 等——fail-loud 记账
+    except Exception as e:  # OSError/EOFError/MemoryError etc. -- fail-loud accounting
         return set(), [], str(e)[:80]
 
 
@@ -187,7 +187,7 @@ def md5_of(path):
 
 
 def find_control():
-    """platform 对照组定位：COQLIB/ROCQLIB/标准装机路径下找 ClassicalDedekindReals.vo。"""
+    """Platform control group locator: find ClassicalDedekindReals.vo under COQLIB/ROCQLIB/the standard install."""
     cands = []
     for base in CONTROL_BASES:
         if not base or not os.path.isdir(base):
@@ -207,7 +207,7 @@ def find_control():
 
 
 def load_blacklist(path):
-    """毒 digest 黑名单：每行首字段=32 位小写 md5，行内 # 后为注释。"""
+    """Poison-digest blacklist: first field per line = 32-char lowercase md5; text after # is a comment."""
     entries = {}
     with open(path, encoding="utf-8") as f:
         for line in f:
@@ -225,10 +225,10 @@ def load_blacklist(path):
 
 def scan_tree(tree, blacklist, strict_psatz):
     files = errors = 0
-    token_hits = []   # 硬命中（strict 时含 Psatz）
-    soft_hits = []    # Psatz 信息档
+    token_hits = []   # hard hits (Psatz included when --strict)
+    soft_hits = []    # Psatz informational tier
     digest_hits = []
-    island_exempt = []  # Reals 命中而上下文属构造性实数岛——信息档（设计要点 6）
+    island_exempt = []  # Reals hits whose context is a constructive-reals island -- informational (design point 6)
     for dp, dn, fn in os.walk(tree):
         for name in sorted(fn):
             if not name.endswith(SCAN_SUFFIXES):
@@ -265,7 +265,7 @@ def scan_tree(tree, blacklist, strict_psatz):
                             "name_mismatch": os.path.basename(path) != blacklist[digest],
                         })
             for rec in exempted:
-                if rec["token"] not in hits:  # 同件同 token 已有硬出现处则豁免不作数
+                if rec["token"] not in hits:  # a hard occurrence of the same token in the same file voids the exemption
                     island_exempt.append({"file": rel, "token": rec["token"],
                                           "island": rec["island"], "digest": digest})
             for t in sorted(hits):
@@ -310,7 +310,7 @@ def main():
     exit_code = 0
     fatal = None
 
-    # 黑名单载入：文件缺失/为空/格式非法＝方法失效，exit 2（fail-loud）
+    # Blacklist load: missing / empty / invalid file = method failure, exit 2 (fail-loud)
     try:
         blacklist = load_blacklist(args.blacklist)
         if not blacklist:
@@ -320,7 +320,7 @@ def main():
         return 2
     report["blacklist"] = {"path": args.blacklist, "entries": len(blacklist)}
 
-    # 对照组自检：SELF-HIT 不成立＝扫描方法不可证，exit 2（防 glob 零命中假象）
+    # Control self-check: no SELF-HIT = scan method unproven, exit 2 (anti glob zero-hit illusion)
     if args.control != "off":
         cpath = args.control if args.control != "auto" else find_control()
         if not cpath or not os.path.isfile(cpath):

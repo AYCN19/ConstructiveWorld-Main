@@ -1,74 +1,74 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-闸① 毒 token grep 守卫（AX-GUARD 20260925）＋ 壳名防复活 token·乙案态零白名单形（R130 EX-PROBE 预制席 20260926）
+Gate 1: poison-token grep guard (AX-GUARD 20260925) + shell-name anti-resurrection token, plan-B zero-whitelist (R130 EX-PROBE 20260926)
 ================================================================================
-【本件=沙箱草案，未落树。差异全文见同目录 gate1_shell_token_ablation_zero_whitelist.patch；
- 与 R7 甲案态（ratchet 台账形，_tr130feas_guard_ws 沙箱）的差异说明见
+[This file = sandbox draft, not landed. Full diff: the sibling file gate1_shell_token_ablation_zero_whitelist.patch;
+ for the difference vs the R7 plan-A form (ratchet-ledger form, _tr130feas_guard_ws sandbox), see section 3 of:
  _tr130exprobe_探针预制报告-20260926.md §三。】
 
-乙案态（壳消融·案 I 落刀后）语义：
-  壳 CW_ConstructiveWorld_219 消融落刀后存量壳 Require=0，故【零白名单形】成立——
-  壳名 token 入 POISON_TOKENS 后任何命中（=任何新写/残留壳 Require 活行）直接 exit 1，
-  无 ratchet 台账、无 --regen-baseline、无豁免面（R8 向量 5「豁免名单机制不需要」）。
-  --strict 保留为 no-op 兼容旗标：接受该参数但零行为差异（零白名单形下唯一模式即
-  strict；保留仅为与 R7 甲案态命令行/runbook 文案兼容，防接线改动即红）。
-  适用时点：壳消融落刀＋split 同票退役之后；落刀前用本形会咬死 1007 行存量壳
-  Require（R7 实测矛盾），落刀前窗口仍须用 R7 甲案态 ratchet 形。
+Plan-B form semantics (after the shell ablation, case I, has landed):
+  after the shell CW_ConstructiveWorld_219 ablation lands, surviving shell Requires = 0, so the [zero-whitelist
+  form] holds -- once the shell-name token is in POISON_TOKENS, any hit (= any newly written or surviving shell
+  Require live line) exits 1 directly; no ratchet ledger, no --regen-baseline, no exemption face (R8 vector 5:
+  "no exemption-list mechanism needed"). --strict stays as a no-op compatibility flag: accepted, zero behavior
+  difference (the only mode under zero-whitelist is strict; kept solely for R7 plan-A CLI/runbook compatibility
+  so wiring changes do not turn red). Applies after the shell ablation lands + split retires in the same vote;
+  earlier it would bite 1007 surviving shell Require lines (R7 measured), so use the R7 plan-A ratchet form then.
 
-R130 乙案扩接 diff（对 AX-GUARD v1.0，96272acb 基准）：
-  [T1] POISON_TOKENS 净增 1 token：CW_ConstructiveWorld_219（壳聚合出口全名）。
-       全名匹配＋\\b 词边界＋严格大小写：简称 CW_219 不命中；af_CW_ConstructiveWorld_219
-       前缀名不命中（_ 为词字符无边界）；UpReqIndex 注释字面非 Require 行不命中
-       （剥注释＋Require 行锚定双防，E422 口径）。R2 §十.1「全名 token 零白名单」同款。
-  [T2'] --strict 保留 no-op（CLI 兼容旗标，见上）。
-  [T3] 其余零变：剥注释（嵌套感知）、Require 行锚定、退出码 0/1/2、--tree/--live-x/--json/--text。
+R130 plan-B extension diff (vs AX-GUARD v1.0, base 96272acb):
+  [T1] POISON_TOKENS adds exactly 1 token: CW_ConstructiveWorld_219 (the shell aggregate export, full name).
+       Full-name match + \\b word boundaries + strict case: the short form CW_219 does not match; the prefixed
+       name af_CW_ConstructiveWorld_219 does not match (_ is a word char, no boundary); UpReqIndex comment
+       literals are not Require lines, no match (comment stripping + Require-line anchoring, E422 caliber).
+  [T2'] --strict kept as a no-op (CLI compatibility flag, see above).
+  [T3] Everything else unchanged: comment stripping (nesting-aware), Require-line anchoring, exit codes 0/1/2, --tree/--live-x/--json/--text.
 
-设计要点（全部来自实勘教训，出处见 _taxguard_ 报告）：
-1. 全名匹配、严格大小写——简称陷阱禁入：token 表一律全名，禁项目简称（如 CW_219≠全名类）。
-   且 \\b 词边界 + 大小写敏感：RealSetoid 不配 Reals（AX-MATRIX §1.3 grep -i 假配教训）。
-2. 剥注释后匹配——(* Require ... *) 注释行不误报（E422 教训；白皮书词表口径：
-   只有活 Require 行算命中）。剥注释为 (* *) 嵌套感知，保行号不变。
-3. 只看含 Require 关键字的行（含 From Stdlib Require Import/Export 句式，无锚定——
-   E-ARCH 教训：^Require Import 锚漏 From Stdlib 句式）。
-4. fail-loud：命中 exit 1；无命中 exit 0；树不存在 exit 2。禁静默降级（零白名单形
-   无台账缺席路径，fail-loud 面比甲案态更窄更硬）。
+Design points (all from field-surveyed lessons; sources in the _taxguard_ report):
+1. Full-name match, strict case -- no short-form traps: the token table uses full names only, project short forms
+   banned (CW_219 != the full name). Plus \\b word boundaries + case sensitivity: RealSetoid does not match Reals (AX-MATRIX 1.3 grep -i lesson).
+2. Match after comment stripping -- (* Require ... *) comment lines do not false-positive (E422 lesson; whitepaper
+   word-list caliber: only live Require lines count). Stripping is (* *) nesting-aware and keeps line numbers unchanged.
+3. Only lines containing the Require keyword (incl. From Stdlib Require Import/Export forms, unanchored -- the
+   E-ARCH lesson: a ^Require Import anchor misses the From Stdlib forms).
+4. fail-loud: hit exit 1; no hit exit 0; missing tree exit 2. No silent downgrade (the zero-whitelist form has no
+   ledger-absent path; its fail-loud face is narrower and harder than the plan-A form).
 
-用法：
+Usage:
   python gate1_poison_guard.py [--tree DIR]... [--json OUT] [--text] [--strict]
-  默认树：Main Live 树（ConstructiveWorld_Live）。可多次 --tree 扫多树。
-  加 --live-x 可附扫 Live_X（850 件面，含探针脚手架，命中另账不混主树）。
-  CI 接线同款（coq.yml gate1 pre-build fail-fast 步）：双树
-  --tree ConstructiveWorld_Live --tree ConstructiveWorld_vo，bash -e 非零即 step 红。
+  Default tree: the Main Live tree (ConstructiveWorld_Live). Repeat --tree to scan more trees.
+  --live-x additionally scans Live_X (850-file surface incl. probe scaffolding; its hits are accounted apart from the main tree).
+  Same wiring as CI (coq.yml gate1 pre-build fail-fast step): two trees
+  --tree ConstructiveWorld_Live --tree ConstructiveWorld_vo; under bash -e any nonzero exit turns the step red.
 
-R130 落树版增条（单条文件级显式豁免）：
-  唯一豁免面=EXEMPT_FILES={"_t24_probe3.v"}——用户禁碰件豁免（该件内容与存在性均受
-  用户明令保护，不可删改），其壳 Require 行为全树唯余存留处，候用户终裁退役与否。
-  豁免命中仍逐笔留账（exempted_hits，文本与 JSON 双可见），非静默放行；除该单件外
-  零白名单语义零变：任何其他文件任何壳名活 Require 命中即 exit 1。
+R130 landed-version addition (single-file explicit exemption):
+  the only exemption face = EXEMPT_FILES={"_t24_probe3.v"} -- user-protected file (content and existence protected
+  by explicit user order; no deletion/edit); its shell Require line is the tree's sole remaining place, pending the
+  user's final retirement ruling. Exempted hits are still logged one by one (exempted_hits, in text and JSON), never
+  silent; outside this file zero-whitelist semantics are unchanged: any other shell-name live Require hit exits 1.
 
-退出码：0=洁净（守卫 PASS，含仅豁免件命中的形态）；1=命中毒 token（守卫咬合，
-含壳名复活，豁免件以外）；2=树路径无效。
+Exit codes: 0 = clean (guard PASS, incl. the form where only the exempt file hits); 1 = poison token hit (guard bites,
+incl. shell-name resurrection, outside the exempt file); 2 = invalid tree path.
 """
 import os, re, sys, json, argparse, datetime
 
 POISON_TOKENS = [
     "Lra", "Psatz", "Reals", "ClassicalDedekindReals", "FunctionalExtensionality",
     "Micromega", "ClassicalDescription", "Logic.Classical",
-    # R130 乙案态 [T1]：壳名防复活 token（全名；乙案零白名单形——命中即红，无台账豁免）
+    # R130 plan-B [T1]: shell-name anti-resurrection token (full name; zero-whitelist form -- any hit is red, no ledger exemption)
     "CW_ConstructiveWorld_219",
 ]
 TOKEN_RE = re.compile(
     r"\b(" + "|".join(re.escape(t) for t in POISON_TOKENS) + r")\b"
-)  # re.escape 保留 \. 为字面点；\b 在点两侧按词字符判定，Logic.Classical 正确配
+)  # re.escape keeps \. a literal dot; \b sides are judged by word chars -- Logic.Classical matches correctly
 REQUIRE_RE = re.compile(r"\bRequire\b")
 
-# 单条文件级显式豁免（用户禁碰件豁免）：_t24_probe3.v 内容与存在性受用户明令保护，
-# 其壳 Require 行为全树唯余存留处，候用户终裁退役与否。豁免命中逐笔留账，非静默放行。
+# Single-file explicit exemption (user-protected file): _t24_probe3.v content and existence are user-protected; its shell
+# Require line is the tree's sole remaining place, pending the user's ruling. Exempted hits logged one by one, never silent.
 EXEMPT_FILES = {"_t24_probe3.v"}
 
 def strip_comments(text):
-    """(* *) 嵌套感知剥注释，非注释字符原样保留（换行保留→行号不变）。"""
+    """(* *) nesting-aware comment stripping; non-comment characters kept verbatim (newlines kept -> line numbers unchanged)."""
     out = []
     depth = 0
     i, n = 0, len(text)

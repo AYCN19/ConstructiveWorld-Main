@@ -1,22 +1,22 @@
 #!/bin/bash
-# vo_sync_watch.sh — 对侧 vo 信任缓存自动联动（macOS/bash 形；Windows 侧用 vo_sync_watch.ps1）
+# vo_sync_watch.sh — automatic peer vo trust-cache sync (macOS/bash form; on Windows use vo_sync_watch.ps1)
 #
-# 使命：本机作为 runner 之一，当对侧电脑推送的 CI run 全绿后，自动下载其上传的
-# vo trust cache artifact，镜像合并进本机信任缓存目录——下次本机 CI/本地编译
-# 播种步即吃指纹 SKIP，实现「一侧新增模块推送 CI，对侧自动本地化+认证」闭环。
+# Mission: this machine is one of the runners; when a CI run pushed by the peer machine goes fully green,
+# automatically download its uploaded vo trust cache artifact and mirror-merge it into the local trust-cache
+# directory, so the next local CI/local-build seeding step takes the fingerprint SKIP -- closing the "one side pushes new modules to CI, the other auto-localizes + certifies" loop.
 #
-# 用法（推荐 launchd/计划任务常驻，或 nohup 后台）：
+# Usage (recommended as a resident launchd/scheduled task, or backgrounded with nohup):
 #   REPO=hy7pc8gfmf-dotcom/ConstructiveWorld-Main \
 #   ARTIFACT=vo-trust-cache-windows \
 #   CACHE_DIR=/Users/apple/vo_ci_cache_mac \
 #   bash scripts/vo_sync_watch.sh
-# 环境变量：
-#   REPO        仓库（默认 hy7pc8gfmf-dotcom/ConstructiveWorld-Main）
-#   ARTIFACT    要同步的 artifact 名（对侧产物；本机若为 Windows 侧则填 vo-trust-cache-macos）
-#   CACHE_DIR   本机信任缓存目录（mac 默认 /Users/apple/vo_ci_cache_mac）
-#   POLL_SEC    轮询间隔（默认 60；网络单飞纪律：每轮仅 1-2 个请求）
-#   RUN_FILE    已同步 run 记录（默认 $CACHE_DIR/.vo_sync_last_run）
-# token：git credential（与 push 同源）自动获取，无 token 时仅观察不下 Artifact（fail-loud 日志）。
+# Environment variables:
+#   REPO        repository (default hy7pc8gfmf-dotcom/ConstructiveWorld-Main)
+#   ARTIFACT    artifact name to sync (the peer's artifact; on a Windows-side machine set vo-trust-cache-macos)
+#   CACHE_DIR   local trust-cache directory (mac default /Users/apple/vo_ci_cache_mac)
+#   POLL_SEC    poll interval (default 60; network single-flight discipline: only 1-2 requests per round)
+#   RUN_FILE    synced-run record (default $CACHE_DIR/.vo_sync_last_run)
+# token: obtained automatically from git credential (same source as push); without a token only observe, no artifact download (fail-loud logging).
 set -u
 REPO="${REPO:-hy7pc8gfmf-dotcom/ConstructiveWorld-Main}"
 ARTIFACT="${ARTIFACT:-vo-trust-cache-windows}"
@@ -35,7 +35,7 @@ get_token() {
 while true; do
   TOKEN=$(get_token)
   AUTH=""; [ -n "$TOKEN" ] && AUTH="Authorization: token $TOKEN"
-  # ① 最近绿 run（单飞 1 发）
+  # step 1: latest green run (single flight, 1 request)
   RUN=$(curl -s --max-time 30 ${AUTH:+-H "$AUTH"} \
     "https://api.github.com/repos/$REPO/actions/runs?branch=main&status=success&per_page=1" \
     | "$("${PYTHON:-python3:-python}" 2>/dev/null || echo python3)" -c "import json,sys
@@ -45,7 +45,7 @@ except Exception:
     print(0)" 2>/dev/null || echo 0)
   if [ -n "$RUN" ] && [ "$RUN" -gt "$LAST" ] 2>/dev/null; then
     echo "vo_sync_watch: new green run $RUN — syncing $ARTIFACT"
-    # ② 定位 artifact（单飞 1 发）
+    # step 2: locate the artifact (single flight, 1 request)
     AID=$(curl -s --max-time 30 ${AUTH:+-H "$AUTH"} \
       "https://api.github.com/repos/$REPO/actions/runs/$RUN/artifacts?per_page=50" \
       | "${PYTHON:-python3}" -c "import json,sys
@@ -55,7 +55,7 @@ try:
 except Exception:
     print(0)" 2>/dev/null || echo 0)
     if [ "${AID:-0}" -gt 0 ] 2>/dev/null && [ -n "$TOKEN" ]; then
-      # ③ 下载+镜像合并（先取到临时区，验 zip 完整再原子替换）
+      # step 3: download + mirror merge (fetch into a temp area first; verify the zip, then swap atomically)
       TMP=$(mktemp -d)
       if curl -sL --max-time 600 -H "Authorization: token $TOKEN" \
            "https://api.github.com/repos/$REPO/actions/artifacts/$AID/zip" -o "$TMP/vo.zip" \

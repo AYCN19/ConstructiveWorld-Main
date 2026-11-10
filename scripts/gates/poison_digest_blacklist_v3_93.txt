@@ -1,19 +1,19 @@
-# poison_digest_blacklist_v3_93.txt — VO 播种检疫毒 digest 黑名单 v3（9.3 重产·Main 侧·20261105·换基铸造师）
-# 出典：ci_switch 包 r3 §6-残留2（工单裁定4·gate5 毒 digest 黑名单 9.3 重产）；Set 仓 v3_93（20261102 attest93 席）落树先例同形。
-# 结构：§A = v2 二十五枚 9.1 字节 digest 逐字保留（md5 系绝对字节指纹·不随编译器代际失效·仍咬 9.1 毒代回流）；
-#       §B = Rocq 9.3.0（stdlib 9.2.0 源构建·opam-root/default）对同名毒件按文档毒形重编所得 digest（本机实测·双建互证）。
-# 毒形出典：E-STAGING-AXFORENSIC-1（R109/R111 整编期副本携 `From Stdlib Require Import Lia Lra.`）→ 本波在现役源上恢复该毒差
-#   （Lia → Lia Lra）后以 9.3 编译；世界＝main93（Main 树 9.3 全闭包·顶层 .vo 1013/1018·毒位依赖闭包零缺件——
-#   沙箱缺件五枚 Arch_UpAbl_30/UpAblP2FeedSumLe/UpAblP6_Package/UpReqPadeConstUnify/_twc_probe 不入毒位闭包，
-#   「缺件补编」条款本波未触发）。cast 台账＝rocq93_work_20261101/_main93_poison_cast_20261105/（gen1/gen2 双目录·
-#   per-stem 隔离子目录防兄弟毒代互染：B1/B2Time/Fin2 相互 Require 面全部自 main93 净代解析·毒形源仅 Lia 行单行差异·diff 断言过）。
-# 双建互证（SELF-HIT·digest 层校准）：gen1/gen2 异目录独立二次编译九枚 md5 逐件全等（确定性＋路径无关·Set 先例同判）；
-#   gate5 以本单对 gen2 产物扫描 DIGEST-HIT 9/9 全中（UpReqConcSoftmax.vos 命中 .vo 册名显 name_mismatch=true＝
-#   .vos 与 .vo 字节全同之结构性注记·非改名投毒）；对 main93 净沙箱全量扫描 0 命中（防自咬断言）。
-# 9.3 可再生面（实测）：五毒位 stem 全族可编（UpReqConcSoftmax/B1/B2Time/Fin2/IrrationalCriterion）——
-#   Set 仓 §C 18 槽挂账（候 Main 9.3 闭包）由本单全额清偿：25 槽对应九 (stem,ext) 形全部重产。
-# 用法/纪律同 v2：全部 32 位 md5 小写；行内 # 后为注释；禁照单硬删（VO-RES-CLEAN）。
-# ===== §A v2 原条目 25 枚（9.1 字节·逐字保留·出典 v2 头注）=====
+# poison_digest_blacklist_v3_93.txt -- VO seeding quarantine poison digest blacklist v3 (9.3 regeneration, Main side, 20261105, rebase-casting pass)
+# Provenance: ci_switch package r3 §6-residual-2 (work-order ruling 4, gate5 poison digest blacklist 9.3 regeneration); same form as the Set repo v3_93 (20261102 attest93 pass) tree-landing precedent.
+# Structure: §A = the 25 v2 entries, 9.1-byte digests, kept verbatim (md5 is an absolute byte fingerprint, does not expire across compiler generations, still catches 9.1 poison-generation backflow);
+#       §B = digests obtained by recompiling the same-named poison files with Rocq 9.3.0 (stdlib built from 9.2.0 sources, opam-root default) under the documented poison shape (measured on this machine, double-build cross-checked).
+# Poison-shape provenance: E-STAGING-AXFORENSIC-1 (R109/R111 consolidation-era copies carried `From Stdlib Require Import Lia Lra.`) -> this wave restored that poison delta on the live sources
+#   (Lia -> Lia Lra) and compiled with 9.3; world = main93 (Main tree 9.3 full closure, top-level .vo 1013/1018, poison-site dependency closure with zero missing items --
+#   the five sandbox-missing items Arch_UpAbl_30/UpAblP2FeedSumLe/UpAblP6_Package/UpReqPadeConstUnify/_twc_probe are outside the poison-site closure,
+#   the "missing-item supplemental compile" clause was not triggered this wave). Cast ledger = rocq93_work_20261101/_main93_poison_cast_20261105/ (gen1/gen2 twin directories,
+#   per-stem isolated subdirectories block sibling poison-generation cross-contamination: the B1/B2Time/Fin2 mutual Require faces all resolved from the clean main93 generation, the poison-shape source was a single-line Lia difference, diff assertion passed).
+# Double-build cross-check (SELF-HIT, digest-layer calibration): gen1/gen2 independent second compiles in separate directories gave nine md5s equal item by item (deterministic + path-independent, same verdict as the Set precedent);
+#   gate5 scanned the gen2 products against this list: DIGEST-HIT 9/9 (the UpReqConcSoftmax.vos hit under a .vo registry name shows name_mismatch=true =
+#   a structural note that .vos and .vo are byte-identical, not renamed poisoning); a full scan of the clean main93 sandbox gave 0 hits (anti-self-bite assertion).
+# 9.3 regenerable face (measured): all five poison-site stems compile (UpReqConcSoftmax/B1/B2Time/Fin2/IrrationalCriterion) --
+#   the Set repo §C 18-slot outstanding debt (awaiting the Main 9.3 closure) is fully settled by this list: all 25 slots across the nine (stem,ext) forms regenerated.
+# Usage/discipline as in v2: all 32-char lowercase md5; text after an inline # is a comment; verbatim bulk deletion from this list is forbidden (VO-RES-CLEAN).
+# ===== §A 25 original v2 entries (9.1 bytes, kept verbatim, provenance v2 header) =====
 43f866e8f029d437f386eafbd09de766  UpReqConcSoftmax.vo  # V1 P2世界毒代
 2ec90e4669dad904ca655d0936e33900  UpReqConcB1.vo  # V1 P2世界毒代
 1f2764e67840d52fce408faac252f25b  UpReqConcFin2.vo  # V1 P2世界毒代
@@ -39,7 +39,7 @@ f2e308be347c71cd00e471cf13a3913c  UpReqConcFin2.vo  # V2 _ttoyre2_sbx x1 09-21 0
 b0b1da8c840ed321c3636d2ff6b99f18  UpReqConcB2Time.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测
 b4d81e94e14e1ba966ba7d047066a231  UpReqConcSoftmax.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测
 c1316e3e30875b2cf84e81db0aa6e862  UpReqIrrationalCriterion.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测（Lra+Psatz）
-# ===== §B 9.3 重产条目（Rocq 9.3.0·世界 main93·毒形 Lia→Lia Lra·双建互证 gen1==gen2·20261105）=====
+# ===== §B 9.3 regenerated entries (Rocq 9.3.0, world main93, poison shape Lia->Lia Lra, double-build cross-checked gen1==gen2, 20261105) =====
 b90a29726b8a458f33a2c48c4a3fbee8  UpReqConcSoftmax.vo  # V3-93 Main源L12毒形·对应槽 43f866e8/62424b1d/a96caf1f＋b4d81e94(.vos)；.vos 与 .vo 字节全同（件内无 Qed 不透明体）→ 同 digest，.vos 命中将显 name_mismatch（结构性·非改名投毒）
 8abfaa610d756bebc54da2141a6a26d3  UpReqConcB1.vo  # V3-93 Main源L66毒形·对应槽 2ec90e4e/ab60a8a5
 eb11a02ca613acb272eb29da752baff8  UpReqConcB1.vos  # V3-93 同源 -vos 桩·对应槽 5a88df60
@@ -48,4 +48,4 @@ fb2e38fc398336de9ffa9eb48426010a  UpReqConcB2Time.vo  # V3-93 Main源L87毒形·
 80efaec4820e6d211ee341e3e914c3d8  UpReqConcFin2.vo  # V3-93 Main源L12毒形·对应槽 1f2764e6/7b4e5172/d796014c/dd828aad/fede91bf/851b378c/71486d58/cc534a06/92e63aa4/181ecbba/f2e308be（11 槽·v2 无 .vos 槽）
 76c12f2583feb438ad6521913e75d28b  UpReqIrrationalCriterion.vo  # V3-93 Main源L44毒形·对应槽 7881659c/aed88e25
 2b89d1a85a504d9aeb7b8954fc89bfae  UpReqIrrationalCriterion.vos  # V3-93 同源 -vos 桩（.vos≠.vo 本件字节异）·对应槽 c1316e3e
-# ===== §C 本波未再生槽：无——25 槽九形全额清偿（Set 仓 §C 18 槽挂账候 Main 9.3 闭包之债·本单收讫）=====
+# ===== §C slots not regenerated this wave: none -- all 25 slots across the nine forms fully settled (the Set repo §C 18-slot debt awaiting the Main 9.3 closure is received in full by this list) =====

@@ -1,5 +1,7 @@
 # CW220 合并轨源级改名清单（rename-ledger-20260910）
 
+> Historical planning record (dated in filename). Preserved verbatim for provenance; current certification facts live in README.md section 2.
+
 - 席位：合并轨命名空间修复席；裁决：**源级改名方案**（新库侧改名，基座/仓库已入库源只读为正名）
 - 撞名宇宙：主会话 /tmp/collisions.txt 100 名（vs 基座）∪ 合并 34 模块闸门集 62 名（含模块互撞、Inductive 构造子 tid_refl/nle_n/nle_S/IOU_*、Record 投影/构造器）= **150 名去重**
 - 改名落盘：attn 工作区 38 个 .v（定义+文件内引用+跨文件消费者重绑定；CW220_Extensions.v 内联副本同步）

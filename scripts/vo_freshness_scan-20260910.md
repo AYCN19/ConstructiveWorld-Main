@@ -1,5 +1,7 @@
 # vo_freshness_scan — 两树信任缓存快扫（2026-09-10 深夜，主会话亲执）
 
+> Historical planning record (dated in filename). Preserved verbatim for provenance; current certification facts live in README.md section 2.
+
 > 用户裁决背景：全树编译须走信任缓存（219/220 版），禁全量重编（全量 ≥95min）。本扫描为编译调度底账。
 
 ## 一、仓库树（ConstructiveWorld_vo/，order.txt 全清单）

@@ -1,5 +1,7 @@
 # 220 单文件版阻塞图谱（模块化拆分的依据）
 
+> Historical planning record (the filename carries the version number 220, not a date; the as-of date 2026-09-08 is in the body below). Preserved verbatim for provenance; current certification facts live in README.md section 2.
+
 单文件 `releases/CW_ConstructiveWorld_220.v`（129,396 行）截至 2026-09-08 的阻塞点：
 
 | # | 位置 | 阻塞 | 模块级归属 | 模块化后状态 |

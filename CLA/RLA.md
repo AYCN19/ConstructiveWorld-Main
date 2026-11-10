@@ -1,159 +1,159 @@
-# ConstructiveWorld-Main 运行时许可协议 (Runtime License Agreement)
+# ConstructiveWorld-Main Runtime License Agreement
 
-**协议编号：** CW-RLA-_______
-**版本：** v1.0
-**起草日期：** 2026-07-10
+**Agreement No.:** CW-RLA-_______
+**Version:** v1.0
+**Drafting Date:** 2026-07-10
 
 ---
 
-## 协议双方
+## Parties
 
-| 角色 | 名称 | 联系方式 |
+| Role | Name | Contact |
 |------|------|---------|
 | **授权方 (Licensor)** | 王宝军 | 168888@live.cn |
-| **被授权方 (Licensee)** | _________________________ | _________________________ |
+| **Licensee** | _________________________ | _________________________ |
 
 ---
 
-## 鉴于条款
+## Recitals
 
-- **A.** 授权方是 ConstructiveWorld-Main 构造世界模块化形式化库（"本系统"）的版权持有者。
-- **B.** 本系统的 源码以 Apache License 2.0 在 https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main 公开。
-- **C.** 本系统源码与 .vo 信任缓存按 Apache License 2.0 自由使用；授权方未来从模块提取并发布的可执行运行时组件不适用 Apache 2.0 商业授权。
-- **D.** 被授权方希望获得运行时组件的使用授权。
+- **A.** The Licensor is the copyright holder of ConstructiveWorld-Main, the Constructive World modular formalization library (the "System").
+- **B.** The source code of the System is published at https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main under the Apache License 2.0.
+- **C.** The source code of the System and the .vo trust cache are freely usable under the Apache License 2.0; the commercial-use authorization of Apache 2.0 does not apply to the executable Runtime Components that the Licensor extracts from the modules and releases in the future.
+- **D.** The Licensee wishes to obtain a license to use the Runtime Components.
 
-**边界声明（Boundary Statement·2026-10-06）** Apache-2.0 主许可已授予任何人对公开源面（含其提取产物 .ml/.mli）的提取、使用与商业化权利；本协议（RLA 轨）的可授权范围限于：① 官方受支持/带担保的分发与维护服务；② 未来非公开资产与增量技术服务。本协议不构成对已公开源面的追溯性商业化限制。
+**Boundary Statement (2026-10-06)** The Apache-2.0 master license already grants every recipient the right to extract from, use, and commercialize the public source face, including its extraction products (.ml/.mli); the licensable scope of this Agreement (the RLA track) is limited to: (i) officially supported and warranted distribution and maintenance services; and (ii) future non-public assets and incremental technical services. This Agreement imposes no retroactive commercial restriction on the public source face.
 
-*（Boundary Statement: the Apache-2.0 master license already grants every recipient the right to extract from, use, and commercialize the public source face, including its extraction products (.ml/.mli). The RLA track only covers (i) officially supported and warranted distribution and maintenance services and (ii) future non-public assets and incremental technical services; it imposes no retroactive commercial restriction on the public source face.）*
+*(Boundary Statement: the Apache-2.0 master license already grants every recipient the right to extract from, use, and commercialize the public source face, including its extraction products (.ml/.mli). The RLA track only covers (i) officially supported and warranted distribution and maintenance services and (ii) future non-public assets and incremental technical services; it imposes no retroactive commercial restriction on the public source face.)*
 
 ---
 
-## 第 1 条 — 定义
+## Article 1 — Definitions
 
-**1.1 "运行时组件" (Runtime Components)** 指授权方未来从本系统模块经 Coq Extraction 提取并发布的 OCaml 可执行检查器及其配套编译产物与数据文件。**截至本协议模板发布之日，暂无已发布组件；首次提取发布时在此表登记。**
+**1.1 "Runtime Components"** means the OCaml executable checkers that the Licensor extracts from the modules of the System via Coq Extraction and releases in the future, together with their accompanying compiled artifacts and data files. **As of the date of publication of this Agreement template, no component has been released; components will be registered in this table upon the first extraction release.**
 
-| 组件 | 类型 | 说明 |
+| Component | Type | Description |
 |------|------|------|
-| （暂无已发布组件） | Coq Extraction 提取的 OCaml 可执行检查器 | 首次提取发布时登记（如模块级反射检查器可执行文件） |
+| (No component released yet) | OCaml executable checker extracted via Coq Extraction | To be registered upon the first extraction release (e.g., a module-level reflective checker executable) |
 
-**状态登记（2026-10-06）：** 本仓现存 Coq Extraction 提取产物（.ml/.mli）属公开审计对象，按源件许可（Apache License 2.0）随源码发布，不属于运行时组件；本表保持为空，直至首次单独发布可执行运行时组件时在此登记。
+**Status record (2026-10-06):** The extraction products of Coq Extraction (.ml/.mli) currently present in this repository are objects of public audit; they are released together with the source code under the license of the source files (Apache License 2.0) and are not Runtime Components. This table remains empty until an executable Runtime Component is first released separately, at which time it will be registered here.
 
-**注：** `ConstructiveWorld_vo/` 内的 .vo 信任缓存为本系统开发依赖，随 Apache License 2.0 自由使用，不属于运行时组件，不受本协议约束。
+**Note:** The .vo trust cache in `ConstructiveWorld_vo/` is a development dependency of the System; it is freely usable under the Apache License 2.0, is not a Runtime Component, and is not governed by this Agreement.
 
-**1.2 "本系统" (The System)** 指 ConstructiveWorld-Main 构造世界模块化形式化库的全部软件组件，包括公开源码和运行时组件。
+**1.2 "The System"** means all software components of ConstructiveWorld-Main, the Constructive World modular formalization library, including the public source code and the Runtime Components.
 
-**1.3 "非商业用途"** 指个人学习、学术研究、开源项目协作，不涉及直接或间接的商业收入。
+**1.3 "Non-Commercial Use"** means personal study, academic research, and collaboration on open-source projects, not involving any direct or indirect commercial revenue.
 
-**1.4 "商业用途"** 指除第 1.3 条外的所有用途，包括但不限于：将本系统嵌入商业产品、作为云服务提供、内部使用的生产环境。
+**1.4 "Commercial Use"** means all uses other than those in Section 1.3, including but not limited to: embedding the System in commercial products, offering it as a cloud service, and internal use in production environments.
 
 ---
 
-## 第 2 条 — 许可授予
+## Article 2 — Grant of License
 
-**2.1 许可范围。** 授权方授予被授权方一项非独占、不可转让、不可再许可、全球范围内的许可，仅限在本系统中加载和调用运行时组件。
+**2.1 Scope of License.** The Licensor grants the Licensee a non-exclusive, non-transferable, non-sublicensable, worldwide license solely to load and invoke the Runtime Components within the System.
 
-**2.2 用途限制。** 许可范围根据被授权方的类型而定：
+**2.2 Limitations on Use.** The scope of the license depends on the type of Licensee:
 
-| 类型 | 费用 | 商业使用 | 再分发 | 逆向工程 | 协议版本 |
+| Type | Fee | Commercial use | Redistribution | Reverse engineering | Agreement version |
 |------|------|---------|--------|---------|---------|
-| 个人/学术 | 免费 | ❌ | ❌ | ❌ | RLA §1-3 |
-| 开源项目 | 免费 | ❌ | ❌ | ❌ | RLA §1-3 |
-| 商业公司 | 按商业许可 | ✅ | ❌ | ❌ | 商业许可 + RLA |
+| Individual/Academic | Free of charge | ❌ | ❌ | ❌ | RLA §1-3 |
+| Open-source project | Free of charge | ❌ | ❌ | ❌ | RLA §1-3 |
+| Commercial company | Per the commercial license | ✅ | ❌ | ❌ | Commercial license + RLA |
 
-**2.3 保留权利。** 授权方保留未在本协议中明确授予的全部权利。
-
----
-
-## 第 3 条 — 限制 (Restrictions)
-
-被授权方不得：
-
-- **(a)** 对运行时组件进行逆向工程、反编译、反汇编，或试图以任何方式推导其源代码；
-- **(b)** 从运行时组件中提取、复制、导出种子数据、语义坐标或任何内部数据；
-- **(c)** 将运行时组件与修改后的本系统源码配合使用；
-- **(d)** 以任何形式再分发、出租、租赁、出借或转让运行时组件；
-- **(e)** 将运行时组件用于本系统之外的任何其他软件或系统；
-- **(f)** 移除或修改运行时组件上的任何版权声明或标识。
+**2.3 Reservation of Rights.** The Licensor reserves all rights not expressly granted in this Agreement.
 
 ---
 
-## 第 4 条 — 期限与终止
+## Article 3 — Restrictions
 
-**4.1 期限。** 本协议自被授权方获取运行时组件之日起生效，有效期为一年，到期自动续期，除非任一方提前 30 日书面通知终止。
+The Licensee shall not:
 
-**4.2 自动终止。** 被授权方违反第 3 条中任一条款，本协议立即自动终止，无需授权方通知，无宽限期。
-
-**4.3 终止的效力。** 协议终止后，被授权方必须：
-- (a) 立即停止使用运行时组件；
-- (b) 销毁全部运行时组件副本（包括备份）；
-- (c) 书面确认已完成销毁。
-
-**4.4 存续。** 第 3 条（限制）和第 7 条（免责）在本协议终止后继续有效。
+- **(a)** reverse engineer, decompile, or disassemble the Runtime Components, or attempt in any manner to derive their source code;
+- **(b)** extract, copy, or export seed data, semantic coordinates, or any internal data from the Runtime Components;
+- **(c)** use the Runtime Components together with modified source code of the System;
+- **(d)** redistribute, rent, lease, lend, or transfer the Runtime Components in any form;
+- **(e)** use the Runtime Components in any software or system other than the System;
+- **(f)** remove or modify any copyright notice or marking on the Runtime Components.
 
 ---
 
-## 第 5 条 — 更新与支持
+## Article 4 — Term and Termination
 
-**5.1 更新。** 授权方可能不时发布运行时组件的更新版本。被授权方在本协议有效期内有权获取此类更新。
+**4.1 Term.** This Agreement takes effect on the date the Licensee obtains the Runtime Components and has a term of one year, renewing automatically upon expiry unless either party gives written notice of termination 30 days in advance.
 
-**5.2 支持。** 本协议不包含技术支持义务。技术支持、定制开发和故障排查需另行签订服务协议。
+**4.2 Automatic Termination.** If the Licensee breaches any provision of Article 3, this Agreement terminates immediately and automatically, without notice from the Licensor and without any grace period.
 
----
+**4.3 Effect of Termination.** Upon termination of this Agreement, the Licensee must:
+- (a) immediately cease using the Runtime Components;
+- (b) destroy all copies of the Runtime Components (including backups);
+- (c) confirm in writing that the destruction has been completed.
 
-## 第 6 条 — 知识产权
-
-**6.1 所有权。** 运行时组件的全部知识产权（包括但不限于著作权、专利权、商业秘密）归授权方所有。本协议不转让任何知识产权。
-
-**6.2 反馈。** 被授权方对运行时组件的反馈、建议或改进建议，授权方有权不受限制地使用，无需承担任何义务。
-
----
-
-## 第 7 条 — 免责与责任限制
-
-**7.1 免责。** 运行时组件按"现状"提供，授权方不提供任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和不侵权的保证。
-
-**7.2 责任限制。** 授权方在任何情况下均不对因使用或无法使用运行时组件而产生的任何间接、附带、特殊或后果性损害承担责任。
+**4.4 Survival.** Article 3 (Restrictions) and Article 7 (Disclaimer) survive the termination of this Agreement.
 
 ---
 
-## 第 8 条 — 一般条款
+## Article 5 — Updates and Support
 
-**8.1 完整协议。** 本协议构成双方之间关于运行时组件的完整协议，取代之前的任何沟通。
+**5.1 Updates.** The Licensor may release updated versions of the Runtime Components from time to time. The Licensee is entitled to obtain such updates during the term of this Agreement.
 
-**8.2 可分割性。** 如果本协议的任何条款被认定为无效或不可执行，其余条款仍然有效。
-
-**8.3 管辖法律。** 本协议受中华人民共和国法律管辖。
-
-**8.4 争议解决。** 因本协议引起的争议，双方应友好协商解决；协商不成的，提交中国国际经济贸易仲裁委员会 (CIETAC) 按届时有效的仲裁规则仲裁。
+**5.2 Support.** This Agreement does not include any technical support obligation. Technical support, custom development, and troubleshooting require a separate service agreement.
 
 ---
 
-## 签署页
+## Article 6 — Intellectual Property
 
-| 授权方 (Licensor) | 被授权方 (Licensee) |
+**6.1 Ownership.** All intellectual property rights in the Runtime Components (including but not limited to copyright, patent rights, and trade secrets) belong to the Licensor. This Agreement does not transfer any intellectual property rights.
+
+**6.2 Feedback.** The Licensor is entitled to use, without restriction and without any obligation, any feedback, suggestions, or proposals for improvement provided by the Licensee regarding the Runtime Components.
+
+---
+
+## Article 7 — Disclaimer and Limitation of Liability
+
+**7.1 Disclaimer.** The Runtime Components are provided "AS IS", and the Licensor makes no warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.
+
+**7.2 Limitation of Liability.** In no event shall the Licensor be liable for any indirect, incidental, special, or consequential damages arising from the use of or inability to use the Runtime Components.
+
+---
+
+## Article 8 — General Provisions
+
+**8.1 Entire Agreement.** This Agreement constitutes the entire agreement between the parties with respect to the Runtime Components and supersedes any prior communications.
+
+**8.2 Severability.** If any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall remain in effect.
+
+**8.3 Governing Law.** This Agreement is governed by the laws of the People's Republic of China.
+
+**8.4 Dispute Resolution.** The parties shall resolve any dispute arising out of this Agreement through amicable negotiation; if negotiation fails, the dispute shall be submitted to the China International Economic and Trade Arbitration Commission (CIETAC) for arbitration in accordance with its arbitration rules in effect at that time.
+
+---
+
+## Signature Page
+
+| Licensor | Licensee |
 |-------------------|-------------------|
 | 王宝军 | _________________________ |
-| 签字：________________ | 签字：________________ |
-| 职务：________________ | 职务：________________ |
-| 日期：________________ | 日期：________________ |
-| 用途类型：□ 个人/学术 □ 开源项目 □ 商业公司 | 统一社会信用代码/注册号：________________ |
+| Signature: ________________ | Signature: ________________ |
+| Title: ________________ | Title: ________________ |
+| Date: ________________ | Date: ________________ |
+| Type of use: □ Individual/Academic □ Open-source project □ Commercial company | Unified Social Credit Code / Registration No.: ________________ |
 
 ---
 
-## 附件 A — 运行时组件获取登记表
+## Annex A — Runtime Components Acquisition Registration Form
 
-*（被授权方填写后发送至 168888@live.cn，授权方确认后提供下载链接）*
+*(To be completed by the Licensee and sent to 168888@live.cn; the Licensor will provide a download link upon confirmation.)*
 
-| 字段 | 内容 |
+| Field | Content |
 |------|------|
-| 申请方名称 | |
-| 联系人 | |
-| 邮箱 | |
-| 用途类型 | □ 个人/学术 □ 开源项目 □ 商业公司 |
-| 项目/产品名称 | |
-| 预计用户数 | |
-| 是否需要商业许可 | □ 是 □ 否 |
-| 备注 | |
+| Applicant name | |
+| Contact person | |
+| Email | |
+| Type of use | □ Individual/Academic □ Open-source project □ Commercial company |
+| Project/product name | |
+| Estimated number of users | |
+| Commercial license required | □ Yes □ No |
+| Remarks | |
 
 
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# ConstructiveWorld220 模块树编译（依赖拓扑序；基座走信任缓存 219.vo）
+# ConstructiveWorld220 module-tree build (dependency topological order; base served through the 219.vo trust cache)
 cd "$(dirname "$0")"
 C="C:\Rocq-Platform~9.1~2026.01\bin\coqc.exe"
 fail=0

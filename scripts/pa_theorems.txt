@@ -1,25 +1,25 @@
-# pa_theorems.txt — PA 全量批审计定理清单（pa_audit.sh 输入，一行一定理：模块:名字）
-# 谱系（2026-09-11 全量重建，PA 审计席续）：
+# pa_theorems.txt -- PA full-batch audit theorem list (input to pa_audit.sh; one theorem per line: module:name)
+# Lineage (full rebuild 2026-09-11, continued by the PA audit pass):
 #   [P1-81]   probe_full.v 81 条基（承 演变\.ablation\sc2_parallel\sL_assumptions\probe_full.v，基态198 口径）；
-#   [P1-EXT]  论文1/2 头条族前席补录 18 条（rlhf_optimal/policy_iter 族、ppo 分解族、fep 正名件等）；
-#   [P1-THM]  论文1 定理 4.x/5.x/6.x/7.x 头条面补全（dpo 恢复族/ppo 单调族/grpo 统计量 + 定理 7.2/7.3
-#             不可去反例（UpExtras219 限定名）+ 定理 5.11 logit 形状族 + 定理 4.8 诚实接口放电族 +
-#             NoDup 均匀均值三件（UpGRPO219 限定名）+ fep_align）；
-#   [P2-THM]  论文2 定理 4.x-8.x 头条面补全（FEP/Gibbs 等式、max-ent、ELBO、稳态、TV 族、eviction 族、minp 非负）；
-#   [P2-MOD]  论文2 点名模块件（UpCS C-S 系/UpQKBound qk 界/UpArchAttn 实收敛/UpEvictId 逐出/UpKVDrift 漂移界）；
-#   [P2-REAL] 论文2 Real 层复刻簇（§Real 复刻清单点名件 + 温度两极/对偶，落位 CW220_Extensions/UpDebtGibbsT）；
-#   [P3/P4]   论文3 e_sq/o_sq 展开；论文4 显式迭代预算定理 4.10 与梯度单调定理 4.7；
-#   [REQ]     req 系 setoid 签名旗舰件 27 条（前席已核，全过模块级探针）。
-# 命名漂移（论文-库，进报告漂移清单不进本清单）：
-#   tv_doeblin_contraction/tv_doeblin_iter（论文2 定理 5.10，UpTVReal 存档件未并入模块化树）；
-#   req_step_kl_eta_bound（论文1 §4.3.2）；r2_step_kl_weighted（论文1 UpReqAlign3 六件名）；
-#   rppo_align_objective_advantage_decomp（论文1 快照锚，仅 attn 在盘）；
-#   attention_minimizes_free_energy（论文2 概念名，正名 req_attention_minimizes_free_energy_unique 已入清单）；
-#   real_kl_sum_decomp（论文2 §Real 复刻清单定理 4.1 侧名）——基座 .v 注释幻影（L43735 重复注释头嵌套未闭，
-#     定理文本被吞、.vo 零导出，承 probe_full.v 历史注记同判），非真实声明不入清单，漂移清单逐条在案。
-# 注：UpExtras219./UpGRPO219./PropositionConvergenceCore. 为基座内子模块限定名（Require Import 后合法可 Print
-#     Assumptions；前席清单曾以平名 boltzmann_factor_pos 探针致 219 模块级探针中断，本版已改限定名）。
-# ---- [P1-81] 基座 CW_ConstructiveWorld_219 ----
+#   [P1-EXT]  18 entries added by earlier passes for the paper-1/2 headline families (rlhf_optimal/policy_iter family, ppo decomposition family, fep renamed items, etc.);
+#   [P1-THM]  paper-1 theorem 4.x/5.x/6.x/7.x headline completion (dpo recovery family / ppo monotonicity family / grpo statistics + theorems 7.2/7.3
+#             irremovable counterexamples (UpExtras219 qualified names) + theorem 5.11 logit shape family + theorem 4.8 honest-interface discharge family +
+#             three NoDup uniform-mean items (UpGRPO219 qualified names) + fep_align);
+#   [P2-THM]  paper-2 theorem 4.x-8.x headline completion (FEP/Gibbs equalities, max-ent, ELBO, steady state, TV family, eviction family, minp nonneg);
+#   [P2-MOD]  paper-2 named module items (UpCS C-S family / UpQKBound qk bound / UpArchAttn real convergence / UpEvictId eviction / UpKVDrift drift bound);
+#   [P2-REAL] paper-2 Real-layer replication cluster (items named in the §Real replication list + temperature two extremes/duality, located in CW220_Extensions/UpDebtGibbsT);
+#   [P3/P4]   paper-3 e_sq/o_sq expansions; paper-4 explicit iteration budget theorem 4.10 and gradient monotonicity theorem 4.7;
+#   [REQ]     27 req-family setoid-signature headline items (checked by earlier passes, all passing module-level tests).
+# Naming drifts (paper vs library; they go on the report drift list, not into this list):
+#   tv_doeblin_contraction/tv_doeblin_iter (paper-2 theorem 5.10; archived in UpTVReal, not merged into the modular tree);
+#   req_step_kl_eta_bound (paper-1 §4.3.2); r2_step_kl_weighted (paper-1, one of the six UpReqAlign3 names);
+#   rppo_align_objective_advantage_decomp (paper-1 snapshot anchor, on disk only under attn);
+#   attention_minimizes_free_energy (paper-2 conceptual name; the renamed req_attention_minimizes_free_energy_unique is already in this list);
+#   real_kl_sum_decomp (paper-2 §Real replication list theorem 4.1 side name) -- base .v comment phantom (L43735: a duplicated comment header left a nested block unclosed,
+#     swallowing the theorem text and exporting zero .vo; same verdict as the historical probe_full.v note); not a real statement, kept out of this list, recorded item by item on the drift list.
+# Note: UpExtras219./UpGRPO219./PropositionConvergenceCore. are submodule qualified names inside the base module (legal for Print
+#     Assumptions after Require Import; an earlier-pass list probed with the plain name boltzmann_factor_pos, which interrupted the 219 module-level test; this version switched to qualified names).
+# ---- [P1-81] base CW_ConstructiveWorld_219 ----
 CW_ConstructiveWorld_219:free_energy_kl_decomp
 CW_ConstructiveWorld_219:gibbs_inequality
 CW_ConstructiveWorld_219:min_free_energy_is_boltzmann
@@ -101,7 +101,7 @@ CW_ConstructiveWorld_219:gradient_zero_neg_entropy_truth
 CW_ConstructiveWorld_219:gradient_zero_unique
 CW_ConstructiveWorld_219:unique_attractor
 CW_ConstructiveWorld_219:attractor_converges_unique_truth
-# ---- [P1-EXT] 论文1/2 头条族前席补录 ----
+# ---- [P1-EXT] paper-1/2 headline families, earlier-pass additions ----
 CW_ConstructiveWorld_219:rlhf_optimal
 CW_ConstructiveWorld_219:rlhf_optimal_unique
 CW_ConstructiveWorld_219:rlhf_optimal_value
@@ -120,7 +120,7 @@ CW_ConstructiveWorld_219:real_step_kl_eta_bound_eps
 CW_ConstructiveWorld_219:dpo_optimal
 CW_ConstructiveWorld_219:PropositionConvergenceCore.boltzmann_factor_pos
 CW_ConstructiveWorld_219:attention_is_gibbs
-# ---- [P1-THM] 论文1 头条面补全 ----
+# ---- [P1-THM] paper-1 headline completion ----
 CW_ConstructiveWorld_219:dpo_loss_at_pi_star
 CW_ConstructiveWorld_219:dpo_reward_is_implicit
 CW_ConstructiveWorld_219:dpo_reward_recovers_up_to_baseline
@@ -149,7 +149,7 @@ CW_ConstructiveWorld_219:UpGRPO219.grpo_count_one
 CW_ConstructiveWorld_219:UpGRPO219.grpo_indicator_sum_one
 CW_ConstructiveWorld_219:UpGRPO219.grpo_uniform_mass
 CW_ConstructiveWorld_219:fep_align
-# ---- [P2-THM] 论文2 头条面补全 ----
+# ---- [P2-THM] paper-2 headline completion ----
 CW_ConstructiveWorld_219:gibbs_equality
 CW_ConstructiveWorld_219:free_energy_min_unique
 CW_ConstructiveWorld_219:max_entropy_is_boltzmann
@@ -166,7 +166,7 @@ CW_ConstructiveWorld_219:eviction_steady_deviation
 CW_ConstructiveWorld_219:eviction_partition_monotone
 CW_ConstructiveWorld_219:eviction_partition_le_full
 CW_ConstructiveWorld_219:minp_markov_kernel_nonneg
-# ---- [P2-MOD] 论文2 点名模块件 ----
+# ---- [P2-MOD] paper-2 named module items ----
 UpCS:real_cauchy_schwarz
 UpCS:real_cauchy_schwarz_lt
 UpCS:real_cauchy_schwarz_reversed_false
@@ -177,7 +177,7 @@ UpArchAttn:attention_iterate_converges_real
 UpEvictId:eviction_db_breaking_zero
 UpKVDrift:kv_drift_bound
 UpKVDrift:kv_drift_bound_tv
-# ---- [P2-REAL] 论文2 Real 层复刻簇 ----
+# ---- [P2-REAL] paper-2 Real-layer replication cluster ----
 CW_ConstructiveWorld_219:real_attention_is_gibbs
 CW_ConstructiveWorld_219:real_steady_state_boltzmann_attn
 CW_ConstructiveWorld_219:real_top_k_majorization
@@ -187,12 +187,12 @@ CW_ConstructiveWorld_219:real_minp_markov_kernel_normalized
 CW220_Extensions:temp_window_T_infty
 CW220_Extensions:real_scale_temp_duality
 UpDebtGibbsT:real_attention_is_gibbs_temp
-# ---- [P3/P4] 论文3/4 补全 ----
+# ---- [P3/P4] paper-3/4 completion ----
 CW_ConstructiveWorld_219:e_sq_expand
 CW_ConstructiveWorld_219:o_sq_expand
 CW_ConstructiveWorld_219:iterate_cauchy_explicit_N
 CW_ConstructiveWorld_219:iterate_grad_abs_mono
-# ---- [REQ] req 系 setoid 签名旗舰件 ----
+# ---- [REQ] req-family setoid-signature headline items ----
 UpReqAlign:req_rlhf_optimal
 UpReqAlign:req_rlhf_optimal_unique
 UpReqAlign:req_policy_iter_kl_geom_step

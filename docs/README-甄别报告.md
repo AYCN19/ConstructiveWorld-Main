@@ -1,5 +1,7 @@
 # 已合并存档 — 219 已收录模块甄别报告（2026-09-08）
 
+> Historical planning record (the filename carries no date; the report date 2026-09-08 is in the title line). Preserved verbatim for provenance; current certification facts live in README.md section 2.
+
 **甄别方法**：Python 声明级终审（模块顶层声明名 ∩ 219 源声明集，CR 清洗 + 全量正则）。
 **教训**：初轮 shell comm 因 CRLF/CR 残留与 locale 全体失敏报假零——工具链交叉验证必做（本次由 boltzmann_dist_attn 单例矛盾揪出）。
 

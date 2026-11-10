@@ -1,38 +1,38 @@
 #!/bin/bash
-# repair_tear.sh v2 — digest-aware 撕裂自愈（E-STAGING-RT2 升级；接口兼容 v1/9b42d46）
+# repair_tear.sh v2 — digest-aware tear self-repair (E-STAGING-RT2 upgrade; interface compatible with v1/9b42d46)
 #
-# 判据①（v1 保留）：消费方 .vo mtime < 其 Require 依赖 .vo mtime ⟹ 撕裂。
-# v1 盲区（P9/HC2 卡实证）：mtime 正常但 .vo 内嵌 digest 断代——上游重编后消费方 mtime
-#   被 touch/播种回填，或上游 .vo 缺失待重编（重编后 digest 必变），CI 三轮漏网
-#   （UpReqEntropyDeficitTemp 形态）。v2 增补双判据：
-# 判据②（结构性断代，零成本）：dep .v 在树而 dep .vo 缺失、消费方 .vo 却在 ⟹ build
-#   重编 dep 后 digest 必新 ⟹ 消费方必断代，删。
-# 判据③（digest 冒烟，秒级/件）：高嫌疑集（历史 coqchk 撕裂同族=温度/桥接/对齐/Gibbs/
-#   TVAbs 族）单件 `coqchk -silent -o`（全闭包；实测捕获 "Inconsistent assumptions"。
-#   -norec 在 Rocq 9.0.1 内部崩溃 Invalid_argument，禁用）。输出含撕裂签名 ⟹ 删；
-#   EXIT!=0 无签名=工具缺席/环境故障 ⟹ 保守保全（run #53 教训，139 件误删复盘）。
-# 伞件白名单（HC2 判别式落地）：源 `grep -cE "^(Definition|Fixpoint|Theorem|Lemma|
-#   Corollary|Instance)"`=0 的伞件（如 CW_ConstructiveWorld_219 薄壳：小体积+零 cst
-#   属结构必然）标记 UMBRELLA 豁免内容猜疑——删除只认 digest 阳性证据，绝不安尺寸/零
-#   cst 单罪定断。
-# 级联：本轮已删件的 Require 消费方一并删（重编后 digest 必断代），单轮 build 全愈。
-# 坑位遵守（LC/HC2 卡）：依赖名提取用字面 grep（本环境 awk 字符类静默零输出）；
-#   _CoqProject 与比对一律 tr -d '\r'（本树实测混合行尾，CRLF 行 v1 静默跳过）。
-# 接口（兼容 CI workflow coq.yml build 步）：build 前调用、输出 TEAR 清单、零交互、
-#   恒 exit 0。coqchk 取 PATH，缺席兜底 9.1 全路径（run #53 教训；2026-09-15 全库换装 9.1）；可 COQCHK=覆盖。
-# 环境开关（默认全关，CI 默认行为=删；不设即与 v1 语义兼容）：
-#   TRT2_DRYRUN=1    只报告不删（诊断/验收用）
-#   TRT2_SUSPECT=RE  覆盖高嫌疑集正则（对 .v 基名整体匹配，-i）
-#   COQCHK=路径      覆盖 coqchk 可执行
+# Criterion 1 (kept from v1): consumer .vo mtime < the mtime of its Require dependency .vo => tear.
+# v1 blind spot (P9/HC2 card evidence): mtime looks normal but the digest embedded in the .vo is stale -- after an upstream rebuild the consumer mtime
+#   was backfilled by touch/seeding, or the upstream .vo was missing pending rebuild (its digest necessarily changes on rebuild); three CI rounds missed it
+#   (UpReqEntropyDeficitTemp shape). v2 adds two further criteria:
+# Criterion 2 (structural staleness, zero cost): dep .v in tree while dep .vo missing, yet the consumer .vo present => build
+#   recompiles dep with a necessarily new digest => the consumer is necessarily stale; delete.
+# Criterion 3 (digest smoke test, seconds per module): high-suspicion set (families with historical coqchk tears =
+#   temperature/bridge/alignment/Gibbs/TVAbs) one `coqchk -silent -o` per module (full closure; measured to catch
+#   "Inconsistent assumptions"; -norec crashes Rocq 9.0.1 internally with Invalid_argument, forbidden). Tear signature
+#   in output => delete; EXIT!=0 without a signature = tool absent/environment fault => conservatively keep (run #53 lesson, postmortem of 139 wrongly deleted files).
+# Umbrella whitelist (HC2 discriminant): umbrella files whose source `grep -cE "^(Definition|Fixpoint|Theorem|Lemma|
+#   Corollary|Instance)"`=0 (e.g. the CW_ConstructiveWorld_219 thin shell: small size + zero cst is structural)
+#   are marked UMBRELLA, exempt from content suspicion -- deletion follows positive digest evidence only, never size/zero-
+#   cst alone as a sole verdict.
+# Cascade: Require consumers of anything deleted this round are deleted too (their digest is necessarily stale after rebuild); one build round fully heals.
+# Pitfall compliance (LC/HC2 cards): dependency names extracted with literal grep (awk character classes silently
+#   output nothing in this environment); _CoqProject and comparisons always tr -d '\r' (measured mixed line endings here; v1 silently skipped CRLF lines).
+# Interface (compatible with the CI workflow coq.yml build step): invoked before build, prints the TEAR list, zero interaction,
+#   always exit 0. coqchk comes from PATH, falling back to the 9.1 full path when absent (run #53 lesson; 2026-09-15 whole-repo retarget to 9.1); COQCHK= overrides.
+# Environment switches (all off by default; CI default behavior = delete; unset means v1-compatible semantics):
+#   TRT2_DRYRUN=1    report only, delete nothing (diagnosis/acceptance)
+#   TRT2_SUSPECT=RE  override the high-suspicion-set regex (whole match against the .v base name, -i)
+#   COQCHK=path      override the coqchk executable
 cd "$(dirname "$0")"
 DRYRUN="${TRT2_DRYRUN:-0}"
-# RT3 回归修正（E-STAGING-RT3）：默认族名子串匹配 .*族.*。原默认锚定 ^(...)$ 整体匹配
-#   使真实族名（UpReqEntropyDeficitTemp/UpReqTVAbsEps 等含族词的基名）零命中，
-#   判据③ digest 冒烟在默认 CI 环境沦为死代码（沙箱 TTempFam 实证：纯 digest 撕裂 0 感知）。
+# RT3 regression fix (E-STAGING-RT3): the default is family-name substring matching, .*<family-token>.*; the original default
+#   anchored ^(...)$ whole matching, which zero-matched real family base names (UpReqEntropyDeficitTemp/UpReqTVAbsEps etc.,
+#   names containing a family word), leaving criterion 3's digest smoke dead code in the default CI environment (sandbox TTempFam evidence: pure digest tear, 0 detections).
 SUSPECT="${TRT2_SUSPECT:-.*Temp.*|.*Bridge.*|.*Gibbs.*|.*Align.*|.*TVAbs.*|.*Entropy.*}"
-# run #53 教训：自托管 runner 的 bash 无 coqchk 于 PATH——裸 `coqchk` 得 EXIT=127。
-# SW2 换装（2026-09-15）：用户级 COQLIB/ROCQLIB 钉 9.0 lib 会压过 9.1 coq_environment.txt，
-# 故随解析出的 coqchk 路径推导导出，保证 bin/lib 同源（E-STAGING-SW2）。
+# run #53 lesson: the self-hosted runner's bash has no coqchk on PATH -- bare `coqchk` got EXIT=127.
+# SW2 retarget (2026-09-15): user-level COQLIB/ROCQLIB pinned to the 9.0 lib overrides the 9.1 coq_environment.txt,
+# so export them derived from the resolved coqchk path, keeping bin/lib same-source (E-STAGING-SW2).
 COQCHK_BIN="${COQCHK:-$(command -v coqchk 2>/dev/null || echo "C:/Rocq-Platform~9.1~2026.01/bin/coqchk.exe")}"
 case "$COQCHK_BIN" in
   */bin/coqchk.exe) export COQLIB ROCQLIB; COQLIB="${COQCHK_BIN%/coqchk.exe}"; COQLIB="${COQLIB%/bin}/lib/coq"; ROCQLIB="$COQLIB" ;;
@@ -41,7 +41,7 @@ esac
 n=0
 declare -A REMOVED
 note() { echo "repair_tear: $*"; }
-remove_vo() { # $1=.v路径 $2=原因标签
+remove_vo() { # $1=.v path  $2=reason tag
   local v="${1%.v}.vo"
   if [ "$DRYRUN" = "1" ]; then
     echo "TEAR($2): $v -> would be removed for rebuild (dryrun)"
@@ -60,7 +60,7 @@ while IFS= read -r f; do
   [ -f "$v" ] || continue
   base="${f%.v}"
   torn=""
-  # ---- 判据②+①：依赖缺失/级联/mtime 倒挂（依赖名提取与 v1 逐字一致）----
+  # ---- criteria 2+1: missing dependency / cascade / mtime inversion (dependency-name extraction verbatim v1) ----
   for dep in $(grep -oE 'Require[[:space:]]+(Import|Export)?[[:space:]]*[A-Za-z0-9_ ]+' "$f" \
       | sed 's/^Require[[:space:]]*//;s/^Import[[:space:]]*//;s/^Export[[:space:]]*//' \
       | tr ' ' '\n' | grep -E '^[A-Za-z0-9_]+$' | sort -u); do
@@ -72,9 +72,9 @@ while IFS= read -r f; do
     fi
     d="$dep.vo"
     if [ -f "$d" ] && [ "$d" -nt "$v" ]; then
-      # v2.2（run #54 复盘）：seed 纯 cp 字母序跨秒边界会让消费方 mtime 早于依赖
-      #   （219 壳最先拷→被 S 系"撕"→判据②级联 128 删）。真断代是分钟/天级差距，
-      #   拷贝噪声 ≤2 秒——差值 ≥5 秒才判撕裂。
+      # v2.2 (run #54 postmortem): alphabetical-order cp seeding across a second boundary can leave the consumer
+      #   mtime older than its dependency (219 shell copied first => "torn" by S-series => criterion-2 cascade, 128 deleted).
+      #   Real staleness is minutes/days apart; copy noise is <=2s -- judge a tear only at a >=5s difference.
       gd=$(stat -c %Y "$d" 2>/dev/null || echo 0)
       gv=$(stat -c %Y "$v" 2>/dev/null || echo 0)
       if [ $((gd - gv)) -ge 5 ]; then
@@ -82,15 +82,15 @@ while IFS= read -r f; do
       fi
     fi
   done
-  # ---- 判据③ digest 冒烟（仅高嫌疑集；便宜判据已撕裂则免烟）----
+  # ---- criterion 3 digest smoke (high-suspicion set only; skipped when a cheap criterion already tore) ----
   if [ -z "$torn" ]; then
     bname="$(basename "$base")"
     if printf '%s' "$bname" | grep -qiE "^($SUSPECT)$"; then
       smokelog="$(mktemp)"
       "$COQCHK_BIN" -silent -o -Q . "" "$base" > "$smokelog" 2>&1
       ec=$?
-      # run #53 事故修正：删除只认撕裂签名；非零退出但无签名=工具缺席/环境故障，
-      # 一律保守保全（旧判据「非零即删」曾把 139 件健康 .vo 全数误删）。
+      # run #53 incident fix: deletion follows tear signatures only; nonzero exit without a signature = tool absent/environment
+      #   fault => always conservatively keep (the old "nonzero => delete" rule once wrongly deleted all 139 healthy .vo files).
       if grep -qE 'Inconsistent assumptions|Anomaly|Fatal' "$smokelog"; then
         torn="digest-smoke:coqchk EXIT=$ec $(head -c 120 "$smokelog" | tr '\n' ' ')"
       elif [ "$ec" -ne 0 ]; then

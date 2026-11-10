@@ -1,249 +1,249 @@
-# ConstructiveWorld-Main 商业许可协议模板
+# ConstructiveWorld-Main Commercial License Agreement Template
 
-**协议编号：** ConstructiveWorld-Main-CLA-_______
-**版本：** v1.0
-**起草日期：** 2026-07-10
-
----
-
-**本协议模板供谈判起点使用。实际版本应根据具体商业条件、适用法律和双方谈判结果进行调整。**
+**Agreement No.:** ConstructiveWorld-Main-CLA-_______
+**Version:** v1.0
+**Drafting Date:** 2026-07-10
 
 ---
 
-## 协议双方
+**This Agreement template is intended as a starting point for negotiation. The actual version should be adjusted according to the specific commercial terms, the applicable law, and the outcome of the negotiations between the parties.**
 
-| 角色 | 名称 | 地址 |
+---
+
+## Parties
+
+| Role | Name | Address |
 |------|------|------|
 | **授权方 (Licensor)** | 王宝军（"授权方"） | — 联系方式：168888@live.cn |
-| **被授权方 (Licensee)** | _________________________（"被授权方"） | _________________________ |
+| **Licensee** | _________________________ ("Licensee") | _________________________ |
 
 ---
 
-## 鉴于条款 (Whereas Clauses)
+## Recitals (Whereas Clauses)
 
-- **A.** 授权方是 ConstructiveWorld-Main 项目（"本软件"）的全部版权持有者，拥有完整的再许可权利。
-- **B.** 本软件已以 Apache License 2.0 在 https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main 公开。
-- **C.** 被授权方希望在 Apache 2.0 标准授权之外，获得额外的权利保障和商业服务。
-- **D.** 双方同意按照本协议条款签署独立的商业许可。
-
----
-
-## 第 1 条 — 定义
-
-**1.1 "本软件" (The Software)** 指 ConstructiveWorld-Main 项目（构造世界模块化形式化库，基座 + 28 模块信任缓存）的全部源代码、目标代码、文档及相关材料，包括但不限于 ConstructiveWorld_Live/ 与 ConstructiveWorld_vo/ 的 .v 源码与 .vo 信任缓存、releases/ 单文件全量版、构建脚本及测试套件。包括授权方在本协议有效期内发布的更新版本。授权方未来经 Coq Extraction 提取发布的可执行运行时组件（如有）按 RLA（CLA/RLA.md）单独保护。
-
-**1.2 "衍生作品" (Derivative Work)** 指基于本软件的修改、改编、扩展，或以本软件为组件的集成产品。被授权方的产品使用本软件所提供的功能时，不视为衍生作品。
-
-**1.3 "内部使用" (Internal Use)** 指被授权方及其关联公司内部的部署和运行，不向第三方提供软件访问或分发拷贝。
-
-**1.4 "商业分发" (Commercial Distribution)** 指以任何形式将本软件或其衍生作品提供给第三方，包括但不限于：嵌入产品中销售、作为 SaaS/云服务提供、以二进制形式分发。
-
-**1.5 "MFL 触发事件" (MFL Trigger Event)** 指授权方与任何第三方签署商业许可协议，其综合条件（价格、权利范围、赔偿条款、技术支持等级等）优于本协议对被授权方的约定 。
-
-**1.6 "互惠贡献" (Reciprocal Contribution)** 指被授权方对 本软件 核心模块的修改、优化或扩展，以源代码形式提交给授权方。
+- **A.** The Licensor is the holder of all copyright in the ConstructiveWorld-Main project (the "Software") and holds full sublicensing rights.
+- **B.** The Software has been published at https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main under the Apache License 2.0.
+- **C.** The Licensee wishes to obtain, in addition to the standard Apache 2.0 grant, additional assurances of rights and commercial services.
+- **D.** The parties agree to enter into a separate commercial license on the terms of this Agreement.
 
 ---
 
-## 第 2 条 — 许可授予 (Grant of License)
+## Article 1 — Definitions
 
-**2.1 许可范围。** 授权方授予被授权方一项非独占、不可转让（除第9.3条规定的合并情形外）、全球范围内的许可：
+**1.1 "The Software"** means all source code, object code, documentation, and related materials of the ConstructiveWorld-Main project (the Constructive World modular formalization library; base + 28 modules, trust cache), including but not limited to the .v source code and .vo trust cache in ConstructiveWorld_Live/ and ConstructiveWorld_vo/, the single-file full release build under releases/, the build scripts, and the test suites. It includes updated versions released by the Licensor during the term of this Agreement. Executable runtime components that the Licensor extracts via Coq Extraction and releases in the future (if any) are protected separately under the RLA (CLA/RLA.md).
 
-| 权利 | Apache 2.0 标准 | 本商业许可 |
+**1.2 "Derivative Work"** means a modification, adaptation, or extension based on the Software, or an integrated product that incorporates the Software as a component. Where a product of the Licensee uses functionality provided by the Software, that product is not deemed a Derivative Work.
+
+**1.3 "Internal Use"** means deployment and operation within the Licensee and its affiliates, without providing third parties with access to the software or distributing copies to them.
+
+**1.4 "Commercial Distribution"** means making the Software or its Derivative Works available to third parties in any form, including but not limited to: selling it embedded in products, offering it as a SaaS/cloud service, and distributing it in binary form.
+
+**1.5 "MFL Trigger Event"** means the Licensor entering into a commercial license agreement with any third party whose overall terms (price, scope of rights, indemnification terms, level of technical support, etc.) are more favorable than those agreed with the Licensee under this Agreement.
+
+**1.6 "Reciprocal Contribution"** means a modification, optimization, or extension made by the Licensee to the core modules of the Software and submitted to the Licensor in source code form.
+
+---
+
+## Article 2 — Grant of License
+
+**2.1 Scope of License.** The Licensor grants the Licensee a non-exclusive, non-transferable (except in the case of a merger as provided in Section 9.3), worldwide license:
+
+| Right | Apache 2.0 standard | This commercial license |
 |------|----------------|-----------|
-| 使用、复制、修改 | ✅ | ✅ |
-| 内部部署 | ✅ | ✅ |
-| 商业分发（嵌入产品） | ✅（需遵循 Apache 2.0 条款） | ✅（不受 Apache 2.0 通知要求约束） |
-| SaaS/云服务提供 | ✅ | ✅ |
-| 赔偿担保 | ❌ | ✅（第 5 条） |
-| 专利不终止保证 | ❌ | ✅（第 2.4 条） |
-| 源代码访问 | ✅ 公开版本 | ✅ 公开版本 + 商业版本独占模块（如有） |
+| Use, reproduction, modification | ✅ | ✅ |
+| Internal deployment | ✅ | ✅ |
+| Commercial distribution (embedded in products) | ✅ (subject to the terms of Apache 2.0) | ✅ (not subject to the notice requirements of Apache 2.0) |
+| Provision as a SaaS/cloud service | ✅ | ✅ |
+| Indemnification | ❌ | ✅ (Article 5) |
+| Patent non-termination assurance | ❌ | ✅ (Section 2.4) |
+| Source code access | ✅ Public edition | ✅ Public edition + modules exclusive to the commercial edition (if any) |
 
-**2.2 分许可。** 被授权方可向其关联公司和合同承包商分许可本协议授予的权利，前提是上述实体书面同意受同等条款约束。
+**2.2 Sublicensing.** The Licensee may sublicense the rights granted under this Agreement to its affiliates and contractors, provided that such entities agree in writing to be bound by equivalent terms.
 
-**2.3 保留权利。** 授权方保留未在本协议中明确授予的全部权利。
+**2.3 Reservation of Rights.** The Licensor reserves all rights not expressly granted in this Agreement.
 
-**2.4 专利不终止。** 即使被授权方对授权方提起专利侵权诉讼（"专利报复"），授权方在本协议项下授予的专利许可不会终止。本条款超越任何 Apache 2.0 第 3 节中的自动终止条款。
-
----
-
-## 第 3 条 — 费用 (Fees)
-
-**3.1 许可费。** 被授权方应向授权方支付以下费用：
-
-```
-□ 一次性许可费：___________ USD/CNY
-□ 年度订阅费：___________ USD/CNY，按年预付
-□ 收入分成：___________%（仅适用于被授权方因直接分发本软件而产生的收入）
-□ 其他安排：_________________________________
-```
-
-**3.2 付款条件。** 费用应在发票日期起 30 日内支付。逾期付款按年利率 ___% 计收滞纳金。
-
-**3.3 税费。** 各方自行承担因本协议产生的税款。如有代扣代缴义务，被授权方应支付净额以使授权方收到的金额等于约定金额。
+**2.4 Patent Non-Termination.** Even if the Licensee brings a patent infringement action against the Licensor ("patent retaliation"), the patent license granted by the Licensor under this Agreement shall not terminate. This provision overrides any automatic termination provision in Section 3 of Apache 2.0.
 
 ---
 
-## 第 4 条 — MFL（最惠被授权方）条款 [可选]
+## Article 3 — Fees
 
-**适用条件：** □ 适用 / □ 不适用
-
-**4.1 MFL 承诺。** 在本协议有效期内，如果授权方与任何第三方签署商业许可协议，其综合条件（考虑价格、权利范围、赔偿条款、技术支持等级及其他实质性条款后整体判断）优于本协议，授权方应在 MFL 触发事件发生之日起 30 日内书面通知被授权方。
-
-**4.2 自动对齐。** 被授权方有权选择以书面方式要求将其适用本协议的条款自动对齐至更优条件，自授权方收到通知之日起生效。
-
-**4.3 范围限制。** （可选择以下一项）
+**3.1 License Fees.** The Licensee shall pay the Licensor the following fees:
 
 ```
-□ 版本 A（全面 MFL）：对齐全部条款，包括价格、权利、赔偿及服务等级。
-□ 版本 B（有限 MFL）：仅对齐价格条款，不涉及权利范围和赔偿条款。
-□ 版本 C（价格锁定 MFL）：后续协议价格不得低于本协议价格的 ___%。
+□ One-time license fee: ___________ USD/CNY
+□ Annual subscription fee: ___________ USD/CNY, payable annually in advance
+□ Revenue share: ___________% (applicable only to revenue generated by the Licensee from direct distribution of the Software)
+□ Other arrangement: _________________________________
 ```
 
-**4.4 不扩散义务。** 被授权方同意不会将其在本协议项下获得的 MFL 对齐信息透露给第三方。
+**3.2 Payment Terms.** Fees shall be paid within 30 days from the invoice date. Late payments are subject to a late fee calculated at an annual rate of ___%.
+
+**3.3 Taxes.** Each party bears its own taxes arising from this Agreement. Where a withholding obligation applies, the Licensee shall pay such amount that the net amount received by the Licensor equals the agreed amount.
 
 ---
 
-## 第 5 条 — 赔偿 (Indemnification) [可选]
+## Article 4 — MFL (Most Favored Licensee) Clause [Optional]
 
-**适用条件：** □ 适用 / □ 不适用
+**Applicability:** □ Applicable / □ Not applicable
 
-**5.1 授权方赔偿。** 如果本软件被第三方成功主张侵犯其知识产权（"侵权主张"），授权方将：
+**4.1 MFL Commitment.** During the term of this Agreement, if the Licensor enters into a commercial license agreement with any third party whose overall terms (assessed as a whole, taking into account price, scope of rights, indemnification terms, level of technical support, and other material terms) are more favorable than this Agreement, the Licensor shall notify the Licensee in writing within 30 days from the date of the MFL Trigger Event.
 
-- (a) 自费为被授权方辩护或和解；
-- (b) 赔偿被授权方因此类侵权主张产生的最终判决金额或和解金额；
-- (c) 赔偿被授权方合理的律师费用。
+**4.2 Automatic Alignment.** The Licensee has the right to elect, by written request, to have the terms applicable to it under this Agreement automatically aligned with the more favorable terms, effective from the date on which the Licensor receives the notice.
 
-**5.2 限制条件。** 授权方在第 5.1 条下的义务需满足以下条件：
+**4.3 Scope Limitation.** (Select one of the following)
 
-- (a) 被授权方在收到侵权主张后 30 日内书面通知授权方；
-- (b) 被授权方配合授权方的辩护，并授予授权方对辩护和和解的独家控制权；
-- (c) 侵权主张非因被授权方对 本软件 的修改、组合或使用方式所致。
+```
+□ Version A (Full MFL): alignment of all terms, including price, rights, indemnification, and service level.
+□ Version B (Limited MFL): alignment of price terms only, not covering scope of rights or indemnification terms.
+□ Version C (Price-Lock MFL): the price of subsequent agreements shall not be lower than ___% of the price of this Agreement.
+```
 
-**5.3 救济措施。** 如果本软件被认定或可能被认定侵权，授权方可选择：
-
-- (a) 为被授权方获取继续使用本软件的权利；
-- (b) 以非侵权替代品替换本软件；
-- (c) 修改本软件使其不侵权；
-- (d) 如 (a)-(c) 不可行，终止本协议并按比例退还已支付的许可费。
-
-**5.4 赔偿上限。** 授权方在本协议项下的累计赔偿总额不超过被授权方在侵权主张前 12 个月内实际支付的许可费总额。
+**4.4 Non-Disclosure Obligation.** The Licensee agrees not to disclose to any third party the MFL alignment information it obtains under this Agreement.
 
 ---
 
-## 第 6 条 — 互惠贡献条款 [可选]
+## Article 5 — Indemnification [Optional]
 
-**适用条件：** □ 适用 / □ 不适用
+**Applicability:** □ Applicable / □ Not applicable
 
-**6.1 互惠义务。** 被授权方同意，对其在本软件**核心模块**（包括但不限于：推理引擎、种子系统、Observer 池、自演进引擎、Holographic 系统、Ψ 推理管线、Coq 内核桥接层）所做的修改、优化或扩展（"核心改进"），应当以源代码形式贡献回本软件公开版本。
+**5.1 Indemnification by the Licensor.** If a third party successfully claims that the Software infringes its intellectual property rights (an "Infringement Claim"), the Licensor will:
 
-**6.2 互惠例外。** 以下内容不属于互惠义务范围：
+- (a) defend the Licensee or settle the claim at the Licensor's own expense;
+- (b) indemnify the Licensee for the amount of the final judgment or settlement arising from such Infringement Claim;
+- (c) indemnify the Licensee for reasonable attorneys' fees.
 
-- (a) 被授权方产品特定的集成层、适配层和用户界面；
-- (b) 被授权方的业务逻辑、配置数据和专有算法；
-- (c) 被授权方在核心模块之上构建的独立应用层；
-- (d) 被授权方明确标记为专有且与核心模块功能正交的附加组件。
+**5.2 Limiting Conditions.** The Licensor's obligations under Section 5.1 are subject to the following conditions:
 
-**6.3 贡献方式。** 互惠贡献应按照本项目的 CLA（Contributor License Agreement）流程提交，初始版权归属贡献者，许可条款与 Apache 2.0 公开版本一致。授权方有权将互惠贡献纳入商业许可版本。
+- (a) the Licensee notifies the Licensor in writing within 30 days after receiving the Infringement Claim;
+- (b) the Licensee cooperates with the Licensor's defense and grants the Licensor sole control over the defense and settlement;
+- (c) the Infringement Claim does not arise from the Licensee's modification, combination, or manner of use of the Software.
 
-**6.4 互惠与 MFL 的关联。** [请选择]
+**5.3 Remedies.** If the Software is found, or is likely to be found, to infringe, the Licensor may elect to:
+
+- (a) obtain for the Licensee the right to continue using the Software;
+- (b) replace the Software with a non-infringing substitute;
+- (c) modify the Software so that it is non-infringing;
+- (d) if (a)-(c) are not feasible, terminate this Agreement and refund the license fees paid on a pro rata basis.
+
+**5.4 Indemnification Cap.** The Licensor's aggregate indemnification under this Agreement shall not exceed the total license fees actually paid by the Licensee in the 12 months preceding the Infringement Claim.
+
+---
+
+## Article 6 — Reciprocal Contribution Clause [Optional]
+
+**Applicability:** □ Applicable / □ Not applicable
+
+**6.1 Reciprocal Obligation.** The Licensee agrees that any modifications, optimizations, or extensions it makes to the **core modules** of the Software (including but not limited to: the inference engine, the seed system, the Observer pool, the self-evolution engine, the Holographic system, the Ψ inference pipeline, and the Coq kernel bridge layer) ("Core Improvements") shall be contributed back to the public edition of the Software in source code form.
+
+**6.2 Exceptions to Reciprocity.** The following are outside the scope of the reciprocal obligation:
+
+- (a) integration layers, adaptation layers, and user interfaces specific to the Licensee's products;
+- (b) the Licensee's business logic, configuration data, and proprietary algorithms;
+- (c) independent application layers built by the Licensee on top of the core modules;
+- (d) add-on components expressly marked by the Licensee as proprietary and functionally orthogonal to the core modules.
+
+**6.3 Manner of Contribution.** Reciprocal Contributions shall be submitted through this project's CLA (Contributor License Agreement) process; the initial copyright belongs to the contributor, and the license terms are consistent with the Apache 2.0 public edition. The Licensor is entitled to include Reciprocal Contributions in the commercially licensed edition.
+
+**6.4 Relationship between Reciprocity and MFL.** [Please select]
 
 ```
-□ 关联模式：如果被授权方未履行第 6.1 条的互惠义务，MFL 第 4 条自动终止。
-□ 独立模式：互惠义务和 MFL 条款各自独立，互不影响。
+□ Linked mode: if the Licensee fails to perform the reciprocal obligation under Section 6.1, the MFL clause of Article 4 terminates automatically.
+□ Independent mode: the reciprocal obligation and the MFL clause are independent of each other and do not affect each other.
 ```
 
-**6.5 互惠等级选择。** [请选择]
+**6.5 Selection of Reciprocity Level.** [Please select]
 
 ```
-□ 等级 1 — 通知义务：被授权方通知授权方所做的核心改进，授权方可申请获取。
-□ 等级 2 — 同步贡献：被授权方在发布包含核心改进的产品版本前，应将改进贡献回公开版本。
-□ 等级 3 — 优先贡献：被授权方的核心改进应优先合并到公开版本，除非有正当理由延迟。
+□ Level 1 — Notification obligation: the Licensee notifies the Licensor of the Core Improvements it has made, and the Licensor may request access to them.
+□ Level 2 — Synchronized contribution: before releasing a product version that contains Core Improvements, the Licensee shall contribute the improvements back to the public edition.
+□ Level 3 — Priority contribution: the Licensee's Core Improvements shall be merged into the public edition with priority, unless there is a legitimate reason for delay.
 ```
 
 ---
 
-## 第 7 条 — 技术支持 [可选]
+## Article 7 — Technical Support [Optional]
 
-**适用条件：** □ 适用 / □ 不适用
+**Applicability:** □ Applicable / □ Not applicable
 
-**7.1 服务等级。** [请选择]
+**7.1 Service Level.** [Please select]
 
 ```
-□ 标准支持：邮件响应，工作时间 24 小时内，无 SLA 保证
-□ 优先支持：邮件 + 即时通讯响应，工作时间 4 小时内，SLA 99.5%
-□ 专属支持：专属工程师对接，2 小时内响应，SLA 99.9%
+□ Standard support: email response, within 24 hours during business hours, no SLA guarantee
+□ Priority support: email + instant messaging response, within 4 hours during business hours, SLA 99.5%
+□ Dedicated support: dedicated engineer as point of contact, response within 2 hours, SLA 99.9%
 ```
 
-**7.2 响应时间。** 技术支持语言为中文和英文。
+**7.2 Response Time.** Technical support is provided in Chinese and English.
 
-**7.3 范围。** 技术支持包括：安装部署、构建配置、API 使用咨询、bug 排查及合理的小规模代码审查。不包括：被授权方专属功能的开发、非公开模块的扩展开发。
-
----
-
-## 第 8 条 — 保证与免责 (Warranties & Disclaimers)
-
-**8.1 授权方保证。** 授权方保证：
-
-- (a) 授权方有完整权利授予本协议项下的许可；
-- (b) 据授权方所知，本软件不侵犯第三方知识产权；
-- (c) 本软件在交付时将实质符合其文档描述。
-
-**8.2 免责声明。** 除第 8.1 条明确规定外，本软件按"现状"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性及不侵权的保证。
-
-**8.3 责任限制。** 任一方在本协议项下的累计赔偿责任不超过第 3 条约定费用的总额。任一方不对间接损失、附带损失、惩罚性损失或利润损失承担责任。
+**7.3 Scope.** Technical support includes: installation and deployment, build configuration, API usage consultation, bug troubleshooting, and reasonable small-scale code review. It does not include: development of features exclusive to the Licensee, or extension development for non-public modules.
 
 ---
 
-## 第 9 条 — 期限与终止 (Term & Termination)
+## Article 8 — Warranties & Disclaimers
 
-**9.1 期限。** 本协议自生效之日起生效，有效期为 ___ 年，到期后自动续期 ___ 年，除非任一方提前 ___ 天书面通知不续期。
+**8.1 Licensor Warranties.** The Licensor warrants that:
 
-**9.2 终止。** 任一方可在以下情形终止本协议：
+- (a) the Licensor has full right to grant the licenses under this Agreement;
+- (b) to the Licensor's knowledge, the Software does not infringe third-party intellectual property rights;
+- (c) the Software, when delivered, will substantially conform to the description in its documentation.
 
-- (a) 对方实质违反本协议且未在 60 日内纠正；
-- (b) 对方进入破产、清算或解散程序。
+**8.2 Disclaimer.** Except as expressly provided in Section 8.1, the Software is provided "AS IS", without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.
 
-**9.3 终止的效力。** 终止不影响终止前已授予的许可权利。被授权方在终止前已合法分发的本软件副本可继续使用。终止后，被授权方应停止使用并销毁本软件，除非双方另有约定。
-
-**9.4 存续条款。** 第 5 条（赔偿）、第 8 条（保证与免责）及第 10 条（一般条款）在本协议终止后继续有效。
-
----
-
-## 第 10 条 — 一般条款
-
-**10.1 不可转让。** 未经授权方书面同意，被授权方不得转让本协议。但被授权方发生合并、收购或出售全部资产时，无需事先同意即可转让，前提是受让方书面同意受本协议约束。
-
-**10.2 完整协议。** 本协议构成双方之间的完整协议，取代此前所有口头或书面的沟通和协议。
-
-**10.3 修改。** 对本协议的任何修改须经双方书面签署。
-
-**10.4 可分割性。** 如果本协议的任何条款被认定为无效或不可执行，其余条款仍然有效。
-
-**10.5 管辖法律。** 本协议受中华人民共和国法律管辖。
-
-**10.6 争议解决。** 因本协议引起的争议，双方应首先友好协商解决；协商不成的，提交 [中国国际经济贸易仲裁委员会 (CIETAC) / 其他] 按届时有效的仲裁规则仲裁。
+**8.3 Limitation of Liability.** The aggregate liability of either party under this Agreement shall not exceed the total amount of the fees agreed under Article 3. Neither party shall be liable for indirect damages, incidental damages, punitive damages, or loss of profits.
 
 ---
 
-## 签署页
+## Article 9 — Term & Termination
 
-双方授权代表签署本协议，以昭信守。
+**9.1 Term.** This Agreement takes effect on the effective date and has a term of ___ year(s), renewing automatically for ___ year(s) upon expiry unless either party gives written notice of non-renewal ___ days in advance.
 
-| 授权方 (Licensor) | 被授权方 (Licensee) |
+**9.2 Termination.** Either party may terminate this Agreement in the following circumstances:
+
+- (a) the other party materially breaches this Agreement and fails to cure the breach within 60 days;
+- (b) the other party enters bankruptcy, liquidation, or dissolution proceedings.
+
+**9.3 Effect of Termination.** Termination does not affect license rights granted before termination. Copies of the Software lawfully distributed by the Licensee before termination may continue to be used. After termination, the Licensee shall cease using and destroy the Software, unless otherwise agreed by the parties.
+
+**9.4 Survival.** Article 5 (Indemnification), Article 8 (Warranties & Disclaimers), and Article 10 (General Provisions) survive the termination of this Agreement.
+
+---
+
+## Article 10 — General Provisions
+
+**10.1 No Assignment.** The Licensee shall not assign this Agreement without the written consent of the Licensor. However, in the event of a merger, acquisition, or sale of all assets of the Licensee, this Agreement may be assigned without prior consent, provided that the assignee agrees in writing to be bound by this Agreement.
+
+**10.2 Entire Agreement.** This Agreement constitutes the entire agreement between the parties and supersedes all prior oral or written communications and agreements.
+
+**10.3 Amendment.** Any amendment to this Agreement must be signed in writing by both parties.
+
+**10.4 Severability.** If any provision of this Agreement is held to be invalid or unenforceable, the remaining provisions shall remain in effect.
+
+**10.5 Governing Law.** This Agreement is governed by the laws of the People's Republic of China.
+
+**10.6 Dispute Resolution.** The parties shall first resolve any dispute arising out of this Agreement through amicable negotiation; if negotiation fails, the dispute shall be submitted to [the China International Economic and Trade Arbitration Commission (CIETAC) / other] for arbitration in accordance with its arbitration rules in effect at that time.
+
+---
+
+## Signature Page
+
+IN WITNESS WHEREOF, the authorized representatives of the parties have signed this Agreement.
+
+| Licensor | Licensee |
 |-------------------|-------------------|
 | 王宝军 | _________________________ |
-| 签字：________________ | 签字：________________ |
-| 职务：________________ | 职务：________________ |
-| 日期：________________ | 日期：________________ |
-|                        | 统一社会信用代码/注册号：________________ |
+| Signature: ________________ | Signature: ________________ |
+| Title: ________________ | Title: ________________ |
+| Date: ________________ | Date: ________________ |
+|                        | Unified Social Credit Code / Registration No.: ________________ |
 
 ---
 
-## 附件 A — MFL 历史记录表
+## Annex A — MFL History Record
 
-*（每发生一次 MFL 触发事件，更新本表）*
+*(This table is updated each time an MFL Trigger Event occurs.)*
 
-| 序号 | 触发日期 | 第三方名称 | 触发条款摘要 | 对齐日期 | 备注 |
+| No. | Trigger date | Third-party name | Summary of triggering terms | Alignment date | Remarks |
 |------|---------|-----------|-------------|---------|------|
 | 1 | | | | | |
 | 2 | | | | | |
@@ -251,23 +251,23 @@
 
 ---
 
-## 附件 B — 核心模块清单（互惠条款适用）
+## Annex B — List of Core Modules (Subject to the Reciprocity Clause)
 
-*（被授权方对以下模块的改进受第 6 条互惠义务约束，授权方可根据版本更新调整本清单）*
+*(Improvements made by the Licensee to the following modules are subject to the reciprocal obligation under Article 6; the Licensor may adjust this list in line with version updates.)*
 
-> **注（2026-10-06 现势）：** 下表为 220 版时代快照，仅示互惠条款的适用方式；现势模块面以注册序 `order.txt`（662 行）为权威引用面，本表不构成对当前模块面的完整列举。
+> **Note (status as of 2026-10-06):** The table below is a snapshot from the era of version 220 and only illustrates how the reciprocity clause applies; for the current set of modules, the registration order `order.txt` (662 lines) is the authoritative reference, and this table does not constitute a complete enumeration of the current set of modules.
 
-| 模块 | 组件 | 说明 |
+| Module | Component | Description |
 |------|------|------|
-| 基座（信任缓存） | CW_ConstructiveWorld_219 | 219 基座 .vo 信任缓存；已吸收 UpStepKL、UpLogMono、AttnDoeblin、AttnHardLimit218、AttnSqrt、UpFEP、UpPPO、UpGRPO219、UpExtras219 |
-| 第 0 层模块（19） | UpCS · UpHlogZ · UpDebtSqrtAbs · UpDebtDual · UpEntropyGain · UpSigMigrate · UpMinP · UpAlignId · UpProj · UpFirewall · UpTempWindow · UpKVEv · UpAuditBridge · UpPredRelax · UpPLA · UpStepKLM3 · UpRecast · UpCLQuery · UpSLM | 基础模块，无模块间依赖 |
-| 第 1 层模块（7） | UpBudgetReal · UpArchAttn · UpConstitution · UpProjBPC · UpEvictId · UpDebtGibbsT · UpDPOLip | 组合模块，依赖第 0 层 |
-| 第 2 层模块（2） | UpDissip · UpStopTime | 顶层模块，依赖第 0/1 层 |
-| 单文件全量版 | CW_ConstructiveWorld_220 · CW220_Extensions | releases/ 下的合并版与扩展层（553 Qed，coqchk 认证） |
+| Base (trust cache) | CW_ConstructiveWorld_219 | .vo trust cache of the 219 base; already incorporates UpStepKL, UpLogMono, AttnDoeblin, AttnHardLimit218, AttnSqrt, UpFEP, UpPPO, UpGRPO219, UpExtras219 |
+| Layer 0 modules (19) | UpCS · UpHlogZ · UpDebtSqrtAbs · UpDebtDual · UpEntropyGain · UpSigMigrate · UpMinP · UpAlignId · UpProj · UpFirewall · UpTempWindow · UpKVEv · UpAuditBridge · UpPredRelax · UpPLA · UpStepKLM3 · UpRecast · UpCLQuery · UpSLM | Foundational modules, with no inter-module dependencies |
+| Layer 1 modules (7) | UpBudgetReal · UpArchAttn · UpConstitution · UpProjBPC · UpEvictId · UpDebtGibbsT · UpDPOLip | Composite modules, depending on Layer 0 |
+| Layer 2 modules (2) | UpDissip · UpStopTime | Top-level modules, depending on Layers 0/1 |
+| Single-file full release build | CW_ConstructiveWorld_220 · CW220_Extensions | Merged edition and extension layer under releases/ (553 Qed, coqchk certification) |
 
 ---
 
-*本模板仅供参考，不构成法律建议。签署前建议双方各自咨询法律顾问。*
+*This template is for reference only and does not constitute legal advice. Both parties are advised to consult their respective legal counsel before signing.*
 
 
 

@@ -1,21 +1,21 @@
 #!/bin/bash
-# vo_sync_once.sh — 跨机 vo 信任缓存一次性同步（CI 起步步形态；亦可手动单发）
+# vo_sync_once.sh — one-shot cross-machine vo trust-cache sync (CI bootstrap-step form; also usable as a manual one-shot)
 #
-# 使命（四基准④ CI 内联化）：本侧认证 job 起步先查对侧最近绿 run 的 vo-trust-cache
-# artifact——有新则下载并镜像合并进本侧缓存目录，使对侧新增模块在本轮 build 即可
-# SKIP（缺者由 parallel_build 编译·变者由 PBLD_CHANGED_SINCE 代差失效重编）——
-# 「一侧新增模块推送 CI、对侧自动本地化+认证」闭环的内联半环；常驻半环由
-# vo_sync_watch.ps1/.sh 承担。
+# Mission (baseline-4 inline-CI form): the local certification job starts by checking the peer's latest green
+# run for a vo-trust-cache artifact -- if newer, download and mirror-merge it into the local cache directory
+# so peer-added modules SKIP in this round's build (missing ones get built by parallel_build; changed ones
+# get rebuilt via PBLD_CHANGED_SINCE generation invalidation) -- the inline half of the "one side pushes new
+# modules to CI, the other auto-localizes + certifies" loop; vo_sync_watch.ps1/.sh runs the resident half.
 #
-# fail-open 契约：网络窗抖动/artifact 缺席/解压失败一律 WARN 后 exit 0——同步是
-# 增强件，认证主链不依赖它（缺件必被 build 补编，正确性不受影响）。禁把本步做成红闸。
+# fail-open contract: network jitter / missing artifact / extract failure all WARN then exit 0 -- sync is an
+# enhancement; the certification main chain does not depend on it (missing .vo are rebuilt by build, correctness unaffected). Never make this step a red gate.
 #
-# 环境变量：
-#   SYNC_ARTIFACT   对侧 artifact 名（vo-trust-cache-windows | vo-trust-cache-macos）
-#   SYNC_CACHE_DIR  本侧缓存目录（Windows seed 源=/d/ComplexAnalysis/ConstructiveWorld-Main/ConstructiveWorld_vo
-#                   mac=/Users/apple/vo_ci_cache_mac）
-#   SYNC_STATE_FILE 已同步 run 记录（默认 $SYNC_CACHE_DIR/.vo_sync_last_run）
-#   REPO / GITHUB_TOKEN（缺 token 时 git credential fill 兜底）
+# Environment variables:
+#   SYNC_ARTIFACT   peer artifact name (vo-trust-cache-windows | vo-trust-cache-macos)
+#   SYNC_CACHE_DIR  local cache directory (Windows seed source=/d/ComplexAnalysis/ConstructiveWorld-Main/ConstructiveWorld_vo
+#                   mac=/Users/apple/vo_ci_cache_mac)
+#   SYNC_STATE_FILE synced-run record (default $SYNC_CACHE_DIR/.vo_sync_last_run)
+#   REPO / GITHUB_TOKEN (git credential fill as fallback when token missing)
 set -u
 REPO="${REPO:-hy7pc8gfmf-dotcom/ConstructiveWorld-Main}"
 ARTIFACT="${SYNC_ARTIFACT:?SYNC_ARTIFACT required}"

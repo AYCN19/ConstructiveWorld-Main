@@ -1,13 +1,13 @@
-# ConstructiveWorld-Main — 构建入口 Makefile（信任缓存增量版；历史合并版配方保留退役）
+# ConstructiveWorld-Main build entry Makefile (trust-cache incremental build; legacy merged recipe retained as retired)
 #
-# 用法：
-#   make modules   # 按 scripts/order.txt 拓扑序编译在册模块（当前 531 个，.vo 已存在则跳过）
-#   make check     # 全树 coqchk 内核复验（共享闭包一次传入；当前认证规模 554 模块，CI run #178）
-#   make merged    # （已退役）220 版历史单文件合并编译配方，仅存 releases/ 供历史复现（见 README 附录）；
-#                  #  非现役认证面，日常验证请用 modules + check
-#   make clean     # 清产物（保留 .v）
+# Usage:
+#   make modules   # compile the registered modules in the topological order of scripts/order.txt (skips modules whose .vo already exists)
+#   make check     # full-tree coqchk kernel re-verification (shared closure passed in a single batch; certification scale follows the current trust cache)
+#   make merged    # (retired) legacy single-file merged build recipe of the 220 era, kept under releases/ for historical reproduction (see the README appendix);
+#                  #  not part of the active certification surface; for routine verification use modules + check
+#   make clean     # remove build artifacts (.v sources kept)
 #
-# 变量覆盖（Windows 本地示例）：
+# Variable overrides (Windows local example):
 #   make COQC="C:/Rocq-Platform~9.1~2026.01/bin/coqc.exe" COQCHK="C:/Rocq-Platform~9.1~2026.01/bin/coqchk.exe"
 
 COQC   ?= coqc
@@ -21,8 +21,8 @@ modules:
 check:
 	cd $(VODIR) && bash coqchk_all.sh
 
-# （已退役）220 版历史合并配方：目标文件为 releases/CW_ConstructiveWorld_220.v（史料保留）。
-# 现役构建与认证面为上方 modules / check 两目标。
+# (retired) legacy 220 merged build recipe: the target file is releases/CW_ConstructiveWorld_220.v (kept as a historical record).
+# The active build and certification surface is the modules / check targets above.
 merged:
 	cd $(VODIR) && $(COQC) -Q . "" CW_ConstructiveWorld_220.v || \
 	cd ../releases && $(COQC) -Q . "" CW_ConstructiveWorld_220.v

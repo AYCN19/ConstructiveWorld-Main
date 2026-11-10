@@ -1,11 +1,11 @@
 #!/bin/bash
-# ConstructiveWorld-Main 增量构建：.vo 比 .v 新则跳过（指纹信任缓存语义）
+# ConstructiveWorld-Main incremental build: skip when .vo is newer than .v (fingerprint trust-cache semantics)
 cd "$(dirname "$0")"
 C="${COQC:-C:/Rocq-Platform~9.1~2026.01/bin/coqc.exe}"
-# SW2 换装（2026-09-15）：机器级【用户环境变量】COQLIB/ROCQLIB 钉在 9.0 lib，
-# 会压过 9.1 版 coq_environment.txt → 9.1 coqc 暗载 9.0 stdlib，产物魔数 90001
-# 被 9.1 coqchk 拒（bad version，期望 90100）。故随 COQC 路径推导导出，保证 bin/lib 同源
-# （E-STAGING-SW2 沙箱实证：COQLIB 同源后 90100 roundtrip，coqchk EXIT=0）。
+# SW2 retarget (2026-09-15): machine-level [user environment variables] COQLIB/ROCQLIB pinned to the 9.0 lib
+# override the 9.1 coq_environment.txt -> 9.1 coqc silently loads the 9.0 stdlib and the artifact magic 90001
+# is rejected by 9.1 coqchk (bad version, expected 90100). Therefore export them derived from the COQC path,
+# keeping bin/lib same-source (E-STAGING-SW2 sandbox evidence: with COQLIB same-source, 90100 roundtrip, coqchk EXIT=0).
 case "$C" in
   */bin/coqc.exe) export COQLIB ROCQLIB; COQLIB="${C%/coqc.exe}"; COQLIB="${COQLIB%/bin}/lib/coq"; ROCQLIB="$COQLIB" ;;
   */bin/coqc)     export COQLIB ROCQLIB; COQLIB="${C%/coqc}";     COQLIB="${COQLIB%/bin}/lib/coq"; ROCQLIB="$COQLIB" ;;
@@ -18,9 +18,9 @@ while IFS= read -r f; do
     echo "$f SKIP(vo 新于源)"
     continue
   fi
-  # -native-compiler no：规避本机 Rocq 9.0 实测 coqnative 子进程挂死（E-STAGING-WangWW-native 卡）；
-  # 9.1 换装后沿用保守旗标（PROBE91 全绿实证），不改变逻辑 digest，coqchk 认证不受影响。
-  # 仅影响运行时 Compute 原生加速，不改变逻辑 digest，coqchk 认证不受影响。
+  # -native-compiler no: avoids a locally measured Rocq 9.0 hang of the coqnative subprocess (E-STAGING-WangWW-native card);
+  # kept as a conservative flag after the 9.1 retarget (PROBE91 all-green evidence); logical digest unchanged, coqchk certification unaffected.
+  # Only affects runtime native Compute acceleration; logical digest unchanged, coqchk certification unaffected.
   mkdir -p "$(dirname "_${f%.v}.build.log")"
   "$C" -native-compiler no -Q . "" "$f" > "_${f%.v}.build.log" 2>&1
   e=$?

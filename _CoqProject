@@ -1,10 +1,10 @@
-# 【历史版注记 2026-10-05】本文件为 220 版时代的历史 _CoqProject（历史版正文 94 行·89 个 .v 条目），
-# 仅存史供考古对照；当前权威清单以双树 _CoqProject 为准
-# （ConstructiveWorld_Live/_CoqProject 与 ConstructiveWorld_vo/_CoqProject，532 行，
-# 注册序 scripts/order.txt 531 行为唯一引用面）。本文件按存史纪律保留原文，条目不再更新。
-# ConstructiveWorld-Main — CoqProject（本地 Rocq 9.1 / CI Rocq 9.0）
-# 模块化信任缓存：基座 + 28 模块扁平命名空间（.v/.vo 同目录，下游 Require Import 直用）
-# 依赖链编译顺序由 scripts/order.txt 驱动（Makefile modules 目标）；本清单供编辑器/coq_makefile 使用
+# [Historical note 2026-10-05] This file is the historical _CoqProject of the 220 era,
+# kept solely as an archival record for comparison; the authoritative current listings are the two-tree _CoqProject files
+# (ConstructiveWorld_Live/_CoqProject and ConstructiveWorld_vo/_CoqProject),
+# with the registration order scripts/order.txt as the sole reference surface. This file is preserved verbatim under the archive-keeping discipline; its entries are no longer updated.
+# ConstructiveWorld-Main CoqProject (local Rocq 9.1 / CI Rocq 9.0)
+# Modular trust cache: base + 28 modules in a flat namespace (.v/.vo in the same directory, consumed directly by downstream Require Import)
+# The dependency-chain build order is driven by scripts/order.txt (Makefile modules target); this listing serves editors/coq_makefile
 -Q ConstructiveWorld_vo ""
 
 ConstructiveWorld_vo/UpCS.v

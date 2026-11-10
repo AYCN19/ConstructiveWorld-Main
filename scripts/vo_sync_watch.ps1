@@ -1,16 +1,16 @@
-# vo_sync_watch.ps1 — 对侧 vo 信任缓存自动联动（Windows/PowerShell 形；mac 侧用 vo_sync_watch.sh）
+# vo_sync_watch.ps1 -- automatic counterpart-side vo trust-cache sync (Windows/PowerShell form; the mac side uses vo_sync_watch.sh)
 #
-# 使命：Windows runner 侧常驻计划任务——对侧（mac）推送的 CI run 全绿后，自动下载
-# vo-trust-cache-macos artifact，镜像合并进 Windows 本地信任缓存树
-# （D:\ComplexAnalysis\ConstructiveWorld-Main\ConstructiveWorld_vo）——下次 CI
-# Seed trust cache 步播种即吃指纹 SKIP，实现双机自动联动认证。
+# Mission: a resident scheduled task on the Windows runner side -- once a CI run pushed by the counterpart (mac) side is fully green, automatically download
+# the vo-trust-cache-macos artifact and mirror-merge it into the Windows local trust-cache tree
+# (D:\ComplexAnalysis\ConstructiveWorld-Main\ConstructiveWorld_vo) -- the next CI
+# "Seed trust cache" step then seeds from fingerprints and hits SKIP, giving automatic two-machine certification handoff.
 #
-# 一次性安装（管理员或用户级计划任务，每 2 分钟轮询）：
+# One-time install (administrator or per-user scheduled task, polling every 2 minutes):
 #   schtasks /Create /TN "vo_sync_watch" /SC MINUTE /MO 2 /TR ^
 #     "pwsh -File D:\actions-runner\scripts\vo_sync_watch.ps1" /F
-# 参数（脚本头部默认值可改）：
+# Parameters (defaults at the top of the script are editable):
 #   $Repo / $Artifact / $CacheDir / $StateFile
-# token：git credential（与 push 同源）自动获取。
+# token: obtained automatically via git credential (same source as push).
 
 $Repo      = "hy7pc8gfmf-dotcom/ConstructiveWorld-Main"
 $Artifact  = "vo-trust-cache-macos"
@@ -31,19 +31,19 @@ while ($true) {
     $Token = Get-Token
     $H = @{ }
     if ($Token) { $H["Authorization"] = "token $Token" }
-    # ① 最近绿 run
+    # 1. latest green run
     $runs = Invoke-RestMethod -Headers $H -TimeoutSec 30 `
       "https://api.github.com/repos/$Repo/actions/runs?branch=main&status=success&per_page=1"
     $RunId = 0
     if ($runs.workflow_runs.Count -gt 0) { $RunId = [long]$runs.workflow_runs[0].id }
     if ($RunId -gt $Last) {
       Write-Output "vo_sync_watch: new green run $RunId — syncing $Artifact"
-      # ② 定位 artifact
+      # 2. locate the artifact
       $arts = Invoke-RestMethod -Headers $H -TimeoutSec 30 `
         "https://api.github.com/repos/$Repo/actions/runs/$RunId/artifacts?per_page=50"
       $aid = ($arts.artifacts | Where-Object { $_.name -eq $Artifact } | Select-Object -First 1).id
       if ($aid -and $Token) {
-        # ③ 下载+镜像合并
+        # 3. download + mirror merge
         $tmp = Join-Path $env:TEMP ("vo_sync_" + [guid]::NewGuid().ToString("N"))
         New-Item -ItemType Directory -Path $tmp -Force | Out-Null
         $zip = Join-Path $tmp "vo.zip"

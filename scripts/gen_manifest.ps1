@@ -1,17 +1,17 @@
 <#
 =====================================================================
- gen_manifest.ps1 — S7/PA2(工具半件) 快照 manifest 生成器
- (ConstructiveWorld 补强战役 SLICE-S7 · 工具族 · 零编译零网络零 git 写)
+ gen_manifest.ps1 -- S7/PA2 (tool half) snapshot manifest generator
+ (ConstructiveWorld reinforcement SLICE-S7, tool family, zero compile / zero network / zero git write)
 ---------------------------------------------------------------------
- 功能: 对快照导出面逐文件计算 SHA1 + 尺寸, 头部记 commit 注记
-       (导出时点主库 HEAD sha+日期+主题, git 只读取得) → snapshot-manifest.json
- 归期: 实导出归 R112 后 —— 施工单原案; 本席 09-22 只读 git 实测 R112/R113 已落云
-       (HEAD=1719a2d), 实导出窗已开, 但 apply/实跑归 R11x 注册波/注册席, 本件只交工具+自测。
- 用法:
-   pwsh -File gen_manifest.ps1 -SelfTest                    # 已知答案自测(验收模式)
-   pwsh -File gen_manifest.ps1 [-SnapshotDir <快照面>] [-OutFile <json>]
- 领地: 只读遍历 + 唯一写面 = -OutFile(默认本工具旁 snapshot-manifest.json)
-       与 -SelfTest 临时目录(本工具旁 _selftest_manifest\, 跑毕即清)。
+ Function: compute SHA1 + size for every file on the snapshot export face, and record a commit note in the header
+       (main repo HEAD sha+date+subject at export time, obtained read-only via git) -> snapshot-manifest.json
+ Schedule: the real export belongs after R112 -- the original work-order plan; a read-only git measurement on 09-22 (this pass) showed R112/R113 already landed in the cloud
+       (HEAD=1719a2d), so the real-export window is open, but apply/real runs belong to the R11x registration wave / registration pass; this item delivers the tool + self-test only.
+ Usage:
+   pwsh -File gen_manifest.ps1 -SelfTest                    # known-answer self-test (acceptance mode)
+   pwsh -File gen_manifest.ps1 [-SnapshotDir <snapshot face>] [-OutFile <json>]
+ Territory: read-only traversal + the only write surface = -OutFile (default snapshot-manifest.json beside this tool)
+       and the -SelfTest temp directory (_selftest_manifest\ beside this tool, cleaned when the run ends).
 =====================================================================
 #>
 [CmdletBinding()]
@@ -19,7 +19,7 @@ param(
   [string]$SnapshotDir = 'D:\ComplexAnalysis\ConstructiveWorld_Live',
   [string]$MainRepo    = 'D:\ComplexAnalysis\ConstructiveWorld-Main',
   [string]$OutFile     = '',
-  [string]$Commit      = '',     # 显式指定则覆盖自动探测(导出脚本批注用)
+  [string]$Commit      = '',     # when given explicitly, overrides auto-detection (for export-script annotation)
   [switch]$SelfTest
 )
 $ErrorActionPreference = 'Stop'
@@ -40,7 +40,7 @@ function New-Manifest {
     schema        = 'cw.snapshot-manifest/v1 (S7/PA2 工具半件)'
     generated_at  = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz')
     snapshot_dir  = (Resolve-Path -LiteralPath $Dir).Path
-    commit_note   = $CommitNote      # 文件级条目外的总注记: 导出时点主库 HEAD(或显式 -Commit)
+    commit_note   = $CommitNote      # overall note beyond the per-file entries: main repo HEAD at export time (or explicit -Commit)
     commit_scope  = 'HEAD-at-generation-time (主库导出时点注记, 非逐文件 blob 声明)'
     file_count    = $entries.Count
     total_bytes   = ($entries | Measure-Object -Property bytes -Sum).Sum
@@ -59,7 +59,7 @@ function Get-HeadNote {
 }
 
 if ($SelfTest) {
-  # ---- 已知答案双向自测: SHA1 标准向量 + 结构断言 + 确定性断言 + 注记断言 ----
+  # ---- Known-answer two-way self-test: SHA1 standard vectors + structure assertions + determinism assertion + note assertion ----
   $here = if ($PSScriptRoot) { $PSScriptRoot } else { (Get-Location).Path }
   $tmp  = Join-Path $here '_selftest_manifest'
   if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp -Recurse -Force }

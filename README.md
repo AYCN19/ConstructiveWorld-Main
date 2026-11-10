@@ -20,7 +20,7 @@
 
 ## 1. 库概述
 
-- **规模**：认证面 **1021 件**（内容寻址认证档案 `scripts/gates/cw_attest.json`·schema `cw.attest/v1`，2026-11-07 自 #9 绿炉重铸；含 `Local/` 茎守护件 `Local/LW0LeibSeparation.v`，全闭包 `coqchk` 复核口径）。注册序 `order.txt` 是库的权威引用面（`ConstructiveWorld_Live/order.txt` 现势 1058 行，2026-11-08 实测；随注册演进而增长，以现势为准），每个在册件一行，形如 `S01_BaseRing.v#R0-d66910`，`#` 之后为注册批次指纹。树内源件（1023 件 `.v`）与去重注册序（1023 件）零差集（2026-11-08 实测）；产物树注册序去重 1021 件与认证档案同集，源树注册序多出的 2 行为 pending-wave 登记行（见 §2 认证链注）。主件 `LW0PiIrrational.v` 位于 ：525（批次指纹 `#R150-40656c`）。
+- **Scale**: certification surface of **1021 modules** (content-addressed certification archive `scripts/gates/cw_attest.json`·schema `cw.attest/v1`, recast 2026-11-07 from the #9 green furnace; includes the `Local/` stem guard module `Local/LW0LeibSeparation.v`, full-closure `coqchk` recheck basis). The registration order `order.txt` is the library's authoritative reference surface (`ConstructiveWorld_Live/order.txt` currently 1070 lines, measured 2026-11-10; grows with registration, the current state prevails), one line per registered module, in the form `S01_BaseRing.v#R0-d66910`, where what follows `#` is the registration-batch fingerprint. In-tree source modules (1035 `.v`) and the deduplicated registration order (1035 modules) have a zero difference set (measured 2026-11-10); the artifact-tree registration order deduplicated to 1021 modules is the same set as the certification archive, and the 14 extra rows in the source-tree registration order are pending-wave registration rows (see the certification-chain note in §2). The main module `LW0PiIrrational.v` sits at :525 (batch fingerprint `#R150-40656c`).
 - **纯构造性**：全库不使用 `Axiom`/`Admitted`/经典逻辑；内核级 `coqchk -o` 复核口径为 `Axioms: <none>`（最近一次全树云端落定：run #9，见 §2）。
 - **Set 层 `sigT` 显式见证**：存在型结论一律给出可计算见证（有理数端点、近似根等），不停留于命题层。
 - **可提取**：以 `Separate Extraction` 生成目标语言代码并机械检查 `Obj.magic` 计数为零（计数非零即示 Prop 层内容泄入提取面）。
@@ -33,17 +33,19 @@
 
 | 项 | 值 |
 |---|---|
-| 库版本 | `0da56c9f`（`main` 分支，2026-11-08 实测；随注册演进而前进） |
-| CI 认证 | **收官 run #9**（Main CI 9.3·head `0ef0c40f`）：**success**——`coqchk` 全树 14 组·1020 件并行内核复核 ALL_PASS·`Axioms: <none>`·gate2 mode=FULL（head 提交 2026-11-06·`git log` 实测；认证链 2026-11-07/08 落定，见下「认证链」）。增量炉现势：run #12（attempt 2）success——gate2 ATTEST 分支判词 **ATTESTED_CLEAN**（9.3 首航），delta 炉整炉约 14.5 分钟（旧全树炉 11 小时级） |
+| Library version | `bf234b76` (`main` branch, measured 2026-11-10·incl. unif-closure L0/L1 registration waves; advances with registration) |
+| CI certification | **Closing run #9** (Main CI 9.3·head `0ef0c40f`): **success**——`coqchk` full-tree 14 groups·1020-module parallel kernel recheck ALL_PASS·`Axioms: <none>`·gate2 mode=FULL (head commit 2026-11-06·`git log` measured; certification chain settled 2026-11-07/08, see the certification chain below). Delta furnace: run #12 (attempt 2) success——gate2 ATTEST branch verdict **ATTESTED_CLEAN** (first flight on 9.3); a full delta-furnace pass takes about 14.5 minutes (the old full-tree furnace was on the order of 11 hours). Current green anchor: run #25 (attempt 6), all steps green with zero red steps (Main CI 9.3, measured 2026-11-10) |
 | 公理审计 | `coqchk -o` 全库复核，`Axioms: <none>`（CI 侧由 gate2 块状态机哨兵解析判定：全树炉走 FULL 分支，增量炉走 ATTEST 分支——#12 判词 `ATTESTED_CLEAN`） |
-| 注册序 | `ConstructiveWorld_Live/order.txt` 现势 1058 行（2026-11-08 实测）；主件 `LW0PiIrrational.v` 位于 ：525（批次指纹 `#R150-40656c`） |
+| Registration order | `ConstructiveWorld_Live/order.txt` currently 1070 lines (measured 2026-11-10); the main module `LW0PiIrrational.v` sits at :525 (batch fingerprint `#R150-40656c`) |
 | 许可 | Apache-2.0（见 `LICENSE`） |
 
 ### 认证链（Rocq 9.3.0 收官，2026-11-07/08）
 
 #9 绿炉（`0ef0c40f`：全树 1020 件·`coqchk` 14 组并行 ALL_PASS·`Axioms: <none>`·gate2 mode=FULL）→ ① **认证档案重铸** `e0dacd49`（`scripts/gates/cw_attest.json` 重铸为 1021 件·Rocq 9.3.0 指纹——commit message 自证 964→1021）→ ② **过渡件退役** `559d0147`（skip 收缴行与 gate2 ATT-MODE-OVERRIDE 块删除，炉恢复继承认证面）→ ③ **delta 炉正典** `0da56c9f`（认证面收编 `Local/` 茎→1021 件；`coqchk` 逻辑名点分转换；`-admit` 继承机械退役——delta 炉对变更件跑真查全闭包；全树 headline 1020→1021；W3-BACKSTOP 每 20 炉强制全树）→ run #12（attempt 2）`GATE2-GREEN verdict=ATTESTED_CLEAN`。三连均为零源码改动（各 commit message 自证 zero source changes；`git show --stat` 实测三连各仅触碰一个文件：档案／workflow／`parallel_chk.sh`）。
 
-> 注：产物树注册序（1021 件·去重口径）与认证档案同集；源树注册序中的 `UpReqPadeConstUnify.v`／`UpReqSymplecticBridge.v`（#R212-reland-20261104）为已登记而尚未进入认证面的 pending-wave 行——其入面随下一绿炉落定。
+> Note: the artifact-tree registration order (1021 modules·deduplicated) is the same set as the certification archive; the `UpReqPadeConstUnify.v`/`UpReqSymplecticBridge.v` rows in the source-tree registration order (#R212-reland-20261104) are registered but not yet in the certification surface — pending-wave rows whose entry settles with the next green furnace. Since 2026-11-09 the unif-closure L0/L1 registration waves add 12 `planb*` rows (see ④ below), bringing the pending-wave rows to 14 in total (measured 2026-11-10).
+
+④ Post-chain waves (measured 2026-11-10): (a) unif-closure registration waves - L0, seven files (four main modules plus three `_cert` companion modules), landed at `8ad12e3` (run #23, attempt 2, green); L1, five files, landed at `e21c1b4`, with the gate4 header repairs on the three planb4 files landed at `bf234b76` (run #25, attempt 6, green - every step green, zero red steps), the current `main` head and the current green anchor. (b) gamma archive wave - PR #1 merged at `925d454` (run #19, attempt 2, green): certified segment sources C1/C2/C3 with the certification dossier tracked under `attn/kbgamma_20261108/` (63 tracked files). (c) gate7 port - PR #4 merged; `scripts/gates/gate7_extract_run.py` and `scripts/gates/gate6_statement_census.py` are in the repository, while the workflow step awaits a Main-specific baseline before re-attachment (an earlier attachment at `42b25a6b` was reverted after a `FileNotFoundError` on the missing script); the active furnace currently contains no gate7 step. The 12 `planb*` modules of the two registration waves are registered in the source-tree `order.txt` and not yet in the certification archive `scripts/gates/cw_attest.json` (together with the two rows named in the note above: 14 pending-wave rows in total, measured 2026-11-10).
 
 ### 认证发布面（tag／Release／Zenodo）
 
@@ -55,7 +57,7 @@
 
 指**增量继承语义**：已认证面内未变更的模块免列（ATTEST-SKIP 附表），不再逐炉重验——**不是跳过验证**：delta 炉对每个变更模块的完整闭包执行真 `coqchk` 内核复核，闭包外模块不参与加载；W3-BACKSTOP 每 20 炉强制全树复核兜底。
 
-持续集成现役为 **Main CI 9.3**（`.github/workflows/coq93.yml`·self-hosted Windows 认证 job；macOS job 已于 2026-10-29 裁定移除（Main CI Windows-only；并发压缩后恢复即双机复证），9.3 炉铸造时按底本无 mac job 块如实登记）：gate1 毒 token 守卫 → gate4 注释哨兵 → gate3 跨树 diff → vo 信任缓存起步播种（fail-open）→ 全树编译（温控包裹·指纹跳过·14 路 Kahn 分层）→ gate7 提取执行（红即增长）→ gate5 vo 二进制检疫（token＋digest 黑名单 v3_93·对照校准）→ attest 对账（`cw_attest.json` 档案命中→skip 清单·未命中→送检）→ `coqchk` 内核复核（14 路 root-grouped 并行·树副本隔离装箱·字节码机旗标 `-bytecode-compiler yes`——`vm_compute` 证书复核 ≥30× 提速；增量炉只验变更闭包，W3-BACKSTOP 每 20 炉强制全树）→ gate2 公理哨兵（块状态机解析 `coqchk` 日志判定 `Axioms: <none>`；代际钉 `Welcome to Chicken 9.3.0`·FULL／ATTEST 双分支）。delta 炉整炉约 14.5 分钟（旧全树炉 11 小时级）。哨兵脚本位于 `scripts/gates/`，并行认证脚本为 `scripts/parallel_chk.sh`；上一代 9.1 炉 `.github/workflows/coq.yml` 并存保留。
+Continuous integration now runs on **Main CI 9.3** (`.github/workflows/coq93.yml`·self-hosted Windows certification job; the macOS job was removed by ruling on 2026-10-29 (Main CI is Windows-only; with concurrency compressed, a restored job means dual-machine re-verification), recorded faithfully at 9.3-furnace minting time as the base had no mac job block): gate1 poison-token guard → gate4 comment sentinel → gate3 cross-tree diff → vo trust-cache startup seeding (fail-open) → RAM guard (commit-headroom report) → full-tree compilation (thermal-guard wrapped·fingerprint skip·14-way Kahn layering) → tree-stats (six-dimension counts, artifact) → gate5 vo binary quarantine (token+digest blacklist v3_93·control-calibrated) → attest reconciliation (`cw_attest.json` archive hit→skip list·miss→send for inspection) → `coqchk` kernel recheck (14-way root-grouped parallel·tree-copy isolation boxing·bytecode machine flag `-bytecode-compiler yes`——`vm_compute` certificate recheck ≥30× speedup; the delta furnace checks only changed closures, W3-BACKSTOP forces a full tree every 20 runs) → vo trust-cache upload (artifact) → gate2 axiom sentinel (block state machine parses `coqchk` logs to decide `Axioms: <none>`; generational pin `Welcome to Chicken 9.3.0`·FULL/ATTEST dual branches) → `coqchk` logs upload (artifact). A delta furnace pass takes about 14.5 minutes (the old full-tree furnace was on the order of 11 hours). Sentinel scripts live in `scripts/gates/` (gate7 extraction-execution scripts in repository; the active furnace has no gate7 step - re-attachment awaits a Main-specific baseline, see certification-chain ④; step chain per `.github/workflows/coq93.yml` as of 2026-11-10); the parallel certification script is `scripts/parallel_chk.sh`; the previous-generation 9.1 furnace `.github/workflows/coq.yml` is kept alongside.
 
 ## 3. 环境前置
 
@@ -104,10 +106,10 @@ coqchk -silent -Q . "" <逻辑库名>.<件名>
 
 | 路径 | 内容 |
 |---|---|
-| `ConstructiveWorld_Live/` | 源码树：全树 `.v` 源件（1023 件，2026-11-08 实测）＋`order.txt`（现势 1058 行）＋`_CoqProject`（955 行，`-Q . ""`）＋`Local/`（守护件 `Local/LW0LeibSeparation.v`，注册序 ：529） |
+| `ConstructiveWorld_Live/` | Source tree: all-tree `.v` sources (1035 modules, measured 2026-11-10)+`order.txt` (currently 1070 lines)+`_CoqProject` (967 lines, `-Q . ""`)+`Local/` (guard module `Local/LW0LeibSeparation.v`, registration order :529) |
 | `ConstructiveWorld_vo/` | 产物树：与源树同构，另含 `.vo`/`.glob`/`.vos`/`.vok` 编译产物（产物树注册序现势 1056 行·去重 1021 件，与认证档案同集） |
-| `order.txt` | 注册序（双树各一份；源树现势 1058 行·产物树 1056 行，行数随注册演进而增长、以现势为准；`scripts/` 留有维护用历史副本 803 行，止于 R193 波未随 R194 同步），权威引用面 |
-| `_CoqProject` | 根级清单：220 版时代历史版（92 行，存史备查，见文件头注记）；现役清单为双树 `_CoqProject`（源树 955 行，`-Q . ""`） |
+| `order.txt` | Registration order (one copy per tree; source tree currently 1070 lines·artifact tree 1056 lines (measured 2026-11-10); line counts grow with registration, the current state prevails; `scripts/` keeps a maintenance historical copy of 803 lines, ending at the R193 wave, not synced with R194) — the authoritative reference surface |
+| `_CoqProject` | Root-level manifest: the historical 220-era version (92 lines, kept for the record, see the header note in the file); the active manifest is the dual-tree `_CoqProject` (source tree 967 lines, `-Q . ""`·measured 2026-11-10) |
 | `scripts/` | 注册序维护脚本、`scripts/gates/` 哨兵（毒 token 守卫、公理解析、跨树 diff、注释哨兵、vo 依赖检疫、提取执行）与内容寻址认证档案 `scripts/gates/cw_attest.json`（1021 件·schema `cw.attest/v1`）；并行认证脚本 `scripts/parallel_chk.sh` |
 | `.github/workflows/coq93.yml` | CI 全树驱动·现役 9.3 炉（编译＋14 路 `coqchk`＋哨兵＋gate2 FULL／ATTEST） |
 | `.github/workflows/coq.yml` | CI 全树驱动·9.1 炉（并存保留） |
@@ -126,7 +128,7 @@ coqchk -silent -Q . "" <逻辑库名>.<件名>
 引用面所在件全量公开。显式例外现势为零——两类历史例外均已清空：
 
 1. **下划线探针件 `_twc_probe.v`（已退役）**：曾维持禁止引用口径、不在注册序内；已于 2026-11-06 退役出树（commit `0571411`——探针不属注册面·注册序探针行清除），双树现均无此件。
-2. **在册外差集件（已清空）**：树内存在而未列入 `order.txt` 的源件，2026-10 口径曾有 45 件；现势（2026-11-08 实测）树内 1023 件 `.v` 与注册序（去重 1023 行）零差集，无在册外源件。若后续出现未在册件，其去留随仓库公开前置批次的裁定结果在此登记。当前注册序为唯一权威引用面（行数随注册演进而增长·以现势为准），未在册件不构成库的引用承诺。
+2. **Out-of-register difference-set modules (cleared)**: source modules present in the tree but not listed in `order.txt` — under the 2026-10 accounting there were 45; currently (measured 2026-11-10) the tree's 1035 `.v` modules and the registration order (1035 deduplicated rows) have a zero difference set, no out-of-register source modules. If unregistered modules appear later, their disposition will be recorded here following the ruling outcome of the pre-publication batch for the repository. The current registration order is the sole authoritative reference surface (line counts grow with registration·the current state prevails); unregistered modules do not constitute a reference commitment of the library.
 
 ## 附录：220 版历史说明（2026-09-07/08）
 

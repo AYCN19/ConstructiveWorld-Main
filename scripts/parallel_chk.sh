@@ -21,33 +21,33 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" 2>/dev/null && { command -v cygpath >/dev/nul
 #      predicted makespan (max lane cost), median default and per-lane costs.
 #   4) VO_DIR hook (env CHK_VO_DIR) so this sandbox copy can be pointed at the
 #      real vo tree; the default resolves exactly like v2.
-# All comments on changed lines are English; every untouched v2 line (including
-# its Chinese comments) is byte-identical to the canonical script.
-# parallel_chk.sh — 全树内核认证·均衡分组并行版 v2（20261019 set1557 修订）
+# All comments on changed lines are English; every untouched v2 line is byte-identical to the canonical
+# v2 script (v2 Chinese comments englishized in place 2026-11-10; command/flag/variable bytes untouched).
+# parallel_chk.sh — full-tree kernel certification, balanced-group parallel edition v2 (20261019 set1557 revision)
 #
-# v1→v2 修订缘由（run#267 Windows coqchk 红根因）：
-#   R1 Windows python /tmp 路径修复：同 parallel_build.sh R1——v1 heredoc Python
-#      open('/tmp/...') 在 Windows 原生 python 下解析为 <盘>:\tmp\... → FileNotFoundError
-#      → 分组输出 0 字节 → 零组 → PCHK-NO-GROUPS exit 2（run#267 实证，盘面
-#      /tmp/_pchk_groups.txt 0 字节 + CI 日志 PCHK-NO-GROUPS 双证）。v2 全部 Python
-#      数据面走 cwd 相对路径（_pchk_tmp/）。
-#   R2 装箱算法重设计：v1 按依赖顶根闭包装箱，「大闭包根独占 + 其余成 orphans 倾入
-#      单组」——实采数据重放（run#267 在飞 _pchk_deps.txt，841 模块 406 根）得组形
-#      811/23/22：96% 全树挤单组=并行名存实亡 + 811 模块单 argv 逼 Windows CreateProcess
-#      32K 参数墙。v2 全模块按闭包规模降序 + 预算封顶贪心（CAP=⌈1.15·N/K⌉）：
-#      实测组形 281/280/280·闭包并集 393/452/412·argv≈5K。
-#   R3 语义红线机械化：并集覆盖断言（每组模块列表恰一次列出·并集==全模块集·违者
-#      exit 2）；order.txt 注册面覆盖断言（认证面 ⊇ 注册面·缺件 exit 2）；退化守卫
-#      （NMOD>200 而组数<2 = 退化单遍，exit 2）。
+# v1->v2 revision reasons (run#267 Windows coqchk red root cause):
+#   R1 Windows python /tmp path fix: same as parallel_build.sh R1 -- the v1 heredoc Python
+#      open('/tmp/...') resolves under native Windows python as <drive>:\tmp\... -> FileNotFoundError
+#      -> group output 0 bytes -> zero groups -> PCHK-NO-GROUPS exit 2 (run#267 evidence: the on-disk
+#      /tmp/_pchk_groups.txt at 0 bytes + the CI log PCHK-NO-GROUPS, double proof). v2 routes all Python
+#      data through cwd-relative paths (_pchk_tmp/).
+#   R2 packing algorithm redesigned: v1 packed by dependency top-root closure -- "large-closure roots
+#      exclusive, the rest orphaned into a single group". Replaying measured data (run#267 in-flight
+#      _pchk_deps.txt, 841 modules / 406 roots) gave group shape 811/23/22: 96% of the tree in one group =
+#      parallelism in name only, and 811 modules in a single argv hit the Windows CreateProcess 32K argument wall.
+#      v2: all modules by closure size descending + budget-capped greedy (CAP=ceil(1.15*N/K)): measured shape 281/280/280, closure union 393/452/412, argv~5K.
+#   R3 semantic red lines mechanized: union-coverage assertion (each module listed exactly once across groups,
+#      union == full module set, violator exit 2); order.txt registration-surface coverage assertion (certification
+#      surface superset of the registration surface, missing module exit 2); degenerate guard (NMOD>200 with <2 groups = degenerate single pass, exit 2).
 #
-# 认证语义（红线）：每模块恰被一组的 rocqchk 调用列出（恰一次）；组内核沿传递闭包
-# 整链核验；跨组共享基座被重复核验=更强保障非缺口；三组日志按组序合并为 _chk_all.log
-# （每路自带 Chicken 9.1.0 banner·Axioms 段逐模块保全·gate2 块状态机零改动兼容）。
+# Certification semantics (red line): each module is listed by exactly one group's rocqchk call (exactly once);
+# in-group kernels verify along the transitive closure of the whole chain; a shared base re-verified across groups =
+# stronger guarantee, not a gap; the three group logs merge in group order into _chk_all.log (each lane keeps its own Chicken 9.1.0 banner, per-module Axioms sections preserved, zero-change compatible with the gate2 block state machine).
 #
-# fail-loud：任一路非 0、或合并日志缺 "Modules were successfully checked" → exit 1。
-# 温控：组数=并行度（CHK_JOBS）；整体由 yml 层 cpu_guard 包裹（负载>阈值错峰）。
-# 环境变量：COQCHK / CHK_JOBS（并行度）/ CHK_ROCQDEP / PYTHON / PCHK_PACK_ONLY=1
-# （仅装箱打印组形即退·调试旗标）。
+# fail-loud: any lane nonzero, or the merged log missing "Modules were successfully checked" -> exit 1.
+# Thermal control: group count = parallelism (CHK_JOBS); the whole step is wrapped by cpu_guard at the yml layer (staggered when load exceeds threshold).
+# Environment variables: COQCHK / CHK_JOBS (parallelism) / CHK_ROCQDEP / PYTHON / PCHK_PACK_ONLY=1
+# (print the group shapes and exit -- packing-only debug flag).
 set -u
 # v3: VO_DIR hook — this sandbox copy lives outside ConstructiveWorld-Main/scripts,
 # so the vo tree can be given explicitly; when unset the default path resolves
@@ -95,7 +95,7 @@ export CHK_COST_TABLE="$COST_TABLE"
 PY="${PYTHON:-python3}"; command -v "$PY" >/dev/null 2>&1 || { PY=python; command -v "$PY" >/dev/null 2>&1 || PY=py; }
 command -v "$PY" >/dev/null 2>&1 || { echo "PCHK-NO-PYTHON: python3/python/py 全缺席"; exit 2; }
 
-# COQLIB/ROCQLIB 同源导出（E-STAGING-SW2 教义：bin/lib 必须同源）
+# COQLIB/ROCQLIB same-source export (E-STAGING-SW2 doctrine: bin/lib must share one source)
 case "$K" in
   */bin/coqchk.exe) COQLIB="${K%/coqchk.exe}"; COQLIB="${COQLIB%/bin}/lib/coq"; export COQLIB ROCQLIB="$COQLIB" ;;
   */bin/coqchk)     COQLIB="${K%/coqchk}";     COQLIB="${COQLIB%/bin}/lib/coq"; export COQLIB ROCQLIB="$COQLIB" ;;
@@ -106,16 +106,16 @@ case "$K" in
 esac
 ROCQDEP="${CHK_ROCQDEP:-$ROCQDEP}"
 
-WORK="$PWD/_pchk_tmp_$$"   # 实例唯一＋绝对化（lane cd 进副本后相对 WORK 即失配——att 链实证）
+WORK="$PWD/_pchk_tmp_$$"   # per-instance unique + absolutized (once a lane cds into a copy, relative WORK mismatches -- att-chain evidence)
 rm -rf "$WORK"; mkdir -p "$WORK"
 
 echo "::group::PCHK 1/4 module list + coverage assertion"
-# ① 认证面清单（`_` 前缀探针/暂态 .vo 不入闭包——CI#46 教训）
-# 20261108 admit 恢复配套（#11 PCHK-NO-LANES 判例）：认证面收编 Local/ 茎——与
-# attest_reconcile 的 cert_surface（树根＋Local/）统一。全树时代 Local 件经依赖闭包
-# 搭车核验无碍；admit 时代顶层全命中→搭车件成孤儿→待验集=0→零道护栏拒炉（诚实红）。
-# 收编后 admit 炉恒有 Local 闭包单道实查（1020 admit＋1 查），全树炉 headline
-# 1020→1021（语义更强非降级：Local 由闭包搭车升为显式列出）。
+# step 1: certification-surface list (`_`-prefixed probe/transient .vo are excluded from the closure -- CI#46 lesson)
+# 20261108 admit-restoration companion (#11 PCHK-NO-LANES precedent): the certification surface absorbs the Local/ stem --
+#   unified with attest_reconcile's cert_surface (tree root + Local/). In the full-tree era Local modules rode the
+#   dependency closure unharmed; in the admit era the top level hit everything -> riders became orphans -> to-verify
+#   set = 0 -> the zero-lane guard rejected the run (honest red). After absorption the admit furnace always gets one
+#   real Local-closure lane check (1020 admit + 1 checked); full-tree furnace headline 1020->1021 (stronger semantics, not a downgrade: Local moves from closure-riding to explicitly listed).
 : > "$WORK/mods.txt"
 for f in *.vo; do
   [ -e "$f" ] || continue
@@ -130,12 +130,12 @@ done
 NMOD=$(wc -l < "$WORK/mods.txt")
 [ "$NMOD" -gt 0 ] || { echo "PCHK-NO-MODS"; exit 2; }
 
-# ①b 认证继承跳过清单（ATT-RECON 20261029·CHK_SKIP_FILE 非空文件时启用）：
-# 清单=对账步按档案 cw.attest/v1 逐件 sha256 对照现树的命中件（unchanged，仅顶层）。
-# 语义：该件字节与上次 coqchk 全绿运行所验内容全等 → 认证凭哈希继承，本轮免列
-# （偏离必检由对账步把守：哈希不匹配者不在清单，照常送检）。
-# 未知项守卫：清单含 mods.txt 之外模块 = 配置错，fail-loud exit 2（禁静默吞）。
-# 清单缺省（未设 CHK_SKIP_FILE 或空文件）= v2 行为逐字节不变（全量送检）。
+# step 1b: certification-inheritance skip list (ATT-RECON 20261029; active when CHK_SKIP_FILE is a non-empty file):
+#   the list = files matched by the reconcile step, which compares the cw.attest/v1 archive per-file sha256
+#   against the current tree (unchanged, top level only). Semantics: the file's bytes equal what the last fully
+#   green coqchk run verified -> certification inherited by hash; this round omits it (deviation-must-check is
+#   guarded by the reconcile step: hash-mismatched files stay off the list and are sent as usual). Unknown-item guard:
+#   a list naming modules outside mods.txt = config error, fail-loud exit 2 (no silent swallow). Default (unset CHK_SKIP_FILE or empty file) = v2 behavior byte-identical (everything sent).
 SKIP_N=0
 if [ -n "${CHK_SKIP_FILE:-}" ] && [ -s "$CHK_SKIP_FILE" ]; then
   comm -23 <(sort -u "$CHK_SKIP_FILE") <(sort -u "$WORK/mods.txt") > "$WORK/skip_unknown.txt"
@@ -150,11 +150,11 @@ if [ -n "${CHK_SKIP_FILE:-}" ] && [ -s "$CHK_SKIP_FILE" ]; then
   NMOD=$((NMOD-SKIP_N))
 fi
 
-# ①a 注册面覆盖断言（禁漏件门：order.txt 全注册 .v 须有 .vo 且入认证面）
-# 子目录注册行（Local/*，order L478 R160 判例）：build 面自编自管（build.sh 逐件走）·
-# 20261108 起 Local 茎已收编入认证面清单（上方 ① 段·与 reconcile cert_surface 统一）
-# ——membership 断言对 Local 行仍按顶层历史语义跳过（下方 */* continue），覆盖由
-# mods.txt 收编＋未知项守卫保证。
+# step 1a: registration-surface coverage assertion (no-missed-module gate: every .v registered in order.txt must have a .vo and enter the certification surface)
+# Subdir registration lines (Local/*, order L478 R160 precedent): the build face self-builds and self-manages them
+#   (build.sh walks each file); since 20261108 the Local/ stem is absorbed into the certification-surface list
+#   (step 1 above, unified with reconcile cert_surface) -- the membership assertion still skips Local lines per the
+#   top-level historical semantics (the */* continue below); coverage is guaranteed by mods.txt absorption + the unknown-item guard.
 covfail=0
 while IFS= read -r line; do
   f=$(printf '%s' "$line" | sed 's/#.*//' | tr -d '\r' | tr -d ' ')
@@ -162,18 +162,18 @@ while IFS= read -r line; do
   case "$f" in */*) continue ;; esac
   m="${f%.v}"
   if [ ! -f "${m}.vo" ]; then echo "PCHK-COV-NO-VO: 注册面 $f 无 .vo（先修 build）"; covfail=1; continue; fi
-  if [ -n "${CHK_SKIP_FILE:-}" ] && [ -f "$CHK_SKIP_FILE" ] && grep -qxF "$m" "$CHK_SKIP_FILE"; then continue; fi  # ATT-RECON: 命中继承件视同已覆盖（.vo 在盘断言上行仍照跑）
+  if [ -n "${CHK_SKIP_FILE:-}" ] && [ -f "$CHK_SKIP_FILE" ] && grep -qxF "$m" "$CHK_SKIP_FILE"; then continue; fi  # ATT-RECON: an inherited hit counts as covered (the on-disk .vo assertion on the line above still runs)
   grep -qxF "$m" "$WORK/mods.txt" || { echo "PCHK-COV-EXCLUDED: 注册面 $m 未入认证面"; covfail=1; }
 done < order.txt
 [ "$covfail" -eq 0 ] || { echo "PCHK-COVERAGE-FAIL: 注册面覆盖断言红——fail-loud"; exit 2; }
 
 echo "::endgroup::"
 echo "::group::PCHK 2/4 dependency graph + balanced packing"
-# ② 依赖图 → 均衡分组
+# step 2: dependency graph -> balanced grouping
 "$ROCQDEP" dep -Q . "" $(ls *.v 2>/dev/null | grep -v '^_'; ls Local/*.v 2>/dev/null | grep -v '/_') > "$WORK/deps.txt" 2>/dev/null || true
 [ -s "$WORK/deps.txt" ] || echo "PCHK-WARN-EMPTYDEP: rocq dep 零输出（闭包退化=每组仅列模块——fail-loud 留痕）"
-# 20261108 admit scoping 料备（已撤）：scoped-admit 机械经预演台裁定退役——闭包真查形态
-# 152s/道（字节码机 5 万 checking 行）·语义最强·admit 继承无增益（见 ③c-2 注）。
+# 20261108 admit-scoping preparation (withdrawn): the scoped-admit mechanism was retired by the dry-run stand ruling --
+#   real closure check at 152s/lane (50k checking lines on the bytecode machine), strongest semantics, no gain from admit inheritance (see note 3c-2).
 CHK_JOBS="$JOBS" "$PY" - "$WORK/mods.txt" "$WORK/deps.txt" > "$WORK/groups.txt" <<'PYEOF'
 import sys, os, math, json, statistics
 from collections import defaultdict
@@ -301,7 +301,7 @@ for gi, g in enumerate(groups):
 # v3: summary line — makespan = max lane cost (predicted packing horizon).
 sys.stderr.write('PCHK-PACK-SUM: mode=%s K=%d total_cost_s=%d makespan_cost_s=%d median_default_s=%d lane_costs=%s\n'
                  % (cost_mode, K, TOTAL, max(loads), MED, ','.join(str(x) for x in loads)))
-sys.stdout.reconfigure(newline='\n')  # 20261019 CRLF 定谳：禁 Windows 文本模式把组行写成 \r\n（源侧根治）
+sys.stdout.reconfigure(newline='\n')  # 20261019 CRLF verdict: forbid Windows text mode from writing group lines as \r\n (fixed at the producer side)
 for g in groups:
     print('\x1f'.join(sorted(g)))
 PYEOF
@@ -310,11 +310,11 @@ PYEOF
 
 echo "::endgroup::"
 echo "::group::PCHK 3/4 per-lane vo copies + scan-drain"
-# ③ K 路并行（组数=并行度）
-# ③a Windows 并发共载缺陷对策（20261019 att1-3 三连实证：同树 4 并发 coqchk 全灭——
-# mmap 共载竞态两型：CI 面 Cannot find library（文件在盘魔数正·单发复现 CLEAN）/本地面
-# intern 中静默 rc1；顺序单发/全组单发皆 CLEAN·mac POSIX 侧同版无恙）——CHK_TREE_COPY=1
-# 时每 lane 先复制独立 vo 副本再验（断共享·保并行度；副本目录 _pchk_tmp/vo_gN 下划线守卫域）。
+# step 3: K-lane parallelism (group count = parallelism)
+# step 3a: Windows concurrent shared-load defect countermeasure (20261019 att1-3 triple evidence: 4 concurrent coqchk
+#   on one tree all died -- two mmap shared-load race shapes: CI face Cannot find library (file on disk, magic correct,
+#   single shot reproduces CLEAN) / local face silent rc1 mid-intern; sequential single-shot and whole-group single-shot
+#   both CLEAN, mac POSIX same version unharmed). With CHK_TREE_COPY=1 each lane first copies a private vo copy then verifies (sharing broken, parallelism kept; copy dir _pchk_tmp/vo_gN inside the underscore-guarded zone).
 LANE_ARR=()
 if [ "${CHK_TREE_COPY:-0}" = "1" ]; then
   echo "PCHK: materializing per-lane vo copies (Windows concurrent-mmap defect countermeasure)"
@@ -325,9 +325,9 @@ if [ "${CHK_TREE_COPY:-0}" = "1" ]; then
     LANE_ARR+=("$WORK/vo_g$c")
   done
 fi
-# ③c 扫描疏引流（20261019 万相归一定谳：全部并发失败=coqchk 开「刚写完的 .vo」撞
-# Defender 排他扫描窗——build 后 23 fresh/copies 1700 fresh 两源同病·顺序单发恒过=窗已过）。
-# lane 发射前对全部待开文件做读开放直至洁净（Defender 按文件+版本缓存扫描结果·读尽即排空）。
+# step 3c: scan-drain flow (20261019 unified verdict: all concurrent failures = coqchk opening a just-written .vo
+#   colliding with the Defender exclusive scan window -- build-later 23 fresh / copies 1700 fresh, both sources same
+#   disease; sequential single-shot always passed = the window had passed). Before launch, read-open every pending file until clean (Defender caches scan verdicts per file+version; reading them through drains the queue).
 if [ "${CHK_TREE_COPY:-0}" = "1" ] && [ -n "${LANE_ARR[*]:-}" ]; then
   for pass in 1 2 3 4; do
     miss=0
@@ -342,41 +342,41 @@ if [ "${CHK_TREE_COPY:-0}" = "1" ] && [ -n "${LANE_ARR[*]:-}" ]; then
 fi
 echo "::endgroup::"
 echo "::group::PCHK 4/4 K-lane certification"
-# ③c-2 delta 炉语义（20261108 定谳·预演台三连判例）：跳过清单不再转译为 -admit——
-# 待验集（对账 sent_to_chk＝变更件＋Local 守护件）由道**真查全闭包**（字节码机对称化下
-# LW0 全闭包 152s/5 万 checking 行实测）。史账：-admit 全局 1020 单道=rc=129 静默死
-# （intern 全 done 后 Stdlib 内核重算中段·资源性死亡·#329-331 同签名——「陈账失配」旧诊
-# 被预演台翻案）；closure-scoped admit 修正后仍不取（152s 真查使 admit 无增益·拆）。
-# 跳过清单空（20 炉 backstop 收缴·run%20==0）=全量重验（v2 行为逐字节不变）。
-# 附页照录（④b 段）：ATTEST-SKIP=对账命中面＝「本炉未列」的日志侧正本——闭包内真查件
-# 属超集强化，与附页最小保证语义相容（宁强勿弱）。
+# step 3c-2 delta-furnace semantics (20261108 verdict; triple dry-run-stand precedent): the skip list is no longer
+#   translated into -admit -- the to-verify set (reconcile sent_to_chk = changed files + Local guardian files) is really
+#   checked over the full closure by the lanes (bytecode-machine symmetry: LW0 full closure measured 152s / 50k
+#   checking lines). History: global -admit of 1020 in one lane = silent rc=129 death (Stdlib kernel mid-recalc after
+#   intern all done; resource death, same signature as #329-331 -- the old "stale-account mismatch" diagnosis was
+#   overturned by the dry-run stand); closure-scoped admit was still rejected after the fix (152s real check gives
+#   admit no gain; dismantled). Empty skip list (20-furnace backstop sweep, run%20==0) = full re-verify (v2 behavior byte-identical).
+#   Appendix verbatim (section 4b): ATTEST-SKIP = reconcile hit surface = the log-side master record of "not listed in this furnace" -- files really checked inside the closure are a superset strengthening, compatible with the appendix's minimal-guarantee semantics (stronger rather than weaker).
 echo "PCHK-ADMIT: retired (delta lanes run real closure checks; skip list defines the check set only)"
-# ③c-3 vm_compute 证书字节码机对称化（20261103·E-COQCHK-BYTECODE-FLAG）：默认 no=纯结构
-# 归约重算 bignum 证书＝小时级难磨（K12_lo ≥5h）；yes=与 coqc 产证同通路（实测 ≥30×）。
-# 字节码机系受信内核组成部分·对称化非降验证强度·-o Axioms 输出不受影响。
+# step 3c-3 vm_compute certificate bytecode-machine symmetry (20261103, E-COQCHK-BYTECODE-FLAG): default no = purely
+#   structural reduction recomputing the bignum certificate = hours of grinding (K12_lo >= 5h); yes = the same path
+#   coqc used to produce it (measured >=30x). The bytecode machine is part of the trusted kernel; symmetry does not lower verification strength; -o Axioms output unaffected.
 PCHK_BC_ARGS="-bytecode-compiler yes"
 i=0
 LANE_PIDS=()
 while IFS= read -r grp; do
   [ -n "$grp" ] || continue
-  # 20261019 CRLF 定谳：groups.txt 行尾 \r 黏在末位件名上→coqchk Cannot find library(名\r)
-  # （Windows Python 文本模式写 \n→\r\n·mac POSIX 无此翻译故同版无恙·CI att1-3 三连红恒为各
-  #  lane 末位参即铁证）——此处连同 \037 一并翻译为空格，消费侧兜底。
+  # 20261019 CRLF verdict: a trailing \r of a groups.txt line sticks to the last module name -> coqchk Cannot find library(name\r)
+  #   (Windows Python text mode writes \n as \r\n; mac POSIX has no such translation, hence the same version unharmed; the
+  #   CI att1-3 triple red always hitting each lane's last argument is the hard proof) -- here \037 and \r are both translated to spaces, consumer-side fallback.
   mods=$(printf '%s' "$grp" | tr '\037\r' '  ' | tr '/' '.')
   nm=$(printf '%s' "$mods" | wc -w | tr -d ' ')
   echo "PCHK group $((i+1)): $nm modules (real closure check)"
   if [ "${PCHK_PACK_ONLY:-0}" = "1" ]; then i=$((i+1)); continue; fi
   ldir="${LANE_ARR[$i]:-}"
-  # 20261019 并发失效对策三件：错峰启动（45s/lane——通道建立窗错开）＋实例域用户隔离
-  # （USER/USERNAME 进 lane 环境——通道名可能含用户域）＋独立副本（CHK_TREE_COPY）。
-  # 实测组合：四 lane 共存全程推进（旧配置秒死窗不复现）。
+  # 20261019 three-piece concurrent-failure countermeasure: staggered start (45s/lane -- channel-setup windows offset)
+  #   + per-instance user isolation (USER/USERNAME into the lane env -- channel names may contain the user domain)
+  #   + independent copies (CHK_TREE_COPY). Measured combination: four lanes coexist and progress throughout (the old die-in-seconds window no longer reproduces).
   if [ -n "$ldir" ] && [ -d "$ldir" ]; then
     ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; cd "$ldir" && "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   else
     ( sleep $((i*45)); export USER="lane$$-$i" USERNAME="lane$$-$i"; "$K" -o $PCHK_BC_ARGS -Q . "" $mods > "$WORK/g$i.log" 2>&1; echo $? > "$WORK/g$i.rc" ) &
   fi
-  # 20261019 死锁修：定向收 lane PID——裸 wait 会把监视器子壳（永循环）一并等死＝
-  # coqchk 步永久假死（桩件实测 t=338s 心跳不歇·wait 不归）。下同 ③d 重试段。
+  # 20261019 deadlock fix: collect lane PIDs explicitly -- a bare wait would also wait forever on the monitor subshell (infinite loop) =
+  #   the coqchk step hanging permanently (stub measurement: at t=338s the heartbeat kept going and wait never returned). Same for the step 3d retry section below.
   LANE_PIDS+=($!)
   i=$((i+1))
 done < "$WORK/groups.txt"
@@ -385,10 +385,10 @@ NGRP=$i
 [ "$NGRP" -gt 0 ] || { echo "PCHK-NO-LANES: 零可用组——fail-loud"; exit 2; }
 if [ "${PCHK_PACK_ONLY:-0}" = "1" ]; then echo "PCHK_PACK_ONLY: $NGRP groups packed — dry exit 0"; exit 0; fi
 
-# ③b 活性仪表盘（20261019 假死定谳反制·用户令「环节显式表达」）：lane 静默期每
-# PCHK_MON_SEC（默认30）s 向控制台打单行心跳——elapsed／各 lane checking 行数＋末模块／
-# rc 收割数；lane 完结即时播报里程碑。只写控制台，不进 lane 日志与合并日志（gate2
-# 口径零污染）。mac bash 3.2 兼容（纯 POSIX 形）。宕机/卡死时刻可由心跳断流精确到 30s。
+# step 3b: liveness dashboard (20261019 countermeasure to the diagnosed fake hang; user directive "make every stage explicit"):
+#   during lane silence, print one heartbeat line to the console every PCHK_MON_SEC (default 30)s -- elapsed /
+#   per-lane checking-line counts + last module / rc harvest count; lane completion announces a milestone immediately.
+#   Console only, never into lane logs or the merged log (zero gate2 pollution). mac bash 3.2 compatible (pure POSIX). A hang/crash moment can be pinned to 30s from the heartbeat cutoff.
 echo "[PCHK-MON] $NGRP lanes launched — heartbeat every ${PCHK_MON_SEC:-30}s (console only; lane logs = WORK/g*.log)"
 MON_T0=$(date +%s); MON_PREV=0
 (
@@ -419,7 +419,7 @@ wait "${LANE_PIDS[@]}"
 kill "$MON_PID" 2>/dev/null || true
 wait "$MON_PID" 2>/dev/null || true
 
-# ③d lane 单次重试（扫描窗残余/瞬态自愈——真伤恒红 fail-loud 不变）
+# step 3d: single lane retry (scan-window residue / transient self-heal -- real damage stays red, fail-loud unchanged)
 retry_done=0
 for j in $(seq 0 $((NGRP-1))); do
   rc=$(cat "$WORK/g$j.rc" 2>/dev/null || echo 1)
@@ -438,7 +438,7 @@ for j in $(seq 0 $((NGRP-1))); do
 done
 wait "${LANE_PIDS[@]}"
 
-# ④ 日志按组序合并（gate2 兼容）+ fail-loud 终审
+# step 4: merge logs in group order (gate2 compatible) + fail-loud final verdict
 : > _chk_all.log
 rc_total=0
 for j in $(seq 0 $((NGRP-1))); do
@@ -447,17 +447,17 @@ for j in $(seq 0 $((NGRP-1))); do
     rc_total=$rc_total
   else
     rc_total=1
-    # lane 失败直进 run 摘要注记（20261019 假死反制：失败面无需开日志即见）
+    # lane failure goes straight into the run summary note (20261019 fake-hang countermeasure: failures visible without opening logs)
     echo "::error::PCHK lane g$j FAILED (rc=$rc) — last module: $(tail -n 1 "$WORK/g$j.log" 2>/dev/null | sed 's/.*checking cst://;s/^[[:space:]]*//' | cut -c1-60)"
   fi
   cat "$WORK/g$j.log" >> _chk_all.log 2>/dev/null || rc_total=1
 done
 grep -q "Modules were successfully checked" _chk_all.log || rc_total=1
 
-# ④b 认证附页（ATT-RECON 20261029）：跳过清单落 _chk_all.log 附页留痕——gate2 认证态
-# 分支的档案覆盖断言以本附页为日志侧正本（与 attest_reconcile.json 逐项对账）。
-# 附页行形（ATTEST-SKIP*/=== 边界行）经 gate2 块状态机 scope 纪律结构性不入 Axioms 段
-# （沙箱负证实测：附页注入前后判定全等；真公理仍 DIRTY——附页不可掩毒）。
+# step 4b: certification appendix (ATT-RECON 20261029): the skip list lands in the _chk_all.log appendix -- the
+#   archive-coverage assertion of gate2's certified-state branch takes this appendix as the log-side master record
+#   (reconciled item by item against attest_reconcile.json). Appendix line shapes (ATTEST-SKIP*/=== boundary lines) structurally never enter the Axioms section, by the gate2 block-state-machine scope discipline
+#   (sandbox negative-control measurement: verdicts identical before/after appendix injection; real axioms still DIRTY -- the appendix cannot mask poison).
 if [ "${SKIP_N:-0}" -gt 0 ] && [ -n "${CHK_SKIP_FILE:-}" ] && [ -f "$CHK_SKIP_FILE" ]; then
   {
     echo ""
@@ -469,7 +469,7 @@ if [ "${SKIP_N:-0}" -gt 0 ] && [ -n "${CHK_SKIP_FILE:-}" ] && [ -f "$CHK_SKIP_FI
   } >> _chk_all.log
 fi
 tail -5 _chk_all.log
-# ④a Step Summary 终表（run 摘要页直读每 lane 状态——环节显式表达收口）
+# step 4a: Step Summary final table (the run summary page reads each lane's status directly -- explicit-stage closure)
 if [ -n "${GITHUB_STEP_SUMMARY:-}" ] && [ -w "$GITHUB_STEP_SUMMARY" ]; then
   {
     echo "### coqchk certification (parallel K=$NGRP, $NMOD modules listed)"

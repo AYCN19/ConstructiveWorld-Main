@@ -1,4 +1,4 @@
-# 文本文件统一 LF 行尾（消除 autocrlf 转换警告）
+# Text files normalized to LF line endings (avoids autocrlf conversion warnings)
 * text=auto
 *.v text eol=lf
 *.md text eol=lf
@@ -6,7 +6,7 @@
 Makefile text eol=lf
 *.ml text eol=lf
 *.json text eol=lf
-# 二进制产物（信任缓存本体，入库追踪）
+# Binary build artifacts (trust cache bodies, tracked in the repository)
 *.vo binary
 *.vos binary
 *.vok binary

@@ -1,33 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""attest_reconcile.py — CI coqchk 前对账步（cw.attest/v1 命中→跳过清单）。
+"""attest_reconcile.py -- CI reconciliation step before coqchk (cw.attest/v1 hit -> skip list).
 
-ATT-RECON 20261029 接线落库件。对账口径与沙箱对账器 coqchk_delta_check.py 同源：
-  * 档案键 = 模块名（保 '.v' 后缀与 'Local/' 类相对路径）；vo 件 = 键去尾 '.v' 换 '.vo'。
-  * 逐件对 = 档案 {vo_sha256, size} vs 现树字节流 sha256 / 字节数；mtime 等任何
-    stat 元数据一律不入判——偏离必检的判据只有内容本身。
-  * 四类判定 unchanged / changed / added / removed，互斥穷尽。
+ATT-RECON 20261029 wiring, landed. Reconciliation caliber shared with the sandbox reconciler coqchk_delta_check.py:
+  * archive key = module name (keeping the '.v' suffix and 'Local/'-style relative paths); vo file = key minus '.v' plus '.vo'.
+  * per-file check = archive {vo_sha256, size} vs the live tree's byte-stream sha256 / byte count; mtime and any
+    other stat metadata never enter the verdict -- the only deviation-must-check criterion is the content itself.
+  * four verdicts unchanged / changed / added / removed, mutually exclusive and exhaustive.
 
-CI 职责（只此一件）：命中件（unchanged）→ 写跳过清单（行形 = parallel_chk.sh
-mods.txt 行形：去 '.v' 后缀的 stem），coqchk 本轮免列、认证凭哈希继承；
-未命中 → 不入清单，照常送 coqchk（偏离必检）。
+CI duty (exactly one): hit files (unchanged) -> write the skip list (line shape = the parallel_chk.sh mods.txt
+line shape: the stem with '.v' stripped); coqchk skips them this round, certification inherits by hash; misses are
+not listed and go to coqchk as usual (deviation must be checked).
 
-跳过面 v1 如实收窄（宁强勿弱）：
-  * 仅顶层模块（键不含 '/'）；Local/ 件维持依赖闭包核验现状；
-  * '_' 前缀件本不入认证面（CI#46 教训），永不入清单。
+Skip surface v1, narrowed as declared (prefer stronger over weaker):
+  * top-level modules only (keys without '/'); Local/ files keep the dependency-closure verification status quo;
+  * '_'-prefixed files never were on the certification surface (CI#46 lesson) and never enter the list.
 
-红只增不减（fail 方向律）：
-  * 档案缺席 / 坏档 / 契约不符 / tree_sha256 自洽破 → 清单置空 + 退出 3：
-    本轮全量 coqchk（认证态分支不启用）——档案侧异常只许降速不许降强；
-  * 现树 vo 不可读 → 退出 2 fail-loud（build 面已绿仍不可读 = 真异常，红）。
+Red only grows (fail-direction law):
+  * archive missing / corrupt archive / contract mismatch / tree_sha256 self-consistency broken -> empty list +
+    exit 3 (full coqchk this round, certified branch off) -- archive trouble may only slow down, never weaken;
+  * live-tree vo unreadable -> exit 2 fail-loud (unreadable although the build face is green = a real anomaly, red).
 
-用法（coq.yml 对账步）：
+Usage (the coq.yml reconciliation step):
   python attest_reconcile.py --tree ConstructiveWorld_vo \\
       --attest scripts/gates/cw_attest.json \\
       --skip-out ConstructiveWorld_vo/_attest_skip.txt --json attest_reconcile.json
 
-退出码：0 = 清单已落盘（可为空）；3 = 档案侧不可用（清单置空，FULL 模式）；
-2 = 结构性失败（树不可读，fail-loud 红）。
+Exit codes: 0 = list written (may be empty); 3 = archive side unusable (list emptied, FULL mode);
+2 = structural failure (tree unreadable, fail-loud red).
 """
 
 from __future__ import annotations
@@ -48,16 +48,16 @@ EXIT_NO_ARCHIVE = 3
 
 
 class ReconError(Exception):
-    """档案侧不可用（EXIT_NO_ARCHIVE 路径）。"""
+    """Archive side unusable (the EXIT_NO_ARCHIVE path)."""
 
 
 class FatalReconError(Exception):
-    """现树结构性失败（EXIT_ERROR 路径，fail-loud 红）。"""
+    """Live-tree structural failure (the EXIT_ERROR path, fail-loud red)."""
 
 
 # ------------------------------------------------------------------ hashing --
 def sha256_file(path: Path) -> tuple[str, int]:
-    """文件字节流 sha256 与字节数。不读任何 stat 元数据。"""
+    """Byte-stream sha256 and byte count of a file. Reads no stat metadata."""
     h = hashlib.sha256()
     size = 0
     with open(path, "rb") as fh:
@@ -72,9 +72,9 @@ def sha256_file(path: Path) -> tuple[str, int]:
 
 # ------------------------------------------------------------------ archive --
 def load_attest(path: Path) -> dict:
-    """契约结构校验 + tree_sha256 自洽校验（口径同沙箱对账器 load_attest）。
+    """Contract-shape check + tree_sha256 self-consistency (same caliber as the sandbox reconciler's load_attest).
 
-    一切不合 → ReconError（调用方走 EXIT_NO_ARCHIVE：清单置空，FULL 模式）。
+    Any mismatch -> ReconError (the caller takes EXIT_NO_ARCHIVE: list emptied, FULL mode).
     """
     try:
         raw = path.read_bytes()
@@ -119,10 +119,10 @@ def load_attest(path: Path) -> dict:
 
 # --------------------------------------------------------------------- tree --
 def scan_surface(tree: Path) -> dict[str, Path]:
-    """认证面 = 树根（非递归）+ Local/（非递归）的 .vo 件；'_' 前缀件除外。
+    """Certification surface = .vo files of the tree root (non-recursive) + Local/ (non-recursive); '_'-prefixed files excluded.
 
-    行形与 parallel_chk.sh mods.txt 对齐：stem = 相对路径去 '.vo'（'X.vo'→'X'，
-    'Local/Y.vo'→'Local/Y'）。"""
+    Line shape aligned with parallel_chk.sh mods.txt: stem = relative path minus '.vo' ('X.vo' -> 'X',
+    'Local/Y.vo' -> 'Local/Y')."""
     surface: dict[str, Path] = {}
     for p in sorted(tree.glob("*.vo")):
         if p.name.startswith("_"):
@@ -138,7 +138,7 @@ def scan_surface(tree: Path) -> dict[str, Path]:
 
 
 def reconcile(tree: Path, archive: dict) -> dict:
-    """四类对账（档案键 ∪ 认证面全并集逐件）。只读树与档案。"""
+    """Four-way reconciliation (union of archive keys and the certification surface, per stem). Read-only on tree and archive."""
     modules = archive["modules"]
     surface = scan_surface(tree)
     arch_stem = {k[:-2]: v for k, v in modules.items()}  # 'X.v' → 'X'
@@ -161,7 +161,7 @@ def reconcile(tree: Path, archive: dict) -> dict:
             raise FatalReconError(f"现树 vo 不可读: {path}: {exc}")
         if digest == ent["vo_sha256"] and size == ent["size"]:
             counts["unchanged"] += 1
-            if "/" not in stem:  # 跳过面 v1 = 仅顶层（Local 维持闭包核验现状）
+            if "/" not in stem:  # skip surface v1 = top-level only (Local/ keeps closure verification as-is)
                 skipped.append(stem)
         else:
             counts["changed"] += 1

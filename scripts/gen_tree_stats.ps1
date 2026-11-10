@@ -1,29 +1,29 @@
 <#
 =====================================================================
- gen_tree_stats.ps1 — S7/PA4+PB6 全树模块计数 tree-stats.json 生成器
- (ConstructiveWorld 补强战役 SLICE-S7 工具件 · 工具族 · 零编译零网络零 git 写)
+ gen_tree_stats.ps1 -- S7/PA4+PB6 full-tree module counter, tree-stats.json generator
+ (ConstructiveWorld reinforcement SLICE-S7 tool item, tool family, zero compile / zero network / zero git write)
 ---------------------------------------------------------------------
- 六维计数:
-   1 全树 .v      = 侧树 Live_X 递归 *.v(全量)
-   2 Live_X 顶层  = 侧树 Live_X 深度0 *.v(沙箱系子目录天然排除)
-   3 UpAbl 顶层   = Live_X 深度0 名前缀 UpAbl*.v
-   4 attn 沙箱    = Live_X\attn 递归 *.v
-   5 order 行数   = order.txt 物理行数(在册三方: 主库Live/侧树Live/vo树, 另探 scripts)
-   6 提交面数     = 主库 git 提交面: ConstructiveWorld_Live/*.v(仓面 *.v 另附)
- 三口径分列 (PB6: 注册面/侧树顶层/沙箱):
-   A 注册面   = 维度5+6 (git 提交面 + order 行数)
-   B 侧树顶层 = 维度2+3 —— ★论文引用口径固定=侧树顶层(维度2), 防锈声明随 JSON 落盘★
-   C 沙箱     = 维度4
- 对账 (fail-loud): 内嵌 09-22 双席手测真值——
-   PR-B: Live_X顶层 841 / 全量 1402 / attn沙箱 363 / UpAbl顶层 226 / order 572 / 提交面 609
-   PR-C: Live_X顶层 839 / UpAbl顶层 226 / order 572 / 提交面 609
-   任一 |实测-手测|/手测 > 5% → 退出码 2, 判「并列存证·禁硬判」(PRWO 施工单红线)。
- 用法:
-   pwsh -File gen_tree_stats.ps1 -SelfTest          # 现树跑一轮+对账表(验收模式)
-   pwsh -File gen_tree_stats.ps1 -TamperTest        # 负向自测: 假真值注入须触发退出码2
-   pwsh -File gen_tree_stats.ps1 [-OutFile x.json] [-CI]   # 常规产出; -CI=runner 韧性
- 领地: 只读统计(库树/git 只读), 唯一写面 = -OutFile(默认本工具旁 tree-stats.json)。
- coq.yml 正本零触碰(CI #107 rerun 在飞面); 本件随 R11x 注册波入库 scripts/ 后 CI 消费。
+ Six counting dimensions:
+   1 full-tree .v     = side tree Live_X recursive *.v (all files)
+   2 Live_X top level = side tree Live_X depth-0 *.v (sandbox-family subdirectories excluded by construction)
+   3 UpAbl top level  = Live_X depth-0 name prefix UpAbl*.v
+   4 attn sandbox     = Live_X\attn recursive *.v
+   5 order lines      = order.txt physical line count (registered copies: main Live / side-tree Live / vo tree, scripts probed as well)
+   6 commit face      = main repo git commit face: ConstructiveWorld_Live/*.v (repo-wide *.v attached separately)
+ Three calibers, listed apart (PB6: registration face / side-tree top level / sandbox):
+   A registration face = dimensions 5+6 (git commit face + order line counts)
+   B side-tree top     = dimensions 2+3 -- paper citation caliber is FIXED to side-tree top level (dimension 2); the anti-rust statement is persisted with the JSON
+   C sandbox           = dimension 4
+ Reconciliation (fail-loud): embedded 09-22 two-pass manual ground truth --
+   PR-B: Live_X top 841 / full 1402 / attn sandbox 363 / UpAbl top 226 / order 572 / commit face 609
+   PR-C: Live_X top 839 / UpAbl top 226 / order 572 / commit face 609
+   Any |measured-manual|/manual > 5% -> exit code 2, verdict "co-exist evidence, no forced judgment" (PRWO work-order red line).
+ Usage:
+   pwsh -File gen_tree_stats.ps1 -SelfTest          # run once on the current tree + reconciliation table (acceptance mode)
+   pwsh -File gen_tree_stats.ps1 -TamperTest        # negative self-test: injected fake ground truth must trigger exit code 2
+   pwsh -File gen_tree_stats.ps1 [-OutFile x.json] [-CI]   # regular output; -CI = runner resilience
+ Territory: read-only statistics (repo tree/git read-only); the only write surface = -OutFile (default tree-stats.json beside this tool).
+ coq.yml original untouched (CI #107 rerun in flight); CI consumes this tool once it lands in scripts/ with an R11x registration wave.
 =====================================================================
 #>
 [CmdletBinding()]
@@ -40,7 +40,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $script:FailLoud = $false
 
-# --- 计数原语: 按 Name 后过滤 '*.v'(免 -Filter 8.3 短名伪匹配), 只读 -----------------
+# --- Counting primitives: filter '*.v' by Name afterwards (avoids -Filter 8.3 short-name false matches); read-only -----------------
 function Count-V {
   param([string]$Dir, [switch]$Recurse)
   if ([string]::IsNullOrWhiteSpace($Dir) -or -not (Test-Path -LiteralPath $Dir)) { return $null }
@@ -69,7 +69,7 @@ function Get-GitFace {
   } catch { return $null }
 }
 
-# --- 六维计数 -------------------------------------------------------------------
+# --- Six-dimension counts -------------------------------------------------------
 $topFiles      = $null
 $liveTop       = $null
 if (Test-Path -LiteralPath $SideTree) {
@@ -102,7 +102,7 @@ try {
   if ($LASTEXITCODE -eq 0 -and $h) { $headNote = ($h -join '') }
 } catch { $headNote = $null }
 
-# --- 对账真值(09-22 PR-B/PR-C 手测) 与 fail-loud 判定 ----------------------------
+# --- Reconciliation ground truth (09-22 PR-B/PR-C manual) and fail-loud verdict --
 $manual = [ordered]@{
   live_x_top    = @{ PRB = 841;  PRC = 839 }
   full_tree_v   = @{ PRB = 1402; PRC = $null }
@@ -111,7 +111,7 @@ $manual = [ordered]@{
   order_lines   = @{ PRB = 572;  PRC = 572 }
   commit_face   = @{ PRB = 609;  PRC = 609 }
 }
-if ($TamperTest) { $manual.live_x_top.PRB = 500 }   # 负向注入: 340/841=40%>>5% 须触发退出码2
+if ($TamperTest) { $manual.live_x_top.PRB = 500 }   # negative injection: 340/841=40% >> 5%, must trigger exit code 2
 
 function Test-Recon {
   param([string]$Key, [int]$Actual)
@@ -135,7 +135,7 @@ if ($null -ne $upablTop)     { $recon['upabl_top']     = Test-Recon 'upabl_top' 
 if ($null -ne $orderMax)     { $recon['order_lines']   = Test-Recon 'order_lines'   $orderMax }
 if ($null -ne $faceLiveDir)  { $recon['commit_face']   = Test-Recon 'commit_face'   $faceLiveDir }
 
-# --- JSON 组装 -------------------------------------------------------------------
+# --- JSON assembly ---------------------------------------------------------------
 $stats = [ordered]@{
   schema       = 'cw.tree-stats/v1 (S7/PA4+PB6)'
   generated_at = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss zzz')
@@ -175,7 +175,7 @@ if (-not $SelfTest) {
   [System.IO.File]::WriteAllText($OutFile, $json, (New-Object System.Text.UTF8Encoding($false)))
   Write-Host "tree-stats.json => $OutFile"
 } else {
-  # 自测模式: 对账表打屏, JSON 落盘同常规(供报告贴存)
+  # Self-test mode: reconciliation table printed to screen, JSON written as usual (for pasting into reports)
   if ([string]::IsNullOrEmpty($OutFile)) { $OutFile = Join-Path $PSScriptRoot 'tree-stats.json' }
   [System.IO.File]::WriteAllText($OutFile, $json, (New-Object System.Text.UTF8Encoding($false)))
   Write-Host '=== S7 六维×三口径 自测对账表 (实测 vs PR-B/PR-C 09-22 手测) ==='
@@ -195,6 +195,6 @@ if ($TamperTest) {
   if ($script:FailLoud) { Write-Host 'TamperTest: fail-loud 正确触发(退出码2预期)'; exit 2 }
   else { Write-Host 'TamperTest: 负向注入未被捕获 = 工具失效!'; exit 3 }
 }
-# fail-loud 门: 本地默认退出码 2(并列存证禁硬判); -CI 面(record-only)不红屏, 判定随 JSON 落盘供审计。
+# fail-loud gate: local default exit code 2 (co-exist evidence, no forced judgment); the -CI face (record-only) does not raise the screen, the verdict is persisted with the JSON for audit.
 if ($script:FailLoud -and -not $CI) { exit 2 }
 exit 0

@@ -1,28 +1,28 @@
 #!/bin/bash
-# parallel_build.sh — 全树构建·依赖分层并行版 v2（20261019 set1557 修订）
+# parallel_build.sh — full-tree build, dependency-layered parallel edition v2 (20261019 set1557 revision)
 #
-# v1→v2 修订缘由（run#267 双红根因）：
-#   R1 Windows python /tmp 路径修复：v1 的 heredoc Python 以 POSIX 绝对路径
-#      open('/tmp/...')——Windows 原生 python 将其解析为 <盘>:\tmp\...（cwd 盘），
-#      与 MSYS bash 的 /tmp（%TEMP%）不同址 → FileNotFoundError → 分层输出 0 字节
-#      → layers=0 零编译假绿（run#267 Build 步实证）。v2 全部 Python 数据面走
-#      cwd 相对路径（_pbld_tmp/），Windows/macOS 双形同源。
-#   R2 代差失效（跨机推送一致性）：PBLD_CHANGED_SINCE=<base sha> 时按 git diff
-#      收集变面 → coqdep 反向闭包 → 删陈旧代 .vo 四件套后重编。变件陈旧 .vo 靠
-#      mtime 指纹判"新鲜"是跨机推送下的撕裂源（.vo 烧录旧代 digest 而 .v 已换代）。
-#      无 base 时回退纯 mtime 指纹（同机推送语义）。
-#   R3 fail-loud 三断言（run#267 layers=0 假绿教训）：分层零行=exit 2；分层总数
-#      != 源清单=exit 2；order.txt 注册面缺源/缺 .vo=exit 1。禁静默降级。
+# v1->v2 revision reasons (run#267 double-red root causes):
+#   R1 Windows python /tmp path fix: the v1 heredoc Python used the POSIX absolute path
+#      open('/tmp/...') -- native Windows python resolves it as <drive>:\tmp\... (cwd drive),
+#      a different location from MSYS bash /tmp (%TEMP%) -> FileNotFoundError -> layer output 0 bytes
+#      -> layers=0 zero-compile fake green (run#267 Build step evidence). v2 routes all Python data
+#      through cwd-relative paths (_pbld_tmp/), identical on Windows/macOS.
+#   R2 generation invalidation (cross-machine push consistency): when PBLD_CHANGED_SINCE=<base sha> is set, changed
+#      files are collected via git diff -> coqdep reverse closure -> stale-generation .vo quadruples deleted, then rebuilt.
+#      Judging a changed file's stale .vo "fresh" by mtime fingerprint is a tear source under cross-machine push (.vo burning an old-generation digest while .v has moved on).
+#      Without a base, fall back to the pure mtime fingerprint (same-machine push semantics).
+#   R3 three fail-loud assertions (run#267 layers=0 fake-green lesson): zero layer lines = exit 2;
+#      layer total != source list = exit 2; order.txt registration surface missing source/.vo = exit 1. No silent downgrade.
 #
-# 原理：rocq dep 生成依赖图 → Kahn 拓扑分层（层内模块互不依赖）→ 逐层并行：
-# 层内缺失/陈旧 .vo 的件经 xargs -P 并行 coqc（层间必须串行——依赖在先层落盘）。
-# 终审 build 面（ConstructiveWorld_vo/build.sh，order 拓扑逐件走）由 yml 后续步承担。
+# Principle: rocq dep builds the dependency graph -> Kahn topological layering (modules within a layer are mutually independent) -> per-layer parallelism:
+# modules with missing/stale .vo are compiled in parallel via xargs -P (layers strictly serial -- dependencies land in earlier layers). The final build-face pass
+# (ConstructiveWorld_vo/build.sh, walking the order topology module by module) is handled by a subsequent yml step.
 #
-# 环境变量：COQC（coqc 路径，Windows 默认 Rocq-Platform 9.1 推导·mac 侧 yml 步显式
-# export mac_rocq shim）/ CHK_ROCQDEP（rocq 路径覆盖）/ BLDJ_JOBS（并行度，默认 3）/
-# PYTHON / PBLD_CHANGED_SINCE（base sha，代差失效）/ PBLD_AUTO_BASE=1（CI 内联
-# 自动探测最近绿 run head 作 base，需 GITHUB_TOKEN）/ GITHUB_TOKEN。
-# fail-loud：任何件编译红 → 红件清单落 /tmp/_pbld_fail.txt + exit 1。
+# Environment variables: COQC (coqc path; Windows default derived from Rocq-Platform 9.1; on the mac side the yml step explicitly
+# exports the mac_rocq shim) / CHK_ROCQDEP (rocq path override) / BLDJ_JOBS (parallelism, default 3) /
+# PYTHON / PBLD_CHANGED_SINCE (base sha, generation invalidation) / PBLD_AUTO_BASE=1 (CI-inline
+# auto-detection of the latest green run head as base, needs GITHUB_TOKEN) / GITHUB_TOKEN.
+# fail-loud: any module failing to compile -> red-file list written to /tmp/_pbld_fail.txt + exit 1.
 set -u
 cd "$(dirname "$0")/../ConstructiveWorld_vo" || { echo "PBLD-PWD-FAIL"; exit 2; }
 COQC_BIN="${COQC:-C:/Rocq-Platform~9.1~2026.01/bin/coqc.exe}"
@@ -30,7 +30,7 @@ JOBS="${BLDJ_JOBS:-3}"
 PY="${PYTHON:-python3}"; command -v "$PY" >/dev/null 2>&1 || { PY=python; command -v "$PY" >/dev/null 2>&1 || PY=py; }
 command -v "$PY" >/dev/null 2>&1 || { echo "PBLD-NO-PYTHON: python3/python/py 全缺席"; exit 2; }
 
-# SW2 同源导出（与 coqchk_all.sh/parallel_chk.sh 同协议）
+# SW2 same-source export (same protocol as coqchk_all.sh/parallel_chk.sh)
 case "$COQC_BIN" in
   */bin/coqc.exe) COQLIB="${COQC_BIN%/coqc.exe}"; COQLIB="${COQLIB%/bin}/lib/coq"; export COQLIB ROCQLIB="$COQLIB" ;;
   */bin/coqc)     COQLIB="${COQC_BIN%/coqc}";     COQLIB="${COQLIB%/bin}/lib/coq"; export COQLIB ROCQLIB="$COQLIB" ;;
@@ -41,23 +41,23 @@ case "$COQC_BIN" in
 esac
 ROCQDEP="${CHK_ROCQDEP:-$ROCQDEP}"
 
-# 工作区：cwd 相对路径（R1——Windows python 可 open 的唯一定址形）
-WORK="_pbld_tmp_$$"   # 实例唯一（同 parallel_chk 多写者互踩定谳）
+# Workspace: cwd-relative paths (R1 -- the only address form Windows python can open)
+WORK="_pbld_tmp_$$"   # per-instance unique (same verdict as the parallel_chk multi-writer clobbering)
 rm -rf "$WORK"; mkdir -p "$WORK"
 
-# ① 全源清单+依赖图（20261105 keeper4：maxdepth 2 收 Local/ 子目录——order.txt 有
-#    Local/LW0LeibSeparation.v 注册行，③a 覆盖断言对其要求源+产物双在，maxdepth 1
-#    漏编则断言必红（PBLD-COV-NO-VO）；lane 日志名经 tr '/' '_' 子目录安全。
-#    原 `! -name '_*'` 排除一并摘除：vo 树 _twc_probe.v 系注册件（order 行）且被
-#    UpReqPadeTransport.v:34 Require——排除即该件零产物→消费件红+③a 断言红。
-#    全树实勘 _ 前缀源=唯 _twc_probe.v 一件（双树同勘），摘除无旁效。）
+# step 1: full source list + dependency graph (20261105 keeper4: maxdepth 2 covers the Local/ subdir -- order.txt has
+#    a Local/LW0LeibSeparation.v registration line and assertion 3a demands source+artifact both present for it; with
+#    maxdepth 1 it would be missed and the assertion would go red (PBLD-COV-NO-VO); lane log names are made subdir-safe
+#    via tr '/' '_'. The old `! -name '_*'` exclusion is removed together with it: _twc_probe.v in the vo tree is a
+#    registered module (order line) and is Required by UpReqPadeTransport.v:34 -- excluding it leaves the module with
+#    zero artifact -> consumers red + assertion 3a red. A full-tree survey found exactly one _-prefixed source, _twc_probe.v (both trees surveyed), so removing the exclusion has no side effects.)
 find . -maxdepth 2 -name '*.v' | sed 's|^\./||' | sort > "$WORK/allv.txt"
 NALL=$(wc -l < "$WORK/allv.txt")
 [ "$NALL" -gt 0 ] || { echo "PBLD-NO-SOURCES"; exit 2; }
 "$ROCQDEP" dep -Q . "" $(cat "$WORK/allv.txt") > "$WORK/deps.txt" 2>/dev/null || true
 [ -s "$WORK/deps.txt" ] || echo "PBLD-WARN-EMPTYDEP: rocq dep 零输出（依赖图空·分层退化名单层——fail-loud 留痕）"
 
-# ② 代差失效面（R2）：base sha → 变面 .v → 反向闭包 → 删陈旧代 .vo
+# step 2: generation invalidation (R2): base sha -> changed .v set -> reverse closure -> delete stale-generation .vo
 BASE="${PBLD_CHANGED_SINCE:-}"
 if [ -z "$BASE" ] && [ "${PBLD_AUTO_BASE:-0}" = "1" ] && [ -n "${GITHUB_TOKEN:-}" ] && command -v git >/dev/null 2>&1; then
   API="https://api.github.com/repos/${GITHUB_REPOSITORY:-}/actions/runs?branch=main&status=success&per_page=1"
@@ -69,14 +69,14 @@ fi
 : > "$WORK/invalidate.txt"
 if [ -n "$BASE" ] && { git cat-file -e "$BASE" 2>/dev/null || git fetch --depth=1 -q origin "$BASE" 2>/dev/null; }; then
   if git diff --name-only "$BASE" HEAD --relative > "$WORK/rawdiff.txt" 2>/dev/null; then
-    # changed 面保留 cwd 相对路径（allv 名册键形；basename 剥除曾使 Local/ 子目录变面永不命中名册——Main CI 9.3 run#5 同类归一病）
+    # the changed set keeps cwd-relative paths (allv roster key shape; basename stripping once made Local/ subdir changes never hit the roster -- Main CI 9.3 run#5 same-class normalization bug)
     grep '\.v$' "$WORK/rawdiff.txt" 2>/dev/null | sort -u > "$WORK/changed.txt" || : > "$WORK/changed.txt"
     "$PY" - "$WORK/allv.txt" "$WORK/deps.txt" "$WORK/changed.txt" > "$WORK/invalidate.txt" <<'PYEOF'
 import sys
 from collections import defaultdict
 allv_f, deps_f, changed_f = sys.argv[1], sys.argv[2], sys.argv[3]
 allv = [l.strip() for l in open(allv_f, encoding='utf-8', errors='replace') if l.strip()]
-allset = set(a[:-2] for a in allv)  # 裸模块名归一（allv 为 .v 文件名形——两名册混用即静默零命中，run 内实证）
+allset = set(a[:-2] for a in allv)  # normalize to bare module names (allv holds .v filename shapes -- mixing the two rosters silently yields zero hits, evidenced in-run)
 rdeps = defaultdict(set)
 for line in open(deps_f, encoding='utf-8', errors='replace'):
     if ':' not in line:
@@ -86,9 +86,9 @@ for line in open(deps_f, encoding='utf-8', errors='replace'):
     if not vt:
         continue
     def norm(t):
-        # 全相对路径形优先（Local/ 子目录件名册键含目录），basename 形兜底——
-        # 单一 basename 剥除曾把 Local/LW0LeibSeparation 归一成 LW0LeibSeparation
-        # ≠ 名册键，整行依赖边被静默丢弃（Main CI 9.3 run#5 fail=34 根因之一）。
+        # full relative-path form first (roster keys of Local/ subdir files include the directory), basename form as
+        # fallback -- stripping to a single basename once normalized Local/LW0LeibSeparation into LW0LeibSeparation
+        # != roster key, silently dropping the whole dependency edge (one root cause of Main CI 9.3 run#5 fail=34).
         p = t.replace('\\', '/')
         if p.endswith('.vo'):
             p = p[:-3]
@@ -143,11 +143,11 @@ else
   fi
 fi
 
-# ③ Kahn 分层：层=入度零批次的逐波剥离（层内并行安全）
-# Windows 原生 python 文本 stdout 重定向恒 CRLF：层行尾 CR 传入 bash read 后不被剥，
-# 层尾文件名带 CR 使 ${f%.v} 后缀剥除失配、"name.v\r.vo" 存在性判定恒假——每炉层尾件
-# 被"缺失"假象全量重编（种子 .vo 指纹 skip 失效，Main CI 9.3 run#8 30 lane=29 层尾+Local
-# 实证）。正形=生产侧钉 LF；消费侧 bash [ -f ]/[ -nt ] 不吃 CR，唯一可靠修位在此。
+# step 3: Kahn layering -- a layer = one wave of zero-indegree stripping (parallel-safe within a layer)
+# Native Windows python text-mode stdout redirection always emits CRLF: the trailing CR of a layer line survives bash
+# read, a CR attached to the layer's last filename breaks the ${f%.v} suffix strip and makes the "name.v\r.vo" existence
+# test always false -- every layer's tail module is fully rebuilt under a false "missing" (seed .vo fingerprint skip
+# defeated; Main CI 9.3 run#8 evidence: 30 lanes = 29 layer-tails + Local). Correct form = pin LF on the producer; bash [ -f ]/[ -nt ] on the consumer never eats CR, so this is the only reliable fix point.
 "$PY" - "$WORK/allv.txt" "$WORK/deps.txt" > "$WORK/layers.txt" <<'PYEOF'
 import sys
 sys.stdout.reconfigure(newline='\n')
@@ -164,10 +164,10 @@ for line in open(deps_f, encoding='utf-8', errors='replace'):
     if not vt:
         continue
     def norm(t):
-        # 全相对路径形优先（Local/ 子目录件名册键含目录），basename 形兜底——
-        # 单一 basename 剥除曾把 Local/LW0LeibSeparation 归一成 LW0LeibSeparation
-        # ≠ 名册键，目标行被静默跳过、入度记 0，该件被误排第 1 层抢在依赖
-        # S01_BaseRing.vo 落盘前编译（Main CI 9.3 run#5 fail=34 根因）。
+        # full relative-path form first (roster keys of Local/ subdir files include the directory), basename form as
+        # fallback -- stripping to a single basename once normalized Local/LW0LeibSeparation into LW0LeibSeparation
+        # != roster key, the target line was silently skipped and its indegree recorded 0, so the module was misordered
+        # into layer 1, compiling before its dependency S01_BaseRing.vo landed (root cause of Main CI 9.3 run#5 fail=34).
         p = t.replace('\\', '/')
         if p.endswith('.vo'):
             p = p[:-3] + '.v'
@@ -207,15 +207,15 @@ for layer in layers:
     print('\x1f'.join(layer))
 PYEOF
 
-# ③a fail-loud 断言一：分层零行（python 崩溃/空输入——run#267 假绿教训，禁静默 PASS）
+# assertion 3a, fail-loud #1: zero layer lines (python crash/empty input -- run#267 fake-green lesson; no silent PASS)
 [ -s "$WORK/layers.txt" ] || { echo "PBLD-NO-LAYERS: 分层输出 0 字节（python 分层崩或空输入）——fail-loud"; exit 2; }
-# ③b fail-loud 断言二：分层总数 == 源清单总数
+# assertion 3b, fail-loud #2: layer total == source list total
 NTOT=$(tr '\037' '\n' < "$WORK/layers.txt" | grep -c '\.v$' || true)
 [ "${NTOT:-0}" -eq "$NALL" ] || { echo "PBLD-TOTAL-MISMATCH: layers_total=$NTOT sources=$NALL —— fail-loud"; exit 2; }
 
-# ④ 逐层并行编译（缺失/在失效集才编；无 base 时按 mtime 指纹回退）
-# lane 体落盘为脚本文件（20261019 mac 判例：多行单引号内联 bash -c 经 BSD xargs -I{}
-# 截断→"line 7: unexpected end of file" 整层零编；文件形双平台同源零引号 dance）
+# step 4: per-layer parallel compile (compile only when missing or in the invalidation set; without a base, fall back to the mtime fingerprint)
+# The lane body is written out as a script file (20261019 mac precedent: a multi-line single-quoted inline bash -c
+# got truncated by BSD xargs -I{} -> "line 7: unexpected end of file", the whole layer compiling nothing; the file form is identical on both platforms, zero quote dance)
 : > "$WORK/fail.txt"
 cat > "$WORK/lane.sh" <<'LANE'
 #!/bin/bash
@@ -238,10 +238,10 @@ while IFS= read -r layer; do
     m="${f%.v}"
     if [ -f "${m}.vo" ]; then
       if [ -n "$BASE" ]; then
-        # 代差失效模式：.vo 在盘且不在失效集 → SKIP（源字节与 base 代一致·层级 induction 保持）
+        # generation-invalidation mode: .vo on disk and not in the invalidation set => SKIP (source bytes match the base generation; layer-level induction preserved)
         if ! grep -qxF "$m" "$WORK/invalidate.txt" 2>/dev/null; then nskip=$((nskip+1)); continue; fi
       else
-        # mtime 回退模式（v1 语义）
+        # mtime fallback mode (v1 semantics)
         if [ "${m}.vo" -nt "$f" ]; then nskip=$((nskip+1)); continue; fi
       fi
     fi
@@ -251,12 +251,12 @@ while IFS= read -r layer; do
   echo "$todo" | tr ' ' '\n' | grep -v '^$' | \
     xargs -P "$JOBS" -I{} "$WORK/lane.sh" {} | while read -r st f; do echo "  [L$layer_i] $st $f"; done
 done < "$WORK/layers.txt"
-# 计数直读（E-STAGING-R84-GATECHAIN 教义：管道计数短路坑规避——独立统计）
+# Count read directly (E-STAGING-R84-GATECHAIN lesson: avoids the pipeline-count short-circuit pitfall -- separate tally)
 nf=$(grep -c "^FAIL" "$WORK/fail.txt" 2>/dev/null || true)
 [ "${nf:-0}" -eq 0 ] || nfail=$nf
 echo "parallel_build: layers=$layer_i total=$NALL compiled_or_invalidated=$((NTOT-nskip)) skip=$nskip fail=${nfail:-0}"
 
-# ④a fail-loud 断言三：order.txt 注册面覆盖（缺源/缺 .vo 即红——禁漏件门）
+# assertion 4a, fail-loud #3: order.txt registration-surface coverage (missing source/.vo goes red -- no-missed-module gate)
 covfail=0
 while IFS= read -r line; do
   f=$(printf '%s' "$line" | sed 's/#.*//' | tr -d '\r' | tr -d ' ')
@@ -271,7 +271,7 @@ if [ "${nfail:-0}" -eq 0 ]; then
   exit 0
 fi
 echo "PARALLEL_BUILD_FAIL — red files:"
-# 20261105 keeper4 修 bug：原 cat /tmp/_pbld_fail.txt 与 fail.txt 落盘位（$WORK/fail.txt）
-# 错位——红清单永远打不出（Windows python /tmp ≠ MSYS /tmp·v1 教训同族）。fail-loud 出证面。
+# 20261105 keeper4 bug fix: the original cat /tmp/_pbld_fail.txt and the fail.txt write location ($WORK/fail.txt)
+# were misaligned -- the red list could never print (Windows python /tmp != MSYS /tmp; same family as the v1 lesson). fail-loud evidence output.
 cat "$WORK/fail.txt"
 exit 1

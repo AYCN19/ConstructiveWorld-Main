@@ -1,5 +1,7 @@
 # 铁律修宪案 · 认证继承律 · 定稿（ATT-AMEND-20261029-A1-FINAL）
 
+> Historical governance record. The normative rulebook in force is maintained outside this file; preserved verbatim for provenance.
+
 > 案类：铁律修正案（立法面）。配套施工件：`ci_attest_wiring.diff`（执行面接线·
 > **生效面 ConstructiveWorld-Main**·可 apply 性终裁与一按即用程序见
 > `final/wiring_case_FINAL.md`）＋ `final/gate2_attest_mode_criteria_FINAL.md`

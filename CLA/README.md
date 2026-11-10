@@ -2,48 +2,48 @@
 
 All contributors to ConstructiveWorld-Main must sign a Contributor License Agreement before their pull requests can be merged. This protects both the contributor and the project.
 
-## 文件结构
+## File Structure
 
-| 文件 | 适用对象 |
+| File | Applies to |
 |------|---------|
-| `ICLA.md` | 个人贡献者（独立开发者、学生、自由职业者） |
-| `CCLA.md` | 实体组织（公司、机构、团队）及其雇员 |
-| `RLA.md` | 运行时组件（提取件）被授权方——未来单独发布的可执行检查器 |
-| `commercial_license_template.md` | 商业许可谈判对手方（谈判起点模板） |
+| `ICLA.md` | Individual contributors (independent developers, students, freelancers) |
+| `CCLA.md` | Legal entities (companies, institutions, teams) and their employees |
+| `RLA.md` | Licensees of the runtime components (extraction artifacts) — the executable checkers to be released separately in the future |
+| `commercial_license_template.md` | Counterparties in commercial license negotiations (template serving as the starting point for negotiation) |
 
-## 签署流程
+## Signing Process
 
-### 个人贡献者 (ICLA)
-1. 打开 `ICLA.md`
-2. 填写签名栏（姓名、邮箱、GitHub ID、日期）
-3. 发送到 `168888@live.cn`，或在第一个 Pull Request 中附上扫描件/截图
+### Individual Contributors (ICLA)
+1. Open `ICLA.md`
+2. Fill in the signature block (name, email, GitHub ID, date)
+3. Send it to `168888@live.cn`, or attach a scanned copy or screenshot to your first Pull Request
 
-### 实体组织 (CCLA)
-1. 公司的授权代表打开 `CCLA.md`
-2. 填写公司信息和签名
-3. 发送到 `168888@live.cn`
-4. 每位实际贡献代码的雇员仍需签署 ICLA，但可在备注栏引用公司 CCLA 编号
+### Legal Entities (CCLA)
+1. An authorized representative of the company opens `CCLA.md`
+2. Fill in the company information and signature
+3. Send it to `168888@live.cn`
+4. Each employee who actually contributes code must still sign the ICLA, but may cite the company's CCLA number in the remarks field
 
-## 为什么需要 CLA？
+## Why Is a CLA Needed?
 
-ConstructiveWorld-Main 采用 **Apache 2.0（公开版）+ 商业许可（企业版）** 双许可模式。CLA 确保：
+ConstructiveWorld-Main adopts a dual-licensing model of **Apache 2.0 (public edition) + commercial license (enterprise edition)**. The CLA ensures that:
 
-- 贡献者的代码可以被 Apache 2.0 授权给全球用户
-- 贡献者的代码也可以被纳入商业许可版本（授权给付费客户）
-- 贡献者保留自己代码的版权（只授予使用权，不转让所有权）
-- 项目免受专利索赔风险
+- Contributors' code can be licensed to users worldwide under Apache 2.0
+- Contributors' code can also be included in the commercially licensed edition (licensed to paying customers)
+- Contributors retain the copyright in their own code (only a right to use is granted; ownership is not transferred)
+- The project is protected against the risk of patent claims
 
-## RLA 轨边界声明（2026-10-06）
+## RLA Track Boundary Statement (2026-10-06)
 
-Apache-2.0 主许可已授予任何人对公开源面（含其提取产物 .ml/.mli）的提取、使用与商业化权利；RLA 轨的可授权范围限于：① 官方受支持/带担保的分发与维护服务；② 未来非公开资产与增量技术服务。RLA 不构成对已公开源面的追溯性商业化限制。详见根目录 `NOTICE.md` 边界声明一节。
+The Apache-2.0 master license already grants every recipient the right to extract from, use, and commercialize the public source face, including its extraction products (.ml/.mli); the licensable scope of the RLA track is limited to: (i) officially supported and warranted distribution and maintenance services; and (ii) future non-public assets and incremental technical services. The RLA imposes no retroactive commercial restriction on the public source face. For details, see the boundary statement section of `NOTICE.md` in the repository root.
 
-## 上游双栖登记（2026-10-06）
+## Upstream Dual-Track Registration (2026-10-06)
 
-`ConstructiveCauchyRealsSep.v`（构造性 Cauchy 实数逃逸窗分离引擎）已提交上游 rocq-prover/stdlib（PR #313，评审中）：上游收录副本按 stdlib 许可（LGPL-2.1）走；本仓及沙箱播种的同源副本仍为 Apache-2.0，权利义务不变——同源双栖、两证并存。登记全文见根目录 `NOTICE.md` 第 2 节。
+`ConstructiveCauchyRealsSep.v` (the escape-window separation engine for the constructive Cauchy reals) has been submitted upstream to rocq-prover/stdlib (PR #313, under review): the copy accepted upstream is governed by the stdlib license (LGPL-2.1); the same-source copies in this repository and those seeded into sandboxes remain under Apache-2.0, with rights and obligations unchanged — same source, dual-track, two licenses coexisting. For the full registration, see Section 2 of `NOTICE.md` in the repository root.
 
-## 协议的法律效力
+## Legal Effect of the Agreements
 
-CLA 是具备法律约束力的协议。如有疑问，建议咨询法律顾问后再签署。
+A CLA is a legally binding agreement. If you have any doubts, you are advised to consult legal counsel before signing.
 
 
 

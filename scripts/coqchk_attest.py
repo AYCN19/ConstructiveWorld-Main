@@ -1,43 +1,53 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""coqchk_attest.py — ConstructiveWorld vo 树认证档案生成器（契约 cw.attest/v1）。
+"""coqchk_attest.py - ConstructiveWorld vo tree certification archive generator
+(contract cw.attest/v1).
 
-契约（固定）:
+Contract (fixed):
     {
-      "modules":      {"<模块名>": {"vo_sha256": "<hex>", "size": <int>}, ...},
+      "modules":      {"<module name>": {"vo_sha256": "<hex>", "size": <int>}, ...},
       "tree_sha256":  "<hex>",
       "generated_by": "coqchk green run",
       "schema":       "cw.attest/v1"
     }
 
-定义:
-  * 模块名 = order.txt 行去掉注释（自首个 '#' 起截断）再去空白后的原文（保留 '.v'
-    后缀与 'Local/' 类相对路径，如 "S01_BaseRing.v"、"Local/LW0LeibSeparation.v"）。
-    对应 vo 件 = 模块名去尾 '.v' 换 '.vo'，在真实 vo 树根下解析。
-  * vo_sha256 / size = vo 文件原始字节的 sha256 / 字节数。mtime、任何 stat 元数据
-    均不入哈希、不入档案。
-  * tree_sha256 = sha256( canonical(modules) )，其中 canonical(modules) 为
+Definitions:
+  * module name = the order.txt line after comment stripping (truncated from
+    the first '#') and whitespace stripping, taken verbatim (the '.v' suffix
+    and relative paths such as 'Local/' are preserved, e.g. "S01_BaseRing.v",
+    "Local/LW0LeibSeparation.v").
+    The corresponding vo file = the module name with the trailing '.v' replaced
+    by '.vo', resolved under the real vo tree root.
+  * vo_sha256 / size = the sha256 / byte count of the vo file's raw bytes.
+    mtime and any stat metadata enter neither the hash nor the archive.
+  * tree_sha256 = sha256( canonical(modules) ), where canonical(modules) is the
+    UTF-8 bytes of
     json.dumps(modules, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    的 UTF-8 字节。与档案文件自身的排版本无关，可跨运行复现。
-  * generated_by / schema 为契约定值。本脚本只生成档案与对账，不代行 coqchk 本体。
+    Independent of the archive file's own layout; reproducible across runs.
+  * generated_by / schema are contract constants. This script only builds the
+    archive and reconciles it; it never stands in for coqchk itself.
 
-纪律（只读律）:
-  * 真实 vo 树与 order.txt 只读（仅 'rb' / 'r' 打开）。
-  * 一切写入（档案、临时夹具、自验残料）只落沙箱目录 = 本脚本所在目录。
-    --out 越出沙箱即拒绝。
+Discipline (read-only law):
+  * the real vo tree and order.txt are read-only (opened 'rb' / 'r' only).
+  * every write (the archive, temporary fixtures, self-test leftovers) lands
+    only in the sandbox directory = the directory holding this script.
+    --out escaping the sandbox is refused.
 
-三态自验 selfTest:
-    ok    —— 档案重载后全量重算（重哈希 848 件 vo + 重导 tree_sha256）零差异;
-    diff  —— 结构合法但内容不符（模块集不齐 / 哈希或字节数不符 / tree 哈希不符）,
-              差异逐条列出;
-    error —— 结构性失败（档案缺失/坏 JSON/契约字段错、模块行重复或无 .v 后缀、
-              vo 缺失或不可读）。
-    退出码: ok=0, diff=1, error=2。
+Three-state self-verification selfTest:
+    ok    - after reloading the archive, a full recompute (re-hash all 848 vo
+            files + re-derive tree_sha256) shows zero differences;
+    diff  - structurally valid but content mismatch (incomplete module set /
+            hash or byte count mismatch / tree hash mismatch),
+            with every difference listed;
+    error - structural failure (archive missing/bad JSON/contract field error,
+            duplicate module lines or a line without the .v suffix,
+            a vo file missing or unreadable).
+    Exit codes: ok=0, diff=1, error=2.
 
-用法:
-    python coqchk_attest.py                  # 生成档案 + 自验（默认全流程）
-    python coqchk_attest.py --verify         # 只对账既有档案（重跑对账自身）
-    python coqchk_attest.py --unit-selftest  # 沙箱内夹具演示三态皆可达
+Usage:
+    python coqchk_attest.py                  # build the archive + self-verify (the default full flow)
+    python coqchk_attest.py --verify         # reconcile the existing archive only (re-run the reconciliation itself)
+    python coqchk_attest.py --unit-selftest  # sandbox fixture demo that all three states are reachable
 """
 
 from __future__ import annotations
@@ -62,14 +72,16 @@ _EXIT = {STATE_OK: 0, STATE_DIFF: 1, STATE_ERROR: 2}
 
 
 class AttestError(Exception):
-    """结构性失败（三态之 error）。"""
+    """Structural failure (the error state of the three states)."""
 
 
 # ---------------------------------------------------------------- order.txt --
 def parse_order(order_path: Path) -> list[str]:
-    """order.txt → 模块名列表（去注释去空格，保序，查重）。
+    """order.txt -> module name list (comments and whitespace stripped, order
+    preserved, duplicates checked).
 
-    注释 = 自首个 '#' 至行尾；空行/纯注释行跳过；重复行按 error 处理。
+    A comment = from the first '#' to the end of the line; blank and
+    comment-only lines are skipped; a duplicate line is treated as an error.
     """
     keys: list[str] = []
     seen: dict[str, int] = {}
@@ -97,7 +109,7 @@ def parse_order(order_path: Path) -> list[str]:
 
 
 def resolve_vo_rel(key: str) -> str:
-    """模块名 → 相对 vo 路径（'X.v' → 'X.vo'）。非 .v 结尾按 error。"""
+    """Module name -> relative vo path ('X.v' -> 'X.vo'). A non-.v ending is an error."""
     if not key.endswith(".v"):
         raise AttestError(f"模块行不以 .v 结尾，无法解析 vo: {key!r}")
     return key[:-2] + ".vo"
@@ -105,7 +117,7 @@ def resolve_vo_rel(key: str) -> str:
 
 # -------------------------------------------------------------------- hashing --
 def sha256_file(path: Path) -> tuple[str, int]:
-    """文件字节流 sha256 与字节数。不读任何 stat 元数据（mtime 不入哈希）。"""
+    """sha256 and byte count of a file's byte stream. Reads no stat metadata (mtime enters no hash)."""
     h = hashlib.sha256()
     size = 0
     try:
@@ -122,11 +134,11 @@ def sha256_file(path: Path) -> tuple[str, int]:
 
 
 def build_modules(tree: Path, keys: list[str]) -> dict[str, dict]:
-    """对每个模块名解析 vo 并哈希。任何缺失/不可读 → AttestError（error 态）。"""
+    """Resolve and hash the vo file for each module name. Any missing/unreadable file -> AttestError (error state)."""
     modules: dict[str, dict] = {}
     failures: list[str] = []
     for key in keys:
-        rel = resolve_vo_rel(key)  # 非 .v 行 → AttestError，整批判 error
+        rel = resolve_vo_rel(key)  # a non-.v line -> AttestError; the whole batch is judged error
         try:
             digest, size = sha256_file(tree / rel)
         except AttestError as exc:
@@ -161,7 +173,7 @@ def _ensure_in_sandbox(path: Path) -> Path:
 
 
 def generate(tree: Path, order_path: Path, out_path: Path) -> dict:
-    """建档并写沙箱。返回档案 dict。真实树零写入。"""
+    """Build the archive and write it into the sandbox. Returns the archive dict. Zero writes to the real tree."""
     keys = parse_order(order_path)
     modules = build_modules(tree, keys)
     archive = {
@@ -182,7 +194,7 @@ def generate(tree: Path, order_path: Path, out_path: Path) -> dict:
 
 # ------------------------------------------------------------------ selfTest --
 def _load_archive(archive_path: Path) -> dict:
-    """读档案并做契约结构校验；坏档 → AttestError（error 态）。"""
+    """Load the archive and validate the contract structure; a bad archive -> AttestError (error state)."""
     try:
         raw = archive_path.read_bytes()
     except OSError as exc:
@@ -217,9 +229,10 @@ def _load_archive(archive_path: Path) -> dict:
 
 
 def selfTest(archive_path: Path, tree: Path, order_path: Path) -> tuple[str, dict]:
-    """三态自验：重载档案 → 从真实树全量重算 → 对账。
+    """Three-state self-verification: reload the archive -> full recompute from
+    the real tree -> reconcile.
 
-    返回 (state, report)；state ∈ {ok, diff, error}。
+    Returns (state, report); state in {ok, diff, error}.
     """
     report: dict = {
         "archive": str(archive_path),
@@ -278,9 +291,9 @@ def selfTest(archive_path: Path, tree: Path, order_path: Path) -> tuple[str, dic
     return STATE_OK, report
 
 
-# ------------------------------------------------- unit selftest (夹具三态) --
+# ------------------------------------------------- unit selftest (fixture states) --
 def run_unit_selftest() -> int:
-    """沙箱内合成夹具，验证三态 selfTest 各自可达且判定正确。只写沙箱。"""
+    """Build synthetic fixtures inside the sandbox and verify that each of the three selfTest states is reachable and judged correctly. Writes only to the sandbox."""
     results: list[tuple[str, str, bool]] = []
     work = Path(tempfile.mkdtemp(prefix="attest_unit_", dir=SANDBOX))
     try:
@@ -298,12 +311,12 @@ def run_unit_selftest() -> int:
         )
         farch = work / "fix_attest.json"
 
-        # 态1 ok：新档自验应零差异
+        # state ok: self-verifying a fresh archive must show zero differences
         generate(ftree, ftree / "order.txt", farch)
         st, rep = selfTest(farch, ftree, ftree / "order.txt")
         results.append((STATE_OK, st, st == STATE_OK and rep["checked"] == 3))
 
-        # 态2 diff：篡改 A.v 哈希 + B.v 字节数 → 应报 2 条差异
+        # state diff: tamper A.v's hash + B.v's byte count -> exactly 2 differences reported
         doc = json.loads(farch.read_text(encoding="utf-8"))
         doc["modules"]["A.v"]["vo_sha256"] = "0" * 64
         doc["modules"]["B.v"]["size"] += 1
@@ -313,7 +326,7 @@ def run_unit_selftest() -> int:
             (STATE_DIFF, st, st == STATE_DIFF and len(rep["diffs"]) == 2)
         )
 
-        # 态3 error：删掉 Local/C.vo（档案过期）→ 结构性失败
+        # state error: delete Local/C.vo (the archive is stale) -> structural failure
         (ftree / "Local" / "C.vo").unlink()
         st, rep = selfTest(farch, ftree, ftree / "order.txt")
         reason_norm = rep.get("reason", "").replace("\\", "/")

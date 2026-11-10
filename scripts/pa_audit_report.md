@@ -1,5 +1,7 @@
 # Print Assumptions 全量批审计报告（pa_audit）
 
+> Historical audit record (Print Assumptions full-tree batch report; the filename carries no date — the generation time is in the body below). Preserved verbatim for provenance; current certification facts live in README.md section 2.
+
 - 生成时间：2026-09-11 02:18:55 +0800；总耗时：4847s（含 guard 热等待 85s（按 guard cooling 行计数 × CoolSec=5 估算））
 - 脚本：scripts/pa_audit.sh（SHA1 `94ccaf54da059e3a04ea7bafd2d2a2533fdb9720`）；清单：scripts/pa_theorems.txt（193 条）
 - 工具链：The Rocq Prover, version 9.0.1（Windows 走 9.0 完整路径 `C:/Rocq-Platform~9.0~2025.08/bin`，禁裸 PATH——9.1 coqchk 对 9.0 产物报 bad version 90001；CI ubuntu 走 setup 的 9.0）

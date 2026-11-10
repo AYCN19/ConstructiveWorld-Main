@@ -1,25 +1,25 @@
 #!/bin/bash
 # ============================================================================
-# merge220.sh — releases/CW_ConstructiveWorld_220.v 确定性生成器（2026-09-10）
+# merge220.sh — deterministic generator for releases/CW_ConstructiveWorld_220.v (2026-09-10)
 # ============================================================================
-# 事故背景：CI #27（af82fa6）报 `Error: positive_dist already exists`（L115662）。
-# 旧合并轨为历轮扁平手拼（基座 219 + 各新库原文拼接），新库重复定义基座已有名即炸。
-# 处置（用户裁决 20260910）：源级改名方案——新库侧（attn 的 Up*/CW220_Extensions.v）
-# 已按 scripts/rename-ledger-20260910.md 完成 150 名源级改名；本生成器以扁平拼接
-# 确定性重生成合并轨，并内置【撞名闸门】：逐名比对前序模块与基座已定义名，
-# 发现撞名立即 FAIL 并报出名字与文件——把本次事故变永久关卡。
+# Incident background: CI #27 (af82fa6) reported `Error: positive_dist already exists` (L115662).
+# The old merge track was flat hand-concatenation across rounds (base 219 + each new library verbatim); a new library redefining an existing base name blew up the build.
+# Remedy (user ruling 20260910): source-level renaming -- the new-library side (attn Up*/CW220_Extensions.v)
+# completed 150 source-level renames per scripts/rename-ledger-20260910.md; this generator flat-concatenates
+# to regenerate the merge track deterministically, with a built-in [name-collision gate]: per-name comparison against names defined by preceding modules and the base;
+# on collision it FAILs immediately, printing name and file -- turning this incident into a permanent gate.
 #
-# 输入：
-#   基座  = ConstructiveWorld_vo/CW_ConstructiveWorld_219.v（仓库已入库正名，只读）
-#   模块  = scripts/order.txt 前 34 项（"220 合并区：34 模块"既定范围）；
-#           模块源当前取 attn 工作区（本席位改名后版本；主会话捆绑入库后，
-#           如 ConstructiveWorld_vo 已同步同名版，可切换 MOD_SRC=repo 再跑，产物不变）。
-#   排除  = CW214KL_scan.v / AttnHardLimit218.v（基座已内联其内容的只读垫片件，
-#           合并轨不内联；.vo 扁平库经 Import 遮蔽合法消费）。
-# 变换：基座原样置顶；其后每模块剥除非 Stdlib 的 Require 行（项目内依赖已由
-#       基座/前序块就地满足，实测外部名 100% 由基座供给），其余字节原样。
-# 幂等：头部"生成时间"取输入文件最新 mtime（确定性），同输入 → 字节同产物。
-# 产物：releases/CW_ConstructiveWorld_220.v（首跑前旧件自动备份 .bak）
+# Inputs:
+#   base    = ConstructiveWorld_vo/CW_ConstructiveWorld_219.v (registered canonical name in the repo, read-only)
+#   modules = first 34 entries of scripts/order.txt (the established "220 merge zone: 34 modules" scope);
+#           module sources currently come from the attn workspace (post-rename versions; after the
+#           main-session bundle lands, if ConstructiveWorld_vo has synced the same-name versions, switch MOD_SRC=repo and rerun -- output unchanged).
+#   exclude = CW214KL_scan.v / AttnHardLimit218.v (read-only shim files whose content the base already inlines;
+#           the merge track does not inline them; the flat .vo library consumes them legitimately via Import shadowing).
+# Transform: base verbatim on top; then each module has its non-Stdlib Require lines stripped (in-project
+#       dependencies are already satisfied by the base/preceding blocks -- measured: external names are 100% supplied by the base); all other bytes verbatim.
+# Idempotent: the header "generation time" takes the newest input mtime (deterministic); same input -> byte-identical output.
+# Output: releases/CW_ConstructiveWorld_220.v (the previous file is auto-backed up as .bak before the first run)
 # ============================================================================
 set -u
 REPO="D:/ComplexAnalysis/ConstructiveWorld-Main"
@@ -28,12 +28,12 @@ BASE="$REPO/ConstructiveWorld_vo/CW_ConstructiveWorld_219.v"
 ORDER="$REPO/scripts/order.txt"
 OUT="$REPO/releases/CW_ConstructiveWorld_220.v"
 MOD_SRC="${MOD_SRC:-attn}"    # attn|repo
-NMERGE=34                     # 合并区模块数（v4 既定 34）
+NMERGE=34                     # merge-zone module count (fixed 34 by v4)
 
 [ -f "$BASE" ] || { echo "FAIL: missing base $BASE"; exit 2; }
 [ -f "$ORDER" ] || { echo "FAIL: missing $ORDER"; exit 2; }
 
-# 旧件备份（仅首跑）
+# Backup of the previous output file (first run only)
 if [ -f "$OUT" ] && [ ! -f "$OUT.bak" ]; then
   cp -p "$OUT" "$OUT.bak" && echo "[bak] 旧合并轨已备份 -> CW_ConstructiveWorld_220.v.bak"
 fi
@@ -139,7 +139,7 @@ for f in mods:
         print("GATE-FAIL: 模块缺失 %s（MOD_SRC=%s）" % (f, MOD_SRC)); sys.exit(1)
     paths.append((f, p))
 
-# ---------- 撞名闸门（事故变永久关卡）----------
+# ---------- name-collision gate (the incident turned into a permanent gate) ----------
 dup = OrderedDict()
 def seen_before(n, label, ln):
     dup.setdefault(n, []).append((label, ln))
@@ -163,7 +163,7 @@ if gate:
     sys.exit(1)
 print("GATE-OK: 基座+%d 模块逐名比对零撞名" % NMERGE)
 
-# ---------- 拼接 ----------
+# ---------- concatenation ----------
 def strip_local_requires(path):
     """剥除非 Stdlib Require 行（项目内依赖已就地满足）；其余字节原样"""
     with open(path, encoding="utf-8", errors="replace", newline="") as fh:

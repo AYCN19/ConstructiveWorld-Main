@@ -1,40 +1,55 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-闸② CI「Axioms 段=0」哨兵：coqchk 日志块状态机解析器（AX-GUARD 20260925）
+Gate 2 CI "Axioms section = 0" sentinel: block state-machine parser for the
+coqchk log (AX-GUARD 20260925)
 ==========================================================================
-对 coqchk（-o）日志做**块状态机**解析，输出实际公理名单；禁朴素 grep。
+Parses the coqchk (-o) log with a **block state machine** and outputs the actual
+axiom list; naive grep is forbidden.
 
-为什么非朴素 grep（本机实证）：
-- 本机 _chk_all.log 有 88 处 `checking cst:` 行名字含 error 字样
-  （Corelib.Init.Specif.error / Stdlib.Lists.List.hd_error / nth_error /
-  PadeErrorIntegral 族…）——裸词 grep（-i error / -i axiom）全数假匹配。
-- E422 教训：2212 条「axiom」裸词命中全为 stdlib NZAxioms/ZAxioms 模块类型名。
-- 本解析器的作用域纪律：**只有处于 `Axioms:` 段内部的行才可能被判为公理**，
-  段外一切行（checking cst / intern / 模块名）永不入榜——假匹配在结构上不可能。
+Why not naive grep (observed on this machine):
+- The local _chk_all.log has 88 `checking cst:` lines whose names contain the
+  substring error
+  (Corelib.Init.Specif.error / Stdlib.Lists.List.hd_error / nth_error /
+  PadeErrorIntegral family...) - bare-word grep (-i error / -i axiom) matches
+  every one of them falsely.
+- Lesson E422: the 2212 bare-word hits for "axiom" were all stdlib
+  NZAxioms/ZAxioms module type names.
+- This parser's scope discipline: **only a line inside the `Axioms:` section
+  can possibly be judged an axiom**; every line outside a section (checking
+  cst / intern / module names) never enters the list - a false match is
+  structurally impossible.
 
-状态机：
-  S0 扫行 → 见 `[*] Axioms:` 头 →
-      头行内联 `<none>` → 记空段（CLEAN 证据）→ 回 S0
-      头行内联名字   → 记单条
-      头行空         → S1 收段
-  S1 收段 → 行为缩进条目（≥2 空格起头非空）→ 记公理；
-            行为空行 / 下一节头（`*` 开头）/ 非缩进行 → 回 S0
+State machine:
+  S0 scan lines -> on the `[*] Axioms:` header ->
+      header line inline `<none>` -> record an empty section (CLEAN evidence)
+      -> back to S0
+      header line inline names   -> record the single entry
+      header line inline empty  -> S1 collect the section
+  S1 collect section -> a line that is an indented entry (starts with >= 2
+            spaces and is non-empty) -> record the axiom;
+            an empty line / the next section header (starts with `*`) / a non
+            indented line -> back to S0
 
-判读（E943 纪律三口径）：
-  exit 0 = CLEAN（Axioms 段全空且日志完整「Modules were successfully checked」）
-  exit 1 = DIRTY（Axioms 段非空；三靶公理单独列明）
-  exit 2 = NO_AXIOMS_SECTION（日志无 Axioms 段——通常系 coqchk 未带 -o，不可判，fail-loud）
-  exit 3 = LOG_INCOMPLETE（无「Modules were successfully checked」尾行——日志被截断或在写）
+Verdict (the three E943-discipline readings):
+  exit 0 = CLEAN (every Axioms section is empty and the log is complete with
+  "Modules were successfully checked")
+  exit 1 = DIRTY (some Axioms section is non-empty; the three target axioms
+  are listed separately)
+  exit 2 = NO_AXIOMS_SECTION (the log has no Axioms section - usually coqchk
+  ran without -o; undecidable, fail-loud)
+  exit 3 = LOG_INCOMPLETE (no "Modules were successfully checked" tail line -
+  the log is truncated or still being written)
 
-靶公理（AX-RECIPE/AX-MATRIX 定谳三件套，全名锚定）：
+Target axioms (the three-piece set adjudicated by AX-RECIPE/AX-MATRIX,
+anchored by full names):
   Stdlib.Logic.FunctionalExtensionality.functional_extensionality_dep
   Stdlib.Reals.ClassicalDedekindReals.sig_not_dec
   Stdlib.Reals.ClassicalDedekindReals.sig_forall_dec
 
-用法：
+Usage:
   python gate2_axioms_parser.py LOG [LOG...] [--json OUT]
-  python gate2_axioms_parser.py --naive-demo LOG   # 演示朴素 grep 假匹配 vs 本解析器对照
+  python gate2_axioms_parser.py --naive-demo LOG   # demo contrasting naive grep false matches with this parser
 """
 import os, re, sys, json, argparse, datetime
 
@@ -43,8 +58,10 @@ TARGET_AXIOMS = [
     "Stdlib.Reals.ClassicalDedekindReals.sig_not_dec",
     "Stdlib.Reals.ClassicalDedekindReals.sig_forall_dec",
 ]
-# 朴素 grep 假匹配白名单类（标识符名字含 error 字样的合法常量/模块族）——
-# 仅用于 --naive-demo 对照说明；本解析器状态机 scope 纪律下这些行永不入榜。
+# Whitelist classes of naive-grep false matches (legal constant/module
+# families whose names contain the substring error); used only for the
+# --naive-demo contrast. Under this parser's state-machine scope discipline
+# such lines never enter the list.
 NAIVE_FALSE_CLASSES = [
     r"checking cst:\S*error", r"checking cst:\S*Error",
 ]
@@ -54,11 +71,11 @@ SECTION_NEXT_RE = re.compile(r"^\*\s?|\s=+$")
 COMPLETE_MARK = "Modules were successfully checked"
 
 def parse_log(path):
-    """块状态机解析。返回 dict：sections / axioms / complete / stats。"""
+    """Block state-machine parse. Returns a dict: sections / axioms / complete / stats."""
     with open(path, encoding="utf-8", errors="replace") as f:
         lines = f.read().splitlines()
     sections = []          # [{line_no, entries:[...], inline:none|str}]
-    axioms = []            # 全部公理（含段归属行号）
+    axioms = []            # all axioms (with the line number of their owning section)
     in_axioms = False
     cur = None
     complete = False

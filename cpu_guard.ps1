@@ -1,17 +1,17 @@
-# cpu_guard.ps1 — CPU 负载 + 温度双维调控执行包装（20261002 v2.1：双线制，用户钉值挂起线 93C）
-# 用法: pwsh -File cpu_guard.ps1 -Command "<命令>" [-LoadLimit 85] [-CoolSec 5] [-MaxWaitSec 600] [-CoreN <0..15>] [-TempLimit 93] [-StartTempLimit 95]
-# 双线制（20261002 实测定谳：本机 idle 积热常态即 96-97C 钳位——执行前门控裸用 93 会锁死一切编译）：
-#   执行前门控线 = StartTempLimit(默认 95C) + LoadLimit：温度>95 或 负载超限 → 冷却后重测，达标放行
-#   执行中挂起线 = TempLimit(默认 93C，用户 20261002 钉值)：命令运行中温度>93 → 挂起子进程树整树，
-#                  降至 <=91(迟滞2C) → 恢复；这是热过载宕机事故后的硬防线
-# 规则：
-#   1. 执行前门控：每 0.5s 探测 CPU 总负载(Win32_Processor LoadPercentage)与温度(Perf 通道)
-#   2. 执行中监控：每 2s 采样温度，超挂起线挂起/迟滞恢复（挂起经进程树递归，cmd→coqc 整树生效）
-#   3. 核心分散：-CoreN 绑核（不同子代理/脚本不同核，避免热集中；子进程继承亲和性）
-#   4. 执行前等待超 MaxWaitSec 仍忙 → ABORT（系统持续高负载，不叠加任务）
-#   5. 温度通道：Win32_PerfFormattedData_Counters_ThermalZoneInformation（Perf 通道）；
-#      MSAcpi 通道本机已死(读 0 换算 -273.2 假值,禁用)；读失败记 TEMP?-UNREADABLE 按负载兜底不硬失败
-#   6. 独立常驻哨兵见 thermal_sentinel.ps1（93C 告警旗标 _THERMAL_ALERT，20261002 已上线）
+# cpu_guard.ps1 -- CPU load + temperature dual-threshold execution wrapper (20261002 v2.1: two-line scheme, user-pinned suspend line 93C)
+# Usage: pwsh -File cpu_guard.ps1 -Command "<command>" [-LoadLimit 85] [-CoolSec 5] [-MaxWaitSec 600] [-CoreN <0..15>] [-TempLimit 93] [-StartTempLimit 95]
+# Two-line scheme (measured finding 20261002: this machine idles heat-clamped at 96-97C -- a bare 93C pre-execution gate would lock out every compile):
+#   Pre-execution gate line = StartTempLimit (default 95C) + LoadLimit: temp > 95 or load over limit -> cool down, re-test, admit when within bounds
+#   Runtime suspend line = TempLimit (default 93C, user-pinned 20261002): while the command runs, temp > 93 -> suspend the whole child process tree,
+#                  resume when it falls to <= 91 (2C hysteresis); this is the hard line of defense added after the thermal-overload crash incident
+# Rules:
+#   1. Pre-execution gating: probe total CPU load (Win32_Processor LoadPercentage) and temperature (Perf counter channel) every 0.5s
+#   2. Runtime monitoring: sample temperature every 2s; suspend above the suspend line, resume on hysteresis (suspension recurses the process tree, effective over the whole cmd->coqc tree)
+#   3. Core spreading: -CoreN pins a core (different subagents/scripts on different cores to avoid heat concentration; child processes inherit affinity)
+#   4. Pre-execution wait exceeding MaxWaitSec while still busy -> ABORT (system under sustained high load; do not stack another task)
+#   5. Temperature channel: Win32_PerfFormattedData_Counters_ThermalZoneInformation (Perf counter channel);
+#      the MSAcpi channel is dead on this machine (reads 0, converts to a bogus -273.2, disabled); on read failure record TEMP?-UNREADABLE and fall back to load gating, no hard failure
+#   6. Standalone resident sentinel: see thermal_sentinel.ps1 (93C alert flag _THERMAL_ALERT, live since 20261002)
 param(
   [Parameter(Mandatory=$true)][string]$Command,
   [double]$LoadLimit = 99.0,
@@ -21,11 +21,11 @@ param(
   [double]$TempLimit = 93.0,
   [double]$StartTempLimit = 99.0
 )
-# 20261002 T2 席实测定谳：启动线 95 在钳位态（idle 96-97C，可持续数小时）下永不满足——
-# 守门 cooling 390s+ 不放行、件停摆 28 分钟实锤，故默认值改 99（温度位实质旁路）。
-# 防热主防线=运行中挂起线 93C+duty-cycle 占空限流（v2.3）；前闸保留负载门控防叠加。
-# 若需真温度前闸（如散热窗作业）可显式传 -StartTempLimit 95。
-# 核心分散：绑定指定逻辑核
+# Measured verdict 20261002 (T2 pass): under the heat clamp (idle 96-97C, sustainable for hours) a start line of 95 is never satisfied --
+# gating cooldowns ran 390s+ without admission and work stalled 28 minutes in the field, so the default became 99 (temperature leg effectively bypassed).
+# Primary thermal defense = runtime suspend line 93C + duty-cycle throttling (v2.3); the pre-gate keeps load gating to prevent task stacking.
+# For a real temperature pre-gate (e.g. work inside a cooling window), pass -StartTempLimit 95 explicitly.
+# Core spreading: bind to the specified logical core
 if ($CoreN -ge 0) {
   $nproc = [Environment]::ProcessorCount
   if ($CoreN -lt $nproc) {
@@ -43,7 +43,7 @@ function Get-TempC {
   if ($t) { return [math]::Round($t.Temperature - 273.0, 1) }
   return $null
 }
-# 递归收集进程树(含孙代)
+# Collect the process tree recursively (grandchildren included)
 function Get-Tree($pidRoot) {
   $all = @(Get-CimInstance Win32_Process -ErrorAction SilentlyContinue)
   $out = @(); $frontier = @($pidRoot)
@@ -54,8 +54,8 @@ function Get-Tree($pidRoot) {
   }
   return $out
 }
-# 进程树挂起/恢复：PS5.1(.NET Framework)无 Process.Suspend()/Resume()——20261002 T4 实测静默假成功；
-# 改 ntdll 原生调用，失败 fail-loud 响亮计数
+# Process-tree suspend/resume: PS5.1 (.NET Framework) has no Process.Suspend()/Resume() -- measured 20261002 (T4 pass): silent fake success;
+# switched to native ntdll calls, failures counted fail-loud
 if (-not ('ProcCtl' -as [type])) {
   Add-Type -TypeDefinition @"
 using System;
@@ -90,7 +90,7 @@ function Resume-Tree($pidRoot) {
   Write-Host "[cpu_guard] resumed ${n} procs (fail=${fail})"
   return $n
 }
-# ── 执行前门控（负载 + 温度双条件，启动线 StartTempLimit）──
+# -- Pre-execution gate (load + temperature dual condition, start line StartTempLimit) --
 $elapsed = 0; $cooled = 0
 while ($elapsed -lt $MaxWaitSec) {
   $l = Get-Load
@@ -108,15 +108,15 @@ while ($elapsed -lt $MaxWaitSec) {
   if ([math]::Floor($cooled) % $CoolSec -eq 0 -and $cooled -gt 0) { Write-Host "[cpu_guard] cooling ${cooled}s: $why" }
   if ($elapsed -ge $MaxWaitSec) { Write-Host "[cpu_guard] ABORT: busy after ${MaxWaitSec}s (last: $why)"; exit 2 }
 }
-# ── 执行（拿句柄以支持执行中挂起/恢复）──
+# -- Execution (grab the handle to support runtime suspend/resume) --
 $child = Start-Process -FilePath "cmd.exe" -ArgumentList "/c", $Command -NoNewWindow -PassThru
 if (-not $child) { Invoke-Expression $Command; exit $LASTEXITCODE }
 $null = $child.Handle
-# ── 执行中温度监控（v2.3：duty-cycle 防钳位死锁）──
-# 20261002 事故定谳：本机温度钳位态 96-97C 下挂起线 93 永不释放（挂起了温度也不降）→ 编译死锁
-# （三 coqc CPU≈0 实锤，rocqworker 85/243/313s 冻结，主会话 NtResume 救援）。
-# v2.3 占空限流：挂 20s → 放 5s（breather）→ 循环，直到温度真降 ≤91 彻底恢复；任务以 ~80% 占空推进，
-# 防护语义保留（挂起占多数=平均热负载受限），死锁消除。
+# -- Runtime temperature monitoring (v2.3: duty-cycle against clamp deadlock) --
+# Incident verdict 20261002: in the 96-97C heat-clamp state the 93C suspend line never releases (suspending does not lower the temperature) -> compile deadlock
+# (three coqc processes pinned at CPU~0 in the field, rocqworker frozen at 85/243/313s, NtResume rescue from the main session).
+# v2.3 duty-cycle throttling: suspend 20s -> release 5s (breather) -> loop, until the temperature truly drops to <= 91 for a full resume; the task advances at ~80% duty,
+# protection semantics preserved (suspend dominates = bounded average thermal load), deadlock eliminated.
 $suspending = $false; $suspCount = 0; $holdSec = 0
 while (-not $child.HasExited) {
   Start-Sleep -Seconds 2

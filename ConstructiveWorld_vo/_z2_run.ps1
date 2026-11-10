@@ -1,5 +1,5 @@
-# _z2_run.ps1 - 席Z2 内层 runner（单一入口；数组参数零引号嵌套，X2 卡先例）
-# 用法: pwsh -File _z2_run.ps1 -Target <file.v> [-Full] [-Chk <file.vo>]
+# _z2_run.ps1 - Z2 inner runner (single entry point; array parameters avoid nested quoting, X2 card precedent)
+# Usage: pwsh -File _z2_run.ps1 -Target <file.v> [-Full] [-Chk <file.vo>]
 param(
   [Parameter(Mandatory=$true)][string]$Target,
   [switch]$Full,

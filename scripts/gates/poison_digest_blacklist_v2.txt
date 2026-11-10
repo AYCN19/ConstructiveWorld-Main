@@ -1,16 +1,16 @@
-# poison_digest_blacklist_v2.txt — VO 播种检疫毒 digest 黑名单 v2（20260926）
-# 出典：v1 六枚=AXFORENSIC 取证报告 §一表五枚＋§五挂账 7b4e5172（E-STAGING-AXFORENSIC-1）；
+# poison_digest_blacklist_v2.txt -- VO seeding quarantine poison digest blacklist v2 (20260926)
+# Provenance: v1 six entries = AXFORENSIC forensic report §1 table five entries + §5 outstanding 7b4e5172 (E-STAGING-AXFORENSIC-1);
 #       v2 增补十五枚 .vo＋四枚 .vos=VO-SCAN 世界代际普查 20260926（_tovscan_世界代际普查报告-20260926.md §二）。
-# 用法：世界播种前逐件 md5 对照本清单，命中即拒种并报 exterminate 波处置；禁照单自行硬删（VO-RES-CLEAN 纪律）。
-# 全部 32 位 md5 小写；行内 # 后为注释（件名/首见世界/时间）。
-# ===== V1 已知六枚（20260926 白名单清除已断证 attn 存量=0，留档防回流）=====
+# Usage: before world seeding, check each item's md5 against this list; on a hit, refuse the seed and report to the exterminate wave; bulk deletion straight from this list is forbidden (VO-RES-CLEAN discipline).
+# All 32-char lowercase md5; text after an inline # is a comment (item name / first-seen world / time).
+# ===== Six known V1 entries (whitelist clearance proved on 20260926 that the attn stock = 0; archived against backflow) =====
 43f866e8f029d437f386eafbd09de766  UpReqConcSoftmax.vo  # V1 P2世界毒代
 2ec90e4669dad904ca655d0936e33900  UpReqConcB1.vo  # V1 P2世界毒代
 1f2764e67840d52fce408faac252f25b  UpReqConcFin2.vo  # V1 P2世界毒代
 2373d1095b346d33a06796eaa5a7257d  UpReqConcB2Time.vo  # V1 P2世界毒代
 7881659ca76f393723c0f9b9930e41f3  UpReqIrrationalCriterion.vo  # V1 P2世界毒代
 7b4e5172c9e7f0d3320af96e5eb0d716  UpReqConcFin2.vo  # V1 _p1world2毒代
-# ===== V2 新增 .vo 十五枚（20260926 实测仍卧 attn 沙箱，28 件存量）=====
+# ===== 15 new V2 .vo entries (measured 20260926: still sitting in the attn sandbox, 28 items in stock) =====
 d796014c1711c47cf6b2f275a64dd32c  UpReqConcFin2.vo  # V2 _tp7fin2c1/c2/vc1/vc2(含_vc1_exdir嵌套,main\) x5 09-25晨（最新毒代）
 dd828aad54bcdcefd2064e4db9d8338b  UpReqConcFin2.vo  # V2 _tm2r2/_tr1base(vo\)/_tw3pkg x3 09-21~22
 fede91bfc6b40c8aab65f28780cc7e4f  UpReqConcFin2.vo  # V2 _tprslice/_tprslice3/_tvet1(cache\) x3 09-22~24
@@ -26,11 +26,11 @@ cc534a06581de2a4606088e4d2b5a925  UpReqConcFin2.vo  # V2 _tmix4v_sbx x1 09-23 13
 92e63aa47d3b167377d05806a934df82  UpReqConcFin2.vo  # V2 _ts3_presbx x1 09-23 01:52
 181ecbba7bb3ddbde68203a04b809b4d  UpReqConcFin2.vo  # V2 _tslice3_sbx x1 09-23 01:44
 f2e308be347c71cd00e471cf13a3913c  UpReqConcFin2.vo  # V2 _ttoyre2_sbx x1 09-21 07:17
-# ===== V2 新增 .vos 毒桩四枚（闸门半径外新发现；.vos=接口桩亦入检疫）=====
+# ===== 4 new V2 .vos poison stubs (new finds outside gate radius; .vos = interface stubs, also quarantined) =====
 5a88df6034ca54c648daa2903348130a  UpReqConcB1.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测
 b0b1da8c840ed321c3636d2ff6b99f18  UpReqConcB2Time.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测
 b4d81e94e14e1ba966ba7d047066a231  UpReqConcSoftmax.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测
 c1316e3e30875b2cf84e81db0aa6e862  UpReqIrrationalCriterion.vos  # V2 _tr1_ws\过期沙箱归档 09-26实测（Lra+Psatz）
-# ===== 附：已验净基准（对照用，非毒）=====
-# 1a6d72989567ff05248c75beca4adfe2  MAIN:UpReqConcSoftmax.vo 现势主树代（09-26 实测 Lra-free）
-# a4b1c953(前缀)  HIST:UpReqConcSoftmax.vo R131+微波净代 ×6 在档
+# ===== Appendix: verified clean baselines (for comparison, not poison) =====
+# 1a6d72989567ff05248c75beca4adfe2  MAIN:UpReqConcSoftmax.vo current main-tree generation (measured 09-26, Lra-free)
+# a4b1c953(prefix)  HIST:UpReqConcSoftmax.vo R131 + minor-cleanup clean generations, x6 on file

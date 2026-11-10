@@ -1,61 +1,61 @@
 #!/usr/bin/env bash
 # ============================================================================
-# pa_audit.sh — Print Assumptions 全量批审计 + 可选 coqchk（正式可复现脚本）
+# pa_audit.sh — Print Assumptions full-batch audit + optional coqchk (official reproducible script)
 #
-# 口径锚：
-#   - 评审11 §3 P5：「唯一可外部审计的形态是：全部头条定理的 Print Assumptions 输出
-#     （应显示 Closed under the global context）+ 对编译产物的 coqchk 通过记录」；
-#   - 论文1 §1.2 贡献9 / 附录 D 第 2 项：81 条主定理/主定义批量 CLEAN 最近一次全量
-#     复核于基态 198/206——本脚本把该口径升级为「可复现脚本 + 当前全量报告」；
+# Caliber anchors:
+#   - Review 11 §3 P5: "The only externally auditable form is: Print Assumptions output for all headline
+#     theorems (it should show Closed under the global context) + a coqchk pass record over the compiled artifacts";
+#   - Paper 1 §1.2 contribution 9 / Appendix D item 2: 81 headline theorems/definitions batch-CLEAN, most recent full
+#     re-check at base state 198/206 -- this script upgrades that caliber to "reproducible script + current full report";
 #   - 审计口径总纲：attn\零公理审计口径说明-20260910.md（其 L4 = 本脚本）。
 #
-# 谱系（最大化复用既有链，勿弃）：
+# Lineage (maximize reuse of the existing chain; do not discard):
 #   - 定理清单初版 = 演变\.ablation\sc2_parallel\sL_assumptions\{probe_full.v,
-#     theorem_names.txt}（81 条主定理/主定义，基态 198 批量链）＋论文1/2 头条定理族
-#     grep 对齐补录，落位为 scripts\pa_theorems.txt（一行一定理：模块:名字）；
-#   - 断言/解析方式承同目录 assert_print_assumptions.ps1 / parse_pa_log.ps1
-#     （生成验证文件 → coqc → 扫 log 断言），改写为 bash 双平台；
+#     theorem_names.txt} (81 headline theorems/definitions, base-state 198 batch chain) + Paper 1/2 headline-theorem family
+#     grep-aligned supplements, landed as scripts\pa_theorems.txt (one theorem per line: module:name);
+#   - Assertion/parsing approach inherited from same-directory assert_print_assumptions.ps1 / parse_pa_log.ps1
+#     (generate a probe file -> coqc -> scan the log and assert), rewritten as cross-platform bash;
 #   - 负载闸承演变\.ablation\cpu_guard.ps1（root 外引用、不改原件），
-#     LoadLimit 自调是与在飞席热共存的既定协议。
+#     LoadLimit self-tuning is the established protocol for hot coexistence with in-flight sessions.
 #
-# 红线（执行时强制）：
-#   - 零 git 操作；不触碰 releases/；不修改任何 .v 源；probe 全部落在
-#     scripts/_pa_work/（只 Require + Print Assumptions）；
-#   - Windows 编译一律走 9.1 完整路径（C:\Rocq-Platform~9.1~2026.01\bin\），
-#     禁裸 PATH——2026-09-15 全库换装 9.1（PROBE91 实证 201 面全绿）；
+# Red lines (enforced at run time):
+#   - Zero git operations; do not touch releases/; do not modify any .v source; all probes land in
+#     scripts/_pa_work/ (Require + Print Assumptions only);
+#   - Windows compilation always goes through the full 9.1 path (C:\Rocq-Platform~9.1~2026.01\bin\),
+#     bare PATH forbidden -- 2026-09-15 whole-repo retarget to 9.1 (PROBE91 evidence: 201 faces all green);
 #     原「9.0 路径 + 防混装 bad version 90001」预警随之作废（见 attn/_thv3sw2_交付报告-20260915.md）；
-#   - 一切 coqc/coqchk 调用经 cpu_guard 包装（PA_GUARD=0 可关，仅建议 CI 用）；
-#   - 避让清单：UpIDL / UpMinP 两模块跳编跳查（合并轨收口席修复中），
-#     修复入库后补审计（见报告覆盖边界节）。
+#   - All coqc/coqchk calls are wrapped by cpu_guard (PA_GUARD=0 disables it; recommended for CI only);
+#   - Avoid list: UpIDL / UpMinP modules skip build and check (merge-track closure seat repairing),
+#     the audit resumes after the fix lands (see the report's coverage-boundary section).
 #
-# 用法：
+# Usage:
 #   ./pa_audit.sh [--root ConstructiveWorld_vo] [--coqchk] [--no-build]
 #                 [--theorems pa_theorems.txt]
-#   环境变量：PA_LOADLIMIT(60) PA_CORE(3) PA_MAXWAIT(1800) PA_GUARD(1)
-#             PA_GUARD_PS1(root 外既定路径) PA_COQ_BIN(9.1 完整路径)
-# 产物：scripts/pa_audit_report.md（旁证 log 在 scripts/_pa_work/）
+#   Environment variables: PA_LOADLIMIT(60) PA_CORE(3) PA_MAXWAIT(1800) PA_GUARD(1)
+#             PA_GUARD_PS1(established path outside root) PA_COQ_BIN(full 9.1 path)
+# Output: scripts/pa_audit_report.md (supporting logs in scripts/_pa_work/)
 #
-# ── 漂移清单（论文-库命名漂移，逐条在案、不跳过；报告有同名节）──
-#   1. req_step_kl_eta_bound（论文1 §4.3.2 批3 同位桥件名）
-#      → 库内无此声明（仓库树与 attn 均无）。近邻已入清单：
-#        real_step_kl_eta_bound_eps（基座219）、geod_step_kl_eta_bound_eps（UpReqGeomD）。
-#   2. r2_step_kl_weighted（论文1 UpReqAlign3 六件清单名）
-#      → 库内无声明；近邻 r2_step_kl_rearr（UpReqAlign3）。
-#   3. rppo_align_objective_advantage_decomp（论文1 快照锚，属 UpReqPPO）
-#      → 仓库树无；仅 attn 工作区在盘（轮 9 待入库面，非命名漂移）。
-#   4. attention_minimizes_free_energy（论文2 概念名）
-#      → 库内声明为 req_attention_minimizes_free_energy_unique（UpReqFEPAttn，已入清单）。
-#   5. tv_doeblin_contraction / tv_doeblin_iter（论文2 定理 5.10，UpTVReal 存档件）
-#      → 库内无声明（未并入模块化树）；双点 TV 收缩以基座 tv 族 + UpReqSampling 承载。
+# -- Drift list (paper-vs-library naming drifts; each on record, none skipped; the report has a same-name section) --
+#   1. req_step_kl_eta_bound (Paper 1 §4.3.2 batch-3 counterpart bridge-lemma name)
+#      -> no such declaration in the library (in neither the repo tree nor attn). Nearest neighbors already on the list:
+#        real_step_kl_eta_bound_eps (base 219), geod_step_kl_eta_bound_eps (UpReqGeomD).
+#   2. r2_step_kl_weighted (Paper 1 UpReqAlign3 six-item list name)
+#      -> not declared in the library; nearest neighbor r2_step_kl_rearr (UpReqAlign3).
+#   3. rppo_align_objective_advantage_decomp (Paper 1 snapshot anchor, belongs to UpReqPPO)
+#      -> absent from the repo tree; on disk only in the attn workspace (round-9 pending-landing face, not a naming drift).
+#   4. attention_minimizes_free_energy (Paper 2 concept name)
+#      -> declared in the library as req_attention_minimizes_free_energy_unique (UpReqFEPAttn, already on the list).
+#   5. tv_doeblin_contraction / tv_doeblin_iter (Paper 2 theorem 5.10, UpTVReal archive file)
+#      -> not declared in the library (not merged into the modular tree); two-point TV contraction is carried by the base tv family + UpReqSampling.
 #
-# ── 2026-09-11 续席（PA 审计席续）改动登记（仅本脚本两处，机制不变）──
-#   a. coqchk 判定补 -silent 形态：9.0 实测 -silent 抑制成功行（9.1 SW2 换装复验同：
-#      rc=0 仅见 "* Axioms:" 段），rc=0 + "* Axioms:" 段在场即双条件成立；
-#   b. 漂移清单表补 tv_doeblin 两件（论文2 定理 5.10 存档件未并入树）与
-#      real_kl_sum_decomp 注释幻影一件（.v 有字样、.vo 零导出，非真实声明）。
-#   清单 pa_theorems.txt 全量重建至 193 条（probe_full 81 基 + 头条族补全 + req 27）；
-#   基座内子模块件以限定名入清单（UpExtras219./UpGRPO219./PropositionConvergenceCore.，
-#   修正前席平名 boltzmann_factor_pos 致 219 模块级探针中断的问题）。
+# -- 2026-09-11 continuation-session (PA audit session continued) change record (two spots in this script only; mechanism unchanged) --
+#   a. the coqchk verdict gains the -silent form: measured on 9.0, -silent suppresses the success line (9.1 SW2 retarget re-verified:
+#      rc=0 shows only the "* Axioms:" section), so rc=0 + presence of the "* Axioms:" section = both conditions hold;
+#   b. the drift list gains the two tv_doeblin entries (Paper 2 theorem 5.10 archive files not merged into the tree) and
+#      one real_kl_sum_decomp comment-phantom entry (text present in .v, zero exports in .vo -- not a real declaration).
+#   The list pa_theorems.txt was fully rebuilt to 193 entries (probe_full 81 base + headline-family supplements + req 27);
+#   base-internal submodule entries enter the list with qualified names (UpExtras219./UpGRPO219./PropositionConvergenceCore.,
+#   fixing the predecessor's flat name boltzmann_factor_pos that broke the 219 module-level probe).
 # ============================================================================
 set -u
 set -o pipefail
@@ -68,7 +68,7 @@ usage() {
   echo "  环境变量: PA_LOADLIMIT(60) PA_CORE(3) PA_MAXWAIT(1800) PA_GUARD(1) PA_COQ_BIN(9.1路径)"
 }
 
-# ---------------------------------------------------------------- 参数 ----
+# ---------------------------------------------------------------- Parameters ----
 ROOT_NAME="ConstructiveWorld_vo"
 DO_COQCHK=0
 DO_BUILD=1
@@ -89,7 +89,7 @@ ORDER_FILE="$SCRIPT_DIR/order.txt"
 WORK="$SCRIPT_DIR/_pa_work"
 REPORT="$SCRIPT_DIR/pa_audit_report.md"
 BASE_MOD="CW_ConstructiveWorld_219"
-# 避让清单（合并轨收口席修复中：跳编跳查；修复入库后补审计）
+# Avoid list (merge-track closure seat repairing: skip build and check; audit resumes after the fix lands)
 EXCLUDE_MODS="UpIDL UpMinP"
 mkdir -p "$WORK"
 
@@ -100,14 +100,14 @@ mkdir -p "$WORK"
 T_START=$(date +%s)
 TS_NOW="$(date '+%Y-%m-%d %H:%M:%S %z')"
 
-# ------------------------------------------------------- 工具链（9.1）----
+# ------------------------------------------------------- Toolchain (9.1) ----
 case "$(uname -s)" in
   MINGW*|MSYS*|CYGWIN*|Windows*)
     HOST_OS=windows
     COQ_BIN="${PA_COQ_BIN:-C:/Rocq-Platform~9.1~2026.01/bin}"
-    # SW2 换装（2026-09-15）：机器级【用户环境变量】COQLIB/ROCQLIB 钉 9.0 lib，会压过 9.1 版
-    # coq_environment.txt → 9.1 coqc 暗载 9.0 stdlib、产物魔数 90001 被 9.1 coqchk 拒。
-    # 故随 COQ_BIN 推导导出，保证 bin/lib 同源（E-STAGING-SW2 实证 90100 roundtrip EXIT=0）。
+    # SW2 retarget (2026-09-15): machine-level [user environment variables] COQLIB/ROCQLIB pinned to the 9.0 lib override the
+    # 9.1 coq_environment.txt -> 9.1 coqc silently loads the 9.0 stdlib and the artifact magic 90001 is rejected by 9.1 coqchk.
+    # Therefore export them derived from COQ_BIN, keeping bin/lib same-source (E-STAGING-SW2 evidence: 90100 roundtrip EXIT=0).
     case "$COQ_BIN" in
       */bin) export COQLIB ROCQLIB; COQLIB="${COQ_BIN%/bin}/lib/coq"; ROCQLIB="$COQLIB" ;;
     esac
@@ -130,7 +130,7 @@ case "$COQ_VERSION" in
   *) echo "[pa_audit] WARN: 非 9.1 工具链: $COQ_VERSION" ;;
 esac
 
-# ------------------------------------------------------------- 闸包装 ----
+# ------------------------------------------------------------- Guard wrapper ----
 GUARD_PS1="${PA_GUARD_PS1:-D:/ComplexAnalysis/ConstructiveWorld/演变/.ablation/cpu_guard.ps1}"
 LOADLIMIT="${PA_LOADLIMIT:-60}"
 COREN="${PA_CORE:-3}"
@@ -141,8 +141,8 @@ if [ "$HOST_OS" = windows ] && [ "${PA_GUARD:-1}" = "1" ] && [ -f "$GUARD_PS1" ]
 fi
 : > "$WORK/.cool_count"
 
-run_cmd() {  # run_cmd <log> <exe> [args...] —— loadpath 经 env（COQPATH/ROCQPATH 等价 -Q dir ""，
-             # 并规避 PowerShell 原生调用丢弃空串实参的坑）；guard ABORT( rc=2 )自动重试至 3 次
+run_cmd() {  # run_cmd <log> <exe> [args...] -- loadpath goes through env (COQPATH/ROCQPATH equivalent to -Q dir "",
+             # and avoids the pitfall of native PowerShell calls dropping empty-string arguments); on guard ABORT (rc=2), auto-retry up to 3 times
   local log="$1"; shift
   local attempt rc=0
   : > "$log"
@@ -161,7 +161,7 @@ run_cmd() {  # run_cmd <log> <exe> [args...] —— loadpath 经 env（COQPATH/R
       rc=$?
     fi
     [ "$rc" = 0 ] && return 0
-    grep -q 'ABORT: load' "$log" 2>/dev/null || return $rc   # 真失败（编译错等）不重试
+    grep -q 'ABORT: load' "$log" 2>/dev/null || return $rc   # real failure (compile error etc.) -- no retry
     echo "[pa_audit] guard ABORT（系统持续高负载），第 $attempt 次重试: $*" >&2
     sleep 20
   done
@@ -169,14 +169,14 @@ run_cmd() {  # run_cmd <log> <exe> [args...] —— loadpath 经 env（COQPATH/R
 }
 strip_log() { grep -vE '^(\[cpu_guard\]|Warning: Deprecated environment variable COQPATH)' "$1" 2>/dev/null || true; }
 excluded() { local m; for m in $EXCLUDE_MODS; do [ "$1" = "$m" ] && return 0; done; return 1; }
-# 传给 coqc/coqchk 的路径须为 Windows 形态（Git Bash 的 /d/... 会被当成标识符报错）
+# Paths passed to coqc/coqchk must be in Windows form (Git Bash /d/... would be parsed as an identifier and error out)
 wpath() {
   if [ "$HOST_OS" = windows ] && command -v cygpath >/dev/null 2>&1; then cygpath -m "$1"; else printf '%s' "$1"; fi
 }
 modsan_of() { printf '%s' "$1" | tr -c 'A-Za-z0-9_' '_'; }
 
-# ------------------------------------------------------------ 模块集 ----
-# 覆盖集 = 基座 + order.txt 全部 + 清单所涉在树模块；避让集剔除
+# ------------------------------------------------------------ Module set ----
+# Coverage set = base + all of order.txt + in-tree modules named by the list; the avoid set is removed
 : > "$WORK/.excluded"
 MODULES="$( { echo "$BASE_MOD"; grep -vE '^\s*(#|$)' "$ORDER_FILE" | sed -e 's/#.*//' -e 's/\.v$//'; } | awk '!seen[$0]++')"
 COVERED=""
@@ -186,7 +186,7 @@ done
 OWNERS="$( grep -vE '^\s*(#|$)' "$THEOREMS_FILE" | sed 's/:.*//' | awk '!seen[$0]++' )"
 ALL_COVERED="$( { printf '%s' "$COVERED"; echo "$OWNERS"; } | awk '!seen[$0]++')"
 
-# -------------------------------------------------------- 1. 编译面 ----
+# -------------------------------------------------------- 1. Build surface ----
 BUILT_LIST="";    N_BUILT=0
 BUILDFAIL_LIST=""; N_BFAIL=0
 NSKIP=0
@@ -205,8 +205,8 @@ if [ "$DO_BUILD" = 1 ]; then
   done
 fi
 
-# --------------------------------------------------- 2. PA 探针逐模块 ----
-parse_pa_log() {  # stdin=纯log（已剥guard行） $1=期望条数; stdout: idx<TAB>RES<TAB>AX<TAB>body
+# --------------------------------------------------- 2. PA probes per module ----
+parse_pa_log() {  # stdin=plain log (guard lines stripped) $1=expected count; stdout: idx<TAB>RES<TAB>AX<TAB>body
   awk '
     BEGIN { t=1 }
     function flush_open() { if (state==2) { t++ } state=0 }
@@ -230,7 +230,7 @@ declare -a R_NAME=() R_MOD=() R_RES=() R_AX=() R_RAW=()
 
 names_of() { grep -vE '^\s*(#|$)' "$THEOREMS_FILE" | awk -F: -v m="$1" '$1==m{print $2}'; }
 
-probe_module() {  # $1=module; 成功返回 0 并追加结果
+probe_module() {  # $1=module; returns 0 on success and appends the results
   local mod="$1"
   local modsan n pf lf names got i nm row res ax raw
   modsan="$(modsan_of "$mod")"
@@ -294,7 +294,7 @@ for om in $OWNERS; do
     R_NAME+=("$nm"); R_MOD+=("$om"); R_RES+=("$res"); R_AX+=("$ax"); R_RAW+=("$raw")
   done <<< "$(names_of "$om")"
 done
-# 避让 owner 的定理如实登记为 EXEMPT（跳查）
+# Theorems of avoided owners are explicitly recorded as EXEMPT (skipped from checking)
 for om in $EXCLUDE_MODS; do
   grep -qE "^$om:" "$THEOREMS_FILE" || continue
   while IFS= read -r nm; do
@@ -317,7 +317,7 @@ for i in "${!R_NAME[@]}"; do
   esac
 done
 
-# ---------------------------------------------------- 3. 零承认 grep ----
+# ---------------------------------------------------- 3. zero-admission grep ----
 ZEROADM="$WORK/.zeroadm"; : > "$ZEROADM"
 for m in $ALL_COVERED; do
   excluded "$m" && continue
@@ -341,15 +341,15 @@ if [ "$DO_COQCHK" = 1 ]; then
     ck_ok=0
     if run_cmd "$WORK/coqchk_combined.log" "$COQCHK" -silent -o $OWNERS; then
       strip_log "$WORK/coqchk_combined.log" | grep -q "Modules were successfully checked" && ck_ok=1
-      # 9.0 实测：-silent 会抑制 "Modules were successfully checked" 行（9.1 复验同，SW2 换装实证；
+      # Measured on 9.0: -silent suppresses the "Modules were successfully checked" line (9.1 re-verified the same, SW2 retarget evidence;
       # docs/coqchk认证总表 判定式系对无 -silent 形态）。rc=0 且 -o 假设清单段（"* Axioms:"）在场 =
-      # 双条件成立（2026-09-11 续席修；2026-09-15 SW2 换装 9.1 复验维持）。
-      # 注：CONTEXT SUMMARY 段居中缩进，勿用行首锚（2026-09-11 二修）。
+      # both conditions hold (2026-09-11 continuation-session fix; upheld by the 2026-09-15 SW2 retarget-to-9.1 re-verification).
+      # Note: the CONTEXT SUMMARY section is center-indented; do not use a line-start anchor (2026-09-11 second fix).
       strip_log "$WORK/coqchk_combined.log" | grep -q "\* Axioms:" && ck_ok=1
     fi
     if [ "$ck_ok" = 1 ]; then
-      # Axioms 段条目提取：段界以 "* Axioms:" 至 "* Constants"（居中缩进，勿锚行首）；
-      # 段内条目为缩进路径名（无冒号），勿以 ' : ' 计（会把 guard stderr 误计入，2026-09-11 三修）。
+      # Axioms-section entry extraction: section bounds run from "* Axioms:" to "* Constants" (center-indented; do not anchor at line start);
+      # entries inside are indented path names (no colon); do not count them via ' : ' (it would wrongly include guard stderr, 2026-09-11 third fix).
       axsec="$(strip_log "$WORK/coqchk_combined.log" | sed -n '/\* Axioms:/,/\* Constants/p' | grep -vE '^[[:space:]]*$|^[[:space:]]*\*' | sed 's/^[[:space:]]*//' | grep -c . || true)"
       axnames="$(strip_log "$WORK/coqchk_combined.log" | sed -n '/\* Axioms:/,/\* Constants/p' | grep -vE '^[[:space:]]*$|^[[:space:]]*\*' | sed 's/^[[:space:]]*//' | tr '\n' '；')"
       COQCHK_BLOCK="coqchk（Rocq 9.0 工具链，-silent -o 输出假设清单；owner 模块合并单趟：$(echo $OWNERS | tr ' ' ',')）：**PASS**（rc=0，成功行被 -silent 抑制、以假设清单段在场判定）；环境 Axioms 段条目数：${axsec:-0}（${axnames:-无}——均为 Stdlib 侧 axiom、经 Stdlib 内部传递链装入环境，非本库声明；被审常量对其零依赖由逐件 Print Assumptions 全 Closed 见证）。log：scripts/_pa_work/coqchk_combined.log（log 尾 guard powershell 之 SetConsoleWindowTitle 无控制台异常为无害噪音）"
@@ -369,7 +369,7 @@ if [ "$DO_COQCHK" = 1 ]; then
   fi
 fi
 
-# ------------------------------------------------------- 5. 报告 ----
+# ------------------------------------------------------- 5. Report ----
 T_END=$(date +%s)
 ELAPSED=$((T_END - T_START))
 COOL_TOTAL=0

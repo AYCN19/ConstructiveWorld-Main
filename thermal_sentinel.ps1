@@ -1,11 +1,11 @@
-# thermal_sentinel.ps1 — 温度监控哨兵（20261001 重建，用户钉值上限 93C）
-# 用法: powershell -File thermal_sentinel.ps1 [-TempLimit 93] [-IntervalSec 10] [-LogFile <csv>]
-# 行为:
-#   1. 每 IntervalSec 读 Perf 通道温度(Win32_PerfFormattedData_Counters_ThermalZoneInformation)
-#      —— MSAcpi 通道本机已死(读 0 换算出 -273.2 假值,禁用)
-#   2. 追加 _THERMAL_log.csv (时间,温度C[,ALERT])
-#   3. 温度 > TempLimit → 写 _THERMAL_ALERT 旗标(时间+Top3 负载进程),回落 <=TempLimit-2 自动清除
-#   4. 读失败连续计数,失败行记 ERR 不刷假值;存 _THERMAL_SENTINEL_STOP 旗标即退出
+# thermal_sentinel.ps1 -- temperature monitoring sentinel (rebuilt 20261001, user-pinned limit 93C)
+# Usage: powershell -File thermal_sentinel.ps1 [-TempLimit 93] [-IntervalSec 10] [-LogFile <csv>]
+# Behavior:
+#   1. Read the Perf counter channel temperature every IntervalSec (Win32_PerfFormattedData_Counters_ThermalZoneInformation)
+#      -- the MSAcpi channel is dead on this machine (reads 0, converts to a bogus -273.2, disabled)
+#   2. Append to _THERMAL_log.csv (time, tempC[,ALERT])
+#   3. Temp > TempLimit -> write the _THERMAL_ALERT flag (time + top-3 load processes); auto-clear once it falls back to <= TempLimit-2
+#   4. Count consecutive read failures and log failed rows as ERR without fabricating values; exit when the _THERMAL_SENTINEL_STOP flag exists
 param(
   [double]$TempLimit = 93.0,
   [int]$IntervalSec = 10,

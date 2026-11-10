@@ -1,15 +1,15 @@
-# Live_X 命名规范（S/G 双系 + 旧名壳）
+# Live_X naming conventions (S/G dual families + legacy-name shells)
 
-- **S 系** `S<NN>_<Theme>`：219 大库拆分组（S01–S15，收录自 _CW219_split 模式）。
-- **G 系** `G<NN>_<Theme>`：小件有限合并组（合并判据：同主题 + <60KB + 低被依赖 + 碰撞预检通过）。
-- **独立件**：枢纽件（被依赖≥3，如 UpReqAlgebra/UpRealLeB/UpReqDist）与中大型件保持原名。
-- **旧名已消融（无壳）**：G 组成员旧文件名不再存在；全库对其 `Require Import 旧名` 已由构建脚本统一改写为 `Require Import G<NN>_<Theme>`。
-- **CW_ConstructiveWorld_219.v**：已自两树移除（219 聚合壳时代结束；S01–S15 各自独立在册，编译序不再经过聚合壳）。
-- **CW214KL_scan**：已退役——名字级验证 219 ⊇ 214（3,943/3,943 名命中，仅 214 有=0），依赖者 Require 已改挂 `CW_ConstructiveWorld_219`。
-- 后缀语义表：`Req`=req setoid 迁移版；`B`=B 形升格（Or 形绕行）；`D`=放电件；`_P2`=第二阶段；`M3`=M3 实验。
-- 编译序：order.txt（拓扑序逐件注册面，662 行；219 聚合壳已成历史）。
+- **S family** `S<NN>_<Theme>`: split groups of the 219 large library (S01-S15, adopted from the _CW219_split scheme).
+- **G family** `G<NN>_<Theme>`: bounded merge groups of small modules (merge criteria: same topic + <60KB + few dependents + collision pre-check passed).
+- **Standalone modules**: hub modules (dependents >= 3, e.g. UpReqAlgebra/UpRealLeB/UpReqDist) and medium-to-large modules keep their original names.
+- **Old names removed (no shells)**: the old file names of G-group members no longer exist; their repository-wide `Require Import <old-name>` references were uniformly rewritten to `Require Import G<NN>_<Theme>` by the build scripts.
+- **CW_ConstructiveWorld_219.v**: removed from both trees (the 219 aggregate-shell era has ended; S01-S15 are each registered independently and the build order no longer goes through the aggregate shell).
+- **CW214KL_scan**: retired; name-level verification that 219 is a superset of 214 (3,943/3,943 names matched; 214-only names = 0), with the dependents' Require now targeting `CW_ConstructiveWorld_219`.
+- Suffix semantics: `Req` = req-setoid migrated version; `B` = B-form promotion (Or-form detour); `D` = discharge module (resolution by instantiation); `_P2` = phase 2; `M3` = M3 experiment.
+- Build order: order.txt (per-module registration surface in topological order; the 219 aggregate shell is now history).
 
-## G 组清单
+## G-group inventory
 - **G01_CoreMicro**: UpHlogZ + UpExtras + UpFEP + UpLogMono + UpPPO
 - **G02_Debt**: UpDebtSqrtAbs + UpDebtDual + UpDebtGibbsT
 - **G04_ProjFam**: UpPLA + UpPredRelax + UpProj + UpProjBPC
