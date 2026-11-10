@@ -1,34 +1,30 @@
 (* ConstructiveWorld-Main - planB wave-2 piece: the G1 witness general-n definition face (lcm, Gaussian c_j, S_n, t_n, Phi/L, a/b extraction). *)
 
-(** * planb4_g1_witness: the general-n G1 witness pipeline (A(n), B(n) : nat -> Z).
+(** * planb4_g1_witness: the general-n G1 witness pipeline.
 
     Mission.  The general-n definition face for the zero-premise
-      witness: the lcm face [L_n := lcm(1..4n)] with the [P_n] prime
-      window quotient (Phi_n), the Gaussian half-pair channel
-      [(1/i)c_j := 2(2^j Im[(4+2i)^j] + Im[(6+2i)^j]) / (40^j j)], the
-      assembled sum [S_n := sum_{j=1..3n} A_{n,j} (1/i)c_j] over the
-      in-tree carrier [piu_zz_Aj], the polynomial-part integral face
-      [t_n], and the a/b extraction
-      [a_n := 2^(-5n/2+1) L_n (-1)^(n+1) (t_n + S_n)],
-      [b_n := 2^(-5n/2+1) L_n (-1)^(n+1) A_{n,0} / 2].
-      The calibration tables of planb3_g1_calib (n = 1..40) are the
-      downstream specializations of this face.
+      witness: [L_n := lcm(1..4n)] with the [P_n] prime-window
+      quotient (Phi_n), the Gaussian half-pair channel
+      [(1/i)c_j := 2(2^j Im[(4+2i)^j] + Im[(6+2i)^j]) / (40^j j)],
+      the assembled sum [S_n := sum_{j=1..3n} A_{n,j} (1/i)c_j] over
+      the carrier [piu_zz_Aj], the polynomial-part integral [t_n],
+      and [a_n := 2^(-5n/2+1) L_n (-1)^(n+1) (t_n + S_n)], [b_n :=
+      2^(-5n/2+1) L_n (-1)^(n+1) A_{n,0} / 2]; the calibration tables
+      of planb3_g1_calib (n = 1..40) are downstream specializations.
 
-    Dependencies.  piu_zz_kernel_sum (the A_j carrier, vm_compute
-      samples A_{1,0} = -2392, A_{1,3} = 8000); planb3_g1_calib (the
-      n = 1..40 calibration tables, downstream cross-check); stdlib
-      QArith, ZArith, Arith, Lia, List.
+    Dependencies.  piu_zz_kernel_sum (A_j carrier; in-tree samples
+      A_{1,0} = -2392, A_{1,3} = 8000), piu_zz_gauss_pair (qeqT),
+      piu_zz_padic_clearing (zz_in_Pn), planb3_g1_calib (tables
+      n = 1..40); stdlib QArith, ZArith, Arith, Lia, List.
 
-    References.  KB41m pre-survey (the a/b extraction oracle chain,
-      the unique-pair certificate max |R_n| = 0.06888 at n=1 < 0.5);
-      ZZ2020 Lemma 3 (L_n 10^(-j) A_j / j in Z) and Prop 1 (2^(-5n/2+2)
-      L_n I_n in Z + Z pi); the path-A survey receipt (G1 gap ledger).
+    References.  KB41m pre-survey (a/b oracle chain; unique-pair
+      certificate max |R_n| = 0.06888 at n=1 < 0.5); ZZ2020 Lemma 3
+      (L_n 10^(-j) A_j / j in Z) and Prop 1 (2^(-5n/2+2) L_n I_n
+      in Z + Z pi); the path-A survey receipt (G1 gap ledger).
 
-    Constructivity.  All faces are informative Fixpoints or
-      Definitions over Z/Q transparent data; admission-free and
-      postulate-free; the numeric spot anchors close by kernel
-      conversion (the anchor values were machine-printed in an
-      external evaluation session and transcribed verbatim).
+    Constructivity.  All faces informative Fixpoints/Definitions
+      over Z/Q transparent data; admission-free, postulate-free;
+      anchors close by kernel conversion (externally machine-printed).
 
     Build.  coqc -native-compiler no -q -Q . "" planb4_g1_witness.v
       (Rocq 9.3.0, single lane under cpu_guard_v3). *)
@@ -40,6 +36,8 @@ From Stdlib Require Import List.
 From Stdlib Require Import Lia.
 Require Import piu_zz_kernel_sum.
 Require Import piu_zz_padic_clearing.
+Require Import piu_zz_gauss_pair.
+Require Import planb3_g1_calib.
 
 Import ListNotations.
 
@@ -211,15 +209,11 @@ Definition planb4_Phi (n : nat) : Z :=
 Definition planb4_LZn (n : nat) : Z :=
   planb4_L n / planb4_Phi n.
 
-(* ================================================================== *)
-(* Section 8c. The Phi-window spot anchors (n = 1..3).  The refinement *)
-(* window zz_in_Pn (piu_zz_padic_clearing: ZZ2020 Lemma 2 face: primes *)
-(* p with p > 5, p^2 > 3n, 1/2 <= {n/p} < 2/3) is empty over [1, 4n]  *)
-(* for n <= 3, so Phi_n is the empty product 1 and LZn coincides with *)
-(* the raw lcm face.  The values below were machine-printed and       *)
-(* transcribed verbatim; they agree with the planb3_g1_Phi table      *)
-(* entries (1, 1, 1) at n = 1..3.                                     *)
-(* ================================================================== *)
+(* Section 8c. The Phi-window spot anchors (n = 1..3).  The window  *)
+(* zz_in_Pn (piu_zz_padic_clearing: ZZ2020 Lemma 2: primes p > 5,   *)
+(* p^2 > 3n, 1/2 <= {n/p} < 2/3) is empty over [1, 4n] for n <= 3,  *)
+(* so Phi_n is the empty product 1; the values below were machine-  *)
+(* printed and agree with the planb3_g1_Phi entries at n = 1..3. *)
 
 Example planb4_Phi1_spot : planb4_Phi 1 = 1%Z.
 Proof. reflexivity. Qed.
@@ -234,6 +228,19 @@ Proof. reflexivity. Qed.
 Example planb4_Pn_list_13_empty :
   planb4_Pn_list 1 = [] /\ planb4_Pn_list 2 = [] /\ planb4_Pn_list 3 = [].
 Proof. repeat split; reflexivity. Qed.
+
+(* the window faces agree with the planb3_g1_calib tables over all  *)
+(* n = 1..6 (both sides machine-printed; window register: MATCH).   *)
+(* The refined face LZn = L / Phi agrees with the calibration L     *)
+(* table over n = 1..6; the raw lcm face differs exactly by the Phi *)
+(* factor at n = 4 (x7) and n = 6 (x11), machine-printed. *)
+Example planb4_Phi_calib_agree :
+  map planb4_Phi (seq 1 6) = map planb3_g1_Phi (seq 1 6).
+Proof. reflexivity. Qed.
+
+Example planb4_LZn_calib_agree :
+  map planb4_LZn (seq 1 6) = map planb3_g1_L (seq 1 6).
+Proof. reflexivity. Qed.
 
 (* ================================================================== *)
 (* Section 9. The t_n polynomial-part integral face (U4).  Dense      *)
@@ -328,3 +335,66 @@ Fixpoint planb4_tn_acc (qs : list Q) (k : nat) : Q * Q :=
 
 Definition planb4_tn (n : nat) : Q :=
   fst (planb4_tn_acc (planb4_P n) 0).
+(* Section 10. The L-cleared a/b composite faces and the integrality *)
+(* statement faces.  aq/bq above are the S-only / A_{n,0}-only       *)
+(* sub-faces; the header formulas add the L_n clearing factor and    *)
+(* the (-1)^(n+1) sign.  The integrality faces are Set-carried       *)
+(* (sigT over qeqT) over the machine-passed KB41m domain n = 1..40;  *)
+(* the general-n supply is the KB41m Lemma 3(9) chain (registered    *)
+(* upstream debt); spots discharge where conversion is affordable. *)
+
+(* the (-1)^(n+1) sign face. *)
+Definition planb4_sign (n : nat) : Z := if Nat.even (S n) then 1%Z else (-1)%Z.
+
+(* the cleared a-face: 2^(-floor(5n/2)+1) L_n (-1)^(n+1) (t_n + S_n). *)
+Definition planb4_a_cleared (n : nat) : Q :=
+  (planb4_scale n * (inject_Z (planb4_L n * planb4_sign n) *
+                     (planb4_tn n + planb4_aq n))%Q)%Q.
+
+(* the cleared b-face: 2^(-floor(5n/2)+1) L_n (-1)^(n+1) A_{n,0} / 2. *)
+Definition planb4_b_cleared (n : nat) : Q :=
+  (planb4_scale n * (inject_Z (planb4_L n * planb4_sign n) *
+                     (piu_zz_Aj n 0 * (1 # 2)%Q))%Q)%Q.
+
+(* the born integrality statement faces (KB41m items 1-5, n = 1..40). *)
+Definition planb4_aq_is_Z : Set :=
+  forall n : nat, BidT (planb3_g1_dom n) ->
+    sigT (fun z : Z => qeqT (planb4_a_cleared n) (inject_Z z)).
+
+Definition planb4_bq_is_Z : Set :=
+  forall n : nat, BidT (planb3_g1_dom n) ->
+    sigT (fun z : Z => qeqT (planb4_b_cleared n) (inject_Z z)).
+
+(* U8 b-channel table anchor at n = 1 (the raw bq sub-face lacks the *)
+(* L_n clearing factor, so the table equality is on the cleared face). *)
+Example planb4_b_cleared_table_1 :
+  Qeq_bool (planb4_b_cleared 1) (inject_Z (planb3_g1_B 1)) = true.
+Proof. reflexivity. Qed.
+
+Example planb4_bq_is_Z_1 :
+  sigT (fun z : Z => qeqT (planb4_b_cleared 1) (inject_Z z)).
+Proof. exists (planb3_g1_B 1). apply qeqT_intro. unfold Qeq. reflexivity. Qed.
+
+(* the a-channel composite does NOT reproduce the calibration A-table *)
+(* at n = 1 (kernel-refuted; the b-channel matches) -- registered     *)
+(* honest item; the composite value at n = 1 is the integer 3602. *)
+Example planb4_aq_is_Z_1 :
+  sigT (fun z : Z => qeqT (planb4_a_cleared 1) (inject_Z z)).
+Proof. exists (3602%Z). apply qeqT_intro. unfold Qeq. reflexivity. Qed.
+
+(* Section 11. Assumption audit for the new spot faces. *)
+
+Print Assumptions planb4_Phi1_spot.
+Print Assumptions planb4_Phi2_spot.
+Print Assumptions planb4_Phi3_spot.
+Print Assumptions planb4_Pn_list_13_empty.
+Print Assumptions planb4_Phi_calib_agree.
+Print Assumptions planb4_LZn_calib_agree.
+Print Assumptions planb4_sign.
+Print Assumptions planb4_a_cleared.
+Print Assumptions planb4_b_cleared.
+Print Assumptions planb4_aq_is_Z.
+Print Assumptions planb4_bq_is_Z.
+Print Assumptions planb4_b_cleared_table_1.
+Print Assumptions planb4_bq_is_Z_1.
+Print Assumptions planb4_aq_is_Z_1.

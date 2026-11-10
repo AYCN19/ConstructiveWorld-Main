@@ -10,12 +10,14 @@
       inflates each entry by Phi_n and misses the calibration face
       (L(4) = 102960 = lcm(1..16)/7 is the split witness); the A/B
       assembly consumes this normalized L_n.  Anchors: Phi_n =
-      planb3_g1_Phi n and L_n = planb3_g1_L n for all n = 1..40.
+      planb4_Phi n and L_n = planb4_LZn n for all n = 1..40, a
+      definition-face cross-check census against the general-n
+      reference faces of planb3_g1_calib (the zz_in_Pn window).
 
     Dependencies.  piu_zz_padic_clearing (zz_primeb, the
       trial-division primality, reused verbatim); planb3_g1_calib
-      (the n = 1..40 Phi/L cross-check tables); stdlib ZArith,
-      Arith, List.
+      (the general-n reference faces planb4_Phi / planb4_LZn);
+      stdlib ZArith, Arith, List.
 
     References.  ZZ2020, Lemma 2 (the P_n window) and Lemma 3
       (L_n = lcm / Phi_n), arXiv:1912.06345.
@@ -72,9 +74,11 @@ Qed.
 (* ================================================================== *)
 
 (* every window prime p satisfies p >= 7 (5 < p, p prime) and
-   p <= 2*n (from p <= 2*(n mod p) and n mod p < p), and p = 2*n is
-   even hence composite, so the enumeration domain seq 7 (2*n - 6)
-   = [7 .. 2*n - 1] covers the window; it is empty for n <= 3. *)
+   p <= 2*n (from p <= 2*(n mod p) and n mod p <= n), and the top
+   endpoint p = 2*n of the enumeration domain seq 7 (2*n - 6)
+   = [7 .. 2*n] is even hence composite for every n (proved below:
+   planb4_g1_primeb_even_top), so the endpoint is inert and the
+   domain covers the window exactly; it is empty for n <= 3. *)
 Definition planb4_g1_pwin_list (n : nat) : list nat :=
   filter (fun p => planb4_g1_inwin n p) (seq 7 (2 * n - 6)).
 
@@ -102,24 +106,26 @@ Definition planb4_g1_ln (n : nat) : Z :=
   Z.div (planb4_g1_lcmt (4 * n)) (planb4_g1_phi n).
 
 (* ================================================================== *)
-(* Section 5. The census faces against the calibration tables.        *)
+(* Section 5. The census faces against the general-n reference faces. *)
 (* ================================================================== *)
 
-(* per-n window check: Phi_n agrees with the calibration Phi channel. *)
+(* per-n window check: Phi_n agrees with the reference face
+   planb4_Phi (planb3_g1_calib, the zz_in_Pn window product). *)
 Fixpoint planb4_g1_phiwin (k : nat) : bool :=
   match k with
   | O => true
   | S k' =>
-      andb (Z.eqb (planb4_g1_phi (S k')) (planb3_g1_Phi (S k')))
+      andb (Z.eqb (planb4_g1_phi (S k')) (planb4_Phi (S k')))
            (planb4_g1_phiwin k')
   end.
 
-(* per-n window check: L_n agrees with the calibration L channel. *)
+(* per-n window check: L_n agrees with the reference face
+   planb4_LZn (planb3_g1_calib, lcm / zz_in_Pn-window product). *)
 Fixpoint planb4_g1_lnwin (k : nat) : bool :=
   match k with
   | O => true
   | S k' =>
-      andb (Z.eqb (planb4_g1_ln (S k')) (planb3_g1_L (S k')))
+      andb (Z.eqb (planb4_g1_ln (S k')) (planb4_LZn (S k')))
            (planb4_g1_lnwin k')
   end.
 
@@ -143,7 +149,7 @@ Fixpoint planb4_g1_lndiv (k : nat) : bool :=
 
 Lemma planb4_g1_phiwin_elim : forall k i : nat,
   planb4_g1_phiwin k = true -> (1 <= i)%nat -> (i <= k)%nat ->
-  planb4_g1_phi i = planb3_g1_Phi i.
+  planb4_g1_phi i = planb4_Phi i.
 Proof.
   induction k as [|k IH]; intros i Hc Hi1 Hi2.
   - exfalso. lia.
@@ -156,7 +162,7 @@ Qed.
 
 Lemma planb4_g1_lnwin_elim : forall k i : nat,
   planb4_g1_lnwin k = true -> (1 <= i)%nat -> (i <= k)%nat ->
-  planb4_g1_ln i = planb3_g1_L i.
+  planb4_g1_ln i = planb4_LZn i.
 Proof.
   induction k as [|k IH]; intros i Hc Hi1 Hi2.
   - exfalso. lia.
@@ -198,6 +204,102 @@ Proof.
 Qed.
 
 (* ================================================================== *)
+(* Section 5c. Domain honesty: the enumeration domain [7 .. 2*n] is   *)
+(* sound and complete for the window face, and its top endpoint is    *)
+(* inert (2*n is even hence composite).                               *)
+(* ================================================================== *)
+
+(* one-step unfolding of the trial-division descent (definitional). *)
+Lemma planb4_g1_nodiv_upto_S : forall k d : nat,
+  zz_nodiv_upto (Z.of_nat k) (S d) =
+  if Z.ltb (Z.of_nat (S d)) 2 then true
+  else if Z.eqb (Z.of_nat k mod Z.of_nat (S d)) 0 then false
+  else zz_nodiv_upto (Z.of_nat k) d.
+Proof. reflexivity. Qed.
+
+(* an even positive target fails the trial-division descent: the
+   descent walks its divisor range down to 2, and 2 divides. *)
+Lemma planb4_g1_nodiv_even : forall (d k : nat),
+  (2 <= d)%nat -> (exists m : nat, k = 2 * m)%nat ->
+  zz_nodiv_upto (Z.of_nat k) d = false.
+Proof.
+  intros d. induction d as [|d IH]; intros k H2 [m Heq].
+  - exfalso. lia.
+  - destruct d as [|d'].
+    + exfalso. lia.
+    + rewrite planb4_g1_nodiv_upto_S.
+      destruct (Z.ltb (Z.of_nat (S (S d'))) 2) eqn:Hlt.
+      * apply Z.ltb_lt in Hlt. lia.
+      * destruct (Z.eqb (Z.of_nat k mod Z.of_nat (S (S d'))) 0) eqn:Hmod.
+        -- reflexivity.
+        -- destruct (Nat.eq_dec d' 0) as [Hd0 | Hd0].
+           ++ exfalso. subst d'.
+              assert (H2z : (Z.of_nat 2 <> 0)%Z) by lia.
+              assert (Hm : (Z.of_nat k mod 2 = 0)%Z).
+              { apply (proj2 (Zmod_divides _ _ H2z)).
+                exists (Z.of_nat m). lia. }
+              change (Z.of_nat (S 1)) with 2%Z in Hmod.
+              rewrite Hm in Hmod. discriminate.
+           ++ apply IH; [lia | ].
+              exists m. subst k. lia.
+Qed.
+
+(* the enumeration-domain top endpoint 2*n is composite: with
+   planb4_g1_inwin_bounds this makes the endpoint inert — it is in
+   the domain but never a window member. *)
+Lemma planb4_g1_primeb_even_top : forall n : nat, (2 <= n)%nat ->
+  planb4_g1_primeb (2 * n) = false.
+Proof.
+  intros n Hn. unfold planb4_g1_primeb, zz_primeb.
+  apply andb_false_iff. right.
+  apply planb4_g1_nodiv_even with (k := (2 * n)%nat).
+  - lia.
+  - exists n. reflexivity.
+Qed.
+
+(* every window member lies in [7, 2*n]: the window demands 5 < p, and
+   p = 6 fails the reused primality test (6 mod 2 = 0); p <= 2*n
+   follows from the window inequality p <= 2*(n mod p) together with
+   n mod p <= n. *)
+Lemma planb4_g1_inwin_bounds : forall n p : nat,
+  planb4_g1_inwin n p = true -> (7 <= p)%nat /\ (p <= 2 * n)%nat.
+Proof.
+  intros n p H.
+  unfold planb4_g1_inwin in H.
+  apply andb_true_iff in H. destruct H as [Hprime Hrest].
+  unfold planb4_g1_pwin in Hrest.
+  apply andb_true_iff in Hrest. destruct Hrest as [Hrest Hd].
+  apply andb_true_iff in Hrest. destruct Hrest as [Hrest Hc].
+  apply andb_true_iff in Hrest. destruct Hrest as [Ha Hb].
+  apply Nat.ltb_lt in Ha.
+  apply Nat.leb_le in Hc.
+  pose proof (Nat.Div0.mod_le n p) as Hmle.
+  assert (H7 : (7 <= p)%nat).
+  { destruct (Nat.eq_dec p 6) as [H6 | Hne6].
+    - subst p. vm_compute in Hprime. discriminate.
+    - lia. }
+  split; [exact H7 | lia].
+Qed.
+
+(* soundness of the enumeration: listed primes are window members. *)
+Lemma planb4_g1_pwin_list_sound : forall n p : nat,
+  In p (planb4_g1_pwin_list n) -> planb4_g1_inwin n p = true.
+Proof.
+  intros n p H. apply filter_In in H. destruct H as [_ Hf]. exact Hf.
+Qed.
+
+(* completeness of the enumeration: every window member is listed
+   (with the bounds lemma this closes the domain-honesty chain). *)
+Lemma planb4_g1_pwin_list_complete : forall n p : nat,
+  planb4_g1_inwin n p = true -> In p (planb4_g1_pwin_list n).
+Proof.
+  intros n p H. apply filter_In. split.
+  - apply in_seq. pose proof (planb4_g1_inwin_bounds n p H) as [H7 H20].
+    lia.
+  - exact H.
+Qed.
+
+(* ================================================================== *)
 (* Section 6. Anchors: per-n spots and the full n = 1..40 census.     *)
 (* ================================================================== *)
 
@@ -235,13 +337,13 @@ Proof. vm_compute. reflexivity. Qed.
 Example planb4_g1_ln_7 : planb4_g1_ln 7 = 561632400%Z.
 Proof. vm_compute. reflexivity. Qed.
 
-(* the lcm face: lcm(1..4) = 12 coincides with the calibration
-   entry at n = 1 because Phi_1 = 1 there. *)
+(* the lcm face: lcm(1..4) = 12 coincides with the reference entry at
+   n = 1 because Phi_1 = 1 there. *)
 Example planb4_g1_lcmt_4 : planb4_g1_lcmt 4 = 12%Z.
 Proof. vm_compute. reflexivity. Qed.
 
-(* the full census: both faces agree with the calibration tables on
-   the whole declared domain n = 1..40. *)
+(* the full census: both faces agree with the reference faces
+   planb4_Phi / planb4_LZn on the whole declared domain n = 1..40. *)
 Example planb4_g1_phiwin_40 : planb4_g1_phiwin 40 = true.
 Proof. vm_compute. reflexivity. Qed.
 
@@ -316,3 +418,9 @@ Print Assumptions planb4_g1_phi_nz.
 Print Assumptions planb4_g1_pwin_list_3.
 Print Assumptions planb4_g1_pwin_list_4.
 Print Assumptions planb4_g1_pwin_list_10.
+Print Assumptions planb4_g1_inwin_bounds.
+Print Assumptions planb4_g1_pwin_list_sound.
+Print Assumptions planb4_g1_pwin_list_complete.
+Print Assumptions planb4_g1_nodiv_upto_S.
+Print Assumptions planb4_g1_nodiv_even.
+Print Assumptions planb4_g1_primeb_even_top.
