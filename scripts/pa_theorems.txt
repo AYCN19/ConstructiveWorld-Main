@@ -16,7 +16,7 @@
 #   rppo_align_objective_advantage_decomp (paper-1 snapshot anchor, on disk only under attn);
 #   attention_minimizes_free_energy (paper-2 conceptual name; the renamed req_attention_minimizes_free_energy_unique is already in this list);
 #   real_kl_sum_decomp (paper-2 §Real replication list theorem 4.1 side name) -- base .v comment phantom (L43735: a duplicated comment header left a nested block unclosed,
-#     swallowing the theorem text and exporting zero .vo; same verdict as the historical probe_full.v note); not a real statement, kept out of this list, recorded item by item on the drift list.
+#     swallowing the theorem text and leaving zero exports in .vo; same verdict as the historical probe_full.v note); not a real statement, kept out of this list, recorded item by item on the drift list.
 # Note: UpExtras219./UpGRPO219./PropositionConvergenceCore. are submodule qualified names inside the base module (legal for Print
 #     Assumptions after Require Import; an earlier-pass list probed with the plain name boltzmann_factor_pos, which interrupted the 219 module-level test; this version switched to qualified names).
 # ---- [P1-81] base CW_ConstructiveWorld_219 ----
