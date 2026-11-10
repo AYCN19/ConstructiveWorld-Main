@@ -1091,3 +1091,8 @@ planb4_u4c3_freezewin_s2n17.v#R224-g1w023
 planb4_u4c3_freezewin_s2n18.v#R224-g1w024
 planb4_u4c3_freezewin_fold40.v#R224-g1w025
 piu_zz_hmu_distpt_supply.v#R224-g1w026
+planb4_u4c3_freezewin_s3.v#R224-g1w027
+planb4_u4c3_freezewin_s4.v#R224-g1w028
+planb4_u4c3_freezewin_s5.v#R224-g1w029
+planb4_u4c3_freezewin_s2n9.v#R224-g1w030
+planb4_u5_carrier_align.v#R224-g1w031
