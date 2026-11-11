@@ -374,7 +374,377 @@ Proof.
     + exact H3.
 Qed.
 
-(* ==== Section 5. Audit ==== *)
+(* ==== Section 5. Envelope carrier (M1 prescription P5, face 1) ==== *)
+
+(* A concrete Q-valued carrier satisfying Hp and the revised-form Htri
+   of piu_mu_criterion.  The modulus m(a,b) := pie_modulus (1/(|b|+1))
+   is a computable pie_modulus-shaped function; the carrier value
+   U(a,b) := |a + b*xL_m| + |b|*e_m is a computable Q-valued upper
+   envelope of the true residual |a + b*pi_L| uniformly over the whole
+   tail k >= m, through lw0m_tail_bounded_pi.  The triangle identity
+   a*q + b*p = q*(a + b*xL_k) + b*(p - q*xL_k), taken at the join index
+   k = max(m(a,b), m(-p,q)) of the two moduli, together with the two
+   tail windows |xL_k - xL_m| < e_m and |xL_k - xL_m'| < e_m' yields
+   exactly the revised-form Htri bound
+   |a*q + b*p| <= q*U(a,b) + |b|*U(-p,q).
+   Every Qeq transport below goes through the dedicated carrier lemmas
+   (qeq_le_l/qeq_le_r/Qeq_trans at the Prop layer, abs_congr at the Z
+   level); no Qeq term is ever rewritten under a Qle goal. *)
+
+Definition piu_zz_env_modulus (a b : Z) : nat :=
+  pie_modulus ((1 # 1) / inject_Z (Z.abs b + 1)).
+
+Definition piu_zz_env_dval (a b : Z) : Q :=
+  Qabs (inject_Z a + inject_Z b * lw0m_xL (piu_zz_env_modulus a b))
+  + inject_Z (Z.abs b) * lw0m_e (piu_zz_env_modulus a b).
+
+Lemma piu_zz_env_injZ_abs : forall z : Z,
+  piu_mu_QeqT (Qabs (inject_Z z)) (inject_Z (Z.abs z)).
+Proof.
+  intros z. apply piu_mu_QeqT_i. unfold inject_Z. symmetry. apply Zabs_Qabs.
+Defined.
+
+Lemma piu_zz_env_injZ_nonneg : forall z : Z, (0 <= z)%Z ->
+  piu_mu_QleT 0 (inject_Z z).
+Proof.
+  intros z Hz. apply piu_mu_QleT_i.
+  change (inject_Z 0 <= inject_Z z)%Q. rewrite <- Zle_Qle. exact Hz.
+Defined.
+
+Lemma piu_zz_env_mult_le_l : forall x y z : Q,
+  piu_mu_QleT x y -> piu_mu_QleT 0 z -> piu_mu_QleT (z * x) (z * y).
+Proof.
+  intros x y z Hxy H0z.
+  destruct Hxy as [Hxy]. destruct H0z as [H0z].
+  apply piu_mu_QleT_i.
+  rewrite (Qmult_comm z x). rewrite (Qmult_comm z y).
+  exact (Qmult_le_compat_r x y z Hxy H0z).
+Defined.
+
+Lemma piu_zz_env_le_plus_r : forall x y : Q,
+  piu_mu_QleT 0 y -> piu_mu_QleT x (x + y).
+Proof.
+  intros x y H. destruct H as [H].
+  apply piu_mu_QleT_i. lra.
+Defined.
+
+Lemma piu_zz_env_e_pos : forall k : nat, piu_mu_QltT 0 (lw0m_e k).
+Proof.
+  intros k. apply piu_mu_QltT_i. unfold lw0m_e.
+  apply (Qmult_lt_0_compat 5 (pie_mag k)).
+  - unfold Qlt. simpl. lia.
+  - apply pie_mag_pos.
+Defined.
+
+Lemma piu_zz_env_qeq_le_l : forall x y : Q,
+  piu_mu_QeqT x y -> piu_mu_QleT x y.
+Proof.
+  intros x y H. destruct H as [H].
+  apply piu_mu_QleT_i.
+  unfold Qeq in H. unfold Qle.
+  rewrite H. apply Z.le_refl.
+Defined.
+
+Lemma piu_zz_env_qeq_le_r : forall x y : Q,
+  piu_mu_QeqT x y -> piu_mu_QleT y x.
+Proof.
+  intros x y H. destruct H as [H].
+  apply piu_mu_QleT_i.
+  unfold Qeq in H. unfold Qle.
+  rewrite <- H. apply Z.le_refl.
+Defined.
+
+Lemma piu_zz_env_qeq_le_l_raw : forall x y : Q, x == y -> x <= y.
+Proof.
+  intros x y H.
+  unfold Qeq in H. unfold Qle.
+  rewrite H. apply Z.le_refl.
+Defined.
+
+Lemma piu_zz_env_qeq_le_r_raw : forall x y : Q, x == y -> y <= x.
+Proof.
+  intros x y H.
+  unfold Qeq in H. unfold Qle.
+  rewrite <- H. apply Z.le_refl.
+Defined.
+
+Lemma piu_zz_env_qeq_sym : forall x y : Q,
+  piu_mu_QeqT x y -> piu_mu_QeqT y x.
+Proof.
+  intros x y H. destruct H as [H].
+  apply piu_mu_QeqT_i. exact (Qeq_sym _ _ H).
+Defined.
+
+Lemma piu_zz_env_qeq_trans : forall x y z : Q,
+  piu_mu_QeqT x y -> piu_mu_QeqT y z -> piu_mu_QeqT x z.
+Proof.
+  intros x y z H1 H2. destruct H1 as [H1]. destruct H2 as [H2].
+  apply piu_mu_QeqT_i. exact (Qeq_trans _ _ _ H1 H2).
+Defined.
+
+Lemma piu_zz_env_abs_mult : forall u v : Q,
+  piu_mu_QeqT (Qabs (u * v)) (Qabs u * Qabs v).
+Proof.
+  intros u v. apply piu_mu_QeqT_i. apply Qabs_Qmult.
+Defined.
+
+Lemma piu_zz_env_abs_mult_le : forall u v : Q,
+  Qabs (u * v) <= Qabs u * Qabs v.
+Proof.
+  intros u v. exact (piu_zz_env_qeq_le_l_raw _ _ (Qabs_Qmult u v)).
+Defined.
+
+Lemma piu_zz_env_abs_opp : forall x : Q,
+  piu_mu_QeqT (Qabs (- x)) (Qabs x).
+Proof.
+  intros x. apply piu_mu_QeqT_i. apply Qabs_opp.
+Defined.
+
+Lemma piu_zz_env_qabs_qpos : forall q : nat,
+  piu_mu_QeqT (Qabs (inject_Z (Z.of_nat q))) (inject_Z (Z.of_nat q)).
+Proof.
+  intros q. apply piu_mu_QeqT_i.
+  assert (HidQ : inject_Z (Z.abs (Z.of_nat q)) == inject_Z (Z.of_nat q))
+    by (apply (proj2 (inject_Z_injective _ _));
+        apply Z.abs_eq; apply Nat2Z.is_nonneg).
+  destruct (piu_zz_env_injZ_abs (Z.of_nat q)) as [H1].
+  exact (Qeq_trans _ _ _ H1 HidQ).
+Defined.
+
+(* Qabs respects Qeq; proved at the Z level: destruct the record so
+   every projection reduces by iota, then Z.abs_mul and the positivity
+   of denominators close the equation by conversion. *)
+Lemma piu_zz_env_abs_congr : forall x y : Q,
+  piu_mu_QeqT x y -> piu_mu_QeqT (Qabs x) (Qabs y).
+Proof.
+  intros x y Hxy. destruct Hxy as [Hxy].
+  destruct x as [nx dx]. destruct y as [ny dy].
+  apply piu_mu_QeqT_i. unfold Qeq.
+  cbn [Qnum Qden Qabs] in Hxy |- *.
+  pose proof (f_equal Z.abs Hxy) as H0.
+  rewrite !Z.abs_mul in H0.
+  exact H0.
+Defined.
+
+(* |X| <= B transports along X == Y at the Qabs argument, through the
+   two-sided conditional shape of Qabs_Qle_condition. *)
+Lemma piu_zz_env_abs_le_congr : forall X Y B : Q,
+  piu_mu_QeqT X Y -> piu_mu_QleT (Qabs Y) B -> piu_mu_QleT (Qabs X) B.
+Proof.
+  intros X Y B HXY HYB.
+  apply piu_mu_QleT_i.
+  destruct HYB as [HYB].
+  destruct (proj1 (Qabs_Qle_condition Y B) HYB) as [Hle1 Hle2].
+  apply (proj2 (Qabs_Qle_condition X B)).
+  destruct (piu_zz_env_qeq_le_r X Y HXY) as [HYX].
+  destruct (piu_zz_env_qeq_le_l X Y HXY) as [HXYle].
+  split.
+  + exact (Qle_trans (- B) Y X Hle1 HYX).
+  + exact (Qle_trans X Y B HXYle Hle2).
+Defined.
+
+(* Hp face of the carrier, verbatim the Hp premise shape of
+   piu_mu_criterion at dval := piu_zz_env_dval. *)
+Theorem piu_zz_env_Hp : forall a b : Z, piu_mu_QleT 0 (piu_zz_env_dval a b).
+Proof.
+  intros a b.
+  apply piu_mu_QleT_i.
+  unfold piu_zz_env_dval.
+  apply (Qle_trans 0 (Qabs (inject_Z a + inject_Z b * lw0m_xL (piu_zz_env_modulus a b)))).
+  - apply Qabs_nonneg.
+  - apply piu_zz_env_le_plus_r.
+    apply piu_mu_QleT_i.
+    apply Qmult_le_0_compat.
+    * destruct (piu_zz_env_injZ_nonneg (Z.abs b) (Z.abs_nonneg b)) as [Hb0]. exact Hb0.
+    * destruct (piu_zz_env_e_pos (piu_zz_env_modulus a b)) as [Hlt0].
+      apply Qlt_le_weak. exact Hlt0.
+Defined.
+
+(* Revised-form Htri face of the carrier, verbatim the revised Htri
+   premise shape of piu_mu_criterion at dval := piu_zz_env_dval
+   (second slot carries |b|*dval(-p,q)). *)
+Theorem piu_zz_env_Htri : forall (a b p : Z) (q : nat), (1 <= q)%nat ->
+  piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
+    ((inject_Z (Z.of_nat q) * piu_zz_env_dval a b
+      + inject_Z (Z.abs b) * piu_zz_env_dval (- p) (Z.of_nat q))%Q).
+Proof.
+  intros a b p q Hq.
+  assert (Hm1 : (1 <= piu_zz_env_modulus a b)%nat)
+    by (unfold piu_zz_env_modulus, pie_modulus; apply Nat.lt_0_succ).
+  assert (Hm'1 : (1 <= piu_zz_env_modulus (- p) (Z.of_nat q))%nat)
+    by (unfold piu_zz_env_modulus, pie_modulus; apply Nat.lt_0_succ).
+  pose proof (QltT_to_Qlt _ _
+    (lw0m_tail_bounded_pi (piu_zz_env_modulus a b)
+      (Nat.max (piu_zz_env_modulus a b) (piu_zz_env_modulus (- p) (Z.of_nat q)))
+      Hm1 (Nat.le_max_l _ _))) as Htw1.
+  pose proof (QltT_to_Qlt _ _
+    (lw0m_tail_bounded_pi (piu_zz_env_modulus (- p) (Z.of_nat q))
+      (Nat.max (piu_zz_env_modulus a b) (piu_zz_env_modulus (- p) (Z.of_nat q)))
+      Hm'1 (Nat.le_max_r _ _))) as Htw2.
+  apply piu_mu_QleT_i.
+  unfold piu_zz_env_dval.
+  set (m := piu_zz_env_modulus a b).
+  set (m' := piu_zz_env_modulus (- p) (Z.of_nat q)).
+  set (k := Nat.max m m').
+  set (qQ := inject_Z (Z.of_nat q)).
+  set (bQ := inject_Z b).
+  set (pQ := inject_Z p).
+  assert (HabsL : piu_mu_QeqT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
+                   (Qabs (inject_Z a * qQ + bQ * pQ))).
+  { assert (Hm13 : piu_mu_QeqT (inject_Z (a * Z.of_nat q + b * p))
+                     (inject_Z a * qQ + bQ * pQ)).
+    { apply piu_mu_QeqT_i.
+      rewrite inject_Z_plus.
+      rewrite (inject_Z_mult a (Z.of_nat q)).
+      rewrite (inject_Z_mult b p).
+      apply (Qeq_refl _). }
+    exact (piu_zz_env_qeq_trans _ _ _
+      (piu_zz_env_qeq_sym _ _ (piu_zz_env_injZ_abs (a * Z.of_nat q + b * p)))
+      (piu_zz_env_abs_congr _ _ Hm13)). }
+  assert (HtriEq : piu_mu_QeqT (inject_Z a * qQ + bQ * pQ)
+                    (qQ * (inject_Z a + bQ * lw0m_xL k)
+                     + (- bQ) * (inject_Z (- p) + qQ * lw0m_xL k))).
+  { apply piu_mu_QeqT_i. unfold qQ, bQ, pQ. rewrite inject_Z_opp. lra. }
+  assert (Htri1 : piu_mu_QleT (Qabs (qQ * (inject_Z a + bQ * lw0m_xL k))
+                                + Qabs ((- bQ) * (inject_Z (- p) + qQ * lw0m_xL k)))
+                  (qQ * Qabs (inject_Z a + bQ * lw0m_xL k)
+                   + inject_Z (Z.abs b) * Qabs (inject_Z (- p) + qQ * lw0m_xL k))).
+  { apply piu_mu_QleT_i.
+    apply Qplus_le_compat.
+    - apply (Qle_trans (Qabs (qQ * (inject_Z a + bQ * lw0m_xL k)))
+             (Qabs qQ * Qabs (inject_Z a + bQ * lw0m_xL k))).
+      + apply piu_zz_env_abs_mult_le.
+      + apply (Qmult_le_compat_r (Qabs qQ) qQ
+             (Qabs (inject_Z a + bQ * lw0m_xL k))).
+        * destruct (piu_zz_env_qabs_qpos q) as [HqQ].
+          exact (piu_zz_env_qeq_le_l_raw _ _ HqQ).
+        * apply piu_mu_QleT_i. apply Qabs_nonneg.
+    - apply (Qle_trans (Qabs ((- bQ) * (inject_Z (- p) + qQ * lw0m_xL k)))
+             (Qabs (- bQ) * Qabs (inject_Z (- p) + qQ * lw0m_xL k))).
+      + apply piu_zz_env_abs_mult_le.
+      + apply (Qmult_le_compat_r (Qabs (- bQ)) (inject_Z (Z.abs b))
+             (Qabs (inject_Z (- p) + qQ * lw0m_xL k))).
+        * apply (Qle_trans (Qabs (- bQ)) (Qabs bQ)).
+          -- destruct (piu_zz_env_abs_opp bQ) as [Ho].
+             exact (piu_zz_env_qeq_le_l_raw _ _ Ho).
+          -- destruct (piu_zz_env_injZ_abs b) as [Hb].
+             exact (piu_zz_env_qeq_le_l_raw _ _ Hb).
+        * apply piu_mu_QleT_i. apply Qabs_nonneg. }
+  assert (Htri1c : piu_mu_QleT (Qabs (qQ * (inject_Z a + bQ * lw0m_xL k)
+                                  + (- bQ) * (inject_Z (- p) + qQ * lw0m_xL k)))
+                  (qQ * Qabs (inject_Z a + bQ * lw0m_xL k)
+                   + inject_Z (Z.abs b) * Qabs (inject_Z (- p) + qQ * lw0m_xL k))).
+  { apply piu_mu_QleT_i.
+    apply (Qle_trans _ (Qabs (qQ * (inject_Z a + bQ * lw0m_xL k))
+            + Qabs ((- bQ) * (inject_Z (- p) + qQ * lw0m_xL k)))).
+    - apply Qabs_triangle.
+    - destruct Htri1 as [Htri1p]. exact Htri1p. }
+  assert (Htri0 : piu_mu_QleT (Qabs (inject_Z a * qQ + bQ * pQ))
+                  (qQ * Qabs (inject_Z a + bQ * lw0m_xL k)
+                   + inject_Z (Z.abs b) * Qabs (inject_Z (- p) + qQ * lw0m_xL k)))
+    by exact (piu_zz_env_abs_le_congr _ _ _ HtriEq Htri1c).
+  assert (HX1Eq : piu_mu_QeqT (inject_Z a + bQ * lw0m_xL k)
+                   ((inject_Z a + bQ * lw0m_xL m)
+                    + bQ * (lw0m_xL k - lw0m_xL m))).
+  { apply piu_mu_QeqT_i. lra. }
+  assert (HX1win : piu_mu_QleT (Qabs ((inject_Z a + bQ * lw0m_xL m)
+                                       + bQ * (lw0m_xL k - lw0m_xL m)))
+                  (Qabs (inject_Z a + bQ * lw0m_xL m)
+                   + inject_Z (Z.abs b) * lw0m_e m)).
+  { apply piu_mu_QleT_i.
+    apply (Qle_trans _ (Qabs (inject_Z a + bQ * lw0m_xL m)
+            + Qabs (bQ * (lw0m_xL k - lw0m_xL m)))).
+    - apply Qabs_triangle.
+    - apply Qplus_le_compat.
+      + apply Qle_refl.
+      + apply (Qle_trans (Qabs (bQ * (lw0m_xL k - lw0m_xL m)))
+               (Qabs bQ * Qabs (lw0m_xL k - lw0m_xL m))).
+        * apply piu_zz_env_abs_mult_le.
+        * apply (Qle_trans _ (inject_Z (Z.abs b)
+                                * Qabs (lw0m_xL k - lw0m_xL m))).
+          -- apply (Qmult_le_compat_r (Qabs bQ) (inject_Z (Z.abs b))
+                  (Qabs (lw0m_xL k - lw0m_xL m))).
+             ++ destruct (piu_zz_env_injZ_abs b) as [Hb].
+                exact (piu_zz_env_qeq_le_l_raw _ _ Hb).
+             ++ apply piu_mu_QleT_i. apply Qabs_nonneg.
+          -- apply (piu_zz_env_mult_le_l _ _ _).
+             ++ apply piu_mu_QleT_i. apply Qlt_le_weak. exact Htw1.
+             ++ exact (piu_zz_env_injZ_nonneg (Z.abs b) (Z.abs_nonneg b)). }
+  assert (HX1 : piu_mu_QleT (qQ * Qabs (inject_Z a + bQ * lw0m_xL k))
+                (qQ * (Qabs (inject_Z a + bQ * lw0m_xL m)
+                 + inject_Z (Z.abs b) * lw0m_e m))).
+  { apply (piu_zz_env_mult_le_l _ _ _).
+    - exact (piu_zz_env_abs_le_congr _ _ _ HX1Eq HX1win).
+    - destruct (piu_zz_env_injZ_nonneg (Z.of_nat q) (Nat2Z.is_nonneg q))
+        as [Hq0].
+      exact (piu_mu_QleT_i _ _ Hq0). }
+  assert (HX2Eq : piu_mu_QeqT (inject_Z (- p) + qQ * lw0m_xL k)
+                   ((inject_Z (- p) + qQ * lw0m_xL m')
+                    + qQ * (lw0m_xL k - lw0m_xL m'))).
+  { apply piu_mu_QeqT_i. lra. }
+  assert (HX2win : piu_mu_QleT (Qabs ((inject_Z (- p) + qQ * lw0m_xL m')
+                                       + qQ * (lw0m_xL k - lw0m_xL m')))
+                  (Qabs (inject_Z (- p) + qQ * lw0m_xL m')
+                   + inject_Z (Z.abs (Z.of_nat q)) * lw0m_e m')).
+  { apply piu_mu_QleT_i.
+    apply (Qle_trans _ (Qabs (inject_Z (- p) + qQ * lw0m_xL m')
+            + Qabs (qQ * (lw0m_xL k - lw0m_xL m')))).
+    - apply Qabs_triangle.
+    - apply Qplus_le_compat.
+      + apply Qle_refl.
+      + apply (Qle_trans (Qabs (qQ * (lw0m_xL k - lw0m_xL m')))
+               (Qabs qQ * Qabs (lw0m_xL k - lw0m_xL m'))).
+        * apply piu_zz_env_abs_mult_le.
+        * apply (Qle_trans _ (inject_Z (Z.abs (Z.of_nat q))
+                                * Qabs (lw0m_xL k - lw0m_xL m'))).
+          -- apply (Qmult_le_compat_r (Qabs qQ)
+                  (inject_Z (Z.abs (Z.of_nat q)))
+                  (Qabs (lw0m_xL k - lw0m_xL m'))).
+             ++ destruct (piu_zz_env_injZ_abs (Z.of_nat q)) as [HqZ].
+                exact (piu_zz_env_qeq_le_l_raw _ _ HqZ).
+             ++ apply piu_mu_QleT_i. apply Qabs_nonneg.
+          -- apply (piu_zz_env_mult_le_l _ _ _).
+             ++ apply piu_mu_QleT_i. apply Qlt_le_weak. exact Htw2.
+             ++ exact (piu_zz_env_injZ_nonneg (Z.abs (Z.of_nat q))
+                        (Z.abs_nonneg (Z.of_nat q))). }
+  assert (HX2 : piu_mu_QleT (inject_Z (Z.abs b)
+                                * Qabs (inject_Z (- p) + qQ * lw0m_xL k))
+                (inject_Z (Z.abs b) * (Qabs (inject_Z (- p) + qQ * lw0m_xL m')
+                 + inject_Z (Z.abs (Z.of_nat q)) * lw0m_e m'))).
+  { apply (piu_zz_env_mult_le_l _ _ _).
+    - exact (piu_zz_env_abs_le_congr _ _ _ HX2Eq HX2win).
+    - destruct (piu_zz_env_injZ_nonneg (Z.abs b) (Z.abs_nonneg b))
+        as [Hb0].
+      exact (piu_mu_QleT_i _ _ Hb0). }
+  apply (Qle_trans _ (Qabs (inject_Z a * qQ + bQ * pQ))).
+  - destruct HabsL as [HabsLp].
+    exact (piu_zz_env_qeq_le_l_raw _ _ HabsLp).
+  - apply (Qle_trans _ (qQ * Qabs (inject_Z a + bQ * lw0m_xL k)
+          + inject_Z (Z.abs b) * Qabs (inject_Z (- p) + qQ * lw0m_xL k))).
+    + destruct Htri0 as [Htri0p]. exact Htri0p.
+    + apply Qplus_le_compat;
+        [destruct HX1 as [HX1p]; exact HX1p
+        |destruct HX2 as [HX2p]; exact HX2p].
+Defined.
+
+(* Concrete Q-value witness: the envelope value at (a,b) = (-1,1),
+   with modulus m(-1,1) = 9, is the exact rational
+   393169913342246/166966608033225 (machine-computed and closed by
+   vm_compute), and it dominates the rational bound 2. *)
+Example piu_zz_env_dval_pin_small :
+  S02_CauchyComplete.QeqT (piu_zz_env_dval (- 1) 1)
+    ((393169913342246 # 166966608033225)%Q).
+Proof. apply qeq_imp_qeqT. vm_compute. reflexivity. Defined.
+
+Example piu_zz_env_dval_lower_pin :
+  piu_mu_QleT ((2 # 1)%Q) (piu_zz_env_dval (- 1) 1).
+Proof. apply piu_mu_QleT_i.
+  assert (Hlt : ((2 # 1) < piu_zz_env_dval (- 1) 1)%Q)
+    by (vm_compute; reflexivity).
+  apply Qlt_le_weak. exact Hlt.
+Defined.
+
+(* ==== Section 6. Audit ==== *)
 
 Print Assumptions piu_zz_hmu_kappa_decomp.
 Print Assumptions piu_zz_hmu_kappa_pin.
@@ -397,10 +767,17 @@ Print Assumptions piu_zz_hmu_n1_s1len_relay.
 Print Assumptions piu_zz_hmu_n2a_chain.
 Print Assumptions piu_zz_hmu_n2c_bank_pair.
 Print Assumptions piu_zz_hmu_n2b_hcoef17_relay.
+Print Assumptions piu_zz_env_modulus.
+Print Assumptions piu_zz_env_dval.
+Print Assumptions piu_zz_env_Hp.
+Print Assumptions piu_zz_env_Htri.
+Print Assumptions piu_zz_env_dval_pin_small.
+Print Assumptions piu_zz_env_dval_lower_pin.
 
 (* Extraction differential: the named values and Set-carried statements *)
 (* compile to OCaml with no Obj.magic and no lost names. *)
 Extraction "piu_zz_hmu_distpt_supply_ext" piu_zz_hmu_kappa_c0 piu_zz_hmu_c0_inv
+  piu_zz_env_modulus piu_zz_env_dval piu_zz_env_dval_pin_small
   piu_zz_hmu_qpow_inject_alpha8 piu_zz_hmu_qpow_inject_tau2
   piu_zz_hmu_distpt_of_realcert piu_zz_hmu_distpt_supply
   piu_zz_hmu_realcert_of_chain piu_zz_hmu_n5_hescd_contract
