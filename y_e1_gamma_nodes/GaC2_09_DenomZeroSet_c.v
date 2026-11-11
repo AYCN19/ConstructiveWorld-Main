@@ -1,60 +1,53 @@
-(* ConstructiveWorld-Main - the rational deviation base, the window
-   pin, and the stem-face map of the denominator zero set. *)
-
-(** * GaC2_09_DenomZeroSet_c: rational base, trigonometric deviation,
-      window pin.
-
-    Mission.  Node C2-09 (segment C2, slot W1), locate piece.  This
-      piece casts the rational-layer deviation base of the stem
-      first-order estimate ([d09_q_mult_le_r], [d09_q_abs_le_of_both],
-      [d09_q_abs_pow_le_one], [d09_q_pow_half_nonneg],
-      [d09_q_half_pow_step], [d09_q_half_pow_anti],
-      [d09_q_fact_inv_le2], [d09_q_pow_m1_abs], [d09_q_abs_pow_le_sq],
-      [d09_q_sqr_eq_abs], [d09_q_abs_sq_le_sq]), the trigonometric
+(** * GaC2_09_DenomZeroSet_c - rational deviation base, trigonometric
+      deviation face, and window pin of the denominator zero set.
+    Mission.  Node C2-09 (segment C2, slot W1), locate piece.  The
+      rational-layer deviation base of the stem first-order estimate
+      (eleven [d09_q_*] faces, roster in Notes); the trigonometric
       deviation face [d09_q_trig_dev] (|cos_partial n t - 1| <= t*t
-      and |sin_partial n t - t| <= t*t on |t| <= 1), the order face
-      [d09_lt_opp_both], the window kit [d09_abs_split],
-      [d09_half_const_pos], [d09_quarter_lt_two], the half-angle
-      collapse [d09_sin_half_zero_of_cos_one] (cos x == 1 forces
-      sin(x/2) == 0), and the window pin [d09_window_pin] (cos d == 1
-      and sin d == 0 with d inside the pi + 1/4 window force d == 0).
-      The logarithm constant [d09_ln2], the distributivity,
-      associativity, and telescoping faces [d09_mult_distr_r]/
-      [d09_mult_assoc]/[d09_sub_split], the pi carrier, and the
-      inverse constant live in the companion piece
-      GaC2_09_DenomZeroSet_b.  The strict upper bound bridge kit, the
-      stem bound [d09_ln2_lt_one], the faces [d09_one_minus_eq], the
-      two-less-than-e comparison kit, and the exponential deviation
-      face of the stem are reserved for the consolidating stem
-      GaC2_09_DenomZeroSet, to be cast there; none of them appear in
-      this piece.
-
-    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs],
-      [QArith.Qring], [QArith.Qpower], [QArith.Qround], [Setoid],
-      [Morphisms], [Arith.Arith], [Lia].  Requires [S01_BaseRing],
-      [S02_CauchyComplete], [S03_QExp], [S07_RealSetoidExpLog],
-      [S10_KVQuantTrig], [CxRealPairCore], [CxRealPairExpLog],
-      [G1_PYTH], [GaC1_Iface_Cx], [GaC1_Iface_Real],
-      [GaC2_09_DenomZeroSet_a], and [GaC2_09_DenomZeroSet_b], all of
-      this development.
-
-    References.  drafts_C2.md C2.09 statement sketch (the L11
-      obligation: the pi carrier pinned to the C1-17 output face
-      [pi_R]); Bishop-Bridges, Constructive Analysis Ch. 2 (the
-      half-angle collapse of the cosine one-face through the
-      Pythagorean identity); the alternating-series remainder
-      estimates behind the trigonometric deviation face.
-
-    Constructivity.  Every named construction is carried by [Set];
-      the window pin runs the weak trichotomy with the explicit
-      pi + 1/4 margin; the deviation base carries the explicit
-      factorial bounds of the alternating-series estimates; zero
-      assumed constants; every proof closes under the global context.
-
+      and |sin_partial n t - t| <= t*t on |t| <= 1); the order face
+      [d09_lt_opp_both]; the window kit [d09_abs_split],
+      [d09_half_const_pos], [d09_quarter_lt_two]; the half-angle
+      collapse [d09_sin_half_zero_of_cos_one]; the window pin
+      [d09_window_pin] (companion faces and the registered-open items
+      reserved for the stem: see Notes).
+    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs], [QArith.Qring],
+      [QArith.Qpower], [QArith.Qround], [Setoid], [Morphisms],
+      [Arith.Arith], [Lia]; [S01_BaseRing] (selective [NatLe]/[And]
+      import), [S02_CauchyComplete], [S03_QExp], [S07_RealSetoidExpLog],
+      [S10_KVQuantTrig], [CxRealPairCore], [CxRealPairExpLog], [G1_PYTH],
+      [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_09_DenomZeroSet_a],
+      [GaC2_09_DenomZeroSet_b].
+    References.  drafts_C2.md C2.09 sketch (the L11 obligation: the pi
+      carrier pinned to the C1-17 output face [pi_R]); Bishop-Bridges
+      Ch. 2 (the half-angle collapse through the Pythagorean identity);
+      the alternating-series remainder estimates (trig deviation face).
+    Constructivity.  Every named construction is carried by [Set]; the
+      window pin runs the weak trichotomy (pi + 1/4 margin) and the
+      deviation base carries the explicit factorial bounds; zero assumed
+      constants; every proof closes under the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_09_DenomZeroSet_c.v] from the flat build
       directory, thermal guard wrapper. *)
 Require S01_BaseRing.
+(** Notes.  Full roster behind the Mission field.  The rational-layer
+    deviation base: [d09_q_mult_le_r], [d09_q_abs_le_of_both],
+    [d09_q_abs_pow_le_one], [d09_q_pow_half_nonneg],
+    [d09_q_half_pow_step], [d09_q_half_pow_anti],
+    [d09_q_fact_inv_le2], [d09_q_pow_m1_abs], [d09_q_abs_pow_le_sq],
+    [d09_q_sqr_eq_abs], [d09_q_abs_sq_le_sq].  The half-angle
+    collapse [d09_sin_half_zero_of_cos_one]: cos x == 1 forces
+    sin(x/2) == 0.  The window pin [d09_window_pin]: cos d == 1 and
+    sin d == 0 with d inside the pi + 1/4 window force d == 0.
+    Companion faces (live in GaC2_09_DenomZeroSet_b): the logarithm
+    constant [d09_ln2], the distributivity, associativity, and
+    telescoping faces [d09_mult_distr_r]/[d09_mult_assoc]/
+    [d09_sub_split], the pi carrier, and the inverse constant.
+    Registered-open items reserved for the consolidating stem
+    GaC2_09_DenomZeroSet, to be cast there and absent from this
+    piece: the strict upper bound bridge kit, the stem bound
+    [d09_ln2_lt_one], the faces [d09_one_minus_eq], the
+    two-less-than-e comparison kit, and the exponential deviation
+    face of the stem. *)
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop, And).
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

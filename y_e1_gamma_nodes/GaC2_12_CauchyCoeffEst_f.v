@@ -1,5 +1,3 @@
-(* ConstructiveWorld-Main - the Cauchy-coefficient glue kit: annulus-step
-   algebra faces shared by the stem assembly. *)
 (** * GaC2_12_CauchyCoeffEst_f: the annulus-step glue kit.
     Mission.  Node C2-12 glue piece f.  Pure algebra faces consumed by the stem
       GaC2_12_CauchyCoeffEst: complex norm faces [gaC12_norm_mult]/
@@ -24,8 +22,9 @@
       premise slots, zero assumed constants, zero admitted goals; every proof
       closes under the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_12_CauchyCoeffEst_f.v]; acceptance via
-      50_toolkit/accept_node.py six-chain gate, thermal-guard wrapped. *)
+      -Q <build dir> "" GaC2_12_CauchyCoeffEst_f.v] from the flat build
+      directory. *)
+
 Require S01_BaseRing.
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

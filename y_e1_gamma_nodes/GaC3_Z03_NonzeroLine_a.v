@@ -1,6 +1,6 @@
 (* ConstructiveWorld-Main - leaf a of the three-cosine racing engine: the rational transport kit. *)
-(** * GaC3_Z03_NonzeroLine_a: leaf a of node C3-Z03.
 
+(** * GaC3_Z03_NonzeroLine_a: leaf a of node C3-Z03.
     Mission.  Leaf a of the three-cosine racing engine (node C3-Z03,
     segment C3): the rational transport kit and the Q-level congruence
     kit.  Part 0a moves the strict and weak rational orders along Qeq
@@ -10,35 +10,20 @@
     the absolute value, the value itself below its absolute value, and
     the lower-bound transfer along an absolute value) feed the
     Real-level relax kit of leaf b.  The cosine term kit is
-    ring-congruent through the q_pow setoid face [q_pow_wd] of S03
-    (term congruence and partial-sum congruence), the consumption base
-    of the pointwise cosine face in leaf b.  The racing-engine core
-    (the real-part bridge, the combined carrier and its equality face)
-    lives in the stem [GaC3_Z03_NonzeroLine]; the relax-order kit and
-    the Real assistants live in leaf b [GaC3_Z03_NonzeroLine_b]; the
-    discharge and racing faces live in [GaC3_Z03_NonzeroLine_race];
-    the literal radius certificates live in
-    [GaC3_Z03_NonzeroLine_cert].
-
+    ring-congruent through the q_pow setoid face [q_pow_wd] of S03 (term
+    congruence and partial-sum congruence), the consumption base of the
+    pointwise cosine face in leaf b.
     Dependencies.  Stdlib [QArith.QArith] (with [Qabs] and [Qring]);
     [S03_QExp] ([q_pow_wd]); [S10_KVQuantTrig] ([cos_term],
     [cos_partial]).
-
     References.  ZZ theory (AFP PNT_with_Remainder) [logderiv_zeta_ineq]
     :136-163 (the three-cosine weighted inequality assembled on these
     term faces); drafts_C3.md C3-Z03 (the racing skeleton, the
-    explicit-radius obligation); cards_C3 C3-Z03 (the three-cosine
-    nonvanishing argument).
-
+    explicit-radius obligation); cards_C3 C3-Z03.
     Constructivity.  Set-sorted rational order transports and
     congruences; zero assumed constants, zero abandoned proofs, zero
-    classical choice; Print Assumptions of every named item reads
-    Closed under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC3_Z03_NonzeroLine_a.v] from the work directory through the
-    dependency-closure build (50_toolkit/build_deposit.py); acceptance
-    runs use 50_toolkit/accept_node.py and write accept/<node>.json. *)
+    classical choice; Print Assumptions reads Closed.
+    Build.  coqc -native-compiler no -q -Q . "" -Q <boot_src> "" GaC3_Z03_NonzeroLine_a.v (work directory, dependency-closure build). *)
 
 From Stdlib Require Import QArith.QArith QArith.Qabs QArith.Qring.
 Require Import S03_QExp.

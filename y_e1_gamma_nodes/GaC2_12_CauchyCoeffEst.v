@@ -1,71 +1,49 @@
-(* ConstructiveWorld-Main - the Cauchy coefficient estimate: the
-   no-integration coefficient bound assembled over the machine cluster. *)
-
+(* ConstructiveWorld-Main - the Cauchy coefficient estimate stem. *)
 (** * GaC2_12_CauchyCoeffEst: the Cauchy coefficient estimate stem.
 
-    Mission.  Node C2-12 (segment C2, slot W3), statement stem.  Two
-      statements over the expandable-carrying data: [cauchy_est_n1] -
-      the first-order form |f'(z0)|^2 <= (2M/R)^2 in squared carrier,
-      and [cauchy_est_n] - the general-n recursion |a_n|^2 <=
-      Cn^2 (M/R^n)^2 with the explicit constant [gaC12_Cn] of 2^n
-      shape.  The coefficient carriers are the machine-cluster
-      projectors [gaC12_deriv1] / [gaC12_nth_coeff] over the sequence
-      carrier [gaC12_local_exp_seq] (the L14 same-source face: the
-      C2-11 three-slot form is derived by [gaC12_slots_of_seq], and
-      the alignment lemma [cauchy_deriv1_align_c211] fixes the
-      C2-11 [deriv1] agreement).  Three gap-carrier premise slots are
-      carried explicitly (honest interface disclosure, all
-      Set-carried, monotonically shrinkable): [Hnn], the
-      complex-norm nonnegativity face (the pending Cx-norm geometry
-      machine, same registered machine as the C2-11 Hrevtri slot and
-      the GaC2_12_CauchyCoeffEst_d Hnn parameters); [Hmod_gate], the
-      strict maximum-modulus gate (circle bound B implies center
-      value bound B - the strict strengthening of the C2-11
-      delta-squared margin form); [Hchain], the extended
-      difference-quotient machine (for an expandable g it yields the
-      punctured-disk difference quotient g1 with its own expansion,
-      the punctured difference-quotient formula, and the full
-      coefficient shift a_n(g1) = a_{S n}(g) - the power-series
-      quotient re-expansion face registered as the C1.4 dependency of
-      the C2-12 card; the vacuous step machine
-      GaC2_12_CauchyCoeffEst_e is its registered placeholder).  The
-      recursion is the annulus iteration: [cauchy_chain] builds the
-      k-th quotient ring with circle bound
-      [cauchy_Bk k] = Cn^2 (M/R^k)^2 by induction, and both
-      statements close through [Hmod_gate] at the ring center.
+    Mission.  Node C2-12 (segment C2, slot W3), statement stem.  Two statements: [cauchy_est_n1], |f'(z0)|^2 <=
+      (2M/R)^2 in squared carrier, and [cauchy_est_n], |a_n|^2 <= Cn^2 (M/R^n)^2 with the explicit constant
+      [gaC12_Cn] of 2^n shape.  The coefficient carriers are the projectors [gaC12_deriv1]/[gaC12_nth_coeff] over
+      the sequence carrier [gaC12_local_exp_seq] (the L14 same-source face; detailed in Notes).  Three
+      gap-carrier premise slots ([Hnn]/[Hmod_gate]/[Hchain]) are carried explicitly - honest interface
+      disclosure, all Set-carried, monotonically shrinkable; full statements in the Notes block after the
+      first Require.  [cauchy_chain] builds the k-th quotient ring (the annulus iteration, circle bound
+      [cauchy_Bk k] = Cn^2 (M/R^k)^2 by induction); both statements close through [Hmod_gate] at the ring center.
 
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
-      [S07_RealSetoidExpLog], [CxRealPairCore], [CxRealPairExpLog],
-      [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_11_MaxModulusDisk]
-      (the closed_disk/boundary/boundary_bounded carriers) and its
-      subpiece [GaC2_11_MaxModulusDisk_b] (the [mm_*] algebra kit
-      faces [mm_norm_self_opp]/[mm_norm_wd], resident in b after
-      the v20 reseat), the machine cluster
-      [GaC2_12_CauchyCoeffEst_a] through [GaC2_12_CauchyCoeffEst_e],
-      and the glue kit [GaC2_12_CauchyCoeffEst_f].
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (Require, not Import), [S02_CauchyComplete],
+      [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore], [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real],
+      [GaC2_11_MaxModulusDisk], [GaC2_11_MaxModulusDisk_b] (the [mm_*] kit faces [mm_norm_self_opp]/[mm_norm_wd]), and
+      the machine cluster [GaC2_12_CauchyCoeffEst_a] through [GaC2_12_CauchyCoeffEst_g].
 
-    References.  drafts_C2.md C2.12 statement sketch (cauchy_est_n1
-      and cauchy_est_n verbatim; obligation L16 the Cn closed form
-      and the rpow R n carrier) and cards_C2.md C2.12 card (the
-      difference-quotient route: g = (f - f(z0))/(z - z0) circle
-      bound 2M/R pushed through the strict modulus gate; the general
-      annulus recursion with explicit constant loss).  Ahlfors Ch.2
-      the classical Cauchy coefficient estimate (statement
-      architecture only; no proof object transcribed).
+    References.  drafts_C2.md C2.12 statement sketch (cauchy_est_n1 and cauchy_est_n verbatim; obligation L16 the Cn
+      closed form and the rpow R n carrier) and cards_C2.md C2.12 card (the difference-quotient route: g = (f -
+      f(z0))/(z - z0) circle bound 2M/R pushed through the strict modulus gate; the general annulus recursion with
+      explicit constant loss).  Ahlfors Ch.2 the classical Cauchy coefficient estimate (statement architecture
+      only; no proof object transcribed).
 
-    Constructivity.  Every named construction is carried by [Set];
-      the three gap-carrier premises are discharged as explicit
-      arguments at the section close (gap-carrier form, monotonically
-      shrinkable); zero assumed constants; every proof closes under
-      the global context.
+    Constructivity.  Every named construction is carried by [Set]; the three gap-carrier premises are discharged as
+      explicit arguments at the section close (gap-carrier form, monotonically shrinkable); zero assumed constants;
+      every proof closes under the global context.
 
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_12_CauchyCoeffEst.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> "" GaC2_12_CauchyCoeffEst.v] from the flat build
+      directory; acceptance via 50_toolkit/accept_node.py (six-chain gate), thermal-guard wrapped. *)
 
 Require S01_BaseRing.
+
+(** Notes.  Disclosure carried here to keep the header within budget.  (1) The three gap-carrier
+    premise slots of the section: [Hnn] : forall v : Cx, real_le real_zero (c_norm_sq v) - the
+    complex-norm nonnegativity face, the pending Cx-norm geometry machine, the same registered
+    machine as the C2-11 Hrevtri slot and the GaC2_12_CauchyCoeffEst_d Hnn parameters.
+    [Hmod_gate] : forall (g : Cx -> Cx) (B : Real), boundary_bounded g z0 R B ->
+    real_le (c_norm_sq (g z0)) B - the strict maximum-modulus gate: a circle bound B on g gives
+    the center value bound B at z0; the strict strengthening of the C2-11 delta-squared margin
+    form.  [Hchain] : for an expandable g it yields the punctured-disk difference quotient g1
+    with its own expansion, the punctured difference-quotient formula, and the full coefficient
+    shift a_n(g1) = a_{S n}(g) - the power-series quotient re-expansion face registered as the
+    C1.4 dependency of the C2-12 card; the vacuous step machine GaC2_12_CauchyCoeffEst_e is its
+    registered placeholder.  (2) The L14 same-source face in detail: the C2-11 three-slot carrier
+    is the truncation of the sequence carrier via [gaC12_slots_of_seq], and
+    [cauchy_deriv1_align_c211] fixes the agreement of [gaC12_deriv1] with the C2-11 [deriv1]. *)
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.
 Require Import S07_RealSetoidExpLog.

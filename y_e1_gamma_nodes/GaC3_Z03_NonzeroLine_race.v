@@ -1,67 +1,51 @@
 (* ConstructiveWorld-Main - discharge and racing face of the three-cosine nonvanishing line engine. *)
+
 (** * GaC3_Z03_NonzeroLine_race: the discharge and racing face of node
     C3-Z03.
-
-    Mission.  The discharge and racing face of the three-cosine
-    nonvanishing argument (node C3-Z03, segment C3).  Part 1 tail (the
-    nonnegativity discharge): the weight factor is nonnegative
-    ([z03_ew_pos]: the von Mangoldt weight is nonnegative and the
-    exponential factor is positive), the square-form sum is
-    asymptotically nonnegative ([z03_sqsum_ge0]), and Main face 1: the
-    combined real part is asymptotically nonnegative
-    ([z03_comb_nonneg], assumption-free, the tree-native form of the
-    ZZ logderiv_zeta_ineq architecture).  Part 2: the racing
-    contradiction in explicit-radius slot form ([z03_racing_contra])
-    under Section Z03_Race with the registered premise slots (the
-    four-term main part at the offset d [Hmain4], the sigma-term
-    [Hsig3] and the doubled-ordinate [Htwo] upper bounds): under the
-    explicit window arithmetic 3*B3 + B2 < 4*m0 (m0 = 1/(2d), positive
-    by [Hd]), the nonnegativity face yields False.  The literal
-    zeta-carrier statement of the card (drafts_C3.md C3-Z03) awaits
-    the eta-continuation supply face (GaC2_10_EtaContinuation, not yet
-    in the tree); the slot form is the registered consumption shape of
-    the certified V03 pattern, and the eta-side supply line
-    [GaC2_Iface_Eta] is held on the stem for the discharge.
-
-    Dependencies.  The stem [GaC3_Z03_NonzeroLine] ([z03_comb],
-    [z03_sqsum], [z03_comb_sqsum_eq], the [z03_pt] normalisation
-    face), leaf b [GaC3_Z03_NonzeroLine_b] ([z03npos], [z03_eterm],
-    [z03_le_mult_l], [z03_relax0_plus], [z03_wy_relax],
-    [z03_lt_add_r], [z03_lt_eq_r], [z03_eq_relax_sym],
-    [z03_relax_lt_false]), [S01_BaseRing] ([NatLe], selective import),
-    [S02_CauchyComplete] ([real_lt_le_iff], [real_le_plus_compat],
-    [QltT]/[QeqT]), [S07_RealSetoidExpLog] ([real_ge_relax],
-    [real_ge_relax_of_pointwise], RealSetoid compat faces,
-    [real_const_pos]), [S10_KVQuantTrig] ([cauchy_real_exp_pos]),
-    [CxRealPairCore] ([real_zero_pt], [real_one_pt]),
-    [CxRealPairExpLog] ([c_scale]),
-    [GaC2_Iface_DS] ([NatLe_one_S] via the leaf import),
-    [GaC3_Z01_LogDerivSeries] ([z01_lam], [z01_lam_ge0],
-    [z01_manpart]), [GaC3_Z02_ThreeCosine]
+    Mission.  The discharge and racing face of the three-cosine nonvanishing
+    argument (node C3-Z03, segment C3).  Part 1 tail: the weight factor is
+    nonnegative ([z03_ew_pos]), the square-form sum is asymptotically
+    nonnegative ([z03_sqsum_ge0]), and Main face 1: the combined real part
+    is asymptotically nonnegative ([z03_comb_nonneg], assumption-free, the
+    tree-native ZZ logderiv_zeta_ineq architecture).  Part 2: the racing
+    contradiction in explicit-radius slot form ([z03_racing_contra]) under
+    Section Z03_Race with the registered premise slots ([Hmain4], [Hsig3],
+    [Htwo]): under the explicit window arithmetic 3*B3 + B2 < 4*m0
+    (m0 = 1/(2d), positive by [Hd]), the nonnegativity face yields False.
+    Dependencies.  The stem [GaC3_Z03_NonzeroLine] ([z03_comb], [z03_sqsum],
+    [z03_comb_sqsum_eq], [z03_pt]), leaf b [GaC3_Z03_NonzeroLine_b],
+    [S01_BaseRing] ([NatLe], selective import), [S03_QExp], [S02_CauchyComplete],
+    [S07_RealSetoidExpLog] ([real_ge_relax] family), [S10_KVQuantTrig],
+    [CxRealPairCore] + [CxRealPairExpLog], [GaC2_Iface_DS],
+    [GaC3_Z01_LogDerivSeries] ([z01_lam], [z01_lam_ge0]), [GaC3_Z02_ThreeCosine]
     ([GaC3_Z02_sq_pointwise_nonneg]); Stdlib [QArith] (with [Qring]),
     [Setoid], [Morphisms], [Arith], [Lia].
-
     References.  ZZ theory (AFP PNT_with_Remainder) [logderiv_zeta_ineq]
-    :136-163 (the three-cosine weighted inequality); drafts_C3.md C3-Z03
-    (racing skeleton, explicit-radius obligation); cards_C3 C3-Z03
-    (multiplicity main part: the zero-neighborhood main part -1/(2d)
-    is the registered open supply face of the zero factorization
-    route).
-
+    :136-163; drafts_C3.md C3-Z03 (racing skeleton, explicit-radius
+    obligation, multiplicity main part); cards_C3 C3-Z03.
     Constructivity.  Every named construction is carried by [Set]; the
     nonnegativity face is carried by [real_ge_relax] (the asymptotic
-    order, per the Z02 precedent).  Zero assumed constants, zero
-    abandoned proofs, zero classical choice; the Section premises
-    discharge as explicit premise arguments at End, so Print
-    Assumptions of every named item reads Closed under the global
-    context.
-
-    Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC3_Z03_NonzeroLine_race.v] from the work directory through the
-    dependency-closure build (50_toolkit/build_deposit.py); acceptance
-    runs use 50_toolkit/accept_node.py and write accept/<node>.json. *)
+    order, per the Z02 precedent).
+    Build.  coqc -native-compiler no -q -Q . "" -Q <boot_src> "" GaC3_Z03_NonzeroLine_race.v (work directory, dependency-closure build). *)
 
 Require S01_BaseRing.
+(** Notes.  Registered premise slots: the four-term main part at the offset
+    d ([Hmain4], the real part of the von Mangoldt partial sum at
+    sigma + i*t stays below the explicit m >= 1 main part -1/(2d) at the
+    balancing truncation; the registered open supply face; the zero
+    factorization route discharges it), the sigma-term upper-bound slot
+    [Hsig3] and the doubled-ordinate upper-bound slot [Htwo].  Registered
+    open: the literal zeta-carrier statement of the card (drafts_C3.md
+    C3-Z03) awaits the eta-continuation supply face (GaC2_10_EtaContinuation,
+    not yet in the tree); the slot form is the registered consumption shape
+    of the certified V03 pattern, and the eta-side supply line
+    [GaC2_Iface_Eta] is held on the stem for the discharge.  Multiplicity
+    main part: the zero-neighborhood main part -1/(2d) is the registered
+    open supply face of the zero factorization route.  Constructivity
+    in full: Zero assumed constants, zero abandoned proofs, zero classical
+    choice; the Section premises discharge as explicit premise arguments at
+    End, so Print Assumptions of every named item reads Closed under the
+    global context. *)
 (* Selective import (the S01 state-space field S shadows the nat          *)
 (* constructor under a full import; only the Set-sorted nat bound face is *)
 (* consumed). *)

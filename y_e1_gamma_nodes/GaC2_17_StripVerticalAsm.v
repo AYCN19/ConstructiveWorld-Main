@@ -1,139 +1,126 @@
-(* ConstructiveWorld-Main - statement face of the eta-route strip         *)
-(* uniform bound and the consumer-domain cover (segment node C2-17).      *)
-
 (** * GaC2_17_StripVerticalAsm: statement face of node C2-17.
 
-    Mission.  Node C2-17 (segment C2, slot W6), the strip face of the
-    vertical-line bound assembly, statement face minted from the
-    drafts_C2.md C2.17 sketch, the sketch form resolved per the
-    module spec conventions: the Section slot triple (delta, its
-    zero-strict premise, its one-cap premise) discharged as explicit
-    premise arguments (no Section wrapper), the sketch Q literals
-    lifted to the born [real_const] face, the order premises carried
-    by the Set-sorted [real_lt] / [real_le].  Two named statements,
-    kept verbatim from the sketch:
-    - [zeta_strip_uniform]: the (a) uniform band face, on
-      0 <= sigma <= 1 - delta, in the squared form
-      |zeta(s)|^2 <= (2 / (2^delta - 1))^2 through the eta route
-      (|zeta| = |eta| / |1 - 2^{1-s}|, |eta| <= 1 + 2 * 2^{-sigma} <= 3
-      on the C2-07 uniform-tail face, the denominator lower bound
-      2^{1-sigma} - 1 by the modulus algebra, zero periodicity
-      dependence; the card (a) chain 2 / (2^{1-sigma} - 1) <=
-      2 / (2^delta - 1) locked factor by factor).
-    - [zeta_strip_cover]: the (c) consumer-domain cover face on
-      0 <= sigma <= 2, carried by the C2-16 three-band disjunction
-      [zeta_vert_bound_disj] consumed directly (the near-one band is
-      the C2-16 (c) face, never re-proved here; the band boundaries
-      stay explicit on the disjunction carrier).
-    Carrier block (the sketch obligation L24 discharge, defined here
-    over the certified base): [ltwo] is the closed ln-2 witness on
-    the premise-carrying born log (its positivity premise closed at
-    the rational decidable face); [two_pow] is the power face
-    exp(delta * ln 2) over the born exponential carrier; [two_d_sub]
-    is the corridor 2^delta - 1 (the sketch := form, kept literal);
-    [c_invq] is the sketch inverse name resolved to the born
-    premise-carrying positive inverse [real_inv_pos] (the sigT
-    inverse-witness face; its premise is the corridor positivity
-    witness); [sq] and [c_scale'] are the squared and real-scalar
-    carriers (the C2-18 same-shape faces).  The corridor positivity
-    witness [Hsub] enters as the explicit premise of the named
-    statement (the L24 face: the discharge route runs through the
-    slot premises Hd / Hd1 via the exponential monotonicity chain,
-    registered for the proof wave, zero global assumption).
-    Consumed names (fail-loud, the mother-boundary registration): the
-    eta carrier [zeta_tilde] with its nonzero-denominator premise
-    [denom_nz] enters from the C2-10 face, the three-band disjunction
-    [zeta_vert_bound_disj] enters from the C2-16 face; both are the
-    sketch-verbatim consumed interfaces, so the statement bodies stop
-    exactly at the mother boundary and the file carries the
-    well-formed statement face only (the carrier block and the two
-    statement shapes verified well-formed against the certified base
-    by the scratch audit probe of this casting run).
-    Honest scope (fail-loud): the full-strip convexity face
-    |zeta(1/2+it)| <= C * t^{1/4+eps} (the log-cubed stock) needs the
-    functional equation's sigma = 0 end t^{1/2} bound; the FE node is
-    not in the KB34 C1-C4 list, NOT in this segment, registered loud
-    (the C3/C4 survey resolves by the log-squared caliber or a FE
-    node re-review; the KB34 down-chain case alpha took the
-    log-squared caliber, consistent).  Zero FE consumption on this
-    face (the word census of this file: no functional-equation name
-    enters any Require or statement).
-    Proof-body state (fail-loud): the two named items are minted at
-    the statement face in the Definition-carrier form (the tree
-    statement-carrier pattern), so the statements are well-formed and
-    their bodies stop exactly at the mother boundary: the three
-    consumed names [denom_nz] / [zeta_tilde] /
-    [zeta_vert_bound_disj] and the three segment stems.  The proof
-    routes are registered on each item (the card route: the C2-07
-    uniform tail, the C2-08 denominator lower bound
-    [denom_lower_bound] consumed through the C2-10 face chain, the
-    C2-16 (c) direct consumption for the cover; re-proving forbidden
-    per the card); the bodies close and promote to Lemma form when
-    the mother chain lands, per the work order (the compile lane
-    conditional, not burned while the chain is open).  Downstream
-    position: this stem is a Require of the C2-18 derivative face
-    already parked at its statement form.
+    Mission.  Node C2-17, the strip face of the vertical-line bound
+      assembly, statement face minted from the drafts_C2.md C2.17
+      sketch: the two sketch-verbatim named statements
+      [zeta_strip_uniform] / [zeta_strip_cover] plus the L24 carrier
+      block (routes, consumed-name registration and honest scope in
+      the Notes block).
 
-    Dependencies.  Stdlib [QArith.QArith].  Requires
-    [S02_CauchyComplete] ([Real], [real_zero], [real_one],
-    [real_const], [real_plus], [real_mult], [real_opp], [real_le],
-    [real_lt], [QltT], the order algebra), [S03_QExp]
-    ([cauchy_real_exp] the power face, [real_inv_pos] the positive
-    inverse), [S07_RealSetoidExpLog] ([real_log] the
-    premise-carrying log, [real_const_pos]), [CxRealPairCore]
-    ([Cx], [cRe], [c_norm_sq]), [CxRealPairExpLog], the segment
-    dependency stems [GaC2_07_DirichletTestAbel] (the uniform-tail
-    face), [GaC2_10_EtaContinuation] (the eta carrier [zeta_tilde]
-    and [denom_nz], the alignment targets),
-    [GaC2_16_ZetaVerticalBound] (the band carriers [zeta_vert_mid] /
-    [zeta_vert_near1], the alignment target),
-    [GaC2_02_AbsConvTailBound_a] ([nat_real_pos], threading the C2-16
-    discharged Hnpos slot; the one-line Require seam of the
-    mother-chain integration, the Fix-R registered form).  Header
-    note: the draft Require header of drafts_C2.md C2.17 named S02,
-    the two born pair carriers and the three stems; this face adds
-    [S03_QExp] and [S07_RealSetoidExpLog] for the power, inverse and
-    log carrier block (the registered addition, the C2-18 same-shape
-    header move).  The C2-09 mother stays out of this Require face
-    per the work order (the in-flight mother is not a dependency of
-    this node's wave row).  Mother-chain integration note (this
-    casting): the consumption faces re-aligned to the landed mother
-    signatures - [denom_nz eps_lb s] / [zeta_tilde eps_lb s Hep Hd
-    Heta] with the eta-value premise slot [d10_eta_conv] carried
-    explicitly (the C2-10 registered re-alignment language), and the
-    sketch disjunction row [zeta_vert_bound_disj] minted here per the
-    draft L-obligation on the actual C2-16 band carriers (the two
-    branch witness bundles; the near-one band stays the C2-16 (c)
-    face, never re-proved).
+    Dependencies.  Stdlib [QArith.QArith]; [S02_CauchyComplete],
+      [S03_QExp] ([cauchy_real_exp], [real_inv_pos]), [S07_RealSetoidExpLog]
+      ([real_log], [real_const_pos]), [CxRealPairCore],
+      [CxRealPairExpLog], [GaC2_07_DirichletTestAbel],
+      [GaC2_10_EtaContinuation], [GaC2_16_ZetaVerticalBound],
+      [GaC2_02_AbsConvTailBound_a].
 
-    References.  drafts_C2.md C2.17 (sketch one the precedent card
-    with the two loud absorption boundaries, sketch two the statement
-    face, sketch four the acceptance: the (a) factor-locked check
-    against the card bound, the FE-gap loud registration with the
-    zero-FE word census, the C2-08 / C2-16 consumption census);
-    cards_C2.md C2.17 card (the attainable grading: modulus algebra
-    plus consumption assembly, zero new method pieces);
-    gamma_module_spec.md section 3.3 the W6 row (C2-17 over
-    C2.07/10/16); Titchmarsh Ch.1 the classical eta-route vertical
-    bound.
+    References.  drafts_C2.md C2.17 (sketches one / two / four);
+      cards_C2.md C2.17; gamma_module_spec.md section 3.3 the W6
+      row; Titchmarsh Ch.1 the eta-route vertical bound.
 
-    Constructivity.  Every statement Set-sorted: the order premises
-    are the Set-sorted [real_lt] / [real_le], the corridor and the
-    inverse are the premise-carrying Set carriers, zero assumed
-    constants, zero abandoned proofs, zero classical principles, the
-    Section slot triple discharged as explicit premise arguments so
-    every named item stays Closed under the global context once the
-    mother chain lands.
+    Constructivity.  Every statement Set-sorted: order premises are
+      the Set-sorted [real_lt] / [real_le]; the corridor and the
+      inverse are premise-carrying Set carriers; zero assumed
+      constants, zero abandoned proofs, zero classical principles.
 
     Build.  [coqc -native-compiler no -q -Q . ""
-    GaC2_17_StripVerticalAsm.v] from the flat build directory; the
-    lane is conditional on the mother chain (the C2-07/10/16 faces)
-    and stays closed until it lands.  The static track of the toolkit
-    accept script passes for this file pair; the certificate face
-    [GaC2_17_StripVerticalAsm_cert] is base-standalone (Stdlib only)
-    and passes the full six-chain track as its own node. *)
+      GaC2_17_StripVerticalAsm.v]; the lane is conditional on the
+      mother chain (the C2-07/10/16 faces) and stays closed until it
+      lands. *)
 
 Require Import S02_CauchyComplete.
+(** Notes.  Statement routes, consumed-name registration, honest scope.
+
+    Sketch resolution conventions: the Section slot triple (delta,
+    its zero-strict premise, its one-cap premise) is discharged as
+    explicit premise arguments (no Section wrapper); the sketch Q
+    literals are lifted to the born [real_const] face; the order
+    premises are carried by the Set-sorted [real_lt] / [real_le].
+    Constructivity tail: the Section slot triple discharged as
+    explicit premise arguments so every named item stays Closed
+    under the global context once the mother chain lands.
+
+    [zeta_strip_uniform] detail: the (a) uniform band face on
+    0 <= sigma <= 1 - delta in the squared form
+    |zeta(s)|^2 <= (2 / (2^delta - 1))^2 through the eta route
+    (|zeta| = |eta| / |1 - 2^{1-s}|, |eta| <= 1 + 2 * 2^{-sigma} <= 3
+    on the C2-07 uniform-tail face, the denominator lower bound
+    2^{1-sigma} - 1 by the modulus algebra, zero periodicity
+    dependence; the card (a) chain 2 / (2^{1-sigma} - 1) <=
+    2 / (2^delta - 1) locked factor by factor).
+    [zeta_strip_cover] detail: the (c) consumer-domain cover face on
+    0 <= sigma <= 2; the near-one band is the C2-16 (c) face, never
+    re-proved here; the band boundaries stay explicit on the
+    disjunction carrier.
+
+    Carrier block (sketch obligation L24 discharge, defined over the
+    certified base): [ltwo] is the closed ln-2 witness on the
+    premise-carrying born log (its positivity premise closed at the
+    rational decidable face); [two_pow] is the power face
+    exp(delta * ln 2) over the born exponential carrier;
+    [two_d_sub] is the corridor 2^delta - 1 (the sketch := form,
+    kept literal); [c_invq] is the sketch inverse name resolved to
+    the born premise-carrying positive inverse [real_inv_pos] (the
+    sigT inverse-witness face; its premise is the corridor
+    positivity witness); [sq] and [c_scale'] are the squared and
+    real-scalar carriers (the C2-18 same-shape faces).  The corridor
+    positivity witness [Hsub] enters as the explicit premise of the
+    named statement (the L24 face: the discharge route runs through
+    the slot premises Hd / Hd1 via the exponential monotonicity
+    chain, registered for the proof work, zero global assumption).
+
+    Consumed names (mother-boundary registration): the eta carrier
+    [zeta_tilde] with its nonzero-denominator premise [denom_nz]
+    enters from the C2-10 face, the three-band disjunction
+    [zeta_vert_bound_disj] enters from the C2-16 face (the sketch
+    disjunction row minted here per the draft L-obligation on the
+    actual C2-16 band carriers; the two branch witness bundles ride
+    the branch, the near-one band stays the C2-16 (c) face, never
+    re-proved); both are the sketch-verbatim consumed interfaces, so
+    the statement bodies stop exactly at the mother boundary and the
+    file carries the well-formed statement face only (verified
+    well-formed against the certified base).
+
+    Mother-chain integration note: the consumption faces are
+    re-aligned to the landed mother signatures - [denom_nz eps_lb s]
+    / [zeta_tilde eps_lb s Hep Hd Heta] with the eta-value premise
+    slot [d10_eta_conv] carried explicitly (the C2-10 registered
+    re-alignment).
+
+    Proof-body state: the two named items are minted at the
+    statement face in the Definition-carrier form (the tree
+    statement-carrier pattern); the proof routes are registered on
+    each item (the card route: the C2-07 uniform tail, the C2-08
+    denominator lower bound [denom_lower_bound] consumed through the
+    C2-10 face chain, the C2-16 (c) direct consumption for the
+    cover; re-proving forbidden per the card); the bodies close and
+    promote to Lemma form when the mother chain lands.  Downstream
+    position: this stem is a Require of the C2-18 derivative face
+    already parked at its statement form; the certificate face
+    [GaC2_17_StripVerticalAsm_cert] is base-standalone (Stdlib only)
+    and stands as its own node.
+
+    Honest scope (declared openly): the full-strip convexity face
+    |zeta(1/2+it)| <= C * t^{1/4+eps} (the log-cubed stock) needs
+    the functional equation's sigma = 0 end t^{1/2} bound; the FE
+    node is not in the KB34 C1-C4 list and is not in this segment -
+    registered openly (the C3/C4 survey resolves by the log-squared
+    caliber or a FE node re-review; the KB34 down-chain case alpha
+    took the log-squared caliber, consistent).  Zero FE consumption
+    on this face: no functional-equation name enters any Require or
+    statement of this file.
+
+    Require-face notes: the draft Require header of drafts_C2.md
+    C2.17 named S02, the two born pair carriers and the three
+    stems; this face adds [S03_QExp] and [S07_RealSetoidExpLog] for
+    the power, inverse and log carrier block (the registered
+    addition, the C2-18 same-shape header move).  The C2-09 mother
+    stays out of this Require face (it is not a dependency of this
+    node's row in gamma_module_spec.md section 3.3).
+    [GaC2_02_AbsConvTailBound_a] supplies [nat_real_pos], threading
+    the C2-16 discharged Hnpos slot (the one-line Require seam of
+    the mother-chain integration). *)
+
 Require Import S03_QExp.
 Require Import S07_RealSetoidExpLog.
 Require Import CxRealPairCore.

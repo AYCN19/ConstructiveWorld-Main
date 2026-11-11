@@ -1,143 +1,31 @@
-(* ConstructiveWorld-Main - statement face of the eta-quotient           *)
-(* continuation: zeta-tilde on the denominator nonzero domain.           *)
+(* ConstructiveWorld-Main - statement face of the eta quotient continuation. *)
+(** * GaC2_10_EtaContinuation: the eta quotient continuation face of node C2-10.
+    Mission.  Node C2-10 (slot W4): the eta-continuation node of the C2.18 closing
+    chain - zeta-tilde on the denominator nonzero domain.  Sketch names kept:
+    [denom_nz], [zeta_tilde], [zeta_tilde_agree] (the (a) face),
+    [zeta_tilde_analytic] (the (b) face), [zeta_tilde_unif_bound] (the (c) face,
+    weight faces [w_one] / [w_sq]); the machine cluster closes now.  Statement
+    faces, carrier state, honest boundary (card row (d)), the GAPASUME discharge
+    and the registered adaptations: the Notes block after the requires (fail-loud).
 
-(** * GaC2_10_EtaContinuation: the eta quotient continuation face of
-      node C2-10.
+    Dependencies.  Stdlib [QArith.QArith].  Requires [S01_BaseRing] (selective [NatLe] import),
+    [S02_CauchyComplete], [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore], [CxRealPairExpLog],
+    [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_01_DirichletPartialSum], [GaC2_02_AbsConvTailBound_a],
+    [GaC2_09_DenomZeroSet_b]; zero cross-segment requires (consumed names: the Notes block).
 
-    Mission.  Node C2-10 (segment C2, the eta-continuation node of the
-      C2.18 closing chain; wave-2 lane per the cast ask, the panorama
-      card row lists the W4 slot - registered as cast metadata).  The
-      sketch statement face minted verbatim in names, the sketch forms
-      resolved per the module spec conventions.  Named items, sketch
-      names kept:
-      - [denom_nz]: the denominator nonzero domain, the sketch body
-        verbatim, [real_lt eps_lb (c_norm_sq (c_plus c_one (c_opp
-        (two_pow_1ms s))))], the sketch free constant [eps_lb]
-        discharged as the explicit leading argument (GAPASUME rule:
-        constants enter as explicit arguments, zero global
-        assumptions); this is the L13 local-constant slot, the disk
-        dependent lower bound, sampled on the certificate face.
-      - [zeta_tilde]: the quotient carrier eta / (1 - 2^(1-s)); the
-        sketch product form [c_mult eta_s (c_inv_wit (nz_wit Hd))] is
-        realized division-free as the conjugate-pair scale
-        [c_scale (c_inv_wit |d|^2 wit) (c_mult eta_s (c_conj d))] with
-        [d] the denominator (the witness inverse [c_inv_wit] is
-        Real-typed, so the complex quotient runs through the conjugate
-        pair and the squared-modulus witness - the house squared
-        carrier form); [nz_wit] is realized by the machine lemma
-        [denom_sq_pos] deriving the positivity witness from the
-        [denom_nz] premise.
-      - [zeta_tilde_agree]: the (a) agreement face, the sketch
-        conclusion [c_eq (zeta_tilde s Hd) zeta_s] with [zeta_s]
-        realized as the premised zeta value carrier [projT1 Hz] where
-        [d10_zeta_conv] is the explicit-tail zeta value interface (the
-        C2.02 condensation + C2.08 limit identity consumption slot,
-        discharged at mother-chain integration).
-      - [zeta_tilde_analytic]: the (b) local power series face, the
-        sketch sigT coefficient form realized as the nested carrier:
-        a positive radius, the coefficient sequence [c_n : nat -> Cx],
-        the denominator bounded below on the closed disk (the L13
-        local face), the series value agreed with [zeta_tilde] on the
-        disk, and the uniform rational-margin Cauchy tails of the
-        partial sums (the C1-15 same-shape series Cauchy form, the R3
-        wave-end cross-check row of GaC2_Iface_Eta).
-      - [zeta_tilde_unif_bound]: the (c) uniform modulus face, the
-        sketch conclusion [real_le (c_norm_sq (zeta_tilde s Hd))
-        (w_sq sig0 ...)] with the minted weight faces [w_one]/[w_sq]
-        (the |eta| corridor 1 + 2 * 2^(-sigma0), the two-power face
-        read off the C2-09 carrier at the real point 1 + sigma0) times
-        the witness inverse of the squared denominator modulus (the
-        |1 - 2^(1-s)|^(-1) weighting, the lower bound routed through
-        the C2-09 zero-set faces).
-    Statement-carrier state (fail-loud): the three named statements
-      are minted in the Definition-carrier form (the tree
-      statement-carrier pattern of the GaC2_18 precedent): their
-      bodies are the well-formed Set statement types, their proof
-      routes stop at the mother boundary because the draft routes
-      consume rows not yet in the tree - the (a) route consumes the
-      C2.08 eta-zeta limit identity, the (b) route is the
-      Weierstrass double series constructive land (the card breakthrough
-      terrain, zero in-tree precedent), the (c) route consumes the
-      C2.07 uniform eta tail; the C2.07 [GaC2_07_DirichletTestAbel]
-      and C2.08 [GaC2_08_EtaZetaRelation] rows have no module in the
-      tree at cast time (the GaC2_Iface_Eta whitelist rows are open),
-      so the eta value enters through the explicit premise carrier
-      [d10_eta_conv] (the alternating-tail modulus interface, the
-      C2.07 consumption slot) and the discharge lands when those rows
-      cast.  The machine cluster closes now: [denom_sq_pos],
-      [d10_denom_is_d09], [d10_eta_sgn_one], [d10_eta_part_zero],
-      [d10_cpow_zero].  Honest boundary (the card (d) face): the
-      removable singularity row at the nonzero lattice points s_k
-      (k nonzero) is NOT in this node's closed domain; registered for
-      the C3 consumption-face survey (the review condition hangs on
-      C3, the dVp chain avoids the window by the sigma >= 1 - c/L
-      corridor).  Downstream alignment note: the C2-18 cast consumes
-      the name [zeta_tilde] inside its expansion carrier shape; the
-      premise family carried here ([eps_lb], [Hep], [Hd], [Heta])
-      re-aligns there at mother-chain integration when the disk witness
-      carries the family (the same registered re-alignment language as
-      the C2-18 cap carrier row).
+    References.  drafts_C2.md C2.10 statement sketch; cards_C2.md C2.10 (the (a)-(d)
+    proposition rows, the certificate row sigma0 in {1/2, 1}); the F7 precedent
+    mapping rows (statement shape only, the mathlib Hurwitz route not absorbed);
+    Titchmarsh Ch.2 the eta continuation quotient (statement architecture only).
 
-    Dependencies.  Stdlib [QArith.QArith].  Requires [S01_BaseRing]
-      (selective import [NatLe], [NatLe_lift], [NatLe_drop], [And] -
-      the Set-sorted conjunction carrier), [S02_CauchyComplete] (the
-      real carrier and the [real_eq_of_zero_diff] ring route),
-      [S03_QExp], [S07_RealSetoidExpLog] ([real_lt_trans], the strict
-      order transit, [real_const_pos]), [CxRealPairCore] ([Cx],
-      [cRe], [cIm], [c_eq], [c_eq_refl], [c_zero], [c_one], [c_plus],
-      [c_opp], [c_mult], [c_conj], [c_norm_sq]), [CxRealPairExpLog]
-      ([c_exp], [c_scale]), [GaC1_Iface_Cx] (the C1 block interface),
-      [GaC1_Iface_Real], [GaC2_01_DirichletPartialSum] ([c_of_real],
-      [nat_real], [NatLe_one_S], the n^{-s} carrier [c_powq]
-      (discharged signature [c_powq Hnpos n Hn s]), the zeta partial
-      sum [c_zeta_part Hnpos N s], the witness inverse [c_inv_wit] +
-      [c_inv_wit_correct]), [GaC2_02_AbsConvTailBound_a] (the closed
-      positivity witness [nat_real_pos] baking the [Hnpos] slot -
-      consumed as [d10_npos], zero premise threading), and
-      [GaC2_09_DenomZeroSet_b] (the C2-09 landed leaf: [two_pow_1ms],
-      [d09_denom], [d09_ln2]; the consolidating stem
-      [GaC2_09_DenomZeroSet] is in flight at cast time, so the leaf is
-      consumed directly and the row moves to the stem when it lands),
-      all of this development, zero cross-segment requires.
+    Constructivity.  Every named construction is carried by [Set]; the order predicates
+    are the Set-sorted [real_lt] / [real_le]; no Section, no Hypothesis, no assumed
+    constant, no global assumption; the machine cluster proofs close under the global
+    context; the statement carriers are Set-typed with the proof routes registered.
 
-    References.  drafts_C2.md C2.10 statement sketch (the three named
-      rows and the L13 obligation; the sketch forms resolved per the
-      registered adaptations above); cards_C2.md C2.10 (the (a)-(d)
-      proposition rows, the (d) honest boundary, the certificate row
-      sigma0 in {1/2, 1}); the F7 precedent mapping rows
-      (LFunction_eq_LSeries - the (a) statement-shape twin,
-      differentiableAt_LFunction - the (b) shape twin, absorbed at
-      statement shape only, the mathlib Hurwitz route not absorbed);
-      the registered adaptations over the sketch: (i) [eta_s] carried
-      as the premised value interface [d10_eta_conv] (the C2.07 row
-      absent), (ii) [zeta_s] carried as the premised value interface
-      [d10_zeta_conv] (the C2.02/08 rows discharge downstream), (iii)
-      the quotient realized division-free through the conjugate pair,
-      (iv) the sketch's unresolved [cIm] slot in the (c) row dropped -
-      the card statement carries no imaginary constraint on the sigma
-      band, (v) the (b) row's point-eta premise widened to the disk
-      family [Hetad] inside the carrier (the local-uniform shape
-      demands the eta value at every disk point; the slot is part of
-      the compound existence face and its witnesses are provided by
-      the C2.07 discharge downstream); Titchmarsh Ch.2 the eta
-      continuation quotient (statement
-      architecture only; no proof object transcribed).
-
-    Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] / [real_le];
-      no Section, no Hypothesis, no assumed constant, no global
-      assumption; the sketch
-      Section slot is discharged as explicit premise arguments; the
-      machine cluster proofs close under the global context; the
-      statement carriers are Set-typed statement terms with the proof
-      routes registered on each row (fail-loud disclosure above).
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_10_EtaContinuation.v] from the flat build
-      directory, thermal guard wrapper; acceptance runs
-      [50_toolkit/accept_node.py --node C2.10] with the certificate
-      face [GaC2_10_EtaContinuation_cert] (base-standalone, Stdlib
-      QArith only). *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> "" GaC2_10_EtaContinuation.v]
+    (flat build directory, thermal guard wrapper); acceptance runs [50_toolkit/accept_node.py --node C2.10]
+    with the certificate face [GaC2_10_EtaContinuation_cert] (base-standalone, Stdlib QArith only). *)
 
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop, And).
@@ -154,6 +42,91 @@ Require Import GaC2_09_DenomZeroSet_b.
 From Stdlib Require Import QArith.QArith.
 
 Local Open Scope Q_scope.
+
+(** Notes.  Named-item statement faces.  [denom_nz]: the sketch body verbatim,
+    [real_lt eps_lb (c_norm_sq (c_plus c_one (c_opp (two_pow_1ms s))))]; the
+    sketch free constant [eps_lb] discharged as the explicit leading argument
+    (the GAPASUME rule: constants enter as explicit arguments, zero global
+    assumptions); this is the L13 local-constant slot, the disk dependent lower
+    bound, sampled on the certificate face.  [zeta_tilde]: the quotient carrier
+    eta / (1 - 2^(1-s)); the sketch product form [c_mult eta_s (c_inv_wit
+    (nz_wit Hd))] realized division-free as the conjugate-pair scale [c_scale
+    (c_inv_wit |d|^2 wit) (c_mult eta_s (c_conj d))] with [d] the denominator
+    (the witness inverse [c_inv_wit] is Real-typed, so the complex quotient runs
+    through the conjugate pair and the squared-modulus witness - the house
+    squared carrier form); [nz_wit] realized by the machine lemma [denom_sq_pos]
+    deriving the positivity witness from the [denom_nz] premise.
+    [zeta_tilde_agree]: the sketch conclusion [c_eq (zeta_tilde s Hd) zeta_s]
+    with [zeta_s] realized as the premised zeta value carrier [projT1 Hz], where
+    [d10_zeta_conv] is the explicit-tail zeta value interface (the C2.02
+    condensation + C2.08 limit identity consumption slot, discharged at
+    mother-chain integration).  [zeta_tilde_analytic]: the sketch sigT
+    coefficient form realized as the nested carrier - a positive radius, the
+    coefficient sequence [c_n : nat -> Cx], the denominator bounded below on the
+    closed disk (the L13 local face), the series value agreed with [zeta_tilde]
+    on the disk, and the uniform rational-margin Cauchy tails of the partial sums
+    (the C1-15 same-shape series Cauchy form, the R3 wave-end cross-check row of
+    GaC2_Iface_Eta).  [zeta_tilde_unif_bound]: the sketch conclusion [real_le
+    (c_norm_sq (zeta_tilde s Hd)) (w_sq sig0 ...)] with the minted weight faces
+    [w_one] / [w_sq] (the |eta| corridor 1 + 2 * 2^{-sigma0}, the two-power face
+    read off the C2-09 carrier at the real point 1 + sigma0) times the witness
+    inverse of the squared denominator modulus (the |1 - 2^(1-s)|^{-1} weighting,
+    the lower bound routed through the C2-09 zero-set faces).
+
+    Statement-carrier state (fail-loud): the three named statements are minted
+    in the Definition-carrier form (the tree statement-carrier pattern, the
+    GaC2_18 precedent): their bodies are the well-formed Set statement types,
+    their proof routes stop at the mother boundary because the draft routes
+    consume rows not yet in the tree - the (a) route consumes the C2.08 eta-zeta
+    limit identity, the (b) route is the Weierstrass double series constructive
+    land (the card breakthrough terrain, zero in-tree precedent), the (c) route
+    consumes the C2.07 uniform eta tail; the C2.07 [GaC2_07_DirichletTestAbel]
+    and C2.08 [GaC2_08_EtaZetaRelation] rows have no module in the tree at cast
+    time (the GaC2_Iface_Eta whitelist rows are open), so the eta value enters
+    through the explicit premise carrier [d10_eta_conv] (the alternating-tail
+    modulus interface, the C2.07 consumption slot) and the discharge lands when
+    those rows cast.  The machine cluster closes now: [denom_sq_pos],
+    [d10_denom_is_d09], [d10_eta_sgn_one], [d10_eta_part_zero], [d10_cpow_zero].
+
+    Honest boundary (the card (d) face): the removable singularity row at the
+    nonzero lattice points s_k (k nonzero) is NOT in this node's closed domain;
+    registered for the C3 consumption-face survey (the review condition hangs on
+    C3; the dVp chain avoids the window by the sigma >= 1 - c/L corridor).
+
+    Downstream alignment note: the C2-18 cast consumes the name [zeta_tilde]
+    inside its expansion carrier shape; the premise family carried here
+    ([eps_lb], [Hep], [Hd], [Heta]) re-aligns there at mother-chain integration
+    when the disk witness carries the family (the same registered re-alignment
+    language as the C2-18 cap carrier row).
+
+    Registered adaptations over the drafts_C2.md C2.10 sketch: (i) [eta_s]
+    carried as the premised value interface [d10_eta_conv] (the C2.07 row
+    absent); (ii) [zeta_s] carried as the premised value interface
+    [d10_zeta_conv] (the C2.02/08 rows discharge downstream); (iii) the quotient
+    realized division-free through the conjugate pair; (iv) the sketch's
+    unresolved [cIm] slot in the (c) row dropped - the card statement carries no
+    imaginary constraint on the sigma band; (v) the (b) row's point-eta premise
+    widened to the disk family [Hetad] inside the carrier (the local-uniform
+    shape demands the eta value at every disk point; the slot is part of the
+    compound existence face and its witnesses are provided by the C2.07
+    discharge downstream).
+
+    Dependencies consumed names: [S02] the real carrier and the
+    [real_eq_of_zero_diff] ring route; [S03_QExp] [cauchy_real_exp];
+    [S07] [real_lt_trans] (the strict order transit), [real_const_pos];
+    [CxRealPairCore] [Cx], [cRe], [cIm], [c_eq], [c_eq_refl], [c_zero], [c_one],
+    [c_plus], [c_opp], [c_mult], [c_conj], [c_norm_sq]; [CxRealPairExpLog]
+    [c_exp], [c_scale]; [GaC2_01_DirichletPartialSum] [c_of_real], [nat_real],
+    [NatLe_one_S], the n^{-s} carrier [c_powq] (discharged signature
+    [c_powq Hnpos n Hn s]), the zeta partial sum [c_zeta_part Hnpos N s], the
+    witness inverse [c_inv_wit] + [c_inv_wit_correct];
+    [GaC2_02_AbsConvTailBound_a] the closed positivity witness [nat_real_pos]
+    baking the [Hnpos] slot (consumed as [d10_npos], zero premise threading);
+    [GaC2_09_DenomZeroSet_b] (the C2-09 landed leaf) [two_pow_1ms], [d09_denom],
+    [d09_ln2] - the consolidating stem [GaC2_09_DenomZeroSet] is in flight at
+    cast time, so the leaf is consumed directly and the row moves to the stem
+    when it lands. *)
+
 
 (* ===================================================================== *)
 (* Section 1. The machine cluster: sign, eta partial sums, powers.       *)

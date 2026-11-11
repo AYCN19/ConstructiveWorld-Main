@@ -1,95 +1,99 @@
-(* ConstructiveWorld-Main - the vertical-line bound face of the zeta      *)
-(* column on the pair carrier (segment C2, slot W5, zero functional-      *)
-(* equation dependence).                                                  *)
-
 (** * GaC2_16_ZetaVerticalBound: the zeta vertical-line bound faces.
 
-    Mission.  Card C2.16 (the explicit segmented vertical-line bound
-    band): the three draft roster items [zeta_vert_high] /
-    [zeta_vert_mid] / [zeta_vert_near1] minted from the drafts_C2.md
-    C2.16 draft-2 statement face, with the documented statement-shape
-    materializations.  (a) [zeta_vert_high] is a proven Lemma: on the
-    vertical line sig >= sig0 > 1 the squared modulus of the Dirichlet
-    partial sums is strictly below the squared explicit condensation
-    corridor  (1 + M^(1-sig0) * C(sig0))  at M = 1 plus a rational
-    margin, uniform in N and uniform in the imaginary coordinate (the
-    premise rides on [cRe] only; the draft s_at-t projection lands as
-    the explicit point argument).  The corridor consumes the GaC2_02
-    condensation engine ([tail_bound_uniform] at M = 1) over the
-    GaC2_05 zeta column ([r_zeta_seq]); the unit front term of the
-    column is normalized by the exp-zero face [zeta16_npow_one]
-    (1^(-sig) = 1).  (b)/(c) are minted at the statement face in the
-    Definition-carrier form (the C2.18 convention): the log-shaped
-    corridors  sq (C1 * log t)  and  sq (C2 * log t)  over the window
-    premise  1 - c_win / log t <= sig < 1  stay well-formed statement
-    carriers whose proof routes (the harmonic-log face plus the Abel
-    machine of the C2.07 stem) are registered on the carriers and the
-    bodies promote to Lemma form when those mother stems land.
-    Statement-shape materializations, all registered here:
-    (i) the zeta limit carrier is absent from the tree (the C2.05
-    honest header keeps the lim face open supply), so the bound faces
-    land on [c_zeta_part], uniform in N;
-    (ii) [Hnpos] gains the [NatLe 1] premise (the C2.01/C2.06 rework
-    ruling: the draft unconditional form is uninhabited at n = 0);
-    (iii) the strict face lands in the rational-margin carrier (the
-    GaC1_14 / GaC2_02(b) house form; the margin-free weak face follows
-    by [real_lt_le_iff], so the draft [real_le] shape is dominated);
-    (iv) the complex modulus face is conditional on the n-fold
-    triangle slot [Htri] (the L-C2.16-A slot, the GaC2_02 L-C2.02-C
-    register: the n-fold triangle is not L0 stock; the slot discharges
-    at End as an explicit premise argument);
-    (v) the draft Q2R embedding face lands as [real_const] Q literals
-    (no Q2R bridge in the tree) and the draft division carrier lands
-    as the positive-inverse carrier (the C2.18 alignment);
-    (vi) the draft Require entry [GaC2_07_DirichletTestAbel] is absent
-    from the live dependency surface (absent from the build shadow,
-    the deposit segments, the nodes face and the L0 face at cast
-    time), so the entry is dropped from the Require header and kept
-    only as the registered route of the (b)/(c) carriers - zero silent
-    substitution.
+    Mission.  Card C2.16, the explicit segmented vertical-line bound
+      band: the three draft roster items [zeta_vert_high] /
+      [zeta_vert_mid] / [zeta_vert_near1], with the six
+      statement-shape materializations (i)-(vi) registered in the
+      Notes block.
 
-    Dependencies.  Stdlib [QArith.QArith], [Arith.Arith], [Lia].
-    Requires [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete]
-    (the Real order kit, [real_const], [QltT], the compat faces),
-    [S03_QExp] ([cauchy_real_exp] band, [real_inv_pos]),
-    [S07_RealSetoidExpLog] ([real_log], [real_log_lt_mono],
-    [real_log_one], [real_log_wd], the Setoid compat band),
-    [CxRealPairCore] and [CxRealPairExpLog] (the pair carrier),
-    [GaC2_01_DirichletPartialSum] ([nat_real], [c_powq],
-    [c_zeta_part], [c_tail], [c_zeta_part_tail_eq], [NatLe_one_S]),
-    [GaC2_02_AbsConvTailBound_a/_b/_c] and the stem ([r_tsum],
-    [r_tail], [r_ln], [r_npow], [r_m1sig], [r_geom_const], the
-    condensation engine, [tail_bound_uniform]), and
-    [GaC2_05_EulerLimitAsm] ([r_zeta_seq], the zeta column).
+    Dependencies.  Stdlib [QArith.QArith], [Arith.Arith], [Lia];
+      [S01_BaseRing] (selective [NatLe]), [S02_CauchyComplete],
+      [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore],
+      [CxRealPairExpLog], [GaC2_01_DirichletPartialSum],
+      [GaC2_02_AbsConvTailBound_a/_b/_c], [GaC2_02_AbsConvTailBound],
+      [GaC2_05_EulerLimitAsm].
 
-    References.  cards_C2.md C2.16 (the (a)/(b)/(c) proposition band,
-    zero functional-equation dependence, the explicit-constant craft);
-    drafts_C2.md C2.16 (draft-2 statement face; draft-4 acceptance:
-    the three-segment alignment, the certificate sample band, the
-    consumption census, the zero-FE word-face check); the F9
-    sSupNormIm vertical-line statement shape (alignment only - the
-    explicit corridor replaces the sup carrier, the C2.11
-    bearing-difference register); F6/F8 statement shapes (the
-    GaC2_02/GaC2_01 consumption positions).  The ZetaAsymp retrieval
-    re-check stays registered per the drafts fail-honest list.
+    References.  cards_C2.md C2.16; drafts_C2.md C2.16 (draft-2
+      statement face, draft-4 acceptance); the F9 sSupNormIm and
+      F6/F8 statement shapes (alignment only).
 
-    Constructivity.  Every named construction is carried by [Set]; the
-    order predicates are the Set-sorted [real_lt] / [real_le] /
-    [QltT]; the strict faces land in the rational-margin carrier; the
-    Section slots (sig0 / Hs0 / Hnpos / Htri) discharge at End as
-    explicit premise arguments so every audited lemma stays Closed
-    under the global context; zero assumed constants; zero abandoned
-    proofs; zero classical principles; no vm_compute word in this
-    proof-topology face (the numeric corridor band lives in the
-    certificate stem).
+    Constructivity.  Every named construction is carried by [Set];
+      order predicates are the Set-sorted [real_lt] / [real_le] /
+      [QltT]; the Section slots (sig0 / Hs0 / Hnpos / Htri) discharge
+      at End as explicit premise arguments so every audited lemma
+      stays Closed under the global context; zero assumed constants,
+      zero abandoned proofs, zero classical principles.
 
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-    -Q <build shadow> "" GaC2_16_ZetaVerticalBound.v] compiles cleanly
-    (exit 0) from the flat build shadow, wrapped by [cpu_guard v3]
-    per the acceptance gate; the six-chain acceptance writes the
-    verdict JSON in the work accept face. *)
+      -Q <build shadow> "" GaC2_16_ZetaVerticalBound.v] from the
+      flat build shadow, wrapped by [cpu_guard v3]. *)
 
 Require S01_BaseRing.
+(** Notes.  Statement-shape materializations, routes and consumables.
+
+    (i) The zeta limit carrier is absent from the tree (the C2.05
+    honest header keeps the lim face open supply), so the bound
+    faces land on [c_zeta_part], uniform in N.
+    (ii) [Hnpos] gains the [NatLe 1] premise (the C2.01/C2.06 rework
+    ruling: the draft unconditional form is uninhabited at n = 0).
+    (iii) The strict face lands in the rational-margin carrier (the
+    GaC1_14 / GaC2_02(b) house form; the margin-free weak face
+    follows by [real_lt_le_iff], so the draft [real_le] shape is
+    dominated).
+    (iv) The complex modulus face is conditional on the n-fold
+    triangle slot [Htri] (the L-C2.16-A slot, the GaC2_02 L-C2.02-C
+    register: the n-fold triangle is not L0 stock; the slot
+    discharges at End as an explicit premise argument).
+    (v) The draft Q2R embedding face lands as [real_const] Q
+    literals (no Q2R bridge in the tree) and the draft division
+    carrier lands as the positive-inverse carrier (the C2.18
+    alignment).
+    (vi) The draft Require entry [GaC2_07_DirichletTestAbel] is
+    absent from the live dependency surface (absent from the build
+    shadow, the deposit segments, the nodes face and the L0 face),
+    so the entry is dropped from the Require header and kept only as
+    the registered route of the (b)/(c) carriers - zero silent
+    substitution.
+
+    Proof status: (a) [zeta_vert_high] is a proven Lemma.  F9
+    alignment (alignment only): the explicit corridor replaces the
+    sup carrier, the C2.11 bearing-difference register.
+
+    (a) detail: [zeta_vert_high] states that the squared modulus of
+    the Dirichlet partial sums is strictly below the squared
+    explicit condensation corridor 1 + M^(1-sig0) * C(sig0) at M = 1
+    plus a rational margin, uniform in N and in the imaginary
+    coordinate (the premise rides on [cRe] only; the draft s_at-t
+    projection lands as the explicit point argument).  The corridor
+    consumes the GaC2_02 condensation engine ([tail_bound_uniform]
+    at M = 1) over the GaC2_05 zeta column [r_zeta_seq]; the unit
+    front term of the column is normalized by [zeta16_npow_one]
+    (1^(-sig) = 1).
+    (b)/(c) detail: the log-shaped corridors sq (C1 * log t) and
+    sq (C2 * log t) over the window premise
+    1 - c_win / log t <= sig < 1 stay well-formed statement carriers
+    (the C2.18 convention); the proof routes (the harmonic-log face
+    plus the Abel machine of the C2.07 stem) are registered on the
+    carriers [zeta_vert_mid] / [zeta_vert_near1]; the bodies promote
+    to Lemma form when those mother stems land.
+
+    Registered open: the ZetaAsymp retrieval re-check stays
+    registered per the drafts fail-honest list.  Zero
+    functional-equation dependence on this face (the cards_C2.md
+    C2.16 proposition band).
+
+    Named consumables: from [GaC2_01_DirichletPartialSum]:
+    [nat_real], [c_powq], [c_zeta_part], [c_tail],
+    [c_zeta_part_tail_eq], [NatLe_one_S]; from the GaC2_02 stem:
+    [r_tsum], [r_tail], [r_ln], [r_npow], [r_m1sig], [r_geom_const],
+    the condensation engine, [tail_bound_uniform]; from [S03_QExp]:
+    the [cauchy_real_exp] band, [real_inv_pos]; from
+    [S07_RealSetoidExpLog]: [real_log], [real_log_lt_mono],
+    [real_log_one], [real_log_wd] and the Setoid compat band; from
+    [S02_CauchyComplete]: the Real order kit, [real_const], [QltT],
+    the compat faces.  No vm_compute word in this proof-topology
+    face (the numeric corridor band lives in the certificate stem). *)
+
 (* Selective import: a full import would shadow the nat constructor S    *)
 (* (the GaC2_01 precedent).                                              *)
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).
@@ -351,4 +355,4 @@ End ZetaVerticalBound.
 (* End); zero vm_compute words, zero assumed constants and zero          *)
 (* abandoned proofs.  The (b)/(c) routes stay registered on the          *)
 (* carriers; the L-C2.16-A triangle slot and the absent C2.07 stem stay  *)
-(* registered in the header. *)
+(* registered in the Notes block. *)

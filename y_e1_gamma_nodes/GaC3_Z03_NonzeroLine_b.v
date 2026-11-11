@@ -1,65 +1,30 @@
 (* ConstructiveWorld-Main - leaf b of the three-cosine racing engine: the Real assistants and the relax-order kit. *)
+
 (** * GaC3_Z03_NonzeroLine_b: leaf b of node C3-Z03.
-
-    Mission.  Leaf b of the three-cosine racing engine (node C3-Z03,
-    segment C3): the fixed term carriers and the Real-level assistant
-    kit.  Carriers: the canonical positivity witness of the embedded
-    naturals [z03npos] (the C2.02 leaf face, fixed once as the premise
-    argument of the Z01 carriers), the natural logarithm on the
-    embedded naturals [z03_lnreal], and the canonical exponential and
-    cosine factors on the embedded naturals [z03_eterm] / [z03_coterm]
-    (exp(-sg * ln n) and cos(-t * ln n)).  Assistants: left
-    multiplication by a positive real preserves real_le
-    ([z03_le_mult_l]); pointwise-equal arguments give equal cosines
-    and exponentials ([z03_cos_peq] / [z03_exp_peq], the construction
-    samples the argument approximation directly); the relax-order kit
-    on [real_ge_relax] (the asymptotic nonnegativity order, the Z02
-    precedent on the equality-versus-positivity obstruction): a real
-    equal to zero is asymptotically nonnegative ([z03_eq_ge0relax]),
-    the face is closed under addition ([z03_relax0_plus]), a
-    nonnegative weight times a pointwise-nonnegative real is
-    asymptotically nonnegative ([z03_wy_relax]), the strict order
-    shifts along a common summand ([z03_lt_add_r]) and transfers along
-    an equality on the larger side ([z03_lt_eq_r]), the
-    equality-transfer mirror of the Z02 relax transfer
-    ([z03_eq_relax_sym]), and the joint incompatibility of the
-    asymptotic nonnegativity face with a strictly negative position
-    carrying a positive margin ([z03_relax_lt_false]).  The
-    racing-engine core (the real-part bridge, the combined carrier and
-    its equality face) lives in the stem [GaC3_Z03_NonzeroLine]; the
-    discharge and racing faces live in [GaC3_Z03_NonzeroLine_race];
-    the literal radius certificates live in
-    [GaC3_Z03_NonzeroLine_cert].
-
+    Mission.  Leaf b of the three-cosine racing engine (node C3-Z03): the
+    fixed term carriers [z03npos] (the canonical positivity witness of the
+    embedded naturals, the C2.02 leaf face, fixed once as the premise
+    argument of the Z01 carriers), [z03_lnreal], and [z03_eterm] /
+    [z03_coterm] (exp(-sg * ln n) and cos(-t * ln n)); plus the Real-level
+    assistant kit [z03_le_mult_l], [z03_cos_peq], [z03_exp_peq], and the
+    relax-order kit on [real_ge_relax] (the asymptotic nonnegativity order,
+    the Z02 precedent on the equality-versus-positivity obstruction):
+    [z03_eq_ge0relax], [z03_relax0_plus], [z03_wy_relax], [z03_lt_add_r],
+    [z03_lt_eq_r], [z03_eq_relax_sym], [z03_relax_lt_false].
     Dependencies.  Leaf a [GaC3_Z03_NonzeroLine_a] ([qeq_lt_r],
     [qeq_minus_r0], [qself_le_abs], [qabs_lb],
     [z03_sc_cos_partial_congr]), [S01_BaseRing] ([NatLe], selective
-    import), [S02_CauchyComplete] (order faces, [QltT]/
-    [Qlt_to_QltT]/[QltT_to_Qlt]), [S07_RealSetoidExpLog]
-    ([real_ge_relax], [real_ge_relax_of_pointwise], RealSetoid compat
-    faces, [real_log], [cauchy_real_exp_wd], [real_const_pos]),
-    [S10_KVQuantTrig] ([cauchy_real_cos], [real_cos_proj]),
-    [S03_QExp] ([cauchy_real_exp]), [CxRealPairCore]
-    ([real_zero_pt]), [GaC2_Iface_DS] ([nat_real_pos] via the leaf
-    import),
-    [GaC3_Z02_ThreeCosine] ([GaC3_Z02_eq_relax_transfer]); Stdlib
+    import), [S02_CauchyComplete] ([QltT] family), [S07_RealSetoidExpLog]
+    ([real_ge_relax] family), [S10_KVQuantTrig], [S03_QExp],
+    [CxRealPairCore], [GaC2_Iface_DS], [GaC3_Z02_ThreeCosine]; Stdlib
     [QArith] (with [Qring]), [Setoid], [Morphisms], [Arith], [Lia].
-
     References.  ZZ theory (AFP PNT_with_Remainder) [logderiv_zeta_ineq]
-    :136-163 (the three-cosine weighted inequality the kit feeds);
-    drafts_C3.md C3-Z03 (the racing skeleton, the explicit-radius
+    :136-163; drafts_C3.md C3-Z03 (the racing skeleton, the explicit-radius
     obligation); cards_C3 C3-Z03.
-
-    Constructivity.  Set-carried statements; the nonnegativity face is
-    carried by [real_ge_relax] (the asymptotic order); zero assumed
-    constants, zero abandoned proofs, zero classical choice; Print
-    Assumptions of every named item reads Closed under the global
-    context.
-
-    Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC3_Z03_NonzeroLine_b.v] from the work directory through the
-    dependency-closure build (50_toolkit/build_deposit.py); acceptance
-    runs use 50_toolkit/accept_node.py and write accept/<node>.json. *)
+    Constructivity.  Set-carried statements; zero assumed constants, zero
+    abandoned proofs, zero classical choice; Print Assumptions reads Closed
+    under the global context.
+    Build.  coqc -native-compiler no -q -Q . "" -Q <boot_src> "" GaC3_Z03_NonzeroLine_b.v (work directory, dependency-closure build). *)
 
 Require S01_BaseRing.
 (* Selective import (the S01 state-space field S shadows the nat          *)

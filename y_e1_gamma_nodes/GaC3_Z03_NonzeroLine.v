@@ -1,76 +1,53 @@
 (* ConstructiveWorld-Main - the three-cosine nonvanishing line engine. *)
+
 (** * GaC3_Z03_NonzeroLine: the three-cosine racing engine for the
     nonvanishing line Re s = 1 (the core face).
-
     Mission.  Node C3-Z03 (segment C3): the constructive core of the
-    three-cosine nonvanishing argument.  This stem casts the real-part
-    bridge of the complex three-point carrier ([z03_cre_powq]: the
-    real part of the exponential term at the point (sg, t) is the
-    polar face exp(-sg*ln n) * cos(-t*ln n); [z03_cre_plus] /
-    [z03_cre_scale]: the real part distributes over the complex sum
-    and the scaling), the real-line mirror of the Z01 von Mangoldt
-    partial sum ([z03_resum], [z03_cre_manpart]), the combined Cx
-    carrier assembled with the 3-4-1 weights ([z03_comb], the ZZ
-    logderiv_zeta_ineq assembly face), its square-form mirror
-    ([z03_sqsum], the per-term square form of the Z02 identity weighted
-    by the Lambda weight and the exponential factor), the per-term
-    bridge ([z03_cre_tri]), and the equality face Theorem
-    [z03_comb_sqsum_eq] (the combined carrier's real part equals the
-    square-form sum).  Piece layout: the rational transport kit and the
-    Q-level cosine congruence kit live in leaf a
-    [GaC3_Z03_NonzeroLine_a]; the term carriers and the relax-order
-    kit live in leaf b [GaC3_Z03_NonzeroLine_b]; the discharge and
-    racing faces (the weight nonnegativity, the asymptotic
-    nonnegativity of the square-form sum and of the combined real
-    part, and the explicit-radius slot contradiction
-    [z03_racing_contra] under Section Z03_Race) live in
-    [GaC3_Z03_NonzeroLine_race]; the literal radius certificates live
-    in [GaC3_Z03_NonzeroLine_cert].  The literal zeta-carrier
-    statement of the card (drafts_C3.md C3-Z03:
-    [zeta_nonzero_line] / [zeta_nonzero_line_quant]) awaits the
-    eta-continuation supply face (GaC2_10_EtaContinuation, not yet in
-    the tree); the slot form is the registered consumption shape of
-    the certified V03 pattern.  The cross-segment supply line
-    [GaC2_Iface_Eta] is held now (the interface slice is cast and
-    accepted, accept/C2.IfaceEta.json verdict PASS), so the eta-side
-    discharge lands on this line when the continuation faces arrive.
-
-    Dependencies.  Leaf a [GaC3_Z03_NonzeroLine_a] (transitively via
-    leaf b), leaf b [GaC3_Z03_NonzeroLine_b] ([z03npos],
-    [z03_lnreal], [z03_eterm], [z03_coterm], [z03_cos_peq],
-    [z03_exp_peq]), [S01_BaseRing] ([NatLe], selective import),
-    [S02_CauchyComplete] (order faces), [S03_QExp], 
-    [S07_RealSetoidExpLog] (RealSetoid compat faces),
-    [S10_KVQuantTrig] ([cauchy_real_cos]), [CxRealPairCore] +
-    [CxRealPairExpLog] (base pair), [GaC2_Iface_DS] ([c_powq],
-    [nat_real_pos], [NatLe_one_S] via the leaf import),
-    [GaC2_Iface_Eta] (the eta-block cross-segment trans-supply slice;
-    registered consumer line of drafts_C3.md C3-Z03),
-    [GaC3_Z01_LogDerivSeries] ([z01_lam], [z01_manpart]),
-    [GaC3_Z02_ThreeCosine] ([GaC3_Z02_three_cosine_sq]); Stdlib
-    [QArith] (with [Qring]), [Setoid], [Morphisms], [Arith], [Lia].
-
+    three-cosine nonvanishing argument: the real-part bridge of the complex
+    three-point carrier ([z03_cre_powq]: the real part of the exponential
+    term at (sg, t) is exp(-sg*ln n) * cos(-t*ln n); [z03_cre_plus] /
+    [z03_cre_scale]), the real-line mirror of the Z01 von Mangoldt partial
+    sum ([z03_resum], [z03_cre_manpart]), the combined Cx carrier with the
+    3-4-1 weights ([z03_comb]), its square-form mirror ([z03_sqsum]), the
+    per-term bridge ([z03_cre_tri]), and the equality face Theorem
+    [z03_comb_sqsum_eq].
+    Dependencies.  Leaf a [GaC3_Z03_NonzeroLine_a] (transitively via leaf
+    b), leaf b [GaC3_Z03_NonzeroLine_b] ([z03npos], [z03_lnreal],
+    [z03_eterm], [z03_coterm], [z03_cos_peq], [z03_exp_peq]),
+    [S01_BaseRing] ([NatLe], selective import), [S02_CauchyComplete],
+    [S03_QExp], [S07_RealSetoidExpLog], [S10_KVQuantTrig],
+    [CxRealPairCore] + [CxRealPairExpLog], [GaC2_Iface_DS] ([c_powq],
+    [nat_real_pos]), [GaC2_Iface_Eta], [GaC3_Z01_LogDerivSeries],
+    [GaC3_Z02_ThreeCosine]; Stdlib [QArith] (with [Qring]), [Setoid],
+    [Morphisms], [Arith], [Lia].
     References.  ZZ theory (AFP PNT_with_Remainder) [logderiv_zeta_ineq]
-    :136-163 (the three-cosine weighted inequality); drafts_C3.md C3-Z03
-    (racing skeleton, explicit-radius obligation, cross-segment line
-    GaC2_Iface_Eta); cards_C3 C3-Z03 (multiplicity main part).  The
-    four-term main-part slot is the registered open supply face (zero
-    factorization route).
-
+    :136-163; drafts_C3.md C3-Z03 (racing skeleton, explicit-radius
+    obligation, cross-segment line GaC2_Iface_Eta); cards_C3 C3-Z03.
     Constructivity.  Every named construction is carried by [Set]; the
     nonnegativity face is carried by [real_ge_relax] (the asymptotic
-    order, per the Z02 precedent on the equality-versus-positivity
-    obstruction).  Zero assumed constants, zero abandoned proofs, zero
-    classical choice; Print Assumptions of every named item reads
-    Closed under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC3_Z03_NonzeroLine.v] from the work directory through the
-    dependency-closure build (50_toolkit/build_deposit.py); acceptance
-    runs use 50_toolkit/accept_node.py and write accept/<node>.json,
-    single compile lane under the thermal guard configuration. *)
+    order, the Z02 precedent); zero assumed constants, zero abandoned
+    proofs, zero classical choice; Print Assumptions reads Closed.
+    Build.  coqc -native-compiler no -q -Q . "" -Q <boot_src> "" GaC3_Z03_NonzeroLine.v (work directory, dependency-closure build). *)
 
 Require S01_BaseRing.
+(** Notes.  Piece layout: the rational transport kit and the Q-level cosine
+    congruence kit live in leaf a [GaC3_Z03_NonzeroLine_a]; the term
+    carriers and the relax-order kit live in leaf b
+    [GaC3_Z03_NonzeroLine_b]; the discharge and racing faces (the weight
+    nonnegativity, the asymptotic nonnegativity of the square-form sum and
+    of the combined real part, and the explicit-radius slot contradiction
+    [z03_racing_contra] under Section Z03_Race) live in
+    [GaC3_Z03_NonzeroLine_race]; the literal radius certificates live in
+    [GaC3_Z03_NonzeroLine_cert].  Registered open: the literal zeta-carrier
+    statement of the card (drafts_C3.md C3-Z03: [zeta_nonzero_line] /
+    [zeta_nonzero_line_quant]) awaits the eta-continuation supply face
+    (GaC2_10_EtaContinuation, not yet in the tree); the slot form is the
+    registered consumption shape of the certified V03 pattern.  The
+    cross-segment supply line [GaC2_Iface_Eta] is held now (the interface
+    slice is cast and accepted, verdict PASS), so the eta-side discharge
+    lands on this line when the continuation faces arrive.  Registered open
+    supply face: the four-term main-part slot (the zero factorization
+    route). *)
 (* Selective import (the S01 state-space field S shadows the nat          *)
 (* constructor under a full import; only the Set-sorted nat bound face is *)
 (* consumed). *)

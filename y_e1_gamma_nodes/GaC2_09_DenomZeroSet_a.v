@@ -1,57 +1,51 @@
-(* ConstructiveWorld-Main - the machine cluster piece of the
-   denominator zero set: the real-order cancellation kit, the
-   pointwise real algebra faces, and the pair helpers. *)
-
-(** * GaC2_09_DenomZeroSet_a: machine cluster of the denominator zero set.
-
-    Mission.  Node C2-09 (segment C2, slot W1), machine piece.  The
-      real-order cancellation kit consumed by the zero set faces
+(** * GaC2_09_DenomZeroSet_a - machine cluster of the denominator zero
+      set: the real-order cancellation kit, the pointwise real algebra
+      faces, and the pair helpers.
+    Mission.  Node C2-09 (segment C2, slot W1), machine piece.  All 18
+      items are pure real/pair algebra, consumed by the on-disk
+      companion pieces GaC2_09_DenomZeroSet_b.v and
+      GaC2_09_DenomZeroSet_c.v: the real-order cancellation kit
       ([d09_lt_zero_opp_rev], [d09_lt_zero_opp], [d09_mult_pos_gen],
       [d09_mult_cancel_pos], [d09_sq_zero], [d09_two_zero_cancel]),
       the pointwise algebra faces ([d09_rplus_zero_l_pt],
-      [d09_rmult_zero_l_pt], [d09_rmult_opp_opp],
-      [d09_rmult_opp_l_pt], [d09_rone_minus_rone]), and the pair
-      helpers ([d09_cRe_scale], [d09_cIm_scale], [d09_norm_wd],
-      [d09_norm_one], [d09_c_eq_shift], [d09_c_opp_zero],
-      [d09_cIm_plus_opp]).  All 18 items are pure real/pair algebra,
-      consumed by the on-disk companion pieces
-      GaC2_09_DenomZeroSet_b.v and GaC2_09_DenomZeroSet_c.v.
-
-    Dependencies.  Stdlib [QArith.QArith], [Arith.Arith], [Lia].
-      Requires [S01_BaseRing] (selective [NatLe] import), [S02]
-      (real carrier, order algebra, [real_eq_of_zero_diff] ring
-      route, [real_mult_comm], [real_mult_zero], [real_plus_comm],
-      [real_plus_zero]), [S03_QExp] ([cauchy_real_exp]),
-      [S07_RealSetoidExpLog] ([real_weak_trich],
-      [real_lt_mult_compat], [real_lt_plus_compat],
-      [real_lt_opp_plus], [real_log_one], [real_lt_zero_one],
-      [cauchy_real_exp_zero], [cauchy_real_exp_wd]),
-      [S10_KVQuantTrig] ([real_cos_opp], [real_sin_opp],
-      [real_cos_eq_compat], [real_sin_eq_compat]),
-      [CxRealPairCore] + [CxRealPairExpLog] (pair carrier,
-      [real_mult_opp_r], [real_mult_one_l]), [GaC1_Iface_Cx] (the
-      C1-16 modulus identity [gaC1_16_norm_sq_exp]), and
-      [GaC1_Iface_Real] (C1-01 strict log monotonicity
-      [gaC1_01_log_lt_mono], C1-04 rational bridge
-      [gaC1_04_qlt_const_lt], C1-05 exp injectivity
-      [gaC1_05_exp_inj]) of this development.
-
-    References.  drafts_C2.md C2.09 statement sketch (the machine
-      cluster slot W1: pure real-order and pair algebra consumed by
-      the zero set faces of the companion pieces); the polar form of
-      the complex exponential mirrored by [CxRealPairExpLog];
-      Titchmarsh Ch.1 the eta quotient denominator 1 - 2^(1-s).
-
-    Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] / [real_eq];
-      no Section, no Hypothesis, no assumed constant; every proof
-      closes under the global context.
-
+      [d09_rmult_zero_l_pt], [d09_rmult_opp_opp], [d09_rmult_opp_l_pt],
+      [d09_rone_minus_rone]), and the pair helpers ([d09_cRe_scale],
+      [d09_cIm_scale], [d09_norm_wd], [d09_norm_one],
+      [d09_c_eq_shift], [d09_c_opp_zero], [d09_cIm_plus_opp]).
+    Dependencies.  Stdlib [QArith.QArith], [Arith.Arith], [Lia];
+      [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete],
+      [S03_QExp], [S07_RealSetoidExpLog], [S10_KVQuantTrig],
+      [CxRealPairCore], [CxRealPairExpLog], [GaC1_Iface_Cx],
+      [GaC1_Iface_Real] (named consumed faces in Notes).
+    References.  drafts_C2.md C2.09 statement sketch (machine cluster
+      slot W1); the polar form of the complex exponential mirrored by
+      [CxRealPairExpLog]; Titchmarsh Ch.1 the eta quotient denominator
+      1 - 2^(1-s).
+    Constructivity.  Every named construction is carried by [Set]; the
+      order predicates are the Set-sorted [real_lt] / [real_eq]; no
+      Section, no Hypothesis, no assumed constant; every proof closes
+      under the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_09_DenomZeroSet_a.v] from the flat build
       directory, thermal guard wrapper. *)
-
 Require S01_BaseRing.
+(** Notes.  Named consumed faces behind the Dependencies field:
+    [S02_CauchyComplete] supplies the real carrier, the order algebra,
+    the [real_eq_of_zero_diff] ring route, [real_mult_comm],
+    [real_mult_zero], [real_plus_comm], [real_plus_zero];
+    [S03_QExp] supplies [cauchy_real_exp]; [S07_RealSetoidExpLog]
+    supplies [real_weak_trich], [real_lt_mult_compat],
+    [real_lt_plus_compat], [real_lt_opp_plus], [real_log_one],
+    [real_lt_zero_one], [cauchy_real_exp_zero],
+    [cauchy_real_exp_wd]; [S10_KVQuantTrig] supplies [real_cos_opp],
+    [real_sin_opp], [real_cos_eq_compat], [real_sin_eq_compat];
+    [CxRealPairCore] + [CxRealPairExpLog] supply the pair carrier,
+    [real_mult_opp_r], [real_mult_one_l]; [GaC1_Iface_Cx] supplies
+    the C1-16 modulus identity [gaC1_16_norm_sq_exp];
+    [GaC1_Iface_Real] supplies the C1-01 strict log monotonicity
+    [gaC1_01_log_lt_mono], the C1-04 rational bridge
+    [gaC1_04_qlt_const_lt], and the C1-05 exp injectivity
+    [gaC1_05_exp_inj]. *)
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

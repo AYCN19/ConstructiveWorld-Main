@@ -1,45 +1,46 @@
-(* ConstructiveWorld-Main - certificate face of the zeta derivative       *)
-(* node: the constant corridor and the sample bands.                      *)
-
 (** * GaC2_18_ZetaDerivBound_cert: certificate face of node C2-18.
 
-    Mission.  Certificate face of node C2-18: the literal corridor of
-    the derivative-bound constant and the decidable sample bands.
-    Bands: (1) the constant corridor [GaC2_18_c3_form] - the explicit
-    C3 = 4 * C2 / c binding form over the rational inputs (C2 the
-    vertical-bound constant, c the consumer-domain constant), sampled
-    at C2 = 2, c = 1 closing at 8; (2) the radius lower-bound corridor
-    [GaC2_18_r_lb] - the half vertical-gap form (sigma - 1) / 2 on the
-    unit-vertical zero-set line, sampled at sigma = 3/2 closing at 1/4
-    and sigma = 5/4 closing at 1/8; (3) the decidable skeleton of the
-    two-sided imaginary bound [GaC2_18_t_le_cap] at the cap samples 10
-    and 100 with the point t = 5 and t = 0.  Honest scope (fail-loud):
-    these bands certify the rational corridor forms and the decidable
-    skeleton only; the Real-line bound faces live on the statement
-    face with the premise family, and the binding of C2 to the
-    certified vertical-bound constant lands at mother-chain
-    integration (the C2-16/17 faces own the certified C2 value).
+    Mission.  Certificate face of node C2-18: the literal corridor
+      of the derivative-bound constant and the decidable sample
+      bands (the band inventory in the Notes block).  Honest scope:
+      these bands certify the rational corridor forms and the
+      decidable skeleton only; the Real-line bound faces live on the
+      statement face with the premise family, and the binding of C2
+      to the certified vertical-bound constant lands at mother-chain
+      integration (the C2-16/17 faces own the certified C2 value).
 
     Dependencies.  Stdlib [QArith.QArith] only (the face is
-    base-standalone: the proof-to-cert direction stays one-way, no
-    statement-face require).
+      base-standalone: the proof-to-cert direction stays one-way, no
+      statement-face require).
 
-    References.  drafts_C2.md C2.18 certificate line (the constant and
-    radius sample bands, the compute-closed form); gamma_module_spec.md
-    section 4.2 the certificate-face shape (literal certificates, the
-    compute-closed verification lemmas).
+    References.  drafts_C2.md C2.18 certificate line (the constant
+      and radius sample bands); gamma_module_spec.md section 4.2 the
+      certificate-face shape.
 
     Constructivity.  Set-sorted rational identities and boolean
-    skeletons; zero assumed constants, zero abandoned proofs; the
-    bands close by the compute tactic under the global context.
+      skeletons; zero assumed constants, zero abandoned proofs; the
+      bands close by the compute tactic under the global context.
 
     Build.  [coqc -native-compiler no -q -Q . ""
-    GaC2_18_ZetaDerivBound_cert.v] from the flat build directory; the
-    face is base-standalone (Stdlib only) so the lane is free of the
-    mother-chain condition; the static track of the toolkit accept
-    script passed for this file in the static mode. *)
+      GaC2_18_ZetaDerivBound_cert.v]; the face is base-standalone
+      (Stdlib only). *)
 
 From Stdlib Require Import QArith.QArith.
+(** Notes.  Band inventory.
+
+    (1) The constant corridor [GaC2_18_c3_form]: the explicit
+    C3 = 4 * C2 / c binding form over the rational inputs (C2 the
+    vertical-bound constant, c the consumer-domain constant),
+    division-free (multiplication by the rational unit 1/c), sampled
+    at C2 = 2, c = 1 closing at 8.
+    (2) The radius lower-bound corridor [GaC2_18_r_lb]: the half
+    vertical-gap form (sigma - 1) / 2 on the unit-vertical zero-set
+    line, sampled at sigma = 3/2 closing at 1/4 and sigma = 5/4
+    closing at 1/8.
+    (3) The decidable skeleton of the two-sided imaginary bound
+    [GaC2_18_t_le_cap] at the cap samples 10 and 100 with the point
+    t = 5 and t = 0. *)
+
 
 Local Open Scope Q_scope.
 

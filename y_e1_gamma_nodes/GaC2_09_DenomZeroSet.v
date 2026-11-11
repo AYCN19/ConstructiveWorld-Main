@@ -1,52 +1,43 @@
-(* ConstructiveWorld-Main - the consolidating stem of the denominator
-   zero set: roster status 2/4 cast, two open slots, over the d09 kit. *)
-
-(** * GaC2_09_DenomZeroSet: the consolidating stem.
-
-    Mission.  Two of the four roster statements of the C2-09 card,
-      verbatim from drafts_C2.md:718-739, are cast here (roster
-      status 2/4; the other two are open slots - no placeholder
-      statements, nothing assumed).  Cast: [denom_zero_real_dir] (a),
-      a vanishing
-      denominator forces Re s = 1 (the real direction, no periodic
-      dependence); [zero_set_membership] (d), the zero points
-      [s_at k] lie on the line Re s = 1.  Open slots (deferred-open,
-      roster-gap disclosure on file): [denom_zero_imag_char] (b),
-      the imaginary direction, the constructive two-pi-lattice
-      witness in sigT form; [denom_first_order] (c), the first-order
-      Taylor remainder face with the explicit constant (ln 2)^2,
-      landing on Bishop [real_le_b] (the v16 disclosure
-      bishop_ordinal_deviation; the draft :735 sign typo corrected
-      to + ln 2 (s - 1)).  Section variables concretized per the
-      obligations L11/L12: [s_at k] := 1 - (2 pi k)/ln 2,
-      [c_m1] := -1, ln 2 := [d09_ln2].
-
-    Dependencies.  Stdlib [QArith.QArith], [ZArith], [Lia].  Requires
+(** * GaC2_09_DenomZeroSet - consolidating stem of the denominator
+      zero set over the d09 machine kit.
+    Mission.  Two of the four roster statements of the C2-09 card
+      (drafts_C2.md:718-739) are cast here verbatim; the other two are
+      registered open slots - no placeholder statements, nothing
+      assumed.  Cast: [denom_zero_real_dir] (a), a vanishing denominator
+      forces Re s = 1 (the real direction, no periodic dependence);
+      [zero_set_membership] (d), the zero points [s_at k] lie on the
+      line Re s = 1.  Open slots (deferred-open, roster-gap disclosure
+      on file): (b) [denom_zero_imag_char], the constructive
+      two-pi-lattice witness in sigT form; (c) [denom_first_order],
+      the first-order Taylor remainder face with the explicit constant
+      (ln 2)^2 on Bishop [real_le_b] (full disclosure in Notes).
+    Dependencies.  Stdlib [QArith.QArith], [ZArith], [Lia]; modules
       [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
-      [S07_RealSetoidExpLog], [GaC1_Iface_Cx] (the real_le_b
-      definition, the c_exp pair form, [gaC1_16_norm_sq_exp], the
-      gaC1_17 period faces), [GaC1_Iface_Real], and this node's
-      family pieces [GaC2_09_DenomZeroSet_a] through
-      [GaC2_09_DenomZeroSet_d] (the d09 machine kit: the ln2
-      positivity, the square-sum zero face, the one-minus-one-opp
-      cancellation, the pi-window pin and the inv-two-pi grid faces).
-
-    References.  drafts_C2.md C2.09 card and roster :718-739; v16
+      [S07_RealSetoidExpLog], [GaC1_Iface_Cx] (real_le_b definition,
+      c_exp pair form, [gaC1_16_norm_sq_exp], gaC1_17 period faces),
+      [GaC1_Iface_Real]; family pieces [GaC2_09_DenomZeroSet_a..d]
+      (the d09 kit: ln2 positivity, square-sum zero face,
+      one-minus-one-opp cancellation, pi-window pin, inv-two-pi grid).
+    References.  drafts_C2.md C2.09 card and roster :718-739; the v16
       receipt section VII.3 casting spec; Titchmarsh Ch.1 the eta
       quotient denominator 1 - 2^(1-s) (statement architecture only).
-
-    Constructivity.  All statements Set-sorted; the open slots (b)
-      and (c) are not cast in this file (their target faces - the
-      sigT lattice witness and the Bishop [real_le_b] Taylor face -
-      stay in the roster-gap disclosure); zero Sections, zero assumed
-      constants, zero admitted goals; every proof closes under the
-      global context.
-
+    Constructivity.  All statements Set-sorted; the open slots (b) and (c)
+      are not cast in this file (their target faces stay in the roster-gap
+      disclosure, see Notes); zero Sections, zero assumed constants, zero
+      admitted goals; every proof closes under the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_09_DenomZeroSet.v]; acceptance via
-      50_toolkit/accept_node.py (six-chain gate), thermal-guard
-      wrapped. *)
+      50_toolkit/accept_node.py (six-chain gate), thermal-guard wrapped. *)
 Require S01_BaseRing.
+(** Notes.  Roster-gap disclosure for the open slots: (b)
+    [denom_zero_imag_char], the imaginary direction, the constructive
+    two-pi-lattice witness in sigT form; (c) [denom_first_order], the
+    first-order Taylor remainder face with the explicit constant
+    (ln 2)^2, landing on Bishop [real_le_b] (the v16 disclosure
+    bishop_ordinal_deviation); the draft :735 sign typo is corrected
+    to + ln 2 (s - 1).  Section variables concretized per the
+    obligations L11/L12: [s_at k] := 1 - (2 pi k)/ln 2, [c_m1] := -1,
+    ln 2 := [d09_ln2]. *)
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.
 Require Import S07_RealSetoidExpLog.

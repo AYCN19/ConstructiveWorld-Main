@@ -1,47 +1,33 @@
-(* ConstructiveWorld-Main - the alignment and first-order increment
-   cluster of the maximum-modulus disk node. *)
+(* ConstructiveWorld-Main - the alignment and first-order increment cluster of the
+   maximum-modulus disk node. *)
 
-(** * GaC2_11_MaxModulusDisk_c: alignment and the first-order
-      increment algebra.
+(** * GaC2_11_MaxModulusDisk_c: alignment and the first-order increment algebra.
 
-    Mission.  Node C2-11 (segment C2, slot W2), machine piece.  The
-      alignment face of the first-order increment
-      ([mm_align_kappa]: the direction-aligned complex scaling
-      collapses to the real gain applied to the base value), the
-      quarter-reciprocal identity ([mm_inv_quarter]), the squared
-      product algebra ([mm_ABAB], [mm_le_comm]), the order
-      transports ([mm_le_lt_trans], [mm_le_lt_trans_alt]), the
-      expanded square ([mm_sq_plus]), the remainder recombination
-      ([mm_c_recombine]), and the first-order norm identity
-      ([mm_first_order_norm]: the squared modulus of u plus a
-      real-scaled copy of u in the expanded closed form).  All
-      identities are pointwise algebra or order transports.
-
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete]
-      (order kit, [real_eq_of_zero_diff] ring route, ring laws),
-      [S03_QExp] ([real_inv_pos] and its faces), [S07_RealSetoidExpLog]
-      ([real_mult_positive], [RealSetoid.real_eq_mult_compat],
-      [RealSetoid.real_eq_le]), [CxRealPairCore] +
-      [CxRealPairExpLog] (pair carrier, [c_scale]),
-      [GaC1_Iface_Cx] (complex slice), [GaC1_Iface_Real] (C1-04
-      rational bridge, C1-05 square root faces), and the machine
-      faces [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b]
-      of this node.
-
-    References.  drafts_C2.md C2.11 statement sketch (the squared
-      modulus carrier and the explicit first-order increment
-      algebra); Ahlfors Ch.2 the first-order growth direction
-      argument mirrored at the squared-carrier level.
-
-    Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] /
-      [real_le]; zero assumed constants; every proof closes under
+    Mission.  Node C2-11 (segment C2, slot W2), machine piece.  The alignment face of the
+      first-order increment ([mm_align_kappa]: the direction-aligned complex scaling
+      collapses to the real gain applied to the base value), the quarter-reciprocal identity
+      ([mm_inv_quarter]), the squared product algebra ([mm_ABAB], [mm_le_comm]), the order
+      transports ([mm_le_lt_trans], [mm_le_lt_trans_alt]), the expanded square
+      ([mm_sq_plus]), the remainder recombination ([mm_c_recombine]), and the first-order
+      norm identity ([mm_first_order_norm]: the squared modulus of u plus a real-scaled
+      copy of u in the expanded closed form).  All identities are pointwise algebra or
+      order transports.
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (selective
+      [NatLe] import), [S02_CauchyComplete] (order kit, [real_eq_of_zero_diff] ring route,
+      ring laws), [S03_QExp] ([real_inv_pos] and its faces), [S07_RealSetoidExpLog]
+      ([real_mult_positive], [RealSetoid.real_eq_mult_compat], [RealSetoid.real_eq_le]),
+      [CxRealPairCore] + [CxRealPairExpLog] (pair carrier, [c_scale]), [GaC1_Iface_Cx]
+      (complex slice), [GaC1_Iface_Real] (C1-04 rational bridge, C1-05 square root faces),
+      and the machine faces [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b] of
+      this node.
+    References.  drafts_C2.md C2.11 statement sketch (the squared modulus carrier and the
+      explicit first-order increment algebra); Ahlfors Ch.2, the first-order growth
+      direction argument mirrored at the squared-carrier level.
+    Constructivity.  Every named construction is carried by [Set]; the order predicates are
+      the Set-sorted [real_lt] / [real_le]; zero assumed constants; every proof closes under
       the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_11_MaxModulusDisk_c.v] from the flat
-      build directory, thermal guard wrapper. *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> ""
+      GaC2_11_MaxModulusDisk_c.v] from the flat build directory, thermal guard wrapper. *)
 
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).

@@ -1,58 +1,43 @@
 (* ConstructiveWorld-Main - Perron cutoff face, leaf a: bound-side carriers. *)
 
 (** * GaC3_P08_PerronCutoff: leaf a of the Perron truncation face.
-
-    Mission.  Node C3-P08 (segment C3), leaf a: the bound-side carriers
-    of the Perron cutoff formula at the certified step carrier: the
-    natural-log wrapper [GaC3_P08_lnR]; the log-distance carrier
-    [GaC3_P08_ln_dist] (the two-case |ln x - ln n| form on the
-    decidable nat comparison, no real_abs face) with nonnegativity;
-    the positive power [GaC3_P08_powR] (n^c := exp(c * ln n)) with
-    positivity and n^c >= 1; the one-over face [GaC3_P08_inv_ge1_le_one]
-    (the min-form left side); the harmonic denominator [GaC3_P08_den]
-    (1 + T |ln(x/n)|) with >= 1 and > 0 items; and the min-form right
-    side [GaC3_P08_inv_scale_le_one].  Together the two sides are the
-    two-form min(1, 1/(T |ln(x/n)|)) registration demanded by the card;
-    the weight term, truncated sum and main bound live in leaf b
-    [GaC3_P08_PerronCutoff_b].  Slot re-registration: the card slot W2
-    deepens to W4 (leaf b consumes the certified [GaC3_P03_ml_vline]
-    face directly; the deepen-don't-shallow law, spec section 6 honest
-    appendix 2).  The power face consumes the certified
-    [GaC3_P07_cpowR] stem directly (no local re-derivation of the
-    exp(s * ln x) body).  Deferred (fail-loud): the exact
-    integral identity needs the continuous-integrand line-integral
-    carrier and the literal log-derivative integrand object (both open
-    slices); the 4(arctan + pi + 1) chain needs a constructive
-    arctan bound (P09 slice).
-
+    Mission.  Node C3-P08 (segment C3), leaf a: the bound-side carriers of
+    the Perron cutoff formula: the natural-log wrapper [GaC3_P08_lnR]; the
+    two-case log-distance carrier [GaC3_P08_ln_dist] (the |ln x - ln n|
+    form on the decidable nat comparison, no real_abs face) with
+    nonnegativity; the positive power [GaC3_P08_powR] (n^c := exp(c * ln n))
+    with positivity and n^c >= 1; the one-over face [GaC3_P08_inv_ge1_le_one];
+    the harmonic denominator [GaC3_P08_den] (1 + T |ln(x/n)|, >= 1 and > 0);
+    and the min-form right side [GaC3_P08_inv_scale_le_one]: together the
+    two-form min(1, 1/(T |ln(x/n)|)) registration of the card (weight term,
+    truncated sum, main bound: leaf b).
     Dependencies.  [S01_BaseRing] ([NatLe], selective import),
     [S02_CauchyComplete], [S03_QExp] ([cauchy_real_exp]),
     [S07_RealSetoidExpLog] ([real_inv_pos] family, exp pos/mono/wd/zero
-    faces, [real_log_lt_mono]), [GaC2_Iface_DS] ([nat_real],
-    [nat_real_pos], [NatLe_one_S], [NatLe_1_zero_empty]) + leaf a
-    ([r_plus_zero_l_gen], [r_plus_zero_r_gen], [r_le_of_eq],
-    [real_log_wd]), [GaC3_P07_PowerGrowth] ([GaC3_P07_cpowR]),
-    [GaC3_Z01_LogDerivSeries] ([z01_log_le_mono],
-    [z01_natreal_le]); Stdlib [QArith], [Arith], [Lia].
-
-    References.  AFP Perrons_Formula perron_bound :1019-1020 (the
-    harmonic denominator shape), perron_effective_strong :1208-1225,
-    perron_indicator :26-35; PNT_with_Remainder perron_formula :920;
-    cards_C3 C3-P08; drafts_C3 P08 study card.
-
-    Constructivity.  Set-carried statements; Set-sorted predicates
-    ([real_lt] / [real_le] / [real_eq] / [NatLe]); zero assumed
-    constants, zero abandoned proofs, zero choice principles.  The
-    Section premises discharge as explicit premise arguments at End, so
-    Print Assumptions of every named item reads Closed under the global
-    context; [Hnpos] is L0-stock instantiable via [nat_real_pos].
-
-    Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC3_P08_PerronCutoff.v] compiles cleanly (exit 0) from the work
-    directory (sandbox pair), single compile lane under the cpu_guard
-    v3 wrapper. *)
+    faces, [real_log_lt_mono]), [GaC2_Iface_DS] + leaf a ([nat_real],
+    [nat_real_pos], [NatLe_one_S], [NatLe_1_zero_empty],
+    [r_plus_zero_l_gen], [r_plus_zero_r_gen], [r_le_of_eq], [real_log_wd]),
+    [GaC3_P07_PowerGrowth] ([GaC3_P07_cpowR]), [GaC3_Z01_LogDerivSeries]
+    ([z01_log_le_mono], [z01_natreal_le]); Stdlib [QArith], [Arith], [Lia].
+    References.  AFP Perrons_Formula perron_bound :1019-1020,
+    perron_effective_strong :1208-1225, perron_indicator :26-35;
+    PNT_with_Remainder perron_formula :920; cards_C3 C3-P08; drafts_C3 P08.
+    Constructivity.  Set-carried statements, Set-sorted predicates; zero
+    assumed constants, zero abandoned proofs, zero choice; Section premises
+    discharge as explicit arguments at End, so Print Assumptions reads
+    Closed; [Hnpos] is L0-stock instantiable via [nat_real_pos].
+    Build.  coqc -native-compiler no -q -Q . "" -Q <boot_src> "" GaC3_P08_PerronCutoff.v (work directory, dependency-closure build). *)
 
 Require S01_BaseRing.
+(** Notes.  Slot re-registration: the card slot W2 deepens to W4 (leaf b
+    consumes the certified [GaC3_P03_ml_vline] face directly; the
+    deepen-don't-shallow law, spec section 6 honest appendix 2).  The power
+    face consumes the certified [GaC3_P07_cpowR] stem directly (no local
+    re-derivation of the exp(s * ln x) body).  Deferred (fail-loud): the
+    exact integral identity needs the continuous-integrand line-integral
+    carrier and the literal log-derivative integrand object (both open
+    slices); the 4(arctan + pi + 1) chain needs a constructive arctan bound
+    (P09 slice). *)
 (* Selective import (the S01 state-space field S shadows the nat          *)
 (* constructor under a full import; only the Set-sorted nat bound face is *)
 (* consumed). *)

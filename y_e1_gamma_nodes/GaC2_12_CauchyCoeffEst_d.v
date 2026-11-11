@@ -1,65 +1,33 @@
-(* ConstructiveWorld-Main - the step-decomposition geometry kit: the
-   norm-square faces and the real reciprocal faces of the iterated
-   difference-quotient machine. *)
-
 (** * GaC2_12_CauchyCoeffEst_d: the step-decomposition geometry kit.
-
-    Mission.  Node C2-12 machine cluster, piece d.  Casts the
-      geometry and reciprocal faces consumed by the iterated
-      difference-quotient step machine (piece e): the complex
-      parallelogram identity [gaC12_parallelogram]; the
-      nonnegativity-opposite bridge [gaC12_opp_cnsq_le_zero]; the
-      two-sum and four-sum square bounds [gaC12_sq_le_2sum] and
-      [gaC12_sq_le_4sum], parameterized over the pending
-      complex-norm nonnegativity face [Hnn] (GAPASUME premise, see
-      Constructivity); the real reciprocal product face
-      [gaC12_inv_mult]; the real square product face
-      [gaC12_sq_prod]; the scaled-norm face [gaC12_norm_scale_inv]
-      (the squared modulus of a positive reciprocal-scaled vector
-      equals the reciprocal of the scale's squared modulus); and
-      the value face [gaC12_dquot_value_at] fixing the quotient
-      value at the expansion point through its defining scale
-      form.  Set-carried throughout; zero Sections.
+    Mission.  Node C2-12 machine cluster, piece d.  Geometry and
+      reciprocal faces for the iterated difference-quotient step
+      machine (piece e): the geometry faces
+      [gaC12_parallelogram]/[gaC12_opp_cnsq_le_zero]/
+      [gaC12_sq_le_2sum] (carrying the pending premise [Hnn], see
+      Notes), the reciprocal faces [gaC12_inv_mult]/[gaC12_sq_prod],
+      the scaled-norm face [gaC12_norm_scale_inv] and the value face
+      [gaC12_dquot_value_at].  Set-carried; zero Sections.
 
     Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
       [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
-      [S07_RealSetoidExpLog], [CxRealPairCore],
-      [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real],
-      [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b]
-      (the [mm_*] algebra kit: [mm_mult_cancel_eq]/
-      [mm_inv_mul_one] resident in a; [mm_norm_scale] resident
-      in b after the v20 reseat), this
-      cluster's pieces a, b and c ([GaC2_12_CauchyCoeffEst_a] for
-      the gaC12 prefixes, [GaC2_12_CauchyCoeffEst_b] for
-      [gaC12_shift_eq] and the real mult-compat style,
-      [GaC2_12_CauchyCoeffEst_c] for [gaC12_cx_dquot]).
+      [S07_RealSetoidExpLog], [CxRealPairCore], [CxRealPairExpLog],
+      [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_11_MaxModulusDisk_a],
+      [GaC2_11_MaxModulusDisk_b] (the [mm_*] algebra kit); pieces
+      a, b, c of this cluster.
 
     References.  drafts_C2.md C2.12 card, general-n route
-      (difference/annulus iteration recursion, C_n of 2^n shape
-      with explicit constant loss, consumed by cauchy_est_n for
-      n >= 2) and the GaC2_12 seat forensics registered in SOP
-      section 2.  The pending complex-norm nonnegativity face is
-      carried as an explicit premise [Hnn] on the two square-bound
-      lemmas: it is the first output face of the pending Cx-norm
-      geometry machine, the same registered pending machine whose
-      reverse-triangle slot is carried by GaC2_11_MaxModulusDisk.v
-      lines 22-28 (the Hrevtri interface premise), and the premise
-      shrinks monotonically when that machine lands.  Ahlfors Ch.2
-      the classical quotient iteration (statement architecture
-      only; no proof object transcribed).
+      (difference/annulus iteration recursion, C_n of 2^n shape,
+      explicit constant loss).  Ahlfors Ch.2 the classical quotient
+      iteration (statement architecture only; no proof object transcribed).
 
-    Constructivity.  All statements are Set-sorted; the ring faces
-      are coordinate-level polynomial identities proven by
-      [real_eq_of_zero_diff] plus [ring] at the rational-point
-      level, the same style as the [mm_*] cluster; the order faces
-      propagate through monotone faces only; no Section wrappers,
-      no premise slots, zero assumed constants, zero admitted
-      goals; every proof closes under the global context.
+    Constructivity.  All statements are Set-sorted; the ring faces are
+      coordinate-level polynomial identities ([real_eq_of_zero_diff] +
+      [ring]); no Section wrappers, zero assumed constants, zero
+      admitted goals; every proof closes under the global context.
 
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_12_CauchyCoeffEst_d.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+      build directory. *)
 
 Require S01_BaseRing.
 Require Import S02_CauchyComplete.
@@ -76,6 +44,21 @@ Require Import GaC2_12_CauchyCoeffEst_b.
 Require Import GaC2_12_CauchyCoeffEst_c.
 From Stdlib Require Import QArith.QArith.
 From Stdlib Require Import Lia.
+
+(** Notes.  Pending-premise disclosure: the two-sum square bound
+    [gaC12_sq_le_2sum] carries the complex-norm nonnegativity face
+    as an explicit premise [Hnn] (GAPASUME premise).  [Hnn] is the
+    first output face of the pending Cx-norm geometry machine, the
+    same registered pending machine whose reverse-triangle slot is
+    carried by GaC2_11_MaxModulusDisk.v lines 22-28 (the [Hrevtri]
+    interface premise); the premise shrinks monotonically when that
+    machine lands.  Order faces in this piece propagate through
+    monotone faces only.  Residency: [mm_mult_cancel_eq] and
+    [mm_inv_mul_one] are resident in GaC2_11_MaxModulusDisk_a,
+    [mm_norm_scale] is resident in GaC2_11_MaxModulusDisk_b.
+    Deviation disclosure: the cluster contains no four-sum square
+    bound statement [gaC12_sq_le_4sum]; the two-sum bound
+    [gaC12_sq_le_2sum] is the only square bound cast in this piece. *)
 
 (* ===================================================================== *)
 (* Section 1. The complex parallelogram identity and the opposite        *)

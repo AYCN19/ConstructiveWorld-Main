@@ -1,53 +1,48 @@
-(* ConstructiveWorld-Main - certificate face of the eta continuation     *)
-(* node: the weight corridor and the denominator sample band.            *)
-
+(* ConstructiveWorld-Main - certificate face of the eta continuation node. *)
 (** * GaC2_10_EtaContinuation_cert: certificate face of node C2-10.
+    Mission.  Certificate face of node C2-10: the decidable rational sample bands of
+    the L13 obligation row (drafts_C2.md C2.10, the certificate row sigma0 in
+    {1/2, 1}).  Band 1: the eta uniform-modulus weight corridor [GaC2_10_w1_form] at
+    the sigma0 = 1 and sigma0 = 1/2 slots.  Band 2: the denominator lower-bound
+    sample band on the real axis (the L13 local-constant registration), the s = 1/2
+    and s = 3/2 samples.  The sample arithmetic and the honest scope: the Notes
+    block after the import.
 
-    Mission.  Certificate face of node C2-10: the decidable rational
-    sample bands of the L13 obligation row (drafts_C2.md C2.10, the
-    certificate row sigma0 in {1/2, 1}).  Bands: (1) the eta
-    uniform-modulus weight corridor [GaC2_10_w1_form] - the explicit
-    1 + 2 * q form over the rational inputs, sampled at the sigma0 = 1
-    slot closing exactly at 2 (the rational two-power 2^{-1} = 1/2)
-    and at the sigma0 = 1/2 slot closing at the rational corridor 5/2
-    (the irrational 2^{-1/2} enters through its rational upper face
-    3/4, underpinned by the square band 2 >= (4/3)^2 = 16/9); (2) the
-    denominator lower-bound sample band on the real axis (the L13
-    local-constant registration): the s = 1/2 sample
-    ([GaC2_10_cert_lb_s1_2]: sqrt(2) > 7/5 gives |1 - 2^(1/2)| > 2/5;
-    [GaC2_10_cert_lb_sq_s1_2]: the squared form 3 - 2 sqrt(2) > 1/6
-    from sqrt(2) < 17/12), and the s = 3/2 sample
-    ([GaC2_10_cert_lb_sq_s3_2]: the squared form 3/2 - sqrt(2) > 1/12
-    from the same square band).  Honest scope (fail-loud): these bands
-    certify the rational corridor forms and the decidable skeleton
-    only; the Real-line bound faces live on the statement face with
-    the premise family, the s = 1 point is a denominator zero (the
-    zero-set face of C2-09) so no sample is claimed there, and the
-    irrationals enter only through their rational square-band
-    certificates.
+    Dependencies.  Stdlib [QArith.QArith] only (the face is base-standalone: the
+    proof-to-cert direction stays one-way, no statement-face require).
 
-    Dependencies.  Stdlib [QArith.QArith] only (the face is
-    base-standalone: the proof-to-cert direction stays one-way, no
-    statement-face require).
+    References.  drafts_C2.md C2.10 certificate line (the denominator lower-bound
+    sample band, the sigma0 in {1/2, 1} two samples); the card C2.10 row (c) (the
+    weight corridor 1 + 2 * 2^{-sigma0}); gamma_module_spec.md section 4.2 the
+    certificate-face shape (literal certificates, the compute-closed verification
+    lemmas).
 
-    References.  drafts_C2.md C2.10 certificate line (the denominator
-    lower-bound sample band, the sigma0 in {1/2, 1} two samples); the
-    card C2.10 row (c) (the weight corridor 1 + 2 * 2^{-sigma0});
-    gamma_module_spec.md section 4.2 the certificate-face shape
-    (literal certificates, the compute-closed verification lemmas).
+    Constructivity.  Set-sorted rational identities and boolean skeletons; zero
+    assumed constants, zero abandoned proofs; the bands close by the compute tactic
+    under the global context.
 
-    Constructivity.  Set-sorted rational identities and boolean
-    skeletons; zero assumed constants, zero abandoned proofs; the
-    bands close by the compute tactic under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q . ""
-    GaC2_10_EtaContinuation_cert.v] from the flat build directory; the
-    face is base-standalone (Stdlib only) so the lane is free of the
-    mother-chain condition. *)
+    Build.  [coqc -native-compiler no -q -Q . "" GaC2_10_EtaContinuation_cert.v] from the flat build directory
+    (base-standalone, Stdlib only, so the lane is free of the mother-chain condition). *)
 
 From Stdlib Require Import QArith.QArith.
 
 Local Open Scope Q_scope.
+
+(** Notes.  Band 1 samples: the sigma0 = 1 slot closes exactly at 2 (the rational
+    two-power 2^{-1} = 1/2); the sigma0 = 1/2 slot closes at the rational corridor
+    5/2 (the irrational 2^{-1/2} enters through its rational upper face 3/4,
+    underpinned by the square band 2 >= (4/3)^2 = 16/9).  Band 2 samples: the
+    s = 1/2 sample ([GaC2_10_cert_lb_s1_2]: sqrt(2) > 7/5 gives |1 - 2^(1/2)| > 2/5;
+    [GaC2_10_cert_lb_sq_s1_2]: the squared form 3 - 2 sqrt(2) > 1/6 from
+    sqrt(2) < 17/12), and the s = 3/2 sample ([GaC2_10_cert_lb_sq_s3_2]: the squared
+    form 3/2 - sqrt(2) > 1/12 from the same square band).
+
+    Honest scope (fail-loud): these bands certify the rational corridor forms and
+    the decidable skeleton only; the Real-line bound faces live on the statement
+    face with the premise family, the s = 1 point is a denominator zero (the
+    zero-set face of C2-09) so no sample is claimed there, and the irrationals
+    enter only through their rational square-band certificates. *)
+
 
 (* ---- Band 1: the eta weight corridor at the two sigma0 samples ---- *)
 

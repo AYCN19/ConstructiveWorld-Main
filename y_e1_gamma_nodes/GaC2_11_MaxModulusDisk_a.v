@@ -1,47 +1,33 @@
-(* ConstructiveWorld-Main - the real-order machine faces of the
-   maximum-modulus disk node. *)
+(* ConstructiveWorld-Main - the real-order machine faces of the maximum-modulus disk node. *)
 
-(** * GaC2_11_MaxModulusDisk_a: strict and weak order faces,
-      reciprocal kit, and the square-root bridge.
+(** * GaC2_11_MaxModulusDisk_a: strict and weak order faces, reciprocal kit, square-root
+      bridge.
 
-    Mission.  Node C2-11 (segment C2, slot W2), machine piece.  The
-      strict and weak addition faces of the real line
-      ([mm_rplus_zero_r], [mm_lt_plus_r], [mm_lt_sub_r],
-      [mm_le_plus_r], [mm_lt_minus_r], [mm_le_plus_compat]), the
-      reciprocal kit over positive reals ([mm_inv_mul_one],
-      [mm_inv_pos_le], [mm_mult_one_l], [mm_le_eq_l], [mm_le_eq_r],
-      [mm_inv_anti], [mm_mult_cancel_eq], [mm_inv_anti_lt]), the
-      strict square monotonicity ([mm_sq_strict_mono]), and the
-      square-root monotonicity bridge ([mm_sqrt_lt_mono]) consumed
-      by the maximum-modulus statements of this node.  All order
-      facts propagate from strict-positivity premises through
-      monotone faces only; no sign decision on abstract terms is
-      performed.
-
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete]
-      (order kit, [real_eq_of_zero_diff] ring route, ring laws),
-      [S03_QExp] ([real_inv_pos] and its faces), [S07_RealSetoidExpLog]
-      ([real_mult_positive], [real_lt_mult_compat],
-      [real_lt_plus_compat_lt_le], [RealSetoid.real_eq_le],
-      [real_lt_not_eq], [real_weak_trich]), [CxRealPairCore] +
-      [CxRealPairExpLog] (pair carrier), [GaC1_Iface_Cx] (complex
-      slice), [GaC1_Iface_Real] (C1-01 log monotonicity, C1-04
-      rational bridge, C1-05 square root faces) of this development.
-
-    References.  drafts_C2.md C2.11 statement sketch (the squared
-      modulus carrier and the explicit first-order increment
-      algebra); Ahlfors Ch.2 the first-order growth direction
-      argument mirrored at the squared-carrier level.
-
-    Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] /
-      [real_le]; zero assumed constants; every proof closes under
+    Mission.  Node C2-11 (segment C2, slot W2), machine piece.  The strict and weak addition
+      faces of the real line ([mm_rplus_zero_r], [mm_lt_plus_r], [mm_lt_sub_r],
+      [mm_le_plus_r], [mm_lt_minus_r], [mm_le_plus_compat]), the reciprocal kit over positive
+      reals ([mm_inv_mul_one], [mm_inv_pos_le], [mm_mult_one_l], [mm_le_eq_l], [mm_le_eq_r],
+      [mm_inv_anti], [mm_mult_cancel_eq], [mm_inv_anti_lt]), the strict square monotonicity
+      ([mm_sq_strict_mono]), and the square-root monotonicity bridge ([mm_sqrt_lt_mono])
+      consumed by the maximum-modulus statements of this node.  All order facts propagate
+      from strict-positivity premises through monotone faces only; no sign decision on
+      abstract terms is performed.
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (selective
+      [NatLe] import), [S02_CauchyComplete] (order kit, [real_eq_of_zero_diff] ring route,
+      ring laws), [S03_QExp] ([real_inv_pos] and its faces), [S07_RealSetoidExpLog]
+      ([real_mult_positive], [real_lt_mult_compat], [real_lt_plus_compat_lt_le],
+      [RealSetoid.real_eq_le], [real_lt_not_eq], [real_weak_trich]), [CxRealPairCore] +
+      [CxRealPairExpLog] (pair carrier), [GaC1_Iface_Cx] (complex slice), [GaC1_Iface_Real]
+      (C1-01 log monotonicity, C1-04 rational bridge, C1-05 square root faces) of this
+      development.
+    References.  drafts_C2.md C2.11 statement sketch (the squared modulus carrier and the
+      explicit first-order increment algebra); Ahlfors Ch.2, the first-order growth
+      direction argument mirrored at the squared-carrier level.
+    Constructivity.  Every named construction is carried by [Set]; the order predicates are
+      the Set-sorted [real_lt] / [real_le]; zero assumed constants; every proof closes under
       the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_11_MaxModulusDisk_a.v] from the flat
-      build directory, thermal guard wrapper. *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> ""
+      GaC2_11_MaxModulusDisk_a.v] from the flat build directory, thermal guard wrapper. *)
 
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).

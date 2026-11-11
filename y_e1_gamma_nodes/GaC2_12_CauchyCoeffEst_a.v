@@ -1,72 +1,43 @@
-(* ConstructiveWorld-Main - the power-series coefficient carrier: the
-   nth-coefficient take-item machine of the local expansion layer. *)
+(* ConstructiveWorld-Main - the power-series coefficient carrier: the nth-coefficient take-item machine of the local expansion layer. *)
+(** * GaC2_12_CauchyCoeffEst_a: the local-expansion sequence carrier and the nth-coefficient take-item machine.
 
-(** * GaC2_12_CauchyCoeffEst_a: the local-expansion sequence carrier
-      and the nth-coefficient take-item machine.
+    Mission.  Node C2-12 machine cluster, piece a.  Defines the pointwise local-expansion carrier [gaC12_local_exp_seq] packing the full
+      coefficient sequence [nat -> Cx] with an explicit quadratic remainder face; the five-argument projector [gaC12_nth_coeff] (the
+      nth_coeff supply form of the Cauchy coefficient estimate, shape-aligned with the C2-11 [deriv1] carrier) and the first-order
+      projection [gaC12_deriv1]; the slot truncation [gaC12_slots_of_seq] realizing the C2-11 three-slot carrier as the truncation of this
+      sequence carrier (the monotone-shrink direction of the L14 obligation), with the slot-form first-order projection [gaC12_deriv1_slots]
+      and its alignment face [gaC12_deriv1_slots_of_seq]; and the constant kit of the cauchy_est_n consumption contract: the real square
+      [gaC12_sq], the natural power [gaC12_rnatpow] on the real line (the rpow R n carrier) with its positivity face [gaC12_rnatpow_pos] and
+      its first-power face [gaC12_rnatpow_one], the closed coefficient constant [gaC12_Cn] (2^n embedded by iterated [real_const 2]
+      products) with its positivity face [gaC12_Cn_pos], the squared constant [gaC12_Cn_sq], the positive-argument division [gaC12_rdiv],
+      and the (1 <= n)/NatLe bridge [gaC12_natle_one_lift].  Every named construction is Set-carried; zero Sections; zero admitted goals.
 
-    Mission.  Node C2-12 machine cluster, piece a.  Defines the
-      pointwise local-expansion carrier [gaC12_local_exp_seq] packing
-      the full coefficient sequence [nat -> Cx] with an explicit
-      quadratic remainder face; the five-argument projector
-      [gaC12_nth_coeff] (the nth_coeff supply form of the Cauchy
-      coefficient estimate, shape-aligned with the C2-11 [deriv1]
-      carrier) and the first-order projection [gaC12_deriv1]; the
-      slot truncation [gaC12_slots_of_seq] realizing the C2-11
-      three-slot carrier as the truncation of this sequence carrier
-      (the monotone-shrink direction of the L14 obligation), with the
-      slot-form first-order projection [gaC12_deriv1_slots] and its
-      alignment face [gaC12_deriv1_slots_of_seq]; and the constant
-      kit of the cauchy_est_n consumption contract: the real square
-      [gaC12_sq], the natural power [gaC12_rnatpow] on the real line
-      (the rpow R n carrier) with its positivity face
-      [gaC12_rnatpow_pos] and its first-power face
-      [gaC12_rnatpow_one], the closed coefficient constant [gaC12_Cn]
-      (2^n embedded by iterated [real_const 2] products) with its
-      positivity face [gaC12_Cn_pos], the squared constant
-      [gaC12_Cn_sq], the positive-argument division [gaC12_rdiv],
-      and the (1 <= n)/NatLe bridge [gaC12_natle_one_lift].  Every
-      named construction is Set-carried; zero Sections; zero
-      admitted goals.
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (Require, not Import; the Set-sorted pair former), [S02_CauchyComplete],
+      [S03_QExp] ([real_inv_pos]), [S07_RealSetoidExpLog] (the positivity and order faces), [CxRealPairCore], [CxRealPairExpLog],
+      [GaC1_Iface_Cx] (the C1-14/15/16/17 stems via the slice interface), [GaC1_Iface_Real] (the C1-05/06 real-power-root and order faces
+      via the slice interface).
 
-    Dependencies.  Stdlib [QArith.QArith].  Requires [S01_BaseRing]
-      (the Set-sorted pair former), [S02_CauchyComplete],
-      [S03_QExp] ([real_inv_pos]), [S07_RealSetoidExpLog] (the
-      positivity and order faces), [CxRealPairCore],
-      [CxRealPairExpLog], [GaC1_Iface_Cx] (the C1-14/15/16/17 stems
-      via the slice interface), [GaC1_Iface_Real] (the C1-05/06
-      real-power-root and order faces via the slice interface).
+    References.  drafts_C2.md C2.12 statement sketch (cauchy_est_n1 and cauchy_est_n; obligation L16: the C_n closed form and the rpow R n
+      carrier; deriv1/nth_coeff same-source with C2-11 L14), and the carrier-face disclosures registered in Notes.  Ahlfors Ch.2-3 the
+      classical Cauchy coefficient estimate (statement architecture only; no proof object transcribed).
 
-    References.  drafts_C2.md C2.12 statement sketch (cauchy_est_n1
-      and cauchy_est_n, obligation L16: the C_n closed form and the
-      rpow R n carrier; deriv1/nth_coeff same-source with C2-11 L14)
-      and the registered proposed-name rule of drafts_C2.md:1320:
-      these carrier shapes are the C1-15 output alignment target.
-      The sequence carrier is a conservative superset of the C2-11
-      three-slot [local_exp_disk] (GaC2_11_MaxModulusDisk.v:102-110,
-      the L14 obligation form subject to the wave-end cross-check)
-      and derives that slot form by [gaC12_slots_of_seq].  A machine
-      cluster piece landing before its consolidating stem follows the
-      GaC2_Iface_Eta.v:25-26 precedent.  The natural power is cast
-      here as an explicit Fixpoint: the tree's [c_powq]
-      (GaC2_01_DirichletPartialSum.v:187) is the n^(-s) power of the
-      eta denominator carrier, not a general R^n, and is not
-      consumed.  Ahlfors Ch.2-3 the classical Cauchy coefficient
-      estimate (statement architecture only; no proof object
-      transcribed).
+    Constructivity.  All statements are Set-sorted (sigT carriers, [real_lt]/[real_le]/[c_eq] predicates, [S01_BaseRing.And] pairs); the
+      coefficient sequence is a plain function [nat -> Cx] inside [sigT]; no Section wrappers, no premise slots, zero assumed constants, zero
+      admitted goals; every proof closes under the global context.
 
-    Constructivity.  All statements are Set-sorted (sigT carriers,
-      [real_lt]/[real_le]/[c_eq] predicates, [S01_BaseRing.And]
-      pairs); the coefficient sequence is a plain function
-      [nat -> Cx] inside [sigT]; no Section wrappers, no premise slots,
-      zero assumed constants, zero admitted goals; every proof closes
-      under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_12_CauchyCoeffEst_a.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> "" GaC2_12_CauchyCoeffEst_a.v] from the flat build
+      directory; acceptance via 50_toolkit/accept_node.py (six-chain gate), thermal-guard wrapped. *)
 
 Require S01_BaseRing.
+
+(** Notes.  Carrier-face disclosures.  (1) The sequence carrier is a conservative superset of the
+    C2-11 three-slot [local_exp_disk] (GaC2_11_MaxModulusDisk.v:102-110, the L14 obligation form
+    subject to the wave-end cross-check) and derives that slot form by [gaC12_slots_of_seq].
+    (2) These carrier shapes are the C1-15 output alignment target, per the registered
+    proposed-name rule of drafts_C2.md:1320.  (3) A machine cluster piece landing before its
+    consolidating stem follows the GaC2_Iface_Eta.v:25-26 precedent.  (4) The natural power is
+    cast here as an explicit Fixpoint: the tree's [c_powq] (GaC2_01_DirichletPartialSum.v:187)
+    is the n^(-s) power of the eta denominator carrier, not a general R^n, and is not consumed. *)
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.
 Require Import S07_RealSetoidExpLog.

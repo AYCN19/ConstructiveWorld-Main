@@ -1,48 +1,32 @@
-(* ConstructiveWorld-Main - the theta, cap, and gain-split kernel
-   faces of the maximum-modulus disk node. *)
-
-(** * GaC2_11_MaxModulusDisk_e: theta and gain-split kernels.
-
-    Mission.  Node C2-11 (segment C2, slot W2), machine piece.  The
-      theta and gain-split kernel faces consumed by the growth
-      statement: the adaptive-theta reciprocal kit ([mm_theta_kit]:
-      the witness pair of the theta factor and its unit reciprocal
-      with the defining equation and the five comparison faces),
-      the two-term comparison shift ([mm_HT_shift]), the gain-split
-      identity ([mm_G_eq]), the reciprocal-reassociation face
-      ([mm_mul_inv_assoc]), the half-tau cap of the
-      radius-square-root product ([mm_rsq_lt_half]), and the
-      half-gain domination ([mm_A_le_G]).  Every kernel takes its
-      data as explicit arguments, so the pointwise
-      rational-algebra routes proceed on freshly introduced
-      components only.
-
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete]
-      (order kit, [real_eq_of_zero_diff] ring route, ring laws),
-      [S03_QExp] ([real_inv_pos] and its faces), [S07_RealSetoidExpLog]
-      ([real_mult_positive], [real_lt_mult_compat],
-      [real_lt_plus_compat_lt_le], [RealSetoid.real_eq_mult_compat],
-      [real_lt_le_iff]), [CxRealPairCore] + [CxRealPairExpLog] (pair
-      carrier, [c_scale]), [GaC1_Iface_Cx] (complex slice),
-      [GaC1_Iface_Real] (C1-04 rational bridge, C1-05 square root
-      faces), and the machine clusters [GaC2_11_MaxModulusDisk_a],
-      [GaC2_11_MaxModulusDisk_b], [GaC2_11_MaxModulusDisk_c],
-      [GaC2_11_MaxModulusDisk_d] of this node.
-
-    References.  drafts_C2.md C2.11 statement sketch (the adaptive
-      radius and the first-order gain direction); Ahlfors Ch.2 the
-      first-order growth direction argument mirrored at the
-      squared-carrier level.
-
-    Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] /
-      [real_le]; zero assumed constants; every proof closes under
-      the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_11_MaxModulusDisk_e.v] from the flat
-      build directory, thermal guard wrapper. *)
+(* ConstructiveWorld-Main, GaC2_11_MaxModulusDisk_e (node C2-11,
+   segment C2, slot W2, machine piece): theta and gain-split kernels.
+   Mission.  The theta and gain-split kernel faces consumed by the
+     growth statement (mm_theta_kit: the adaptive-theta reciprocal
+     kit; mm_HT_shift, mm_G_eq, mm_mul_inv_assoc, mm_rsq_lt_half,
+     mm_A_le_G); every kernel takes its data as explicit arguments,
+     so the pointwise rational-algebra routes proceed on freshly
+     introduced components only.
+   Dependencies.  Stdlib QArith.QArith, Lia.  Requires S01_BaseRing
+     (selective NatLe import), S02_CauchyComplete (order kit,
+     real_eq_of_zero_diff ring route, ring laws), S03_QExp
+     (real_inv_pos and its faces), S07_RealSetoidExpLog
+     (real_mult_positive, real_lt_mult_compat,
+     real_lt_plus_compat_lt_le, RealSetoid.real_eq_mult_compat,
+     real_lt_le_iff), CxRealPairCore + CxRealPairExpLog (pair
+     carrier, c_scale), GaC1_Iface_Cx (complex slice),
+     GaC1_Iface_Real (C1-04 rational bridge, C1-05 square root
+     faces), machine clusters GaC2_11_MaxModulusDisk_a,
+     GaC2_11_MaxModulusDisk_b, GaC2_11_MaxModulusDisk_c, and
+     GaC2_11_MaxModulusDisk_d of this node.
+   References.  drafts_C2.md C2.11 statement sketch (the adaptive
+     radius and the first-order gain direction); Ahlfors Ch.2, the
+     growth-direction argument mirrored at the squared-carrier level.
+   Constructivity.  Every named construction is carried by Set; the
+     order predicates are the Set-sorted real_lt / real_le; zero
+     assumed constants; every proof closes under the global context.
+   Build.  coqc -native-compiler no -q -Q <certified vo tree> ""
+     -Q <build dir> "" GaC2_11_MaxModulusDisk_e.v, from the flat
+     build directory, thermal guard wrapper. *)
 
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).

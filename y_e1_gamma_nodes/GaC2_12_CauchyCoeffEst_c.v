@@ -1,67 +1,33 @@
-(* ConstructiveWorld-Main - the second-order difference-quotient base
-   piece: the centered Cauchy face of the quotient machine. *)
+(* ConstructiveWorld-Main - the second-order difference-quotient base piece: the centered Cauchy face of the quotient machine. *)
+(** * GaC2_12_CauchyCoeffEst_c: the second-order difference-quotient base piece.
 
-(** * GaC2_12_CauchyCoeffEst_c: the second-order difference-quotient
-      base piece.
+    Mission.  Node C2-12 machine cluster, piece c.  Defines the complex difference quotient [gaC12_cx_dquot] of [f] between [z0] and a point [q]
+      whose squared distance is explicitly positive (Set-carried division: numerator times [conj(q - z0)] times [real_inv_pos] of the squared
+      distance).  Casts the distance-positivity transfer [gaC12_dquot_pos], the remainder well-definedness face [gaC12_rem_wd], the value face
+      [gaC12_dquot_value_eq] (the quotient at [z0+w] minus the first-order coefficient equals the second-order remainder of [f] carried by
+      [conj w] over the squared distance), and the main statement [gaC12_dquot_center_T2]: if the second-order remainder of [f] at [z0] is bounded
+      by [T2] at [w], then the squared modulus of the difference quotient minus [a1] is bounded by [T2] itself - the centered Cauchy face by which
+      the second-order data of [f] becomes the first-order slot of the quotient.  Set-carried throughout; zero Sections.
 
-    Mission.  Node C2-12 machine cluster, piece c.  Defines the
-      complex difference quotient [gaC12_cx_dquot] of [f] between
-      [z0] and a point [q] whose squared distance is explicitly
-      positive (Set-carried division: numerator times [conj(q - z0)]
-      times [real_inv_pos] of the squared distance).  Casts the
-      distance-positivity transfer [gaC12_dquot_pos], the remainder
-      well-definedness face [gaC12_rem_wd], the value face
-      [gaC12_dquot_value_eq] (the quotient at [z0+w] minus the
-      first-order coefficient equals the second-order remainder of
-      [f] carried by [conj w] over the squared distance), and the
-      main statement [gaC12_dquot_center_T2]: if the second-order
-      remainder of [f] at [z0] is bounded by [T2] at [w], then the
-      squared modulus of the difference quotient minus [a1] is
-      bounded by [T2] itself - the centered Cauchy face by which
-      the second-order data of [f] becomes the first-order slot of
-      the quotient.  Set-carried throughout; zero Sections.
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (Require, not Import), [S02_CauchyComplete], [S03_QExp] ([real_inv_pos]
+      with its correctness and positivity faces), [S07_RealSetoidExpLog] (the Setoid compatibility and order faces), [CxRealPairCore],
+      [CxRealPairExpLog] ([c_plus_congr]/[c_opp_congr]/[c_mult_congr]), [GaC1_Iface_Cx], [GaC1_Iface_Real], the machine clusters
+      [GaC2_11_MaxModulusDisk_a]/[GaC2_11_MaxModulusDisk_b] (the [mm_*] algebra kit: [mm_inv_mul_one]/[mm_mult_one_l] resident in a;
+      [mm_norm_wd]/[mm_norm_scale]/[mm_c_mult_scale]/[mm_c_scale_scale]/[mm_c_scale_wd]/[mm_c_eq_scale_wd] resident in b), and this cluster's
+      pieces [GaC2_12_CauchyCoeffEst_a] (the gaC12 algebra prefixes) and [GaC2_12_CauchyCoeffEst_b] (the algebra faces and [gaC12_cauchy_cancel]).
 
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing], [S02_CauchyComplete], [S03_QExp]
-      ([real_inv_pos] with its correctness and positivity faces),
-      [S07_RealSetoidExpLog] (the Setoid compatibility and order
-      faces), [CxRealPairCore], [CxRealPairExpLog]
-      ([c_plus_congr]/[c_opp_congr]/[c_mult_congr]),
-      [GaC1_Iface_Cx], [GaC1_Iface_Real], the machine clusters
-      [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b]
-      (the [mm_*] algebra kit: [mm_inv_mul_one]/[mm_mult_one_l]
-      resident in a; [mm_norm_wd]/[mm_norm_scale]/
-      [mm_c_mult_scale]/[mm_c_scale_scale]/[mm_c_scale_wd]/
-      [mm_c_eq_scale_wd] resident in b after the v20 reseat),
-      this cluster's pieces a
-      and b ([GaC2_12_CauchyCoeffEst_a] for the gaC12 algebra
-      prefixes, [GaC2_12_CauchyCoeffEst_b] for the algebra faces
-      and [gaC12_cauchy_cancel]).
+    References.  drafts_C2.md C2.12 card (the difference-quotient route: g = (f - f(z0))/(z - z0) is disk-expandable with g(z0) = f'(z0), and the
+      circle bound 2M/R is pushed through C2-11) and the C2-11 interface constraint: the C2-11 L14 expansion packs only a0/a1/Tmaj, so
+      difference-quotient expandability needs second-order data, which the Tmaj quadratic face supplies; this piece is the center face of that
+      route, and the full-disk face and the annulus recursion land in later pieces of this cluster.  Ahlfors Ch.2 the classical quotient argument
+      (statement architecture only; no proof object transcribed).
 
-    References.  drafts_C2.md C2.12 card (the difference-quotient
-      route: g = (f - f(z0))/(z - z0) is disk-expandable with
-      g(z0) = f'(z0), and the circle bound 2M/R is pushed through
-      C2-11) and the GaC2_12 seat forensics registered in SOP
-      section 2 (C2-11 L14 packs only a0/a1/Tmaj; the
-      difference-quotient expandability needs second-order data,
-      which the Tmaj quadratic face supplies).  This piece is the
-      center face of that route; the full-disk face and the annulus
-      recursion land in later pieces of this cluster.  Ahlfors Ch.2
-      the classical quotient argument (statement architecture only;
-      no proof object transcribed).
+    Constructivity.  All statements are Set-sorted; the nonzero distance enters only through the explicit [real_lt real_zero (c_norm_sq ...)]
+      witness [Hq] and its [real_inv_pos] carrier; the order chain runs through monotone faces only; no Section wrappers, no premise slots,
+      zero assumed constants, zero admitted goals; every proof closes under the global context.
 
-    Constructivity.  All statements are Set-sorted; the nonzero
-      distance enters only through the explicit
-      [real_lt real_zero (c_norm_sq ...)] witness [Hq] and its
-      [real_inv_pos] carrier; the order chain runs through
-      monotone faces only; no Section wrappers, no premise slots, zero
-      assumed constants, zero admitted goals; every proof closes under
-      the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_12_CauchyCoeffEst_c.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> "" GaC2_12_CauchyCoeffEst_c.v] from the flat build
+      directory; acceptance via 50_toolkit/accept_node.py (six-chain gate), thermal-guard wrapped. *)
 
 Require S01_BaseRing.
 Require Import S02_CauchyComplete.

@@ -1,76 +1,59 @@
-(* ConstructiveWorld-Main - the sum-zero backer, the ln2 positivity,
-   the inv2pi lattice faces, and the exp-Taylor remainder of the
-   denominator zero set. *)
-
-(** * GaC2_09_DenomZeroSet_d: backers and the exp-Taylor remainder.
-
+(** * GaC2_09_DenomZeroSet_d - backers and the exp-Taylor remainder of
+      the denominator zero set.
     Mission.  Node C2-09 (segment C2, slot W1), backer piece for the
-      consolidating stem.  This piece casts the sum-zero backer
-      [d09_sq_sum_zero] (u*u + v*v == 0 forces u == 0 and v == 0,
-      through the pointwise Q-layer square nonnegativity and the weak
-      trichotomy on each factor), the logarithm positivity
-      [d09_ln2_pos] (ln 2 > 0 through the strict log monotonicity
-      [real_log_one]), the inv2pi lattice
-      faces [d09_inv_two_pi_pos] (the inverse constant of
-      GaC2_09_DenomZeroSet_b is positive), [d09_two_pi_inv_roundtrip]
-      (two pi times inv2pi == 1 in the swapped order),
-      [d09_grid_cancel_r]/[d09_grid_cancel_l] (the lattice cancel
-      round trips y*inv2pi*two pi == y and two pi*inv2pi*y == y),
-      and the exp-Taylor remainder [d09_exp_taylor_remainder]:
-      |e^w - 1 - w| <= (|w|^2/2)*e^|w| in the Bishop order
-      [real_le_b], from the Q-layer partial-sum engine [exp_partial]
-      of S03_QExp and the pointwise remainder bound
-      [d09_q_exp_rem_point] (|exp_partial (S (S m)) x - (1 + x)| <=
-      (|x|^2/2)*exp_partial m |x|) built on the term scaling
-      [d09_q_term_scale] and the factorial shift
-      [d09_q_fact_le_two_shift].  The four stem statements
-      (denom_zero_real_dir, denom_zero_imag_char, denom_first_order,
-      zero_set_membership) live in the consolidating stem
-      GaC2_09_DenomZeroSet, to be cast there; none of them appear in
-      this piece.
-
-    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs],
-      [QArith.Qring], [ZArith], [Setoid], [Morphisms], [Arith.Arith],
-      [Lia].  Requires [S01_BaseRing] (selective [NatLe] import),
-      [S02_CauchyComplete], [S03_QExp] ([exp_partial], [q_pow_abs],
-      [q_square_nonneg], [q_fact_pos], [q_pow_nonneg],
-      [exp_partial_eq_series], [exp_series_mono],
-      [cauchy_real_exp_pos], [q_le_div_le]), [S07_RealSetoidExpLog]
-      ([real_weak_trich], [real_abs], [real_abs_proj], [real_log],
-      [real_log_one], [q_abs_lt_lower], [real_const_pos],
-      [real_const_lt], [RealSetoid.real_lt_compat]), and
-      the machine cluster [GaC2_09_DenomZeroSet_a]/
-      [GaC2_09_DenomZeroSet_b] of this node.
-
-    References.  drafts_C2.md C2.09 statement sketch (the (c)
-      first-order form and the L11/L12 obligations); the draft sketch
-      carried the sign typo -ln2*(s-1) on the first-order term
-      (logged in the v14 receipt, section three, item 3): the
-      remainder face cast here is stated for the correct-sign
-      consumption |e^w - 1 - w| and does not inherit the typo;
-      E. Bishop and D. Bridges, Constructive Analysis Ch. 2 (the
-      exp series remainder estimate and the epsilon order).
-      Degradation note: the real-layer remainder face
-      d09_exp_taylor_remainder is deferred to a later segment - the
-      Q-layer remainder chain d09_q_exp_rem_point (with
-      d09_q_term_scale, d09_q_ep_mono, d09_q_fact_le_two_shift and
-      their support faces) is fully cast and compiled in this piece,
-      but the real-layer lift requires a proj-difference to
-      Q-combination form bridge whose rewrite is blocked by the
-      setoid restriction of this environment (Qeq-based lemmas
-      cannot be rewritten inside Qlt/Qle goals); the precise
-      blocking point is documented in the checkpoint A ledger.
-
-    Constructivity.  Every named construction is carried by [Set];
-      the remainder face is stated in the Bishop order [real_le_b]
-      (epsilon form, no disjunction decided); the Q-layer pointwise
-      bound runs a nat induction through the factorial shift; zero
-      assumed constants; every proof closes under the global context.
-
+      consolidating stem.  The sum-zero backer [d09_sq_sum_zero]
+      (u*u + v*v == 0 forces u == 0 and v == 0); the logarithm
+      positivity [d09_ln2_pos] (ln 2 > 0 through [real_log_one]); the
+      inv2pi lattice faces [d09_inv_two_pi_pos],
+      [d09_two_pi_inv_roundtrip], [d09_grid_cancel_r]/
+      [d09_grid_cancel_l]; and the exp-Taylor remainder
+      [d09_exp_taylor_remainder] support faces (see Notes for the
+      degradation disclosure).  The four stem statements live in the
+      consolidating stem GaC2_09_DenomZeroSet; none appear here.
+    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs], [QArith.Qring],
+      [ZArith], [Setoid], [Morphisms], [Arith.Arith], [Lia];
+      [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete],
+      [CxRealPairCore], [S03_QExp], [S07_RealSetoidExpLog],
+      [GaC2_09_DenomZeroSet_a], [GaC2_09_DenomZeroSet_b] (named faces in Notes).
+    References.  drafts_C2.md C2.09 sketch (the (c) first-order form and
+      the L11/L12 obligations); the draft first-order term sign typo
+      (v14 receipt, section three, item 3) is corrected here - see
+      Notes; Bishop-Bridges, Constructive Analysis Ch. 2 (exp series
+      remainder estimate, epsilon order); degradation note in Notes.
+    Constructivity.  Every named construction is carried by [Set]; the
+      remainder face is stated in the Bishop order [real_le_b]
+      (epsilon form, no disjunction decided); the Q-layer bound is a
+      nat induction; zero assumed constants; every proof closes under
+      the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_09_DenomZeroSet_d.v] from the flat build
       directory, thermal guard wrapper. *)
 Require S01_BaseRing.
+(** Notes.  The four stem statements (denom_zero_real_dir,
+    denom_zero_imag_char, denom_first_order, zero_set_membership)
+    live in the consolidating stem GaC2_09_DenomZeroSet, to be cast
+    there; none of them appear in this piece.  Sign-typo disclosure:
+    the draft sketch carried the sign typo -ln2*(s-1) on the
+    first-order term (logged in the v14 receipt, section three,
+    item 3); the remainder face cast here is stated for the
+    correct-sign consumption |e^w - 1 - w| and does not inherit the
+    typo.  Degradation note: the real-layer remainder face
+    d09_exp_taylor_remainder is deferred to a later segment - the
+    Q-layer remainder chain d09_q_exp_rem_point (with
+    d09_q_term_scale, d09_q_ep_mono, d09_q_fact_le_two_shift and
+    their support faces) is fully cast and compiled in this piece,
+    but the real-layer lift requires a proj-difference to
+    Q-combination form bridge whose rewrite is blocked by the setoid
+    restriction of this environment (Qeq-based lemmas cannot be
+    rewritten inside Qlt/Qle goals); the precise blocking point is
+    documented in the checkpoint A ledger.  Named consumed faces
+    behind the Dependencies field: [S03_QExp] supplies
+    [exp_partial], [q_pow_abs], [q_square_nonneg], [q_fact_pos],
+    [q_pow_nonneg], [exp_partial_eq_series], [exp_series_mono],
+    [cauchy_real_exp_pos], [q_le_div_le]; [S07_RealSetoidExpLog]
+    supplies [real_weak_trich], [real_abs], [real_abs_proj],
+    [real_log], [real_log_one], [q_abs_lt_lower], [real_const_pos],
+    [real_const_lt], [RealSetoid.real_lt_compat]. *)
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop, And).
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

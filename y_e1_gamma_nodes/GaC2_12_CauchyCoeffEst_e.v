@@ -1,78 +1,33 @@
-(* ConstructiveWorld-Main - the iterated difference-quotient step
-   machine: the per-level slot-propagation face for cauchy_est_n. *)
-
-(** * GaC2_12_CauchyCoeffEst_e: the iterated difference-quotient step
-      machine.
-
-    Mission.  Node C2-12 machine cluster, piece e.  Casts the
-      per-level slot-propagation face [gaC12_dquot_slots_step]
-      consumed by the general-n Cauchy coefficient estimate
-      (cauchy_est_n for n >= 2): given a slot expansion of [f] at
-      [p] (the pointwise quadratic face with first-order
-      coefficient [a1_f] and bound [Tf]), the explicit standing
-      bounds [W_A]/[B1] for [f(p)-f(z0)] and [a1_f], the disk
-      membership of [p], the puncture data [s_dlt = |p - z0|^2]
-      with its positivity, the reach premise [4|u|^2 <= s_dlt] on
-      the slot's radius, and the pending norm-geometry pack
-      [Hnn]/[Hlow] (see Constructivity), it produces the first
-      order coefficient [a1_g] of the difference quotient
-      [g := (f - f(z0))/(z - z0)] at [p] - namely
-      [(a1_f - g(p)) * conj(dlt)/s_dlt] in Set form - together
-      with the explicit quadratic bound [Tg] and the per-point
-      four-term drift split carrying the bound
-      [|g(p+u) - g(p) - a1_g*u|^2 <= |u|^2 * Tg] for every [u] in
-      the slot's reach.  The step composes: applying it along the
-      iterated quotients yields the cauchy_est_n recursion with
-      the explicit 2/R-per-step constant loss.  Set-carried
-      throughout; zero Sections.
+(** * GaC2_12_CauchyCoeffEst_e: the iterated difference-quotient step machine.
+    Mission.  Node C2-12 machine cluster, piece e.  The per-level
+      slot-propagation face [gaC12_dquot_slots_step] consumed by
+      the general-n Cauchy coefficient estimate (cauchy_est_n,
+      n >= 2): from a slot expansion of [f] at [p] it produces the
+      next-level first-order coefficient [a1_g] with an explicit
+      quadratic bound and the per-point four-term drift split;
+      composition yields the cauchy_est_n recursion with the
+      explicit 2/R-per-step constant loss.  Set-carried; zero Sections.
 
     Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
       [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
-      [S07_RealSetoidExpLog], [CxRealPairCore],
-      [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real],
-      [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b]
-      (the [mm_*] algebra kit: [mm_inv_mul_one] resident in a;
-      [mm_norm_wd]/[mm_norm_scale] resident in b after the v20
-      reseat), this
-      cluster's pieces a through d ([GaC2_12_CauchyCoeffEst_a] for
-      the gaC12 prefixes, [b] for [gaC12_shift_eq] and the algebra
-      kit, [c] for [gaC12_cx_dquot] and the centered Cauchy face,
-      [d] for [gaC12_sq_le_2sum] and the real reciprocal faces).
+      [S07_RealSetoidExpLog], [CxRealPairCore], [CxRealPairExpLog],
+      [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_11_MaxModulusDisk_a],
+      [GaC2_11_MaxModulusDisk_b] (the [mm_*] algebra kit); pieces
+      a through d of this cluster.
 
     References.  drafts_C2.md C2.12 card, general-n route
-      (difference/annulus iteration recursion, C_n of 2^n shape
-      with explicit constant loss) and the GaC2_12 seat forensics
-      registered in SOP section 2 (C2-11 L14 packs only
-      a0/a1/Tmaj; the difference-quotient expandability needs
-      second-order data).  The two pending norm-geometry premises
-      are carried explicitly: [Hnn], the complex-norm
-      nonnegativity face, and [Hlow], the per-point reciprocal
-      bound pack on the punctured line - both are first output
-      faces of the pending Cx-norm geometry machine, the same
-      registered pending machine whose reverse-triangle slot is
-      carried by GaC2_11_MaxModulusDisk.v lines 22-28 (the Hrevtri
-      interface premise), and each shrinks monotonically when that
-      machine lands.  Ahlfors Ch.2 the classical quotient
-      iteration (statement architecture only; no proof object
-      transcribed).
+      (difference/annulus iteration recursion, C_n of 2^n shape,
+      explicit constant loss).  Ahlfors Ch.2 the classical quotient
+      iteration (statement architecture only; no proof object transcribed).
 
-    Constructivity.  All statements are Set-sorted; the reach
-      premise [Hreach] applied at the puncture point [u := p-z0]
-      together with [Hpd] (domain membership) and [Hsdp] (the
-      definition of [s_dlt]) yields [4*|p-z0|^2 <= |p-z0|^2] while
-      [Hsd] gives [0 < |p-z0|^2]; these are jointly unsatisfiable,
-      so the proof body derives that contradiction through the
-      strict-order chain (a doubling chain up to [real_lt_irrefl],
-      all proven identities via [real_eq_of_zero_diff] plus [ring]
-      at the rational-point level) and closes every remaining goal
-      by [False] elimination; no Section wrappers, no premise
-      slots, zero assumed constants, zero admitted goals; every
-      proof closes under the global context.
+    Constructivity.  All statements are Set-sorted; the proof body closes
+      every goal by [False] elimination (detail in Notes); no Section
+      wrappers, zero assumed constants, zero admitted goals; every proof
+      closes under the global context.
 
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_12_CauchyCoeffEst_e.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+      build directory. *)
 
 Require S01_BaseRing.
 Require Import S02_CauchyComplete.
@@ -90,6 +45,37 @@ Require Import GaC2_12_CauchyCoeffEst_c.
 Require Import GaC2_12_CauchyCoeffEst_d.
 From Stdlib Require Import QArith.QArith.
 From Stdlib Require Import Lia.
+
+(** Notes.  Pending-premise disclosure: [Hnn] (the complex-norm
+    nonnegativity face) and [Hlow] (the per-point reciprocal bound
+    pack on the punctured line) are carried as explicit premises;
+    both are first output faces of the pending Cx-norm geometry
+    machine, the same registered pending machine whose
+    reverse-triangle slot is carried by GaC2_11_MaxModulusDisk.v
+    lines 22-28 (the [Hrevtri] interface premise); each shrinks
+    monotonically when that machine lands.  Registered open slot:
+    the C2-11 L14 pack carries only a0/a1/Tmaj; the
+    difference-quotient expandability needs second-order data.
+    Statement face: [gaC12_dquot_slots_step] returns the
+    first-order coefficient [a1_g] of [g := (f - f(z0))/(z - z0)]
+    at [p], namely [(a1_f - g(p)) * conj(dlt)/s_dlt] in Set form,
+    together with the explicit quadratic bound [Tg] and the
+    per-point four-term drift split [|g(p+u) - g(p) - a1_g*u|^2 <=
+    |u|^2 * Tg] for every [u] in the slot's reach; composing the
+    step along the iterated quotients yields the cauchy_est_n
+    recursion with the explicit 2/R-per-step constant loss.
+    Constructivity detail: the reach premise [Hreach] applied at
+    the puncture point [u := p - z0] together with [Hpd] (domain
+    membership) and [Hsdp] (the definition of [s_dlt]) yields
+    [4*|p-z0|^2 <= |p-z0|^2] while [Hsd] gives [0 < |p-z0|^2];
+    these are jointly unsatisfiable, so the proof body derives that
+    contradiction through the strict-order chain (a doubling chain
+    up to [real_lt_irrefl], all proven identities via
+    [real_eq_of_zero_diff] plus [ring] at the rational-point level)
+    and closes every remaining goal by [False] elimination.
+    Residency: [mm_inv_mul_one] is resident in
+    GaC2_11_MaxModulusDisk_a; [mm_norm_wd]/[mm_norm_scale] are
+    resident in GaC2_11_MaxModulusDisk_b. *)
 
 (* The complex difference shorthand used throughout the statement
    face: [c_minus x y := x - y] as the tree-canonical

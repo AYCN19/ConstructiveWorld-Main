@@ -1,39 +1,33 @@
-(* ConstructiveWorld-Main - the Cauchy ring-bound algebra: the k-th
-   annulus bound constant faces consumed by the stem. *)
-
 (** * GaC2_12_CauchyCoeffEst_g: the annulus ring-bound kit.
-
     Mission.  Node C2-12 glue piece g.  The parameterized ring-bound
       constant [gaC12_Bk] (Cn^2 k * (M/R^k)^2 in squared carrier, the
-      target form of the stem statement cauchy_est_n) with its two
-      algebra faces: [gaC12_Bk_zero] (the zeroth ring equals the
-      squared boundary bound M^2) and [gaC12_Bk1_eq] (the first ring
-      equals (2M/R)^2 in the est_n1 consumption form).  Set-carried;
-      zero Sections; zero admitted goals.
+      target form of the stem statement cauchy_est_n) with two algebra
+      faces: [gaC12_Bk_zero] (the zeroth ring equals the squared
+      boundary bound M^2) and [gaC12_Bk1_eq] (the first ring equals
+      (2M/R)^2 in the est_n1 consumption form).  Set-carried; zero
+      Sections; zero admitted goals.
 
     Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
       [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
       [S07_RealSetoidExpLog], [CxRealPairCore], [CxRealPairExpLog],
-      [GaC1_Iface_Cx], [GaC1_Iface_Real], and this cluster's pieces
-      a, c, d and f ([gaC12_rnatpow_pos]/[gaC12_rnatpow_one] via a;
-      [gaC12_rdiv] via a; [gaC12_sq_prod] via d; [gaC12_inv_sq]/
-      [gaC12_rdiv_S]/[gaC12_Cn_S_sq]/[gaC12_cert_cn1] via f).
+      [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_11_MaxModulusDisk],
+      [GaC2_11_MaxModulusDisk_a], [GaC2_11_MaxModulusDisk_b]; pieces
+      a, c, d, f of this cluster.
 
     References.  drafts_C2.md C2.12 card (the annulus recursion with
       explicit constant loss; the stem cauchy_est_n1 consumption
-      form) and the registered gap-carrier discipline: pure algebra
-      faces over the [gaC12_rdiv]/[gaC12_Cn] constant kit.  Ahlfors
-      Ch.2 the classical coefficient bound (statement architecture
-      only).
+      form).  Registered gap-carrier discipline: pure algebra faces
+      over the [gaC12_rdiv]/[gaC12_Cn] constant kit.  Ahlfors Ch.2
+      the classical coefficient bound (statement architecture only).
 
     Constructivity.  All statements are Set-sorted; no Section
-      wrappers, no premise slots, zero assumed constants, zero
-      admitted goals; every proof closes under the global context.
+      wrappers, zero assumed constants, zero admitted goals; every
+      proof closes under the global context.
 
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_12_CauchyCoeffEst_g.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+      build directory. *)
+
 Require S01_BaseRing.
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

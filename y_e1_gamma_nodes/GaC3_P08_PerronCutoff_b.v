@@ -1,57 +1,44 @@
 (* ConstructiveWorld-Main - Perron cutoff face, leaf b: weight and bound. *)
 
 (** * GaC3_P08_PerronCutoff_b: leaf b of the Perron truncation face.
-
-    Mission.  Node C3-P08 (segment C3), leaf b: the Perron weight term,
-    the truncated weight sum and the main truncation bound over the
-    leaf-a carriers, plus the psi-face endpoint carriers.  Named faces:
-    the weight term [GaC3_P08_pw] (Lambda(n) * (x/n)^c / (1 +
-    T|ln(x/n)|), the AFP perron_bound :1019 harmonic shape; (x/n)^c
-    carried as x^c * 1/n^c via [real_inv_pos], no division face); the
-    truncated sum [GaC3_P08_perron_sum] over 1..N; the main bound
-    [GaC3_P08_perron_sum_le] (sum <= x^c * psi(N), psi the [z01_mansum]
-    carrier, aggregated from [GaC3_P08_pw_le] through the leaf-a
-    min-form sides); the psi monotonicity [GaC3_P08_mansum_mono]; the
-    half-weight endpoint carrier [GaC3_P08_psi_half] with sandwich
-    [GaC3_P08_psi_half_sandwich] (0 <= h <= 1 places the h-weighted
-    endpoint between the neighboring full psi values, the
-    perron_indicator :26-35 semantics in scalar-slot form; the concrete
-    h := 1/2 instance awaits a real_const order face, the registered
-    open const-order face); and the ML consumption face
-    [GaC3_P08_vline_ml] ([GaC3_P03_ml_vline], the perron_integrable
-    :124 side-condition free at this carrier; this direct consumption
-    of the certified [GaC3_P03_MLEstimate] face deepens the node slot
-    to W4, the deepen-don't-shallow law).  Deferred (fail-loud): the
-    exact integral identity needs the continuous-integrand
-    line-integral carrier and the literal log-derivative integrand
-    object (both open slices; the P07 power stem is consumed through
-    leaf a).
-
+    Mission.  Node C3-P08 (segment C3), leaf b: the Perron weight term
+    [GaC3_P08_pw] (Lambda(n) * (x/n)^c / (1 + T|ln(x/n)|), the AFP
+    perron_bound :1019 harmonic shape; (x/n)^c as x^c * 1/n^c via
+    [real_inv_pos], no division face), the truncated weight sum
+    [GaC3_P08_perron_sum], the main truncation bound
+    [GaC3_P08_perron_sum_le] (sum <= x^c * psi(N), psi = the [z01_mansum]
+    carrier), the psi monotonicity [GaC3_P08_mansum_mono], the half-weight
+    endpoint carrier [GaC3_P08_psi_half] with sandwich
+    [GaC3_P08_psi_half_sandwich], and the ML consumption face
+    [GaC3_P08_vline_ml].
     Dependencies.  [GaC3_P08_PerronCutoff] (leaf a), [S01_BaseRing]
     ([NatLe], selective import), [S02_CauchyComplete], [S03_QExp],
-    [S07_RealSetoidExpLog], [GaC2_Iface_DS] + leaf a
-    ([r_mult_plus_distr_l], [r_le_of_eq]), [GaC3_P02_LineIntegralAlg]
-    (over [GaC3_P01_LineIntegralDef]), [GaC3_P03_MLEstimate],
-    [GaC3_Z01_LogDerivSeries] ([z01_lam], [z01_lam_ge0], [z01_mansum]);
-    Stdlib [QArith], [Arith], [List], [Lia].
-
+    [S07_RealSetoidExpLog], [GaC2_Iface_DS] + leaf a,
+    [GaC3_P02_LineIntegralAlg] (over [GaC3_P01_LineIntegralDef]),
+    [GaC3_P03_MLEstimate], [GaC3_Z01_LogDerivSeries] ([z01_lam],
+    [z01_lam_ge0], [z01_mansum]); Stdlib [QArith], [Arith], [List], [Lia].
     References.  AFP Perrons_Formula perron_bound :1019-1020,
     perron_effective_strong :1208-1225, perron_indicator :26-35;
     PNT_with_Remainder perron_formula :920, perron_integrable :124;
     cards_C3 C3-P08; drafts_C3 P08.
-
-    Constructivity.  Set-carried statements; Set-sorted predicates
-    ([real_lt] / [real_le] / [real_eq] / [NatLe]); zero assumed
-    constants, zero abandoned proofs, zero choice principles.  Section
-    premises discharge as explicit arguments at End, so Print
-    Assumptions reads Closed under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC3_P08_PerronCutoff_b.v] compiles cleanly (exit 0) from the work
-    directory (sandbox pair), single compile lane under the cpu_guard
-    v3 wrapper. *)
+    Constructivity.  Set-carried statements, Set-sorted predicates; zero
+    assumed constants, zero abandoned proofs, zero choice; Section premises
+    discharge as explicit arguments at End, so Print Assumptions reads
+    Closed under the global context.
+    Build.  coqc -native-compiler no -q -Q . "" -Q <boot_src> "" GaC3_P08_PerronCutoff_b.v (work directory, dependency-closure build). *)
 
 Require S01_BaseRing.
+(** Notes.  Slot re-registration: this direct consumption of the certified
+    [GaC3_P03_MLEstimate] face ([GaC3_P03_ml_vline], the perron_integrable
+    :124 side-condition free at this carrier) deepens the node slot to W4,
+    the deepen-don't-shallow law.  Registered open: the concrete h := 1/2
+    instance of [GaC3_P08_psi_half] awaits a real_const order face (the
+    registered open const-order face; the scalar slot h carries the
+    fraction, the perron_indicator :26-35 semantics in scalar-slot form).
+    Deferred (fail-loud): the exact integral identity needs the
+    continuous-integrand line-integral carrier and the literal
+    log-derivative integrand object (both open slices; the P07 power stem
+    is consumed through leaf a). *)
 (* Selective import (the S01 state-space field S shadows the nat          *)
 (* constructor under a full import; only the Set-sorted nat bound face is *)
 (* consumed). *)

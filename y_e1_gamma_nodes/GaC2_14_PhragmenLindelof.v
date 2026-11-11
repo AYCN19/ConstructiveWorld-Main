@@ -1,74 +1,69 @@
-(* ConstructiveWorld-Main - the Phragmen-Lindelof indicator face of the
-   strip: pointwise subquadratic-growth bound with the explicit
-   (eps,T) selector carrier. *)
-
 (** * GaC2_14_PhragmenLindelof: Phragmen-Lindelof pointwise face.
 
-    Mission.  Node C2-14 (segment C2, slot W4), indicator-principle
-      piece.  Carriers: the squared unit [sq], the tree-carried
-      rational maximum inside [max_sq], the closed-strip membership
-      [strip_member], the local power-series expansion slot
-      [local_exp_at] / [strip_local_exp] (obligation L19), the
-      rational-exponent power [r_pow] and the one-capped growth
-      carrier [grow_bound] (obligation L20; the cap
-      [real_max (real_abs y) real_one] is forced by the positivity
-      premise of the constructive log carrier), the data-level
-      selector criterion [pl_selector_ok] (obligation L21; its body
-      is f-free so the certificate face can sample it), the
-      truncation identity [pl_norm_sq_trunc_eq] (the squared modulus
-      of f at z equals the squared modulus of the truncated function
-      f z e^{eps z^2} times e^{2 eps (Im z^2 - Re z^2)}), and the
-      main pointwise statement [pl_strip_point]: a strip function
-      with the line bounds M0 and M1, the one-capped subquadratic
-      growth, and local expandability satisfies, at every strip point
-      z and every accuracy delta, a witness pair (eps,T) with the
-      squared bound max(M0,M1)^2 + delta^2, supplied through the W4
-      consumer face [pl_w4_consumer_face].  The consumer face is the
-      single explicit GAPASUME carrying premise of this wave: its
-      discharge consumes the GaC2_11 rectangle maximum-modulus chain
-      over [0,1] x [-T,T] together with the GaC2_12 coefficient
-      faces, and shrinks monotonically when the mothers land.
+    Mission.  Node C2-14: the strip indicator principle with the
+      exp(eps z^2) truncation and the explicit (eps,T) selector
+      carrier.  Main statement [pl_strip_point]: a strip function
+      with the line bounds M0 / M1, the one-capped subquadratic
+      growth and local expandability satisfies, at every strip point
+      and every accuracy delta, a witness pair (eps,T) with the
+      squared bound max(M0,M1)^2 + delta^2.
 
-    Dependencies.  Stdlib [QArith], [QArith.Qabs], [QArith.Qminmax].
-      Requires [S01_BaseRing]
-      (selective [NatLe]), [S02_CauchyComplete] (the real carrier,
-      [real_eq_of_zero_diff], the pointwise ring faces), [S03_QExp]
-      ([cauchy_real_exp], [cauchy_real_exp_pos],
-      [cauchy_real_exp_zero], [real_abs], [Qhalf_pos]),
-      [S07_RealSetoidExpLog] ([cauchy_real_exp_plus],
-      [cauchy_real_exp_wd], [real_lt_zero_one], [cw_log],
-      [real_max], the RealSetoid transfer faces), [CxRealPairCore] +
-      [CxRealPairExpLog] (the pair carrier, [cdiff],
-      [c_norm_sq_mul], [c_scale]), [GaC1_Iface_Cx] (the C1-16 modulus
-      identity [gaC1_16_norm_sq_exp]), [GaC1_Iface_Real] (the C1-06
-      exponential monotonicity [g06_exp_le]), and the W-wave mothers
-      [GaC2_11_MaxModulusDisk], [GaC2_12_CauchyCoeffEst] (the draft
-      Require header of drafts_C2.md C2.14; consumed by the
-      consumer-face discharge wave).
+    Dependencies.  Stdlib [QArith], [QArith.Qabs], [QArith.Qminmax];
+      [S01_BaseRing] (selective [NatLe]), [S02_CauchyComplete],
+      [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore],
+      [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real],
+      [GaC2_11_MaxModulusDisk], [GaC2_12_CauchyCoeffEst].
 
     References.  drafts_C2.md C2.14 statement sketch (the
       [pl_strip_point] shape, the [pl_selector_ok] signature, the
-      [grow_bound] / [max_sq] / [strip_member] / [strip_local_exp]
-      carriers); the C2.14 card proposition (the strip indicator
-      principle with the exp(eps z^2) truncation and the explicit
-      (eps,T) management); Titchmarsh Ch.5 the Phragmen-Lindelof
-      principle.
+      carrier names); the C2.14 card proposition; Titchmarsh Ch.5.
 
     Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] / [real_le];
-      the witness pair is a [sigT]; zero assumed constants; the
-      truncation identity and the closure chain close under the
-      global context.  Carrying-form registration: the rectangle
-      maximum-modulus consumption and the (eps,T) selector closure
-      live in [pl_w4_consumer_face] until the mothers land.
+      the order predicates are the Set-sorted [real_lt] /
+      [real_le]; the witness pair is a [sigT]; zero assumed
+      constants; the closure chain closes under the global context.
 
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_14_PhragmenLindelof.v] from the flat
       build directory under the thermal-guard wrapper; the compile
-      gate is deferred until the W-wave mothers land, since the
-      Require header follows the draft canon. *)
+      gate is deferred until the W-wave mothers land. *)
 
 From Stdlib Require Import QArith.QArith.
+(** Notes.  Carrier inventory and gap registration.
+
+    - [sq]: the squared unit; [max_sq]: the tree-carried rational
+      maximum inside it; [strip_member]: the closed-strip membership.
+    - [local_exp_at] / [strip_local_exp]: the local power-series
+      expansion slot (obligation L19).
+    - [r_pow]: the rational-exponent power; [grow_bound]: the
+      one-capped growth carrier (obligation L20); the cap
+      [real_max (real_abs y) real_one] is forced by the positivity
+      premise of the constructive log carrier.
+    - [pl_selector_ok]: the data-level selector criterion (obligation
+      L21); its body is f-free so the certificate face can sample it.
+    - [pl_norm_sq_trunc_eq]: the truncation identity - the squared
+      modulus of f at z equals the squared modulus of the truncated
+      function f z e^{eps z^2} times e^{2 eps (Im z^2 - Re z^2)}.
+    - [pl_w4_consumer_face]: the single explicit GAPASUME carrying
+      premise of this wave (the registered open face).  Its
+      discharge consumes the GaC2_11 rectangle maximum-modulus chain
+      over [0,1] x [-T,T] together with the GaC2_12 coefficient
+      faces, and shrinks monotonically when the mothers land.  The
+      rectangle maximum-modulus consumption and the (eps,T) selector
+      closure live in this carrier until the mothers land; the
+      deferral of the compile gate follows the draft canon Require
+      header.
+    - Named consumables: from [S03_QExp]: [cauchy_real_exp],
+      [cauchy_real_exp_pos], [cauchy_real_exp_zero], [real_abs],
+      [Qhalf_pos]; from [S07_RealSetoidExpLog]:
+      [cauchy_real_exp_plus], [cauchy_real_exp_wd],
+      [real_lt_zero_one], [cw_log], [real_max] and the RealSetoid
+      transfer faces; from [CxRealPairCore] + [CxRealPairExpLog]:
+      the pair carrier, [cdiff], [c_norm_sq_mul], [c_scale]; from
+      [GaC1_Iface_Cx]: the C1-16 modulus identity
+      [gaC1_16_norm_sq_exp]; from [GaC1_Iface_Real]: the C1-06
+      exponential monotonicity [g06_exp_le]. *)
+
 From Stdlib Require Import QArith.Qabs QArith.Qminmax.
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).

@@ -1,46 +1,47 @@
-(* ConstructiveWorld-Main - certificate face of the Phragmen-Lindelof
-   indicator node. *)
-
 (** * GaC2_14_PhragmenLindelof_cert: certificate face of node C2-14.
 
-    Mission.  Certificate face of node C2-14: literal certificates for
-    the decidable skeleton of the selector carriers and Q-level
-    samples.  Bands: (1) the definitional unfold faces of [max_sq],
-    [grow_bound], and [pl_selector_ok] (premise-generic, delta
+    Mission.  Certificate face of node C2-14: literal certificates
+      for the decidable skeleton of the selector carriers and
+      Q-level samples (the band inventory and the honest scope are
+      declared in the Notes block).
+
+    Dependencies.  [GaC2_14_PhragmenLindelof] (the statement face);
+      [S02_CauchyComplete]; [S03_QExp] ([cauchy_real_exp],
+      [real_abs]); [S07_RealSetoidExpLog] ([real_max]);
+      [CxRealPairCore] ([Cx], [cRe], [cIm]); Stdlib [QArith], [List].
+
+    References.  drafts_C2.md C2.14 certificate band; the
+      certificate-face precedent [GaC3_P08_PerronCutoff_cert].
+
+    Constructivity.  Set-sorted boolean and Q identities; zero
+      assumed constants, zero abandoned proofs; the Q bands close
+      with vm_compute, the unfold bands with definitional
+      transparency, all under the global context.
+
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
+      -Q <build dir> "" GaC2_14_PhragmenLindelof_cert.v] from the
+      flat build directory under the thermal-guard wrapper; compile
+      deferred with the statement face. *)
+
+From Stdlib Require Import QArith.QArith QArith.Qabs.
+(** Notes.  Honest scope and band inventory.
+
+    Honest scope: the Real-line inequalities live on the proof faces
+    of [GaC2_14_PhragmenLindelof] with the GAPASUME consumer
+    premise; these literals certify the decidable Q skeleton and the
+    literal corridor, not the Real-line order facts; the compile
+    gate of both faces is deferred until the W-wave mothers land.
+
+    Bands: (1) the definitional unfold faces of [max_sq],
+    [grow_bound] and [pl_selector_ok] (premise-generic, delta
     transparent); (2) the Q-level literal samples of the carrier
     sequences: the squared unit at (3,2), the rational maximum pick
     max(1,2) = 2 at index 7, the truncation algebra sample
     eps * (x^2 - y^2) = (1/4) * ((1/2)^2 - 3^2) = -35/16 at index 6,
     and the edge-factor corridor |exp_partial(3, 1/4) - 1| < 1;
     (3) the composite selector-sample list [zz_pl_selector_samples]
-    (drafts_C2.md C2.14 REPL band), discharged by vm_compute.
-    Honest scope: the Real-line inequalities live on the proof faces
-    of [GaC2_14_PhragmenLindelof] with the GAPASUME consumer premise;
-    these literals certify the decidable Q skeleton and the literal
-    corridor, not the Real-line order facts, and the compile gate of
-    both faces is deferred until the W-wave mothers land.
+    (drafts_C2.md C2.14 REPL band), discharged by vm_compute. *)
 
-    Dependencies.  [GaC2_14_PhragmenLindelof] (the statement face);
-      [S03_QExp] ([cauchy_real_exp], [real_abs]);
-      [S07_RealSetoidExpLog] ([real_max]);
-      [CxRealPairCore] ([Cx], [cRe], [cIm]); Stdlib [QArith], [List].
-
-    References.  drafts_C2.md C2.14 certificate band (the selector
-    samples at three target points times two accuracy tiers, the
-    [zz_pl_selector_samples] REPL face); the certificate-face
-    precedent [GaC3_P08_PerronCutoff_cert].
-
-    Constructivity.  Set-sorted boolean and Q identities; zero
-    assumed constants, zero abandoned proofs; the Q bands close with
-    vm_compute, the unfold bands with definitional transparency, all
-    under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_14_PhragmenLindelof_cert.v] from the
-    flat build directory under the thermal-guard wrapper; compile
-    deferred with the statement face. *)
-
-From Stdlib Require Import QArith.QArith QArith.Qabs.
 From Stdlib Require Import List.
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

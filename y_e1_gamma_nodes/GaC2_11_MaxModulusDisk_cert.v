@@ -1,36 +1,29 @@
-(* ConstructiveWorld-Main - the rational sample certificates of the
-   maximum-modulus growth closed forms. *)
-
-(** * GaC2_11_MaxModulusDisk_cert: gain and radius samples.
-
-    Mission.  Node C2-11 (segment C2, slot W2), certificate piece.
-      The rational-level mirrors of the growth-lemma closed forms and
-      their vm_compute sample points: [cert_tau] (the gain-scale
-      [tau = s0 s1 / (s0 + (R/4) s1)]), [cert_theta] (the adaptive
-      theta factor [tau / (4 sqT r4)]), [cert_rho] (the adaptive
-      radius [theta / (1 + theta) scaled by R/4]), and [cert_gain]
-      (the gain increment [(1/2) rho tau]).  Sample lemmas at the
-      unit instance [s0 = s1 = sqT = R = 1]: [tau = 4/5],
-      [theta = 4/5], [rho = 1/9], [gain = 47/45], the radius
-      modulus face [rho^2 = 1/81], and the radius bound
-      [rho < 1/2].  The chain-walk step-count certificate belongs
-      to the chain interface premise of the node statement piece
-      and is not carried here.
-
-    Dependencies.  Stdlib [QArith.QArith].  Requires
-      [S02_CauchyComplete] ([QeqT], [QltT]) of this development.
-
-    References.  drafts_C2.md C2.11 certificate note (the gain
-      constant and step-bound samples); the closed forms are the
-      rational mirrors of the statement-piece growth direction.
-
-    Constructivity.  All statements are Set-sorted rational
-      decisions ([QeqT], [QltT]); every proof closes by
-      [vm_compute]; zero assumed constants.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_11_MaxModulusDisk_cert.v] from the flat
-      build directory, thermal guard wrapper. *)
+(* ConstructiveWorld-Main, GaC2_11_MaxModulusDisk_cert (node
+   C2-11, segment C2, slot W2, certificate piece): the rational
+   sample certificates of the maximum-modulus growth closed forms.
+   Mission.  The rational-level mirrors of the growth-lemma closed
+     forms and their vm_compute sample points: cert_tau (the
+     gain-scale tau = s0 s1 / (s0 + (R/4) s1)), cert_theta (the
+     adaptive theta factor tau / (4 sqT r4)), cert_rho (the
+     adaptive radius (theta / (1 + theta)) scaled by R/4), and
+     cert_gain (the gain increment (1/2) rho tau).  Sample lemmas
+     at the unit instance s0 = s1 = sqT = R = 1: tau = 4/5,
+     theta = 4/5, rho = 1/9, the gain increment 2/45 (the total
+     gain factor 47/45), the radius modulus face rho^2 = 1/81,
+     and the radius bound rho < 1/2.  The chain-walk step-count
+     certificate belongs to the chain interface premise of the
+     node statement piece and is not carried here.
+   Dependencies.  Stdlib QArith.QArith.  Requires S02_CauchyComplete
+     (QeqT, QltT) of this development.
+   References.  drafts_C2.md C2.11 certificate note (the gain
+     constant and step-bound samples); the closed forms are the
+     rational mirrors of the statement-piece growth direction.
+   Constructivity.  All statements are Set-sorted rational
+     decisions (QeqT, QltT); every proof closes by vm_compute;
+     zero assumed constants.
+   Build.  coqc -native-compiler no -q -Q <certified vo tree> ""
+     -Q <build dir> "" GaC2_11_MaxModulusDisk_cert.v, from the
+     flat build directory, thermal guard wrapper. *)
 
 From Stdlib Require Import QArith.QArith.
 Require Import S02_CauchyComplete.

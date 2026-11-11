@@ -1,66 +1,31 @@
-(* ConstructiveWorld-Main - the Q corridor certificate band of the        *)
-(* Dirichlet test node (the R2 numeric face, vm_compute by design).       *)
+(* ConstructiveWorld-Main - the Q corridor certificate band of the Dirichlet test node. *)
+(** * GaC2_07_DirichletTestAbel_cert: the certificate face of node C2.07.
+    Mission.  The certificate face of node C2.07: the decidable Q sample bands of the draft
+    certificate row (the tail-bound sample corridor at the floor samples sigma0 = 1/2 with N in
+    {10, 100}), in three bands: Band 1 the premise-generic carrier unfold faces ([alt_sign 0],
+    [c_abssum 1], [c_wsum M 0], [eta_part 1], and the two statement carriers [abel_tail] /
+    [eta_conv_uniform] unfolded to their premise-closing functors); Band 2 the Q corridor
+    arithmetic; Band 3 the composite certificate bool list.  The sample arithmetic and the
+    honest scope: the Notes block after the imports.
 
-(** * GaC2_07_DirichletTestAbel_cert: the certificate face of node
-      C2.07.
+    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs], [List].  Requires [S01_BaseRing]
+    (selective [NatLe] import), [S02_CauchyComplete], [CxRealPairCore],
+    [GaC2_01_DirichletPartialSum], [GaC2_02_AbsConvTailBound_a], [GaC2_06_AltMonoFace],
+    and the statement stem [GaC2_07_DirichletTestAbel], all of this development.
 
-    Mission.  The certificate face of node C2.07 (the draft
-    certificate band: the tail-bound sample corridor at the floor
-    samples sigma0 = 1/2 with N in {10, 100}, closed by vm_compute).
-    Two bands.  Band 1: the premise-generic carrier unfold faces -
-    the sign carrier ([alt_sign 0] unfolds to the embedded -1 point),
-    the prefix and window sum carriers ([c_abssum 1], [c_wsum M 0]
-    unfold to the house conditional prefix forms), the eta column
-    ([eta_part 1] unfolds to the sign-times-power term step), and the
-    two statement carriers ([abel_tail], [eta_conv_uniform] unfold to
-    their premise-closing functors).  Band 2: the Q corridor
-    arithmetic.  The squared card-bound replica of the draft
-    certificate row: sq(2 * (N+1)^(-sigma0)) at sigma0 = 1/2 is the
-    rational replica 4 / (N+1), closing at N = 10 to 4/11 and at
-    N = 100 to 4/101 (Qeq_bool, vm_compute).  The sign column
-    pointwise samples at the even index 10 and the odd index 11 (the
-    parity band of the [abssum_alt_pair] faces, vm_compute), and the
-    ten-term sign prefix sum corridor |sum_{n<10} alt_sign n| <= 1
-    (Qle_bool, vm_compute).  Band 3: the composite certificate bool
-    list, discharged by vm_compute.  Honest scope: the Real-line
-    inequalities live on the proof faces of
-    [GaC2_07_DirichletTestAbel] and its registered open rows (the
-    L-C2.02-C triangle supply face, the eta leaf slot); these
-    literals certify the decidable Q skeleton and the unfold faces,
-    not the Real-line order facts, mirroring the C2-16
-    corridor-certificate register (the Q replica band; the
-    Real-line binding rides the Band 1 unfold faces and closes at
-    mother-chain integration).
+    References.  drafts_C2.md C2.07 certificate row (the tail-bound sample band at sigma0 = 1/2,
+    N in {10, 100}); the certificate-face precedents [GaC2_16_ZetaVerticalBound_cert] (the Q corridor
+    register) and [GaC2_14_PhragmenLindelof_cert] (the unfold band register); cards_C2.md C2.07.
 
-    Dependencies.  Stdlib [QArith.QArith].  Requires [S02]
-    ([S02_CauchyComplete], the real carrier names),
-    [CxRealPairCore] ([cRe], [c_norm_sq], the pair carrier),
-    [GaC2_01_DirichletPartialSum] ([NatLe_one_S]),
-    [GaC2_02_AbsConvTailBound_a] ([nat_real_pos]),
-    [GaC2_06_AltMonoFace] ([r_npow_at] the sigma-zero slice, named
-    in the unfold face), and the statement stem
-    [GaC2_07_DirichletTestAbel] ([alt_sign], [eta_sgn_cx],
-    [c_abssum], [c_wsum], [eta_part], [eta_term], [abel_tail],
-    [eta_conv_uniform]), all of this development.
-
-    References.  drafts_C2.md C2.07 certificate row (the tail-bound
-    sample band at sigma0 = 1/2, N in {10, 100}); the certificate
-    face precedent [GaC2_16_ZetaVerticalBound_cert] (the Q corridor
-    register) and [GaC2_14_PhragmenLindelof_cert] (the unfold band
-    register); cards_C2.md C2.07 (the certificate row).
-
-    Constructivity.  Every named construction is carried by [Set];
-    the band statements are bool equations and Q identities at the Q
-    level; zero assumed constants, zero abandoned proofs; the Q bands
-    close with vm_compute, the unfold bands with definitional
-    transparency, all under the global context; the vm_compute word
-    lives here by design (the R2 proof-topology / certificate
+    Constructivity.  Every named construction is carried by [Set]; the band statements are bool
+    equations and Q identities at the Q level; zero assumed constants, zero abandoned proofs; the Q
+    bands close with vm_compute, the unfold bands with definitional transparency, all under the
+    global context (the vm_compute word lives here by design, the R2 proof-topology / certificate
     separation).
 
-    Build.  [coqc -native-compiler no -q -Q <l0_local> "" -Q <build>
-    "" GaC2_07_DirichletTestAbel_cert.v] from the flat build
-    directory, thermal guard wrapper; acceptance runs
-    [50_toolkit/accept_node.py --node C2.07] with the statement face. *)
+    Build.  [coqc -native-compiler no -q -Q <l0_local> "" -Q <build> "" GaC2_07_DirichletTestAbel_cert.v]
+    (flat build directory, thermal guard wrapper); acceptance runs [50_toolkit/accept_node.py --node C2.07]
+    with the statement face [GaC2_07_DirichletTestAbel]. *)
 
 From Stdlib Require Import QArith.QArith QArith.Qabs.
 From Stdlib Require Import List.
@@ -74,6 +39,23 @@ Require Import GaC2_06_AltMonoFace.
 Require Import GaC2_07_DirichletTestAbel.
 
 Local Open Scope Q_scope.
+
+(** Notes.  Band 2 arithmetic: the squared card-bound replica of the draft
+    certificate row, sq(2 * (N+1)^{-sigma0}) at sigma0 = 1/2 is the rational replica
+    4 / (N+1), closing at N = 10 to 4/11 and at N = 100 to 4/101 ([Qeq_bool],
+    vm_compute); the sign column pointwise samples at the even index 10 and the odd
+    index 11 (the parity band of the [abssum_alt_pair] faces, vm_compute); the
+    ten-term sign prefix sum corridor |sum_{n<10} alt_sign n| <= 1 ([Qle_bool],
+    vm_compute).  Band 3 is the composite certificate bool list, discharged by
+    vm_compute.
+
+    Honest scope: the Real-line inequalities live on the proof faces of
+    [GaC2_07_DirichletTestAbel] and its registered open rows (the L-C2.02-C
+    triangle supply face, the eta leaf slot); these literals certify the decidable
+    Q skeleton and the unfold faces, not the Real-line order facts, mirroring the
+    C2-16 corridor-certificate register (the Q replica band; the Real-line binding
+    rides the Band 1 unfold faces and closes at mother-chain integration). *)
+
 
 (* ==== Band 1: the premise-generic unfold faces ==== *)
 

@@ -1,73 +1,33 @@
-(* ConstructiveWorld-Main - the maximum-modulus disk statements: the
-   explicit growth direction and the pointwise converse face. *)
+(* ConstructiveWorld-Main - the maximum-modulus disk statements: the explicit growth
+   direction and the pointwise converse face. *)
 
-(** * GaC2_11_MaxModulusDisk: maximum modulus on a disk, power-series
-      growth route without integration or compactness.
+(** * GaC2_11_MaxModulusDisk: maximum modulus on a disk, power-series growth route without
+      integration or compactness.
 
-    Mission.  Node C2-11 (segment C2, slot W2), statement piece.  The
-      carrier [local_exp_disk] packs, at every point of the closed
-      disk, a local first-order expansion of [f] with an explicit
-      quadratic remainder control; [deriv1] projects the packed
-      first-order coefficient.  The two statements:
-      [growth_lemma] - given [f z0] and the first-order coefficient
-      [a1] both explicitly bounded away from zero, an explicit
-      radius [rho] (at most half of [R], chosen adaptively against
-      the packed remainder scale) and an explicit direction witness
-      [w] with [c_norm_sq w = rho * rho] such that the squared
-      modulus of [f] at [z0 + w] dominates the closed form
-      [(|f z0| + rho * tau)^2] with
-      [tau = |f z0| |a1| / (|f z0| + (R/4) |a1|)]; and
-      [max_modulus_pointwise] - any interior point value is bounded
-      by the boundary bound up to the squared margin.  Two named
-      interface premises are carried explicitly (honest interface
-      disclosure, both Set-carried): [Hrevtri], the reverse
-      triangle of the complex norm in squared-carrier data (the
-      pending Cx-norm geometry machine), and [Hgrow_chain], the
-      explicit chain-walk contract stated against the requested
-      margin (the pending segment-chain machine; its discharge is
-      the walk with explicit step count and gain product).
-
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing] (selective [NatLe] import), [S02_CauchyComplete],
-      [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore],
-      [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real]
-      (C1-04 rational bridge, C1-05 square root faces),
-      [GaC2_01_DirichletPartialSum], and the machine clusters
-      [GaC2_11_MaxModulusDisk_a] through [GaC2_11_MaxModulusDisk_f]
-      of this node (the order, norm, alignment, radius, theta, and
-      bridge kernel faces consumed by the two statements; the
-      direction witness is carried by the [growth_lemma] witness
-      term itself).
-
-    References.  drafts_C2.md C2.11 statement sketch with three
-      registered adaptations: (i) the sketch direction of modulus
-      exactly R/2 is realized as the adaptive radius [rho <= R/2]
-      witnessed jointly with [w], the exact-R/2 form being
-      incompatible with the packed quadratic remainder face; (ii)
-      the sketch gain form with the absolute constant c is realized
-      as the squared closed form
-      [|f z0| + rho |f z0| |a1| / (|f z0| + (R/4)|a1|)] with
-      [rho <= R/2] explicit; (iii) the sketch token [eps_lb] is
-      realized by the tree-native [real_lt real_zero] form whose
-      witness carries the explicit lower-bound pair.  The
-      [local_exp_disk] and [deriv1] carrier shapes are the L14
-      obligation form, subject to the wave-end cross-check.
-      Ahlfors Ch.2 the classical first-order growth direction
-      argument (statement architecture only; no proof object
-      transcribed).
-
-    Constructivity.  Every named construction is carried by [Set];
-      the order predicates are the Set-sorted [real_lt] /
-      [real_le]; the two interface premises are discharged as
-      explicit arguments at the section close (gap-carrier form,
-      monotonically shrinkable); the growth proof propagates all
-      order facts from the strict-positivity premises through
-      monotone faces only; zero assumed constants; every proof
-      closes under the global context.
-
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_11_MaxModulusDisk.v] from the flat
-      build directory, thermal guard wrapper. *)
+    Mission.  Node C2-11 (segment C2, slot W2), statement piece.  Carrier [local_exp_disk]
+      packs a local first-order expansion of [f] with explicit quadratic remainder control at
+      every point of the closed disk; [deriv1] projects the first-order coefficient.  Growth
+      lemma and pointwise maximum-modulus statements (full faces in the Notes block); two
+      named Set-carried interface premises [Hrevtri] / [Hgrow_chain] disclosed there too.
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (selective
+      [NatLe] import), [S02_CauchyComplete], [S03_QExp], [S07_RealSetoidExpLog],
+      [CxRealPairCore], [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real] (C1-04
+      rational bridge, C1-05 square root faces), [GaC2_01_DirichletPartialSum], and the
+      machine clusters [GaC2_11_MaxModulusDisk_a] through [GaC2_11_MaxModulusDisk_f] of this
+      node (order, norm, alignment, radius, theta, and bridge kernel faces consumed by the
+      two statements).
+    References.  drafts_C2.md C2.11 statement sketch, three registered adaptations (i)-(iii)
+      - adaptive radius [rho <= R/2] witnessed jointly with [w] for the sketch exact-R/2
+      direction, squared closed form for the sketch absolute constant c, tree-native
+      [real_lt real_zero] for the sketch token [eps_lb] (full clauses in the Notes block);
+      Ahlfors Ch.2, statement architecture only.
+    Constructivity.  Every named construction is carried by [Set]; the order predicates are
+      the Set-sorted [real_lt] / [real_le]; the interface premises are discharged as explicit
+      arguments at the section close (gap-carrier form, monotonically shrinkable); order
+      facts propagate from strict-positivity premises through monotone faces only; zero
+      assumed constants; every proof closes under the global context.
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> ""
+      GaC2_11_MaxModulusDisk.v] from the flat build directory, thermal guard wrapper. *)
 
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).
@@ -87,6 +47,39 @@ Require Import GaC2_11_MaxModulusDisk_e.
 Require Import GaC2_11_MaxModulusDisk_f.
 From Stdlib Require Import QArith.QArith.
 From Stdlib Require Import Lia.
+
+(* Notes.  Disclosure text continued from the header.
+
+    Statement faces.  [growth_lemma] - given [f z0] and the first-order coefficient [a1]
+      both explicitly bounded away from zero, an explicit radius [rho] (at most half of
+      [R], chosen adaptively against the packed remainder scale) and an explicit direction
+      witness [w] with [c_norm_sq w = rho * rho] such that the squared modulus of [f] at
+      [z0 + w] dominates the closed form [(|f z0| + rho * tau)^2] with
+      [tau = |f z0| |a1| / (|f z0| + (R/4) |a1|)].  [max_modulus_pointwise] - any interior
+      point value is bounded by the boundary bound up to the squared margin.
+
+    Honest interface disclosure (both premises Set-carried): [Hrevtri], the reverse
+      triangle of the complex norm in squared-carrier data (the pending Cx-norm geometry
+      machine), and [Hgrow_chain], the explicit chain-walk contract stated against the
+      requested margin (the pending segment-chain machine; its discharge is the walk with
+      explicit step count and gain product).
+
+    Registered adaptations of the drafts_C2.md C2.11 statement sketch: (i) the sketch
+      direction of modulus exactly R/2 is realized as the adaptive radius [rho <= R/2]
+      witnessed jointly with [w], the exact-R/2 form being incompatible with the packed
+      quadratic remainder face; (ii) the sketch gain form with the absolute constant c is
+      realized as the squared closed form [|f z0| + rho |f z0| |a1| / (|f z0| + (R/4)|a1|)]
+      with [rho <= R/2] explicit; (iii) the sketch token [eps_lb] is realized by the
+      tree-native [real_lt real_zero] form whose witness carries the explicit lower-bound
+      pair.
+
+    Carrier-shape obligation: the [local_exp_disk] and [deriv1] carrier shapes are the L14
+      obligation form, subject to the wave-end cross-check; the direction witness is
+      carried by the [growth_lemma] witness term itself.
+
+    Reference.  Ahlfors Ch.2, the classical first-order growth direction argument
+      (statement architecture only; no proof object transcribed). *)
+
 
 (* Section 1. The disk carriers. *)
 

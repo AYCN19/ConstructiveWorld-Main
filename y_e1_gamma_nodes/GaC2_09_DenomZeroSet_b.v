@@ -1,60 +1,53 @@
-(* ConstructiveWorld-Main - the pi carrier, logarithm constant, and
-   pi-window faces of the denominator zero set. *)
-
-(** * GaC2_09_DenomZeroSet_b: pi carrier, lattice exponential, and the
-      pi-window pin.
-
+(** * GaC2_09_DenomZeroSet_b - pi carrier, lattice exponential, and
+      the pi-window pin of the denominator zero set.
     Mission.  Node C2-09 (segment C2, slot W1), machine piece.  The
-      pi carrier [d09_pi_times]/[d09_two_pi] with the integer-multiple
-      faces [d09_two_pi_zero]/[d09_two_pi_add]/[d09_two_pi_opp]/
-      [d09_two_pi_one_two_pi_R], the lattice exponential face
-      [d09_exp_i_two_pi_Z] (c_exp of (0, two pi k) is c_one, by a
-      nat induction through [c_exp_plus] and the conjugation face
-      [c_exp_conj]), the pi shift [d09_sin_pi_shift]
-      (sin(pi + x) == - sin x through [rs_add_sin]), the pi-window
-      pin [d09_window_pin] (cos d == 1 and sin d == 0 with
-      |d| < pi + 1/4 force d == 0), the logarithm constant
-      [d09_ln2], the power carrier [two_pow_1ms] and denominator
-      [d09_denom] with the zero-set faces
-      [d09_c_plus_one_opp_eq_zero]/[d09_carrier_norm], the pi bound
-      faces [d09_pi_R_eq_geom]/[d09_two_pi_pos]/
-      [d09_pi_R_lt_ten_thirds], the inverse constant
-      [d09_inv_two_pi] with its round trip [d09_inv_two_pi_mult],
-      and the rational floor bounds [d09_floor_bounds].
-
-    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs],
-      [QArith.Qring], [ZArith], [QArith.Qround] ([Qfloor_le],
-      [Qlt_floor]), [Setoid], [Morphisms], [Arith.Arith], [Lia].
-      Requires [S01_BaseRing] (selective [NatLe]/[And] import),
-      [S02_CauchyComplete] ([real_weak_trich]), [S03_QExp],
-      [S07_RealSetoidExpLog], [S10_KVQuantTrig] ([rs_add_sin],
-      [real_sin_opp], [real_sin_pos_lt_two],
-      [real_pi_geom_gt_three], [real_pi_geom_lt_ten_thirds]),
-      [CxRealPairCore], [CxRealPairExpLog] ([c_exp_plus],
-      [c_exp_conj]), [GaC1_Iface_Cx] ([pi_R], [two_pi_R],
-      [gaC1_17_sin_pi], [gaC1_17_cos_pi], [gaC1_17_cos_two_pi],
-      [gaC1_17_sin_two_pi]), [GaC1_Iface_Real], and the machine
-      cluster [GaC2_09_DenomZeroSet_a] of this node.
-
-    References.  drafts_C2.md C2.09 statement sketch (the L11
-      obligation: the pi carrier pinned to the C1-17 output face
-      [pi_R]; the lattice face realizes the e^(iy) = 1 constructive
-      characterization on the two-pi grid); Bishop-Bridges,
-      Constructive Analysis Ch. 2 (integer part of a real through
-      the Cauchy modulus); the periodicity laws of
-      [GaC1_17_TwoPiPeriod].
-
-    Constructivity.  Every named construction is carried by [Set];
-      the Z-indexed exponential face [d09_exp_i_two_pi_Z] is a [c_eq]
-      statement with the Z case analysis discharged constructively;
-      the window pin runs the weak trichotomy with the explicit
-      pi + 1/4 margin; zero assumed constants; every proof closes
-      under the global context.
-
+      pi carrier [d09_pi_times]/[d09_two_pi] with its integer-multiple
+      faces; the lattice exponential face [d09_exp_i_two_pi_Z] (c_exp
+      of (0, two pi k) is c_one, by a nat induction through
+      [c_exp_plus] and [c_exp_conj]); the pi shift [d09_sin_pi_shift];
+      the pi-window pin [d09_window_pin] (cos d == 1 and sin d == 0
+      with |d| < pi + 1/4 force d == 0); the logarithm constant
+      [d09_ln2]; the power carrier [two_pow_1ms] and denominator
+      [d09_denom] with their zero-set faces; the pi bound faces; the
+      inverse constant [d09_inv_two_pi] with its round trip; the
+      rational floor bounds (full roster in Notes).
+    Dependencies.  Stdlib [QArith.QArith], [QArith.Qabs], [QArith.Qring],
+      [ZArith], [QArith.Qround], [Setoid], [Morphisms], [Arith.Arith],
+      [Lia]; [S01_BaseRing] (selective [NatLe]/[And] import),
+      [S02_CauchyComplete], [S03_QExp], [S07_RealSetoidExpLog],
+      [S10_KVQuantTrig], [CxRealPairCore], [CxRealPairExpLog],
+      [GaC1_Iface_Cx], [GaC1_Iface_Real], [GaC2_09_DenomZeroSet_a]
+      (named faces in Notes).
+    References.  drafts_C2.md C2.09 statement sketch (the L11 obligation:
+      the pi carrier pinned to the C1-17 output face [pi_R]; the lattice
+      face realizes the e^(iy) = 1 constructive characterization on the
+      two-pi grid); Bishop-Bridges Ch. 2; [GaC1_17_TwoPiPeriod] laws.
+    Constructivity.  Every named construction is carried by [Set]; the
+      Z-indexed exponential face and the weak-trichotomy window pin
+      (explicit pi + 1/4 margin) discharge constructively; zero
+      assumed constants; every proof closes under the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_09_DenomZeroSet_b.v] from the flat build
-      directory, thermal guard wrapper. *)
+      -Q <build dir> "" GaC2_09_DenomZeroSet_b.v]; flat build dir, thermal guard wrapper. *)
 Require S01_BaseRing.
+(** Notes.  Full face roster behind the Mission field: the
+    integer-multiple faces [d09_two_pi_zero], [d09_two_pi_add],
+    [d09_two_pi_opp], [d09_two_pi_one_two_pi_R]; the pi shift
+    [d09_sin_pi_shift] (sin(pi + x) == - sin x through [rs_add_sin]);
+    the zero-set faces [d09_c_plus_one_opp_eq_zero] and
+    [d09_carrier_norm]; the pi bound faces [d09_pi_R_eq_geom],
+    [d09_two_pi_pos], [d09_pi_R_lt_ten_thirds]; the lattice
+    exponential family runs [d09_exp_i_two_pi_zero],
+    [d09_exp_i_two_pi_one], [d09_exp_i_two_pi_nat],
+    [d09_exp_i_two_pi_Z].  Named consumed faces behind the
+    Dependencies field: [QArith.Qround] supplies [Qfloor_le] and
+    [Qlt_floor]; [S10_KVQuantTrig] supplies [rs_add_sin],
+    [real_sin_opp], [real_sin_pos_lt_two], [real_pi_geom_gt_three],
+    [real_pi_geom_lt_ten_thirds]; [CxRealPairExpLog] supplies
+    [c_exp_plus] and [c_exp_conj]; [GaC1_Iface_Cx] supplies [pi_R],
+    [two_pi_R], [gaC1_17_sin_pi], [gaC1_17_cos_pi],
+    [gaC1_17_cos_two_pi], [gaC1_17_sin_two_pi].  References
+    overflow: Bishop-Bridges, Constructive Analysis Ch. 2 (integer
+    part of a real through the Cauchy modulus). *)
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop, And).
 Require Import S02_CauchyComplete.
 Require Import S03_QExp.

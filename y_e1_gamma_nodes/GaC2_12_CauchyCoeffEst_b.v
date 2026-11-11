@@ -1,54 +1,30 @@
-(* ConstructiveWorld-Main - the Cauchy-coefficient algebra kit: the
-   pure algebra faces and the cancellation lemma of the quotient
-   machine. *)
-
+(* ConstructiveWorld-Main - the Cauchy-coefficient algebra kit: the pure algebra faces and the cancellation lemma of the quotient machine. *)
 (** * GaC2_12_CauchyCoeffEst_b: the Cauchy-coefficient algebra kit.
 
-    Mission.  Node C2-12 machine cluster, piece b.  Casts the pure
-      algebra faces consumed by the difference-quotient machine:
-      [gaC12_shift_eq] (the punctured-disk shift identity
-      (z0+w)-z0 = w), [gaC12_scale_plus] and [gaC12_scale_one] (the
-      complex-scale distributivity and unit faces), [gaC12_conj_wd]
-      (conjugate well-definedness along [c_eq]), and
-      [gaC12_quot_ringC] (the two-term recombination ring face
-      folding the first-order term into the conjugate-carried
-      remainder).  Also casts the cancellation lemma
-      [gaC12_cauchy_cancel]: with [s] positive and [K*s = 1], the
-      five-factor product (s*T2)*((K*K)*s) equals [T2] - the
-      account by which the squared-modulus chain of the quotient
-      estimate collapses onto [T2] itself.  Set-carried throughout;
-      zero Sections.
+    Mission.  Node C2-12 machine cluster, piece b.  Casts the pure algebra faces consumed by the difference-quotient machine: [gaC12_shift_eq]
+      (the punctured-disk shift identity (z0+w)-z0 = w), [gaC12_scale_plus] and [gaC12_scale_one] (the complex-scale distributivity and unit
+      faces), [gaC12_conj_wd] (conjugate well-definedness along [c_eq]), and [gaC12_quot_ringC] (the two-term recombination ring face folding
+      the first-order term into the conjugate-carried remainder).  Also casts the cancellation lemma [gaC12_cauchy_cancel]: with [s] positive
+      and K*s = 1, the five-factor product (s*T2)*((K*K)*s) equals [T2] - the account by which the squared-modulus chain of the quotient
+      estimate collapses onto [T2] itself.  Set-carried throughout; zero Sections.
 
-    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires
-      [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
-      [S07_RealSetoidExpLog] (the Setoid compatibility and order
-      faces), [CxRealPairCore], [CxRealPairExpLog],
-      [GaC1_Iface_Cx], [GaC1_Iface_Real], and the machine cluster
-      [GaC2_11_MaxModulusDisk_a] (the [mm_*] algebra kit: the unit
-      face [mm_mult_one_l] is consumed by [gaC12_cauchy_cancel]).
+    Dependencies.  Stdlib [QArith.QArith], [Lia].  Requires [S01_BaseRing] (Require, not Import), [S02_CauchyComplete], [S03_QExp],
+      [S07_RealSetoidExpLog] (the Setoid compatibility and order faces), [CxRealPairCore], [CxRealPairExpLog], [GaC1_Iface_Cx],
+      [GaC1_Iface_Real], [GaC2_11_MaxModulusDisk_a] (the [mm_*] algebra kit: the unit face [mm_mult_one_l] is consumed by
+      [gaC12_cauchy_cancel]), and [GaC2_12_CauchyCoeffEst_a].
 
-    References.  drafts_C2.md C2.12 card (the difference-quotient
-      route: g = (f - f(z0))/(z - z0) is disk-expandable with
-      g(z0) = f'(z0), and the circle bound 2M/R is pushed through
-      C2-11) and the GaC2_12 seat forensics registered in SOP
-      section 2 (C2-11 L14 packs only a0/a1/Tmaj; the
-      difference-quotient expandability needs second-order data,
-      which the Tmaj quadratic face supplies).  Ahlfors Ch.2 the
-      classical quotient argument (statement architecture only; no
-      proof object transcribed).
+    References.  drafts_C2.md C2.12 card (the difference-quotient route: g = (f - f(z0))/(z - z0) is disk-expandable with g(z0) = f'(z0),
+      and the circle bound 2M/R is pushed through C2-11) and the C2-11 interface constraint: the C2-11 L14 expansion packs only a0/a1/Tmaj,
+      so difference-quotient expandability needs second-order data, which the Tmaj quadratic face supplies.  Ahlfors Ch.2 the classical
+      quotient argument (statement architecture only; no proof object transcribed).
 
-    Constructivity.  All statements are Set-sorted; the ring faces
-      are coordinate-level polynomial identities proven by
-      [real_eq_of_zero_diff] plus [ring] at the rational-point
-      level, the same style as the [mm_*] cluster; the order faces
-      propagate through monotone faces only; no Section wrappers, no
-      premise slots, zero assumed constants, zero admitted goals;
-      every proof closes under the global context.
+    Constructivity.  All statements are Set-sorted; the ring faces are coordinate-level polynomial identities proven by
+      [real_eq_of_zero_diff] plus [ring] at the rational-point level, the same style as the [mm_*] cluster; the order faces propagate through
+      monotone faces only; no Section wrappers, no premise slots, zero assumed constants, zero admitted goals; every proof closes under the
+      global context.
 
-    Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
-      -Q <build dir> "" GaC2_12_CauchyCoeffEst_b.v] from the flat
-      build directory; acceptance via 50_toolkit/accept_node.py
-      (six-chain gate), thermal-guard wrapped. *)
+    Build.  [coqc -native-compiler no -q -Q <certified vo tree> "" -Q <build dir> "" GaC2_12_CauchyCoeffEst_b.v] from the flat build
+      directory; acceptance via 50_toolkit/accept_node.py (six-chain gate), thermal-guard wrapped. *)
 
 Require S01_BaseRing.
 Require Import S02_CauchyComplete.

@@ -1,83 +1,33 @@
-(* ConstructiveWorld-Main - the Dirichlet test face of the alternating    *)
-(* block: the Abel window carrier and the eta series statement face.      *)
-
+(* ConstructiveWorld-Main - the Dirichlet test face of the alternating block. *)
 (** * GaC2_07_DirichletTestAbel: node C2-07, the Dirichlet test face.
+    Mission.  Node C2-07 (slot W2): the constructive face of the Dirichlet test - the window sum
+    carriers of the Abel partial summation ([c_abssum], [c_wsum]), the sign carrier [alt_sign], the
+    eta column ([eta_term], [eta_part]); the machine cluster closes now; the two named statement
+    faces of the card minted at the statement-carrier form with the proof routes registered
+    (fail-loud): [abel_tail] (the card (1) Abel window bound 2 B a_{M+1} in the squared house form,
+    the section slot discharged as explicit premise arguments) and [eta_conv_uniform] (the card
+    eta-row tail relation, the uniform floor bound 2 (N+1)^{-sigma0}); adaptations and proof-body
+    state: the Notes block after the imports.
 
-    Mission.  Node C2-07 (segment C2, slot W2), the constructive face
-    of the Dirichlet test: the window sum carriers of the Abel partial
-    summation ([c_abssum], [c_wsum]), the sign carrier [alt_sign], the
-    eta column ([eta_term], [eta_part]), the machine cluster closed
-    now ([alt_sign_step], [eta_part_zero], [eta_part_step],
-    [abssum_zero], [wsum_zero_le], [c_of_real_plus_opp],
-    [c_norm_sq_mone_face], [abssum_alt_pair], [c_norm_sq_zero_le_one],
-    [r_neg_one_mult_l], [eta_sgn_bounded_pair] (the card B=1 supply
-    row, the parity-pair form), [eta_term_real_axis],
-    [abel_tri_pair_step]), and the two named statement faces of the
-    card, minted at the statement-carrier form with the proof routes
-    registered (fail-loud): [abel_tail] (the card (1) Abel window
-    bound 2 B a_{M+1} in the squared house form, the section slot
-    discharged as explicit premise arguments, the C2-17 house
-    convention) and [eta_conv_uniform] (the card eta-row tail
-    relation with the uniform floor bound 2 (N+1)^(-sigma0), the eta
-    value entering as the explicit premise argument).
-    Registered adaptations over the sketch (drafts_C2.md C2.07):
-    (i) the Section slot discharged as explicit premise arguments;
-    (ii) nat bounds carried by the Set-sorted [NatLe] (the C2-01
-    red-line A ruling); (iii) the sketch window pseudo-form realized
-    on the C2-01 house conditional prefix shape; (iv) the sketch
-    [alt_sign] stdlib slot realized as the explicit parity sign
-    carrier; (v) the to-zero modulus slot minted as the premise
-    carrier [abel_tozero_slot] (the finite window bound does not
-    consume it); (vi) the eta value enters [eta_conv_uniform] as the
-    explicit premise argument: the sketch t-free uniform tail face is
-    registered FALSE on the unbounded imaginary face (stationary-phase
-    census: violation 1.12x at |t| = 30 up to 17.52x at |t| = 5000 on
-    s = 1/2 + i t against the card constant); the discharge row is
-    the real-axis leaf slot (the card's own instantiation lives on
-    the real line, the Leibniz bracketing route).
-    Proof-body state (fail-loud): [abel_tail] consumes the n-fold
-    linear triangle face registered open at L-C2.02-C of the C2-02
-    casting (not L0 stock; the C1-14 face is the two-fold step only,
-    consumed as [abel_tri_pair_step]); the body closes when the
-    supply row lands.  [eta_conv_uniform] closes on the real axis
-    when the leaf slot lands (the completion machine
-    [real_cauchy_complete] is L0 stock; the route consumes the C2-06
-    rows [r_npow_anti] / [r_npow_diff_nonneg]).
+    Dependencies.  Stdlib [QArith.QArith], [Arith.Arith], [Lia].  Requires [S01_BaseRing] (selective
+    [NatLe] import), [S02_CauchyComplete], [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore],
+    [CxRealPairExpLog], [GaC1_Iface_Cx] (the L1 interface), [GaC2_01_DirichletPartialSum],
+    [GaC2_02_AbsConvTailBound_a], [GaC2_06_AltMonoFace]; zero cross-segment requires beyond the L1
+    interface (consumed names: the Notes block).
 
-    Dependencies.  Stdlib [QArith.QArith], [Arith.Arith], [Lia].
-    Requires [S01_BaseRing] (selective [NatLe] import), [S02]
-    (the real carrier and the order algebra), [S03] ([cauchy_real_exp]),
-    [S07] ([real_log], the RealSetoid bundle), [CxRealPairCore],
-    [CxRealPairExpLog], [GaC1_Iface_Cx] (the L1 interface; the C1-14
-    two-fold step consumed in [abel_tri_pair_step]),
-    [GaC2_01_DirichletPartialSum] ([c_powq] discharged signature,
-    [nat_real], [NatLe_one_S], [c_of_real], [c_plus_zero_r]),
-    [GaC2_02_AbsConvTailBound_a] (the algebra leaves [r_le_of_eq],
-    [r_mult_opp_l], [r_opp_invol], [c_of_real_mult_gen],
-    [c_of_real_scale_gen], [c_of_real_wd], [nat_real_pos],
-    [c_norm_sq_wd]), [GaC2_06_AltMonoFace] ([r_npow_at], the card
-    C2-06 premise rows); zero cross-segment requires beyond the L1
-    interface.
+    References.  cards_C2.md C2.07 card; drafts_C2.md C2.07 sketch;
+    gamma_module_spec.md section 3.3 the W2 row; Titchmarsh Ch.1 the Dirichlet
+    test and Abel summation (statement architecture only); Montgomery-Vaughan
+    Ch.1; the stationary-phase numeric census (the Notes block, adaptation (vi)).
 
-    References.  cards_C2.md C2.07 card; drafts_C2.md C2.07 sketch
-    (the adaptations above); gamma_module_spec.md section 3.3 the W2
-    row; Titchmarsh Ch.1 the Dirichlet test and Abel summation
-    (statement architecture only); Montgomery-Vaughan Ch.1; the
-    certificate-face numeric census run of this casting.
+    Constructivity.  Every named construction is carried by [Set]; the order premises are the Set-sorted
+    [real_lt] / [real_le]; the parity conjunction is the Set-sorted [And]; no Section wrapper, no assumed
+    constant, no abandoned proof; the machine cluster proofs close under the global context; the two named
+    faces are well-formed Set statement carriers.
 
-    Constructivity.  Every named construction is carried by [Set];
-    the order premises are the Set-sorted [real_lt] / [real_le]; the
-    parity conjunction is the Set-sorted [And]; no Section wrapper,
-    no assumed constant, no abandoned proof; the machine cluster
-    proofs close under the global context; the two named faces are
-    well-formed Set statement carriers with the routes registered.
-
-    Build.  [coqc -native-compiler no -q -Q <l0_local> "" -Q <build>
-    "" GaC2_07_DirichletTestAbel.v] from the flat build directory,
-    thermal guard wrapper; acceptance runs
-    [50_toolkit/accept_node.py --node C2.07] with the certificate
-    face [GaC2_07_DirichletTestAbel_cert] (Q-sample band). *)
-
+    Build.  [coqc -native-compiler no -q -Q <l0_local> "" -Q <build> "" GaC2_07_DirichletTestAbel.v]
+    (flat build directory, thermal guard wrapper); acceptance runs [50_toolkit/accept_node.py --node C2.07]
+    with the certificate face [GaC2_07_DirichletTestAbel_cert] (Q-sample band). *)
 
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop, And).
@@ -94,6 +44,45 @@ From Stdlib Require Import QArith.QArith.
 From Stdlib Require Import Arith.Arith Lia.
 
 Local Open Scope Q_scope.
+
+(** Notes.  The machine cluster closed now: [alt_sign_step], [eta_part_zero],
+    [eta_part_step], [abssum_zero], [wsum_zero_le], [c_of_real_plus_opp],
+    [c_norm_sq_mone_face], [abssum_alt_pair], [c_norm_sq_zero_le_one],
+    [r_neg_one_mult_l], [eta_sgn_bounded_pair] (the card B=1 supply row, the
+    parity-pair form), [eta_term_real_axis], [abel_tri_pair_step].
+
+    Registered adaptations over the sketch (drafts_C2.md C2.07): (i) the Section
+    slot discharged as explicit premise arguments; (ii) nat bounds carried by the
+    Set-sorted [NatLe] (the C2-01 red-line A ruling); (iii) the sketch window
+    pseudo-form realized on the C2-01 house conditional prefix shape; (iv) the
+    sketch [alt_sign] stdlib slot realized as the explicit parity sign carrier;
+    (v) the to-zero modulus slot minted as the premise carrier [abel_tozero_slot]
+    (the finite window bound does not consume it); (vi) the eta value enters
+    [eta_conv_uniform] as the explicit premise argument: the sketch t-free
+    uniform tail face is registered FALSE on the unbounded imaginary face
+    (stationary-phase census: violation 1.12x at |t| = 30 up to 17.52x at
+    |t| = 5000 on s = 1/2 + i t against the card constant); the discharge row is
+    the real-axis leaf slot (the card's own instantiation lives on the real line,
+    the Leibniz bracketing route).
+
+    Proof-body state (fail-loud): [abel_tail] consumes the n-fold linear triangle
+    face registered open at L-C2.02-C of the C2-02 casting (not L0 stock; the
+    C1-14 face is the two-fold step only, consumed as [abel_tri_pair_step]); the
+    body closes when the supply row lands.  [eta_conv_uniform] closes on the real
+    axis when the leaf slot lands (the completion machine [real_cauchy_complete]
+    is L0 stock; the route consumes the C2-06 rows [r_npow_anti] /
+    [r_npow_diff_nonneg]).
+
+    Dependencies consumed names: [S02] the real carrier and the order algebra;
+    [S03] [cauchy_real_exp]; [S07] [real_log] and the RealSetoid bundle;
+    [GaC1_Iface_Cx] the C1-14 two-fold step consumed in [abel_tri_pair_step];
+    [GaC2_01_DirichletPartialSum] the [c_powq] discharged signature, [nat_real],
+    [NatLe_one_S], [c_of_real], [c_plus_zero_r]; [GaC2_02_AbsConvTailBound_a]
+    the algebra leaves [r_le_of_eq], [r_mult_opp_l], [r_opp_invol],
+    [c_of_real_mult_gen], [c_of_real_scale_gen], [c_of_real_wd], [nat_real_pos],
+    [c_norm_sq_wd]; [GaC2_06_AltMonoFace] [r_npow_at], the card C2-06 premise
+    rows. *)
+
 
 (* Section 1. The sign and window carriers. *)
 

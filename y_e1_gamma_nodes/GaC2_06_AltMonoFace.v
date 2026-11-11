@@ -1,51 +1,32 @@
-(* ConstructiveWorld-Main - the monotone modulus face of the alternating Dirichlet block. *)
-
+(* ConstructiveWorld-Main - the monotone modulus face of the alternating block. *)
 (** * GaC2_06_AltMonoFace: the monotone modulus face of the alternating block.
 
-    Mission.  Node C2-06 (segment C2, slot W1).  The real modulus of the
-    alternating Dirichlet block: the n^{-sigma} term slice [r_npow] of
-    the Dirichlet term carrier [c_powq] (C2.01), its sigma-zero slice
-    [r_npow0] (consumption alias [r_npow_at] for the C2.07 consumer),
-    and the four statements the alternating test consumes:
-    antitonicity ([r_npow_anti]), domination by the sigma-zero slice
-    ([r_npow_tozero]), the explicit sigT convergence modulus
-    ([r_npow0_tendsto], witness M0 = 2, modulus 2^{-sigma0}), and the
-    step-difference nonnegativity ([r_npow_diff_nonneg]).
+    Mission.  Node C2-06 (segment C2, slot W1).  The real modulus of the alternating
+    Dirichlet block: the n^{-sigma} term slice [r_npow] of the Dirichlet term carrier
+    [c_powq] (C2.01), its sigma-zero slice [r_npow0] (consumption alias [r_npow_at]
+    for the C2.07 consumer), and the four statements the alternating test consumes:
+    antitonicity [r_npow_anti], domination by the sigma-zero slice [r_npow_tozero],
+    the explicit sigT convergence modulus [r_npow0_tendsto] (witness M0 = 2, modulus
+    2^{-sigma0}), and the step-difference nonnegativity [r_npow_diff_nonneg].
 
-    Dependencies.  [S01_BaseRing] (selective [NatLe] import), [S02]
-    (order kit), [S03_QExp] ([cauchy_real_exp]),
-    [S07_RealSetoidExpLog] ([cauchy_real_exp_mono],
-    [real_le_mult_compat_weak], [real_le_mult_compat],
-    [real_opp_le_compat], [real_lt_mult_compat], [real_log_one]),
-    [CxRealPairCore] + [CxRealPairExpLog] (pair carrier), [GaC1_Iface_Real]
-    (C1-01 log monotonicity [gaC1_01_log_le_mono] / [gaC1_01_log_lt_mono]),
-    [GaC2_01_DirichletPartialSum] ([c_powq], [c_of_real], [nat_real],
-    [NatLe_one_S]), [GaC2_02_AbsConvTailBound_a] ([r_mult_opp_l],
-    [r_assoc_scale], [c_exp_real], [nat_real_lt], [real_log_wd]);
-    Stdlib [Arith] and [Lia] (nat bookkeeping only).
+    Dependencies.  [S01_BaseRing] (selective [NatLe] import), [S02] (order kit),
+    [S03_QExp], [S07_RealSetoidExpLog], [CxRealPairCore] + [CxRealPairExpLog] (pair
+    carrier), [GaC1_Iface_Real] (C1-01 log monotone faces),
+    [GaC2_01_DirichletPartialSum] ([c_powq], [c_of_real], [nat_real], [NatLe_one_S]),
+    [GaC2_02_AbsConvTailBound_a]; Stdlib [Arith], [Lia] (nat bookkeeping only).
 
-    References.  F8 RiemZeta.lean [summable_riemannZetaSummand] and F3
-    Convergence.lean (statement shapes only); the mathlib Real.rpow
-    monotone chain re-assembled from the C1-01 log monotone output
-    and the S07 exp monotone; drafts_C2.md C2.06 skeleton with three
-    adaptations: (i) the positivity premise is NatLe-1-parametrised,
-    [forall n, NatLe 1 n -> 0 < nat_real n] (unusable at n = 0; the
-    C2.01 rework ruling); (ii) nat bounds are Set-sorted [NatLe];
-    (iii) [r_npow0_tendsto] fixes the free modulus eps0 to
-    2^{-sigma0}, witness M0 = 2.  The bridge [mn_slice_exp_gen]
-    transcribes the C2.02 leaf chain [r_npow_slice] slice-first.
-    A second retrieval pass finds no same-route formalization of the
-    eta continuation (mathlib: theta/Poisson; Isabelle: Hurwitz zeta
-    plus Bernoulli/Euler-Maclaurin; this line: eta over (1 - 2^(1-s)),
-    the Z03 supply face).
+    References.  F8 RiemZeta.lean [summable_riemannZetaSummand] and F3 Convergence.lean
+    (statement shapes only); the mathlib [Real.rpow] monotone chain re-assembled from
+    the C1-01 log monotone output and the S07 exp monotone; drafts_C2.md C2.06 skeleton
+    (the registered adaptations and the retrieval note: the Notes block after the
+    requires).
 
-    Constructivity.  Every named construction is carried by [Set]; the
-    order predicates are the Set-sorted [real_le] / [real_lt]; zero
-    assumed constants, zero abandoned proofs, zero classical choice;
-    every proof closes under the global context.
+    Constructivity.  Every named construction is carried by [Set]; the order predicates
+    are the Set-sorted [real_le] / [real_lt]; zero assumed constants, zero abandoned
+    proofs, zero classical choice; every proof closes under the global context.
 
     Build.  [coqc -native-compiler no -q -Q . "" -Q <boot_src> ""
-    GaC2_06_AltMonoFace.v] from the work directory, thermal guard wrapper. *)
+    GaC2_06_AltMonoFace.v] (work directory, thermal guard wrapper). *)
 
 Require S01_BaseRing.
 (* Selective import: only the Set-sorted nat bound face is consumed;   *)
@@ -60,6 +41,19 @@ Require Import GaC1_Iface_Real.
 Require Import GaC2_01_DirichletPartialSum.
 Require Import GaC2_02_AbsConvTailBound_a.
 From Stdlib Require Import Arith.Arith Lia.
+
+(** Notes.  Registered adaptations over the drafts_C2.md C2.06
+    skeleton: (i) the positivity premise is NatLe-1-parametrised,
+    [forall n, NatLe 1 n -> 0 < nat_real n] (unusable at n = 0; the
+    C2.01 rework ruling); (ii) nat bounds are Set-sorted [NatLe];
+    (iii) [r_npow0_tendsto] fixes the free modulus eps0 to 2^{-sigma0},
+    witness M0 = 2.  The bridge [mn_slice_exp_gen] transcribes the
+    C2.02 leaf chain [r_npow_slice] slice-first.  A second retrieval
+    pass finds no same-route formalization of the eta continuation
+    (mathlib: theta/Poisson; Isabelle: Hurwitz zeta plus
+    Bernoulli/Euler-Maclaurin; this line: eta over (1 - 2^(1-s)), the
+    Z03 supply face). *)
+
 
 (* Weak monotonicity of the exponential: the strict face of S07 plus   *)
 (* the equality branch through the congruence of the exponential.      *)
