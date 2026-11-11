@@ -29,7 +29,8 @@
       over [0,1] x [-T,T] together with the GaC2_12 coefficient
       faces, and shrinks monotonically when the mothers land.
 
-    Dependencies.  Stdlib [QArith].  Requires [S01_BaseRing]
+    Dependencies.  Stdlib [QArith], [QArith.Qabs], [QArith.Qminmax].
+      Requires [S01_BaseRing]
       (selective [NatLe]), [S02_CauchyComplete] (the real carrier,
       [real_eq_of_zero_diff], the pointwise ring faces), [S03_QExp]
       ([cauchy_real_exp], [cauchy_real_exp_pos],
@@ -68,6 +69,7 @@
       Require header follows the draft canon. *)
 
 From Stdlib Require Import QArith.QArith.
+From Stdlib Require Import QArith.Qabs QArith.Qminmax.
 Require S01_BaseRing.
 Import S01_BaseRing (NatLe, NatLe_lift, NatLe_drop).
 Require Import S02_CauchyComplete.
@@ -94,14 +96,18 @@ Proof.
   exists (1#2)%Q. split.
   - exact (Qlt_to_QltT 0%Q (1#2)%Q Qhalf_pos).
   - exists O. intros n Hn.
+    apply Qlt_to_QltT.
     rewrite (real_max_proj (real_abs y) real_one n).
     rewrite (real_abs_proj y n).
+    cbn [projT1 real_zero].
+    assert (Hm0 : forall M : Q, (M - 0)%Q == M)
+      by (intro M; unfold Qminus; ring).
+    rewrite (Hm0 (Qminmax.Qmax (Qabs (projT1 y n)) (projT1 real_one n))).
     cbn [projT1 real_one].
-    apply Qlt_to_QltT.
     apply (Qlt_le_trans (1#2)%Q (1#1)%Q
-             (Qmax (Qabs (projT1 y n)) (1#1)%Q)).
+             (Qminmax.Qmax (Qabs (projT1 y n)) (1#1)%Q)).
     + exact H12.
-    + apply Qle_max_r.
+    + apply Q.le_max_r.
 Qed.
 
 Definition r_pow (rho : Q) (x : Real) (Hx : real_lt real_zero x) : Real :=
@@ -118,7 +124,7 @@ Definition grow_bound (A B : Real) (rho : Q) (y : Real) : Real :=
 (* ---- Section 2: the strip and the local expansion slot. ---- *)
 
 Definition strip_member (z : Cx) : Set :=
-  And (real_le real_zero (cRe z)) (real_le (cRe z) real_one).
+  S01_BaseRing.And (real_le real_zero (cRe z)) (real_le (cRe z) real_one).
 
 Fixpoint cpow (z : Cx) (n : nat) : Cx :=
   match n with
@@ -134,7 +140,7 @@ Fixpoint pl_poly (a : nat -> Cx) (u : Cx) (n : nat) : Cx :=
 
 Definition local_exp_at (f : Cx -> Cx) (z : Cx) : Set :=
   sigT (fun r : Real =>
-    And (real_lt real_zero r)
+    S01_BaseRing.And (real_lt real_zero r)
         (sigT (fun a : nat -> Cx =>
           forall w : Cx, real_lt (c_norm_sq (cdiff w z)) r ->
             forall epsq : Q, QltT 0 epsq ->
@@ -161,10 +167,10 @@ Definition pl_point_factor (eps : Real) (z : Cx) : Real :=
 
 Definition pl_selector_ok (f : Cx -> Cx) (M0 M1 A B : Real) (rho : Q)
            (z : Cx) (eps T : Real) : Set :=
-  And (real_lt (cIm z) T)
-  (And (real_lt (real_opp (cIm z)) T)
-  (And (real_lt real_zero eps)
-  (And (real_lt real_zero T)
+  S01_BaseRing.And (real_lt (cIm z) T)
+  (S01_BaseRing.And (real_lt (real_opp (cIm z)) T)
+  (S01_BaseRing.And (real_lt real_zero eps)
+  (S01_BaseRing.And (real_lt real_zero T)
        (real_le (grow_bound A B rho T) (max_sq M0 M1))))).
 
 (* ---- Section 4: the truncation identity. ---- *)
@@ -226,14 +232,16 @@ Proof.
                _ (real_mult (c_norm_sq (f z))
                             (cauchy_real_exp (real_plus (cRe (c_scale eps (c_mult z z))) (cRe (c_scale eps (c_mult z z))))))).
       + exact (RealSetoid.real_eq_mult_compat
-                 (c_norm_sq (f z)) (c_norm_sq (f z))
+                 (c_norm_sq (f z))
                  (c_norm_sq (c_exp (c_scale eps (c_mult z z))))
+                 (c_norm_sq (f z))
                  (cauchy_real_exp (real_plus (cRe (c_scale eps (c_mult z z))) (cRe (c_scale eps (c_mult z z)))))
                  (real_eq_refl (c_norm_sq (f z)))
                  (gaC1_16_norm_sq_exp (c_scale eps (c_mult z z)))).
       + exact (RealSetoid.real_eq_mult_compat
-                 (c_norm_sq (f z)) (c_norm_sq (f z))
+                 (c_norm_sq (f z))
                  (cauchy_real_exp (real_plus (cRe (c_scale eps (c_mult z z))) (cRe (c_scale eps (c_mult z z)))))
+                 (c_norm_sq (f z))
                  (cauchy_real_exp S)
                  (real_eq_refl (c_norm_sq (f z)))
                  (cauchy_real_exp_wd (real_plus (cRe (c_scale eps (c_mult z z))) (cRe (c_scale eps (c_mult z z)))) S Hre)). }
@@ -257,8 +265,9 @@ Proof.
       apply (real_eq_trans
                _ (real_mult (c_norm_sq (f z)) real_one)).
       * exact (RealSetoid.real_eq_mult_compat
-                 (c_norm_sq (f z)) (c_norm_sq (f z))
+                 (c_norm_sq (f z))
                  (real_mult (cauchy_real_exp S) (cauchy_real_exp S'))
+                 (c_norm_sq (f z))
                  real_one
                  (real_eq_refl (c_norm_sq (f z)))
                  Hinv).
@@ -267,8 +276,9 @@ Proof.
                (cauchy_real_exp S) (cauchy_real_exp S')).
   - exact (RealSetoid.real_eq_mult_compat
              (real_mult (c_norm_sq (f z)) (cauchy_real_exp S))
+             (cauchy_real_exp S')
              (c_norm_sq (c_mult (f z) (c_exp (c_scale eps (c_mult z z)))))
-             (cauchy_real_exp S') (cauchy_real_exp S')
+             (cauchy_real_exp S')
              (real_eq_sym _ _ Hg) (real_eq_refl (cauchy_real_exp S'))).
 Qed.
 
@@ -279,14 +289,14 @@ Definition pl_w4_consumer_face (f : Cx -> Cx) (M0 M1 A B : Real)
   forall (z : Cx) (delta : Real), strip_member z -> real_lt real_zero delta ->
     sigT (fun eps : Real =>
       sigT (fun T : Real =>
-        And (pl_selector_ok f M0 M1 A B rho z eps T)
-        (And (real_le (c_norm_sq (c_mult (f z) (c_exp (pl_trunc_arg eps z))))
+        S01_BaseRing.And (pl_selector_ok f M0 M1 A B rho z eps T)
+        (S01_BaseRing.And (real_le (c_norm_sq (c_mult (f z) (c_exp (pl_trunc_arg eps z))))
                       (real_mult (max_sq M0 M1) (pl_edge_factor eps)))
              (real_le (real_mult (c_norm_sq
                                     (c_mult (f z)
                                             (c_exp (pl_trunc_arg eps z))))
                                  (pl_point_factor eps z))
-                      (real_plus (max_sq M0 M1) (sq delta))))))).
+                      (real_plus (max_sq M0 M1) (sq delta)))))).
 
 Lemma pl_strip_point :
   forall (f : Cx -> Cx) (M0 M1 A B : Real) (rho : Q),
@@ -300,9 +310,9 @@ Lemma pl_strip_point :
   forall (z : Cx) (delta : Real),
   strip_member z -> real_lt real_zero delta ->
   { eps : Real & { T : Real &
-    And (real_lt real_zero eps)
-    (And (real_lt real_zero T)
-    (And (pl_selector_ok f M0 M1 A B rho z eps T)
+    S01_BaseRing.And (real_lt real_zero eps)
+    (S01_BaseRing.And (real_lt real_zero T)
+    (S01_BaseRing.And (pl_selector_ok f M0 M1 A B rho z eps T)
          (real_le (c_norm_sq (f z))
                   (real_plus (max_sq M0 M1) (sq delta))))) } }.
 Proof.

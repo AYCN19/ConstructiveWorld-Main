@@ -25,8 +25,10 @@
       [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
       [S07_RealSetoidExpLog], [CxRealPairCore],
       [CxRealPairExpLog], [GaC1_Iface_Cx], [GaC1_Iface_Real],
-      [GaC2_11_MaxModulusDisk_a] (the [mm_*] algebra kit:
-      [mm_mult_cancel_eq]/[mm_inv_mul_one]/[mm_norm_scale]), this
+      [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b]
+      (the [mm_*] algebra kit: [mm_mult_cancel_eq]/
+      [mm_inv_mul_one] resident in a; [mm_norm_scale] resident
+      in b after the v20 reseat), this
       cluster's pieces a, b and c ([GaC2_12_CauchyCoeffEst_a] for
       the gaC12 prefixes, [GaC2_12_CauchyCoeffEst_b] for
       [gaC12_shift_eq] and the real mult-compat style,
@@ -68,6 +70,7 @@ Require Import CxRealPairExpLog.
 Require Import GaC1_Iface_Cx.
 Require Import GaC1_Iface_Real.
 Require Import GaC2_11_MaxModulusDisk_a.
+Require Import GaC2_11_MaxModulusDisk_b.
 Require Import GaC2_12_CauchyCoeffEst_a.
 Require Import GaC2_12_CauchyCoeffEst_b.
 Require Import GaC2_12_CauchyCoeffEst_c.

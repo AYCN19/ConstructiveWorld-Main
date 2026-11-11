@@ -1,234 +1,536 @@
 {
- "package": "y-e1-gamma-nodes-20261111",
- "base": "main 1755a07 (hy7pc8gfmf-dotcom/ConstructiveWorld-Main)",
- "channel": "sandbox branch (no CI trigger; G-MU-01 precedent)",
+ "package": "y-e1-gamma-nodes-20261112",
  "seat": "AYCN19 (y-E1 main session)",
- "date": "2026-11-11",
- "note": "37 gamma-line node files from D:/ComplexAnalysis/attn/y_e1_work/nodes. gate_state=PASS means six-chain accept_node verdict PASS (lint/gate4/compile/coqchk/print_assumptions/md5_ledger). gate_state=FAIL means file itself green-static but dependency chain not yet closed (C2.12 mother stem casting in flight v21); pending full-chain regate. C2.12-machine-e-review FAIL is a v18 historical red superseded by v19 all-green.",
- "passed": 32,
- "pending_gate": 5,
+ "channel": "fork sandbox branch; no CI trigger; the gamma line is not registered in the Main tree (no GaC files, no order.txt rows)",
+ "gate": "accept_node six-chain (lint/gate4/compile/coqchk/print_assumptions/md5_ledger); verdicts copied from attn/y_e1_work/accept/*.json at push time",
+ "read_this_first": [
+  "A PASS verdict means the file compiles, passes coqchk, and every audited name is closed under the global context. It does NOT by itself mean the node's card statements are proved.",
+  "set_typed_definitions lists every `Definition name ... : Set :=` in a file. Some are ordinary predicates; some are card statements minted as statement carriers (stated, not proved). statement_face_only=true marks files with zero Theorem/Lemma.",
+  "Read by the pushing seat: GaC2_18_ZetaDerivBound.v is a statement face only (r_pos_lower and zeta_deriv_bound are Set-typed carriers; the file has no proof). GaC2_07_DirichletTestAbel.v carries abel_tail and eta_conv_uniform as Set-typed carriers; their bodies are registered open in the file header.",
+  "By census only (not individually read by the pushing seat): GaC2_17_StripVerticalAsm.v has one lemma and Set-typed definitions named zeta_strip_uniform / zeta_strip_cover / zeta_vert_bound_disj.",
+  "GaC2_09_DenomZeroSet.v (bare stem) proves 2 of the 4 roster statements: (a) denom_zero_real_dir and (d) zero_set_membership. (b) denom_zero_imag_char and (c) denom_first_order are open: the real-layer first-order exp-Taylor remainder face they need does not exist in the library.",
+  "GaC2_18 statement-face deviations from the draft, approved by the main session: point premises replaced by a representative function g with a pointwise bond; dist_lb_ok re-expressed as an in-disk denominator lower bound; real_const (2#1) atom fix; one added Require.",
+  "Independent review of this state (v25, eight review lanes) was still running at push time."
+ ],
+ "counts": {
+  "files": 43,
+  "gate_pass": 43,
+  "gate_other": 0,
+  "statement_face_only": 1,
+  "lines": 11435
+ },
  "files": [
   {
    "file": "GaC2_06_AltMonoFace.v",
    "md5": "671a458ce5dadf1ae2662f8c83ceaaba",
-   "gate_state": "PASS",
-   "accept_ref": "C2.06"
+   "lines": 320,
+   "gate_node": "C2.06",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:33",
+   "theorem_count": 12,
+   "set_typed_definitions": [],
+   "statement_face_only": false
+  },
+  {
+   "file": "GaC2_07_DirichletTestAbel.v",
+   "md5": "1d494545d97b0e0cb52120dc512d7862",
+   "lines": 398,
+   "gate_node": "C2.07",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:10",
+   "theorem_count": 13,
+   "set_typed_definitions": [
+    "abel_tozero_slot",
+    "abel_tail",
+    "eta_conv_uniform"
+   ],
+   "statement_face_only": false
+  },
+  {
+   "file": "GaC2_07_DirichletTestAbel_cert.v",
+   "md5": "2b3f3318c868e1918f982168887226a3",
+   "lines": 175,
+   "gate_node": "C2.07",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:10",
+   "theorem_count": 14,
+   "set_typed_definitions": [],
+   "statement_face_only": false
+  },
+  {
+   "file": "GaC2_09_DenomZeroSet.v",
+   "md5": "f058b047af25a52f9033c2821e75f3b5",
+   "lines": 292,
+   "gate_node": "C2.09",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:37:28",
+   "theorem_count": 10,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_09_DenomZeroSet_a.v",
    "md5": "6e5755802a454797069f0aea495cfaac",
-   "gate_state": "PASS",
-   "accept_ref": "C2.09"
+   "lines": 323,
+   "gate_node": "C2.09",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:37:28",
+   "theorem_count": 18,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_09_DenomZeroSet_b.v",
    "md5": "1034809e82ce92731c13850d142b148c",
-   "gate_state": "PASS",
-   "accept_ref": "C2.09"
+   "lines": 400,
+   "gate_node": "C2.09",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:37:28",
+   "theorem_count": 29,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_09_DenomZeroSet_c.v",
    "md5": "7f51881f45dfda8d3a12c644cdd74eb4",
-   "gate_state": "PASS",
-   "accept_ref": "C2.09"
+   "lines": 322,
+   "gate_node": "C2.09",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:37:28",
+   "theorem_count": 18,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_09_DenomZeroSet_d.v",
    "md5": "fd9c078987a820b90f5e53f028941674",
-   "gate_state": "PASS",
-   "accept_ref": "C2.09"
+   "lines": 322,
+   "gate_node": "C2.09",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:37:28",
+   "theorem_count": 25,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_10_EtaContinuation.v",
    "md5": "bb804737395587b26dc340d6950b05e3",
-   "gate_state": "PASS",
-   "accept_ref": "C2.10"
+   "lines": 349,
+   "gate_node": "C2.10",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:53",
+   "theorem_count": 5,
+   "set_typed_definitions": [
+    "d10_closed_disk",
+    "d10_eta_conv",
+    "d10_zeta_conv",
+    "denom_nz",
+    "zeta_tilde_agree",
+    "zeta_tilde_analytic",
+    "zeta_tilde_unif_bound"
+   ],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_10_EtaContinuation_cert.v",
    "md5": "52d293066ac2cb90761762d47fa0614e",
-   "gate_state": "PASS",
-   "accept_ref": "C2.10"
+   "lines": 91,
+   "gate_node": "C2.10",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:53",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk.v",
    "md5": "a216d02a1f5caa2ea6a648053e827f7a",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 399,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 8,
+   "set_typed_definitions": [
+    "closed_disk",
+    "boundary",
+    "boundary_bounded",
+    "local_exp_disk"
+   ],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_a.v",
    "md5": "9d35dff6da105d100bd99634d961100e",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 363,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 17,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_b.v",
    "md5": "246c08a5968a9c985912f15704da3298",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 217,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 13,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_c.v",
    "md5": "fe2a61f7d4bcacc377fb4a608405c32f",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 306,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 9,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_cert.v",
    "md5": "6bf6b2475af3a38672f21d773ab1c0d4",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 76,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_d.v",
    "md5": "b4702677c08dd73df5f5c49f5ea73e4f",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 378,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 10,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_e.v",
    "md5": "7799a7f6ecded47c03dbb22201277baf",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 393,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 7,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_11_MaxModulusDisk_f.v",
    "md5": "42aec903cdec62cfac70ee60a53ec066",
-   "gate_state": "PASS",
-   "accept_ref": "C2.11"
+   "lines": 315,
+   "gate_node": "C2.11",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:01:47",
+   "theorem_count": 3,
+   "set_typed_definitions": [],
+   "statement_face_only": false
+  },
+  {
+   "file": "GaC2_12_CauchyCoeffEst.v",
+   "md5": "34b431997636854ffeef7d891106e552",
+   "lines": 374,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 5,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_12_CauchyCoeffEst_a.v",
    "md5": "387328e695eb6f09de0876e74e5aab7c",
-   "gate_state": "PASS",
-   "accept_ref": "C2.12-machine"
+   "lines": 243,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 10,
+   "set_typed_definitions": [
+    "gaC12_closed_disk",
+    "gaC12_local_exp_seq",
+    "gaC12_local_exp_slots"
+   ],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_12_CauchyCoeffEst_b.v",
    "md5": "b91ad122de7288cad6b2f9034a264e1e",
-   "gate_state": "PASS",
-   "accept_ref": "C2.12-machine"
+   "lines": 173,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_12_CauchyCoeffEst_c.v",
-   "md5": "2beda4504112d182400f1d34d7a3dd10",
-   "gate_state": "PASS",
-   "accept_ref": "C2.12-machine"
+   "md5": "ca394f733dc7d9c4d2c55d8a9bfe2d48",
+   "lines": 399,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 4,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_12_CauchyCoeffEst_d.v",
-   "md5": "4e19840807d4f0e638575fb73c7b9029",
-   "gate_state": "PASS",
-   "accept_ref": "C2.12-machine-review-all"
+   "md5": "6048a939d6e3159aa7b22edde7f8fb76",
+   "lines": 246,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 7,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_12_CauchyCoeffEst_e.v",
-   "md5": "5f898320a752922c61fa487a7c5dcb33",
-   "gate_state": "PASS",
-   "accept_ref": "C2.12-machine-e"
+   "md5": "1c8e435752af31c81412c50991ee206d",
+   "lines": 257,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 2,
+   "set_typed_definitions": [],
+   "statement_face_only": false
+  },
+  {
+   "file": "GaC2_12_CauchyCoeffEst_f.v",
+   "md5": "173149631155b8852699777cc0112563",
+   "lines": 400,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 16,
+   "set_typed_definitions": [],
+   "statement_face_only": false
+  },
+  {
+   "file": "GaC2_12_CauchyCoeffEst_g.v",
+   "md5": "09a81e69edb7b7484264acdc88ecfd0d",
+   "lines": 181,
+   "gate_node": "C2.12",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:17",
+   "theorem_count": 3,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_14_PhragmenLindelof.v",
-   "md5": "3ae51495dda949f0cc8c39fd863e75cf",
-   "gate_state": "FAIL",
-   "accept_ref": "C2.14"
+   "md5": "fb5c3351fa20bb8afeb17cd6f1a738db",
+   "lines": 339,
+   "gate_node": "C2.14",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:09:26",
+   "theorem_count": 5,
+   "set_typed_definitions": [
+    "strip_member",
+    "local_exp_at",
+    "strip_local_exp",
+    "pl_selector_ok",
+    "pl_w4_consumer_face"
+   ],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_14_PhragmenLindelof_cert.v",
-   "md5": "b908267761332722ecca7a723ed65d21",
-   "gate_state": "FAIL",
-   "accept_ref": "C2.14"
+   "md5": "b19c4e1313c215750b48079463217466",
+   "lines": 122,
+   "gate_node": "C2.14",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:09:26",
+   "theorem_count": 8,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_16_ZetaVerticalBound.v",
    "md5": "646fc774a6274bbc1f5331fc338c20e8",
-   "gate_state": "PASS",
-   "accept_ref": "C2.16"
+   "lines": 355,
+   "gate_node": "C2.16",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:17",
+   "theorem_count": 5,
+   "set_typed_definitions": [
+    "zeta_vert_mid",
+    "zeta_vert_near1"
+   ],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_16_ZetaVerticalBound_cert.v",
    "md5": "2f0f2435086956b53ae8b143ed0d0b62",
-   "gate_state": "PASS",
-   "accept_ref": "C2.16"
+   "lines": 154,
+   "gate_node": "C2.16",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:17",
+   "theorem_count": 13,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_17_StripVerticalAsm.v",
-   "md5": "70061672dbbe5fa9c8972aa3d925f020",
-   "gate_state": "FAIL",
-   "accept_ref": "C2.17"
+   "md5": "09fcbf7d065ec8a1e92d08175f2dba8f",
+   "lines": 252,
+   "gate_node": "C2.17",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:25",
+   "theorem_count": 1,
+   "set_typed_definitions": [
+    "zeta_vert_bound_disj",
+    "zeta_strip_uniform",
+    "zeta_strip_cover"
+   ],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_17_StripVerticalAsm_cert.v",
    "md5": "a453e1a3bcb04b472497d5d5cdac0b7b",
-   "gate_state": "PASS",
-   "accept_ref": "C2.17-cert"
+   "lines": 97,
+   "gate_node": "C2.17",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:14:25",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_18_ZetaDerivBound.v",
-   "md5": "d804fb0dc34cf37b73a6f06bb1ba39e7",
-   "gate_state": "FAIL",
-   "accept_ref": "C2.18"
+   "md5": "afff4177794f6195830ef160aab287a3",
+   "lines": 255,
+   "gate_node": "C2.18",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:32:20",
+   "theorem_count": 0,
+   "set_typed_definitions": [
+    "consumer_domain",
+    "disk_in_consumer",
+    "r_pos_lower",
+    "zeta_deriv_bound"
+   ],
+   "statement_face_only": true
   },
   {
    "file": "GaC2_18_ZetaDerivBound_cert.v",
    "md5": "472ef302a3156ee3b205eae34a0d2a44",
-   "gate_state": "FAIL",
-   "accept_ref": "C2.18"
+   "lines": 79,
+   "gate_node": "C2.18",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:32:20",
+   "theorem_count": 5,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC2_Iface_Eta.v",
    "md5": "7afab81775aac0629a35fe70dc3202b2",
-   "gate_state": "PASS",
-   "accept_ref": "C2.IfaceEta"
+   "lines": 89,
+   "gate_node": "C2.IfaceEta",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:07:19",
+   "theorem_count": 0,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_P08_PerronCutoff.v",
    "md5": "200b6fc77a0f042be1e88896a5b11dea",
-   "gate_state": "PASS",
-   "accept_ref": "C3-P08"
+   "lines": 337,
+   "gate_node": "C3-P08",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:11:40",
+   "theorem_count": 12,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_P08_PerronCutoff_b.v",
    "md5": "720f371043ee9854774b1a5110eb02f3",
-   "gate_state": "PASS",
-   "accept_ref": "C3-P08"
+   "lines": 362,
+   "gate_node": "C3-P08",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:11:40",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_P08_PerronCutoff_cert.v",
    "md5": "f5b7c9704099ec3a4a4965e0ce60a725",
-   "gate_state": "PASS",
-   "accept_ref": "C3-P08"
+   "lines": 124,
+   "gate_node": "C3-P08",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:11:40",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_Z03_NonzeroLine.v",
    "md5": "cadff4c42fe6db950f0ec8004476fca1",
-   "gate_state": "PASS",
-   "accept_ref": "C3-Z03"
+   "lines": 334,
+   "gate_node": "C3-Z03",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:12:27",
+   "theorem_count": 6,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_Z03_NonzeroLine_a.v",
    "md5": "581f683ee9e522bec22884fc72d06539",
-   "gate_state": "PASS",
-   "accept_ref": "C3-Z03"
+   "lines": 177,
+   "gate_node": "C3-Z03",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:12:27",
+   "theorem_count": 10,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_Z03_NonzeroLine_b.v",
    "md5": "83fe64a77f1cff161ae0c94de44aea6e",
-   "gate_state": "PASS",
-   "accept_ref": "C3-Z03"
+   "lines": 310,
+   "gate_node": "C3-Z03",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:12:27",
+   "theorem_count": 10,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_Z03_NonzeroLine_cert.v",
    "md5": "536c2dc7761da4868d0d7ceae5b67347",
-   "gate_state": "PASS",
-   "accept_ref": "C3-Z03"
+   "lines": 57,
+   "gate_node": "C3-Z03",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:12:27",
+   "theorem_count": 2,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   },
   {
    "file": "GaC3_Z03_NonzeroLine_race.v",
    "md5": "d19c0df4e2d5032c802dcca6ed76b375",
-   "gate_state": "PASS",
-   "accept_ref": "C3-Z03"
+   "lines": 280,
+   "gate_node": "C3-Z03",
+   "gate_verdict": "PASS",
+   "gate_time": "2026-11-12T04:12:27",
+   "theorem_count": 5,
+   "set_typed_definitions": [],
+   "statement_face_only": false
   }
  ]
 }

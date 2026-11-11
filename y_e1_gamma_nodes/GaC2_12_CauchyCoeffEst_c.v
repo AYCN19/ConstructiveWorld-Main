@@ -27,11 +27,13 @@
       [S07_RealSetoidExpLog] (the Setoid compatibility and order
       faces), [CxRealPairCore], [CxRealPairExpLog]
       ([c_plus_congr]/[c_opp_congr]/[c_mult_congr]),
-      [GaC1_Iface_Cx], [GaC1_Iface_Real], the machine cluster
-      [GaC2_11_MaxModulusDisk_a] (the [mm_*] algebra kit:
-      [mm_norm_wd]/[mm_norm_scale]/[mm_c_mult_scale]/
-      [mm_c_scale_scale]/[mm_c_scale_wd]/[mm_c_eq_scale_wd]/
-      [mm_inv_mul_one]/[mm_mult_one_l]), this cluster's pieces a
+      [GaC1_Iface_Cx], [GaC1_Iface_Real], the machine clusters
+      [GaC2_11_MaxModulusDisk_a] and [GaC2_11_MaxModulusDisk_b]
+      (the [mm_*] algebra kit: [mm_inv_mul_one]/[mm_mult_one_l]
+      resident in a; [mm_norm_wd]/[mm_norm_scale]/
+      [mm_c_mult_scale]/[mm_c_scale_scale]/[mm_c_scale_wd]/
+      [mm_c_eq_scale_wd] resident in b after the v20 reseat),
+      this cluster's pieces a
       and b ([GaC2_12_CauchyCoeffEst_a] for the gaC12 algebra
       prefixes, [GaC2_12_CauchyCoeffEst_b] for the algebra faces
       and [gaC12_cauchy_cancel]).
@@ -70,6 +72,7 @@ Require Import CxRealPairExpLog.
 Require Import GaC1_Iface_Cx.
 Require Import GaC1_Iface_Real.
 Require Import GaC2_11_MaxModulusDisk_a.
+Require Import GaC2_11_MaxModulusDisk_b.
 Require Import GaC2_12_CauchyCoeffEst_a.
 Require Import GaC2_12_CauchyCoeffEst_b.
 From Stdlib Require Import QArith.QArith.

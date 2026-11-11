@@ -85,15 +85,26 @@
     dependency stems [GaC2_07_DirichletTestAbel] (the uniform-tail
     face), [GaC2_10_EtaContinuation] (the eta carrier [zeta_tilde]
     and [denom_nz], the alignment targets),
-    [GaC2_16_ZetaVerticalBound] (the three-band disjunction
-    [zeta_vert_bound_disj], the alignment target).  Header note: the
-    draft Require header of drafts_C2.md C2.17 named S02, the two
-    born pair carriers and the three stems; this face adds
+    [GaC2_16_ZetaVerticalBound] (the band carriers [zeta_vert_mid] /
+    [zeta_vert_near1], the alignment target),
+    [GaC2_02_AbsConvTailBound_a] ([nat_real_pos], threading the C2-16
+    discharged Hnpos slot; the one-line Require seam of the
+    mother-chain integration, the Fix-R registered form).  Header
+    note: the draft Require header of drafts_C2.md C2.17 named S02,
+    the two born pair carriers and the three stems; this face adds
     [S03_QExp] and [S07_RealSetoidExpLog] for the power, inverse and
     log carrier block (the registered addition, the C2-18 same-shape
     header move).  The C2-09 mother stays out of this Require face
     per the work order (the in-flight mother is not a dependency of
-    this node's wave row).
+    this node's wave row).  Mother-chain integration note (this
+    casting): the consumption faces re-aligned to the landed mother
+    signatures - [denom_nz eps_lb s] / [zeta_tilde eps_lb s Hep Hd
+    Heta] with the eta-value premise slot [d10_eta_conv] carried
+    explicitly (the C2-10 registered re-alignment language), and the
+    sketch disjunction row [zeta_vert_bound_disj] minted here per the
+    draft L-obligation on the actual C2-16 band carriers (the two
+    branch witness bundles; the near-one band stays the C2-16 (c)
+    face, never re-proved).
 
     References.  drafts_C2.md C2.17 (sketch one the precedent card
     with the two loud absorption boundaries, sketch two the statement
@@ -130,6 +141,7 @@ Require Import CxRealPairExpLog.
 Require Import GaC2_07_DirichletTestAbel.
 Require Import GaC2_10_EtaContinuation.
 Require Import GaC2_16_ZetaVerticalBound.
+Require Import GaC2_02_AbsConvTailBound_a.
 
 From Stdlib Require Import QArith.QArith.
 
@@ -168,6 +180,41 @@ Definition sq (x : Real) : Real := real_mult x x.
 (* face).                                                                *)
 Definition c_scale' (a x : Real) : Real := real_mult a x.
 
+(* The C2-16 band consumption carrier (the sketch disjunction row: the   *)
+(* draft L-obligation discharged here on the actual C2-16 face).  Two    *)
+(* branches - the (b) mid band and the (c) near-one window band - each   *)
+(* carrying its band witness bundle inside the branch (the C2-10         *)
+(* compound-existence precedent); the (a) band enters through this       *)
+(* node's own uniform face.                                              *)
+Definition zeta_vert_bound_disj (s : Cx) : Set :=
+  sigT (fun b : bool =>
+    match b with
+    | true =>
+        sigT (fun t : Real =>
+          sigT (fun Ht2 : real_le (real_const (2#1)) t =>
+            sigT (fun Ht1 : real_lt real_one t =>
+              sigT (fun Hlogpos : real_lt real_zero (log_t t Ht1) =>
+                sigT (fun C1 : Real =>
+                  sigT (fun Hs1 : real_le real_one (cRe s) =>
+                    sigT (fun Hs2 : real_le (cRe s) (real_const (2#1)) =>
+                      zeta_vert_mid nat_real_pos t Ht2 Ht1 Hlogpos C1 s
+                        Hs1 Hs2)))))))
+    | false =>
+        sigT (fun t : Real =>
+          sigT (fun Ht1 : real_lt real_one t =>
+            sigT (fun Hlogpos : real_lt real_zero (log_t t Ht1) =>
+              sigT (fun c_win : Real =>
+                sigT (fun C2 : Real =>
+                  sigT (fun Hwin : real_le
+                          (real_plus real_one
+                             (real_opp (c_scale' c_win
+                                (real_inv_pos (log_t t Ht1) Hlogpos))))
+                          (cRe s) =>
+                    sigT (fun Hslt : real_lt (cRe s) real_one =>
+                      zeta_vert_near1 nat_real_pos t Ht1 Hlogpos c_win C2 s
+                        Hwin Hslt)))))))
+    end).
+
 (* ===================================================================== *)
 (* Section 2. The two named statements (sketch-verbatim names).           *)
 (* ===================================================================== *)
@@ -180,13 +227,14 @@ Definition c_scale' (a x : Real) : Real := real_mult a x.
 (* 3, the C2-08 denominator lower bound 2^{1-sigma} - 1 through the      *)
 (* C2-10 face chain, then the delta cap.                                 *)
 Definition zeta_strip_uniform
-  (delta : Real) (Hd : real_lt real_zero delta)
+  (eps_lb delta : Real) (Hep : real_lt real_zero eps_lb)
+  (Hd : real_lt real_zero delta)
   (Hd1 : real_le delta real_one)
   (Hsub : real_lt real_zero (two_d_sub delta)) : Set :=
-  forall (s : Cx) (Hd2 : denom_nz s),
+  forall (s : Cx) (Heta : d10_eta_conv s) (Hd2 : denom_nz eps_lb s),
     real_le real_zero (cRe s) ->
     real_le (cRe s) (real_plus real_one (real_opp delta)) ->
-    real_le (c_norm_sq (zeta_tilde s Hd2))
+    real_le (c_norm_sq (zeta_tilde eps_lb s Hep Hd2 Heta))
             (sq (c_scale' (real_const (2#1)) (c_invq (two_d_sub delta) Hsub))).
 
 (* Statement carrier of [zeta_strip_cover]: the (c) consumer-domain      *)
