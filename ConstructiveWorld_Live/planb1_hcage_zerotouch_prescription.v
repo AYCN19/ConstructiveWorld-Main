@@ -292,7 +292,7 @@ Theorem planb_b_mubound_zerotouch :
   (forall (a b p : Z) (q : nat), (1 <= q)%nat ->
     piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
       ((inject_Z (Z.of_nat q) * dval a b
-        + inject_Z (Z.abs b) * dval (Z.of_nat q) (- p)%Z)%Q)) ->
+        + inject_Z (Z.abs b) * dval (- p)%Z (Z.of_nat q))%Q)) ->
   planb_b_hesc17 A B dval ->
   piu_mu_MuBound 17%nat 2%nat dval (35831808 # 1)%Q (1 # 2)%Q.
 Proof.

@@ -160,15 +160,15 @@ Qed.
 (* half-integer span absorbed by bQ <= bQ^2 inside the square).         *)
 Lemma planb_b_rate_c0_E10 :
   forall (dval : Z -> Z -> Q) (p0 : Z) (q0 : nat),
-  (1 <= q0)%nat -> (0 <= dval (Z.of_nat q0) (- p0)%Z)%Q ->
+  (1 <= q0)%nat -> (0 <= dval (- p0)%Z (Z.of_nat q0))%Q ->
   piu_mu_MuBound 17%nat 2%nat dval (35831808 # 1)%Q (1 # 2)%Q ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * (35831808 # 1))%Q)
-    (dval (Z.of_nat q0) (- p0)%Z
+    (dval (- p0)%Z (Z.of_nat q0)
      * Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 10))%Q.
 Proof.
   intros dval p0 q0 Hq0 Hnn Hmb.
   pose proof (Hmb p0 q0 Hq0) as Hm0. destruct Hm0 as [Hm0].
-  remember (dval (Z.of_nat q0) (- p0)%Z) as W eqn:HW in *.
+  remember (dval (- p0)%Z (Z.of_nat q0)) as W eqn:HW in *.
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb in *.
   remember (35831808 # 1)%Q as kq eqn:HKq in *.
   assert (Hbne : ~ (bQ == 0)%Q).
@@ -310,9 +310,9 @@ Lemma planb_b_rate_dist_slot11 :
   S02_CauchyComplete.QeqT (inject_Z (Z.of_nat q0) * r) (inject_Z p0) ->
   (1 <= q0)%nat ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * (35831808 # 1))%Q)
-    (dval (Z.of_nat q0) (- p0)%Z
+    (dval (- p0)%Z (Z.of_nat q0)
      * Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 10))%Q ->
-  S02_CauchyComplete.QleT' (dval (Z.of_nat q0) (- p0)%Z)
+  S02_CauchyComplete.QleT' (dval (- p0)%Z (Z.of_nat q0))
     (Qabs (inject_Z (Z.of_nat q0) * xk - inject_Z p0)) ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * (35831808 # 1))%Q
       / Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 11))%Q
@@ -321,7 +321,7 @@ Proof.
   intros dval r xk p0 q0 Hred Hq0 Hc0 Hx.
   pose proof (S02_CauchyComplete.QleT'_to_Qle _ _ Hc0) as H1.
   pose proof (S02_CauchyComplete.QleT'_to_Qle _ _ Hx) as H2.
-  remember (dval (Z.of_nat q0) (- p0)%Z) as W eqn:HW in *.
+  remember (dval (- p0)%Z (Z.of_nat q0)) as W eqn:HW in *.
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb in *.
   remember (Qpower bQ (Z.of_nat 10)) as B10 eqn:HQ10 in *.
   remember (Qpower bQ (Z.of_nat 11)) as B11 eqn:HQ11 in *.

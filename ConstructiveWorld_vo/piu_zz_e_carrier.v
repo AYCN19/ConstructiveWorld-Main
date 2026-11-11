@@ -467,17 +467,17 @@ Qed.
    first-power inequality c0 <= dval(q0,-p0) * q0^7 (square-root step via
    order-reflecting powers on the positive domain). *)
 Lemma piu_zz_ec_rate_c0 : forall (dv : Z -> Z -> Q) (p0 : Z) (q0 : nat),
-  (1 <= q0)%nat -> (0 <= dv (Z.of_nat q0) (- p0)%Z)%Q ->
+  (1 <= q0)%nat -> (0 <= dv (- p0)%Z (Z.of_nat q0))%Q ->
   piu_mu_MuBound piu_zz_ec_sigma piu_zz_ec_tau dv piu_zz_ec_kappa
     (1 # 2)%Q ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * piu_zz_ec_kappa)%Q)
-    (dv (Z.of_nat q0) (- p0)%Z
+    (dv (- p0)%Z (Z.of_nat q0)
      * Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 7))%Q.
 Proof.
   intros dv p0 q0 Hq0 Hnn Hmb.
   pose proof (Hmb p0 q0 Hq0) as Hm. destruct Hm as [Hm].
   unfold piu_zz_ec_sigma, piu_zz_ec_tau in Hm. cbn [Z.of_nat] in Hm.
-  remember (dv (Z.of_nat q0) (- p0)%Z) as W eqn:HW.
+  remember (dv (- p0)%Z (Z.of_nat q0)) as W eqn:HW.
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb.
   remember (Qpower bQ (Z.of_nat 7)) as B7 eqn:HQ7.
   destruct piu_zz_ec_kappa_pos as [Hk].
@@ -534,9 +534,9 @@ Lemma piu_zz_ec_rate_dist : forall (dv : Z -> Z -> Q) (r : Q) (p0 : Z)
   S02_CauchyComplete.QeqT (inject_Z (Z.of_nat q0) * r) (inject_Z p0) ->
   (1 <= q0)%nat ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * piu_zz_ec_kappa)%Q)
-    (dv (Z.of_nat q0) (- p0)%Z
+    (dv (- p0)%Z (Z.of_nat q0)
      * Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 7))%Q ->
-  S02_CauchyComplete.QleT' (dv (Z.of_nat q0) (- p0)%Z)
+  S02_CauchyComplete.QleT' (dv (- p0)%Z (Z.of_nat q0))
     (Qabs (inject_Z (Z.of_nat q0) * lw0m_xL k - inject_Z p0)) ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * piu_zz_ec_kappa)%Q
           / Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 8))%Q
@@ -545,7 +545,7 @@ Proof.
   intros dv r p0 q0 k Hred Hq0 Hc0 Hx.
   pose proof (S02_CauchyComplete.QleT'_to_Qle _ _ Hc0) as H1.
   pose proof (S02_CauchyComplete.QleT'_to_Qle _ _ Hx) as H2.
-  remember (dv (Z.of_nat q0) (- p0)%Z) as W eqn:HW.
+  remember (dv (- p0)%Z (Z.of_nat q0)) as W eqn:HW.
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb.
   remember (Qpower bQ (Z.of_nat 7)) as B7 eqn:HQ7.
   remember (Qpower bQ (Z.of_nat 8)) as B8 eqn:HQ8.
@@ -622,7 +622,7 @@ Hypothesis Hp : forall a b : Z, piu_mu_QleT 0 (dv a b).
 Hypothesis Htri : forall (a b p : Z) (q : nat), (1 <= q)%nat ->
   piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
     ((inject_Z (Z.of_nat q) * dv a b
-      + inject_Z (Z.abs b) * dv (Z.of_nat q) (- p))%Q).
+      + inject_Z (Z.abs b) * dv (- p) (Z.of_nat q))%Q).
 (* coefficient growth at the corrected pinning sigma = 12 *)
 Hypothesis Hcoef : forall n : nat,
   piu_mu_and2
@@ -643,10 +643,10 @@ Hypothesis Hesc : forall (p : Z) (q : nat), (1 <= q)%nat ->
 (* the cage: the carrier magnitude is exponentially bounded for all n *)
 Hypothesis Hcage : forall n : nat,
   S02_CauchyComplete.QleT' (dv (A n) (B n)) (Qpower (13 # 400)%Q (Z.of_nat n)).
-(* the exit mirror: dval(b,-a) is eventually bounded by |b*xL(k)-a| *)
+(* the exit mirror: dval(-a,b) is eventually bounded by |b*xL(k)-a| *)
 Hypothesis Hexit : forall a b : Z, (1 <= b)%Z ->
   sigT (fun K : nat => forall k : nat, (K <= k)%nat ->
-    S02_CauchyComplete.QleT' (dv b (- a)%Z)
+    S02_CauchyComplete.QleT' (dv (- a)%Z b)
       (Qabs (inject_Z b * lw0m_xL k - inject_Z a))).
 
 (* the value face derived from the cage: dval * 2^(tau*n) <= 1 *)
@@ -700,7 +700,7 @@ Proof.
   pose proof (piu_mu_criterion piu_zz_ec_sigma piu_zz_ec_tau dv A B
     piu_zz_ec_kappa piu_zz_ec_tau_ge1 piu_zz_ec_kappa_pos Hp Hcoef
     ec_hval Htri Hesc) as HMBd.
-  pose proof (Hp (Z.of_nat q0) (- p0)%Z) as Hnn0. destruct Hnn0 as [Hnn0].
+  pose proof (Hp (- p0)%Z (Z.of_nat q0)) as Hnn0. destruct Hnn0 as [Hnn0].
   pose proof (piu_zz_ec_rate_c0 dv p0 q0 Hq0 Hnn0 HMBd) as Hc0.
   destruct (Hexit p0 (Z.of_nat q0) ltac:(unfold inject_Z; cbn; lia)) as [K HK].
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb.

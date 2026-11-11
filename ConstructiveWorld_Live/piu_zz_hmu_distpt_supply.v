@@ -188,7 +188,7 @@ Theorem piu_zz_hmu_distpt_supply :
   (forall (a b p : Z) (q : nat), (1 <= q)%nat ->
      piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
        (inject_Z (Z.of_nat q) * dv a b
-         + inject_Z (Z.abs b) * dv (Z.of_nat q) (- p)%Z)) ->
+         + inject_Z (Z.abs b) * dv (- p)%Z (Z.of_nat q))) ->
   (forall n : nat,
      piu_mu_and2
        (piu_mu_ZleT (Z.abs (A n)) (2 ^ Z.of_nat (piu_zz_ec_sigma * n)))
@@ -206,7 +206,7 @@ Theorem piu_zz_hmu_distpt_supply :
      S02_CauchyComplete.QleT' (dv (A n) (B n)) ((13 # 400) ^ Z.of_nat n)) ->
   (forall a b : Z, (1 <= b)%Z ->
      sigT (fun K : nat => forall k : nat, (K <= k)%nat ->
-       S02_CauchyComplete.QleT' (dv b (- a)%Z)
+       S02_CauchyComplete.QleT' (dv (- a)%Z b)
          (Qabs (inject_Z b * lw0m_xL k - inject_Z a)))) ->
   forall q : Q, (0 < q)%Q ->
   sigT (fun ee : Q => And (S02_CauchyComplete.QltT 0 ee)
@@ -227,7 +227,7 @@ Theorem piu_zz_hmu_realcert_of_chain :
   (forall (a b p : Z) (q : nat), (1 <= q)%nat ->
      piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
        (inject_Z (Z.of_nat q) * dv a b
-         + inject_Z (Z.abs b) * dv (Z.of_nat q) (- p)%Z)) ->
+         + inject_Z (Z.abs b) * dv (- p)%Z (Z.of_nat q))) ->
   (forall n : nat,
      piu_mu_and2
        (piu_mu_ZleT (Z.abs (A n)) (2 ^ Z.of_nat (piu_zz_ec_sigma * n)))
@@ -245,7 +245,7 @@ Theorem piu_zz_hmu_realcert_of_chain :
      S02_CauchyComplete.QleT' (dv (A n) (B n)) ((13 # 400) ^ Z.of_nat n)) ->
   (forall a b : Z, (1 <= b)%Z ->
      sigT (fun K : nat => forall k : nat, (K <= k)%nat ->
-       S02_CauchyComplete.QleT' (dv b (- a)%Z)
+       S02_CauchyComplete.QleT' (dv (- a)%Z b)
          (Qabs (inject_Z b * lw0m_xL k - inject_Z a)))) ->
   forall q : Q, (0 < q)%Q ->
   real_lt (real_const (piu1932_ck_alpha piu_zz_c0_criterion 8 q))

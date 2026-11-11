@@ -861,7 +861,7 @@ gcl_full.v#R193-18ca99
 d519a2_cert.v#R193-71f9f2
 u5c_n1_affine_transform.v#R193-6dd37f
 zzm2_qpoly.v#R193-9a4516
-piu_mu_criterion.v#R194-dc5b47
+piu_mu_criterion.v#R194-dce9a2
 piu_zz_constants.v#R194-6cd82e
 piu_zz_gauss_pair.v#R194-0e9d50
 piu_zz_padic_clearing.v#R194-927ee9
@@ -898,7 +898,7 @@ piu_zz_ln_rate_bound.v#R194-e2ad1b
 piu_zz_bridge_real.v#R194-3eafd3
 piu_zz_bridge_rateslot.v#R194-5bf2f4
 piu_zz_mu_assembly.v#R196-12798c
-piu_zz_e_carrier.v#R197-f22b5b
+piu_zz_e_carrier.v#R197-df34f1
 piu1932_uncond_zz.v#R194-61baed
 piu_zz_tau_enclosure_base.v#R194-417fe3
 piu_zz_tau_enclosure_bank1.v#R194-6021ea
@@ -1052,5 +1052,5 @@ piu_zz_s2_headledger.v#R217-a3df0f
 piu_zz_ec_escwin_nescD.v#R218-124f79
 piu_zz_ec_escwin_bracket.v#R219-4951eb
 piu_zz_n2c_sigma_assembly.v#R220-8c1e82
-piu1932_uncond_zz.v#R221-46f5f5
+piu1932_uncond_zz.v#R221-e63556
 UpAblBYUpperTight.v#R212-reland-20261104

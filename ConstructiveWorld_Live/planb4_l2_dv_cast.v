@@ -72,7 +72,7 @@ Proof. intros a b. exact (planb3_dv_hp a b). Qed.
 Lemma l2_dv_htri : forall (a b p : Z) (q : nat), (1 <= q)%nat ->
   piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
     ((inject_Z (Z.of_nat q) * l2_dv a b
-      + inject_Z (Z.abs b) * l2_dv (Z.of_nat q) (- p)%Z)%Q).
+      + inject_Z (Z.abs b) * l2_dv (- p)%Z (Z.of_nat q))%Q).
 Proof. intros a b p q Hq. exact (planb3_dv_htri a b p q Hq). Qed.
 
 (* ================================================================== *)
@@ -89,7 +89,7 @@ Proof. intros a b p q Hq. exact (planb3_dv_htri a b p q Hq). Qed.
 Definition l2_dv_hexit_face : Set :=
   forall (xL : nat -> Q) (a b : Z), (1 <= b)%Z ->
     sigT (fun K : nat => forall k : nat, (K <= k)%nat ->
-      S02_CauchyComplete.QleT' (l2_dv b (- a)%Z)
+      S02_CauchyComplete.QleT' (l2_dv (- a)%Z b)
         (Qabs (inject_Z b * xL k - inject_Z a))).
 
 (* ================================================================== *)
