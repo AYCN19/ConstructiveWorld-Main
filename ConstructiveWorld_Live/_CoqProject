@@ -993,3 +993,8 @@ planb4_u4c3_freezewin_s4.v
 planb4_u4c3_freezewin_s5.v
 planb4_u4c3_freezewin_s2n9.v
 planb4_u5_carrier_align.v
+planb4_u4c3_freezewin_s2n18b.v
+planb4_u4c3_freezewin_s2n19.v
+planb4_u4c3_freezewin_s2n20.v
+planb4_u4c3_freezewin_s2n21.v
+planb4_l3_limbs_discharge.v
