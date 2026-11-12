@@ -7,7 +7,7 @@
 
     Mission.  The per-point cross certificates of the general-n A/B
       assembly at n = 44, 56, 64, in the litdef cross-multiplication
-      form (main-session ruling 20261112 item 3-b): the comparison
+      form (main-session ruling item 3-b): the comparison
       face is [Qeq_bool (exp * L * sign * r_snapshot) (anchor)] with
       the pipeline's internal r/s channel values carried as Z
       literals (the snapshot kb41m_rs_snapshot_20261112.json, md5
@@ -18,11 +18,11 @@
       it still bites the anchor fail-loud.  This shape avoids the
       giant-term reduction of [planb4_abqA n] (machine-level freeze:
       small-term compiles pass, n >= 8 giant-term reductions hang,
-      three seats affected, ruling 20261112).  Provenance (honest
-      registration): rebuilt 2026-11-12; the original package source
+      three seats affected, main-session ruling).  Provenance (honest
+      registration): rebuilt per main-session dispatch; the original package source
       kb41m_asm_rb.json (md5 097fda87c872c75bacbc63c5239940bd) is LOST
       (double zero-hit: git history of both repos + attn-wide find;
-      main-session ruling 20261112 item 3); the values come from the
+      main-session ruling item 3); the values come from the
       KB41m Lemma 3(9) recurrence pipeline (the same recurrence whose
       n = 1..40 window is frozen in planb3_g1_calib) cross-validated
       40/40 against planb3_g1_A/planb3_g1_B in the same production
@@ -86,7 +86,7 @@ Require Import planb4_g1_ab_def.
 (* ruling): their rebuilt values conflict with the independent       *)
 (* Machin recomputation by +825 / +980 bits, and neither candidate   *)
 (* value is declared here.  Small-integer arithmetic only; the       *)
-(* giant-term reduction form is banned (ruling 20261112).  The       *)
+(* giant-term reduction form is banned (per main-session ruling).  The       *)
 (* snapshot is not an expected-value source: a wrong snapshot        *)
 (* computes to false and the compile fails loud.                     *)
 (* ================================================================ *)

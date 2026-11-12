@@ -12,6 +12,11 @@
     envelope planb4_l3_limbs_bundle packages the triple under the
     explicit honest interface form (the piu1932_uncond_zz six-premise
     precedent): an exit witness yields the limb triple.
+    Dependencies.  S02_CauchyComplete; S10_TP3B5; LW0MLicBridge;
+      piu_mu_criterion; planb3_g1_calib; planb4_l2_dv_cast.
+    References.  planb3_g1_g2_design.v:132-137 (the L6 ledger exit slot
+      registration); planb3_g1_calib_cert.v:36 (the frozen nonzero
+      census face mirrored by the cert file).
     Wall registration.  The exit slot is refuted at (a,b) = (100,1):
     |b - a| = 99 while the tree faces squeeze lw0m_xL into [8/3, 52/15]
     (S10 sc_lp_odd_chain / sc_lp_odd_mono / sc_lp_odd_le_s2, with
