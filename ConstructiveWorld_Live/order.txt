@@ -1101,3 +1101,4 @@ planb4_u4c3_freezewin_s2n19.v#R224-g1w033
 planb4_u4c3_freezewin_s2n20.v#R224-g1w034
 planb4_u4c3_freezewin_s2n21.v#R224-g1w035
 planb4_l3_limbs_discharge.v#R223-l3v001
+planb5_u5c3_extwin_cert.v#R224-g1w036
