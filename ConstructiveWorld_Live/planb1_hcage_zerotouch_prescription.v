@@ -296,7 +296,7 @@ Proof.
                     <= Nat.log2 q + 2)%nat) by lia.
     assert (Hmlb : (Nat.log2 q + 1
                     <= 2 * Nat.div2 (Nat.log2 q + 2))%nat) by lia.
-    (* witness form, stated as a hypothesis BEFORE the case split: the     *)
+    (* witness form, stated as a premise BEFORE the case split: the     *)
     (* destruct then resolves the if inside Hnl per branch, so each branch *)
     (* rewrites the witness by Hnl alone - no goal-side cbn (cbn on the    *)
     (* literal-heavy RHS would normalize 2^28 * 3^14 into unary - the      *)
