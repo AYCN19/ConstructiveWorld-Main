@@ -1,0 +1,99 @@
+# probe-ynodes-rocq93-hosted.yml — hosted-runner CI lane for the y-E1 gamma node
+# deposit (y_e1_gamma_nodes/, waves 1-4: 92 .v files, 31 PASS-gated verdicts).
+# Same rationale as probe-rocq93-hosted.yml on the planb5 branch: the upstream
+# furnace cannot checkout fork-origin PR merge refs, and the fork has no
+# self-hosted runner, so this lane runs on a GitHub-hosted ubuntu runner.
+# Scope: coqdep the whole node set, topologically sort (python3), compile every
+# dependency-closure file (y nodes first-class + their ConstructiveWorld_Live
+# deps), and report a per-file rc table. Honest face: gate PASS is not proof of
+# card statements; statement-face-only files compile but prove nothing.
+name: probe y-nodes rocq93 hosted
+on: [push, workflow_dispatch]
+
+concurrency:
+  group: cw-probe-ynodes
+  cancel-in-progress: false
+
+jobs:
+  ynodes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.0
+
+      - name: Install Rocq 9.3.0 (defensive multi-archive)
+        run: |
+          opam repo add rocq-archive https://github.com/rocq-prover/opam || true
+          opam repo add coq-released https://coq.inria.fr/opam-repository || true
+          opam update
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 coq-core.9.3.0 coq-stdlib.9.3.0 || \
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 rocq-stdlib.9.3.0 || \
+          opam install -y coq.9.3.0 || \
+          opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
+          opam exec -- coqc -v
+
+      - name: coqdep + topological build of the y-node closure
+        run: |
+          opam exec -- bash -c '
+            set -e
+            ROOT=$PWD
+            cd y_e1_gamma_nodes
+            ls *.v | sort > /tmp/nodes.txt
+            echo "[y] node files: $(wc -l < /tmp/nodes.txt)"
+            coqdep -Q ../ConstructiveWorld_Live "" -Q . "" $(cat /tmp/nodes.txt) > /tmp/deps.mk 2>/tmp/coqdep.err || { echo "[y] coqdep failed"; cat /tmp/coqdep.err; exit 1; }
+            python3 - <<PYEOF
+import re, os
+deps, tgt_of = {}, {}
+for line in open("/tmp/deps.mk", encoding="utf-8", errors="replace"):
+    m = re.match(r"(.+?)\s*:\s*(.*)", line)
+    if not m:
+        continue
+    tgt = os.path.basename(m.group(1).strip())
+    dv = [os.path.basename(x) for x in m.group(2).split() if x.endswith(".v")]
+    deps.setdefault(tgt, [])
+    tgt_of.setdefault(tgt, m.group(1).strip())
+    for d in dv:
+        deps[tgt].append(d)
+order, state = [], {}
+def visit(n, chain):
+    if n in done or n not in deps:
+        return
+    if n in chain:
+        return  # cycle tolerance
+    chain.add(n)
+    for d in deps[n]:
+        visit(d, chain)
+    chain.discard(n)
+    done.add(n)
+    order.append(n)
+done = set()
+for n in deps:
+    visit(n, set())
+open("/tmp/order.txt", "w").write("\n".join(order))
+print("[y] closure size:", len(order))
+PYEOF
+            pass=0; fail=0
+            : > /tmp/rc_table.txt
+            while IFS= read -r f; do
+              [ -f "$f" ] || f2="../ConstructiveWorld_Live/$f"
+              if [ -f "$f" ]; then p="$f"; elif [ -f "$f2" ]; then p="$f2"; else echo "MISSING-SOURCE $f" | tee -a /tmp/rc_table.txt; fail=$((fail+1)); continue; fi
+              if [ -f "${p%.v}.vo" ]; then echo "SKIP(vo-exists) $p" | tee -a /tmp/rc_table.txt; pass=$((pass+1)); continue; fi
+              echo "[build] $p"
+              if coqc -native-compiler no -q -Q ../ConstructiveWorld_Live "" -Q . "" "$p" > /tmp/last.log 2>&1; then
+                echo "OK $p" | tee -a /tmp/rc_table.txt; pass=$((pass+1))
+              else
+                echo "FAIL $p (see job log tail)" | tee -a /tmp/rc_table.txt; fail=$((fail+1)); tail -30 /tmp/last.log
+              fi
+            done < /tmp/order.txt
+            echo "=== RC TABLE: pass=$pass fail=$fail ==="
+            cat /tmp/rc_table.txt
+            [ "$fail" -eq 0 ] && echo "YNODES-GREEN: full closure built clean on hosted rocq93" || { echo "YNODES-RED: $fail file(s) failed (honest table above)"; exit 1; }
+          '
+
+      - name: Probe stamp
+        if: always()
+        run: echo "y-nodes hosted probe lane done (gate PASS ≠ card-statement proofs; statement-face files compile but prove nothing)"
