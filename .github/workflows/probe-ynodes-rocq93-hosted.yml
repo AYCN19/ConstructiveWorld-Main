@@ -64,7 +64,7 @@ jobs:
                 elif grep -q "Unable to locate library" /tmp/last.log; then
                   deferred=$((deferred+1)); echo "$p" >> /tmp/next.txt
                   mkdir -p /tmp/defer_logs; cp /tmp/last.log "/tmp/defer_logs/p${pass}_$(basename "${p%.v}").log"
-                  echo "DEFER $p :: $(head -3 /tmp/last.log | tr '\n' ' ' | cut -c1-220)"
+                  echo "DEFER $p :: $(head -3 /tmp/last.log | tr "\n" " " | cut -c1-220)"
                 else
                   echo "FAIL $p" | tee -a /tmp/rc_table.txt; tail -20 /tmp/last.log
                 fi
