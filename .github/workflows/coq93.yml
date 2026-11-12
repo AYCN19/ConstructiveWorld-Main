@@ -89,6 +89,7 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 1
+          ref: ${{ github.event_name == 'pull_request' && format('refs/pull/{0}/head', github.event.pull_request.number) || github.sha }}
 
       # ── AX-FORTRESS 防线挂点（20260925 施工单，R131 落树）────────────────────
       # 闸① 毒 token 守卫：pre-build fail-fast，秒级。exit 0 洁净／1 命中／2 树无效——
