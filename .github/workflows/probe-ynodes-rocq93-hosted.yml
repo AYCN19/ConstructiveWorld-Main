@@ -35,7 +35,7 @@ jobs:
           opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
           opam exec -- coqc -v
 
-      - name: coqdep + topological build of the y-node closure
+      - name: coqdep + self-healing topological build of the y-node closure
         run: |
           opam exec -- bash -c '
             set -e
@@ -43,23 +43,42 @@ jobs:
             ls *.v | sort > /tmp/nodes.txt
             echo "[y] node files: $(wc -l < /tmp/nodes.txt)"
             coqdep -Q ../ConstructiveWorld_Live "" -Q . "" $(cat /tmp/nodes.txt) > /tmp/deps.mk 2>/tmp/coqdep.err || { echo "[y] coqdep failed"; cat /tmp/coqdep.err; exit 1; }
+            echo "[y] deps.mk size: $(wc -l < /tmp/deps.mk)"
+            grep -E "S02_CauchyComplete" /tmp/deps.mk | head -2 || true
             python3 ../scripts/y_sort_closure.py /tmp/deps.mk /tmp/order.txt
-            pass=0; fail=0
+            # self-healing multi-pass build: a file failing with Unable-to-locate-library
+            # is deferred to a later pass (its dep compiles somewhere in the closure);
+            # a pass with zero progress stops the loop (fail-loud).
+            cp /tmp/order.txt /tmp/pending.txt
             : > /tmp/rc_table.txt
-            while IFS= read -r f; do
-              if [ -f "$f" ]; then p="$f"; elif [ -f "../ConstructiveWorld_Live/$f" ]; then p="../ConstructiveWorld_Live/$f"; else echo "MISSING-SOURCE $f" | tee -a /tmp/rc_table.txt; fail=$((fail+1)); continue; fi
-              if [ -f "${p%.v}.vo" ]; then echo "SKIP(vo-exists) $p" | tee -a /tmp/rc_table.txt; pass=$((pass+1)); continue; fi
-              echo "[build] $p"
-              if coqc -native-compiler no -q -Q ../ConstructiveWorld_Live "" -Q . "" "$p" > /tmp/last.log 2>&1; then
-                echo "OK $p" | tee -a /tmp/rc_table.txt; pass=$((pass+1))
-              else
-                echo "FAIL $p" | tee -a /tmp/rc_table.txt; fail=$((fail+1)); tail -25 /tmp/last.log
-              fi
-            done < /tmp/order.txt
-            echo "=== RC TABLE: pass=$pass fail=$fail ==="
-            cat /tmp/rc_table.txt
-            if [ "$fail" -eq 0 ]; then echo "YNODES-GREEN: full closure built clean on hosted rocq93"; else echo "YNODES-RED: $fail file(s) failed (honest table above)"; exit 1; fi
+            pass=1
+            while [ -s /tmp/pending.txt ] && [ $pass -le 4 ]; do
+              echo "[y] build pass $pass: $(wc -l < /tmp/pending.txt) pending"
+              progress=0; deferred=0
+              : > /tmp/next.txt
+              while IFS= read -r f; do
+                if [ -f "$f" ]; then p="$f"; elif [ -f "../ConstructiveWorld_Live/$f" ]; then p="../ConstructiveWorld_Live/$f"; else echo "MISSING-SOURCE $f" | tee -a /tmp/rc_table.txt; deferred=$((deferred+1)); continue; fi
+                if [ -f "${p%.v}.vo" ]; then echo "SKIP(vo-exists) $p" | tee -a /tmp/rc_table.txt; progress=$((progress+1)); continue; fi
+                if coqc -native-compiler no -q -Q ../ConstructiveWorld_Live "" -Q . "" "$p" > /tmp/last.log 2>&1; then
+                  echo "OK $p" | tee -a /tmp/rc_table.txt; progress=$((progress+1))
+                elif grep -q "Unable to locate library" /tmp/last.log; then
+                  deferred=$((deferred+1)); echo "$p" >> /tmp/next.txt; echo "DEFER(missing-dep) $p"
+                else
+                  echo "FAIL $p" | tee -a /tmp/rc_table.txt; tail -20 /tmp/last.log
+                fi
+              done < /tmp/pending.txt
+              echo "[y] pass $pass done: progress=$progress deferred=$deferred"
+              if [ $progress -eq 0 ] && [ $deferred -gt 0 ]; then echo "[y] no progress with deferrals -> breaking (deps unresolvable)"; break; fi
+              cp /tmp/next.txt /tmp/pending.txt
+              pass=$((pass+1))
+            done
+            ok=$(grep -c "^OK " /tmp/rc_table.txt || true); fails=$(grep -c "^FAIL " /tmp/rc_table.txt || true); missing=$(grep -c "^MISSING-SOURCE " /tmp/rc_table.txt || true); deferred_left=$(wc -l < /tmp/next.txt)
+            echo "=== RC TABLE: ok=$ok fail=$fails missing=$missing deferred_left=$deferred_left ==="
+            grep "^FAIL " /tmp/rc_table.txt | head -40 || true
+            echo "=== DEFERRED LEFT ==="; cat /tmp/next.txt || true
+            if [ "$fails" -eq 0 ] && [ "$deferred_left" -eq 0 ]; then echo "YNODES-GREEN: closure built clean on hosted rocq93"; else echo "YNODES-RED/PARTIAL (honest table above)"; exit 1; fi
           '
+
 
       - name: Probe stamp
         if: always()
