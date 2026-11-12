@@ -1,0 +1,58 @@
+# probe-rocq93-hosted.yml — hosted-runner CI lane for the sigma17-draft planb5 probe.
+# Why: the upstream furnace cannot checkout fork-origin PR merge refs (upload-pack
+# "not our ref" -- 6 runs of evidence), and the fork registers no self-hosted
+# runner. This lane runs on a GitHub-hosted ubuntu runner instead: it installs
+# Rocq 9.3.0 from opam and replays the exact 7-shot cascade + coqchk that the
+# local certification passed (B-caliber). Platform signal only; the certification
+# furnace remains the verdict authority. Draft sigma=17, do-not-merge.
+name: probe rocq93 hosted
+on: [push, workflow_dispatch]
+
+concurrency:
+  group: cw-probe-rocq93-hosted
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.0
+
+      - name: Install Rocq 9.3.0 (defensive multi-archive)
+        run: |
+          set -x
+          opam repo add rocq-archive https://github.com/rocq-prover/opam || true
+          opam repo add coq-released https://coq.inria.fr/opam-repository || true
+          opam update
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 coq-core.9.3.0 coq-stdlib.9.3.0 || \
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 rocq-stdlib.9.3.0 || \
+          opam install -y coq.9.3.0 || \
+          opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
+          opam exec -- coqc -v
+          opam exec -- coqchk -v 2>&1 | head -2
+
+      - name: 7-shot cascade + coqchk (planb5_hesc17_assembly)
+        run: |
+          opam exec -- bash -c '
+            set -e
+            cd ConstructiveWorld_Live
+            for f in S01_BaseRing S02_CauchyComplete piu_mu_criterion \
+                     planb1_hcage_zerotouch_prescription \
+                     piu_zz_padic_clearing planb3_g1_calib \
+                     planb5_hesc17_assembly; do
+              echo "[probe] shot $f"
+              coqc -native-compiler no -q -Q . "" "$f.v"
+            done
+            echo "[probe] coqchk planb5_hesc17_assembly"
+            coqchk -o -silent -Q . "" planb5_hesc17_assembly
+            echo "PROBE-GREEN: hosted rocq93 7-shot cascade rc=0 + coqchk clean"
+          '
+
+      - name: Probe stamp
+        if: always()
+        run: echo "hosted probe lane done (draft sigma=17, superseded by sigma=18 final PR)"
