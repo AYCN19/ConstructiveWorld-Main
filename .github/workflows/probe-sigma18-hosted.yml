@@ -1,0 +1,57 @@
+# probe-sigma18-hosted.yml — hosted-runner CI lane for the sigma18 landing content.
+# This branch carries the A3 sigma18 reshape products (planb1 + cert, md5-stable
+# 4683ee90 sources) and the A1S2 sigma18 assembly candidate (WF-3 product,
+# coqchk CHKRC=0 / Axioms:<none> under B-caliber two-root certification locally).
+# Landing this content into main = A3 landing (hard-edge release for A1-2
+# finalization). This lane gives the content CI on a hosted runner while the
+# upstream furnace channel is blocked (fork-PR merge-ref wall + pending
+# collaborator grant). Certification furnace remains the verdict authority.
+name: probe sigma18 hosted
+on: [push, workflow_dispatch]
+
+concurrency:
+  group: cw-probe-sigma18
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.0
+
+      - name: Install Rocq 9.3.0 (defensive multi-archive)
+        run: |
+          opam repo add rocq-archive https://github.com/rocq-prover/opam || true
+          opam repo add coq-released https://coq.inria.fr/opam-repository || true
+          opam update
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 coq-core.9.3.0 coq-stdlib.9.3.0 || \
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 rocq-stdlib.9.3.0 || \
+          opam install -y coq.9.3.0 || \
+          opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
+          opam exec -- coqc -v
+
+      - name: "7-shot cascade + coqchk (sigma18 - planb1 + planb5_hesc18_assembly)"
+        run: |
+          opam exec -- bash -c '
+            set -e
+            cd ConstructiveWorld_Live
+            for f in S01_BaseRing S02_CauchyComplete piu_mu_criterion \
+                     planb1_hcage_zerotouch_prescription \
+                     piu_zz_padic_clearing planb3_g1_calib \
+                     planb5_hesc18_assembly; do
+              echo "[probe] shot $f"
+              coqc -native-compiler no -q -Q . "" "$f.v"
+            done
+            echo "[probe] coqchk planb5_hesc18_assembly"
+            coqchk -o -silent -Q . "" planb5_hesc18_assembly
+            echo "SIGMA18-PROBE-GREEN: hosted rocq93 7-shot cascade rc=0 + coqchk clean"
+          '
+
+      - name: Probe stamp
+        if: always()
+        run: echo "sigma18 hosted probe done (landing content CI signal; merge decision rests with the maintainers)"

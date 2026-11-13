@@ -155,29 +155,28 @@ Qed.
 (*            7 -> 10 replacement) and the abstract slot-11 face.     *)
 (* ================================================================== *)
 
-(* The (B) first-power rate face: MuBound at (sigma, tau) = (17, 2)     *)
-(* unwinds to c0 <= dval * q^10 (e_carrier.v:469-527 isomorph with the  *)
-(* half-integer span absorbed by bQ <= bQ^2 inside the square).         *)
+(* The (B) first-power rate face: MuBound at (sigma, tau) = (18, 2)     *)
+(* unwinds to c0 <= dval * q^10 (e_carrier.v:469-527 isomorph; the      *)
+(* even span 20 makes q^20 the exact square (bQ^10)^2 - the half-       *)
+(* integer absorption segment of the sigma = 17 dance is deleted).      *)
 Lemma planb_b_rate_c0_E10 :
   forall (dval : Z -> Z -> Q) (p0 : Z) (q0 : nat),
-  (1 <= q0)%nat -> (0 <= dval (Z.of_nat q0) (- p0)%Z)%Q ->
-  piu_mu_MuBound 17%nat 2%nat dval (35831808 # 1)%Q (1 # 2)%Q ->
+  (1 <= q0)%nat -> (0 <= dval (- p0)%Z (Z.of_nat q0))%Q ->
+  piu_mu_MuBound 18%nat 2%nat dval (35831808 # 1)%Q (1 # 2)%Q ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * (35831808 # 1))%Q)
-    (dval (Z.of_nat q0) (- p0)%Z
+    (dval (- p0)%Z (Z.of_nat q0)
      * Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 10))%Q.
 Proof.
   intros dval p0 q0 Hq0 Hnn Hmb.
   pose proof (Hmb p0 q0 Hq0) as Hm0. destruct Hm0 as [Hm0].
-  remember (dval (Z.of_nat q0) (- p0)%Z) as W eqn:HW in *.
+  remember (dval (- p0)%Z (Z.of_nat q0)) as W eqn:HW in *.
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb in *.
   remember (35831808 # 1)%Q as kq eqn:HKq in *.
+  assert (Hbpos : (0 < bQ)%Q).
+  { rewrite HQb. unfold inject_Z, Qlt. cbn. lia. }
   assert (Hbne : ~ (bQ == 0)%Q).
   { rewrite HQb. intro Hc. unfold inject_Z, Qeq in Hc. cbn [Qnum Qden] in Hc.
     lia. }
-  assert (Hbpos : (0 < bQ)%Q).
-  { rewrite HQb. unfold inject_Z, Qlt. cbn. lia. }
-  assert (Hbge : (1 <= bQ)%Q).
-  { rewrite HQb. unfold inject_Z, Qle. cbn. lia. }
   assert (HWne : ~ (W == 0)%Q).
   { intro Hc. rewrite Hc in Hm0.
     assert (Hz : Qpower 0%Q (Z.of_nat 2) == 0%Q) by reflexivity.
@@ -189,98 +188,47 @@ Proof.
   assert (Hne12 : ~ ((1 # 2) == 0)%Q) by (unfold Qeq; cbn; lia).
   assert (HneK : ~ (kq == 0)%Q).
   { rewrite HKq. unfold Qeq. cbn. lia. }
-  assert (HB9ne : ~ (Qpower bQ (Z.of_nat 9) == 0)%Q).
-  { pose proof (planb_b_pow_pos_lt bQ 9 Hbpos) as HP.
+  assert (HB10ne : ~ (Qpower bQ (Z.of_nat 10) == 0)%Q).
+  { pose proof (planb_b_pow_pos_lt bQ 10 Hbpos) as HP.
     intro Hc. rewrite Hc in HP. unfold Qlt in HP. cbn in HP. lia. }
-  (* bQ^18 = (bQ^9)^2 and bQ^19 = bQ^18 * bQ *)
-  assert (H18 : Qpower bQ (Z.of_nat 18)
-                == Qpower (Qpower bQ (Z.of_nat 9)) (Z.of_nat 2)).
-  { replace (Z.of_nat 18) with (Z.of_nat 9 + Z.of_nat 9)%Z by reflexivity.
-    rewrite (Qpower_plus bQ (Z.of_nat 9) (Z.of_nat 9) Hbne).
-    rewrite <- (planb_b_qpow2_mul (Qpower bQ (Z.of_nat 9)) HB9ne).
+  (* bQ^20 = (bQ^10)^2 - the exact square at the even span 20 *)
+  assert (H20 : Qpower bQ (Z.of_nat (18 + 2))
+                == Qpower (Qpower bQ (Z.of_nat 10)) (Z.of_nat 2)).
+  { replace (Z.of_nat (18 + 2)) with (Z.of_nat (10 + 10)) by reflexivity.
+    rewrite (Qpower_plus bQ (Z.of_nat 10) (Z.of_nat 10) Hbne).
+    rewrite <- (planb_b_qpow2_mul (Qpower bQ (Z.of_nat 10)) HB10ne).
     reflexivity. }
-  assert (H19split : Qpower bQ (Z.of_nat (17 + 2))
-                     == Qpower bQ (Z.of_nat 18) * bQ).
-  { replace (Z.of_nat (17 + 2)) with (Z.of_nat 18 + 1)%Z by reflexivity.
-    rewrite (Qpower_plus bQ (Z.of_nat 18) (Z.of_nat 1) Hbne).
-    rewrite Qpower_1_r. reflexivity. }
   (* unpack the squares into multiplied form *)
   rewrite (planb_b_qpow2_mul (1 # 2)%Q Hne12) in Hm0.
   rewrite (planb_b_qpow2_mul kq HneK) in Hm0.
   rewrite (planb_b_qpow2_mul W HWne) in Hm0.
-  rewrite H19split, H18 in Hm0.
-  rewrite (planb_b_qpow2_mul (Qpower bQ (Z.of_nat 9)) HB9ne) in Hm0.
-  (* Hm0 : (1/2)*(1/2) <= kq*kq*(W*W)*((bQ9*bQ9)*bQ)                    *)
-  (* pack: = (kq*W*bQ9) * (kq*W*bQ9) * bQ = Y*Y*bQ                      *)
+  rewrite H20 in Hm0.
+  rewrite (planb_b_qpow2_mul (Qpower bQ (Z.of_nat 10)) HB10ne) in Hm0.
+  (* Hm0 : (1/2)*(1/2) <= kq*kq*(W*W)*(bQ10*bQ10)                       *)
+  (* pack: = (kq*W*bQ10) * (kq*W*bQ10) = Y*Y                            *)
   (* (Q ring proves Qeq, not Eq - the replace side-goal is Eq, so the   *)
   (* reorders are carried as Qeq asserts + setoid rewrites.)            *)
   assert (Hpack : (kq * kq * (W * W)
-                   * (Qpower bQ (Z.of_nat 9) * Qpower bQ (Z.of_nat 9) * bQ))%Q
-                  == (kq * W * Qpower bQ (Z.of_nat 9)
-                      * (kq * W * Qpower bQ (Z.of_nat 9)) * bQ)%Q)
+                   * (Qpower bQ (Z.of_nat 10) * Qpower bQ (Z.of_nat 10)))%Q
+                  == (kq * W * Qpower bQ (Z.of_nat 10)
+                      * (kq * W * Qpower bQ (Z.of_nat 10)))%Q)
     by ring.
   rewrite Hpack in Hm0.
-  assert (HYpos : (0 < kq * W * Qpower bQ (Z.of_nat 9))%Q).
-  { apply Qmult_lt_0_compat.
-    - apply Qmult_lt_0_compat; [rewrite HKq; unfold Qlt; cbn; lia | exact HWpos].
-    - apply (planb_b_pow_pos_lt bQ 9 Hbpos). }
-  assert (Hbgrow : (bQ <= bQ * bQ)%Q).
-  { pose proof (planb_b_qmult_le_compat_l (1 # 1)%Q bQ bQ Hbge
-                  ltac:(rewrite HQb; unfold inject_Z, Qle; cbn; lia)) as Hb0.
-    rewrite Qmult_1_r in Hb0. exact Hb0. }
-  (* grow the lone bQ into the square: Y*Y*bQ <= Y*Y*(bQ*bQ) = (Y*bQ)^2 *)
-  assert (Hgrow2 : ((kq * W * Qpower bQ (Z.of_nat 9))
-                    * (kq * W * Qpower bQ (Z.of_nat 9)) * bQ
-                    <= (kq * W * Qpower bQ (Z.of_nat 9))
-                       * (kq * W * Qpower bQ (Z.of_nat 9))
-                       * (bQ * bQ))%Q).
-  { apply planb_b_qmult_le_compat_l.
-    - exact Hbgrow.
-    - apply Qmult_le_0_compat.
-      + apply Qmult_le_0_compat.
-        * apply Qmult_le_0_compat.
-          { rewrite HKq; unfold Qle; cbn; lia. }
-          { apply Qlt_le_weak. exact HWpos. }
-        * apply Qlt_le_weak. apply (planb_b_pow_pos_lt bQ 9 Hbpos).
-      + apply Qmult_le_0_compat.
-        * apply Qmult_le_0_compat.
-          { rewrite HKq; unfold Qle; cbn; lia. }
-          { apply Qlt_le_weak. exact HWpos. }
-        * apply Qlt_le_weak. apply (planb_b_pow_pos_lt bQ 9 Hbpos). }
-  assert (Hrepack : ((kq * W * Qpower bQ (Z.of_nat 9))
-                     * (kq * W * Qpower bQ (Z.of_nat 9)) * (bQ * bQ))%Q
-                    == ((kq * W * Qpower bQ (Z.of_nat 9) * bQ)
-                        * (kq * W * Qpower bQ (Z.of_nat 9) * bQ))%Q)
-    by ring.
-  rewrite Hrepack in Hgrow2.
-  assert (Hsq : ((1 # 2) * (1 # 2)
-                 <= (kq * W * Qpower bQ (Z.of_nat 9) * bQ)
-                    * (kq * W * Qpower bQ (Z.of_nat 9) * bQ))%Q).
-  { apply (Qle_trans _ ((kq * W * Qpower bQ (Z.of_nat 9))
-                        * (kq * W * Qpower bQ (Z.of_nat 9)) * bQ)).
-    - exact Hm0.
-    - exact Hgrow2. }
-  assert (Hhalf : ((1 # 2)
-                   <= kq * W * Qpower bQ (Z.of_nat 9) * bQ)%Q).
-  { apply (planb_b_qsq_ord_reflect (1 # 2)%Q
-             (kq * W * Qpower bQ (Z.of_nat 9) * bQ)).
-    - unfold Qlt. cbn. lia.
-    - apply Qmult_lt_0_compat.
-      + exact HYpos.
-      + rewrite HQb. unfold inject_Z, Qlt. cbn. lia.
-    - exact Hsq. }
-  (* bridge to the exponent-10 face: Y*bQ = kq*W*bQ^10 *)
-  assert (HB10 : Qpower bQ (Z.of_nat 10) == Qpower bQ (Z.of_nat 9) * bQ).
-  { replace (Z.of_nat 10) with (Z.of_nat 9 + 1)%Z by reflexivity.
-    rewrite (Qpower_plus bQ (Z.of_nat 9) (Z.of_nat 1) Hbne).
-    rewrite Qpower_1_r. reflexivity. }
+  (* the square opens directly at the exact division: Hm0 is             *)
+  (* (1/2)^2 <= Y^2 at Y = kq*W*bQ^10 - the half-integer absorption      *)
+  (* of the sigma = 17 dance (the lone-bQ grow segment) is deleted,      *)
+  (* since the even span 20 leaves no lone bQ factor to absorb.          *)
   assert (HhalfK : ((1 # 2)
                     <= kq * W * Qpower bQ (Z.of_nat 10))%Q).
-  { rewrite HB10.
-    assert (Hbr : (kq * W * (Qpower bQ (Z.of_nat 9) * bQ))%Q
-                  == (kq * W * Qpower bQ (Z.of_nat 9) * bQ)%Q)
-      by ring.
-    rewrite Hbr. exact Hhalf. }
+  { apply (planb_b_qsq_ord_reflect (1 # 2)%Q
+             (kq * W * Qpower bQ (Z.of_nat 10))).
+    - unfold Qlt. cbn. lia.
+    - apply Qmult_lt_0_compat.
+      + apply Qmult_lt_0_compat.
+        * rewrite HKq. unfold Qlt. cbn. lia.
+        * exact HWpos.
+      + apply (planb_b_pow_pos_lt bQ 10 Hbpos).
+    - exact Hm0. }
   (* cancel kappa: c0 = (1/2)/kq <= W * bQ^10 *)
   apply S02_CauchyComplete.Qle_to_QleT'.
   assert (Hc0split : ((1 # 1) / (2 * kq)%Q
@@ -310,9 +258,9 @@ Lemma planb_b_rate_dist_slot11 :
   S02_CauchyComplete.QeqT (inject_Z (Z.of_nat q0) * r) (inject_Z p0) ->
   (1 <= q0)%nat ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * (35831808 # 1))%Q)
-    (dval (Z.of_nat q0) (- p0)%Z
+    (dval (- p0)%Z (Z.of_nat q0)
      * Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 10))%Q ->
-  S02_CauchyComplete.QleT' (dval (Z.of_nat q0) (- p0)%Z)
+  S02_CauchyComplete.QleT' (dval (- p0)%Z (Z.of_nat q0))
     (Qabs (inject_Z (Z.of_nat q0) * xk - inject_Z p0)) ->
   S02_CauchyComplete.QleT' ((1 # 1) / (2 * (35831808 # 1))%Q
       / Qpower (inject_Z (Z.of_nat q0)) (Z.of_nat 11))%Q
@@ -321,7 +269,7 @@ Proof.
   intros dval r xk p0 q0 Hred Hq0 Hc0 Hx.
   pose proof (S02_CauchyComplete.QleT'_to_Qle _ _ Hc0) as H1.
   pose proof (S02_CauchyComplete.QleT'_to_Qle _ _ Hx) as H2.
-  remember (dval (Z.of_nat q0) (- p0)%Z) as W eqn:HW in *.
+  remember (dval (- p0)%Z (Z.of_nat q0)) as W eqn:HW in *.
   remember (inject_Z (Z.of_nat q0)) as bQ eqn:HQb in *.
   remember (Qpower bQ (Z.of_nat 10)) as B10 eqn:HQ10 in *.
   remember (Qpower bQ (Z.of_nat 11)) as B11 eqn:HQ11 in *.

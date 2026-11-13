@@ -74,7 +74,7 @@ Qed.
 Lemma planb3_dv_htri : forall (a b p : Z) (q : nat), (1 <= q)%nat ->
   piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
     ((inject_Z (Z.of_nat q) * planb3_dv a b
-      + inject_Z (Z.abs b) * planb3_dv (Z.of_nat q) (- p)%Z)%Q).
+      + inject_Z (Z.abs b) * planb3_dv (- p)%Z (Z.of_nat q))%Q).
 Proof.
   intros a b p q Hq. apply piu_mu_QleT_i. unfold planb3_dv.
   rewrite (planb3_inj_zabs_qabs (a * Z.of_nat q + b * p)).
@@ -83,21 +83,21 @@ Proof.
   assert (Hid : inject_Z (a * Z.of_nat q + b * p)
                 == (inject_Z (Z.of_nat q) * (inject_Z a + inject_Z b)
                     + inject_Z (- b)
-                      * (inject_Z (Z.of_nat q) + inject_Z (- p)))%Q).
+                      * (inject_Z (- p) + inject_Z (Z.of_nat q)))%Q).
   { unfold inject_Z, Qplus, Qminus, Qmult, Qeq. cbn. ring. }
   rewrite Hid.
   pose proof (Qabs_triangle (inject_Z (Z.of_nat q) * (inject_Z a + inject_Z b))
               (inject_Z (- b)
-               * (inject_Z (Z.of_nat q) + inject_Z (- p)))) as Htri0.
+               * (inject_Z (- p) + inject_Z (Z.of_nat q)))) as Htri0.
   apply (Qle_trans _
     (Qabs (inject_Z (Z.of_nat q) * (inject_Z a + inject_Z b))
      + Qabs (inject_Z (- b)
-             * (inject_Z (Z.of_nat q) + inject_Z (- p))))%Q).
+             * (inject_Z (- p) + inject_Z (Z.of_nat q))))%Q).
   - exact Htri0.
   - rewrite (Qabs_Qmult (inject_Z (Z.of_nat q)) (inject_Z a + inject_Z b)).
     rewrite (planb3_qabs_inj_nat q).
     rewrite (Qabs_Qmult (inject_Z (- b))
-              (inject_Z (Z.of_nat q) + inject_Z (- p))).
+              (inject_Z (- p) + inject_Z (Z.of_nat q))).
     rewrite Habsb.
     apply Qle_refl.
 Qed.
@@ -139,7 +139,7 @@ Definition planb3_g2_htri_face : Set :=
   forall (a b p : Z) (q : nat), (1 <= q)%nat ->
     piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
       ((inject_Z (Z.of_nat q) * planb3_dv_anchor a b
-        + inject_Z (Z.abs b) * planb3_dv_anchor (Z.of_nat q) (- p)%Z)%Q).
+        + inject_Z (Z.abs b) * planb3_dv_anchor (- p)%Z (Z.of_nat q))%Q).
 
 (* DESIGN OBLIGATION 3 (the exit mirror): dval(b, -a) is eventually    *)
 (* bounded by |b * xL(k) - a| (the e_carrier.v:647-650 Hexit shape at  *)
@@ -148,7 +148,7 @@ Definition planb3_g2_htri_face : Set :=
 Definition planb3_g2_hexit_face : Set :=
   forall a b : Z, (1 <= b)%Z ->
     sigT (fun K : nat => forall k : nat, (K <= k)%nat ->
-      S02_CauchyComplete.QleT' (planb3_dv_anchor b (- a)%Z)
+      S02_CauchyComplete.QleT' (planb3_dv_anchor (- a)%Z b)
         (Qabs (inject_Z b * xL k - inject_Z a))).
 
 End G2_DESIGN.

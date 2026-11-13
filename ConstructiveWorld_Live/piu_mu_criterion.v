@@ -154,7 +154,7 @@ Definition piu_mu_MuBound (cnum : Q) : Set :=
   forall (p : Z) (q : nat), (1 <= q)%nat ->
     piu_mu_QleT (Qpower cnum (Z.of_nat tau))
       ((Qpower kappa (Z.of_nat tau)
-        * Qpower (dval (Z.of_nat q) (- p)) (Z.of_nat tau)
+        * Qpower (dval (- p) (Z.of_nat q)) (Z.of_nat tau)
         * Qpower (inject_Z (Z.of_nat q)) (Z.of_nat (sigma + tau)))%Q).
 
 Hypothesis Htau : piu_mu_NleT 1 tau.
@@ -169,7 +169,7 @@ Hypothesis Hval : forall n : nat,
 Hypothesis Htri : forall (a b p : Z) (q : nat), (1 <= q)%nat ->
   piu_mu_QleT (inject_Z (Z.abs (a * Z.of_nat q + b * p)))
     ((inject_Z (Z.of_nat q) * dval a b
-      + inject_Z (Z.abs b) * dval (Z.of_nat q) (- p))%Q).
+      + inject_Z (Z.abs b) * dval (- p) (Z.of_nat q))%Q).
 Hypothesis Hesc : forall (p : Z) (q : nat), (1 <= q)%nat ->
   sigT (fun n : nat => piu_mu_and3
     (piu_mu_QleT (inject_Z (Z.of_nat (2 * q))) (piu_mu_epos (tau * n)))
@@ -185,7 +185,7 @@ Theorem piu_mu_core : forall (p : Z) (q : nat) (n : nat), (1 <= q)%nat ->
   piu_mu_QleT (inject_Z (Z.of_nat (2 * q))) (piu_mu_epos (tau * n)) ->
   piu_mu_ZleT 1 (Z.abs (A n * Z.of_nat q + B n * p)) ->
   piu_mu_QleT ((1 # 2)%Q)
-    (dval (Z.of_nat q) (- p) * piu_mu_epos (sigma * n)).
+    (dval (- p) (Z.of_nat q) * piu_mu_epos (sigma * n)).
 Proof.
   intros p q n Hq E1 E2.
   destruct E2 as [Hnz].
@@ -193,7 +193,7 @@ Proof.
   destruct (Hval n) as [Hv].
   destruct (Htri (A n) (B n) p q Hq) as [Htr].
   destruct E1 as [He1].
-  destruct (Hp (Z.of_nat q) (- p)) as [Hwpos].
+  destruct (Hp (- p) (Z.of_nat q)) as [Hwpos].
   destruct (Hp (A n) (B n)) as [Hdvpos].
   destruct (piu_mu_Zle_Qle _ _ HB) as [HBQ].
   destruct (piu_mu_Zle_Qle _ _ Hnz) as [HnzQ].
@@ -205,7 +205,7 @@ Proof.
   change (inject_Z 1) with (1 # 1) in HnzQ.
   set (qQ := inject_Z (Z.of_nat q)) in *.
   set (dv := dval (A n) (B n)) in *.
-  set (w := dval (Z.of_nat q) (- p)) in *.
+  set (w := dval (- p) (Z.of_nat q)) in *.
   set (bQ := inject_Z (Z.abs (B n))) in *.
   set (tv := piu_mu_epos (tau * n)) in *.
   set (s := piu_mu_epos (sigma * n)) in *.
@@ -239,9 +239,9 @@ Proof.
   destruct Htau as [Htd].
   pose proof (piu_mu_core p q n Hq E1q E2z) as Hcore.
   destruct Hcore as [Hcore].
-  destruct (Hp (Z.of_nat q) (- p)) as [Hwpos].
+  destruct (Hp (- p) (Z.of_nat q)) as [Hwpos].
   destruct Hkap as [Hk0].
-  set (w := dval (Z.of_nat q) (- p)) in *.
+  set (w := dval (- p) (Z.of_nat q)) in *.
   set (s := piu_mu_epos (sigma * n)) in *.
   (* 步 1: (1/2)^tau <= w^tau * s^tau *)
   assert (Hstep1 : (Qpower (1 # 2) (Z.of_nat tau)

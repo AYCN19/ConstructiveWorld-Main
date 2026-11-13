@@ -272,3 +272,30 @@ Print Assumptions planb3_g1_B5.
 Print Assumptions planb3_g1_L5.
 Print Assumptions planb3_g1_Phi5.
 Print Assumptions planb3_g1_out_of_dom.
+
+(* Section 10. The Pn prime-window faces (general-n, zz_in_Pn based) *)
+(* Restored from the L1 deposit calib (git 5f11e6b) verbatim: these  *)
+(* are the general-n reference faces consumed by planb4_g1_phiwin    *)
+(* (planb4_g1_phi / planb4_g1_ln census targets).  Placed after the  *)
+(* tables so the zz_in_Pn require cannot re-scope the table arms.    *)
+
+From Stdlib Require Import List.
+Require Import piu_zz_padic_clearing.
+
+(* the lcm face lcm(1..k) over Z. *)
+Definition planb4_lcm_upto (k : nat) : Z :=
+  fold_left Z.lcm (map Z.of_nat (seq 1 k)) 1%Z.
+
+Definition planb4_L (n : nat) : Z := planb4_lcm_upto (4 * n).
+
+(* the Pn prime-window index list: p in [1, 4n] with zz_in_Pn n p. *)
+Definition planb4_Pn_list (n : nat) : list nat :=
+  filter (fun p => zz_in_Pn n p) (seq 1 (4 * n)).
+
+(* Phi_n := the product of the Pn-window primes (empty window = 1). *)
+Definition planb4_Phi (n : nat) : Z :=
+  fold_right (fun p acc => acc * Z.of_nat p) 1%Z (planb4_Pn_list n).
+
+(* the ZZ2020 L_n: lcm(1..4n) divided by the Pn-window product. *)
+Definition planb4_LZn (n : nat) : Z :=
+  planb4_L n / planb4_Phi n.
