@@ -1,9 +1,15 @@
 # probe-ynodes-rocq93-hosted.yml — hosted-runner CI lane for the y-E1 gamma node
-# deposit (y_e1_gamma_nodes/, waves 1-4: 92 .v files, 31 PASS-gated verdicts).
+# deposit (y_e1_gamma_nodes/, waves 1-5: 136 .v files, 31 PASS-gated verdicts).
 # Same rationale as probe-rocq93-hosted.yml: the upstream furnace cannot checkout
 # fork-origin PR merge refs and the fork has no self-hosted runner, so this lane
-# runs on a GitHub-hosted ubuntu runner. coqdep the node set, sort with the
-# committed scripts/y_sort_closure.py, compile the closure, report per-file rc.
+# runs on a GitHub-hosted ubuntu runner. coqdep the FULL dependency graph (node
+# set + every kbgamma seg dir + the whole ConstructiveWorld_Live tree), restrict
+# the emitted order to the transitive closure of the probe roots with
+# scripts/y_sort_closure.py roots mode, compile the closure, report per-file rc.
+# Root cause of the run #1 RED: the scan covered only nodes+seg_C2, so dep
+# targets inside ConstructiveWorld_Live / seg_C1 entered the order as leaves
+# without their own edges — Hanson3Pow, abl_Pr_euclid_03, GaC1_Iface_Cx,
+# S13/S14 and friends were never compiled and 79 files stranded in deferral.
 # Honest face: gate PASS is not proof of card statements; statement-face-only
 # files compile but prove nothing.
 name: probe y-nodes rocq93 hosted
@@ -42,24 +48,36 @@ jobs:
             cd y_e1_gamma_nodes
             ls *.v | sort > /tmp/nodes.txt
             echo "[y] node files: $(wc -l < /tmp/nodes.txt)"
-            ls ../attn/kbgamma_20261108/seg_C2/*.v > /tmp/segc2.txt; cat /tmp/nodes.txt /tmp/segc2.txt | sort > /tmp/all.txt; coqdep -Q ../ConstructiveWorld_Live "" -Q ../attn/kbgamma_20261108/seg_C2 "" -Q . "" $(cat /tmp/all.txt) > /tmp/deps.mk 2>/tmp/coqdep.err || { echo "[y] coqdep failed"; cat /tmp/coqdep.err; exit 1; }
+            SEG=../attn/kbgamma_20261108
+            ls $SEG/seg_C1/*.v > /tmp/segc1.txt
+            ls $SEG/seg_C2/*.v > /tmp/segc2.txt
+            ls $SEG/seg_C3/*.v > /tmp/segc3.txt
+            ls $SEG/seg_C3_cast/*.v > /tmp/segc3c.txt
+            ls ../ConstructiveWorld_Live/*.v > /tmp/live.txt
+            # full-graph scan: nodes + all seg dirs + whole Live tree
+            cat /tmp/nodes.txt /tmp/segc1.txt /tmp/segc2.txt /tmp/segc3.txt /tmp/segc3c.txt /tmp/live.txt | sort > /tmp/all.txt
+            # probe scope roots stay nodes + seg_C2 (deposit verification face)
+            cat /tmp/nodes.txt /tmp/segc2.txt | sort > /tmp/roots.txt
+            echo "[y] scan set: $(wc -l < /tmp/all.txt) files | roots: $(wc -l < /tmp/roots.txt)"
+            coqdep -Q ../ConstructiveWorld_Live "" -Q $SEG/seg_C1 "" -Q $SEG/seg_C2 "" -Q $SEG/seg_C3 "" -Q $SEG/seg_C3_cast "" -Q . "" $(cat /tmp/all.txt) > /tmp/deps.mk 2>/tmp/coqdep.err || { echo "[y] coqdep failed"; cat /tmp/coqdep.err; exit 1; }
             echo "[y] deps.mk size: $(wc -l < /tmp/deps.mk)"
             grep -E "S02_CauchyComplete" /tmp/deps.mk | head -2 || true
-            python3 ../scripts/y_sort_closure.py /tmp/deps.mk /tmp/order.txt
+            python3 ../scripts/y_sort_closure.py /tmp/deps.mk /tmp/order.txt /tmp/roots.txt
+            echo "[y] closure size: $(wc -l < /tmp/order.txt)"
             # self-healing multi-pass build: a file failing with Unable-to-locate-library
             # is deferred to a later pass (its dep compiles somewhere in the closure);
             # a pass with zero progress stops the loop (fail-loud).
             cp /tmp/order.txt /tmp/pending.txt
             : > /tmp/rc_table.txt
             pass=1
-            while [ -s /tmp/pending.txt ] && [ $pass -le 6 ]; do
+            while [ -s /tmp/pending.txt ] && [ $pass -le 8 ]; do
               echo "[y] build pass $pass: $(wc -l < /tmp/pending.txt) pending"
               progress=0; deferred=0
               : > /tmp/next.txt
               while IFS= read -r f; do
                 if [ -f "$f" ]; then p="$f"; elif [ -f "../ConstructiveWorld_Live/$f" ]; then p="../ConstructiveWorld_Live/$f"; else echo "MISSING-SOURCE $f" | tee -a /tmp/rc_table.txt; deferred=$((deferred+1)); continue; fi
                 if [ -f "${p%.v}.vo" ]; then echo "SKIP(vo-exists) $p" | tee -a /tmp/rc_table.txt; progress=$((progress+1)); continue; fi
-                if coqc -native-compiler no -q -Q ../ConstructiveWorld_Live "" -Q ../attn/kbgamma_20261108/seg_C2 "" -Q . "" "$p" > /tmp/last.log 2>&1; then
+                if coqc -native-compiler no -q -Q ../ConstructiveWorld_Live "" -Q $SEG/seg_C1 "" -Q $SEG/seg_C2 "" -Q $SEG/seg_C3 "" -Q $SEG/seg_C3_cast "" -Q . "" "$p" > /tmp/last.log 2>&1; then
                   echo "OK $p" | tee -a /tmp/rc_table.txt; progress=$((progress+1))
                 elif grep -q "Unable to locate library" /tmp/last.log; then
                   deferred=$((deferred+1)); echo "$p" >> /tmp/next.txt
@@ -81,7 +99,6 @@ jobs:
             echo "=== DEFERRED LEFT ==="; cat /tmp/next.txt || true
             if [ "$fails" -eq 0 ] && [ "$deferred_left" -eq 0 ]; then echo "YNODES-GREEN: closure built clean on hosted rocq93"; else echo "YNODES-RED/PARTIAL (honest table above)"; exit 1; fi
           '
-
 
       - name: Probe stamp
         if: always()
