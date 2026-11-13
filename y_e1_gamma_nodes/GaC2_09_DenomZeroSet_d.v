@@ -31,8 +31,8 @@
 Require S01_BaseRing.
 (** Notes.  The four stem statements (denom_zero_real_dir,
     denom_zero_imag_char, denom_first_order, zero_set_membership)
-    live in the consolidating stem GaC2_09_DenomZeroSet, to be cast
-    there; none of them appear in this piece.  Sign-typo disclosure:
+    are cast in the consolidating stem GaC2_09_DenomZeroSet; none of
+    them appear in this piece.  Sign-typo disclosure:
     the draft sketch carried the sign typo -ln2*(s-1) on the
     first-order term (logged in the v14 receipt, section three,
     item 3); the remainder face cast here is stated for the

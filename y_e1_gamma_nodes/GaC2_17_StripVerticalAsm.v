@@ -12,7 +12,7 @@
       ([real_log], [real_const_pos]), [CxRealPairCore],
       [CxRealPairExpLog], [GaC2_07_DirichletTestAbel],
       [GaC2_10_EtaContinuation], [GaC2_16_ZetaVerticalBound],
-      [GaC2_02_AbsConvTailBound_a].
+      [GaC2_02_AbsConvTailBound_a], [GaC2_17_StripVerticalAsm_a].
 
     References.  drafts_C2.md C2.17 (sketches one / two / four);
       cards_C2.md C2.17; gamma_module_spec.md section 3.3 the W6
@@ -113,8 +113,9 @@ Require Import S02_CauchyComplete.
     Require-face notes: the draft Require header of drafts_C2.md
     C2.17 named S02, the two born pair carriers and the three
     stems; this face adds [S03_QExp] and [S07_RealSetoidExpLog] for
-    the power, inverse and log carrier block (the registered
-    addition, the C2-18 same-shape header move).  The C2-09 mother
+    the power, inverse and log carrier block, and the auxiliary
+    stem [GaC2_17_StripVerticalAsm_a] (the registered additions,
+    the C2-18 same-shape header move).  The C2-09 mother
     stays out of this Require face (it is not a dependency of this
     node's row in gamma_module_spec.md section 3.3).
     [GaC2_02_AbsConvTailBound_a] supplies [nat_real_pos], threading
@@ -129,6 +130,7 @@ Require Import GaC2_07_DirichletTestAbel.
 Require Import GaC2_10_EtaContinuation.
 Require Import GaC2_16_ZetaVerticalBound.
 Require Import GaC2_02_AbsConvTailBound_a.
+Require Import GaC2_17_StripVerticalAsm_a.
 
 From Stdlib Require Import QArith.QArith.
 
@@ -236,3 +238,132 @@ Definition zeta_strip_cover
     real_le real_zero (cRe s) ->
     real_le (cRe s) (real_const (2#1)) ->
     zeta_vert_bound_disj s.
+
+(* Section 3. The residence theorems of the three named carriers: the   *)
+(* (a) uniform band, the pointwise branch assembly, the band cover.     *)
+(* The (a) residence: the carrier's own eta slot caps the eta modulus   *)
+(* by 2 through its N = 0 face; the denominator corridor is the C2-08   *)
+(* modulus-algebra route slot; the inverse algebra and the forward      *)
+(* monotone chain close the card chain factor by factor.                *)
+
+(* The two branch slot carriers of [zeta_vert_bound_disj]; each is       *)
+(* definitionally the matching full branch bundle of the disjunction.   *)
+Definition c17_mid_slot (s : Cx) : Set :=
+  sigT (fun t : Real =>
+    sigT (fun Ht2 : real_le (real_const (2#1)) t =>
+      sigT (fun Ht1 : real_lt real_one t =>
+        sigT (fun Hlogpos : real_lt real_zero (log_t t Ht1) =>
+          sigT (fun C1 : Real =>
+            sigT (fun Hs1 : real_le real_one (cRe s) =>
+              sigT (fun Hs2 : real_le (cRe s) (real_const (2#1)) =>
+                zeta_vert_mid nat_real_pos t Ht2 Ht1 Hlogpos C1 s Hs1 Hs2))))))).
+
+Definition c17_near_slot (s : Cx) : Set :=
+  sigT (fun t : Real =>
+    sigT (fun Ht1 : real_lt real_one t =>
+      sigT (fun Hlogpos : real_lt real_zero (log_t t Ht1) =>
+        sigT (fun c_win : Real =>
+          sigT (fun C2 : Real =>
+            sigT (fun Hwin : real_le (real_plus real_one
+                     (real_opp (c_scale' c_win
+                        (real_inv_pos (log_t t Ht1) Hlogpos))))
+                    (cRe s) =>
+              sigT (fun Hslt : real_lt (cRe s) real_one =>
+                zeta_vert_near1 nat_real_pos t Ht1 Hlogpos c_win C2 s
+                  Hwin Hslt))))))).
+
+Theorem zeta_strip_uniform_holds :
+  forall (eps_lb delta : Real) (Hep : real_lt real_zero eps_lb)
+         (Hd : real_lt real_zero delta) (Hd1 : real_le delta real_one)
+         (Hsub : real_lt real_zero (two_d_sub delta))
+         (Hdlb : forall s : Cx,
+                   real_le (cRe s) (real_plus real_one (real_opp delta)) ->
+                   denom_nz (sq (two_d_sub delta)) s),
+    zeta_strip_uniform eps_lb delta Hep Hd Hd1 Hsub.
+Proof.
+  unfold zeta_strip_uniform.
+  intros eps_lb delta Hep Hd Hd1 Hsub Hdlb s Heta Hd2 Hs0 Hcap.
+  assert (Hv2 : real_le (c_norm_sq (eta_s s Heta)) (real_const (2#1)))
+    by exact (c17_eta_cap s Heta).
+  destruct Heta as [v Hew].
+  unfold zeta_tilde, eta_s. cbn [projT1].
+  set (dp := c_plus c_one
+               (c_opp (GaC2_09_DenomZeroSet_b.two_pow_1ms s))) in *.
+  set (D := c_norm_sq dp) in *.
+  set (u := c_mult v (c_conj dp)) in *.
+  set (Hdpos := denom_sq_pos eps_lb s Hep Hd2) in *.
+  set (A := GaC2_01_DirichletPartialSum.c_inv_wit D Hdpos) in *.
+  set (W := two_d_sub delta) in *.
+  set (B := c_invq W Hsub) in *.
+  assert (Hapos : real_lt real_zero A)
+    by exact (real_inv_pos_pos D Hdpos).
+  assert (Hpos2 : real_lt real_zero (real_const (2#1))).
+  { apply real_const_pos. unfold QltT, Qlt_bool. reflexivity. }
+  assert (Hle2 : real_le real_zero (real_const (2#1)))
+    by exact (real_lt_le_iff _ _ (inl Hpos2)).
+  assert (H12le : real_le real_one (real_const (2#1)))
+    by exact (real_lt_le_iff _ _ (inl c17_one_lt_two)).
+  assert (HWW : real_le (real_mult W W) D).
+  { exact (real_lt_le_iff _ _ (inl (Hdlb s Hcap))). }
+  assert (HA : real_le A (real_mult B B)).
+  { exact (c17_inv_le_sq D W Hdpos Hsub
+             (real_mult_positive W W Hsub Hsub) HWW). }
+  apply (real_le_trans _ (real_mult (real_const (2#1))
+                              (real_mult (real_const (2#1))
+                                 (real_mult B B)))).
+  - apply (real_le_trans _ (real_mult A (c_norm_sq v))).
+    + apply (RealSetoid.real_eq_le _ _).
+      exact (c17_norm_leg A D (c_norm_sq v) u
+               (real_eq_trans _ _ _ (real_mult_comm A D)
+                  (real_inv_pos_correct D Hdpos))
+               (real_eq_trans _ _ _ (c_norm_sq_mul v (c_conj dp))
+                  (RealSetoid.real_eq_mult_compat _ _ _ _
+                     (real_eq_refl _) (c_norm_sq_conj dp)))).
+    + apply (c17_mono_final A (c_norm_sq v) (real_mult B B)
+               Hapos
+               (real_lt_le_iff _ _ (inl (real_mult_positive B B
+                                    (real_inv_pos_pos W Hsub)
+                                    (real_inv_pos_pos W Hsub))))
+               Hle2 H12le HA Hv2).
+  - apply (RealSetoid.real_eq_le _ _).
+    exact (real_eq_sym _ _ (c17_target_eq (real_const (2#1)) B)).
+Qed.
+
+(* The pointwise branch residence: the two mother band faces as the      *)
+(* guarded slot carriers, selected by the band-point split slot.        *)
+Theorem zeta_vert_bound_disj_holds :
+  forall s : Cx,
+    c17_mid_slot s ->
+    c17_near_slot s ->
+    S01_BaseRing.Or (real_lt (cRe s) real_one)
+                    (real_le real_one (cRe s)) ->
+    zeta_vert_bound_disj s.
+Proof.
+  intros s Hmid Hnear Hsplit.
+  destruct Hsplit as [Hlt | Hge].
+  - exact (existT _ false Hnear).
+  - exact (existT _ true Hmid).
+Qed.
+
+(* The (c) cover residence: the pointwise lift of the branch residence   *)
+(* over the consumption band 0 <= Re s <= 2, threading the carrier's     *)
+(* own band premises verbatim into the mother slot arguments.           *)
+Theorem zeta_strip_cover_holds :
+  forall (delta : Real) (Hd : real_lt real_zero delta)
+         (Hd1 : real_le delta real_one)
+    (Hsplit : forall s : Cx,
+                real_le real_zero (cRe s) ->
+                S01_BaseRing.Or (real_lt (cRe s) real_one)
+                                (real_le real_one (cRe s)))
+    (Hmid : forall s : Cx,
+              real_le (cRe s) (real_const (2#1)) -> c17_mid_slot s)
+    (Hnear : forall s : Cx, c17_near_slot s),
+    zeta_strip_cover delta Hd Hd1.
+Proof.
+  unfold zeta_strip_cover.
+  intros delta Hd Hd1 Hsplit Hmid Hnear s Hs0 Hs2.
+  apply (zeta_vert_bound_disj_holds s).
+  - exact (Hmid s Hs2).
+  - exact (Hnear s).
+  - exact (Hsplit s Hs0).
+Qed.
