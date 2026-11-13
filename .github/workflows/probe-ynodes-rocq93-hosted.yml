@@ -54,11 +54,6 @@ jobs:
             ls *.v | sort > /tmp/nodes.txt
             echo "[y] node files: $(wc -l < /tmp/nodes.txt)"
             SEG=../attn/kbgamma_20261108
-            ls $SEG/seg_C1/*.v > /tmp/segc1.txt
-            ls $SEG/seg_C2/*.v > /tmp/segc2.txt
-            ls $SEG/seg_C3/*.v > /tmp/segc3.txt
-            ls $SEG/seg_C3_cast/*.v > /tmp/segc3c.txt
-            ls ../ConstructiveWorld_Live/*.v > /tmp/live.txt
             # Basename collisions across mapped dirs are fatal at import time in
             # Rocq 9.3 ("Required library X matches several files in path" once
             # two same-named .vo exist). seg_C1/seg_C2/seg_C3 carry byte-identical
@@ -69,7 +64,15 @@ jobs:
             # Remove the seg_C1/seg_C3 twin sources from the throwaway checkout so
             # exactly one .vo can ever exist per name; seg_C2 keeps the instances
             # the probe roots face uses (and which run #1 proved compatible).
-            rm -f ../attn/kbgamma_20261108/seg_C1/CxRealPairCore.v ../attn/kbgamma_20261108/seg_C1/CxRealPairExpLog.v ../attn/kbgamma_20261108/seg_C3/CxRealPairCore.v ../attn/kbgamma_20261108/seg_C3/CxRealPairExpLog.v
+            # This must happen BEFORE the ls sweeps below (run #4: rm after ls
+            # left the twins in the scan lists and coqdep died on the missing
+            # files with "No such file or directory").
+            rm -f $SEG/seg_C1/CxRealPairCore.v $SEG/seg_C1/CxRealPairExpLog.v $SEG/seg_C3/CxRealPairCore.v $SEG/seg_C3/CxRealPairExpLog.v
+            ls $SEG/seg_C1/*.v > /tmp/segc1.txt
+            ls $SEG/seg_C2/*.v > /tmp/segc2.txt
+            ls $SEG/seg_C3/*.v > /tmp/segc3.txt
+            ls $SEG/seg_C3_cast/*.v > /tmp/segc3c.txt
+            ls ../ConstructiveWorld_Live/*.v > /tmp/live.txt
             # full-graph scan: nodes + all seg dirs + whole Live tree
             cat /tmp/nodes.txt /tmp/segc1.txt /tmp/segc2.txt /tmp/segc3.txt /tmp/segc3c.txt /tmp/live.txt | sort > /tmp/all.txt
             # probe scope roots stay nodes + seg_C2 (deposit verification face)
