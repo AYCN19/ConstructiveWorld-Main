@@ -10,6 +10,10 @@
 # targets inside ConstructiveWorld_Live / seg_C1 entered the order as leaves
 # without their own edges — Hanson3Pow, abl_Pr_euclid_03, GaC1_Iface_Cx,
 # S13/S14 and friends were never compiled and 79 files stranded in deferral.
+# That uncovered the run #2 RED: with the full graph mapped, the byte-identical
+# CxRealPairCore/CxRealPairExpLog copies in seg_C1/seg_C2/seg_C3 both built .vo
+# and every import of them failed with "matches several files in path" (59+1
+# FAILs, one root cause); the scan prunes the seg_C1/seg_C3 twins.
 # Honest face: gate PASS is not proof of card statements; statement-face-only
 # files compile but prove nothing.
 name: probe y-nodes rocq93 hosted
@@ -54,8 +58,17 @@ jobs:
             ls $SEG/seg_C3/*.v > /tmp/segc3.txt
             ls $SEG/seg_C3_cast/*.v > /tmp/segc3c.txt
             ls ../ConstructiveWorld_Live/*.v > /tmp/live.txt
+            # Basename collisions across mapped dirs are fatal at import time in
+            # Rocq 9.3 ("Required library X matches several files in path" once
+            # two same-named .vo exist). seg_C1/seg_C2/seg_C3 carry byte-identical
+            # copies of CxRealPairCore.v and CxRealPairExpLog.v (md5 fa7ec759de /
+            # fd483f5bad); keep the seg_C2 instances (probe roots face) and prune
+            # the C1/C3 twins from the scan so only one .vo is ever built per name.
+            grep -v -E "/(CxRealPairCore|CxRealPairExpLog)\.v$" /tmp/segc1.txt > /tmp/segc1f.txt || true
+            grep -v -E "/(CxRealPairCore|CxRealPairExpLog)\.v$" /tmp/segc3.txt > /tmp/segc3f.txt || true
+            grep -v -E "/(CxRealPairCore|CxRealPairExpLog)\.v$" /tmp/segc3c.txt > /tmp/segc3cf.txt || true
             # full-graph scan: nodes + all seg dirs + whole Live tree
-            cat /tmp/nodes.txt /tmp/segc1.txt /tmp/segc2.txt /tmp/segc3.txt /tmp/segc3c.txt /tmp/live.txt | sort > /tmp/all.txt
+            cat /tmp/nodes.txt /tmp/segc1f.txt /tmp/segc2.txt /tmp/segc3f.txt /tmp/segc3cf.txt /tmp/live.txt | sort > /tmp/all.txt
             # probe scope roots stay nodes + seg_C2 (deposit verification face)
             cat /tmp/nodes.txt /tmp/segc2.txt | sort > /tmp/roots.txt
             echo "[y] scan set: $(wc -l < /tmp/all.txt) files | roots: $(wc -l < /tmp/roots.txt)"
