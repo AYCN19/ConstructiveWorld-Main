@@ -176,9 +176,7 @@ Proof.
     lia.
   - destruct Hnd as [ | Hnx Hnd' ].
     assert (Hqx : (q <> x)%nat).
-    { intro Heq. subst x. apply Hnotin.
-      let G := match goal with |- ?G0 => G0 end in
-      fail 0 G. left. reflexivity. }
+    { intro Heq. subst x. apply Hnotin. left. reflexivity. }
     assert (Hq2 : (2 <= q)%nat) by (destruct (pr_prime_parts q Hq); lia).
     rewrite prodf_pow_cons in Hdvd.
     destruct (pr_prime_euclid q (Nat.pow x (Kq x)) (prodf_pow Kq l)
