@@ -1,0 +1,88 @@
+# probe-ynodes-rocq93-hosted.yml — hosted-runner CI lane for the y-E1 gamma node
+# deposit (y_e1_gamma_nodes/, waves 1-4: 92 .v files, 31 PASS-gated verdicts).
+# Same rationale as probe-rocq93-hosted.yml: the upstream furnace cannot checkout
+# fork-origin PR merge refs and the fork has no self-hosted runner, so this lane
+# runs on a GitHub-hosted ubuntu runner. coqdep the node set, sort with the
+# committed scripts/y_sort_closure.py, compile the closure, report per-file rc.
+# Honest face: gate PASS is not proof of card statements; statement-face-only
+# files compile but prove nothing.
+name: probe y-nodes rocq93 hosted
+on: [push, workflow_dispatch]
+
+concurrency:
+  group: cw-probe-ynodes
+  cancel-in-progress: false
+
+jobs:
+  ynodes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.0
+
+      - name: Install Rocq 9.3.0 (defensive multi-archive)
+        run: |
+          opam repo add rocq-archive https://github.com/rocq-prover/opam || true
+          opam repo add coq-released https://coq.inria.fr/opam-repository || true
+          opam update
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 coq-core.9.3.0 coq-stdlib.9.3.0 || \
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 rocq-stdlib.9.3.0 || \
+          opam install -y coq.9.3.0 || \
+          opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
+          opam exec -- coqc -v
+
+      - name: coqdep + self-healing topological build of the y-node closure
+        run: |
+          opam exec -- bash -c '
+            set -e
+            cd y_e1_gamma_nodes
+            ls *.v | sort > /tmp/nodes.txt
+            echo "[y] node files: $(wc -l < /tmp/nodes.txt)"
+            ls ../attn/kbgamma_20261108/seg_C2/*.v > /tmp/segc2.txt; cat /tmp/nodes.txt /tmp/segc2.txt | sort > /tmp/all.txt; coqdep -Q ../ConstructiveWorld_Live "" -Q ../attn/kbgamma_20261108/seg_C2 "" -Q . "" $(cat /tmp/all.txt) > /tmp/deps.mk 2>/tmp/coqdep.err || { echo "[y] coqdep failed"; cat /tmp/coqdep.err; exit 1; }
+            echo "[y] deps.mk size: $(wc -l < /tmp/deps.mk)"
+            grep -E "S02_CauchyComplete" /tmp/deps.mk | head -2 || true
+            python3 ../scripts/y_sort_closure.py /tmp/deps.mk /tmp/order.txt
+            # self-healing multi-pass build: a file failing with Unable-to-locate-library
+            # is deferred to a later pass (its dep compiles somewhere in the closure);
+            # a pass with zero progress stops the loop (fail-loud).
+            cp /tmp/order.txt /tmp/pending.txt
+            : > /tmp/rc_table.txt
+            pass=1
+            while [ -s /tmp/pending.txt ] && [ $pass -le 6 ]; do
+              echo "[y] build pass $pass: $(wc -l < /tmp/pending.txt) pending"
+              progress=0; deferred=0
+              : > /tmp/next.txt
+              while IFS= read -r f; do
+                if [ -f "$f" ]; then p="$f"; elif [ -f "../ConstructiveWorld_Live/$f" ]; then p="../ConstructiveWorld_Live/$f"; else echo "MISSING-SOURCE $f" | tee -a /tmp/rc_table.txt; deferred=$((deferred+1)); continue; fi
+                if [ -f "${p%.v}.vo" ]; then echo "SKIP(vo-exists) $p" | tee -a /tmp/rc_table.txt; progress=$((progress+1)); continue; fi
+                if coqc -native-compiler no -q -Q ../ConstructiveWorld_Live "" -Q ../attn/kbgamma_20261108/seg_C2 "" -Q . "" "$p" > /tmp/last.log 2>&1; then
+                  echo "OK $p" | tee -a /tmp/rc_table.txt; progress=$((progress+1))
+                elif grep -q "Unable to locate library" /tmp/last.log; then
+                  deferred=$((deferred+1)); echo "$p" >> /tmp/next.txt
+                  mkdir -p /tmp/defer_logs; cp /tmp/last.log "/tmp/defer_logs/p${pass}_$(basename "${p%.v}").log"
+                  echo "DEFER $p :: $(head -3 /tmp/last.log | tr "\n" " " | cut -c1-220)"
+                else
+                  echo "FAIL $p" | tee -a /tmp/rc_table.txt; tail -20 /tmp/last.log
+                fi
+              done < /tmp/pending.txt
+              echo "[y] pass $pass done: progress=$progress deferred=$deferred"
+              if [ $progress -eq 0 ] && [ $deferred -gt 0 ]; then echo "[y] no progress with deferrals -> breaking (deps unresolvable)"; break; fi
+              cp /tmp/next.txt /tmp/pending.txt
+              pass=$((pass+1))
+            done
+            ok=$(grep -c "^OK " /tmp/rc_table.txt || true); fails=$(grep -c "^FAIL " /tmp/rc_table.txt || true); missing=$(grep -c "^MISSING-SOURCE " /tmp/rc_table.txt || true); deferred_left=$(wc -l < /tmp/next.txt)
+            echo "=== MISSING-LIB STATS (defer logs) ==="; grep -hoE "Unable to locate library [A-Za-z0-9_]+" /tmp/defer_logs/*.log 2>/dev/null | sort | uniq -c | sort -rn | head -20 || true
+            echo "=== RC TABLE: ok=$ok fail=$fails missing=$missing deferred_left=$deferred_left ==="
+            grep "^FAIL " /tmp/rc_table.txt | head -40 || true
+            echo "=== DEFERRED LEFT ==="; cat /tmp/next.txt || true
+            if [ "$fails" -eq 0 ] && [ "$deferred_left" -eq 0 ]; then echo "YNODES-GREEN: closure built clean on hosted rocq93"; else echo "YNODES-RED/PARTIAL (honest table above)"; exit 1; fi
+          '
+
+
+      - name: Probe stamp
+        if: always()
+        run: echo "y-nodes hosted probe lane done (gate PASS not card-statement proofs; statement-face files compile but prove nothing)"
