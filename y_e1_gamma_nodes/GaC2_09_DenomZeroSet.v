@@ -1,39 +1,37 @@
 (** * GaC2_09_DenomZeroSet - consolidating stem of the denominator
       zero set over the d09 machine kit.
-    Mission.  Two of the four roster statements of the C2-09 card
-      (drafts_C2.md:718-739) are cast here verbatim; the other two are
-      registered open slots - no placeholder statements, nothing
-      assumed.  Cast: [denom_zero_real_dir] (a), a vanishing denominator
-      forces Re s = 1 (the real direction, no periodic dependence);
-      [zero_set_membership] (d), the zero points [s_at k] lie on the
-      line Re s = 1.  Open slots (deferred-open, roster-gap disclosure
-      on file): (b) [denom_zero_imag_char], the constructive
-      two-pi-lattice witness in sigT form; (c) [denom_first_order],
-      the first-order Taylor remainder face with the explicit constant
-      (ln 2)^2 on Bishop [real_le_b] (full disclosure in Notes).
+    Mission.  All four roster statements of the C2-09 card
+      (drafts_C2.md:718-739) are cast: [denom_zero_real_dir] (a), a
+      vanishing denominator forces Re s = 1 (the real direction, no
+      periodic dependence); [zero_set_membership] (d), the zero points
+      [s_at k] lie on the line Re s = 1; [denom_zero_imag_char_holds]
+      (b), the constructive two-pi-lattice witness in sigT form
+      (discharged through [_g]); [denom_first_order_holds] (c), the
+      first-order Taylor remainder face with the explicit constant
+      14 (ln 2)^2 on Bishop [real_le_b] (discharged through
+      [_h]/[_i]/[_j]; full disclosure in Notes).
     Dependencies.  Stdlib [QArith.QArith], [ZArith], [Lia]; modules
       [S01_BaseRing], [S02_CauchyComplete], [S03_QExp],
       [S07_RealSetoidExpLog], [GaC1_Iface_Cx] (real_le_b definition,
       c_exp pair form, [gaC1_16_norm_sq_exp], gaC1_17 period faces),
-      [GaC1_Iface_Real]; family pieces [GaC2_09_DenomZeroSet_a..d]
-      (the d09 kit: ln2 positivity, square-sum zero face,
-      one-minus-one-opp cancellation, pi-window pin, inv-two-pi grid).
+      [GaC1_Iface_Real]; family pieces [GaC2_09_DenomZeroSet_a..j]
+      (the d09 kit, the witness kit, and the first-order kit).
     References.  drafts_C2.md C2.09 card and roster :718-739; the v16
       receipt section VII.3 casting spec; Titchmarsh Ch.1 the eta
       quotient denominator 1 - 2^(1-s) (statement architecture only).
-    Constructivity.  All statements Set-sorted; the open slots (b) and (c)
-      are not cast in this file (their target faces stay in the roster-gap
-      disclosure, see Notes); zero Sections, zero assumed constants, zero
-      admitted goals; every proof closes under the global context.
+    Constructivity.  All statements Set-sorted; all four roster
+      statements discharge with zero Sections, zero assumed constants,
+      zero admitted goals; every proof closes under the global context.
     Build.  [coqc -native-compiler no -q -Q <certified vo tree> ""
       -Q <build dir> "" GaC2_09_DenomZeroSet.v]; acceptance via
       50_toolkit/accept_node.py (six-chain gate), thermal-guard wrapped. *)
 Require S01_BaseRing.
-(** Notes.  Roster-gap disclosure for the open slots: (b)
-    [denom_zero_imag_char], the imaginary direction, the constructive
-    two-pi-lattice witness in sigT form; (c) [denom_first_order], the
-    first-order Taylor remainder face with the explicit constant
-    (ln 2)^2, landing on Bishop [real_le_b] (the v16 disclosure
+(** Notes.  Roster disclosure: (b) [denom_zero_imag_char_holds] is
+    discharged through the lattice witness [e09_lattice_witness] of
+    [_g]; (c) [denom_first_order_holds] is discharged through the
+    first-order face [f09_first_order] of [_j] (the uniform exp-Taylor
+    remainder kit [_h] and the pointwise engine [_i]); the constant is
+    the explicit 14 (ln 2)^2 on Bishop [real_le_b] (the v16 disclosure
     bishop_ordinal_deviation); the draft :735 sign typo is corrected
     to + ln 2 (s - 1).  Section variables concretized per the
     obligations L11/L12: [s_at k] := 1 - (2 pi k)/ln 2, [c_m1] := -1,
@@ -47,6 +45,12 @@ Require Import GaC2_09_DenomZeroSet_a.
 Require Import GaC2_09_DenomZeroSet_b.
 Require Import GaC2_09_DenomZeroSet_c.
 Require Import GaC2_09_DenomZeroSet_d.
+Require Import GaC2_09_DenomZeroSet_e.
+Require Import GaC2_09_DenomZeroSet_f.
+Require Import GaC2_09_DenomZeroSet_g.
+Require Import GaC2_09_DenomZeroSet_h.
+Require Import GaC2_09_DenomZeroSet_i.
+Require Import GaC2_09_DenomZeroSet_j.
 From Stdlib Require Import QArith.QArith.
 From Stdlib Require Import ZArith.
 From Stdlib Require Import Lia.
@@ -267,6 +271,9 @@ Proof.
   apply d09_one_plus_opp_eq_zero. exact Hu1.
 Qed.
 
+Lemma d09_ln2_lt_one : real_lt d09_ln2 real_one.
+Proof. exact (f09_ln2_lt_one). Qed.
+
 Lemma zero_set_membership : forall (k : Z),
   real_eq (cRe (s_at k)) real_one.
 Proof.
@@ -280,3 +287,27 @@ Proof.
   rewrite (real_zero_pt n).
   ring.
 Qed.
+
+(* The (b) roster statement of the C2-09 card, discharged through the
+   lattice-witness face of GaC2_09_DenomZeroSet_g: a vanishing
+   denominator at Re s = 1 yields an explicit integer k with
+   t * ln 2 = 2 pi k. *)
+Theorem denom_zero_imag_char_holds : forall (s : Cx) (t : Real),
+  real_eq (cIm s) t -> real_eq (cRe s) real_one ->
+  real_eq (c_norm_sq (c_plus c_one (c_opp (two_pow_1ms s)))) real_zero ->
+  sigT (fun k : Z => real_eq (real_mult t d09_ln2) (d09_two_pi k)).
+Proof. exact e09_lattice_witness. Defined.
+
+(* The (c) roster statement of the C2-09 card, discharged through the
+   first-order face [f09_first_order] of GaC2_09_DenomZeroSet_j: on the
+   disk |s - 1|^2 <= 3/4 the first-order Taylor remainder of the
+   denominator satisfies |R|^2 <= 14 (ln 2)^2 |s - 1|^2 in the Bishop
+   order [real_le_b] (the registered bishop_ordinal_deviation form;
+   the draft :735 sign typo corrected to + ln 2 (s - 1)). *)
+Theorem denom_first_order_holds : forall (s : Cx),
+  real_le_b (c_norm_sq (c_plus s (c_opp c_one))) (real_const (3 / 4)) ->
+  real_le_b (c_norm_sq (c_plus (c_plus (two_pow_1ms s) (c_opp c_one))
+                                (c_scale d09_ln2 (c_plus s (c_opp c_one)))))
+            (real_mult (real_mult (real_mult (real_const 14) d09_ln2) d09_ln2)
+                       (c_norm_sq (c_plus s (c_opp c_one)))).
+Proof. exact f09_first_order. Defined.
