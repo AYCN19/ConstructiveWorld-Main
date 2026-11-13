@@ -174,7 +174,10 @@ Proof.
     assert (Hq1 : (q <= 1)%nat)
       by (apply (dvd_le q 1); [ lia | lia | exact Hdvd ]).
     lia.
-  - destruct Hnd as [ | Hnx Hnd' ].
+  - (* Rocq 9.3: plain destruct on NoDup (x::l) generalises the compound index
+       and yields a degenerate nil subgoal (In q [] = False, unprovable);
+       inversion keeps only the cons case the rest of this proof assumes. *)
+    inversion Hnd as [ | x0 l0' Hnx Hnd' ]; subst.
     assert (Hqx : (q <> x)%nat).
     { intro Heq. subst x. apply Hnotin. left. reflexivity. }
     assert (Hq2 : (2 <= q)%nat) by (destruct (pr_prime_parts q Hq); lia).
