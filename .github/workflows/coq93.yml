@@ -527,8 +527,21 @@ jobs:
           # cw_chk93.cmd 系 coqchk_all.sh 串行壳，直挂会废并行 K=14（ci_switch README 偏离1 同判
           # ·否决）；原 cw_chk.cmd 未删，回滚=弃 job env＋本 export 即复 9.1 默认。
           export COQCHK="D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe"
-          # W3 v1.1 backstop (20261101; 20261115 user order 20 -> 500): every 500th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
-          if [ $((GITHUB_RUN_NUMBER % 500)) -eq 0 ]; then : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"; echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (skip list withheld)"; fi
+          # W3 v1.1 backstop (20261101; 20261115 user order 20 -> 500 + heavy-category
+# exemption): every 500th run narrows the skip list to the closed heavy
+# registry (scripts/gates/w3_heavy_exempt.txt: flag / vm_compute-heavy
+# categories), so the sweep re-checks the whole tree EXCEPT those heavy
+# modules whose fingerprints are unchanged - the kernel verdict on unchanged
+# bytes is deterministic and bytecode re-execution costs hours;
+# fingerprint-changed stems never enter the skip list, so they always
+# re-check.  The skip file and the reconcile JSON are rewritten as a
+# consistent pair (gate2 R2 appendix==reconciliation and R4 coverage
+# partition read the pair); a filter failure falls back to the legacy full
+# sweep (empty skip list).
+          if [ $((GITHUB_RUN_NUMBER % 500)) -eq 0 ]; then
+            "$PYTHON" scripts/gates/w3_skip_filter.py --skip "$PWD/ConstructiveWorld_vo/_attest_skip.txt" --recon "$PWD/attest_reconcile.json" || : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"
+            echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (heavy-unchanged exempted)"
+          fi
           # 20261030 装箱回退（C-path 撤除）：own-mode K=12 cost-weighted packing
           # （cost_table.json + parallel_chk v3 own branch）实测 28h+ cancelled，对照
           # K=4 基线 14h15m——每道全闭包重验物理墙，非调参可救；CHK_JOBS 回退 4，
