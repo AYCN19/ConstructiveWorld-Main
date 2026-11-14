@@ -53,13 +53,13 @@ jobs:
                      S12_B5RecycleSF cast_modulus cast_parity mach_fold_q \
                      S13_NLiveAudit planb5_p7_hval_table S14_B5BatchBlock \
                      S15_TailFEPUp mach_atan_addsub PiEnvelope mach_fold_chain \
-                     LW0MLicBridge cast_bridge; do
+                     LW0MLicBridge cast_bridge planb5_p7_mach_assembly; do
               echo "[probe] shot $f"
               coqc -native-compiler no -q -Q . "" "$f.v"
             done
             echo "[probe] coqchk planb5_p7_mach_assembly (two roots: assembly + table)"
-            coqchk -o -Q . "" planb5_p7_mach_assembly
             test -f planb5_p7_mach_assembly.vo
+            coqchk -o -Q . "" planb5_p7_mach_assembly
             echo "P7-PROBE-GREEN: hosted rocq93 34-shot cascade rc=0 + coqchk clean"
           '
 
