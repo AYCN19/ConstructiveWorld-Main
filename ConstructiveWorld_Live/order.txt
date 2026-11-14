@@ -1104,3 +1104,10 @@ planb4_l3_limbs_discharge.v#R223-l3v001
 planb5_u5c3_extwin_cert.v#R224-g1w036
 planb4_l4_fourslots.v#R223-l4v001
 planb4_sl4_delta_anchor.v#R223-l4v002
+vertex_window.v#R227-r2ta002
+atan_expl_rate.v#R227-r2ta003
+WC_budget_family.v#R227-r2ta004
+window_cos_assembly.v#R227-r2ta005
+N_total_assembly.v#R227-r2ta006
+tier_A_explicit_rate.v#R227-r2ta007
+SigMigrate_core.v#R227-cm78

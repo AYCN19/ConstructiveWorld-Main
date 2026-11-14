@@ -1001,3 +1001,10 @@ planb4_l3_limbs_discharge.v
 planb5_u5c3_extwin_cert.v
 planb4_l4_fourslots.v
 planb4_sl4_delta_anchor.v
+vertex_window.v
+atan_expl_rate.v
+WC_budget_family.v
+window_cos_assembly.v
+N_total_assembly.v
+tier_A_explicit_rate.v
+SigMigrate_core.v
