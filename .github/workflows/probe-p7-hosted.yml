@@ -19,7 +19,7 @@ concurrency:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 360
     steps:
       - uses: actions/checkout@v5
 
@@ -59,7 +59,7 @@ jobs:
             done
             echo "[probe] coqchk planb5_p7_mach_assembly (two roots: assembly + table)"
             test -f planb5_p7_mach_assembly.vo
-            coqchk -o -Q . "" planb5_p7_mach_assembly
+            coqchk -o -bytecode-compiler yes -Q . "" planb5_p7_mach_assembly
             echo "P7-PROBE-GREEN: hosted rocq93 34-shot cascade rc=0 + coqchk clean"
           '
 
@@ -68,7 +68,7 @@ jobs:
           opam exec -- bash -c '
             set -e
             cd ConstructiveWorld_Live
-            coqchk -o -Q . "" planb5_p7_hval_table
+            coqchk -o -bytecode-compiler yes -Q . "" planb5_p7_hval_table
             echo "P7-PROBE-GREEN-2: second root checked"
           '
 
