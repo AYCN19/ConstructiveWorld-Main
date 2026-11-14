@@ -1008,3 +1008,8 @@ window_cos_assembly.v
 N_total_assembly.v
 tier_A_explicit_rate.v
 SigMigrate_core.v
+planb5_p7_hval_table.v
+cast_bridge.v
+cast_modulus.v
+cast_parity.v
+planb5_p7_mach_assembly.v

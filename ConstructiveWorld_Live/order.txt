@@ -1111,3 +1111,8 @@ window_cos_assembly.v#R227-r2ta005
 N_total_assembly.v#R227-r2ta006
 tier_A_explicit_rate.v#R227-r2ta007
 SigMigrate_core.v#R227-cm78
+planb5_p7_hval_table.v#R228-p7as01
+cast_bridge.v#R228-p7as02
+cast_modulus.v#R228-p7as03
+cast_parity.v#R228-p7as04
+planb5_p7_mach_assembly.v#R228-p7as05
