@@ -23,7 +23,7 @@
 #     「sha256」与 gate5_vodep_quarantine.py:220 [0-9a-f]{32} 硬闸冲突·按脚本契约裁定·gaps 登记）。
 #   ⑤ attest 增量继承现役（20261108 admit 恢复）：过渡件（ATT-MODE-OVERRIDE 块＋CHK_SKIP_FILE
 #     全树行＋skip 清空行）已退役删除——档案已按 #9 绿树重铸（e0dacd49·1021 件）；W3 backstop
-#     （每 20 轮全量）保留。
+#     （每 500 轮全量；20261115 用户令 20→500）保留。
 #   ⑥ seed=main93 沙箱 BUILD_DONE 闸（seedLedger 判定 20261105=不可用：_93m_BUILD_DONE 缺席＋
 #     1013/1018 .vo 缺 5 件·炉在飞）→ 首炉冷编零 seed·禁播 9.1 .vo（魔数 90100 vs 90300 拒载律）；
 #     沙箱收官（R4 闸线）后播种自动启用。
@@ -211,7 +211,7 @@ jobs:
           # （无豁免则播种件无 Build 产物、被 T2 删除律全灭。20261108 注：cw_attest.json 已按
           # #9 绿树重铸（e0dacd49·9.3 代）——播种有效件若字节≠档案 digest，reconcile 判 changed
           # 送 coqchk 复验，陈种永不入跳过清单）。
-          # 假绿防线不受削弱：有效件字节=清单在册 digest（步内复核）＋W3 backstop 每 20 轮
+          # 假绿防线不受削弱：有效件字节=清单在册 digest（步内复核）＋W3 backstop 每 500 轮
           # 全树 coqchk＋T2 对其余件照常每炉失效。
           PYTHON="C:\Program Files\Python313\python.exe"   # keeper4 20261105：显式钉真实 python（#290 商店桩坑·T2/chk 步同款）
           "$PYTHON" - <<'PYEOF93SEED'
@@ -475,7 +475,7 @@ jobs:
       # changed≈全量（.vo 魔数 90100→90300 全换代）·removed=0——口径=「换代」非「漂移」
       # （工单风险#3）；cw_attest.json 由步3 以 9.3 绿树重铸（新 tree_sha·指纹全换代）后
       # 恢复增量继承语义。机制零改：档案缺席/坏档仍走全量 coqchk 分支（降速不降强）；
-      # W3 v1.1 backstop（每 20 轮全量）代际无关零改。
+      # W3 v1.1 backstop（每 500 轮全量；20261115 用户令 20→500）代际无关零改。
       - name: attest reconcile (archive-hit -> skip list, miss -> coqchk, cw.attest/v1)
         shell: C:/Progra~1/Git/bin/bash.exe -e {0}
         run: |
@@ -519,7 +519,7 @@ jobs:
           # 20261108 admit restored: the 20261103 skip-withholding transition is retired
           # (archive re-cast from the #9 green tree at e0dacd49, 1021 modules) - the skip
           # list feeds parallel_chk again; the W3-BACKSTOP below still forces a full-tree
-          # coqchk every 20 runs.
+          # coqchk every 500 runs (20261115: 20 -> 500; rocqwash autofix inflates run numbers).
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
           export CHK_JOBS=14   # 20261105 用户令：14 路（根分组共享闭包模式不变）
           # 20261105 Rocq 9.3 换基（形A·改点③）：parallel_chk.sh L57 K="${COQCHK:-…9.1…}" 吃本环境
@@ -527,8 +527,8 @@ jobs:
           # cw_chk93.cmd 系 coqchk_all.sh 串行壳，直挂会废并行 K=14（ci_switch README 偏离1 同判
           # ·否决）；原 cw_chk.cmd 未删，回滚=弃 job env＋本 export 即复 9.1 默认。
           export COQCHK="D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe"
-          # W3 v1.1 backstop (20261101): every 20th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
-          if [ $((GITHUB_RUN_NUMBER % 20)) -eq 0 ]; then : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"; echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (skip list withheld)"; fi
+          # W3 v1.1 backstop (20261101; 20261115 user order 20 -> 500): every 500th run withholds the skip list -> full-tree coqchk (periodic full re-certification for the incremental protocol)
+          if [ $((GITHUB_RUN_NUMBER % 500)) -eq 0 ]; then : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"; echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (skip list withheld)"; fi
           # 20261030 装箱回退（C-path 撤除）：own-mode K=12 cost-weighted packing
           # （cost_table.json + parallel_chk v3 own branch）实测 28h+ cancelled，对照
           # K=4 基线 14h15m——每道全闭包重验物理墙，非调参可救；CHK_JOBS 回退 4，
