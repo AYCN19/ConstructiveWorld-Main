@@ -1,0 +1,87 @@
+# rocqwash-triage.yml - furnace red triage watch via the local rocqwash MCP
+# server (companion driver: .github/scripts/rocqwash_triage.py, 20261114).
+#
+# Design notes:
+#   * Observer, not furnace: triggers on workflow_run of "Main CI 9.3" and
+#     only acts when that furnace run concluded failure. The furnace yml is
+#     not touched by this watch lane (zero edit to the certification core).
+#   * The runner is the desk machine, so the job reaches the resident
+#     rocqwash MCP server directly (stdio spawn, same wiring as the
+#     user-level MCP config) and mirrors the triage report into the desk
+#     inbox directory on this machine.
+#   * Test mode: workflow_dispatch with a run_id input triages any given
+#     historical run (no compile, read-only API face, netrc token masked
+#     in the report).
+#   * A red triage verdict is data, not a tool failure: the job stays green
+#     as long as the watch leg itself works. A non-zero driver exit means
+#     the watch leg is broken (server wiring, protocol, netrc, HTTP) and
+#     the job shows red - fail loud, the desk must see the watch die.
+#   * Rollback: delete this file (and optionally the driver script); the
+#     ledger entries already written stay valid history.
+name: rocqwash triage watch
+
+on:
+  workflow_run:
+    workflows: ["Main CI 9.3"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'CI run id to triage (test mode; empty = no-op)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  triage:
+    runs-on: [self-hosted, Windows]
+    steps:
+      - name: Guard (triage only red furnace runs, or dispatch test input)
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            RUN_ID="${{ github.event.workflow_run.id }}"
+            CONCL="${{ github.event.workflow_run.conclusion }}"
+            echo "watch: Main CI 9.3 run $RUN_ID concluded $CONCL"
+            if [ "$CONCL" = "failure" ]; then
+              echo "RUN_ID=$RUN_ID" >> "$GITHUB_ENV"
+            fi
+          else
+            if [ -n "${{ inputs.run_id }}" ]; then
+              echo "watch: dispatch test mode, run ${{ inputs.run_id }}"
+              echo "RUN_ID=${{ inputs.run_id }}" >> "$GITHUB_ENV"
+            else
+              echo "watch: dispatch without run_id - nothing to do"
+            fi
+          fi
+
+      - name: Check out triage driver (main)
+        if: env.RUN_ID != ''
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          sparse-checkout: .github/scripts
+          sparse-checkout-cone-mode: false
+
+      - name: Triage red run via local rocqwash MCP
+        if: env.RUN_ID != ''
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/rocqwash-triage"
+          "/c/Program Files/Python313/python.exe" .github/scripts/rocqwash_triage.py \
+            --repo "${{ github.repository }}" \
+            --run "$RUN_ID" \
+            --out "$GITHUB_WORKSPACE/rocqwash-triage" \
+            --inbox "D:/ComplexAnalysis/attn/_rocqwash_watch_inbox"
+
+      - name: Upload triage artifacts
+        if: env.RUN_ID != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: rocqwash-triage-run-${{ env.RUN_ID }}
+          path: rocqwash-triage/
+          if-no-files-found: error
