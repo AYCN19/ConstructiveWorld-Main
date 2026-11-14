@@ -477,10 +477,28 @@ def try_heal(args, family, action, run_id, repo):
         nb = (newest or {}).get("workflow_runs") or []
         if not nerr and nb and (nb[0] or {}).get("head_sha") \
                 and nb[0]["head_sha"] != hs:
-            return ("skipped(superseded)",
-                    "run %d head %s superseded on %s by %s - not rerun "
-                    "(fission guard)" % (run_id, hs[:7], hb,
-                                         nb[0]["head_sha"][:7]))
+            new_sha = nb[0]["head_sha"]
+            # 20261115 desk follow-up: "branch moved" alone does NOT
+            # mean covered - only a descendant head contains the old
+            # content.  Compare API discriminates: ahead/identical =
+            # covered (true superseded, skip); behind/diverged/errors
+            # = coverage NOT proven (force-push, rebase with drops,
+            # revert chains) - the rerun PROCEEDS, bounded by the
+            # 1/run heal budget and the live-cancel check above
+            # (at-most-once per run).
+            cmpv, cerr = gh_api(token,
+                                "/repos/%s/compare/%s...%s"
+                                % (repo, hs, new_sha))
+            vstat = (cmpv or {}).get("status") or ""
+            if vstat in ("ahead", "identical"):
+                return ("skipped(superseded-covered)",
+                        "run %d head %s is ancestor-covered by %s on %s "
+                        "(compare=%s) - not rerun (fission guard)"
+                        % (run_id, hs[:7], new_sha[:7], hb, vstat))
+            log("heal: head %s not provably covered by %s on %s "
+                "(compare=%s%s) - rerun proceeds (budget-capped)"
+                % (hs[:7], new_sha[:7], hb, vstat or "err",
+                   (": " + cerr) if cerr else ""))
     url = ("https://api.github.com/repos/%s/actions/runs/%d/rerun-failed-jobs"
            % (repo, run_id))
     req = urllib.request.Request(url, method="POST", data=b"", headers={
