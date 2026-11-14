@@ -30,8 +30,8 @@ on:
     workflows: ["Main CI 9.3"]
     types: [completed]
   schedule:
-    # reconcile pass: revive recently cancelled furnace runs (backfill to
-    # green), budget-capped; cheap API scan, no compile.
+    # reconcile pass: record recent cancelled runs (intent; NOT revived -
+    # 20261115 order, manual rerun only) + PR adjudication; no compile.
     - cron: '*/30 * * * *'
   workflow_dispatch:
     inputs:

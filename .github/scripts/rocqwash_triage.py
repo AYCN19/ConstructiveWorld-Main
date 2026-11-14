@@ -55,6 +55,7 @@ FURNACE_WORKFLOW_FILE = "coq93.yml"
 FURNACE_NAME = "Main CI 9.3"
 RECONCILE_WINDOW_H = 48
 RECONCILE_MAX_PER_PASS = 2
+MAX_QUEUED_FURNACE_RUNS = 3
 AUTOFIX_BUDGET_PER_BRANCH = 2
 
 INIT_RESULT_ID = 1
@@ -436,6 +437,40 @@ def try_heal(args, family, action, run_id, repo):
                         "not-fast-forward", "merge-failed")):
         return "skipped(mirror-sync:" + sync + ")", "mirror sync failed: " + sync
 
+    # 20261115 desk order: a manually cancelled run must NOT be
+    # resurrected.  Re-fetch the run's live state right before the
+    # rerun POST; if the desk cancelled it since the failure
+    # (conclusion now cancelled / status no longer completed), drop
+    # the heal attempt.
+    live, lerr = gh_api(token, "/repos/%s/actions/runs/%d" % (repo, run_id))
+    if lerr:
+        return "skipped(live-check: %s)" % lerr, \
+            "heal live-check failed: %s" % lerr
+    if (live or {}).get("conclusion") == "cancelled" or \
+            (live or {}).get("status") != "completed":
+        return ("skipped(intent-cancelled)",
+                "run %d live status=%s conclusion=%s - desk intent, "
+                "not resurrected" % (run_id, (live or {}).get("status"),
+                                     (live or {}).get("conclusion")))
+    # 20261115 desk order (fission guard): a failed run whose branch has
+    # moved on is superseded - rerunning it grows the run tree for
+    # nothing.  Compare against the newest furnace run of the same
+    # head_branch; the heal budget (1/run) additionally caps reruns
+    # at most once per run.
+    hb = (live or {}).get("head_branch") or ""
+    hs = (live or {}).get("head_sha") or ""
+    if hb and hs:
+        newest, nerr = gh_api(
+            token,
+            "/repos/%s/actions/workflows/%s/runs?head_branch=%s"
+            "&per_page=1" % (repo, FURNACE_WORKFLOW_FILE, hb))
+        nb = (newest or {}).get("workflow_runs") or []
+        if not nerr and nb and (nb[0] or {}).get("head_sha") \
+                and nb[0]["head_sha"] != hs:
+            return ("skipped(superseded)",
+                    "run %d head %s superseded on %s by %s - not rerun "
+                    "(fission guard)" % (run_id, hs[:7], hb,
+                                         nb[0]["head_sha"][:7]))
     url = ("https://api.github.com/repos/%s/actions/runs/%d/rerun-failed-jobs"
            % (repo, run_id))
     req = urllib.request.Request(url, method="POST", data=b"", headers={
@@ -464,11 +499,11 @@ def try_heal(args, family, action, run_id, repo):
 
 
 def reconcile_leg(args, repo):
-    """Backfill pass: drive recently cancelled furnace runs to completion
-    (full rerun), budget-capped once per run id, only while no furnace run
-    is in flight, at most RECONCILE_MAX_PER_PASS per pass.  The revived
-    runs re-enter the watch loop on completion (triage -> heal -> autofix),
-    so the backlog converges to green without further prompting."""
+    """Scheduled pass over recent furnace runs.  Cancelled runs are
+    recorded as intent (desk manual cancel or infra cancel) and NOT
+    revived - revival is opt-in only via --reconcile-revive (desk-run
+    emergency lever; 20261115 order: manual cancels stay dead).  The
+    pass is read-only unless that flag is set."""
     token = os.environ.get("GITHUB_TOKEN", "")
     if not token:
         return ["skipped(no-token)"]
@@ -482,6 +517,7 @@ def reconcile_leg(args, repo):
     if err or not runs:
         return ["skipped(runs-list: %s)" % err]
     recent = []
+    queued = []
     busy = False
     now = datetime.datetime.now(datetime.timezone.utc)
     for r in runs.get("workflow_runs") or []:
@@ -494,14 +530,49 @@ def reconcile_leg(args, repo):
             continue
         if r.get("status") in ("in_progress", "queued"):
             busy = True
+        if r.get("status") == "queued":
+            queued.append((r["id"], r["run_number"]))
         if (r.get("conclusion") == "cancelled" and age_h is not None
                 and age_h <= RECONCILE_WINDOW_H):
             recent.append((r["id"], r["run_number"], age_h))
-    if busy:
-        return ["skipped(furnace-busy)"]
+    queued.reverse()  # oldest first (the runs listing is newest-first)
     out = []
+    # 20261115 desk order (queue governor): the pending queue must be
+    # bounded - unbounded queued runs pile up when pushes outpace the
+    # furnace.  Keep at most MAX_QUEUED_FURNACE_RUNS queued runs (newest
+    # win); cancel the oldest overflow.  In-progress runs are never
+    # touched; the trimmed ones stay dead under the intent rule.
+    if len(queued) > MAX_QUEUED_FURNACE_RUNS:
+        overflow = queued[:len(queued) - MAX_QUEUED_FURNACE_RUNS]
+        for gid, gnum in overflow:
+            _, cerr = gh_api(token, "/repos/%s/actions/runs/%d/cancel"
+                             % (repo, gid), method="POST")
+            if cerr:
+                out.append("#%d queue-trim cancel failed: %s"
+                           % (gnum, cerr))
+                continue
+            out.append("#%d queue-trimmed (queued beyond cap %d)"
+                       % (gnum, MAX_QUEUED_FURNACE_RUNS))
+            mcp_append(args, "watch-queue-governor",
+                       "queued furnace run #%d cancelled - queue depth %d "
+                       "over cap %d (oldest-first trim)"
+                       % (gnum, len(queued), MAX_QUEUED_FURNACE_RUNS),
+                       "https://github.com/%s/actions/runs/%d"
+                       % (repo, gid))
+    if busy:
+        if not out:
+            return ["skipped(furnace-busy)"]
+        return out
     for run_id, num, age_h in sorted(recent, key=lambda x: -x[2])[
             :RECONCILE_MAX_PER_PASS]:
+        # 20261115 desk order: manually cancelled runs are intent - the
+        # watch must NOT auto-revive them.  With cancel-in-progress=false
+        # on both furnaces (8c527f1) concurrency cancels no longer occur,
+        # so revival is opt-in only via --reconcile-revive.
+        if not args.reconcile_revive:
+            out.append("skip #%d (cancelled=intent; not revived - manual "
+                       "rerun only, age %.1fh)" % (num, age_h))
+            continue
         key = "reconcile:%d" % run_id
         if int(state.get(key, 0)) >= 1:
             out.append("skip #%d (already reconciled)" % num)
@@ -512,7 +583,7 @@ def reconcile_leg(args, repo):
             out.append("#%d revive failed: %s" % (num, err))
             continue
         try:
-            heal_state_bump(path, state, run_id)
+            heal_state_bump(path, state, key)  # keyed cap: at-most-once per run
         except Exception:
             pass
         out.append("#%d revived (age %.1fh)" % (num, age_h))
@@ -546,8 +617,12 @@ def main():
     ap.add_argument("--timeout", type=int, default=900,
                     help="whole MCP conversation deadline in seconds")
     ap.add_argument("--reconcile", action="store_true",
-                    help="reconcile mode: revive recently cancelled furnace "
-                         "runs (scheduled backlog pass; triage skipped)")
+                    help="reconcile mode: record recent cancelled furnace "
+                         "runs (intent; not revived - scheduled pass; "
+                         "triage skipped)")
+    ap.add_argument("--reconcile-revive", action="store_true",
+                    help="emergency lever with --reconcile: actually rerun "
+                         "cancelled runs (default off: cancelled = intent)")
     ap.add_argument("--autofix", action="store_true",
                     help="enable the autofix leg (mechanical comment-surface "
                          "repair pushed to the triggering branch)")
