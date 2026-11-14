@@ -38,22 +38,28 @@ jobs:
           opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
           opam exec -- coqc -v
 
-      - name: "16-shot cascade + coqchk (P7 - S-chain base + 4 casts + assembly)"
+      - name: "32-shot cascade + coqchk (P7 - full dependency closure, coqdep topological order)"
         run: |
           opam exec -- bash -c '
             set -e
             cd ConstructiveWorld_Live
-            for f in S01_BaseRing S02_CauchyComplete S03_QExp S04_RealExpLogConv \
-                     S05_AlignmentGRPO S06_DiffSamplingGibbs S07_RealSetoidExpLog \
-                     S08_RealMainlineDPO S09_EntropyReal S10_KVQuantTrig S11_TP3B5 \
-                     cast_bridge cast_modulus cast_parity planb5_p7_hval_table; do
+            for f in S01_BaseRing planb3_g1_calib S02_CauchyComplete S03_QExp \
+                     UpReqBanachInstB S04_RealExpLogConv UpReqBanachExp \
+                     S05_AlignmentGRPO UpReqBanachInst S06_DiffSamplingGibbs \
+                     UpReqBanachInstReal S07_RealSetoidExpLog UpReqBanachNormOpp \
+                     S08_RealMainlineDPO SumInvFactEscape S09_EntropyReal \
+                     UpReqIrrationalCriterion S10_KVQuantTrig S11_TP3B5 \
+                     S12_B5RecycleSF cast_modulus cast_parity mach_fold_q \
+                     S13_NLiveAudit mach_fold_chain planb5_p7_hval_table \
+                     S14_B5BatchBlock S15_TailFEPUp PiEnvelope LW0MLicBridge \
+                     cast_bridge; do
               echo "[probe] shot $f"
               coqc -native-compiler no -q -Q . "" "$f.v"
             done
             echo "[probe] coqchk planb5_p7_mach_assembly (two roots: assembly + table)"
             coqchk -o -Q . "" planb5_p7_mach_assembly
             test -f planb5_p7_mach_assembly.vo
-            echo "P7-PROBE-GREEN: hosted rocq93 15-shot cascade rc=0 + coqchk clean"
+            echo "P7-PROBE-GREEN: hosted rocq93 32-shot cascade rc=0 + coqchk clean"
           '
 
       - name: "coqchk table root (second certification root)"
