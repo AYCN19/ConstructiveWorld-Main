@@ -26,7 +26,7 @@
     width faces, exit_core.py:73).  No new analytic content: every
     statement is an instance of the canonical section-two faces above.
 
-    Registered downgrade (evaluation-budget clause, 20261114).  The
+    Registered downgrade (evaluation-budget clause).  The
     canonical reference depth is 2600 (exit_core.py:87: PI = Mdot(2600)).
     The vm_compute evaluation of the depth-2600 reference faces exceeded
     the seconds-level evaluation budget by more than 100x (probe run
@@ -35,7 +35,7 @@
     normalization, unlike the integer-accumulating canonical script).
     Per the evaluation-budget rule the reference depth was downgraded to
     40 (same face form, own-modulus margin w(40)); the depth is a free
-    instance parameter of the canonical quantified face.  This downgrade
+    instance choice of the canonical quantified face.  This downgrade
     is registered for adjudication in the seat receipt; it is not a
     silent substitution.
 

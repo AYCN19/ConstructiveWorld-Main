@@ -1,5 +1,5 @@
 (* * planb5_p7_hval_table: the table-domain (Hval, n<=40) clearing piece
-      of the P7 exit assembly (GD-20261114-P7ASM-01 item 5, family-one
+      of the P7 exit assembly (GD-P7ASM-01 item 5, family-one
       route k0(40)=159, Machin ball carrier dval_M).
 
     Mission.  Clear the canonical Hval table face pointwise: for each
@@ -9,12 +9,12 @@
 
     (canonical script chong1_exit_core.py:187-191, the 1d transfer face;
     grid-checked there and re-verified 79/79 EXACT against the anchors by
-    the table sweep receipt (sweep report md, 2026-11-14) under OUT/p7_out_20261114/) is
+    the table sweep receipt (sweep report md) under the P7 OUT sandbox) is
     delivered as the Set-carried row face p7_hval_row n (QleT' carrier
     over Qle_bool), certified by exact vm_compute arithmetic closures -
     the machine evaluates every rational; no hand arithmetic anywhere.
 
-    Registered evaluation-budget downgrade (ALERT clause, 20261114).
+    Registered evaluation-budget downgrade (ALERT clause).
     The canonical depths k0(n) reach 159 at n=40 (the 3695-bit numerator
     route).  The in-library Machin partial sum (arctan_partial,
     S11_TP3B5.v:53) is a Qsum with per-operation rational normalization;
@@ -44,7 +44,7 @@
     References.  Hval face = chong1_exit_core.py:187-191; k0 table =
     per_n_table.txt + chong1_run1.log L24 (k0(1),k0(5),k0(40) = 3 20
     159); Mdot = chong1_exit_core.py:65; w = :73; A/B tables =
-    planb3_g1_calib.v:36/:83; M1:438 prescription; sweep receipt (sweep report md 2026-11-14,
+    planb3_g1_calib.v:36/:83; M1:438 prescription; sweep receipt (sweep report md,
     79/79 EXACT anchors, tightest 1.815 bit@n=5).
 
     Constructivity.  Zero axioms, zero admitted goals; the row face is

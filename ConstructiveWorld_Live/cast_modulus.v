@@ -84,7 +84,7 @@ Definition mach_own_modulus (k : nat) : Q :=
 Definition mach_modulus_target (b : Q) : Q :=
   (1 # 71663616) / (4 * q_pow (Qmax (Qabs b) 1) 11).
 
-(* Digit-count parameter s(b): any nat with max(|b|,1) <= 2^s serves as
+(* Digit-count choice s(b): any nat with max(|b|,1) <= 2^s serves as
    the base of the fuel bound; Z.log2 of |numerator|+1 is the
    computable choice. *)
 Definition mach_modulus_s (b : Q) : nat :=
