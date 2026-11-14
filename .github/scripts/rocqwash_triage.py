@@ -176,22 +176,32 @@ def write_artifacts(out_dir, files):
 
 
 def gh_api(token, path, method="GET", body=None):
-    url = "https://api.github.com" + path
-    data = json.dumps(body).encode("utf-8") if body is not None else \
-        (b"" if method == "POST" else None)
-    req = urllib.request.Request(url, method=method, data=data, headers={
-        "Authorization": "Bearer " + token,
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "rocqwash-triage-watch",
-    })
-    try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            raw = resp.read()
-        return (json.loads(raw) if raw else None), None
-    except urllib.error.HTTPError as exc:
-        return None, "%d %s" % (exc.code, exc.reason)
-    except Exception as exc:
-        return None, repr(exc)
+    """One REST call.  GET retries twice on transient transport
+    failures (truncated reads / connection resets in the NETRED window
+    truncated the ~600KB runs listing twice on 20261115, disarming the
+    queue governor); POST stays single-shot (non-idempotent)."""
+    attempts = 2 if method == "GET" else 1
+    last_err = None
+    for attempt in range(attempts):
+        url = "https://api.github.com" + path
+        data = json.dumps(body).encode("utf-8") if body is not None else \
+            (b"" if method == "POST" else None)
+        req = urllib.request.Request(url, method=method, data=data, headers={
+            "Authorization": "Bearer " + token,
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "rocqwash-triage-watch",
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                raw = resp.read()
+            return (json.loads(raw) if raw else None), None
+        except urllib.error.HTTPError as exc:
+            return None, "%d %s" % (exc.code, exc.reason)
+        except Exception as exc:
+            last_err = exc
+            if attempt + 1 < attempts:
+                time.sleep(3 + attempt * 5)
+    return None, repr(last_err)
 
 
 def mcp_append(args, tool, points, evidence):
