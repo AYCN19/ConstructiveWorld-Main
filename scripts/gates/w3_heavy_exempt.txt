@@ -1,0 +1,17 @@
+# W3 heavy-category exemption registry (closed list; user order 20261115).
+# Stems named here are withheld from the periodic full-tree sweep (W3
+# backstop) while their fingerprints stay unchanged: the kernel verdict on
+# byte-identical .vo artifacts is deterministic, and re-executing
+# vm_compute certificates costs hours.  Fingerprint-changed stems never
+# enter the skip list (attest_reconcile excludes them), so they always
+# re-check.  Additions go through review - this list is a registry, not a
+# dumping ground.
+#
+# Category: bytecode / vm_compute-heavy certificate modules.
+sl12_constants
+sl3_d3_gf_anchors
+sl4_d3_growth_anchor
+sl4_d4_denom_anchors
+# Category: finite-flag modules (vm_compute anchor families).
+sl3_d2_flag
+sl3_d2_flag_anchors
