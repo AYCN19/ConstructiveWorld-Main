@@ -16,6 +16,11 @@
 #     as long as the watch leg itself works. A non-zero driver exit means
 #     the watch leg is broken (server wiring, protocol, netrc, HTTP) and
 #     the job shows red - fail loud, the desk must see the watch die.
+#   * Heal leg (20261114 v2): for rerun-safe transient families only
+#     (netred / runner-lost, i.e. verdict action "rerun-after-stable-window"),
+#     the driver fast-forwards the bridge mirror main (guarded: clean tree,
+#     strictly ff, budget-capped 1 round per run) and re-dispatches the
+#     failed jobs. Content reds and toolchain breaks stay human-gated.
 #   * Rollback: delete this file (and optionally the driver script); the
 #     ledger entries already written stay valid history.
 name: rocqwash triage watch
@@ -33,7 +38,7 @@ on:
         type: string
 
 permissions:
-  actions: read
+  actions: write
   contents: read
 
 jobs:
@@ -64,19 +69,26 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: main
-          sparse-checkout: .github/scripts
-          sparse-checkout-cone-mode: false
+          # NO sparse-checkout here on purpose: this runner shares one
+          # cached checkout repo across all workflows, and a sparse pattern
+          # left enabled there silently collapses every later job's working
+          # tree to that pattern (20261114 #69 att2/att3 - furnace gates
+          # died on a missing scripts/gates). Full checkout only.
 
       - name: Triage red run via local rocqwash MCP
         if: env.RUN_ID != ''
         shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           mkdir -p "$GITHUB_WORKSPACE/rocqwash-triage"
           "/c/Program Files/Python313/python.exe" .github/scripts/rocqwash_triage.py \
             --repo "${{ github.repository }}" \
             --run "$RUN_ID" \
             --out "$GITHUB_WORKSPACE/rocqwash-triage" \
-            --inbox "D:/ComplexAnalysis/attn/_rocqwash_watch_inbox"
+            --inbox "D:/ComplexAnalysis/attn/_rocqwash_watch_inbox" \
+            --heal \
+            --mirror "D:/ComplexAnalysis/ConstructiveWorld-Main"
 
       - name: Upload triage artifacts
         if: env.RUN_ID != ''
