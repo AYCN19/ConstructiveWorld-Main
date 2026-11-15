@@ -2276,7 +2276,7 @@ Definition ng_UpAblT9_G09_MiscSmall : NewGreenFace :=
   MkNewGreenFace "UpAblT9_G09_MiscSmall.v" 42 2 20260919 "v1 T9 batch (T9a), N1 x21 + T x1 (G09:72 downgrade), four-gate green (_tt9a_); enrolled R91ENROLL option-B full wave, zero new assumptions, PA closed" "L42:m5d6b2f".
 (* ng_UpAblT9_UpReqDist —— UpAblT9_UpReqDist.v：v1 T9 batch (T9a), N1 x21 + T x1 (G09:72 downgrade), four-gate green () *)
 Definition ng_UpAblT9_UpReqDist : NewGreenFace :=
-  MkNewGreenFace "UpAblT9_UpReqDist.v" 64 3 20260919 "v1 T9 batch (T9a), N1 x21 + T x1 (G09:72 downgrade), four-gate green (_tt9a_); enrolled R91ENROLL option-B full wave, zero new assumptions, PA closed" "L64:m73bbc3".
+  MkNewGreenFace "UpAblT9_UpReqDist.v" 64 3 20260919 "v1 T9 batch (T9a), N1 x21 + T x1 (G09:72 downgrade), four-gate green (_tt9a_); enrolled R91ENROLL option-B full wave, zero new assumptions, PA closed" "L63:m9247aa".
 (* ng_UpAblT9_UpReqFEPAttn —— UpAblT9_UpReqFEPAttn.v：v1 T9 batch (T9a), N1 x21 + T x1 (G09:72 downgrade), four-gate green () *)
 Definition ng_UpAblT9_UpReqFEPAttn : NewGreenFace :=
   MkNewGreenFace "UpAblT9_UpReqFEPAttn.v" 61 3 20260919 "v1 T9 batch (T9a), N1 x21 + T x1 (G09:72 downgrade), four-gate green (_tt9a_); enrolled R91ENROLL option-B full wave, zero new assumptions, PA closed" "L61:mc43870".
@@ -5233,6 +5233,67 @@ Definition ng_PiuZzN2cSigmaAssembly : NewGreenFace :=
 Definition ng_Piu1932UncondZzReland : NewGreenFace :=
   MkNewGreenFace "piu1932_uncond_zz.v" 179 8 20261103
   "Route B assembly main piece, W5 four-slot direct-supply form: the rate-slot nsep bound is derived with all four slots of tlw1703_unif_rebase_le_Sbpowc supplied directly, slot 3 from the six-premise conditional chain piu_zz_ec_mu_cond via the v2 rate-slot bridge, so no rate-form certificate is an abstract premise; the six premises Hp/Htri/Hcoef/Hesc/Hcage/Hexit are the explicit honest interface; previous rate-loaded signature kept as a twin theorem; C0 = 1/10^9, alpha = 8" "L179:m46f5f5".
+(* ---------- V49 batch, 20 modules cons'd before the V47 list nil (dependency topological order; order.txt #R194 anchors in the three order copies): the SL12 constant case file, five ln L_n supply faces, two |I_n| supply faces, the SL4 skeleton unit, four delta-debt units (D-SL4-3/4/5), seven N2c-chain units (D-SL3-1..5); ng_qed = grep -c (Qed|Defined). token-face, line counts = wc -l; registered 20261114. ---------- *)
+Definition ng_Sl12Constants : NewGreenFace :=
+  MkNewGreenFace "sl12_constants.v" 877 103 20261114
+  "22 checked Gantumur certificate-family constants cast as Q-form definitions with per-constant vm_compute anchors" "L877:m661649".
+Definition ng_Sl1PhaseFaces : NewGreenFace :=
+  MkNewGreenFace "sl1_phase_faces.v" 172 4 20261114
+  "SL1 supply faces: psi-band phase certificate faces over the shared L_n object" "L172:mcfb294".
+Definition ng_Sl1PhiDividesL : NewGreenFace :=
+  MkNewGreenFace "sl1_phi_divides_L.v" 348 20 20261114
+  "SL1 supply face: Phi_n divides L_n integer divisibility chain over the lcm carrier" "L348:md67014".
+Definition ng_Sl1HeadAnchors : NewGreenFace :=
+  MkNewGreenFace "sl1_head_anchors.v" 86 7 20261114
+  "SL1 supply face: head-side numeric anchors for the L_n and Phi_n faces (n = 1..40 table)" "L86:m356d5d".
+Definition ng_Sl1LznAssembly : NewGreenFace :=
+  MkNewGreenFace "sl1_lzn_assembly.v" 319 15 20261114
+  "SL1 supply face: L_n/Phi_n ratio assembly toward the exponential-bound statement" "L319:m89a782".
+Definition ng_Sl1Lzn48Chain : NewGreenFace :=
+  MkNewGreenFace "sl1_lzn48_chain.v" 56 1 20261114
+  "SL1 supply face: the ln-48 chain instance tying the certificate family to the budget line" "L56:mb523f9".
+Definition ng_Sl2AnchorCarrier : NewGreenFace :=
+  MkNewGreenFace "sl2_anchor_carrier.v" 530 48 20261114
+  "SL2 supply face: the anchor carrier with Hval-direct consumption alignment" "L530:m4e8f49".
+Definition ng_Sl2RintRecast : NewGreenFace :=
+  MkNewGreenFace "sl2_rint_recast.v" 428 56 20261114
+  "SL2 supply face: the real-integral recast toward the |I_n| bound" "L428:me841ce".
+Definition ng_Planb4Sl4Skeleton : NewGreenFace :=
+  MkNewGreenFace "planb4_sl4_skeleton.v" 239 0 20261114
+  "SL4 skeleton unit: delta/bgrowth/denom/proportional statement faces with born-clean declarations" "L239:m3e02c2".
+Definition ng_Sl4D5Proportional : NewGreenFace :=
+  MkNewGreenFace "sl4_d5_proportional.v" 186 5 20261114
+  "D-SL4-5: Delta_n = 0 implies the two coefficients are Q-proportional (rank-1 algebra)" "L186:m17e024".
+Definition ng_Sl4D3GrowthAnchor : NewGreenFace :=
+  MkNewGreenFace "sl4_d3_growth_anchor.v" 214 13 20261114
+  "D-SL4-3 table-domain anchor: B-side bit-growth lower bound over the landed table window" "L214:m565d91".
+Definition ng_Sl4D4DenomAnchors : NewGreenFace :=
+  MkNewGreenFace "sl4_d4_denom_anchors.v" 220 12 20261114
+  "D-SL4-4 table-domain anchors: reduced-denominator bound point anchors n = 1..12" "L220:m065684".
+Definition ng_Sl4D4DenomSkeleton : NewGreenFace :=
+  MkNewGreenFace "sl4_d4_denom_skeleton.v" 197 3 20261114
+  "D-SL4-4 reduction skeleton: the gcd upper-bound face the open accounts plug into" "L197:m6751c3".
+Definition ng_Sl3D3GfCarrier : NewGreenFace :=
+  MkNewGreenFace "sl3_d3_gf_carrier.v" 365 31 20261114
+  "D-SL3-3 carrier: the nat->Z generating-function coefficient-table fold machinery" "L365:mc3a022".
+Definition ng_Sl3D1SigmaLift : NewGreenFace :=
+  MkNewGreenFace "sl3_d1_sigma_lift.v" 255 4 20261114
+  "D-SL3-1: sigma lift bridge plus slot-face isomorphism in both dialects (up-band only)" "L255:m4db000".
+Definition ng_Sl3D2Flag : NewGreenFace :=
+  MkNewGreenFace "sl3_d2_flag.v" 392 21 20261114
+  "D-SL3-2: Z-exact binary finite flag (s-parameterized) with the proven-spec weld" "L392:m7a8d6b".
+Definition ng_Sl3D2FlagAnchors : NewGreenFace :=
+  MkNewGreenFace "sl3_d2_flag_anchors.v" 63 2 20261114
+  "D-SL3-2 head anchors n = 3..4 by vm_compute over the binary flag weld" "L64:m3c5e19".
+Definition ng_Sl3D3GfAnchors : NewGreenFace :=
+  MkNewGreenFace "sl3_d3_gf_anchors.v" 104 7 20261114
+  "D-SL3-3 small-sample anchors: GF dominance face spot checks n = 1..3" "L104:mac8304".
+Definition ng_Sl3D4Chain : NewGreenFace :=
+  MkNewGreenFace "sl3_d4_chain.v" 237 9 20261114
+  "D-SL3-4: the N2c chain assembly 37 -> 17 over the GF bound, b0 bridge and sharp face" "L237:md05b6a".
+Definition ng_Sl3D5Param : NewGreenFace :=
+  MkNewGreenFace "sl3_d5_param.v" 251 7 20261114
+  "D-SL3-5: sigma-parameterized supply recast with the three-pin annotation face" "L251:m5baae8".
 (* ---------- V47 批统计（整批追加纪律：清单/常量/引理同块原子写入·ng_qed 口径） ---------- *)
 Definition NewGreenListV47 : list NewGreenFace :=
  cons ng_PiuMuCriterion
@@ -5298,7 +5359,7 @@ Definition NewGreenListV47 : list NewGreenFace :=
  (cons ng_PiuZzEcEscwinBracket
  (cons ng_PiuZzN2cSigmaAssembly
  (cons ng_Piu1932UncondZzReland
- nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
+ (cons ng_Sl12Constants (cons ng_Sl1PhaseFaces (cons ng_Sl1PhiDividesL (cons ng_Sl1HeadAnchors (cons ng_Sl1LznAssembly (cons ng_Sl1Lzn48Chain (cons ng_Sl2AnchorCarrier (cons ng_Sl2RintRecast (cons ng_Planb4Sl4Skeleton (cons ng_Sl4D5Proportional (cons ng_Sl4D3GrowthAnchor (cons ng_Sl4D4DenomAnchors (cons ng_Sl4D4DenomSkeleton (cons ng_Sl3D3GfCarrier (cons ng_Sl3D1SigmaLift (cons ng_Sl3D2Flag (cons ng_Sl3D2FlagAnchors (cons ng_Sl3D3GfAnchors (cons ng_Sl3D4Chain (cons ng_Sl3D5Param nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
 (* ---------- V48 批八件 cons（插于 V47 清单 nil 前·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚） ---------- *)
 (* ---------- 十七片终形辅助名注记（KB13R 按 KB12/KB15 核勘代拟·KB20 无壳形制修订：wave4 拆四季·伞退役·slim 直挂八季） ---------- *)
 (* 本批 wave 行承载 128 条升格辅助引理名：piu_zz_hb_512_0..31（wave1/2 各 16）＋
@@ -5309,9 +5370,9 @@ Definition NewGreenListV47 : list NewGreenFace :=
    零丢失（KB12 审计·KB15 复核）。落地后逐行 PA 占位以 new_About 实测检验填注（仅注释面）。 *)
 (* 续写统计：63 件 / 行数和 43383 / 闭合数和 3851（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚·registered in the November 2026 wave·W5 件候 born 第二批重锚禁预填）＋W6 二批一件追加 179/8（piu1932_uncond_zz 9.3 一致型同名重落·候选版 46f5f5·六前提无条件闭合顶件·注册号 194 旧条目 ng_Piu1932UncondZz 原位保留＝A 案·R 号 ? 占位·registry-day full-width placeholder pending, final value assigned at commit time·order.txt :973 行锚）。 *)
 (* Fix-I 语句手术一代续记：Htri 槽 2 换位 dval (Z.of_nat q) (- p)→dval (- p) (Z.of_nat q) 逐处＋Hexit 前提面同形换位 dval b (- a)→dval (- a) b——34 处语句/前提面（criterion 7／e_carrier 9／piu1932 顶件 2／planb1 1／planb1_cert 6／planb3_g1_g2_design 3＋证体随改 4 行／planb4_l2_dv_cast 2／distpt_supply 4）＋e_carrier :646 注释随形；重编闭包 18 模块绿（rocq dep 全盘反向定界 8 种子＋10 下游）；三在册件 md5 换代锚于 order.txt 双树（M 语义·R 号外置迁移账：criterion dc5b47→dce9a2／e_carrier f22b5b→df34f1／顶件 46f5f5→e63556）；本索引 ng_meta=登记时点快照口径不变——三件行数 281/761/179 与 ng_qed 8/33/8（剥块注释 token 级双口径）手术前后实测零变化→三常量重算零增量（63 件／行数和 43383／闭合数和 3851 维持·下方三等式引理编译期核对）；P2 工单原列「Hexit 前提退役六→五」不在本次执行 diff（现役仍六前提接口同形换位形·不以修形后非空真作结语·始末详见跨线资产分析与工单目录迁移账·Fix-I Htri 换位与 Hexit 退役卷）。 *)
-Definition NewGreenV47Pieces  : nat := 63.
-Definition NewGreenV47LineSum : nat := 43383.
-Definition NewGreenV47QedSum  : nat := 3851.
+Definition NewGreenV47Pieces : nat := 83.
+Definition NewGreenV47LineSum : nat := 48922.
+Definition NewGreenV47QedSum : nat := 4219.
 
 (* 清单件数 = 字面值（增删清单而忘改字面值即爆 G2） *)
 Lemma NewGreenV47Pieces_matches : NewGreenV47Pieces = cnt_ng NewGreenListV47.

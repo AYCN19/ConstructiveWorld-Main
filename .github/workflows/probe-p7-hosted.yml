@@ -1,0 +1,77 @@
+# probe-p7-hosted.yml — hosted-runner CI lane for the P7 mach assembly landing content.
+# This branch carries the P7 mach assembly products: the Machin bridge-amplify cast
+# (cast_bridge.v), the modulus-of-convergence function (cast_modulus.v), the parity
+# interleave cast (cast_parity.v), the Hval table domain (planb5_p7_hval_table.v;
+# kernel proof face n<=20, full 40-point numeric certificate via exact rational
+# sweep with an independent mirror recomputation), and the assembly
+# (planb5_p7_mach_assembly.v; Print Assumptions 7/7 Closed, coqchk Axioms:<none>
+# under two-root certification locally, born-clean census magic=0).
+# Landing this content into main = P7 exit-assembly landing (front piece for the L5
+# exit re-derivation). This lane gives the content CI on a hosted runner; the
+# certification furnace remains the verdict authority.
+name: probe p7 hosted
+on: [push, workflow_dispatch]
+
+concurrency:
+  group: cw-probe-p7
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.2.0
+
+      - name: Install Rocq 9.3.0 (defensive multi-archive)
+        run: |
+          opam repo add rocq-archive https://github.com/rocq-prover/opam || true
+          opam repo add coq-released https://coq.inria.fr/opam-repository || true
+          opam update
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 coq-core.9.3.0 coq-stdlib.9.3.0 || \
+          opam install -y rocq-runtime.9.3.0 rocq-core.9.3.0 rocq-stdlib.9.3.0 || \
+          opam install -y coq.9.3.0 || \
+          opam install -y coq-core.9.3.0 coq-stdlib.9.3.0
+          opam exec -- coqc -v
+
+      - name: "34-shot cascade + coqchk (P7 - machine-expanded dependency closure, coqdep topological order)"
+        run: |
+          opam exec -- bash -c '
+            set -e
+            cd ConstructiveWorld_Live
+            for f in S01_BaseRing piu_zz_padic_clearing S02_CauchyComplete \
+                     planb3_g1_calib S03_QExp UpReqBanachInstB \
+                     S04_RealExpLogConv UpReqBanachExp S05_AlignmentGRPO \
+                     UpReqBanachInst S06_DiffSamplingGibbs UpReqBanachInstReal \
+                     S07_RealSetoidExpLog UpReqBanachNormOpp \
+                     S08_RealMainlineDPO SumInvFactEscape S09_EntropyReal \
+                     UpReqIrrationalCriterion S10_KVQuantTrig S11_TP3B5 \
+                     S12_B5RecycleSF cast_modulus cast_parity mach_fold_q \
+                     S13_NLiveAudit planb5_p7_hval_table S14_B5BatchBlock \
+                     S15_TailFEPUp mach_atan_addsub PiEnvelope mach_fold_chain \
+                     LW0MLicBridge cast_bridge planb5_p7_mach_assembly; do
+              echo "[probe] shot $f"
+              coqc -native-compiler no -q -Q . "" "$f.v"
+            done
+            echo "[probe] coqchk planb5_p7_mach_assembly (two roots: assembly + table)"
+            test -f planb5_p7_mach_assembly.vo
+            coqchk -o -bytecode-compiler yes -Q . "" planb5_p7_mach_assembly
+            echo "P7-PROBE-GREEN: hosted rocq93 34-shot cascade rc=0 + coqchk clean"
+          '
+
+      - name: "coqchk table root (second certification root)"
+        run: |
+          opam exec -- bash -c '
+            set -e
+            cd ConstructiveWorld_Live
+            coqchk -o -bytecode-compiler yes -Q . "" planb5_p7_hval_table
+            echo "P7-PROBE-GREEN-2: second root checked"
+          '
+
+      - name: Probe stamp
+        if: always()
+        run: echo "p7 hosted probe done (landing content CI signal; merge decision rests with the maintainers)"
