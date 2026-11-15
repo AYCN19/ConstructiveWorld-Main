@@ -528,16 +528,16 @@ jobs:
           # ·否决）；原 cw_chk.cmd 未删，回滚=弃 job env＋本 export 即复 9.1 默认。
           export COQCHK="D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe"
           # W3 v1.1 backstop (20261101; 20261115 user order 20 -> 500 + heavy-category
-# exemption): every 500th run narrows the skip list to the closed heavy
-# registry (scripts/gates/w3_heavy_exempt.txt: flag / vm_compute-heavy
-# categories), so the sweep re-checks the whole tree EXCEPT those heavy
-# modules whose fingerprints are unchanged - the kernel verdict on unchanged
-# bytes is deterministic and bytecode re-execution costs hours;
-# fingerprint-changed stems never enter the skip list, so they always
-# re-check.  The skip file and the reconcile JSON are rewritten as a
-# consistent pair (gate2 R2 appendix==reconciliation and R4 coverage
-# partition read the pair); a filter failure falls back to the legacy full
-# sweep (empty skip list).
+          # exemption): every 500th run narrows the skip list to the closed heavy
+          # registry (scripts/gates/w3_heavy_exempt.txt: flag / vm_compute-heavy
+          # categories), so the sweep re-checks the whole tree EXCEPT those heavy
+          # modules whose fingerprints are unchanged - the kernel verdict on unchanged
+          # bytes is deterministic and bytecode re-execution costs hours;
+          # fingerprint-changed stems never enter the skip list, so they always
+          # re-check.  The skip file and the reconcile JSON are rewritten as a
+          # consistent pair (gate2 R2 appendix==reconciliation and R4 coverage
+          # partition read the pair); a filter failure falls back to the legacy full
+          # sweep (empty skip list).
           if [ $((GITHUB_RUN_NUMBER % 500)) -eq 0 ]; then
             "$PYTHON" scripts/gates/w3_skip_filter.py --skip "$PWD/ConstructiveWorld_vo/_attest_skip.txt" --recon "$PWD/attest_reconcile.json" || : > "$PWD/ConstructiveWorld_vo/_attest_skip.txt"
             echo "W3-BACKSTOP: full-tree coqchk on run $GITHUB_RUN_NUMBER (heavy-unchanged exempted)"
