@@ -5233,7 +5233,7 @@ Definition ng_PiuZzN2cSigmaAssembly : NewGreenFace :=
 Definition ng_Piu1932UncondZzReland : NewGreenFace :=
   MkNewGreenFace "piu1932_uncond_zz.v" 179 8 20261103
   "Route B assembly main piece, W5 four-slot direct-supply form: the rate-slot nsep bound is derived with all four slots of tlw1703_unif_rebase_le_Sbpowc supplied directly, slot 3 from the six-premise conditional chain piu_zz_ec_mu_cond via the v2 rate-slot bridge, so no rate-form certificate is an abstract premise; the six premises Hp/Htri/Hcoef/Hesc/Hcage/Hexit are the explicit honest interface; previous rate-loaded signature kept as a twin theorem; C0 = 1/10^9, alpha = 8" "L179:m46f5f5".
-(* ---------- V49 batch, 20 modules cons'd before the V47 list nil (dependency topological order; order.txt anchors in the three order copies): the SL12 constant case file, five ln L_n supply faces, two |I_n| supply faces, the SL4 skeleton unit, four delta-debt units (D-SL4-3/4/5), seven N2c-chain units (D-SL3-1..5); ng_qed = grep -c (Qed|Defined). token-face, line counts = wc -l; registered. ---------- *)
+(* ---------- V49 batch, 20 modules cons'd before the V47 list nil (dependency topological order; order.txt #R194 anchors in the three order copies): the SL12 constant case file, five ln L_n supply faces, two |I_n| supply faces, the SL4 skeleton unit, four delta-debt units (D-SL4-3/4/5), seven N2c-chain units (D-SL3-1..5); ng_qed = grep -c (Qed|Defined). token-face, line counts = wc -l; registered 20261114. ---------- *)
 Definition ng_Sl12Constants : NewGreenFace :=
   MkNewGreenFace "sl12_constants.v" 877 103 20261114
   "22 checked Gantumur certificate-family constants cast as Q-form definitions with per-constant vm_compute anchors" "L877:m661649".
