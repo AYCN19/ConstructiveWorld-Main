@@ -384,10 +384,10 @@ jobs:
           # T2 每炉失效（本步上方·seed 有效件契约豁免除外）——任何 miss 都 fail-loud 红。
           # 9.1 炉 coq.yml 串行面零触碰（他席域）。
           # export 面（guard→cmd→bash 继承链与 chk 步同款）：COQC job env 已注入；
-          # BLDJ_JOBS=14（用户令·16 逻辑核占 87.5%·lane 内存抖动则回退 8）；PYTHON 显式
+          # BLDJ_JOBS=8（20261117 用户令 14→8·OOM 防控·free_virtual 0.1GB 实测）；PYTHON 显式
           # 钉真实 python（#290 商店桩坑·chk 步同款）；PBLD_AUTO_BASE 不设=无 base 纯
           # mtime 模式（镜像播种=真镜像·无跨机代差面）。
-          export BLDJ_JOBS=14
+          export BLDJ_JOBS=8
           export PYTHON="C:\\Program Files\\Python313\\python.exe"
           pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash scripts/parallel_build.sh" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
 
@@ -504,7 +504,7 @@ jobs:
         shell: C:/Progra~1/Git/bin/bash.exe -e {0}
         run: |
           # 20261018 强制并行：均衡分组装箱·组数=并行度·禁退化为单遍
-          # 20261105 用户提速令：CHK_JOBS 4→14（16 逻辑核占 14=87.5%）；K=12 own-mode 28h+ 判例
+          # 20261105 用户提速令：CHK_JOBS 4→14→8（20261117 OOM 防控 14→8·free_virtual 0.1GB 实测）；K=12 own-mode 28h+ 判例
           # 系逐件全闭包装箱（重复闭包爆炸），不适用本共享闭包模式；lane 内存抖动则回退 8。
           # 20261019 set1557：去 -CoreN 钉核（同 Build 步——多组并行禁单核钉死）
           # 20261019 用户温控修法令：编译可占 4-8 核·温控包裹不减（LoadLimit 占空+TL98 照全）——
@@ -521,7 +521,7 @@ jobs:
           # list feeds parallel_chk again; the W3-BACKSTOP below still forces a full-tree
           # coqchk every 500 runs (20261115: 20 -> 500; rocqwash autofix inflates run numbers).
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
-          export CHK_JOBS=14   # 20261105 用户令：14 路（根分组共享闭包模式不变）
+          export CHK_JOBS=8   # 20261105 用户令：14 路（根分组共享闭包模式不变）
           # 20261105 Rocq 9.3 换基（形A·改点③）：parallel_chk.sh L57 K="${COQCHK:-…9.1…}" 吃本环境
           # （SW2 同根推导 COQLIB/ROCQLIB/ROCQDEP）；job env 已注入同值，此行显式重申=步级自含。
           # cw_chk93.cmd 系 coqchk_all.sh 串行壳，直挂会废并行 K=14（ci_switch README 偏离1 同判
