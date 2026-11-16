@@ -1,5 +1,6 @@
 # ConstructiveWorld — 构造性数学库（Rocq/Coq）
 
+[![coqchk](https://img.shields.io/badge/coqchk-Axioms%3A_none-brightgreen)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/tree/GREEN-CERTIFIED-v2) [![certified modules](https://img.shields.io/badge/certified_modules-1055-brightgreen)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/tree/GREEN-CERTIFIED-v2) [![tag](https://img.shields.io/badge/tag-GREEN--CERTIFIED--v2-blue)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/tree/GREEN-CERTIFIED-v2)
 [![Main CI 9.3](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq93.yml/badge.svg?branch=main)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq93.yml) [![Coq CI（9.1 炉·并存保留）](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq.yml/badge.svg?branch=main)](https://github.com/hy7pc8gfmf-dotcom/ConstructiveWorld-Main/actions/workflows/coq.yml) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23717747.svg)](https://doi.org/10.5281/zenodo.23717747)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
