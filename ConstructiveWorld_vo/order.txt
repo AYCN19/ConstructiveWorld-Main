@@ -1083,3 +1083,8 @@ planb4_g1_laur_extract.v#R223-g1w002
 planb4_g1_rs_channel.v#R224-g1w004
 planb4_g1_witness.v#R223-g1w001
 planb4_l2_dv_cast.v#R223-eec47c
+cast_bridge.v#R228-p7as02
+cast_modulus.v#R228-p7as03
+cast_parity.v#R228-p7as04
+planb5_p7_hval_table.v#R228-p7as01
+planb5_p7_mach_assembly.v#R228-p7as05

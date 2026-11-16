@@ -982,3 +982,8 @@ planb4_g1_laur_extract.v
 planb4_g1_rs_channel.v
 planb4_g1_witness.v
 planb4_l2_dv_cast.v
+cast_bridge.v
+cast_modulus.v
+cast_parity.v
+planb5_p7_hval_table.v
+planb5_p7_mach_assembly.v
