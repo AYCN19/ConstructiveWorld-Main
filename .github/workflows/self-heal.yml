@@ -1,0 +1,55 @@
+# self-heal.yml — Main repo self-heal watch (standalone, no rocqwash modification).
+#
+# Clones rocqwash tools at runtime and runs the self-heal script against
+# this repository.  The selfheal_rocqwash.py script is universal (takes
+# --repo parameter) — no rocqwash repo modification needed.
+#
+# Triggers: Main CI 9.3 failure (workflow_run) + */30 scheduled reconcile.
+
+name: self-heal watch
+
+on:
+  workflow_run:
+    workflows: ["Main CI 9.3"]
+    types: [completed]
+  schedule:
+    - cron: '*/30 * * * *'
+
+permissions:
+  actions: write
+  contents: write
+
+jobs:
+  self-heal:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event_name != 'workflow_run' ||
+      github.event.workflow_run.conclusion == 'failure'
+    steps:
+      - name: Check out rocqwash tools
+        uses: actions/checkout@v5
+        with:
+          repository: hy7pc8gfmf-dotcom/rocqwash
+          ref: main
+
+      - name: Self-heal reconcile pass
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          mkdir -p selfheal-out
+          echo "target: ${{ github.repository }}"
+          echo "trigger: ${{ github.event_name }} (run ${{ github.event.workflow_run.id || 'scheduled' }})"
+          python3 .github/scripts/selfheal_rocqwash.py \
+            --repo "${{ github.repository }}" \
+            --run "${{ github.event.workflow_run.id || 0 }}" \
+            --out selfheal-out \
+            --reconcile
+
+      - name: Upload triage artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: selfheal-${{ github.run_id }}
+          path: selfheal-out/
+          if-no-files-found: warn
