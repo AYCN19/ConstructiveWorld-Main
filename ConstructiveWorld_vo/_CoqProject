@@ -987,3 +987,14 @@ cast_modulus.v
 cast_parity.v
 planb5_p7_hval_table.v
 planb5_p7_mach_assembly.v
+sl4_w2_growth_anchor.v
+sl4_w2_growth_d4_denom_anchor.v
+sl4_w2_survey_pdivfix.v
+sl4_w2_propweld.v
+sl3_w2_body_pole_dom.v
+sl3_w2_body_identity_anchors.v
+sl3_w2_body_flag_tab.v
+sl3_w2_band_b_arm.v
+sl3_w2_band_migration.v
+sl1_w2_extended_anchors.v
+sl2_w2_rint_decay_chain.v
