@@ -1079,6 +1079,7 @@ planb3_g1_calib.v#R222-9c04ae
 planb3_g1_g2_design.v#R222-61b35c
 planb4_g1_ab_def.v#R224-g1w005
 planb4_g1_calibwin_b1.v#R224-g1w006
+planb4_g1_calibwin_b2.v#R224-73ab2eb4-g1w007
 planb4_g1_laur_extract.v#R223-g1w002
 planb4_g1_rs_channel.v#R224-g1w004
 planb4_g1_witness.v#R223-g1w001

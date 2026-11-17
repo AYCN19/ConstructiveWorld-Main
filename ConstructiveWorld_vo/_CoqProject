@@ -978,6 +978,7 @@ planb3_g1_calib.v
 planb3_g1_g2_design.v
 planb4_g1_ab_def.v
 planb4_g1_calibwin_b1.v
+planb4_g1_calibwin_b2.v
 planb4_g1_laur_extract.v
 planb4_g1_rs_channel.v
 planb4_g1_witness.v
