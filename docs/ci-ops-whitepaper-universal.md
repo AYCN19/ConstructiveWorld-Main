@@ -3,30 +3,27 @@
 > **适用域**：ConstructiveWorld 生态全部代码仓（Main／Set／rocqwash／rocq-pi-leibniz 及后续仓）。
 > **单源声明**：本文件为 CI 运维通用原则与约束的唯一措辞源——各仓数据文档（ci-ops-data.json 等）引用本文件原则·禁各处改写。修订只改本文件。
 > **依据**：近期 CI 修复实战经验蒸馏（20261114-17·SL/P7/y-carrier/vo-gap/attest 重铸/runner 管理/桥劫持/NETRED 等全波次）。
-> **修订**：20261118 v1.1——§1 增档案保护与 T1 语义条款（跳过捷径回潮事故·run#105 波）·§2 增 skip-regression／runner-crash-netred／serial-rerun 三故障模式（用户令增补）。
+> **修订**：20261118 v1.2——§1 重写为正典形态（run#94 参照炉·种子链闭环·PBLD_AUTO_BASE 正形）＋档案保护条款；§2 三新故障模式对齐（skip-regression 三分类）；用户令「#94 最快三捷径规范入册·与不一致处对齐」。v1.1 原表述（mtime fingerprint 为 Build 捷径主形）经 run#107 实证勘误：mtime -nt 在 checkout 落盘序下不可靠·生成失效模式（AUTO_BASE）才是正形。
 
 ---
 
-## §1 三捷径体系（全仓通用）
+## §1 三捷径体系（全仓通用·正典形态＝run#94）
 
-已认证模块通过三条捷径跳过重复验证·减轻维护压力：
+已认证模块通过三条捷径跳过重复验证。**正典参照炉＝Main CI run#94（head 32f0ea6·20261116）**：全炉 **19 分钟**——seed 播种 1049 .vo → **Build 步 97 秒（skip=1050·compiled=0）** → coqchk 继承 1049 只真验 1 件 → 收炉。任何偏离此形态（Build 大面积 [L*] OK 行、coqchk sent 数暴涨）＝捷径回潮，按 §2 skip-regression 处置。
 
-| 捷径 | 机制 | 配置位 |
-|---|---|---|
-| **Build fingerprint skip** | .vo mtime ≥ .v mtime → 编译跳过 | parallel_build.sh（fingerprint 模式） |
-| **Attest hash inheritance** | .vo sha256 ＝ 档案在册值 → coqchk 免列 | cw_attest.json（attest_reconcile 产出 skip 名册） |
-| **Bytecode flag** | coqchk `-bytecode-compiler yes` | parallel_chk.sh 内置（vm_compute 证书 ≥30× 提速） |
+| 捷径 | 机制 | 配置位 | 正典判定行（炉日志） |
+|---|---|---|---|
+| **①种子播种** | 炉前从本地信任缓存整树播种（furnace93_seed manifest 按源 sha 过滤＋main93 沙箱 BUILD_DONE 闸整层拷贝） | coq93.yml Seed 步＋`rocq93_work_20261101/furnace93_seed/`＋`main93/ConstructiveWorld_vo/_93m_BUILD_DONE` | `FURNACE93-SEED: manifest=N seeded_valid=M`＋`seeded (mirror-deleted stale) K .vo`（K 应≈全树） |
+| **②Build 生成失效跳过** | **PBLD_AUTO_BASE=1（job env 必设）**：以最近绿炉 head 为 base→diff changed 集→反向依赖闭包失效→**其余全量 SKIP**；mtime 兜底仅作 base 判定失败的降级（其 `-nt` 判据在 checkout 落盘序下不可靠·勿依赖） | coq93.yml job env `PBLD_AUTO_BASE: "1"`＋parallel_build.sh | `parallel_build: layers=L total=T compiled_or_invalidated=X skip=Y fail=0`——**Y 应≈T**（X=本波真变更件数） |
+| **③coqchk 档案继承** | .vo sha256＝档案在册值 → coqchk 免列；vm_compute 证书 `-bytecode-compiler yes` | cw_attest.json（唯一合法写手＝attest_cast.py）＋parallel_chk.sh | `PCHK-ATTEST-SKIP: inherited=N sent_to_chk=M`——M 应=本波新验件数 |
 
-**新模块入册规则**：新模块冷编 CI 全绿后 → 跑 `attest_cast.py` 重铸档案 → 新模块进入 skip 名册 → 后续炉走捷径。**每波次必做·不做的后果＝后续每炉冷编该模块**。
+**种子链闭环（三捷径的生命线·20261118 补齐）**：新模块 → 冷编取得认证（首验·设计行为）→ **炉绿后「Recycle new-module .vo into the seed chain」步自动回流**（furnace93_seed 补拷＋manifest 追加 v_sha256/vo_sha256 契约＋main93 沙箱回灌）→ 下一炉种子播种覆盖它 → 走捷径。**此环缺失＝永久首编循环**（run#107 实证：wave-2 件首编后不回流·每炉重新冷编）。
 
-**档案重铸工具**：`scripts/gates/attest_cast.py`（单源重铸器·契约逐字对齐 reconcile loader）。
-
-**档案保护（20261118 增补·跳过捷径回潮事故条款）**：
+**档案保护（跳过捷径回潮事故条款·run#105 波）**：
 
 - `cw_attest.json` ＝**认证层账本**（§6 认证层同款待遇）——**零自动触达**：autofix／机械化扫荡／任何整文件重写类工具一律排除在触达面外；唯一合法写手＝`attest_cast.py` 重铸器（绿炉产物）。
-- **T1 前置清理语义**（Build 步三层清理的正文）：T0＝无源孤儿 .vo 必删；**T1＝archive 非命中 .vo 每炉必删（未认证＝每炉重认证·设计行为非故障）**；T2＝被删者反向依赖闭包级联删。→ **档案即跳表**：档案回退＝跳过捷径全线回潮（run#105 波实证：autofix 整文件重写把 1055 件打回 1021 件 → 34 件认证窗口每炉冷编）。
-- **回潮检测一刀**：commit 后对关键账本做模块数断言＋tree_sha 对表（stale-base assembled commit 静默抹杀检测器——本族病两次实锤）。
-- **新件首编豁免**：从未入档的新件每炉首编＝设计行为（首验取得认证），**第二炉起必须跳**——跳不回去即查档案。
+- **回潮检测一刀**：commit 后对关键账本（档案/manifest/白皮书）做计数断言＋tree_sha/hash 对表（stale-base assembled commit 静默抹杀检测器——本族病两次实锤）。
+- **新件首编豁免**：新件每炉首编＝设计行为（首验取得认证），**第二炉起必须跳**——跳不回去即查种子回流步与档案（先查 SEED-RECYCLE 行·再查 manifest 条目·最后查档案）。
 
 ## §2 故障模式分类学（跨仓通用）
 
@@ -35,7 +32,7 @@
 | checkout-red | `not our ref` / `couldn't find remote ref` | 镜像缺新 commit（API 铸后或他席推后镜像未同步） | 绕桥 fetch + update-ref + rerun |
 | furnace-hang | coqc 0 CPU / 8MB 工作集 | **非挂**——rocqworker 子进程满负荷（巨常量单核重算） | 照常磨·采样须测 worker 子进程 |
 | gate-false-positive | YAML schema 红 / 主炉不接单 | 注释续行顶格断 mapping | 修 YAML 缩进 |
-| attest-stale | PBLD-COV-NO-VO（新件编译产物缺席） | 新模块无档案条目 | attest_cast 重铸 |
+| attest-stale | PBLD-COV-NO-VO（新件编译产物缺席） | 新模块无档案条目 | attest_cast 重铸＋种子回流步（SEED-RECYCLE） |
 | vo-gap | Live-only 落岸 → vo 树缺源 | 双树不同步 | 补 vo 树源 + 册行 |
 | runner-offline | API /actions/runners = offline | Listener 进程灭 | 双席重启（.env 钩变量须验） |
 | yaml-syntax | schema 红 / jobs=0 | 注释续行顶格断 mapping | 修缩进 |
@@ -44,7 +41,7 @@
 | push-anomaly | non-commit object / needs force | API 铸对象本地不在 | PATCH ref 替代 push |
 | merge-conflict | read-tree 基底错 → 静默回退 | parent/base 写错 | 重贴修复 blob |
 | autofix-leg | autofix 修复带伤未落岸 | 宿主分支 checkout 失败 | 修 checkout 前置 |
-| skip-regression（回潮） | 老认证件每炉冷编 | 档案被整文件重写回退（autofix/异步工具 stale-base 抹杀） | 恢复档案 blob（对象库原物仍在）＋工具排除清单＋模块数断言 |
+| skip-regression（回潮） | 老认证件每炉冷编／Build 大面积 [L*] OK／PBLD-GEN 无基底＋mtime 失效 | 三类：①档案被整文件重写回退②PBLD_AUTO_BASE 未设③种子链断环（新件不回流） | ①恢复档案 blob＋工具排除清单＋计数断言②job env 补 AUTO_BASE=1③核 SEED-RECYCLE 行与 manifest |
 | runner-crash-netred | job 无红步即 fail／后继步全 None | Listener .NET SocketException 995（NETRED 阵发必死·事件日志 0xe0434352 铁证） | 复活配方＋看门狗／Listener 升级 |
 | serial-rerun | 复跑炉把在飞炉取消 | rerun＝新 run 实例·同触发并发级联 | **在跑炉落定再发下一个**（或排队治理器接管） |
 
