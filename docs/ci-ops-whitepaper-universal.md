@@ -3,6 +3,7 @@
 > **适用域**：ConstructiveWorld 生态全部代码仓（Main／Set／rocqwash／rocq-pi-leibniz 及后续仓）。
 > **单源声明**：本文件为 CI 运维通用原则与约束的唯一措辞源——各仓数据文档（ci-ops-data.json 等）引用本文件原则·禁各处改写。修订只改本文件。
 > **依据**：近期 CI 修复实战经验蒸馏（20261114-17·SL/P7/y-carrier/vo-gap/attest 重铸/runner 管理/桥劫持/NETRED 等全波次）。
+> **修订**：20261118 v1.1——§1 增档案保护与 T1 语义条款（跳过捷径回潮事故·run#105 波）·§2 增 skip-regression／runner-crash-netred／serial-rerun 三故障模式（用户令增补）。
 
 ---
 
@@ -20,6 +21,13 @@
 
 **档案重铸工具**：`scripts/gates/attest_cast.py`（单源重铸器·契约逐字对齐 reconcile loader）。
 
+**档案保护（20261118 增补·跳过捷径回潮事故条款）**：
+
+- `cw_attest.json` ＝**认证层账本**（§6 认证层同款待遇）——**零自动触达**：autofix／机械化扫荡／任何整文件重写类工具一律排除在触达面外；唯一合法写手＝`attest_cast.py` 重铸器（绿炉产物）。
+- **T1 前置清理语义**（Build 步三层清理的正文）：T0＝无源孤儿 .vo 必删；**T1＝archive 非命中 .vo 每炉必删（未认证＝每炉重认证·设计行为非故障）**；T2＝被删者反向依赖闭包级联删。→ **档案即跳表**：档案回退＝跳过捷径全线回潮（run#105 波实证：autofix 整文件重写把 1055 件打回 1021 件 → 34 件认证窗口每炉冷编）。
+- **回潮检测一刀**：commit 后对关键账本做模块数断言＋tree_sha 对表（stale-base assembled commit 静默抹杀检测器——本族病两次实锤）。
+- **新件首编豁免**：从未入档的新件每炉首编＝设计行为（首验取得认证），**第二炉起必须跳**——跳不回去即查档案。
+
 ## §2 故障模式分类学（跨仓通用）
 
 | 模式 | 症状 | 根因 | 修法 |
@@ -36,6 +44,9 @@
 | push-anomaly | non-commit object / needs force | API 铸对象本地不在 | PATCH ref 替代 push |
 | merge-conflict | read-tree 基底错 → 静默回退 | parent/base 写错 | 重贴修复 blob |
 | autofix-leg | autofix 修复带伤未落岸 | 宿主分支 checkout 失败 | 修 checkout 前置 |
+| skip-regression（回潮） | 老认证件每炉冷编 | 档案被整文件重写回退（autofix/异步工具 stale-base 抹杀） | 恢复档案 blob（对象库原物仍在）＋工具排除清单＋模块数断言 |
+| runner-crash-netred | job 无红步即 fail／后继步全 None | Listener .NET SocketException 995（NETRED 阵发必死·事件日志 0xe0434352 铁证） | 复活配方＋看门狗／Listener 升级 |
+| serial-rerun | 复跑炉把在飞炉取消 | rerun＝新 run 实例·同触发并发级联 | **在跑炉落定再发下一个**（或排队治理器接管） |
 
 ## §3 Runner 管理
 
@@ -47,6 +58,7 @@
 | 判据 | 「观察 ci 没拉起」九成 = runner offline（API /actions/runners status + WMI 进程探测两刀定位） |
 | 重启生效 | .env 变更须 listener 重启才加载 |
 | 挂死判据 | coqc **worker 子进程** 0 CPU + 8MB 工作集双采样 = 真 hang（包装壳 0 CPU 无意义） |
+| NETRED 崩溃自灭 | Listener .NET 未处理异常（SocketException 995 网络中止路径）＝**NETRED 阵发必死**·事件日志 0xe0434352 铁证 | 治＝看门狗自动重启／Listener 升级；判据配方见事件日志过滤（Application Id=1026 + Runner 字样） |
 
 ## §4 桥与镜像
 
@@ -68,7 +80,7 @@
 | API git-data 全链 | 需逐 blob 断言时 | blob POST → tree POST → commit POST → ref PATCH |
 | 禁 | 直推 main（工作流中）·零断言 push | — |
 
-**NETRED 切面**：git 面（github.com:443）与 API 面（api.github.com）健康独立——一面断切另一面·分面探活（curl --resolve 逐 IP）。
+**NETRED 切面**：git 面（github.com:443）与 API 面（api.github.com）健康独立——一面断切另一面·分面探活（curl --resolve 逐 IP）。API 铸 commit 的 author/committer 字段带尾部换行＝422 Unprocessable（subprocess 输出须 strip）；DNS 阵发期 getaddrinfo 失败＝curl --resolve 钉 IP 绕过。
 
 ## §6 层律（全仓通用·宪法级）
 
