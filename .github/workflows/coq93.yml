@@ -86,6 +86,14 @@ jobs:
       COQC: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqc.exe
       COQCHK: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/bin/coqchk.exe
       COQLIB: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/lib/coq
+      # ── 生成失效模式启用（20261118 用户令「重新修订 yml·三捷径不得回潮」）──────────
+      # PBLD_AUTO_BASE=1：parallel_build.sh 以最近绿炉 head 为 base（PBLD-GEN 模式），
+      # diff 出 changed .v 集→反向依赖闭包失效→其余全量 SKIP——三捷径的 Build 面正形。
+      # 历史：d67b862 起不设（纯 mtime 兜底），checkout 落盘序使 .vo/.v mtime 同秒级
+      # 可靠性丧失（PBLD-GEN: 无基底＋mtime -nt 失效→wave-2 件回潮冷编·run#107 att2 实证）。
+      # 消费位：GITHUB_TOKEN 由 GitHub 自动注入 job 环境（actions/checkou t 亦用它拉取）·
+      # 无需 secrets 配置。回滚=删本行（回 mtime 兜底·登记 gaps）。
+      PBLD_AUTO_BASE: "1"
       ROCQLIB: D:/ComplexAnalysis/attn/ocaml_work_20261101/opam-root/default/lib/coq
     steps:
       - uses: actions/checkout@v5
@@ -385,8 +393,9 @@ jobs:
           # 9.1 炉 coq.yml 串行面零触碰（他席域）。
           # export 面（guard→cmd→bash 继承链与 chk 步同款）：COQC job env 已注入；
           # BLDJ_JOBS=8（20261117 用户令 14→8·OOM 防控·free_virtual 0.1GB 实测）；PYTHON 显式
-          # 钉真实 python（#290 商店桩坑·chk 步同款）；PBLD_AUTO_BASE 不设=无 base 纯
-          # mtime 模式（镜像播种=真镜像·无跨机代差面）。
+          # 钉真实 python（#290 商店桩坑·chk 步同款）；PBLD_AUTO_BASE=1（20261118 job env
+          # 已注入·生成失效模式=三捷径 Build 面正形——最近绿炉 head 为 base·changed 集外
+          # 全量 SKIP；mtime 兜底仅作 base 判定失败的 fail-loud 降级·留痕见 PBLD-GEN 行）。
           export BLDJ_JOBS=8
           export PYTHON="C:\\Program Files\\Python313\\python.exe"
           pwsh -File D:/ComplexAnalysis/infra/thermal/cpu_guard_v3.ps1 -Command "bash scripts/parallel_build.sh" -LoadLimit 60 -CoolSec 5 -MaxWaitSec 14400 -TempLimit 98 -AllowG3 -GearForce 0
@@ -580,6 +589,63 @@ jobs:
           path: |
             ConstructiveWorld_vo/*.vo
             ConstructiveWorld_vo/Local/*.vo
+
+      # ── 新件回流种子链（20261118 用户令「三捷径不得回潮」·闭环最后一环）────────────
+      # 缺口实证（run#107 att2）：wave-2 新件首编后 .vo 只活在检出树与 artifact——
+      # furnace93_seed/_seed93_manifest.json（985 老件）与 main93 沙箱都不含它们，
+      # 下一炉 checkout 后 .vo 再缺席→再冷编→永久首编循环。
+      # 本步（炉绿后）：①本炉新编件（对照种子 manifest 缺口）补拷回 furnace93_seed/＋
+      # 追加 manifest 条目（v_sha256/vo_sha256 同契约）②vo 树整层回灌 main93 沙箱
+      # （_93m_BUILD_DONE 语义=沙箱是最近绿炉真镜像·回灌保持该不变量）。
+      # fail-open：写失败只登记不红炉（种子链是优化非正确性依赖——正确性由 T1/coqchk 面）。
+      - name: Recycle new-module .vo into the seed chain (three-shortcut closure)
+        if: success()
+        shell: C:/Progra~1/Git/bin/bash.exe -e {0}
+        run: |
+          PYTHON="C:\Program Files\Python313\python.exe"
+          "$PYTHON" - <<'PYEOF93RECYCLE'
+          import json, os, hashlib, shutil
+          seed_dir = r'D:/ComplexAnalysis/attn/rocq93_work_20261101/furnace93_seed'
+          man_path = os.path.join(seed_dir, '_seed93_manifest.json')
+          man = json.load(open(man_path, encoding='utf-8')) if os.path.isfile(man_path) else {}
+          vo = 'ConstructiveWorld_vo'
+          vs = sorted(f for f in os.listdir(vo) if f.endswith('.v') and not f.startswith('_'))
+          def sha(p):
+              h = hashlib.sha256()
+              with open(p, 'rb') as f:
+                  for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
+              return h.hexdigest()
+          added = 0; refreshed = 0
+          for f in vs:
+              stem = f[:-2]
+              vf = os.path.join(vo, f); of = os.path.join(vo, stem + '.vo')
+              if not os.path.isfile(of):
+                  continue
+              v_sha, vo_sha = sha(vf), sha(of)
+              ent = man.get(stem)
+              if ent is None:
+                  shutil.copy2(of, os.path.join(seed_dir, stem + '.vo'))
+                  man[stem] = {'v_sha256': v_sha, 'vo_sha256': vo_sha}
+                  added += 1
+              elif ent.get('v_sha256') == v_sha and ent.get('vo_sha256') != vo_sha:
+                  shutil.copy2(of, os.path.join(seed_dir, stem + '.vo'))
+                  ent['vo_sha256'] = vo_sha; refreshed += 1
+          if added or refreshed:
+              tmp = man_path + '.tmp'
+              with open(tmp, 'w', encoding='utf-8', newline='\n') as fh:
+                  json.dump(man, fh, ensure_ascii=False, indent=1, sort_keys=True)
+              os.replace(tmp, man_path)
+          # main93 sandbox backfill (keep _93m_BUILD_DONE invariant: sandbox == latest green tree)
+          sbx = r'D:/ComplexAnalysis/attn/rocq93_work_20261101/main93/ConstructiveWorld_vo'
+          done_flag = os.path.join(sbx, '_93m_BUILD_DONE')
+          n_cp = 0
+          if os.path.isdir(sbx) and os.path.isfile(done_flag):
+              for f in vs:
+                  of = os.path.join(vo, f[:-2] + '.vo')
+                  if os.path.isfile(of):
+                      shutil.copy2(of, os.path.join(sbx, f[:-2] + '.vo')); n_cp += 1
+          print('SEED-RECYCLE: added=%d refreshed=%d sandbox_backfill=%d manifest_total=%d' % (added, refreshed, n_cp, len(man)))
+          PYEOF93RECYCLE
 
       # 闸② Axioms 段哨兵：块状态机解析（禁裸 grep——裸 -i error 假配 84 行／-i axiom
       # 假配 2213 行，E422/AX-MATRIX 实证；状态机段外假匹配结构性不可能）。
