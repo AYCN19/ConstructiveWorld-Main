@@ -1100,3 +1100,5 @@ sl3_w2_band_b_arm.v#R229-c19198
 sl3_w2_band_migration.v#R229-bb246e
 sl1_w2_extended_anchors.v#R229-df8e0e
 sl2_w2_rint_decay_chain.v#R229-de6cde
+planb4_g1_calibwin_b1_seg_7_12.v#R230-b2seg-a
+planb4_g1_calibwin_b2_seg_13_18.v#R230-b2seg-b

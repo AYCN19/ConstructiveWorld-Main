@@ -999,3 +999,5 @@ sl3_w2_band_b_arm.v
 sl3_w2_band_migration.v
 sl1_w2_extended_anchors.v
 sl2_w2_rint_decay_chain.v
+planb4_g1_calibwin_b1_seg_7_12.v
+planb4_g1_calibwin_b2_seg_13_18.v
