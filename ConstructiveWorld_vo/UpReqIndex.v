@@ -5294,7 +5294,7 @@ Definition ng_Sl3D4Chain : NewGreenFace :=
 Definition ng_Sl3D5Param : NewGreenFace :=
   MkNewGreenFace "sl3_d5_param.v" 251 7 20261114
   "D-SL3-5: sigma-parameterized supply recast with the three-pin annotation face" "L251:m5baae8".
-(* ---------- W2 批十一件 cons（插于 V47 清单 nil 前·依赖拓扑序·注册号 #R229 于 order.txt 行锚·20261117） ---------- *)
+(* ---------- W2 batch: eleven ng_ cons rows, dependency topological order, inserted before the V47 list nil; registration rows are anchored in order.txt ---------- *)
 Definition ng_Sl4W2GrowthAnchor : NewGreenFace :=
   MkNewGreenFace "sl4_w2_growth_anchor.v" 191 7 20261117
   "D-SL4-3: growth window anchors n=13..18 six bites + bgrowth_table_18 with born face" "L191:mb286b5".
