@@ -530,7 +530,7 @@ jobs:
           # list feeds parallel_chk again; the W3-BACKSTOP below still forces a full-tree
           # coqchk every 500 runs (20261115: 20 -> 500; rocqwash autofix inflates run numbers).
           export CHK_ATTEST_SHA256="$("$PYTHON" -c "import json,io;d=json.load(io.open('attest_reconcile.json',encoding='utf-8'));print(d.get('archive_tree_sha256') or 'none')" 2>/dev/null || echo none)"
-          export CHK_JOBS=8   # 20261105 用户令：14 路（根分组共享闭包模式不变）
+          export CHK_JOBS=14  # 20261119 用户令：恢复 14 路（根分组共享闭包模式不变）；20261117 曾因 free_virtual 0.1GB 降 8——若复现 OOM 按该账回退 8。注意 parallel_chk.sh 的 CHK_HEADROOM_FILE 自适应钩本 yml 未设置=休眠；若将来设置，其 tier 表封顶 8 会压掉本值
           # 20261105 Rocq 9.3 换基（形A·改点③）：parallel_chk.sh L57 K="${COQCHK:-…9.1…}" 吃本环境
           # （SW2 同根推导 COQLIB/ROCQLIB/ROCQDEP）；job env 已注入同值，此行显式重申=步级自含。
           # cw_chk93.cmd 系 coqchk_all.sh 串行壳，直挂会废并行 K=14（ci_switch README 偏离1 同判
