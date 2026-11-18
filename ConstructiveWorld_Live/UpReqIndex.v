@@ -5329,6 +5329,15 @@ Definition ng_Sl2W2RintDecayChain : NewGreenFace :=
   MkNewGreenFace "sl2_w2_rint_decay_chain.v" 456 2 20261117
   "D-SL2-W2: rate-algebra engine + flagship assembly chain + kernel bricks + ratio anchors (PA 18, SL2-b retained)" "L456:mde6cde".
 (* ---------- V47 批统计（整批追加纪律：清单/常量/引理同块原子写入·ng_qed 口径） ---------- *)
+Definition ng_Sl12W3Zz2020Transcript : NewGreenFace :=
+  MkNewGreenFace "sl12_w3_zz2020_transcript.v" 328 3 20261118
+  "SL2-b supply face: ZZ2020 v2 transcription, eq.(3) mirror identity green, Lemma 1/2/3 born, Phi divides lcm proved face, vm_compute sample anchors; forall-n analytic recast stays need-breakthrough (wave-3 T3)" "L328:ma8da7b".
+Definition ng_Sl12W3Sl1Certs : NewGreenFace :=
+  MkNewGreenFace "sl12_w3_sl1_certs.v" 225 9 20261118
+  "SL1 two premise certificates at K=121 freeze plus forall-n reduction bodies (lcm split-body B=65 margin 7.58e-5; Phi window-form c=34/25 from N0=15); tail premises OPEN with named recheck conditions (wave-3 T3)" "L225:mb95298".
+Definition ng_L6CarrierMigration : NewGreenFace :=
+  MkNewGreenFace "l6_carrier_migration.v" 217 2 20261118
+  "hexit route B-1 carrier migration: l6_env_L lower envelope, exit face at it, tail-bound premise slot, two PROVEN bridges (exit-from-tail-bound witness K=m0 uniform; l2dv twin orientation); route A-1 stays need-breakthrough (wave-3 T4)" "L217:mb8f5a1".
 Definition NewGreenListV47 : list NewGreenFace :=
  cons ng_PiuMuCriterion
  (cons ng_PiuZzConstants
@@ -5393,7 +5402,7 @@ Definition NewGreenListV47 : list NewGreenFace :=
  (cons ng_PiuZzEcEscwinBracket
  (cons ng_PiuZzN2cSigmaAssembly
  (cons ng_Piu1932UncondZzReland
- (cons ng_Sl12Constants (cons ng_Sl1PhaseFaces (cons ng_Sl1PhiDividesL (cons ng_Sl1HeadAnchors (cons ng_Sl1LznAssembly (cons ng_Sl1Lzn48Chain (cons ng_Sl2AnchorCarrier (cons ng_Sl2RintRecast (cons ng_Planb4Sl4Skeleton (cons ng_Sl4D5Proportional (cons ng_Sl4D3GrowthAnchor (cons ng_Sl4D4DenomAnchors (cons ng_Sl4D4DenomSkeleton (cons ng_Sl3D3GfCarrier (cons ng_Sl3D1SigmaLift (cons ng_Sl3D2Flag (cons ng_Sl3D2FlagAnchors (cons ng_Sl3D3GfAnchors (cons ng_Sl3D4Chain (cons ng_Sl3D5Param (cons ng_Sl4W2GrowthAnchor (cons ng_Sl4W2GrowthD4DenomAnchor (cons ng_Sl4W2SurveyPdivfix (cons ng_Sl4W2Propweld (cons ng_Sl3W2BodyPoleDom (cons ng_Sl3W2BodyIdentityAnchors (cons ng_Sl3W2BodyFlagTab (cons ng_Sl3W2BandBArm (cons ng_Sl3W2BandMigration (cons ng_Sl1W2ExtendedAnchors (cons ng_Sl2W2RintDecayChain nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
+ (cons ng_Sl12Constants (cons ng_Sl1PhaseFaces (cons ng_Sl1PhiDividesL (cons ng_Sl1HeadAnchors (cons ng_Sl1LznAssembly (cons ng_Sl1Lzn48Chain (cons ng_Sl2AnchorCarrier (cons ng_Sl2RintRecast (cons ng_Planb4Sl4Skeleton (cons ng_Sl4D5Proportional (cons ng_Sl4D3GrowthAnchor (cons ng_Sl4D4DenomAnchors (cons ng_Sl4D4DenomSkeleton (cons ng_Sl3D3GfCarrier (cons ng_Sl3D1SigmaLift (cons ng_Sl3D2Flag (cons ng_Sl3D2FlagAnchors (cons ng_Sl3D3GfAnchors (cons ng_Sl3D4Chain (cons ng_Sl3D5Param (cons ng_Sl4W2GrowthAnchor (cons ng_Sl4W2GrowthD4DenomAnchor (cons ng_Sl4W2SurveyPdivfix (cons ng_Sl4W2Propweld (cons ng_Sl3W2BodyPoleDom (cons ng_Sl3W2BodyIdentityAnchors (cons ng_Sl3W2BodyFlagTab (cons ng_Sl3W2BandBArm (cons ng_Sl3W2BandMigration (cons ng_Sl1W2ExtendedAnchors (cons ng_Sl2W2RintDecayChain (cons ng_Sl12W3Zz2020Transcript (cons ng_Sl12W3Sl1Certs (cons ng_L6CarrierMigration nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
 (* ---------- V48 批八件 cons（插于 V47 清单 nil 前·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚） ---------- *)
 (* ---------- 十七片终形辅助名注记（KB13R 按 KB12/KB15 核勘代拟·KB20 无壳形制修订：wave4 拆四季·伞退役·slim 直挂八季） ---------- *)
 (* 本批 wave 行承载 128 条升格辅助引理名：piu_zz_hb_512_0..31（wave1/2 各 16）＋
@@ -5403,10 +5412,11 @@ Definition NewGreenListV47 : list NewGreenFace :=
    原 2,912 定义性名零丢失＋辅助名增量 128＝终形 3,040 名；语句多集 3,044 位恒等、原 42 位
    零丢失（KB12 审计·KB15 复核）。落地后逐行 PA 占位以 new_About 实测检验填注（仅注释面）。 *)
 (* 续写统计：63 件 / 行数和 43383 / 闭合数和 3851（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚·registered in the November 2026 wave·W5 件候 born 第二批重锚禁预填）＋W6 二批一件追加 179/8（piu1932_uncond_zz 9.3 一致型同名重落·候选版 46f5f5·六前提无条件闭合顶件·注册号 194 旧条目 ng_Piu1932UncondZz 原位保留＝A 案·R 号 ? 占位·registry-day full-width placeholder pending, final value assigned at commit time·order.txt :973 行锚）。 *)
+(* wave3 C 落三件追加 770/14（zz2020 328/3＋certs 225/9＋l6cm 217/2）；R231 于 order.txt 行锚。 *)
 (* Fix-I 语句手术一代续记：Htri 槽 2 换位 dval (Z.of_nat q) (- p)→dval (- p) (Z.of_nat q) 逐处＋Hexit 前提面同形换位 dval b (- a)→dval (- a) b——34 处语句/前提面（criterion 7／e_carrier 9／piu1932 顶件 2／planb1 1／planb1_cert 6／planb3_g1_g2_design 3＋证体随改 4 行／planb4_l2_dv_cast 2／distpt_supply 4）＋e_carrier :646 注释随形；重编闭包 18 模块绿（rocq dep 全盘反向定界 8 种子＋10 下游）；三在册件 md5 换代锚于 order.txt 双树（M 语义·R 号外置迁移账：criterion dc5b47→dce9a2／e_carrier f22b5b→df34f1／顶件 46f5f5→e63556）；本索引 ng_meta=登记时点快照口径不变——三件行数 281/761/179 与 ng_qed 8/33/8（剥块注释 token 级双口径）手术前后实测零变化→三常量重算零增量（63 件／行数和 43383／闭合数和 3851 维持·下方三等式引理编译期核对）；P2 工单原列「Hexit 前提退役六→五」不在本次执行 diff（现役仍六前提接口同形换位形·不以修形后非空真作结语·始末详见跨线资产分析与工单目录迁移账·Fix-I Htri 换位与 Hexit 退役卷）。 *)
-Definition NewGreenV47Pieces : nat := 94.
-Definition NewGreenV47LineSum : nat := 52693.
-Definition NewGreenV47QedSum : nat := 4275.
+Definition NewGreenV47Pieces : nat := 97.
+Definition NewGreenV47LineSum : nat := 53463.
+Definition NewGreenV47QedSum : nat := 4289.
 
 (* 清单件数 = 字面值（增删清单而忘改字面值即爆 G2） *)
 Lemma NewGreenV47Pieces_matches : NewGreenV47Pieces = cnt_ng NewGreenListV47.

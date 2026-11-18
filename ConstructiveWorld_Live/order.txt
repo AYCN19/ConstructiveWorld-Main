@@ -1036,7 +1036,6 @@ planb4_l4_hesc_nonzero.v#R223-b664f513-l4v001
 planb4_g1_rs_channel.v#R224-92790f54-g1w004
 planb4_g1_ab_def.v#R224-3c618545-g1w005
 planb4_g1_calibwin_b1.v#R224-31a088fa-g1w006
-planb4_g1_calibwin_b2.v#R224-73ab2eb4-g1w007
 planb4_g1_calibwin_b3.v#R224-cd9359a0-g1w008
 planb4_g1_calibwin_b4.v#R224-2d4b2e7c-g1w009
 planb4_g1_calibwin_b5.v#R224-50dd3f21-g1w010
@@ -1101,8 +1100,6 @@ cast_bridge.v#R228-p7as02
 cast_modulus.v#R228-p7as03
 cast_parity.v#R228-p7as04
 planb5_p7_mach_assembly.v#R228-p7as05
-sl4_w2_growth_anchor.v#R229-b286b5
-sl4_w2_growth_d4_denom_anchor.v#R229-20a9dc
 sl4_w2_survey_pdivfix.v#R229-ba42b2
 sl4_w2_propweld.v#R229-b11aa7
 sl3_w2_body_pole_dom.v#R229-6ad29f
@@ -1112,3 +1109,6 @@ sl3_w2_band_b_arm.v#R229-c19198
 sl3_w2_band_migration.v#R229-bb246e
 sl1_w2_extended_anchors.v#R229-df8e0e
 sl2_w2_rint_decay_chain.v#R229-de6cde
+sl12_w3_zz2020_transcript.v#R231-t3zz
+sl12_w3_sl1_certs.v#R231-t3sc
+l6_carrier_migration.v#R231-t4l6

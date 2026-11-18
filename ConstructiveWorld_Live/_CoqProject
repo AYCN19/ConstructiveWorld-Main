@@ -967,7 +967,6 @@ planb4_l4_hesc_nonzero.v.v
 planb4_g1_rs_channel.v
 planb4_g1_ab_def.v
 planb4_g1_calibwin_b1.v
-planb4_g1_calibwin_b2.v
 planb4_g1_calibwin_b3.v
 planb4_g1_calibwin_b4.v
 planb4_g1_calibwin_b5.v
@@ -1102,8 +1101,6 @@ cast_bridge.v
 cast_modulus.v
 cast_parity.v
 planb5_p7_mach_assembly.v
-sl4_w2_growth_anchor.v
-sl4_w2_growth_d4_denom_anchor.v
 sl4_w2_survey_pdivfix.v
 sl4_w2_propweld.v
 sl3_w2_body_pole_dom.v
@@ -1113,3 +1110,6 @@ sl3_w2_band_b_arm.v
 sl3_w2_band_migration.v
 sl1_w2_extended_anchors.v
 sl2_w2_rint_decay_chain.v
+sl12_w3_zz2020_transcript.v
+sl12_w3_sl1_certs.v
+l6_carrier_migration.v
