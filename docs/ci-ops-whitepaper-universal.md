@@ -3,7 +3,8 @@
 > **适用域**：ConstructiveWorld 生态全部代码仓（Main／Set／rocqwash／rocq-pi-leibniz 及后续仓）。
 > **单源声明**：本文件为 CI 运维通用原则与约束的唯一措辞源——各仓数据文档（ci-ops-data.json 等）引用本文件原则·禁各处改写。修订只改本文件。
 > **依据**：近期 CI 修复实战经验蒸馏（20261114-17·SL/P7/y-carrier/vo-gap/attest 重铸/runner 管理/桥劫持/NETRED 等全波次）。
-> **修订**：20261118 v1.2——§1 重写为正典形态（run#94 参照炉·种子链闭环·PBLD_AUTO_BASE 正形）＋档案保护条款；§2 三新故障模式对齐（skip-regression 三分类）；用户令「#94 最快三捷径规范入册·与不一致处对齐」。v1.1 原表述（mtime fingerprint 为 Build 捷径主形）经 run#107 实证勘误：mtime -nt 在 checkout 落盘序下不可靠·生成失效模式（AUTO_BASE）才是正形。
+> **修订**：20261119 v1.3——新增 §8 coqchk 字节码旗定律（vm_compute 咬合证明的内核复核必修旗·双机双实证·有界组验正形）；§1 第三捷径（字节码旗）适用面自 build 正式扩展到 coqchk 复核面。
+> 20261118 v1.2——§1 重写为正典形态（run#94 参照炉·种子链闭环·PBLD_AUTO_BASE 正形）＋档案保护条款；§2 三新故障模式对齐（skip-regression 三分类）；用户令「#94 最快三捷径规范入册·与不一致处对齐」。v1.1 原表述（mtime fingerprint 为 Build 捷径主形）经 run#107 实证勘误：mtime -nt 在 checkout 落盘序下不可靠·生成失效模式（AUTO_BASE）才是正形。
 
 ---
 
@@ -96,3 +97,36 @@
 | cw_sentinel | CI 状态监控→heal 触发 | Main 仓 coq93.yml 步链 |
 | automerge 门 | PR 可合并性判定→自动合并 | Main 仓 PR 面 |
 | symbiosis 喂送 | 跨仓经验条目→缺口账 | Main 仓 exp-ledger |
+
+## §8 coqchk 字节码旗定律（vm_compute 咬合证明的内核复核·20261119 v1.3 新增）
+
+**定律**：凡证明体含 `vm_compute` 咬合的 `.vo`，`coqchk` 内核复核必须带 **`-bytecode-compiler yes`** 旗。缺旗时内核走惰性转换路径，在单个大常量上磨（100% 单核·日志冻结·单常量名长时间不动）——这是**缺旗**，不是证明缺陷；处置＝插旗重跑，**禁止 kill 绕过、禁止降级标准、禁止改用弱判据顶替 coqchk 判决**。
+
+| 面 | 要点 |
+|---|---|
+| 判别签名 | coqchk 进程 100% 单核＋输出日志冻结＋卡在**单个**常量名＝缺旗特征（多常量推进中的慢＝正常·vm_compute 大证明本来要算） |
+| 实证一（焊接席·20261119） | 链改造组验：`-admit` 有界形式到达 build_n18 后在 `pb4cwin_remcertA_n18_i1` 单常量磨 8+ 分钟无判决·停手留痕 |
+| 实证二（落地刀·20261118/19） | 全闭包复核 25 min 帽超时；`-norec` 形式仍慢（zz3_* 内部重进）；**插旗后 scoped 门正常出判决** |
+| 正形（大闭包不全验时） | `coqchk -bytecode-compiler yes -silent -admit <上游库…> <目标模块…>`——`-admit` 只装载不重验上游；`-norec` 会连目标件自身常量一起全量重进（比 -admit 更慢·弃用） |
+| 第三捷径扩展 | §1 第三捷径（字节码旗）适用面自 build 正式扩展到 **coqchk 复核面**——build 与 check 两面同一旗；炉端 chk 步已带旗（run#94 正典），**席端/验收刀端手工 coqchk 是缺旗事故高发面** |
+| 红线不损 | coqchk 判决仍是落岸唯一金标准（认证铁律不变）；本定律只是让判决**算得出来**。缺旗慢≠可用弱判据（PA Closed／编译 rc）顶替判决——PA 与单进程多模块 Require 是必要证据面，判决仍归 coqchk |
+
+
+## §9 落地刀正典（外发件落树推岸全工序·20261119 v1.3 新增·B1 波三→A转C落全案蒸馏）
+
+外发包交付件落树上岸的唯一正典工序。十步有序·闸闸断言·任何一步不过即停手不落。
+
+| 步 | 工序 | 正典要点 |
+|---|---|---|
+| 1 | 包验收 | MANIFEST md5 逐条机检（判例 46/46）＋回执/回传面全读＋复核席独立复跑账对读——包面先信机检再信叙述 |
+| 2 | 验证树搭台 | clone 外稳定 temp 树（湿工作面禁用——多席 git 清扫会蒸发未跟踪件）；上游 .vo 借用＝**炉点同 HEAD 检出区整库借用**（直系九件不够——.vo 载入要求传递闭包全家桶在场；-Q 指检出区 vo 目录只读借） |
+| 3 | 编译闸 | cpu_guard 包裹（G3 档放行形 `-AllowG3 -GearForce 0 -TempLimit 98`·条37 禁候窗）；逐件 rc＋耗时侧写落盘（无侧写=未跑） |
+| 4 | 认证刀 | coqchk **必带 `-bytecode-compiler yes`**（§8 定律）；大闭包用 `-admit` 有界形；coqchk 拒 `-Q` 空根名→路径走 `ROCQPATH/COQPATH` 环境变量经 bash 闸脚本注入（world.run 无 env 参数） |
+| 5 | 注册面三件套 | order.txt/_CoqProject 追加＋UpReqIndex 整批原子手术（新 ng_ 定义＋cons 链尾扩环＋统计字面值同步三改·对账引理编译期闭合＝机器自验）；**两树同款逐字节同**；UpReqIndex 独立编译 rc=0 脚本级复验（不信席口头） |
+| 6 | 静态门闸 | gate1 毒词／gate4 头注五字段＋**注释面禁 R 号**（20261119 判例：R231 入注=双树硬红·修法=R 号外置 order.txt）／语句面普查与回执对表——推前本地全跑（`--file` 单件快验 rc=0 再推） |
+| 7 | 落树纪律 | 白名单逐文件 add＋**staged 数量硬断言**（他席脏面/未跟踪件零沾）；commit 消息携带单号·摘牌/理由·换装恢复条件 |
+| 8 | 推岸 | NETRED 阵发=重试环（25s×N·失败轮转）；**cred-embedded URL**（`https://user:token@github.com/...`）绕 insteadOf 桥（全局 ghproxy 只读代理会改写裸 github URL 且不认 git 推送·还会假答 ls-remote——真值以 API branches 端点为准）；探活推活合一循环＋push 后 API 双验 |
+| 9 | 落岸后盯守 | 三查＝新炉确认（head sha 对表）＋**防旧炉重跑守卫**（旧 head 排队 watch 一律 cancel·用户禁磨令优先于在飞神圣）＋runner listener 死活链（炉排队无人领=listener 死·`Start-Process bin/Runner.Listener.exe run` 复活即接单·JobStarted 钩自证） |
+| 10 | 指数禁磨律 | **parallel_build 扫 vo 目录（find *.v）不扫注册面**——删注册行挡不住磨（判例 cbd74a6 前夜：b2_seg 摘牌后仍被编）；防指数磨必须**文件摘除**（git rm·簇闭包先 python 全树反查零外部消费者·历史永存·换装时点统一回植）；git 前置闸=当前炉 cancel（用户禁磨令覆盖在飞神圣）＋本地 compile 进程全清 |
+
+**判例源**：B1 波三包（46/46）→ A转C落落地刀（四关全绿→NETRED 窗口推岸→PR#19 修复支→gate4 硬红→build 扫面真相→簇摘除 cbd74a6）全链。工艺细则判例（world.run 全路径／coqchk COQPATH／孤儿竞日志／睡眠杀炉）归经验卡族，本节只立工序正典。
