@@ -1,144 +1,199 @@
 (* ===================================================================== *)
 (* ConstructiveWorld-Main - planB wave-2 G1: the calibration-window      *)
-(* anchor sweep, segment 3 of 6: n = 19..24.                            *)
+(* anchor sweep, segment 3 of 6: n = 19..24 (chain-tail supply form).    *)
 (* ===================================================================== *)
 
 (** * planb4_g1_calibwin_b3: anchor groups (b)/(c) point-wise, n = 19..24.
 
     Mission.  The planb4_g1_ab_def born-window anchors continued
-      past n = 6: group (b) the integrality round trip
-      [Qeq_bool (inject_Z (Qnum q)) q = true] over both assembled
-      channels; group (c) the assembled [Qnum] values bite the
-      frozen [planb3_g1_A]/[planb3_g1_B] table channels (the
-      single-source table md5 f2e56ff27c667de6b077e87e7c5c7b70).
-      One Example per channel per n, each an independent
-      vm_compute bite; a failing anchor names its n.
+      past n = 6, supplied from the small-step chain.  Group (b)
+      the integrality round trip [Qeq_bool (inject_Z (Qnum q)) q =
+      true]: each anchor rewrites the point's chain-tail equality
+      certificate onto its integer literal, then one small bite.
+      Group (c) the assembled [Qnum] values bite the frozen
+      [planb3_g1_A]/[planb3_g1_B] table channels: each anchor is
+      the matching host twin certificate, taken verbatim.
 
-    Dependencies.  planb4_g1_ab_def (planb4_abqA/planb4_abqB; its
-      witness/rs_channel/laur_extract/zzm1b/calib closure compiled
-      in tree); stdlib QArith, ZArith.
+    Dependencies.  planb4_g1_ab_def; planb3_g1_calib;
+      planb4_calib_chain_glue_qred (pb4cwin_zzId_eq);
+      planb4_calib_chain_build_n19..n24 (eq-face certificates);
+      planb4_calib_chain_host_n19..n24 (group-(c) twins);
+      stdlib QArith, ZArith.
 
-    References.  ZZ2020 Prop 1 (2^(-floor(5n/2)+2) L_n I_n in
-      Z + Z pi); planb3_g1_calib A/B channels n = 1..40.
+    References.  ZZ2020 Prop 1; planb3_g1_calib A/B channels
+      n = 1..40; planb4_g1_calibwin_b1.v (segment 1, continued).
 
-    Constructivity.  No non-constructive escapes; zero premise slot;
-      every anchor closes by one vm_compute step.
+    Constructivity.  No non-constructive escapes; zero premise
+      slot; every anchor carries Print Assumptions.
 
-    Build.  coqc -native-compiler no -q -Q . "" planb4_g1_calibwin_b3.v
-      (Rocq 9.3.0; serial single lane under cpu_guard_v3). *)
+    Build.  coqc -native-compiler no -time -q -Q <chain sandbox> ""
+      -Q <tree ConstructiveWorld_Live> "" planb4_g1_calibwin_b3.v
+      (Rocq 9.3.0; cpu_guard_v3 wrapped). *)
 
 From Stdlib Require Import QArith.
 From Stdlib Require Import ZArith.
 Require Import planb4_g1_ab_def.
 Require Import planb3_g1_calib.
+Require Import planb4_calib_chain_glue_qred.
+Require Import planb4_calib_chain_build_n19.
+Require Import planb4_calib_chain_build_n20.
+Require Import planb4_calib_chain_build_n21.
+Require Import planb4_calib_chain_build_n22.
+Require Import planb4_calib_chain_build_n23.
+Require Import planb4_calib_chain_build_n24.
+Require Import planb4_calib_chain_host_n19.
+Require Import planb4_calib_chain_host_n20.
+Require Import planb4_calib_chain_host_n21.
+Require Import planb4_calib_chain_host_n22.
+Require Import planb4_calib_chain_host_n23.
+Require Import planb4_calib_chain_host_n24.
 
 (* ================================================================== *)
 (* Group (b): both assembled channels are integer-valued rationals    *)
 (* at every n of the segment (Q representation free: Qeq_bool through *)
-(* the Qnum/inject_Z round trip; the ab_def statement shape, per n).  *)
+(* the Qnum/inject_Z round trip; the ab_def statement shape, per n;   *)
+(* each proof rewrites the build file's chain-tail equality           *)
+(* certificate to the point's integer literal, then one small bite).  *)
 (* ================================================================== *)
 
 Example planb4_abqA_int_19 :
   Qeq_bool (inject_Z (Qnum (planb4_abqA 19))) (planb4_abqA 19) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqAeq_n19).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqB_int_19 :
   Qeq_bool (inject_Z (Qnum (planb4_abqB 19))) (planb4_abqB 19) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqBeq_n19).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqA_int_20 :
   Qeq_bool (inject_Z (Qnum (planb4_abqA 20))) (planb4_abqA 20) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqAeq_n20).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqB_int_20 :
   Qeq_bool (inject_Z (Qnum (planb4_abqB 20))) (planb4_abqB 20) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqBeq_n20).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqA_int_21 :
   Qeq_bool (inject_Z (Qnum (planb4_abqA 21))) (planb4_abqA 21) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqAeq_n21).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqB_int_21 :
   Qeq_bool (inject_Z (Qnum (planb4_abqB 21))) (planb4_abqB 21) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqBeq_n21).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqA_int_22 :
   Qeq_bool (inject_Z (Qnum (planb4_abqA 22))) (planb4_abqA 22) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqAeq_n22).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqB_int_22 :
   Qeq_bool (inject_Z (Qnum (planb4_abqB 22))) (planb4_abqB 22) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqBeq_n22).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqA_int_23 :
   Qeq_bool (inject_Z (Qnum (planb4_abqA 23))) (planb4_abqA 23) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqAeq_n23).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqB_int_23 :
   Qeq_bool (inject_Z (Qnum (planb4_abqB 23))) (planb4_abqB 23) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqBeq_n23).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqA_int_24 :
   Qeq_bool (inject_Z (Qnum (planb4_abqA 24))) (planb4_abqA 24) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqAeq_n24).
+  vm_compute. reflexivity.
+Qed.
 
 Example planb4_abqB_int_24 :
   Qeq_bool (inject_Z (Qnum (planb4_abqB 24))) (planb4_abqB 24) = true.
-Proof. vm_compute. reflexivity. Qed.
+Proof.
+  rewrite (pb4cwin_zzId_eq pb4cwin_abqBeq_n24).
+  vm_compute. reflexivity.
+Qed.
 
 (* ================================================================== *)
 (* Group (c): the assembled Qnum values bite the frozen calibration   *)
 (* tables (the exact machine verification of the assembly formula on  *)
-(* the segment; the ab_def statement shape, per n).                   *)
+(* the segment; the ab_def statement shape, per n; each proof term is *)
+(* the host file's twin certificate verbatim, zero computation here). *)
 (* ================================================================== *)
 
 Example planb4_ab_Acal_19 :
-  Z.eqb (Qnum (planb4_abqA 19)) (planb3_g1_A 19) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqA 19)) (planb3_g1_A 19) = true :=
+  pb4cwin_ab_Acal_n19.
 
 Example planb4_ab_Bcal_19 :
-  Z.eqb (Qnum (planb4_abqB 19)) (planb3_g1_B 19) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqB 19)) (planb3_g1_B 19) = true :=
+  pb4cwin_ab_Bcal_n19.
 
 Example planb4_ab_Acal_20 :
-  Z.eqb (Qnum (planb4_abqA 20)) (planb3_g1_A 20) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqA 20)) (planb3_g1_A 20) = true :=
+  pb4cwin_ab_Acal_n20.
 
 Example planb4_ab_Bcal_20 :
-  Z.eqb (Qnum (planb4_abqB 20)) (planb3_g1_B 20) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqB 20)) (planb3_g1_B 20) = true :=
+  pb4cwin_ab_Bcal_n20.
 
 Example planb4_ab_Acal_21 :
-  Z.eqb (Qnum (planb4_abqA 21)) (planb3_g1_A 21) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqA 21)) (planb3_g1_A 21) = true :=
+  pb4cwin_ab_Acal_n21.
 
 Example planb4_ab_Bcal_21 :
-  Z.eqb (Qnum (planb4_abqB 21)) (planb3_g1_B 21) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqB 21)) (planb3_g1_B 21) = true :=
+  pb4cwin_ab_Bcal_n21.
 
 Example planb4_ab_Acal_22 :
-  Z.eqb (Qnum (planb4_abqA 22)) (planb3_g1_A 22) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqA 22)) (planb3_g1_A 22) = true :=
+  pb4cwin_ab_Acal_n22.
 
 Example planb4_ab_Bcal_22 :
-  Z.eqb (Qnum (planb4_abqB 22)) (planb3_g1_B 22) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqB 22)) (planb3_g1_B 22) = true :=
+  pb4cwin_ab_Bcal_n22.
 
 Example planb4_ab_Acal_23 :
-  Z.eqb (Qnum (planb4_abqA 23)) (planb3_g1_A 23) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqA 23)) (planb3_g1_A 23) = true :=
+  pb4cwin_ab_Acal_n23.
 
 Example planb4_ab_Bcal_23 :
-  Z.eqb (Qnum (planb4_abqB 23)) (planb3_g1_B 23) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqB 23)) (planb3_g1_B 23) = true :=
+  pb4cwin_ab_Bcal_n23.
 
 Example planb4_ab_Acal_24 :
-  Z.eqb (Qnum (planb4_abqA 24)) (planb3_g1_A 24) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqA 24)) (planb3_g1_A 24) = true :=
+  pb4cwin_ab_Acal_n24.
 
 Example planb4_ab_Bcal_24 :
-  Z.eqb (Qnum (planb4_abqB 24)) (planb3_g1_B 24) = true.
-Proof. vm_compute. reflexivity. Qed.
+  Z.eqb (Qnum (planb4_abqB 24)) (planb3_g1_B 24) = true :=
+  pb4cwin_ab_Bcal_n24.
 
 (* ================================================================== *)
 (* Assumption audit over the segment anchors.                         *)
@@ -146,25 +201,25 @@ Proof. vm_compute. reflexivity. Qed.
 
 Print Assumptions planb4_abqA_int_19.
 Print Assumptions planb4_abqB_int_19.
-Print Assumptions planb4_ab_Acal_19.
-Print Assumptions planb4_ab_Bcal_19.
 Print Assumptions planb4_abqA_int_20.
 Print Assumptions planb4_abqB_int_20.
-Print Assumptions planb4_ab_Acal_20.
-Print Assumptions planb4_ab_Bcal_20.
 Print Assumptions planb4_abqA_int_21.
 Print Assumptions planb4_abqB_int_21.
-Print Assumptions planb4_ab_Acal_21.
-Print Assumptions planb4_ab_Bcal_21.
 Print Assumptions planb4_abqA_int_22.
 Print Assumptions planb4_abqB_int_22.
-Print Assumptions planb4_ab_Acal_22.
-Print Assumptions planb4_ab_Bcal_22.
 Print Assumptions planb4_abqA_int_23.
 Print Assumptions planb4_abqB_int_23.
-Print Assumptions planb4_ab_Acal_23.
-Print Assumptions planb4_ab_Bcal_23.
 Print Assumptions planb4_abqA_int_24.
 Print Assumptions planb4_abqB_int_24.
+Print Assumptions planb4_ab_Acal_19.
+Print Assumptions planb4_ab_Bcal_19.
+Print Assumptions planb4_ab_Acal_20.
+Print Assumptions planb4_ab_Bcal_20.
+Print Assumptions planb4_ab_Acal_21.
+Print Assumptions planb4_ab_Bcal_21.
+Print Assumptions planb4_ab_Acal_22.
+Print Assumptions planb4_ab_Bcal_22.
+Print Assumptions planb4_ab_Acal_23.
+Print Assumptions planb4_ab_Bcal_23.
 Print Assumptions planb4_ab_Acal_24.
 Print Assumptions planb4_ab_Bcal_24.

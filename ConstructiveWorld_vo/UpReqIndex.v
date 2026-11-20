@@ -5455,6 +5455,208 @@ Definition ng_Sl12W3Sl1Certs : NewGreenFace :=
 Definition ng_L6CarrierMigration : NewGreenFace :=
   MkNewGreenFace "l6_carrier_migration.v" 217 2 20261118
   "hexit route B-1 carrier migration: l6_env_L lower envelope, exit face at it, tail-bound premise slot, two PROVEN bridges (exit-from-tail-bound witness K=m0 uniform; l2dv twin orientation); route A-1 stays need-breakthrough (wave-3 T4)" "L217:mb8f5a1".
+(* ---------- chain window extension batch: 67 rows appended before the list nil (dependency topological order: step/build/host n19..n40, then the b2 replant shim); registration rows anchored in order.txt ---------- *)
+Definition ng_Planb4CalibChainStepN19 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n19.v" 214 0 20261121
+  "chain step leaf at n=19: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L214:m2999fa".
+Definition ng_Planb4CalibChainStepN20 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n20.v" 214 0 20261121
+  "chain step leaf at n=20: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L214:m5bc169".
+Definition ng_Planb4CalibChainStepN21 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n21.v" 214 0 20261121
+  "chain step leaf at n=21: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L214:mdd54d0".
+Definition ng_Planb4CalibChainStepN22 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n22.v" 238 0 20261121
+  "chain step leaf at n=22: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L238:md5e071".
+Definition ng_Planb4CalibChainStepN23 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n23.v" 238 0 20261121
+  "chain step leaf at n=23: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L238:m8505fc".
+Definition ng_Planb4CalibChainStepN24 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n24.v" 262 0 20261121
+  "chain step leaf at n=24: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L262:m0e8e22".
+Definition ng_Planb4CalibChainStepN25 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n25.v" 262 0 20261121
+  "chain step leaf at n=25: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L262:m50b601".
+Definition ng_Planb4CalibChainStepN26 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n26.v" 262 0 20261121
+  "chain step leaf at n=26: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L262:md55f64".
+Definition ng_Planb4CalibChainStepN27 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n27.v" 286 0 20261121
+  "chain step leaf at n=27: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L286:m249dcc".
+Definition ng_Planb4CalibChainStepN28 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n28.v" 286 0 20261121
+  "chain step leaf at n=28: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L286:m2808c7".
+Definition ng_Planb4CalibChainStepN29 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n29.v" 286 0 20261121
+  "chain step leaf at n=29: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L286:m44b3cf".
+Definition ng_Planb4CalibChainStepN30 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n30.v" 310 0 20261121
+  "chain step leaf at n=30: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L310:mb955ec".
+Definition ng_Planb4CalibChainStepN31 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n31.v" 310 0 20261121
+  "chain step leaf at n=31: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L310:m17b0e6".
+Definition ng_Planb4CalibChainStepN32 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n32.v" 334 0 20261121
+  "chain step leaf at n=32: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L334:me9d87a".
+Definition ng_Planb4CalibChainStepN33 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n33.v" 334 0 20261121
+  "chain step leaf at n=33: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L334:m9a23b9".
+Definition ng_Planb4CalibChainStepN34 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n34.v" 334 0 20261121
+  "chain step leaf at n=34: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L334:m20623e".
+Definition ng_Planb4CalibChainStepN35 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n35.v" 358 0 20261121
+  "chain step leaf at n=35: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L358:m3e3985".
+Definition ng_Planb4CalibChainStepN36 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n36.v" 358 0 20261121
+  "chain step leaf at n=36: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L358:m6e1ccc".
+Definition ng_Planb4CalibChainStepN37 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n37.v" 358 0 20261121
+  "chain step leaf at n=37: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L358:mbfca92".
+Definition ng_Planb4CalibChainStepN38 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n38.v" 382 0 20261121
+  "chain step leaf at n=38: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L382:medc548".
+Definition ng_Planb4CalibChainStepN39 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n39.v" 382 0 20261121
+  "chain step leaf at n=39: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L382:ma17559".
+Definition ng_Planb4CalibChainStepN40 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_step_n40.v" 406 0 20261121
+  "chain step leaf at n=40: Laurent segment literals + fold-window anchors (w-step polynomial increment, one vm_compute cap per anchor)" "L406:mb79aa7".
+Definition ng_Planb4CalibChainBuildN19 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n19.v" 475 8 20261121
+  "chain build at n=19: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L475:m6fb2f0".
+Definition ng_Planb4CalibChainBuildN20 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n20.v" 465 8 20261121
+  "chain build at n=20: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L465:m97501e".
+Definition ng_Planb4CalibChainBuildN21 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n21.v" 465 8 20261121
+  "chain build at n=21: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L465:m14a630".
+Definition ng_Planb4CalibChainBuildN22 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n22.v" 517 8 20261121
+  "chain build at n=22: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L517:m4a6ee5".
+Definition ng_Planb4CalibChainBuildN23 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n23.v" 517 8 20261121
+  "chain build at n=23: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L517:mfa14f7".
+Definition ng_Planb4CalibChainBuildN24 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n24.v" 559 8 20261121
+  "chain build at n=24: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L559:me8cef9".
+Definition ng_Planb4CalibChainBuildN25 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n25.v" 559 8 20261121
+  "chain build at n=25: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L559:mbce02a".
+Definition ng_Planb4CalibChainBuildN26 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n26.v" 559 8 20261121
+  "chain build at n=26: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L559:m148e1f".
+Definition ng_Planb4CalibChainBuildN27 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n27.v" 611 8 20261121
+  "chain build at n=27: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L611:m2d54c5".
+Definition ng_Planb4CalibChainBuildN28 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n28.v" 601 8 20261121
+  "chain build at n=28: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L601:mf3eab8".
+Definition ng_Planb4CalibChainBuildN29 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n29.v" 601 8 20261121
+  "chain build at n=29: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L601:mdca450".
+Definition ng_Planb4CalibChainBuildN30 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n30.v" 653 8 20261121
+  "chain build at n=30: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L653:m872b82".
+Definition ng_Planb4CalibChainBuildN31 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n31.v" 653 8 20261121
+  "chain build at n=31: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L653:m6f3d34".
+Definition ng_Planb4CalibChainBuildN32 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n32.v" 695 8 20261121
+  "chain build at n=32: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L695:m46d7f3".
+Definition ng_Planb4CalibChainBuildN33 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n33.v" 677 8 20261121
+  "chain build at n=33: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L677:m5c9b09".
+Definition ng_Planb4CalibChainBuildN34 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n34.v" 677 8 20261121
+  "chain build at n=34: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L677:m7525be".
+Definition ng_Planb4CalibChainBuildN35 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n35.v" 725 8 20261121
+  "chain build at n=35: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L725:md50fb7".
+Definition ng_Planb4CalibChainBuildN36 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n36.v" 719 8 20261121
+  "chain build at n=36: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L719:m271b60".
+Definition ng_Planb4CalibChainBuildN37 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n37.v" 719 8 20261121
+  "chain build at n=37: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L719:m6ab414".
+Definition ng_Planb4CalibChainBuildN38 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n38.v" 767 8 20261121
+  "chain build at n=38: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L767:ma5ddd9".
+Definition ng_Planb4CalibChainBuildN39 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n39.v" 767 8 20261121
+  "chain build at n=39: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L767:m7297a4".
+Definition ng_Planb4CalibChainBuildN40 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_build_n40.v" 809 8 20261121
+  "chain build at n=40: poleA/poleB eq+bool tail certificates composed from the step leaves (substantive derivation chain, no full-chain vm_compute)" "L809:m349a3b".
+Definition ng_Planb4CalibChainHostN19 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n19.v" 38 2 20261121
+  "window anchor host at n=19: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m8d761e".
+Definition ng_Planb4CalibChainHostN20 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n20.v" 38 2 20261121
+  "window anchor host at n=20: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m9c9656".
+Definition ng_Planb4CalibChainHostN21 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n21.v" 38 2 20261121
+  "window anchor host at n=21: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m29e503".
+Definition ng_Planb4CalibChainHostN22 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n22.v" 38 2 20261121
+  "window anchor host at n=22: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m602e7e".
+Definition ng_Planb4CalibChainHostN23 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n23.v" 38 2 20261121
+  "window anchor host at n=23: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:mb76111".
+Definition ng_Planb4CalibChainHostN24 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n24.v" 38 2 20261121
+  "window anchor host at n=24: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:mc36b30".
+Definition ng_Planb4CalibChainHostN25 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n25.v" 38 2 20261121
+  "window anchor host at n=25: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m5383d5".
+Definition ng_Planb4CalibChainHostN26 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n26.v" 38 2 20261121
+  "window anchor host at n=26: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m833ecc".
+Definition ng_Planb4CalibChainHostN27 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n27.v" 38 2 20261121
+  "window anchor host at n=27: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:me9ffda".
+Definition ng_Planb4CalibChainHostN28 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n28.v" 38 2 20261121
+  "window anchor host at n=28: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:mbc05b7".
+Definition ng_Planb4CalibChainHostN29 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n29.v" 38 2 20261121
+  "window anchor host at n=29: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:mebd426".
+Definition ng_Planb4CalibChainHostN30 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n30.v" 38 2 20261121
+  "window anchor host at n=30: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m02668c".
+Definition ng_Planb4CalibChainHostN31 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n31.v" 38 2 20261121
+  "window anchor host at n=31: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:maa7ce2".
+Definition ng_Planb4CalibChainHostN32 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n32.v" 38 2 20261121
+  "window anchor host at n=32: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:me54b73".
+Definition ng_Planb4CalibChainHostN33 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n33.v" 38 2 20261121
+  "window anchor host at n=33: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m9c61cd".
+Definition ng_Planb4CalibChainHostN34 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n34.v" 38 2 20261121
+  "window anchor host at n=34: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m4f8f70".
+Definition ng_Planb4CalibChainHostN35 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n35.v" 38 2 20261121
+  "window anchor host at n=35: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m7133f8".
+Definition ng_Planb4CalibChainHostN36 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n36.v" 38 2 20261121
+  "window anchor host at n=36: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m8531b3".
+Definition ng_Planb4CalibChainHostN37 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n37.v" 38 2 20261121
+  "window anchor host at n=37: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:ma36ba0".
+Definition ng_Planb4CalibChainHostN38 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n38.v" 38 2 20261121
+  "window anchor host at n=38: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m6caa9a".
+Definition ng_Planb4CalibChainHostN39 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n39.v" 38 2 20261121
+  "window anchor host at n=39: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m693ee7".
+Definition ng_Planb4CalibChainHostN40 : NewGreenFace :=
+  MkNewGreenFace "planb4_calib_chain_host_n40.v" 38 2 20261121
+  "window anchor host at n=40: statement twin of the calibwin group-(c) anchor face, closed from the chain tail (rewrite + one small bite)" "L38:m043ca0".
+Definition ng_Planb4G1CalibwinB2 : NewGreenFace :=
+  MkNewGreenFace "planb4_g1_calibwin_b2.v" 225 12 20261121
+  "F106 calibwin segment-2 replant shim (n = 13..18): group-(b) int round-trip anchors re-closed from build eq-face certificates, group-(c) anchors aliased to the host byte-twin certificates" "L225:m22ed96".
 Definition NewGreenListV47 : list NewGreenFace :=
  cons ng_PiuMuCriterion
  (cons ng_PiuZzConstants
@@ -5519,7 +5721,7 @@ Definition NewGreenListV47 : list NewGreenFace :=
  (cons ng_PiuZzEcEscwinBracket
  (cons ng_PiuZzN2cSigmaAssembly
  (cons ng_Piu1932UncondZzReland
- (cons ng_Sl12Constants (cons ng_Sl1PhaseFaces (cons ng_Sl1PhiDividesL (cons ng_Sl1HeadAnchors (cons ng_Sl1LznAssembly (cons ng_Sl1Lzn48Chain (cons ng_Sl2AnchorCarrier (cons ng_Sl2RintRecast (cons ng_Planb4Sl4Skeleton (cons ng_Sl4D5Proportional (cons ng_Sl4D3GrowthAnchor (cons ng_Sl4D4DenomAnchors (cons ng_Sl4D4DenomSkeleton (cons ng_Sl3D3GfCarrier (cons ng_Sl3D1SigmaLift (cons ng_Sl3D2Flag (cons ng_Sl3D2FlagAnchors (cons ng_Sl3D3GfAnchors (cons ng_Sl3D4Chain (cons ng_Sl3D5Param (cons ng_Sl4W2GrowthAnchor (cons ng_Sl4W2GrowthD4DenomAnchor (cons ng_Sl4W2SurveyPdivfix (cons ng_Sl4W2Propweld (cons ng_Sl3W2BodyPoleDom (cons ng_Sl3W2BodyIdentityAnchors (cons ng_Sl3W2BodyFlagTab (cons ng_Sl3W2BandBArm (cons ng_Sl3W2BandMigration (cons ng_Sl1W2ExtendedAnchors (cons ng_Sl2W2RintDecayChain (cons ng_Sl12W3Zz2020Transcript (cons ng_Sl12W3Sl1Certs (cons ng_L6CarrierMigration (cons ng_Planb4CalibChainGlueQred (cons ng_Planb4CalibChainGlueLaur (cons ng_Planb4CalibChainGlueSumf (cons ng_Planb4CalibChainStepN7 (cons ng_Planb4CalibChainStepN8 (cons ng_Planb4CalibChainStepN9 (cons ng_Planb4CalibChainStepN10 (cons ng_Planb4CalibChainStepN11 (cons ng_Planb4CalibChainStepN12 (cons ng_Planb4CalibChainStepN13 (cons ng_Planb4CalibChainStepN14 (cons ng_Planb4CalibChainStepN15 (cons ng_Planb4CalibChainStepN16 (cons ng_Planb4CalibChainStepN17 (cons ng_Planb4CalibChainStepN18 (cons ng_Planb4CalibChainBuildN7 (cons ng_Planb4CalibChainBuildN8 (cons ng_Planb4CalibChainBuildN9 (cons ng_Planb4CalibChainBuildN10 (cons ng_Planb4CalibChainBuildN11 (cons ng_Planb4CalibChainBuildN12 (cons ng_Planb4CalibChainBuildN13 (cons ng_Planb4CalibChainBuildN14 (cons ng_Planb4CalibChainBuildN15 (cons ng_Planb4CalibChainBuildN16 (cons ng_Planb4CalibChainBuildN17 (cons ng_Planb4CalibChainBuildN18 (cons ng_Planb4CalibChainHostN7 (cons ng_Planb4CalibChainHostN8 (cons ng_Planb4CalibChainHostN9 (cons ng_Planb4CalibChainHostN10 (cons ng_Planb4CalibChainHostN11 (cons ng_Planb4CalibChainHostN12 (cons ng_Planb4CalibChainHostN13 (cons ng_Planb4CalibChainHostN14 (cons ng_Planb4CalibChainHostN15 (cons ng_Planb4CalibChainHostN16 (cons ng_Planb4CalibChainHostN17 (cons ng_Planb4CalibChainHostN18 nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
+ (cons ng_Sl12Constants (cons ng_Sl1PhaseFaces (cons ng_Sl1PhiDividesL (cons ng_Sl1HeadAnchors (cons ng_Sl1LznAssembly (cons ng_Sl1Lzn48Chain (cons ng_Sl2AnchorCarrier (cons ng_Sl2RintRecast (cons ng_Planb4Sl4Skeleton (cons ng_Sl4D5Proportional (cons ng_Sl4D3GrowthAnchor (cons ng_Sl4D4DenomAnchors (cons ng_Sl4D4DenomSkeleton (cons ng_Sl3D3GfCarrier (cons ng_Sl3D1SigmaLift (cons ng_Sl3D2Flag (cons ng_Sl3D2FlagAnchors (cons ng_Sl3D3GfAnchors (cons ng_Sl3D4Chain (cons ng_Sl3D5Param (cons ng_Sl4W2GrowthAnchor (cons ng_Sl4W2GrowthD4DenomAnchor (cons ng_Sl4W2SurveyPdivfix (cons ng_Sl4W2Propweld (cons ng_Sl3W2BodyPoleDom (cons ng_Sl3W2BodyIdentityAnchors (cons ng_Sl3W2BodyFlagTab (cons ng_Sl3W2BandBArm (cons ng_Sl3W2BandMigration (cons ng_Sl1W2ExtendedAnchors (cons ng_Sl2W2RintDecayChain (cons ng_Sl12W3Zz2020Transcript (cons ng_Sl12W3Sl1Certs (cons ng_L6CarrierMigration (cons ng_Planb4CalibChainGlueQred (cons ng_Planb4CalibChainGlueLaur (cons ng_Planb4CalibChainGlueSumf (cons ng_Planb4CalibChainStepN7 (cons ng_Planb4CalibChainStepN8 (cons ng_Planb4CalibChainStepN9 (cons ng_Planb4CalibChainStepN10 (cons ng_Planb4CalibChainStepN11 (cons ng_Planb4CalibChainStepN12 (cons ng_Planb4CalibChainStepN13 (cons ng_Planb4CalibChainStepN14 (cons ng_Planb4CalibChainStepN15 (cons ng_Planb4CalibChainStepN16 (cons ng_Planb4CalibChainStepN17 (cons ng_Planb4CalibChainStepN18 (cons ng_Planb4CalibChainBuildN7 (cons ng_Planb4CalibChainBuildN8 (cons ng_Planb4CalibChainBuildN9 (cons ng_Planb4CalibChainBuildN10 (cons ng_Planb4CalibChainBuildN11 (cons ng_Planb4CalibChainBuildN12 (cons ng_Planb4CalibChainBuildN13 (cons ng_Planb4CalibChainBuildN14 (cons ng_Planb4CalibChainBuildN15 (cons ng_Planb4CalibChainBuildN16 (cons ng_Planb4CalibChainBuildN17 (cons ng_Planb4CalibChainBuildN18 (cons ng_Planb4CalibChainHostN7 (cons ng_Planb4CalibChainHostN8 (cons ng_Planb4CalibChainHostN9 (cons ng_Planb4CalibChainHostN10 (cons ng_Planb4CalibChainHostN11 (cons ng_Planb4CalibChainHostN12 (cons ng_Planb4CalibChainHostN13 (cons ng_Planb4CalibChainHostN14 (cons ng_Planb4CalibChainHostN15 (cons ng_Planb4CalibChainHostN16 (cons ng_Planb4CalibChainHostN17 (cons ng_Planb4CalibChainHostN18 (cons ng_Planb4CalibChainStepN19 (cons ng_Planb4CalibChainStepN20 (cons ng_Planb4CalibChainStepN21 (cons ng_Planb4CalibChainStepN22 (cons ng_Planb4CalibChainStepN23 (cons ng_Planb4CalibChainStepN24 (cons ng_Planb4CalibChainStepN25 (cons ng_Planb4CalibChainStepN26 (cons ng_Planb4CalibChainStepN27 (cons ng_Planb4CalibChainStepN28 (cons ng_Planb4CalibChainStepN29 (cons ng_Planb4CalibChainStepN30 (cons ng_Planb4CalibChainStepN31 (cons ng_Planb4CalibChainStepN32 (cons ng_Planb4CalibChainStepN33 (cons ng_Planb4CalibChainStepN34 (cons ng_Planb4CalibChainStepN35 (cons ng_Planb4CalibChainStepN36 (cons ng_Planb4CalibChainStepN37 (cons ng_Planb4CalibChainStepN38 (cons ng_Planb4CalibChainStepN39 (cons ng_Planb4CalibChainStepN40 (cons ng_Planb4CalibChainBuildN19 (cons ng_Planb4CalibChainBuildN20 (cons ng_Planb4CalibChainBuildN21 (cons ng_Planb4CalibChainBuildN22 (cons ng_Planb4CalibChainBuildN23 (cons ng_Planb4CalibChainBuildN24 (cons ng_Planb4CalibChainBuildN25 (cons ng_Planb4CalibChainBuildN26 (cons ng_Planb4CalibChainBuildN27 (cons ng_Planb4CalibChainBuildN28 (cons ng_Planb4CalibChainBuildN29 (cons ng_Planb4CalibChainBuildN30 (cons ng_Planb4CalibChainBuildN31 (cons ng_Planb4CalibChainBuildN32 (cons ng_Planb4CalibChainBuildN33 (cons ng_Planb4CalibChainBuildN34 (cons ng_Planb4CalibChainBuildN35 (cons ng_Planb4CalibChainBuildN36 (cons ng_Planb4CalibChainBuildN37 (cons ng_Planb4CalibChainBuildN38 (cons ng_Planb4CalibChainBuildN39 (cons ng_Planb4CalibChainBuildN40 (cons ng_Planb4CalibChainHostN19 (cons ng_Planb4CalibChainHostN20 (cons ng_Planb4CalibChainHostN21 (cons ng_Planb4CalibChainHostN22 (cons ng_Planb4CalibChainHostN23 (cons ng_Planb4CalibChainHostN24 (cons ng_Planb4CalibChainHostN25 (cons ng_Planb4CalibChainHostN26 (cons ng_Planb4CalibChainHostN27 (cons ng_Planb4CalibChainHostN28 (cons ng_Planb4CalibChainHostN29 (cons ng_Planb4CalibChainHostN30 (cons ng_Planb4CalibChainHostN31 (cons ng_Planb4CalibChainHostN32 (cons ng_Planb4CalibChainHostN33 (cons ng_Planb4CalibChainHostN34 (cons ng_Planb4CalibChainHostN35 (cons ng_Planb4CalibChainHostN36 (cons ng_Planb4CalibChainHostN37 (cons ng_Planb4CalibChainHostN38 (cons ng_Planb4CalibChainHostN39 (cons ng_Planb4CalibChainHostN40 (cons ng_Planb4G1CalibwinB2 nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))).
 (* ---------- V48 批八件 cons（插于 V47 清单 nil 前·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚） ---------- *)
 (* ---------- 十七片终形辅助名注记（KB13R 按 KB12/KB15 核勘代拟·KB20 无壳形制修订：wave4 拆四季·伞退役·slim 直挂八季） ---------- *)
 (* 本批 wave 行承载 128 条升格辅助引理名：piu_zz_hb_512_0..31（wave1/2 各 16）＋
@@ -5531,11 +5733,12 @@ Definition NewGreenListV47 : list NewGreenFace :=
 (* 续写统计：63 件 / 行数和 43383 / 闭合数和 3851（ng_qed 口径·无壳形制落装重算 KB20：v2 21 册行 25934/3006 基础上 −wave3 伞 13/0 −wave4 单体 382/16 ＋四季 4×106/4 ＋slim 直挂 422→428；净 +35/+0 ＋domface 负定理单件追加 400/20 ＋mu_assembly 与 e_carrier 两件追加 955/40＋NsepBudgetExhaustion 常量化改形与 NsepBudgetVerify 拆件双件追加 256/13（主体 164/8＋验证块 92/5）＋u5c_quad_uniform_escape 参数化件与 u5c_quad_demo_sqrt7 演示件双件追加 1430/36（主体 1255/33＋演示 175/3）＋KB57 PNT 下游链九件追加 3554/155（window 135/4＋winsum 156/9＋qexp 681/30＋lcmpow 807/37＋phi 697/28＋ipow 386/23＋psi 239/7＋rateup 272/11＋assembly 181/6·依赖序 window→winsum→qexp→lcmpow→phi→ipow→psi→rateup→assembly）；一致性由下方等式引理编译期核对＋V48 注册批八件追加 3081/212（cage 474/35＋decay 231/10＋nail 387/51＋n1 423/34＋headledger 485/23＋nescD 478/26＋bracket 289/11＋n2c 314/22·γP1 首波四件＋W4 三件＋N2c 一件·依赖拓扑序·注册号 213 至 220 于 order.txt 行锚·registered in the November 2026 wave·W5 件候 born 第二批重锚禁预填）＋W6 二批一件追加 179/8（piu1932_uncond_zz 9.3 一致型同名重落·候选版 46f5f5·六前提无条件闭合顶件·注册号 194 旧条目 ng_Piu1932UncondZz 原位保留＝A 案·R 号 ? 占位·registry-day full-width placeholder pending, final value assigned at commit time·order.txt :973 行锚）。 *)
 (* wave3 C 落三件追加 770/14（zz2020 328/3＋certs 225/9＋l6cm 217/2）；order.txt 行锚（R 号外置于 order.txt·注释面禁 R 号）。 *)
 (* chain landing: 39 modules appended (glue 3 + step/build/host 12x3) +6541/125; order.txt anchors external (R numbers live in order.txt only). *)
+(* chain window extension: 66 modules appended (step/build/host 22x3, faces F40..F105) + b2 chain-tail shim replant (24 anchors re-closed from the build/host certificates) +21479/232; survey_band tree face registered in order.txt and _CoqProject only, its first compile verification is pending the desk-side furnace; delta_anchor replanted through the order.txt anchor refresh with the statement face unchanged, its retired-dependency tear (planb_b_nlo consumption) is disclosed in the landing PR debt section; order.txt anchors external (R numbers live in order.txt only, no date literals in this comment face). *)
 
 (* Fix-I 语句手术一代续记：Htri 槽 2 换位 dval (Z.of_nat q) (- p)→dval (- p) (Z.of_nat q) 逐处＋Hexit 前提面同形换位 dval b (- a)→dval (- a) b——34 处语句/前提面（criterion 7／e_carrier 9／piu1932 顶件 2／planb1 1／planb1_cert 6／planb3_g1_g2_design 3＋证体随改 4 行／planb4_l2_dv_cast 2／distpt_supply 4）＋e_carrier :646 注释随形；重编闭包 18 模块绿（rocq dep 全盘反向定界 8 种子＋10 下游）；三在册件 md5 换代锚于 order.txt 双树（M 语义·R 号外置迁移账：criterion dc5b47→dce9a2／e_carrier f22b5b→df34f1／顶件 46f5f5→e63556）；本索引 ng_meta=登记时点快照口径不变——三件行数 281/761/179 与 ng_qed 8/33/8（剥块注释 token 级双口径）手术前后实测零变化→三常量重算零增量（63 件／行数和 43383／闭合数和 3851 维持·下方三等式引理编译期核对）；P2 工单原列「Hexit 前提退役六→五」不在本次执行 diff（现役仍六前提接口同形换位形·不以修形后非空真作结语·始末详见跨线资产分析与工单目录迁移账·Fix-I Htri 换位与 Hexit 退役卷）。 *)
-Definition NewGreenV47Pieces : nat := 136.
-Definition NewGreenV47LineSum : nat := 60004.
-Definition NewGreenV47QedSum : nat := 4414.
+Definition NewGreenV47Pieces : nat := 203.
+Definition NewGreenV47LineSum : nat := 81483.
+Definition NewGreenV47QedSum : nat := 4646.
 
 (* 清单件数 = 字面值（增删清单而忘改字面值即爆 G2） *)
 Lemma NewGreenV47Pieces_matches : NewGreenV47Pieces = cnt_ng NewGreenListV47.
